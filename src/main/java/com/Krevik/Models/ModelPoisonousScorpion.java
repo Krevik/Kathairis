@@ -1,0 +1,272 @@
+package com.Krevik.Models;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
+
+/**
+ * PoisonousScorpion.tcn - TechneToTabulaImporter
+ * Created using Tabula 7.0.0
+ */
+public class ModelPoisonousScorpion extends ModelBase {
+    public ModelRenderer Head;
+    public ModelRenderer Neck1;
+    public ModelRenderer Neck2;
+    public ModelRenderer Body;
+    public ModelRenderer Leg11;
+    public ModelRenderer Leg61;
+    public ModelRenderer Leg51;
+    public ModelRenderer Leg41;
+    public ModelRenderer Leg31;
+    public ModelRenderer Leg21;
+    public ModelRenderer Leg12;
+    public ModelRenderer Leg62;
+    public ModelRenderer Leg52;
+    public ModelRenderer Leg42;
+    public ModelRenderer Leg32;
+    public ModelRenderer Leg22;
+    public ModelRenderer Tail2;
+    public ModelRenderer Tail1;
+    public ModelRenderer Tail15;
+    public ModelRenderer Tail14;
+    public ModelRenderer Tail13;
+    public ModelRenderer Tail12;
+    public ModelRenderer Tail11;
+    public ModelRenderer Tail10;
+    public ModelRenderer Tail9;
+    public ModelRenderer Tail8;
+    public ModelRenderer Tail7;
+    public ModelRenderer Tail6;
+    public ModelRenderer Tail5;
+    public ModelRenderer Tail4;
+    public ModelRenderer Tail3;
+    public ModelRenderer Szczypce11;
+    public ModelRenderer Szczypce12;
+    public ModelRenderer Szczypce13;
+    public ModelRenderer Szczypce14;
+    public ModelRenderer Szczypce21;
+    public ModelRenderer Szczypce22;
+    public ModelRenderer Szczypce24;
+    public ModelRenderer Szczypce23;
+
+    public ModelPoisonousScorpion() {
+        this.textureWidth = 128;
+        this.textureHeight = 128;
+        this.Tail8 = new ModelRenderer(this, 50, 0);
+        this.Tail8.setRotationPoint(-2.0F, -9.0F, 18.0F);
+        this.Tail8.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail8, 2.3794310092926025F, -0.0F, 0.0F);
+        this.Szczypce14 = new ModelRenderer(this, 0, 0);
+        this.Szczypce14.setRotationPoint(5.5F, 2.0F, 1.0F);
+        this.Szczypce14.addBox(0.0F, 0.0F, 0.0F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(Szczypce14, 0.0F, 0.4363323129985824F, 0.0F);
+        this.Leg51 = new ModelRenderer(this, 0, 70);
+        this.Leg51.setRotationPoint(5.0F, 11.0F, 0.0F);
+        this.Leg51.addBox(0.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
+        this.setRotateAngle(Leg51, 0.0F, -0.0F, -0.20943951023931953F);
+        this.Leg41 = new ModelRenderer(this, 0, 70);
+        this.Leg41.setRotationPoint(5.0F, 12.0F, 10.0F);
+        this.Leg41.addBox(0.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
+        this.setRotateAngle(Leg41, 0.0F, -0.0F, -0.20943951023931953F);
+        this.Szczypce22 = new ModelRenderer(this, 0, 80);
+        this.Szczypce22.setRotationPoint(2.5F, -1.0F, 16.0F);
+        this.Szczypce22.addBox(0.0F, 0.0F, 0.0F, 6, 4, 4, 0.0F);
+        this.setRotateAngle(Szczypce22, 3.141592653589793F, -0.3490658503988659F, -3.141592653589793F);
+        this.Leg12 = new ModelRenderer(this, 0, 50);
+        this.Leg12.setRotationPoint(-5.0F, 0.0F, 0.0F);
+        this.Leg12.addBox(0.0F, 0.0F, 0.0F, 2, 13, 2, 0.0F);
+        this.Tail1 = new ModelRenderer(this, 50, 0);
+        this.Tail1.setRotationPoint(-2.0F, 10.0F, 13.0F);
+        this.Tail1.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail1, 0.23794311285018924F, -0.0F, 0.0F);
+        this.Tail15 = new ModelRenderer(this, 35, 0);
+        this.Tail15.setRotationPoint(-1.0F, -12.0F, -8.0F);
+        this.Tail15.addBox(0.0F, 0.0F, 0.0F, 2, 2, 4, 0.0F);
+        this.setRotateAngle(Tail15, -2.8367280960083012F, -0.0F, 0.0F);
+        this.Tail6 = new ModelRenderer(this, 50, 0);
+        this.Tail6.setRotationPoint(-2.0F, -3.0F, 20.0F);
+        this.Tail6.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail6, 1.725087642669678F, -0.0F, 0.0F);
+        this.Leg22 = new ModelRenderer(this, 0, 50);
+        this.Leg22.setRotationPoint(-5.0F, 0.0F, 0.0F);
+        this.Leg22.addBox(0.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
+        this.Leg11 = new ModelRenderer(this, 0, 70);
+        this.Leg11.setRotationPoint(-5.0F, 12.0F, 10.0F);
+        this.Leg11.addBox(-4.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
+        this.setRotateAngle(Leg11, 0.0F, -0.0F, 0.20943951023931953F);
+        this.Neck1 = new ModelRenderer(this, 77, 0);
+        this.Neck1.setRotationPoint(-3.0F, 9.0F, -9.0F);
+        this.Neck1.addBox(0.0F, 0.0F, 0.0F, 6, 1, 5, 0.0F);
+        this.setRotateAngle(Neck1, -0.20820023119449615F, -0.0F, 0.0F);
+        this.Neck2 = new ModelRenderer(this, 77, 0);
+        this.Neck2.setRotationPoint(-2.0F, 7.0F, -12.0F);
+        this.Neck2.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Neck2, -0.5056291222572326F, -0.0F, 0.0F);
+        this.Leg52 = new ModelRenderer(this, 0, 50);
+        this.Leg52.setRotationPoint(4.0F, 0.0F, 0.0F);
+        this.Leg52.addBox(0.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
+        this.Head = new ModelRenderer(this, 100, 0);
+        this.Head.setRotationPoint(-3.0F, 5.0F, -18.0F);
+        this.Head.addBox(0.0F, 0.0F, 0.0F, 6, 6, 6, 0.0F);
+        this.Leg31 = new ModelRenderer(this, 0, 70);
+        this.Leg31.setRotationPoint(-5.0F, 10.0F, -10.0F);
+        this.Leg31.addBox(-4.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
+        this.setRotateAngle(Leg31, 0.0F, 0.0F, 0.136659280431156F);
+        this.Tail10 = new ModelRenderer(this, 50, 0);
+        this.Tail10.setRotationPoint(-2.0F, -14.0F, 13.0F);
+        this.Tail10.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail10, 3.0337746143341064F, -0.0F, 0.0F);
+        this.Tail5 = new ModelRenderer(this, 50, 0);
+        this.Tail5.setRotationPoint(-2.0F, 0.0F, 20.0F);
+        this.Tail5.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail5, 1.3979157209396362F, -0.0F, 0.0F);
+        this.Leg21 = new ModelRenderer(this, 0, 70);
+        this.Leg21.setRotationPoint(-5.0F, 11.0F, 0.0F);
+        this.Leg21.addBox(-4.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
+        this.setRotateAngle(Leg21, 0.0F, -0.0F, 0.20943951023931953F);
+        this.Tail14 = new ModelRenderer(this, 0, 21);
+        this.Tail14.setRotationPoint(-2.0F, -12.0F, -4.0F);
+        this.Tail14.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail14, -2.8367280960083012F, -0.0F, 0.0F);
+        this.Tail7 = new ModelRenderer(this, 50, 0);
+        this.Tail7.setRotationPoint(-2.0F, -6.0F, 20.0F);
+        this.Tail7.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail7, 2.1117451190948486F, -0.0F, 0.0F);
+        this.Szczypce12 = new ModelRenderer(this, 0, 80);
+        this.Szczypce12.setRotationPoint(-1.0F, 3.0F, 16.0F);
+        this.Szczypce12.addBox(0.0F, 0.0F, 0.0F, 6, 4, 4, 0.0F);
+        this.setRotateAngle(Szczypce12, 3.141592653589793F, -0.3490658503988659F, 0.0F);
+        this.Tail13 = new ModelRenderer(this, 0, 34);
+        this.Tail13.setRotationPoint(-3.0F, -13.0F, 2.0F);
+        this.Tail13.addBox(0.0F, 0.0F, 0.0F, 6, 6, 6, 0.0F);
+        this.setRotateAngle(Tail13, -2.8367280960083012F, -0.0F, 0.0F);
+        this.Szczypce13 = new ModelRenderer(this, 0, 0);
+        this.Szczypce13.setRotationPoint(6.0F, 2.0F, 3.0F);
+        this.Szczypce13.addBox(0.0F, 0.0F, 0.0F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(Szczypce13, 0.0F, -0.4363323129985824F, 0.0F);
+        this.Leg42 = new ModelRenderer(this, 0, 50);
+        this.Leg42.setRotationPoint(4.0F, 0.0F, 0.0F);
+        this.Leg42.addBox(0.0F, 0.0F, 0.0F, 2, 13, 2, 0.0F);
+        this.Tail4 = new ModelRenderer(this, 50, 0);
+        this.Tail4.setRotationPoint(-2.0F, 3.0F, 19.0F);
+        this.Tail4.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail4, 1.1599726676940918F, -0.0F, 0.0F);
+        this.Szczypce21 = new ModelRenderer(this, 0, 100);
+        this.Szczypce21.setRotationPoint(4.0F, 12.0F, -12.0F);
+        this.Szczypce21.addBox(0.0F, 0.0F, 0.0F, 2, 2, 14, 0.0F);
+        this.setRotateAngle(Szczypce21, 3.141592566167013F, -0.45378559827804565F, 0.0F);
+        this.Body = new ModelRenderer(this, 52, 15);
+        this.Body.setRotationPoint(-6.0F, 10.0F, -12.0F);
+        this.Body.addBox(0.0F, 0.0F, 0.0F, 12, 5, 26, 0.0F);
+        this.setRotateAngle(Body, -0.1047197580337524F, -0.0F, 0.0F);
+        this.Leg32 = new ModelRenderer(this, 0, 50);
+        this.Leg32.setRotationPoint(-5.0F, 0.0F, 0.0F);
+        this.Leg32.addBox(0.0F, 0.0F, 0.0F, 2, 15, 2, 0.0F);
+        this.Tail9 = new ModelRenderer(this, 50, 0);
+        this.Tail9.setRotationPoint(-2.0F, -12.0F, 16.0F);
+        this.Tail9.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail9, 2.7066028118133545F, -0.0F, 0.0F);
+        this.Leg62 = new ModelRenderer(this, 0, 50);
+        this.Leg62.setRotationPoint(4.0F, 0.0F, 0.0F);
+        this.Leg62.addBox(0.0F, 0.0F, 0.0F, 2, 15, 2, 0.0F);
+        this.Leg61 = new ModelRenderer(this, 0, 70);
+        this.Leg61.setRotationPoint(5.0F, 10.0F, -10.0F);
+        this.Leg61.addBox(0.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
+        this.setRotateAngle(Leg61, 0.0F, 0.0F, -0.20943951023931953F);
+        this.Tail12 = new ModelRenderer(this, 50, 0);
+        this.Tail12.setRotationPoint(-2.0F, -15.0F, 5.0F);
+        this.Tail12.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail12, -2.89621376991272F, -0.0F, 0.0F);
+        this.Tail3 = new ModelRenderer(this, 50, 0);
+        this.Tail3.setRotationPoint(-2.0F, 5.0F, 17.0F);
+        this.Tail3.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail3, 0.8030579686164856F, -0.0F, 0.0F);
+        this.Tail11 = new ModelRenderer(this, 50, 0);
+        this.Tail11.setRotationPoint(-2.0F, -15.0F, 9.0F);
+        this.Tail11.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail11, -3.141592566167013F, -0.0F, 0.0F);
+        this.Szczypce23 = new ModelRenderer(this, 0, 0);
+        this.Szczypce23.setRotationPoint(6.0F, 1.0F, 1.9F);
+        this.Szczypce23.addBox(0.0F, 0.0F, 0.0F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(Szczypce23, 0.0F, -0.7285004297824331F, 0.0F);
+        this.Tail2 = new ModelRenderer(this, 50, 0);
+        this.Tail2.setRotationPoint(-2.0F, 8.0F, 15.0F);
+        this.Tail2.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.setRotateAngle(Tail2, 0.5948577523231506F, -0.0F, 0.0F);
+        this.Szczypce24 = new ModelRenderer(this, 0, 0);
+        this.Szczypce24.setRotationPoint(5.5F, 1.0F, 0.0F);
+        this.Szczypce24.addBox(0.0F, 0.0F, 0.0F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(Szczypce24, 0.0F, 0.5009094953223726F, 0.0F);
+        this.Szczypce11 = new ModelRenderer(this, 0, 100);
+        this.Szczypce11.setRotationPoint(-6.0F, 12.0F, -11.0F);
+        this.Szczypce11.addBox(0.0F, 0.0F, 0.0F, 2, 2, 14, 0.0F);
+        this.setRotateAngle(Szczypce11, 3.141592566167013F, 0.45378559827804565F, 0.0F);
+        this.Szczypce12.addChild(this.Szczypce14);
+        this.Szczypce21.addChild(this.Szczypce22);
+        this.Leg11.addChild(this.Leg12);
+        this.Leg21.addChild(this.Leg22);
+        this.Leg51.addChild(this.Leg52);
+        this.Szczypce11.addChild(this.Szczypce12);
+        this.Szczypce12.addChild(this.Szczypce13);
+        this.Leg41.addChild(this.Leg42);
+        this.Leg31.addChild(this.Leg32);
+        this.Leg61.addChild(this.Leg62);
+        this.Szczypce22.addChild(this.Szczypce23);
+        this.Szczypce22.addChild(this.Szczypce24);
+    }
+
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        super.render(entity, f, f1, f2, f3, f4, f5);
+        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+        this.Tail8.render(f5);
+        this.Leg51.render(f5);
+        this.Leg41.render(f5);
+        this.Tail1.render(f5);
+        this.Tail15.render(f5);
+        this.Tail6.render(f5);
+        this.Leg11.render(f5);
+        this.Neck1.render(f5);
+        this.Neck2.render(f5);
+        this.Head.render(f5);
+        this.Leg31.render(f5);
+        this.Tail10.render(f5);
+        this.Tail5.render(f5);
+        this.Leg21.render(f5);
+        this.Tail14.render(f5);
+        this.Tail7.render(f5);
+        this.Tail13.render(f5);
+        this.Tail4.render(f5);
+        this.Szczypce21.render(f5);
+        this.Body.render(f5);
+        this.Tail9.render(f5);
+        this.Leg61.render(f5);
+        this.Tail12.render(f5);
+        this.Tail3.render(f5);
+        this.Tail11.render(f5);
+        this.Tail2.render(f5);
+        this.Szczypce11.render(f5);
+    }
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
+    }
+    
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+    {
+      super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+      Leg11.rotateAngleZ=((MathHelper.sin(f*1.5F)+1*(f1/10))+1)/3;
+      Leg21.rotateAngleZ=((MathHelper.sin(f)+1*(f1/10))+1)/3;
+      Leg31.rotateAngleZ=((MathHelper.sin(f*1.5F)+1*(f1/10))+1)/3;
+      Leg41.rotateAngleZ=((MathHelper.sin(f)-1*(f1/10))-1)/3;
+      Leg51.rotateAngleZ=((MathHelper.sin(f*1.5F)-1*(f1/10))-1)/3;
+      Leg61.rotateAngleZ=((MathHelper.sin(f)-1*(f1/10))-1)/3;
+      
+    }
+}
