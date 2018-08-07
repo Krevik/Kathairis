@@ -111,8 +111,6 @@ public class KCore {
 
 	public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();
 	public static final String DIM_NAME = "Kathairis";
-	public static int updateRendererCount=0;
-
 	
 	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12);
 	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", "mystic:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F);

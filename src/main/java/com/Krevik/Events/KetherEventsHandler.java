@@ -57,7 +57,6 @@ public class KetherEventsHandler {
 	@SubscribeEvent
 	public static void onEvent1(WorldTickEvent event)
 	{
-		KCore.instance.updateRendererCount++;
 				if(data==null) {
 					data = KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.instance.DIMENSION_ID));
 				}
