@@ -31,6 +31,7 @@ public class RenderWeatherRenderer extends IRenderHandler {
     private static final ResourceLocation RAIN_TEXTURES = new ResourceLocation("textures/environment/rain.png");
     private static final ResourceLocation SNOW_TEXTURES = new ResourceLocation("textures/environment/snow.png");
     private static final ResourceLocation SANDSTORM_TEXTURES = cproxy.dust_particle;
+    
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
 		if(data.getIsSandstorm()) {
