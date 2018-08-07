@@ -118,7 +118,6 @@ public class KetherEventsHandler {
 						}
 					}
 				}
-				//TODO SOUND
 				if(data!=null) {
 					if(data.getIsSandstorm()) {
 						if(event.player.world.getBiome(event.player.getPosition())==KCore.MysticDesert) {
