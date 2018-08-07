@@ -1,5 +1,6 @@
 package com.Krevik.Entities;
 
+import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 import com.google.common.collect.Maps;
@@ -68,10 +69,12 @@ public class EntityBigTurtle extends EntityAnimal
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
     }
+    
     public int getMaxSpawnedInChunk()
     {
-        return 2;
+        return 1;
     }
     protected void updateAITasks()
     {
@@ -110,12 +113,6 @@ public class EntityBigTurtle extends EntityAnimal
     {
     	return false;
     }
-
-    public static void registerFixesSheep(DataFixer fixer)
-    {
-        EntityLiving.registerFixesMob(fixer, EntityBigTurtle.class);
-    }
-
 
     public void writeEntityToNBT(NBTTagCompound compound)
     {
