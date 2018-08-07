@@ -50,8 +50,9 @@ public class EntityAIPanicNew extends EntityAIBase
      */
     public boolean shouldContinueExecuting()
     {
-    	return creature.panic;
+    	return creature.panic();
     }
+    
     int jumpTimer=0;
     public void updateTask()
     {

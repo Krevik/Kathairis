@@ -21,6 +21,8 @@ import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -33,17 +35,31 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class EntityCloudOister extends EntityAmbientCreature
 {
-	
-    public int timeUntilNextPearl;
-    public boolean panic;
+    private static final DataParameter<Integer> timeUntilNextPearl = EntityDataManager.<Integer>createKey(EntityCloudOister.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> panic = EntityDataManager.<Boolean>createKey(EntityCloudOister.class, DataSerializers.BOOLEAN);
+    
+    public int timeUntilNextPearl() {
+    	return ((Integer)this.dataManager.get(timeUntilNextPearl)).intValue();
+    }
+    public void setTimeUntilNextPearl(int x) {
+    	this.dataManager.set(timeUntilNextPearl, Integer.valueOf(x));
+    }
+    
+    public boolean panic() {
+    	return (Boolean)this.dataManager.get(panic).booleanValue();
+    }
+    
+    public void setPanic(boolean trueorfalse) {
+    	this.dataManager.set(panic, Boolean.valueOf(trueorfalse));
+    }
 
     public EntityCloudOister(World worldIn)
     {
         super(worldIn);
         this.setSize(0.6F, 0.6F);
         this.experienceValue=5;
-        this.timeUntilNextPearl = this.rand.nextInt(6000) + 6000;
-        panic=false;
+        this.setTimeUntilNextPearl(this.rand.nextInt(6000) + 6000);
+        this.setPanic(false);
     }
     
 
@@ -71,12 +87,13 @@ public class EntityCloudOister extends EntityAmbientCreature
     protected void entityInit()
     {
         super.entityInit();
+        this.dataManager.register(timeUntilNextPearl, 24000);
+        this.dataManager.register(panic, Boolean.valueOf(false));
     }
 
 
     public void notifyDataManagerChange(DataParameter<?> key)
     {
-
         super.notifyDataManagerChange(key);
     }
 
@@ -91,17 +108,18 @@ public class EntityCloudOister extends EntityAmbientCreature
     {
         super.onLivingUpdate();
        
-        if (!this.world.isRemote && --this.timeUntilNextPearl <= 0)
+        this.setTimeUntilNextPearl(this.timeUntilNextPearl()-1);
+        if (!this.world.isRemote && this.timeUntilNextPearl() <= 0)
         {
             this.dropItem(KCore.CloudPearl, 1);
-            this.timeUntilNextPearl = this.rand.nextInt(6000) + 6000;
+            this.setTimeUntilNextPearl(this.rand.nextInt(6000) + 6000);
         }
         this.fallDistance=0;
 	        if(this.getRevengeTarget()!=null) {
-	        	panic=true;
+	        	this.setPanic(true);
 	        }
 	        
-	        if(!panic) {
+	        if(!panic()) {
 	        		jumpTimer++;
 	        		if(jumpTimer>k) {
 	        			k=50+rand.nextInt(300);
@@ -124,7 +142,7 @@ public class EntityCloudOister extends EntityAmbientCreature
 	        }else {
 	        	panicTimer++;
 	        	if(panicTimer>200+rand.nextInt(100)) {
-	        		panic=false;
+	        		this.setPanic(false);
 	        		panicTimer=0;
 	        		this.setRevengeTarget(null);
 	        	}
@@ -204,6 +222,8 @@ public class EntityCloudOister extends EntityAmbientCreature
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
+        compound.setInteger("timeUntilNextPearl", this.timeUntilNextPearl());
+        compound.setBoolean("panic", panic());
     }
 
     /**
@@ -212,7 +232,8 @@ public class EntityCloudOister extends EntityAmbientCreature
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-
+        this.setTimeUntilNextPearl(compound.getInteger("timeUntilNextPearl"));
+        this.setPanic(compound.getBoolean("panic"));
     }
 
     /**

@@ -2,6 +2,7 @@ package com.Krevik.Entities;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
@@ -9,6 +10,13 @@ import net.minecraft.block.SoundType;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.HorseArmorType;
@@ -35,17 +43,17 @@ public class EntityCamel extends AbstractHorse
         this.setSize(1.6F, 1.5F);
     }
     
+    protected void initEntityAI()
+    {
+    	super.initEntityAI();
+        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+    }
+    
     protected void entityInit()
     {
         super.entityInit();
 
     }
-
-    public static void registerFixesHorse(DataFixer fixer)
-    {
-        AbstractHorse.registerFixesAbstractHorse(fixer, EntityCamel.class);
-    }
-
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */

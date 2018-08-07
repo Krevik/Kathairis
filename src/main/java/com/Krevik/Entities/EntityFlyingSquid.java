@@ -109,12 +109,6 @@ public class EntityFlyingSquid extends EntityFlying
         setCanHoldPlayer(compound.getBoolean("canHoldPlayer"));
 
     }
-    
-
-    public static void registerFixesSquid(DataFixer fixer)
-    {
-        EntityLiving.registerFixesMob(fixer, EntityFlyingSquid.class);
-    }
 
     protected void initEntityAI()
     {

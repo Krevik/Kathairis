@@ -2,6 +2,7 @@ package com.Krevik.Entities;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
@@ -48,6 +49,7 @@ public class EntityFungite extends EntityMob
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
         this.applyEntityAI();
     }
 

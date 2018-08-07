@@ -98,7 +98,7 @@ public class GuiOldMan extends GuiScreen {
 		int offLeft = (int) ((width - ImageWidth) / 2.0F);
 		int offTop = 0;
 		drawModalRectWithCustomSizedTexture(offLeft, offTop, 0, 0, ImageScale,ImageScale,ImageScale,ImageScale);
-		fontRenderer.drawString("Welcome to the Kether!", (int) (width / 2.0) - 55, 20, 0X353f51); 
+		fontRenderer.drawString("Welcome to the Kathairis!", (int) (width / 2.0) - 55, 20, 0X353f51); 
 
 		if(mode==1) {
 			this.drawCenteredString(fontRenderer, "I went through mountains,", (int) (width / 2.0), 30, 0Xbfbfbf);
@@ -107,7 +107,7 @@ public class GuiOldMan extends GuiScreen {
 			this.drawCenteredString(fontRenderer, "I've fought with dragons", (int) (width / 2.0), 60, 0Xbfbfbf);
 			this.drawCenteredString(fontRenderer, "I've got to Heaven", (int) (width / 2.0), 70, 0Xbfbfbf);
 			this.drawCenteredString(fontRenderer, "Now I am here as you are", (int) (width / 2.0), 80, 0Xbfbfbf);
-			this.drawCenteredString(fontRenderer, "Kether - our destiny", (int) (width / 2.0), 90, 0Xbfbfbf);
+			this.drawCenteredString(fontRenderer, "Kathairis - our destiny", (int) (width / 2.0), 90, 0Xbfbfbf);
 			}
 		if(mode==2) {
 			if(!KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathDefeated()) {

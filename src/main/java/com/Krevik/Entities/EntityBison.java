@@ -34,6 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityBison extends EntityAnimal
 {
 	public boolean shouldPanic=false;
+	
     public EntityBison(World worldIn)
     {
         super(worldIn);
@@ -90,11 +91,6 @@ public class EntityBison extends EntityAnimal
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
     	return super.processInteract(player, hand);
-    }
-
-    public static void registerFixesSheep(DataFixer fixer)
-    {
-        EntityLiving.registerFixesMob(fixer, EntityBison.class);
     }
     
     public void onLivingUpdate()
