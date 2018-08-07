@@ -1,9 +1,8 @@
 package com.Krevik.Entities;
 
-import java.util.UUID;
-
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
@@ -12,32 +11,26 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.Path;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityPoisonousScorpion extends EntityMob
@@ -48,21 +41,21 @@ public class EntityPoisonousScorpion extends EntityMob
         this.setSize(0.4F, 0.7F);
         this.experienceValue=25;
     }
-
+    
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.applyEntityAI();
+        this.tasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.2D, false));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
     }
+    
     public int getMaxSpawnedInChunk()
     {
         return 2;
-    }
-    protected void applyEntityAI()
-    {
     }
 
     protected void applyEntityAttributes()
@@ -103,37 +96,43 @@ public class EntityPoisonousScorpion extends EntityMob
      */
     public void onLivingUpdate()
     {
-        
-        if(this.world.getNearestAttackablePlayer(getPosition(), 30, 5)!=null) {
-        	this.setAttackTarget(this.world.getNearestAttackablePlayer(getPosition(), 30, 5));
-        }
-
         super.onLivingUpdate();
     }
     
     public boolean attackEntityAsMob(Entity entityIn)
     {
-        boolean flag = super.attackEntityAsMob(entityIn);
+        if (super.attackEntityAsMob(entityIn))
+        {
+            if (entityIn instanceof EntityLivingBase)
+            {
+                int i = 0;
 
-        return flag;
+                if (this.world.getDifficulty() == EnumDifficulty.NORMAL)
+                {
+                    i = 7;
+                }
+                else if (this.world.getDifficulty() == EnumDifficulty.HARD)
+                {
+                    i = 15;
+                }
+
+                if (i > 0)
+                {
+                    ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(MobEffects.POISON, i * 20, 0));
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-    EntityPlayer target = null;
+    
     public void onUpdate() {
     	super.onUpdate();
     	if(!this.world.isRemote) {
-    		target=this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 10, false);
-    		if(target!=null) {
-    			if(!target.isCreative()) {
-    			Path path = this.navigator.getPathToXYZ(target.posX, target.posY, target.posZ);
-    			if(path!=null) {
-    				this.navigator.setPath(path, 1);
-    			}
-    			if(this.getDistance(target)<1.2) {
-					target.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-					target.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"),5,3));
-    			}
-    			}
-    		}
     		
     	}
     }
@@ -175,11 +174,6 @@ public class EntityPoisonousScorpion extends EntityMob
     protected ResourceLocation getLootTable()
     {
         return MysticLootTables.LOOT_POISONOUSSCORPION;
-    }
-
-    public static void registerFixesHowler(DataFixer fixer)
-    {
-        EntityLiving.registerFixesMob(fixer, EntityPoisonousScorpion.class);
     }
 
     /**
