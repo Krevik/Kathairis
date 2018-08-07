@@ -78,9 +78,10 @@ public class BaseItem extends Item{
  {
 	 if(this==KCore.MysticGem){
 		 if(!worldIn.isRemote) {
-	    	 KCore.MysticPortal.trySpawnPortal(worldIn, pos.up());
-	    	 ItemStack itemstack = player.getHeldItem(hand);
-	    	 itemstack.shrink(1);
+	    	 if(KCore.MysticPortal.trySpawnPortal(worldIn, pos.up())) {
+		    	 ItemStack itemstack = player.getHeldItem(hand);
+		    	 itemstack.shrink(1);
+	    	 }
 		 }
     	 return EnumActionResult.SUCCESS; 
 	 }

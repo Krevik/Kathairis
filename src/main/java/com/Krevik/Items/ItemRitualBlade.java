@@ -157,9 +157,10 @@ public class ItemRitualBlade extends BaseItem
     {
    	 if(this==KCore.Ritual_Blade){
    		 if(!worldIn.isRemote) {
-   	    	 KCore.MysticPortal.trySpawnPortal(worldIn, pos.up());
-   	    	 ItemStack itemstack = player.getHeldItem(hand);
-   	    	 itemstack.damageItem(1, player);
+   	    	 if(KCore.MysticPortal.trySpawnPortal(worldIn, pos.up())) {
+   	   	    	 ItemStack itemstack = player.getHeldItem(hand);
+   	   	    	 itemstack.damageItem(1, player); 
+   	    	 }
    		 }
        	 return EnumActionResult.SUCCESS; 
    	 }

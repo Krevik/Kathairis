@@ -195,7 +195,7 @@ public class KCore {
     public static final BaseBlock ForgottenSand = new BaseBlock(Ref.ForgottenSand, Material.GROUND, CreativeTabsMystic.mainTab, 1.5F, 1.5F, SoundType.GROUND);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MovingSand)
-    public static final BaseBlock MovingSand = new BaseBlock(Ref.MovingSand, Material.GOURD, CreativeTabsMystic.mainTab, 15F, 15F, SoundType.GROUND);
+    public static final BaseBlock MovingSand = new BaseBlock(Ref.MovingSand, Material.GOURD, CreativeTabsMystic.mainTab, 1.5F, 1.5F, SoundType.GROUND);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.WeatheredRock)
     public static final BaseBlock WeatheredRock = new BaseBlock(Ref.WeatheredRock, Material.ROCK, CreativeTabsMystic.mainTab, 1.5F, 1.5F, SoundType.STONE);
