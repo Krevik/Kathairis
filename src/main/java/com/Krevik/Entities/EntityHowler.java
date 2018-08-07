@@ -15,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -54,6 +55,9 @@ public class EntityHowler extends EntityMob
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+
         this.experienceValue=15;
 
         this.applyEntityAI();
@@ -124,24 +128,9 @@ public class EntityHowler extends EntityMob
 
         return flag;
     }
-    EntityPlayer target = null;
     public void onUpdate() {
     	super.onUpdate();
-    	if(!this.world.isRemote) {
-    		target=this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 10, false);
-    		if(target!=null) {
-    			if(!target.isCreative()) {
-    			Path path = this.navigator.getPathToXYZ(target.posX, target.posY, target.posZ);
-    			if(path!=null) {
-    				this.navigator.setPath(path, 1);
-    			}
-    			if(this.getDistance(target)<1.2) {
-					target.attackEntityFrom(DamageSource.causeMobDamage(this), 6F);
-    			}
-    			}
-    		}
-    		
-    	}
+ 
     }
 
     protected SoundEvent getAmbientSound()
