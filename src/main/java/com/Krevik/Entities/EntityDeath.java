@@ -256,7 +256,7 @@ public class EntityDeath extends EntityLiving
     	            			}
     	        			}
     	        			else if(mobStage>5) {
-    	            			for(int i=0;i<=3+mobStage*2;i++) {
+    	            			for(int i=0;i<=13;i++) {
     	            				EntityWitherSkeleton mob = new EntityWitherSkeleton(this.getEntityWorld());
     	            				mob.setPosition(this.posX-rand.nextInt(10), posY+2, posZ-rand.nextInt(7)+rand.nextInt(7));
     	            				if(!this.world.isRemote) {

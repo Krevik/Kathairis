@@ -128,9 +128,36 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         this.checkAndDropBlock(worldIn, pos, state);
     }
 
+    
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         this.checkAndDropBlock(worldIn, pos, state);
+        if(rand.nextInt(40)==0) {
+	        if(this==KCore.Succulent||this==KCore.SteppedSucculent) {
+	            if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent growing cactus from loading unloaded chunks with block update
+	            BlockPos blockpos = pos.up();
+
+	            if (worldIn.isAirBlock(blockpos))
+	            {
+	                int i;
+
+	                for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
+	                {
+	                    ;
+	                }
+
+	                if (i < 5)
+	                {
+
+	                        worldIn.setBlockState(blockpos, this.getDefaultState());
+	                        IBlockState iblockstate = state;
+	                        worldIn.setBlockState(pos, iblockstate, 4);
+	                        iblockstate.neighborChanged(worldIn, blockpos, this, pos);
+
+	                }
+	            }
+	        }
+        }
     }
 
     protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)

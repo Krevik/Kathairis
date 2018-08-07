@@ -139,11 +139,7 @@ public class EntityGecko extends EntityAnimal
     	return super.processInteract(player, hand);
     }
 
-    public static void registerFixesSheep(DataFixer fixer)
-    {
-        EntityLiving.registerFixesMob(fixer, EntityGecko.class);
-    }
-    
+
     public void onLivingUpdate()
     {
     	super.onLivingUpdate();
@@ -176,6 +172,12 @@ public class EntityGecko extends EntityAnimal
     		}else {
     			this.setClimbingSide(-1);
     		}
+    	}
+    	
+    	if(this.isClimbing()) {
+    		this.setNoGravity(true);
+    	}else {
+    		this.setNoGravity(false);
     	}
     	
     	if(this.canWalkOnWall()&&this.climbingSide()>=0) {
