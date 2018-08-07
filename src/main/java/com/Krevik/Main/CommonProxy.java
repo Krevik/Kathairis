@@ -84,8 +84,8 @@ public class CommonProxy {
     public void init(FMLInitializationEvent e) {
 		EntityAndRenderRegistry.registerEntitiesAndEggs();
     	GameRegistry.registerTileEntity(TileEntityCharger.class, new ResourceLocation("mystic:charger").toString());
-    	GameRegistry.registerTileEntity(TileEntityKether.class, "entityDimKether");
-    	GameRegistry.registerTileEntity(TileEntityMythicStoneSign.class, "mythicstonesign");
+    	GameRegistry.registerTileEntity(TileEntityKether.class, "mystic:entityDimKether");
+    	GameRegistry.registerTileEntity(TileEntityMythicStoneSign.class, "mystic:mythicstonesign");
 
     	NetworkRegistry.INSTANCE.registerGuiHandler(KCore.instance, new GuiHandler()); 
 
