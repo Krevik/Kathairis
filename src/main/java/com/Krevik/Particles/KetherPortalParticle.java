@@ -2,12 +2,9 @@ package com.Krevik.Particles;
 
 import java.util.Random;
 
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.Krevik.Main.KCore;
-import com.Krevik.Shaders.StaticShader;
+import com.Krevik.Networking.KetherPacketHandler;
+import com.Krevik.Networking.PacketSpawnForgottenSandEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
@@ -15,19 +12,21 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ParticleSoulTree extends Particle
+public class KetherPortalParticle extends Particle
 {
     private final float portalParticleScale;
     private final double portalPosX;
     private final double portalPosY;
     private final double portalPosZ;
     Random random = new Random();
-    public ParticleSoulTree(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
+    public KetherPortalParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         this.motionX = xSpeedIn;
@@ -39,7 +38,6 @@ public class ParticleSoulTree extends Particle
         this.portalPosX = this.posX;
         this.portalPosY = this.posY;
         this.portalPosZ = this.posZ;
-        float f = this.rand.nextFloat() * 0.6F + 0.4F;
         this.particleScale = this.rand.nextFloat() * 0.2F + 0.5F;
         this.portalParticleScale = this.particleScale;
        // this.particleRed = 2.32F;
@@ -49,9 +47,9 @@ public class ParticleSoulTree extends Particle
         this.particleGreen=1;
         this.particleBlue=1;
         this.particleAlpha=50;
-        this.particleMaxAge = (int)(Math.random() * 600.0D);
+        this.particleMaxAge = (int)(Math.random() * 120.0D);
 
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.soulTreeParticle.toString());
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.kether_portal_particle.toString());
 
         setParticleTexture(sprite);
 
@@ -68,7 +66,7 @@ public class ParticleSoulTree extends Particle
                               float edgeLRdirectionX, float edgeUDdirectionY, float edgeLRdirectionZ,
                               float edgeUDdirectionX, float edgeUDdirectionZ)
     {
-    	double minU = this.particleTexture.getMinU();
+      double minU = this.particleTexture.getMinU();
       double maxU = this.particleTexture.getMaxU();
       double minV = this.particleTexture.getMinV();
       double maxV = this.particleTexture.getMaxV();
@@ -118,6 +116,7 @@ public class ParticleSoulTree extends Particle
               .color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
               .lightmap(skyLightTimes16, blockLightTimes16)
               .endVertex();
+
     }
 
 
@@ -161,7 +160,7 @@ public class ParticleSoulTree extends Particle
         {
             public Particle createParticle(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
             {
-                return new ParticleSoulTree(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
+                return new KetherPortalParticle(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
             }
         }
 }

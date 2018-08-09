@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import com.Krevik.Dimension.TileEntityKether;
 import com.Krevik.Entities.EntityStrangeWanderer;
 import com.Krevik.Main.KCore;
+import com.Krevik.Particles.KetherPortalParticle;
 import com.google.common.cache.LoadingCache;
 
 import net.minecraft.block.Block;
@@ -32,7 +33,6 @@ import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -413,7 +413,7 @@ public class BlockMysticPortal extends BaseBlock
                 d5 = (double)(rand.nextFloat() * 2.0F * (float)j);
             }
 
-            worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
+            KCore.cproxy.drawParticle(worldIn, new KetherPortalParticle(worldIn,d0,d1,d2,d3*0.1,d4*0.1,d5*0.1));
         }
     }
 
