@@ -209,7 +209,7 @@ public class EntityDeath extends EntityLiving
 
     	        	if(isFighting) {
     	        		timer++;
-    	        		if(timer>=300+mobStage*20) {
+    	        		if(timer>=400+mobStage*100) {
     	        			if(mobStage==1) {
     	            			for(int i=0;i<=3+mobStage;i++) {
     	            				EntityZombie zombie = new EntityZombie(this.getEntityWorld());
