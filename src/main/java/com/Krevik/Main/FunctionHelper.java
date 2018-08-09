@@ -2,17 +2,17 @@ package com.Krevik.Main;
 
 import java.util.Random;
 
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -185,6 +185,17 @@ public class FunctionHelper {
     	drugiczlon=(-((actual-srednia)*(actual-srednia)))/(2*odchylenie*odchylenie);
     	result=(float) (1/(odchylenie*Math.sqrt(2*Math.PI))*Math.exp(drugiczlon));
     	return result;
+    }
+    
+    public Matrix4f createTransformationMatrix(Vector3f translation, float rx, float ry, float rz, float scale) {
+    	Matrix4f matrix = new Matrix4f();
+    	matrix.setIdentity();
+    	Matrix4f.translate(translation, matrix, matrix);
+    	Matrix4f.rotate((float)Math.toRadians(rx), new Vector3f(1,0,0), matrix, matrix);
+    	Matrix4f.rotate((float)Math.toRadians(ry), new Vector3f(0,1,0), matrix, matrix);
+    	Matrix4f.rotate((float)Math.toRadians(rz), new Vector3f(0,0,1), matrix, matrix);
+    	Matrix4f.scale(new Vector3f(scale,scale,scale), matrix, matrix);
+    	return matrix;
     }
 
 }

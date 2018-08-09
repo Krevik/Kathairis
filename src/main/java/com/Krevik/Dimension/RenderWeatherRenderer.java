@@ -3,9 +3,8 @@ package com.Krevik.Dimension;
 import java.util.Random;
 
 import com.Krevik.Main.KCore;
+import com.Krevik.Shaders.StaticShader;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -15,13 +14,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
 
@@ -51,6 +46,7 @@ public class RenderWeatherRenderer extends IRenderHandler {
 			}
 		}
 	}*/
+	
 	
 	 private final Random random = new Random();
 	    private final float[] rainXCoords = new float[1024];
@@ -225,6 +221,7 @@ public class RenderWeatherRenderer extends IRenderHandler {
 	            GlStateManager.alphaFunc(516, 0.1F);
 	            this.disableLightmap();
 	        }
+	        
 	    }
 
 

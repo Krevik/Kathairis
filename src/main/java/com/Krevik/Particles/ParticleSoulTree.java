@@ -2,7 +2,12 @@ package com.Krevik.Particles;
 
 import java.util.Random;
 
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.Krevik.Main.KCore;
+import com.Krevik.Shaders.StaticShader;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
@@ -22,6 +27,7 @@ public class ParticleSoulTree extends Particle
     private final double portalPosY;
     private final double portalPosZ;
     Random random = new Random();
+    StaticShader shader = new StaticShader();
     public ParticleSoulTree(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
@@ -63,7 +69,7 @@ public class ParticleSoulTree extends Particle
                               float edgeLRdirectionX, float edgeUDdirectionY, float edgeLRdirectionZ,
                               float edgeUDdirectionX, float edgeUDdirectionZ)
     {
-      double minU = this.particleTexture.getMinU();
+    	double minU = this.particleTexture.getMinU();
       double maxU = this.particleTexture.getMaxU();
       double minV = this.particleTexture.getMinV();
       double maxV = this.particleTexture.getMaxV();
@@ -113,7 +119,6 @@ public class ParticleSoulTree extends Particle
               .color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha)
               .lightmap(skyLightTimes16, blockLightTimes16)
               .endVertex();
-
     }
 
 
