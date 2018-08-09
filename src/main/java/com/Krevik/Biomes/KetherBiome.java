@@ -4,8 +4,10 @@ import java.util.Random;
 
 import com.Krevik.Entities.Butterflies.EntityIllukini;
 import com.Krevik.Entities.Butterflies.EntityRubySile;
+import com.Krevik.Gens.WorldGenMysticOre;
 import com.Krevik.Main.KCore;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ColorizerFoliage;
@@ -18,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class KetherBiome extends Biome
 {
-
+	
     public KetherBiome(Biome.BiomeProperties properties)
     {
     	super(properties);
@@ -41,6 +43,14 @@ public abstract class KetherBiome extends Biome
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
         this.decorator.decorate(worldIn, rand, this, pos);
+        
+        for(int x=0;x<=2+rand.nextInt(4);x++){
+        	WorldGenMysticOre normalStone = new WorldGenMysticOre(Blocks.STONE.getDefaultState(),2+rand.nextInt(16));
+			int rx = pos.getX() + rand.nextInt(16) + 8;
+			int rz = pos.getZ() + rand.nextInt(16) + 8;
+			int ry = 5 + rand.nextInt(128);
+			normalStone.generate(worldIn, rand, new BlockPos(rx,ry,rz));
+        }
     }
 
     @SideOnly(Side.CLIENT)
