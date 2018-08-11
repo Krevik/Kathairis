@@ -1,5 +1,7 @@
 package com.Krevik.Particles;
 
+import com.Krevik.Main.KCore;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
@@ -19,7 +21,6 @@ public class DynamicMovementParticle extends Particle
     private final double portalPosY;
     private final double portalPosZ;
     private int baseSpellTextureIndex = 128;
-    private static final ResourceLocation PARTICLE_TEXTURES = new ResourceLocation("textures/particle/particles.png");
 
     public DynamicMovementParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
     {
@@ -43,10 +44,10 @@ public class DynamicMovementParticle extends Particle
         this.particleGreen=1;
         this.particleBlue=1;
         this.particleAlpha=50;
-        this.particleMaxAge = (int)(Math.random() * 80.0D) + 100;
+        this.particleMaxAge = (int)(Math.random() * 800.0D) + 500;
 
         //TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.particleBlueCloud.toString());
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(PARTICLE_TEXTURES.toString());
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.kether_portal_particle.toString());
 
         setParticleTexture(sprite);
 
@@ -135,35 +136,19 @@ public class DynamicMovementParticle extends Particle
         return j | k << 16;
     }
 
-    int direction=-1;
-    float stepSize=-1;
+
     public void onUpdate()
     {
         float f = (float)this.particleAge / (float)this.particleMaxAge;
-        this.setParticleTextureIndex(this.baseSpellTextureIndex + (7 - this.particleAge * 8 / this.particleMaxAge));
+
 
         if (this.particleAge++ >= this.particleMaxAge)
         {
             this.setExpired();
         }
-        
-        if(direction==-1) direction=rand.nextInt(9);
-        if(stepSize==-1) stepSize=rand.nextInt(5);
-        if(direction==0) {motionX=+0.01*stepSize; motionY=0.0; motionZ=0.0;}
-        if(direction==1) {motionX=-0.01*stepSize; motionY=0.0; motionZ=0.0;}
-        if(direction==2) {motionX=+0.00*stepSize; motionY=+0.01*stepSize; motionZ=0.0;}
-        if(direction==3) {motionX=-0.00*stepSize; motionY=-0.01*stepSize; motionZ=0.0;}
-        if(direction==4) {motionX=+0.00*stepSize; motionY=+0.00*stepSize; motionZ=+0.01*stepSize;}
-        if(direction==5) {motionX=-0.00*stepSize; motionY=-0.00*stepSize; motionZ=-0.01*stepSize;}
-        if(direction==7) {motionX=-0.00*stepSize; motionY=-0.00*stepSize; motionZ=-0.00*stepSize;}
-        if(direction==8) {motionX=+0.01*stepSize; motionY=+0.01*stepSize; motionZ=+0.01*stepSize;}
-        if(direction==9) {motionX=-0.01*stepSize; motionY=-0.01*stepSize; motionZ=-0.01*stepSize;}
-        if(direction==10) {motionX=+0.01*stepSize; motionY=-0.01*stepSize; motionZ=+0.01*stepSize;}
-        if(direction==11) {motionX=+0.01*stepSize; motionY=-0.01*stepSize; motionZ=-0.01*stepSize;}
-        if(direction==12) {motionX=+0.01*stepSize; motionY=-0.01*stepSize; motionZ=-0.01*stepSize;}
-        if(direction==13) {motionX=-0.01*stepSize; motionY=-0.01*stepSize; motionZ=+0.01*stepSize;}
-        if(direction==14) {motionX=-0.01*stepSize; motionY=+0.01*stepSize; motionZ=+0.01*stepSize;}
-        if(direction==15) {motionX=-0.01*stepSize; motionY=+0.01*stepSize; motionZ=-0.01*stepSize;}
+        this.motionX=0;
+        this.motionY=0;
+        this.motionZ=0;
 
     }
     

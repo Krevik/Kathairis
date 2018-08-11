@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import com.Krevik.Dimension.TileEntityKether;
 import com.Krevik.Entities.EntityStrangeWanderer;
 import com.Krevik.Main.KCore;
+import com.Krevik.Particles.DynamicMovementParticle;
 import com.Krevik.Particles.KetherPortalParticle;
 import com.google.common.cache.LoadingCache;
 
@@ -415,6 +416,30 @@ public class BlockMysticPortal extends BaseBlock
 
             KCore.cproxy.drawParticle(worldIn, new KetherPortalParticle(worldIn,d0,d1,d2,d3*0.1,d4*0.1,d5*0.1));
         }
+        
+            for (int i = 0; i < 4; ++i)
+            {
+	            double d0 = (double)((float)pos.getX() + rand.nextFloat());
+	            double d1 = (double)((float)pos.getY() + rand.nextFloat());
+	            double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+	            double d3 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
+	            double d4 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
+	            double d5 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
+	            int j = rand.nextInt(2) * 2 - 1;
+	
+	            if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this)
+	            {
+	                d0 = (double)pos.getX() + 0.5D + 0.25D * (double)j;
+	                d3 = (double)(rand.nextFloat() * 2.0F * (float)j);
+	            }
+	            else
+	            {
+	                d2 = (double)pos.getZ() + 0.5D + 0.25D * (double)j;
+	                d5 = (double)(rand.nextFloat() * 2.0F * (float)j);
+	            }
+	
+	            KCore.cproxy.drawParticle(worldIn, new DynamicMovementParticle(worldIn,d0,d1,d2,d3*0.01,d4*0.01,d5*0.01));
+            }
     }
 
     /**
