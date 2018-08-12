@@ -49,9 +49,12 @@ public class BlockMysticWoodTrapdoor extends BaseBlock
     {
         super(Name,Material.WOOD,CreativeTabsMystic.mainTab,3,3,SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, Boolean.valueOf(false)).withProperty(HALF, BlockMysticWoodTrapdoor.DoorHalf.BOTTOM));
-
-        
     }
+    
+	@Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return blockState.getBoundingBox(worldIn, pos);
+	}
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
