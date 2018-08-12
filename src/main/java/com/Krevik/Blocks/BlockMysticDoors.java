@@ -59,7 +59,13 @@ public class BlockMysticDoors extends BaseBlock
 	public void initModel() {
 			ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(POWERED).build());
 	}
+	
+	@Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return blockState.getBoundingBox(worldIn, pos);
+	}
 
+	@Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         state = state.getActualState(source, pos);
