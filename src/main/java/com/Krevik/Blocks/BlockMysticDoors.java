@@ -127,12 +127,6 @@ public class BlockMysticDoors extends BaseBlock
      */
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (this.blockMaterial == Material.IRON)
-        {
-            return false;
-        }
-        else
-        {
             BlockPos blockpos = state.getValue(HALF) == BlockMysticDoors.EnumDoorHalf.LOWER ? pos : pos.down();
             IBlockState iblockstate = pos.equals(blockpos) ? state : worldIn.getBlockState(blockpos);
 
@@ -148,7 +142,6 @@ public class BlockMysticDoors extends BaseBlock
                 worldIn.playEvent(playerIn, ((Boolean)state.getValue(OPEN)).booleanValue() ? this.getOpenSound() : this.getCloseSound(), pos, 0);
                 return true;
             }
-        }
     }
 
     public void toggleDoor(World worldIn, BlockPos pos, boolean open)
