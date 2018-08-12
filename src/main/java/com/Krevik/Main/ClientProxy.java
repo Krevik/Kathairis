@@ -2,24 +2,22 @@ package com.Krevik.Main;
 
 import java.util.Map;
 
-import com.Krevik.Blocks.BlockMysticSlabBase;
 import com.Krevik.Particles.TextureStitcherParicleManager;
-import com.Krevik.Sounds.SoundHelper;
 import com.Krevik.TileEntity.TileEntityMythicStoneSign;
 import com.Krevik.TileEntity.TileEntityMythicStoneSignRenderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
@@ -30,7 +28,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IRegistryDelegate;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -45,7 +42,6 @@ public static final ResourceLocation soulTreeParticle = new ResourceLocation(KCo
 public static final ResourceLocation Mystic_Gem_Block_Particle = new ResourceLocation(KCore.MODID+":"+"effect/mystic_gem_block_particle");
 public static final ResourceLocation dust_particle = new ResourceLocation(KCore.MODID+":"+"effect/dust_particle");
 public static final ResourceLocation kether_portal_particle = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
-
 
 
  public void registerItemRenderer(Item item, int meta, String id) {
@@ -67,8 +63,11 @@ public static final ResourceLocation kether_portal_particle = new ResourceLocati
     public void preInit(FMLPreInitializationEvent e) {
 
 	    MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
-
     }
+	
+	@Override
+	public void init() {
+	}
 	
 	public static void drawParticle(World worldObj, Particle particle) {
 		if(particle != null)

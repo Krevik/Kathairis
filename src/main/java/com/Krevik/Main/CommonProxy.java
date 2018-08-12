@@ -43,8 +43,7 @@ public class CommonProxy {
 	public static SoundHelper bison_dead = new SoundHelper("bison","dead");
 	public static SoundHelper bison_hurt = new SoundHelper("bison","hurt");
 	public static SoundHelper bison_living = new SoundHelper("bison","living");
-	public static SoundEvent nightMusic = new SoundHelper("night.music");
-	public static SoundEvent dayMusic = new SoundHelper("day.music");
+	public static SoundEvent ketherMusic = new SoundHelper("music");
 	public static SoundHelper ghost_living = new SoundHelper("ghost","living");
 	public static SoundHelper ghost_attack = new SoundHelper("ghost","attack");
 	public static SoundHelper ghost_dead = new SoundHelper("ghost","dead");
@@ -386,6 +385,14 @@ public class CommonProxy {
 
 		}
 		
+		
+	}
+
+
+
+
+	public void init() {
+		// TODO Auto-generated method stub
 		
 	}
 

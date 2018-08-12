@@ -153,6 +153,11 @@ public class WorldProviderMystic extends WorldProviderSurface
         return KCore.Mystic_DIMENSION;
     }
     
-    
+    @Nullable
+    @SideOnly(Side.CLIENT)
+    public net.minecraft.client.audio.MusicTicker.MusicType getMusicType()
+    {
+        return KCore.instance.ketherMusic;
+    }
     
 }

@@ -70,6 +70,7 @@ import com.Krevik.Networking.KetherPacketHandler;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -77,6 +78,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -758,14 +760,19 @@ public class KCore {
         new RecipeHandler().addRecipes();
     }
 
+    public MusicTicker.MusicType ketherMusic;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+		ketherMusic= EnumHelperClient.addMusicType("kether", KCore.instance.proxy.ketherMusic, 100, 500);
+
     	World.MAX_ENTITY_RADIUS=12D;
     	KetherPacketHandler.init();
+
     	KCore.instance.dimRegistry();
-        //logger = (Logger)event.getModLog();
         proxy.preInit(event);
+
+        //logger = (Logger)event.getModLog();
     }
 
     @Mod.EventHandler

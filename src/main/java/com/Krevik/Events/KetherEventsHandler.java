@@ -35,6 +35,7 @@ public class KetherEventsHandler {
 	@SideOnly(Side.CLIENT)
 	public static void onEvent(PlaySoundEvent event)
 	{
+		/*
 		ISound sound = event.getSound();
 
 		if(sound!=null&&sound.getCategory() == SoundCategory.MUSIC) {
@@ -55,6 +56,7 @@ public class KetherEventsHandler {
 				}
 			}
 		}
+		*/
 	}
 	
 
