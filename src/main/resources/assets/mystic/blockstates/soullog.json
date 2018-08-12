@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "mystic:soullog" },
+        "axis=z":   { "model": "mystic:soullog", "x": 90 },
+        "axis=x":   { "model": "mystic:soullog", "x": 90, "y": 90 },
+        "axis=none": { "model": "mystic:soullogbark" }
+    }
+}

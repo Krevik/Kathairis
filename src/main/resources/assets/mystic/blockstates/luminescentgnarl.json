@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=east": { "model": "mystic:luminescentgnarle" },
+		"facing=west": { "model": "mystic:luminescentgnarlw" },
+		"facing=south": { "model": "mystic:luminescentgnarls" },
+		"facing=north": { "model": "mystic:luminescentgnarln" }
+	}
+}

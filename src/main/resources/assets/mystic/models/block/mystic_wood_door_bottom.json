@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "mystic:blocks/mystic_wood_door_lower",
+        "top": "mystic:blocks/mystic_wood_door_upper"
+    }
+}

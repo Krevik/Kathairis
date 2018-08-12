@@ -1,0 +1,247 @@
+{
+    "mob.bird.bird":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:bird/bird1",
+			"mystic:bird/bird2",
+			"mystic:bird/bird3",
+			"mystic:bird/bird4"
+        ]
+    },
+	"mob.howler.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:howler/living"
+        ]
+    },
+	"mob.howler.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:howler/dead"
+        ]
+    },
+	"mob.jellyfish.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:jellyfish/dead"
+        ]
+    },
+	"mob.jellyfish.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:jellyfish/hurt"
+        ]
+    },
+	"mob.jellyfish.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:jellyfish/living1",
+			"mystic:jellyfish/living2",
+			"mystic:jellyfish/living3"
+        ]
+    },
+	"mob.turtle.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:turtle/turtle_dead"
+        ]
+    },
+	"mob.bison.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:bison/dead"
+        ]
+    },
+	"mob.bison.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:bison/hurt"
+        ]
+    },
+	"mob.bison.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:bison/1",
+			"mystic:bison/2",
+			"mystic:bison/3",
+			"mystic:bison/4",
+			"mystic:bison/5",
+			"mystic:bison/6",
+			"mystic:bison/7"
+        ]
+    },
+	"kether.night.music":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "mystic:kether/kether_night", "stream": true},
+			{"name": "mystic:kether/kether_night2", "stream": true}
+        ]
+    },
+	"kether.day.music":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "mystic:kether/kether_day", "stream": true}
+        ]
+    },
+	"mob.ghost.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:ghost/ghost1",
+			"mystic:ghost/ghost2",
+			"mystic:ghost/ghost3",
+			"mystic:ghost/ghost4"
+        ]
+    },
+	"mob.ghost.attack":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:ghost/ghost_attack"
+        ]
+    },
+	"mob.ghost.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:ghost/ghost_dead"
+        ]
+    },
+	"mob.death.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:death/death1",
+			"mystic:death/death2",
+			"mystic:death/death3",
+			"mystic:death/death4",
+			"mystic:death/death5",
+			"mystic:death/death6",
+			"mystic:death/death7",
+			"mystic:death/death8",
+			"mystic:death/death9",
+			"mystic:death/death10"
+        ]
+    },
+	"mob.scary.flower":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:scary/scary1",
+			"mystic:scary/scary2",
+			"mystic:scary/scary3",
+			"mystic:scary/scary4",
+			"mystic:scary/scary5"
+        ]
+    },
+	"mob.camel.ambient":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:camel/camel_ambient1",
+			"mystic:camel/camel_ambient2",
+			"mystic:camel/camel_ambient3",
+			"mystic:camel/camel_ambient4",
+			"mystic:camel/camel_ambient5"
+        ]
+    },
+	"mob.camel.breath":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:camel/camel_breath"
+        ]
+    },
+	"mob.camel.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:camel/camel_dead"
+        ]
+    },
+	"mob.camel.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:camel/camel_hurt"
+        ]
+    },
+	"mob.oldman.ambient":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:oldman/ambient"
+        ]
+    },
+	"mob.skyray.ambient":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:skyray/skyray1",
+			"mystic:skyray/skyray2",
+            "mystic:skyray/skyray3"
+        ]
+    },
+	"mob.skyray.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:skyray/skyray_hurt"
+        ]
+    },
+	"kether.cloudglass.break":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:blocks/cloud_glass/cloudglass1",
+			"mystic:blocks/cloud_glass/cloudglass2"
+        ]
+    },
+	"kether.sandstorm":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:sandstorm/sandstorm1",
+			"mystic:sandstorm/sandstorm2",
+			"mystic:sandstorm/sandstorm3"
+        ]
+    }
+}

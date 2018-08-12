@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=east": { "model": "mystic:swampgas" },
+		"facing=west": { "model": "mystic:swampgas" },
+		"facing=south": { "model": "mystic:swampgas" },
+		"facing=north": { "model": "mystic:swampgas" }
+	}
+}

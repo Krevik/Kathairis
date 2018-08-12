@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "mystic:blocks/stripped_shiny_log_top",
+        "side": "mystic:blocks/stripped_shiny_log"
+    }
+}

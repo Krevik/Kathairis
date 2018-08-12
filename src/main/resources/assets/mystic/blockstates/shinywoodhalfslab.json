@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=mystic": { "model": "mystic:shinywoodhalfslabbottom" },
+        "half=top,variant=mystic": { "model": "mystic:shinywoodhalfslabtop" }
+    }
+}

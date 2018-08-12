@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "variant=mystic": { "model": "mystic:mysticplanks" },
+		"variant=shiny": { "model": "mystic:shinyplanks" }
+    }
+}

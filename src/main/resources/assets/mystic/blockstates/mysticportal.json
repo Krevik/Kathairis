@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "axis=z": { "model": "mystic:mysticportal_ew" },
+        "axis=x": { "model": "mystic:mysticportal_ns" }
+    }
+}

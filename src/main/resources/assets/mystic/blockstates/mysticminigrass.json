@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "age=0": { "model": "mystic:mysticminigrass" }, 
+        "age=1": { "model": "mystic:mysticminigrass" },
+        "age=2": { "model": "mystic:mysticminigrass" },
+        "age=3": { "model": "mystic:mysticminigrass" },
+        "age=4": { "model": "mystic:mysticminigrass" },
+        "age=5": { "model": "mystic:mysticminigrass" },
+        "age=6": { "model": "mystic:mysticminigrass" },
+        "age=7": { "model": "mystic:mysticminigrass" },	
+		"age=8": { "model": "mystic:mysticminigrass" }	
+    }
+}

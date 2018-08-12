@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up":  { "model": "mystic:yellowcrystal" },
+        "facing=down":   { "model": "mystic:yellowcrystal", "x": 180 },
+        "facing=east":   { "model": "mystic:yellowcrystal", "y": 90, "x": 90 },
+        "facing=south": { "model": "mystic:yellowcrystal", "y": 180, "x": 90 },
+		"facing=west": { "model": "mystic:yellowcrystal", "y": 270, "x": 90 },
+        "facing=north": { "model": "mystic:yellowcrystal", "y": 0, "x": 90 }
+    }
+}

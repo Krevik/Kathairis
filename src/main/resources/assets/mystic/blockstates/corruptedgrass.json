@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "snowy=false": [
+            { "model": "mystic:corruptedgrass_normal" },
+            { "model": "mystic:corruptedgrass_normal", "y": 90 },
+            { "model": "mystic:corruptedgrass_normal", "y": 180 },
+            { "model": "mystic:corruptedgrass_normal", "y": 270 }
+        ],
+        "snowy=true":  { "model": "mystic:corruptedgrass_snowed" }
+    }
+}

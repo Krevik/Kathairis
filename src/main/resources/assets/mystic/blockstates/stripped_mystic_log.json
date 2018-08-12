@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "mystic:stripped_mystic_log" },
+        "axis=z":   { "model": "mystic:stripped_mystic_log", "x": 90 },
+        "axis=x":   { "model": "mystic:stripped_mystic_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "mystic:mysticlogbark" }
+    }
+}
