@@ -416,7 +416,7 @@ public class BlockMysticPortal extends BaseBlock
 
             KCore.cproxy.drawParticle(worldIn, new KetherPortalParticle(worldIn,d0,d1,d2,d3*0.1,d4*0.1,d5*0.1));
         }
-        
+        if(rand.nextInt(50)==0) {
             for (int i = 0; i < 4; ++i)
             {
 	            double d0 = (double)((float)pos.getX() + rand.nextFloat());
@@ -440,6 +440,7 @@ public class BlockMysticPortal extends BaseBlock
 	
 	            KCore.cproxy.drawParticle(worldIn, new DynamicMovementParticle(worldIn,d0,d1,d2,d3*0.01,d4*0.01,d5*0.01));
             }
+        }
     }
 
     /**
