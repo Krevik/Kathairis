@@ -36,36 +36,6 @@ public class FunctionHelper {
     	return tmp;
     }
     
-    public BlockPos getRandomCircleDestination(Entity entity,BlockPos from,int radius) {
-    	BlockPos tmp=entity.getPosition();
-    	BlockPos result=entity.getPosition();
-    	double posX=tmp.getX();
-    	double posY=tmp.getY();
-    	double posZ=tmp.getZ();
-    	
-    	int k = -5-random.nextInt(5);
-    	double distanceToX1=entity.getDistance(from.getX()+radius, from.getY()+k, posZ);
-    	double distanceToX2=entity.getDistance(from.getX()-radius, from.getY()+k, posZ);
-    	double distanceToZ1=entity.getDistance(posX, from.getY()+k, from.getZ()+radius);
-    	double distanceToZ2=entity.getDistance(posX, from.getY()+k, from.getZ()-radius);
-    	
-    	double shortestTo=distanceToX1;
-    	if(distanceToX1<=4) shortestTo=distanceToZ1;
-    	if(distanceToZ1<shortestTo&&distanceToZ1>4) shortestTo=distanceToZ1;
-    	if(distanceToX2<shortestTo&&distanceToX2>4) shortestTo=distanceToX2;
-    	if(distanceToZ2<shortestTo&&distanceToZ2>4) shortestTo=distanceToZ2;
-    	
-    	float kk = random.nextFloat()-random.nextFloat()-5;
-    	if(shortestTo==distanceToX1) result = new BlockPos(from.getX()+radius+kk,from.getY()+k,from.getZ()+kk);
-    	if(shortestTo==distanceToX2) result = new BlockPos(from.getX()-radius+kk,from.getY()+k,from.getZ()+kk);
-    	
-    	if(shortestTo==distanceToZ1) result = new BlockPos(from.getX()+kk,from.getY()+k,from.getZ()+radius+kk);
-    	if(shortestTo==distanceToZ2) result = new BlockPos(from.getX()+kk,from.getY()+k,from.getZ()-radius+kk);
-    	
-    	if(entity.world.isAirBlock(result))return result;
-    	else return getRandomCircleDestination(entity,from,radius);
-    }
-    
     public void updateJellyFishMotion(Entity entity) {
     	if(!entity.world.isRemote) {
         	BlockPos Destination = this.getRandomDestination(entity,10,10);
@@ -179,14 +149,7 @@ public class FunctionHelper {
         return degrees * (float)Math.PI / 180 ;
     }
     
-    public float normalDistibution(int srednia, int odchylenie, int actual) {
-    	float result=0;
-    	float drugiczlon=0;
-    	drugiczlon=(-((actual-srednia)*(actual-srednia)))/(2*odchylenie*odchylenie);
-    	result=(float) (1/(odchylenie*Math.sqrt(2*Math.PI))*Math.exp(drugiczlon));
-    	return result;
-    }
-    
+
     public Matrix4f createTransformationMatrix(Vector3f translation, float rx, float ry, float rz, float scale) {
     	Matrix4f matrix = new Matrix4f();
     	matrix.setIdentity();
