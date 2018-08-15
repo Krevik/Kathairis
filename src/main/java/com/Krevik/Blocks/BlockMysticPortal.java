@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import com.Krevik.Dimension.TileEntityKether;
 import com.Krevik.Entities.EntityStrangeWanderer;
 import com.Krevik.Main.KCore;
+import com.Krevik.Main.KathairisMaterials;
 import com.Krevik.Particles.DynamicMovementParticle;
 import com.Krevik.Particles.KetherPortalParticle;
 import com.google.common.cache.LoadingCache;
@@ -53,7 +54,7 @@ public class BlockMysticPortal extends BaseBlock
 
     public BlockMysticPortal(String Name)
     {
-        super(Name, Material.PORTAL, null, -1, -1, SoundType.STONE);
+        super(Name, KathairisMaterials.KATHAIRISPORTAL, null, -1, -1, SoundType.STONE);
         this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
         this.setTickRandomly(true);
     }

@@ -79,7 +79,6 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.EnumHelperClient;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -103,7 +102,7 @@ public class KCore {
 	public static final String MODID = "mystic";
 	public static final String name = "Kathairis";
 	public static final String version = "0.8.0";
-
+	
 	@Mod.Instance(MODID)
 	public static KCore instance;
 	
@@ -130,7 +129,7 @@ public class KCore {
 	public static Item.ToolMaterial CLOUD = EnumHelper.addToolMaterial("cloud", 3, 250, 1F, 2.5F, 1);
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21);
 	public static Item.ToolMaterial LIGHT = EnumHelper.addToolMaterial("light", 1, 1000, 0.5F, 0.5F, 1);
-
+	
 
 	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticPortal)
     public static final BlockMysticPortal MysticPortal = (BlockMysticPortal) new BlockMysticPortal(Ref.MysticPortal).setLightLevel(1F);
