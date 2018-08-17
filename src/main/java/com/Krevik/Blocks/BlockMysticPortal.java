@@ -133,7 +133,9 @@ public class BlockMysticPortal extends BaseBlock
     			KCore.ButterflyFlower.getDefaultState(),KCore.MysticFlower.getDefaultState(),KCore.MysticFungus.getDefaultState(),
     			KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),
     			KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),
-    			KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState()
+    			KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),
+    			KCore.MysticSapling.getDefaultState(),KCore.EyePlant.getDefaultState(),KCore.MagicBeans.getDefaultState(),KCore.GooseberryBlock.getDefaultState(),
+    			KCore.SteppedSucculent.getDefaultState()
     			};
     	return flowers[random.nextInt(flowers.length)];
     }
