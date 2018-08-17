@@ -3,10 +3,9 @@ package com.Krevik.TileEntity;
 import java.util.Random;
 
 import com.Krevik.Container.ContainerCharger;
+import com.Krevik.Main.ChargerRecipe;
 import com.Krevik.Main.KCore;
-import com.Krevik.Slot.SlotChargerOutput;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -304,7 +303,29 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
      */
     private boolean canSmelt()
     {
-    	if(this.furnaceItemStacks.get(2).getItem()!=null) {
+    	ItemStack itemStackToUpgrade = this.furnaceItemStacks.get(2);
+    	ItemStack itemToBeConsumed = this.furnaceItemStacks.get(0);
+    	boolean can=false;
+    	
+    	if(itemStackToUpgrade!=null) {
+    		if(itemToBeConsumed!=null) {
+    			if(itemStackToUpgrade.getItem()!=null) {
+    				if(itemToBeConsumed.getItem()!=null) {
+    	    			int recipeID = KCore.instance.chargerRecipes.getRecipe(itemStackToUpgrade.getItem());
+    	    			if(recipeID!=-1) {
+    	    				ChargerRecipe recipe = KCore.instance.chargerRecipes.recipeList.get(recipeID);
+    	    				if(itemStackToUpgrade.getItem()==recipe.getItemToUpgrade()) {
+    	    					if(itemToBeConsumed.getItem()==recipe.getItemToBeConsumed()) {
+    	    						can=true;
+    	    					}
+    	    				}
+    	    			}
+    				}
+    			}    			
+    		}
+    	}
+    	
+    	/*if(this.furnaceItemStacks.get(2).getItem()!=null) {
     		if(this.furnaceItemStacks.get(2).getItem()==KCore.DeathWand) {
     			if(this.furnaceItemStacks.get(0).getItem()==KCore.DarknessEssence) {
     				if(this.furnaceItemStacks.get(2).getItem().getDamage(this.furnaceItemStacks.get(2))-10>=0) {
@@ -329,7 +350,8 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
     		}
     	}else {
     		return false;
-    	}
+    	}*/
+    	return can;
     }
 
     /**
