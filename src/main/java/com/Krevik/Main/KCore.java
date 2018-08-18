@@ -417,7 +417,7 @@ public class KCore {
     public static final BaseBlock SoulLogBark = new BaseBlock(Ref.SoulLogBark,Material.WOOD, CreativeTabsMystic.mainTab,3F,3F,SoundType.WOOD);
    
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Mystic_Gem_Block)
-    public static final BaseBlock Mystic_Gem_Block = new BaseBlock(Ref.Mystic_Gem_Block,Material.GLASS, CreativeTabsMystic.mainTab,5F,5F,SoundType.GLASS);
+    public static final BaseBlock Mystic_Gem_Block = (BaseBlock) new BaseBlock(Ref.Mystic_Gem_Block,Material.GLASS, CreativeTabsMystic.mainTab,5F,5F,SoundType.GLASS).setTickRandomly(true);
    
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Stripped_Mystic_Log)
     public static final BlockMysticLog Stripped_Mystic_Log = new BlockMysticLog(Ref.Stripped_Mystic_Log);

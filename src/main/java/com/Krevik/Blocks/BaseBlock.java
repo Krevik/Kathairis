@@ -53,11 +53,7 @@ public class BaseBlock extends Block
         this.setSoundType(soundType);
         this.setRegistryName(Name);
         this.setUnlocalizedName(Name);
-        if(this==KCore.Mystic_Gem_Block) {
-        	this.setTickRandomly(true);
-        }
         KCore.instance.regHelper.blocksList.add(this);
-
     }
     
     protected boolean canSilkHarvest()
