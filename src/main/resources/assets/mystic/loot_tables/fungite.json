@@ -1,7 +1,7 @@
 {
     "pools": [
         {
-		    "name": "mystic:fungal_drug"
+		    "name": "mystic:fungal_drug",
             "rolls": 1,
             "entries": [
                 {
