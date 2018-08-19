@@ -64,7 +64,7 @@ public class RenderMysticSky extends IRenderHandler {
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         RenderHelper.disableStandardItemLighting();
         
-        //stars?
+        //stars
         if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
 
     		for(int x=0;x<6000;x++) {
@@ -74,7 +74,6 @@ public class RenderMysticSky extends IRenderHandler {
     				constantLight[x]=helper.getRandomInteger(0, 256);
     			}else {
         			constantLight[x]+=(helper.getRandomInteger(0, 8)-helper.getRandomInteger(0, 8));
-
     			}
     		}
         GlStateManager.pushMatrix();
