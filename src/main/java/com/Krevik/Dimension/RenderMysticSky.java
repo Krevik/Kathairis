@@ -41,17 +41,7 @@ public class RenderMysticSky extends IRenderHandler {
     @Override
     @SideOnly(Side.CLIENT)
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
-    		for(int x=0;x<6000;x++) {
 
-    			if(constantLight[x]>=255) {
-    				constantLight[x]-=helper.getRandomInteger(0, 16);
-    			}else if(constantLight[x]<=0) {
-    				constantLight[x]=helper.getRandomInteger(0, 256);
-    			}else {
-        			constantLight[x]+=(helper.getRandomInteger(0, 16)-helper.getRandomInteger(0, 16));
-
-    			}
-    		}
 
         
         GlStateManager.disableTexture2D();
@@ -60,16 +50,8 @@ public class RenderMysticSky extends IRenderHandler {
         float f1 = (float)vec3d.y;
         float f2 = (float)vec3d.z;
 
-        //pass !=2
-        {
-            float f3 = (f * 30.0F + f1 * 59.0F + f2 * 11.0F) / 100.0F;
-            float f4 = (f * 30.0F + f1 * 70.0F) / 100.0F;
-            float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
-            f = f3;
-            f1 = f4;
-            f2 = f5;
-        }
 
+        
         GlStateManager.color(f, f1, f2);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -84,6 +66,17 @@ public class RenderMysticSky extends IRenderHandler {
         
         //stars?
         if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
+
+    		for(int x=0;x<6000;x++) {
+    			if(constantLight[x]>=255) {
+    				constantLight[x]-=helper.getRandomInteger(0, 16);
+    			}else if(constantLight[x]<=0) {
+    				constantLight[x]=helper.getRandomInteger(0, 256);
+    			}else {
+        			constantLight[x]+=(helper.getRandomInteger(0, 16)-helper.getRandomInteger(0, 16));
+
+    			}
+    		}
         GlStateManager.pushMatrix();
         Random random = new Random(10842L);
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
