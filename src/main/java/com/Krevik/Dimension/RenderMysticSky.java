@@ -69,11 +69,11 @@ public class RenderMysticSky extends IRenderHandler {
 
     		for(int x=0;x<6000;x++) {
     			if(constantLight[x]>=255) {
-    				constantLight[x]-=helper.getRandomInteger(0, 16);
+    				constantLight[x]-=helper.getRandomInteger(0, 8);
     			}else if(constantLight[x]<=0) {
     				constantLight[x]=helper.getRandomInteger(0, 256);
     			}else {
-        			constantLight[x]+=(helper.getRandomInteger(0, 16)-helper.getRandomInteger(0, 16));
+        			constantLight[x]+=(helper.getRandomInteger(0, 8)-helper.getRandomInteger(0, 8));
 
     			}
     		}
