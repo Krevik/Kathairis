@@ -1,4 +1,4 @@
-package com.Krevik.Main;
+package com.Krevik.Recipes;
 
 import net.minecraft.item.Item;
 

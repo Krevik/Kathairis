@@ -67,6 +67,8 @@ import com.Krevik.Items.ItemMysticSword;
 import com.Krevik.Items.ItemMythicStoneSign;
 import com.Krevik.Items.ItemRitualBlade;
 import com.Krevik.Networking.KetherPacketHandler;
+import com.Krevik.Recipes.ChargerRecipes;
+import com.Krevik.Recipes.RecipeHandler;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -1,6 +1,8 @@
-package com.Krevik.Main;
+package com.Krevik.Recipes;
 
 import java.util.ArrayList;
+
+import com.Krevik.Main.KCore;
 
 import net.minecraft.item.Item;
 

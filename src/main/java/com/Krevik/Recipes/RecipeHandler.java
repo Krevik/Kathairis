@@ -1,6 +1,7 @@
-package com.Krevik.Main;
+package com.Krevik.Recipes;
 
 import com.Krevik.Blocks.BlockRefinedCloud;
+import com.Krevik.Main.KCore;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

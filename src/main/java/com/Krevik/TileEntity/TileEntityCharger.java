@@ -3,8 +3,8 @@ package com.Krevik.TileEntity;
 import java.util.Random;
 
 import com.Krevik.Container.ContainerCharger;
-import com.Krevik.Main.ChargerRecipe;
 import com.Krevik.Main.KCore;
+import com.Krevik.Recipes.ChargerRecipe;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
