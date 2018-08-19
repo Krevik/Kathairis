@@ -27,6 +27,13 @@ public class FunctionHelper {
 		return min+random.nextInt(((max+1)-min));
 	}
 	
+	public int getRandomInteger(long Seed, int min, int max) {
+		int result=0;
+		Random rand = new Random(Seed);
+		result=min+rand.nextInt(((max+1)-min));
+		return result;
+	}
+	
     private BlockPos getRandomDestination(Entity entity,int maxX, int maxZ) {
     	BlockPos tmp;
     	double X=entity.posX-random.nextInt(maxX)+random.nextInt(10);

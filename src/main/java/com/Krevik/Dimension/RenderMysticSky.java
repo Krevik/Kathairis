@@ -2,28 +2,23 @@ package com.Krevik.Dimension;
 
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
+import javax.vecmath.Vector4d;
 
+import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexBuffer;
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -32,14 +27,33 @@ public class RenderMysticSky extends IRenderHandler {
 
     private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("mystic:textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("mystic:textures/environment/sun.png");
-    
+    private VertexBuffer starVBO;
+    private int starGLCallList = -1;
+    private boolean vboEnabled=true;
+
     public RenderMysticSky()
     {
     }
+    
+    private int[] constantLight = new int[6000];
 
+    FunctionHelper helper = KCore.instance.functionHelper;
     @Override
     @SideOnly(Side.CLIENT)
     public void render(float partialTicks, WorldClient world, Minecraft mc) {
+    		for(int x=0;x<6000;x++) {
+
+    			if(constantLight[x]>=255) {
+    				constantLight[x]-=helper.getRandomInteger(0, 16);
+    			}else if(constantLight[x]<=0) {
+    				constantLight[x]=helper.getRandomInteger(0, 256);
+    			}else {
+        			constantLight[x]+=(helper.getRandomInteger(0, 16)-helper.getRandomInteger(0, 16));
+
+    			}
+    		}
+
+        
         GlStateManager.disableTexture2D();
         Vec3d vec3d = world.getSkyColor(mc.getRenderViewEntity(), partialTicks);
         float f = (float)vec3d.x;
@@ -67,6 +81,61 @@ public class RenderMysticSky extends IRenderHandler {
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         RenderHelper.disableStandardItemLighting();
+        
+        //stars?
+        if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
+        GlStateManager.pushMatrix();
+        Random random = new Random(10842L);
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        for (int i = 0; i < 1500; ++i)
+        {
+            double d0 = (double)(random.nextFloat() * 2.0F - 1.0F);
+            double d1 = (double)(random.nextFloat() * 2.0F - 1.0F);
+            double d2 = (double)(random.nextFloat() * 2.0F - 1.0F);
+            double d33 = (double)(0.15F + random.nextFloat() * 0.1F);
+            double d4 = d0 * d0 + d1 * d1 + d2 * d2;
+
+            if (d4 < 1.0D && d4 > 0.01D)
+            {
+                d4 = 1.0D / Math.sqrt(d4);
+                d0 = d0 * d4;
+                d1 = d1 * d4;
+                d2 = d2 * d4;
+                double d5 = d0 * 100.0D;
+                double d6 = d1 * 100.0D;
+                double d7 = d2 * 100.0D;
+                double d8 = Math.atan2(d0, d2);
+                double d9 = Math.sin(d8);
+                double d10 = Math.cos(d8);
+                double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+                double d12 = Math.sin(d11);
+                double d13 = Math.cos(d11);
+                double d14 = random.nextDouble() * Math.PI * 2.0D;
+                double d15 = Math.sin(d14);
+                double d16 = Math.cos(d14);
+
+                for (int j = 0; j < 4; ++j)
+                {
+                	Vector4d color = new Vector4d(helper.getRandomInteger(10842L,66, 137),helper.getRandomInteger(10842L,65, 244),helper.getRandomInteger(10842L,229, 244),constantLight[i+j*1125]);
+                    double d17 = 0.0D;
+                    double d18 = (double)((j & 2) - 1) * d33;
+                    double d19 = (double)((j + 1 & 2) - 1) * d33;
+                    double d20 = 0.0D;
+                    double d21 = d18 * d16 - d19 * d15;
+                    double d22 = d19 * d16 + d18 * d15;
+                    double d23 = d21 * d12 + 0.0D * d13;
+                    double d24 = 0.0D * d12 - d21 * d13;
+                    double d25 = d24 * d9 - d22 * d10;
+                    double d26 = d22 * d9 + d24 * d10;
+                    bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color((int)color.x, (int)color.y, (int)color.z, (int)color.w).endVertex();
+                    
+                }
+            }
+        }
+        tessellator.draw();
+        GlStateManager.popMatrix();
+        //stars end
+        }
         float[] afloat = world.provider.calcSunriseSunsetColors(world.getCelestialAngle(partialTicks), partialTicks);
 
         if (afloat != null)
@@ -136,6 +205,9 @@ public class RenderMysticSky extends IRenderHandler {
         bufferbuilder.pos((double)f17, -100.0D, (double)(-f17)).tex((double)f22, (double)f23).endVertex();
         bufferbuilder.pos((double)(-f17), -100.0D, (double)(-f17)).tex((double)f24, (double)f23).endVertex();
         tessellator.draw();
+        
+ 
+        
         GlStateManager.disableTexture2D();
         float f15 = world.getStarBrightness(partialTicks) * f16;
 
