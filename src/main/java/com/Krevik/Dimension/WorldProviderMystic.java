@@ -78,9 +78,9 @@ public class WorldProviderMystic extends WorldProviderSurface
             float f3 = (float)(l >> 16 & 255) / 255.0F;
             float f4 = (float)(l >> 8 & 255) / 255.0F;
             float f5 = (float)(l & 255) / 255.0F;
-            f3 = (float) (f3 * f1*0.237);
-            f4 = (float) (f4 * f1*0.165);
-            f5 = (float) (f5 * f1*0.071);
+            f3 = (float) (f3 * f1*2.37);
+            f4 = (float) (f4 * f1*1.65);
+            f5 = (float) (f5 * f1*0.71);
             float f6 = world.getRainStrength(partialTicks);
 
             if (f6 > 0.0F)
