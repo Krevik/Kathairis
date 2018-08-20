@@ -761,11 +761,14 @@ public class KCore {
         new RecipeHandler().addRecipes();
     }
 
-    public MusicTicker.MusicType ketherMusic;
+    public MusicTicker.MusicType ketherMusicDay;
+
+    public MusicTicker.MusicType ketherMusicNight;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-		ketherMusic= EnumHelperClient.addMusicType("kether", KCore.instance.proxy.ketherMusic, 100, 500);
+		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDay, 100, 500);
+		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNight, 100, 500);
 
     	World.MAX_ENTITY_RADIUS=12D;
     	KetherPacketHandler.init();

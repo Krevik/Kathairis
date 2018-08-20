@@ -207,8 +207,12 @@ public class WorldProviderMystic extends WorldProviderSurface
     @Nullable
     @SideOnly(Side.CLIENT)
     public net.minecraft.client.audio.MusicTicker.MusicType getMusicType()
-    {
-        return KCore.instance.ketherMusic;
+    {        
+    	if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
+            return KCore.instance.ketherMusicNight;
+    	}else {
+            return KCore.instance.ketherMusicDay;
+    	}
     }
     
 }

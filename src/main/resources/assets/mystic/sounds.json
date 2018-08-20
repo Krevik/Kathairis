@@ -90,16 +90,17 @@
 			"mystic:bison/7"
         ]
     },
-	"kether.night.music":
+	"kether.music.night":
     {
         "category": "music",
 		"sounds":
         [
             {"name": "mystic:kether/kether_night", "stream": true},
-			{"name": "mystic:kether/kether_night2", "stream": true}
+			{"name": "mystic:kether/kether_night2", "stream": true},
+			{"name": "mystic:kether/kether_night3", "stream": true}
         ]
     },
-	"kether.day.music":
+	"kether.music.day":
     {
         "category": "music",
 		"sounds":
