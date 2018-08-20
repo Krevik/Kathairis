@@ -38,7 +38,7 @@ public class RenderMysticSky extends IRenderHandler {
     {
     }
     
-    private int[] constantLight = new int[6000];
+    private int[] constantLight = new int[1501];
     
     private ArrayList<FallingStar> fallingStarsList = new ArrayList();
 
@@ -71,7 +71,7 @@ public class RenderMysticSky extends IRenderHandler {
         
         //stars
         if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
-		    		for(int x=0;x<6000;x++) {
+		    		for(int x=0;x<1501;x++) {
 		    			if(constantLight[x]>=255) {
 		    				constantLight[x]-=helper.getRandomInteger(0, 8);
 		    			}else if(constantLight[x]<=0) {
@@ -112,7 +112,7 @@ public class RenderMysticSky extends IRenderHandler {
 		
 		                for (int j = 0; j < 4; ++j)
 		                {
-		                	Vector4d color = new Vector4d(helper.getRandomInteger(10842L,66, 137),helper.getRandomInteger(10842L,65, 244),helper.getRandomInteger(10842L,229, 244),constantLight[i+j*1125]);
+		                	Vector4d color = new Vector4d(helper.getRandomInteger(10842L,66, 137),helper.getRandomInteger(10842L,65, 244),helper.getRandomInteger(10842L,229, 244),constantLight[i]);
 		                    double d17 = 0.0D;
 		                    double d18 = (double)((j & 2) - 1) * d33;
 		                    double d19 = (double)((j + 1 & 2) - 1) * d33;
@@ -171,7 +171,7 @@ public class RenderMysticSky extends IRenderHandler {
 		                    double d24 = 0.0D * d12 - d21 * d13;
 		                    double d25 = d24 * d9 - d22 * d10;
 		                    double d26 = d22 * d9 + d24 * d10;
-		                    FallingStar star = new FallingStar(this.fallingStarsList.size(),d5 + d25, d6 + d23, d7 + d26,random.nextFloat(),random.nextFloat(),random.nextFloat());
+		                    FallingStar star = new FallingStar(this.fallingStarsList.size(),d5 + d25, d6 + d23, d7 + d26,0.2F+random.nextFloat(),0.2F+random.nextFloat(),0.2F+random.nextFloat());
 		                    this.fallingStarsList.add(star);
 		                    //bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color(244, 238, 66, 200).endVertex();
 		               // }
@@ -187,10 +187,12 @@ public class RenderMysticSky extends IRenderHandler {
 		                	Vec3d vec3 = new Vec3d(star.getPos().x+0.5,star.getPos().y,star.getPos().z);
 		                	Vec3d vec4 = new Vec3d(star.getPos().x,star.getPos().y-0.5,star.getPos().z);
 
+		                	
 		        		bufferbuilder.pos(vec1.x, vec1.y, vec1.z).color(244, 238, 66, 200).endVertex();
 		        		bufferbuilder.pos(vec2.x, vec2.y, vec2.z).color(244, 238, 66, 200).endVertex();
 		        		bufferbuilder.pos(vec3.x, vec3.y, vec3.z).color(244, 238, 66, 200).endVertex();
 		        		bufferbuilder.pos(vec4.x, vec4.y, vec4.z).color(244, 238, 66, 200).endVertex();
+		        		
 
 		        		if(helper.random.nextInt(500)==0) {
 		        			this.fallingStarsList.remove(x);
@@ -203,6 +205,7 @@ public class RenderMysticSky extends IRenderHandler {
 		        tessellator.draw();
 		        GlStateManager.popMatrix();
     	}
+        
         //stars end
         
         float f17 = 20.0F;
