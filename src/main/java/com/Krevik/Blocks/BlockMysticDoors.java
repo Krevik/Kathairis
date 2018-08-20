@@ -296,8 +296,8 @@ public class BlockMysticDoors extends BaseBlock
     		return Item.getItemFromBlock(KCore.Shiny_Wood_Door);
     	}else if(this==KCore.Soul_Wood_Door) {
     		return Item.getItemFromBlock(KCore.Soul_Wood_Door);
-    	}else if(this==KCore.Adamantium_Door) {
-    		return Item.getItemFromBlock(KCore.Adamantium_Door);
+    	}else if(this==KCore.Revenum_Door) {
+    		return Item.getItemFromBlock(KCore.Revenum_Door);
     	}else {
     		return Item.getItemFromBlock(KCore.Mystic_Wood_Door);
     	}

@@ -32,7 +32,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(KCore.WeatheredRock, new ItemStack(Item.getItemFromBlock(KCore.HardenedWeatheredRock)), 0.1f);
 		GameRegistry.addSmelting(new ItemStack(KCore.BlueCloudDust,4), new ItemStack(KCore.CondensedBlueCloudDust), 0.3f);
 		GameRegistry.addSmelting(new ItemStack(KCore.YellowCloudDust,4), new ItemStack(KCore.CondensedYellowCloudDust), 0.3f);
-		GameRegistry.addSmelting(KCore.AdamantiumOre, new ItemStack(KCore.AdamantiumIngot), 25.0f);
+		GameRegistry.addSmelting(KCore.RevenumOre, new ItemStack(KCore.RevenumIngot), 25.0f);
 		GameRegistry.addSmelting(KCore.MudBlock, new ItemStack(KCore.MudBricks), 0.3f);
 		GameRegistry.addSmelting(KCore.CrystalsCluster, new ItemStack(KCore.CrystalBlend,3), 1.0f);
 		GameRegistry.addSmelting(KCore.Mythic_Cobblestone, new ItemStack(KCore.MythicStone,1), 0.2f);
@@ -67,16 +67,16 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Titanium Shovel1"),new ResourceLocation("Shovels"),new ItemStack(KCore.TitaniumShovel)," X ", " C ", " C ", Character.valueOf('X'), KCore.TitaniumIngot,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Titanium Shovel2"),new ResourceLocation("Shovels"),new ItemStack(KCore.TitaniumShovel),"X  ", "C  ", "C  ", Character.valueOf('X'), KCore.TitaniumIngot,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Titanium Shovel3"),new ResourceLocation("Shovels"),new ItemStack(KCore.TitaniumShovel),"  X", "  C", "  C", Character.valueOf('X'), KCore.TitaniumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Sword1"),new ResourceLocation("Swords"),new ItemStack(KCore.AdamantiumSword)," X ", " X ", " C ", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Sword2"),new ResourceLocation("Swords"),new ItemStack(KCore.AdamantiumSword),"X  ", "X  ", "C  ", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Sword3"),new ResourceLocation("Swords"),new ItemStack(KCore.AdamantiumSword),"  X", "  X", "  C", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Axe"),new ResourceLocation("Axes"),new ItemStack(KCore.AdamantiumAxe),"XX ", "XC ", " C ", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.AdamantiumPickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Hoe1"),new ResourceLocation("Hoes"),new ItemStack(KCore.AdamantiumHoe)," XX", " C ", " C ", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Hoe2"),new ResourceLocation("Hoes"),new ItemStack(KCore.AdamantiumHoe),"XX ", " C ", " C ", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Hoe3"),new ResourceLocation("Hoes"),new ItemStack(KCore.AdamantiumHoe),"XX ", "C  ", "C  ", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Hoe4"),new ResourceLocation("Hoes"),new ItemStack(KCore.AdamantiumHoe)," XX", "  C", "  C", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Shovel"),new ResourceLocation("Shovels"),new ItemStack(KCore.AdamantiumShovel),"X", "C", "C", Character.valueOf('X'), KCore.AdamantiumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Sword1"),new ResourceLocation("Swords"),new ItemStack(KCore.RevenumSword)," X ", " X ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Sword2"),new ResourceLocation("Swords"),new ItemStack(KCore.RevenumSword),"X  ", "X  ", "C  ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Sword3"),new ResourceLocation("Swords"),new ItemStack(KCore.RevenumSword),"  X", "  X", "  C", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Axe"),new ResourceLocation("Axes"),new ItemStack(KCore.RevenumAxe),"XX ", "XC ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.RevenumPickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe1"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe)," XX", " C ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe2"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe),"XX ", " C ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe3"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe),"XX ", "C  ", "C  ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe4"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe)," XX", "  C", "  C", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Shovel"),new ResourceLocation("Shovels"),new ItemStack(KCore.RevenumShovel),"X", "C", "C", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
 
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Crystal Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.CrystalPickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.CrystalsCluster,Character.valueOf('C'),KCore.TitaniumRod);
 		
@@ -97,10 +97,10 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Titanium Chestplate"),new ResourceLocation("Chestplates"),new ItemStack(KCore.TitaniumChestplate),"X X", "XXX", "XXX", Character.valueOf('X'), KCore.TitaniumIngot);	
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Titanium Leggins"),new ResourceLocation("Leggins"),new ItemStack(KCore.TitaniumLeggins),"XXX", "X X", "X X", Character.valueOf('X'), KCore.TitaniumIngot);	
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Titanium Boots"),new ResourceLocation("Boots"),new ItemStack(KCore.TitaniumBoots),"X X", "X X", Character.valueOf('X'), KCore.TitaniumIngot);	
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Helmet"),new ResourceLocation("Helmets"),new ItemStack(KCore.AdamantiumHelmet),"XXX", "X X", Character.valueOf('X'), KCore.AdamantiumIngot);	
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Chestplate"),new ResourceLocation("Chestplates"),new ItemStack(KCore.AdamantiumChestplate),"X X", "XXX", "XXX", Character.valueOf('X'), KCore.AdamantiumIngot);	
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Leggins"),new ResourceLocation("Leggins"),new ItemStack(KCore.AdamantiumLeggins),"XXX", "X X", "X X", Character.valueOf('X'), KCore.AdamantiumIngot);	
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Boots"),new ResourceLocation("Boots"),new ItemStack(KCore.AdamantiumBoots),"X X", "X X", Character.valueOf('X'), KCore.AdamantiumIngot);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Helmet"),new ResourceLocation("Helmets"),new ItemStack(KCore.RevenumHelmet),"XXX", "X X", Character.valueOf('X'), KCore.RevenumIngot);	
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Chestplate"),new ResourceLocation("Chestplates"),new ItemStack(KCore.RevenumChestplate),"X X", "XXX", "XXX", Character.valueOf('X'), KCore.RevenumIngot);	
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Leggins"),new ResourceLocation("Leggins"),new ItemStack(KCore.RevenumLeggins),"XXX", "X X", "X X", Character.valueOf('X'), KCore.RevenumIngot);	
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Boots"),new ResourceLocation("Boots"),new ItemStack(KCore.RevenumBoots),"X X", "X X", Character.valueOf('X'), KCore.RevenumIngot);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Boots"),new ResourceLocation("Boots"),new ItemStack(KCore.CloudBoots),"X X", "X X", Character.valueOf('X'), KCore.CondensedBlueCloudDust);	
 		
 	}
@@ -175,11 +175,11 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Mystic Wood Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Mystic_Wood_Trap_Door,2),"XXX", "XXX", Character.valueOf('X'), KCore.MysticPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Shiny Wood Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Shiny_Wood_Trap_Door,2),"XXX", "XXX", Character.valueOf('X'), KCore.ShinyPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Soul Wood Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Soul_Wood_Trap_Door,2),"XXX", "XXX", Character.valueOf('X'), KCore.SoulPlanks);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Adamantium_Trapdoor,1),"XX", "XX", Character.valueOf('X'), KCore.AdamantiumIngot);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Revenum_Trapdoor,1),"XX", "XX", Character.valueOf('X'), KCore.RevenumIngot);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Mystic Wood Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Mystic_Wood_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.MysticPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Shiny Wood Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Shiny_Wood_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.ShinyPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Soul Wood Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Soul_Wood_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.SoulPlanks);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Adamantium Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Adamantium_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.AdamantiumIngot);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Revenum_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.RevenumIngot);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium"),new ResourceLocation("Blocks"), new ItemStack(KCore.Magnethium,1),"XX","XX", Character.valueOf('X'), KCore.Magnethium_Shard);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Shards"),new ResourceLocation("Blocks"), new ItemStack(KCore.Magnethium_Shard,4),"X", Character.valueOf('X'), KCore.Magnethium);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Iron Gold Ingot"),new ResourceLocation("Ingots"), new ItemStack(KCore.Ingot_Iron_Gold,3),"XYX", Character.valueOf('X'), Items.IRON_INGOT, Character.valueOf('Y'),Items.GOLD_INGOT);

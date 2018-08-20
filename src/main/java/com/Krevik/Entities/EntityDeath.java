@@ -157,7 +157,7 @@ public class EntityDeath extends EntityLiving
     	            int damage=KCore.functionHelper.getRandomInteger(700, 990);
     	            ItemStack wand = new ItemStack(KCore.DeathWand,1,damage);
     	            this.dropItem(KCore.DarknessEssence, 10+rand.nextInt(20));
-    	            this.dropItem(KCore.AdamantiumIngot, 1+rand.nextInt(5));
+    	            this.dropItem(KCore.RevenumIngot, 1+rand.nextInt(5));
     	            this.entityDropItem(wand,0);
     	            defeated=true;
     	            this.setDead();

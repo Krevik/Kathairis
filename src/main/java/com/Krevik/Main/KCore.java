@@ -124,8 +124,8 @@ public class KCore {
 	
 	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", "mystic:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F);
 
-	public static Item.ToolMaterial ADAMANTIUM = EnumHelper.addToolMaterial("adamantium", 3, 20000, 20F, 7F, 18);
-	public static ItemArmor.ArmorMaterial ADAMANTIUMARMOR = EnumHelper.addArmorMaterial("adamantium", "mystic:adamantium", 40, new int[]{4, 6, 8, 4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4F);
+	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 20000, 20F, 7F, 18);
+	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 40, new int[]{4, 6, 8, 4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4F);
 	
 	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 3F, 2.5F, 12);
 	public static Item.ToolMaterial CLOUD = EnumHelper.addToolMaterial("cloud", 3, 250, 1F, 2.5F, 1);
@@ -223,8 +223,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID+":"+Ref.BlueCloud)
     public static final BlockMysticCloud BlueCloud = (BlockMysticCloud) new BlockMysticCloud(Ref.BlueCloud).setLightLevel(0.1F).setLightOpacity(0);
 
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumOre)
-    public static final BlockMysticOre AdamantiumOre = new BlockMysticOre(Ref.AdamantiumOre,25F,50F,1,1,25,75);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumOre)
+    public static final BlockMysticOre RevenumOre = new BlockMysticOre(Ref.RevenumOre,25F,50F,1,1,25,75);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.VioletCrystal)
     public static final BlockCrystal VioletCrystal = (BlockCrystal) new BlockCrystal(Ref.VioletCrystal).setLightOpacity(0);
@@ -442,8 +442,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Soul_Wood_Trap_Door)
     public static final BlockMysticWoodTrapdoor Soul_Wood_Trap_Door = new BlockMysticWoodTrapdoor(Ref.Soul_Wood_Trap_Door);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Adamantium_Trapdoor)
-    public static final BlockMysticMetalTrapdoor Adamantium_Trapdoor = new BlockMysticMetalTrapdoor(Ref.Adamantium_Trapdoor,20F,50F);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Revenum_Trapdoor)
+    public static final BlockMysticMetalTrapdoor Revenum_Trapdoor = new BlockMysticMetalTrapdoor(Ref.Revenum_Trapdoor,20F,50F);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Mystic_Wood_Door)
     public static final BlockMysticDoors Mystic_Wood_Door = new BlockMysticDoors(Ref.Mystic_Wood_Door,Material.WOOD,null,4F,4F,SoundType.WOOD);
@@ -454,8 +454,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Soul_Wood_Door)
     public static final BlockMysticDoors Soul_Wood_Door = new BlockMysticDoors(Ref.Soul_Wood_Door,Material.WOOD,null,4F,4F,SoundType.WOOD);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Adamantium_Door)
-    public static final BlockMysticDoors Adamantium_Door = new BlockMysticDoors(Ref.Adamantium_Door,Material.IRON,null,20F,25F,SoundType.METAL);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Revenum_Door)
+    public static final BlockMysticDoors Revenum_Door = new BlockMysticDoors(Ref.Revenum_Door,Material.IRON,null,20F,25F,SoundType.METAL);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Plant_Blue_Cloud)
     public static final BlockMysticBush Plant_Blue_Cloud = new BlockMysticBush(Ref.Plant_Blue_Cloud,false,false);
@@ -580,35 +580,35 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CloudBoots)
 	public static final ItemMysticArmor CloudBoots = new ItemMysticArmor(Ref.CloudBoots, CreativeTabsMystic.mainTab,KCore.CLOUDARMOR,9,EntityEquipmentSlot.FEET);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumIngot)
-	public static final BaseItem AdamantiumIngot = new BaseItem(Ref.AdamantiumIngot, CreativeTabsMystic.mainTab);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumIngot)
+	public static final BaseItem RevenumIngot = new BaseItem(Ref.RevenumIngot, CreativeTabsMystic.mainTab);
 	
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumHelmet)
-	public static final ItemMysticArmor AdamantiumHelmet = new ItemMysticArmor(Ref.AdamantiumHelmet, CreativeTabsMystic.mainTab,KCore.ADAMANTIUMARMOR,5,EntityEquipmentSlot.HEAD);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumHelmet)
+	public static final ItemMysticArmor RevenumHelmet = new ItemMysticArmor(Ref.RevenumHelmet, CreativeTabsMystic.mainTab,KCore.REVENUMARMOR,5,EntityEquipmentSlot.HEAD);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumChestplate)
-	public static final ItemMysticArmor AdamantiumChestplate = new ItemMysticArmor(Ref.AdamantiumChestplate, CreativeTabsMystic.mainTab,KCore.ADAMANTIUMARMOR,5,EntityEquipmentSlot.CHEST);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumChestplate)
+	public static final ItemMysticArmor RevenumChestplate = new ItemMysticArmor(Ref.RevenumChestplate, CreativeTabsMystic.mainTab,KCore.REVENUMARMOR,5,EntityEquipmentSlot.CHEST);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumLeggins)
-	public static final ItemMysticArmor AdamantiumLeggins = new ItemMysticArmor(Ref.AdamantiumLeggins, CreativeTabsMystic.mainTab,KCore.ADAMANTIUMARMOR,5,EntityEquipmentSlot.LEGS);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumLeggins)
+	public static final ItemMysticArmor RevenumLeggins = new ItemMysticArmor(Ref.RevenumLeggins, CreativeTabsMystic.mainTab,KCore.REVENUMARMOR,5,EntityEquipmentSlot.LEGS);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumBoots)
-	public static final ItemMysticArmor AdamantiumBoots = new ItemMysticArmor(Ref.AdamantiumBoots, CreativeTabsMystic.mainTab,KCore.ADAMANTIUMARMOR,5,EntityEquipmentSlot.FEET);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumBoots)
+	public static final ItemMysticArmor RevenumBoots = new ItemMysticArmor(Ref.RevenumBoots, CreativeTabsMystic.mainTab,KCore.REVENUMARMOR,5,EntityEquipmentSlot.FEET);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumAxe)
-	public static final ItemMysticAxe AdamantiumAxe = new ItemMysticAxe(Ref.AdamantiumAxe, CreativeTabsMystic.mainTab,KCore.ADAMANTIUM);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumAxe)
+	public static final ItemMysticAxe RevenumAxe = new ItemMysticAxe(Ref.RevenumAxe, CreativeTabsMystic.mainTab,KCore.REVENUM);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumPickaxe)
-	public static final ItemMysticPickaxe AdamantiumPickaxe = new ItemMysticPickaxe(Ref.AdamantiumPickaxe, CreativeTabsMystic.mainTab,KCore.ADAMANTIUM);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumPickaxe)
+	public static final ItemMysticPickaxe RevenumPickaxe = new ItemMysticPickaxe(Ref.RevenumPickaxe, CreativeTabsMystic.mainTab,KCore.REVENUM);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumShovel)
-	public static final ItemMysticShovel AdamantiumShovel = new ItemMysticShovel(Ref.AdamantiumShovel, CreativeTabsMystic.mainTab,KCore.ADAMANTIUM);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumShovel)
+	public static final ItemMysticShovel RevenumShovel = new ItemMysticShovel(Ref.RevenumShovel, CreativeTabsMystic.mainTab,KCore.REVENUM);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumSword)
-	public static final ItemMysticSword AdamantiumSword = new ItemMysticSword(Ref.AdamantiumSword, CreativeTabsMystic.mainTab,KCore.ADAMANTIUM);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumSword)
+	public static final ItemMysticSword RevenumSword = new ItemMysticSword(Ref.RevenumSword, CreativeTabsMystic.mainTab,KCore.REVENUM);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.AdamantiumHoe)
-	public static final ItemMysticHoe AdamantiumHoe = new ItemMysticHoe(Ref.AdamantiumHoe, CreativeTabsMystic.mainTab,KCore.ADAMANTIUM);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumHoe)
+	public static final ItemMysticHoe RevenumHoe = new ItemMysticHoe(Ref.RevenumHoe, CreativeTabsMystic.mainTab,KCore.REVENUM);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.VioletCrystalShard)
     public static final BaseItem VioletCrystalShard = new BaseItem(Ref.VioletCrystalShard, CreativeTabsMystic.mainTab);
@@ -736,8 +736,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Soul_Wood_Door_Item)
 	public static final ItemMysticDoor Soul_Wood_Door_Item = new ItemMysticDoor(Ref.Soul_Wood_Door_Item, CreativeTabsMystic.mainTab,Soul_Wood_Door);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Adamantium_Door_Item)
-	public static final ItemMysticDoor Adamantium_Door_Item = new ItemMysticDoor(Ref.Adamantium_Door_Item, CreativeTabsMystic.mainTab,Adamantium_Door);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Revenum_Door_Item)
+	public static final ItemMysticDoor Revenum_Door_Item = new ItemMysticDoor(Ref.Revenum_Door_Item, CreativeTabsMystic.mainTab,Revenum_Door);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Shard)
 	public static final BaseItem Magnethium_Shard = new BaseItem(Ref.Magnethium_Shard, CreativeTabsMystic.mainTab);
@@ -820,16 +820,16 @@ public class KCore {
         public static final String BlueCloudDust = "blueclouddust";
         public static final String CondensedBlueCloudDust = "condensedblueclouddust";
         public static final String CloudBoots = "cloudboots";
-        public static final String AdamantiumIngot = "adamantiumingot";
-        public static final String AdamantiumHelmet = "adamantiumhelmet";
-        public static final String AdamantiumChestplate = "adamantiumchestplate";
-        public static final String AdamantiumLeggins = "adamantiumleggins";
-        public static final String AdamantiumBoots = "adamantiumboots";
-        public static final String AdamantiumAxe = "adamantiumaxe";
-        public static final String AdamantiumPickaxe = "adamantiumpickaxe";
-        public static final String AdamantiumShovel = "adamantiumshovel";
-        public static final String AdamantiumSword = "adamantiumsword";
-        public static final String AdamantiumHoe = "adamantiumhoe";
+        public static final String RevenumIngot = "revenumingot";
+        public static final String RevenumHelmet = "revenumhelmet";
+        public static final String RevenumChestplate = "revenumchestplate";
+        public static final String RevenumLeggins = "revenumleggins";
+        public static final String RevenumBoots = "revenumboots";
+        public static final String RevenumAxe = "revenumaxe";
+        public static final String RevenumPickaxe = "revenumpickaxe";
+        public static final String RevenumShovel = "revenumshovel";
+        public static final String RevenumSword = "revenumsword";
+        public static final String RevenumHoe = "revenumhoe";
         public static final String VioletCrystalShard = "violetcrystalshard";
         public static final String YellowCrystalShard = "yellowcrystalshard";
         public static final String BlueCrystalShard = "bluecrystalshard";
@@ -881,7 +881,7 @@ public class KCore {
         public static final String ShinyRock = "shinyrock";
         public static final String MysticMultiGrass = "mysticmultigrass";
         public static final String BlueCloud = "bluecloud";
-        public static final String AdamantiumOre = "adamantiumore";
+        public static final String RevenumOre = "revenumore";
         public static final String VioletCrystal = "violetcrystal";
         public static final String YellowCrystal = "yellowcrystal";
         public static final String BlueCrystal = "bluecrystal";
@@ -974,15 +974,15 @@ public class KCore {
         public static final String Mystic_Wood_Trap_Door="mystic_wood_trap_door";
         public static final String Shiny_Wood_Trap_Door="shiny_wood_trap_door";
         public static final String Soul_Wood_Trap_Door="soul_wood_trap_door";
-        public static final String Adamantium_Trapdoor="adamantium_trapdoor";
+        public static final String Revenum_Trapdoor="revenum_trapdoor";
         public static final String Mystic_Wood_Door="mystic_wood_door";
         public static final String Shiny_Wood_Door="shiny_wood_door";
         public static final String Soul_Wood_Door="soul_wood_door";
-        public static final String Adamantium_Door="adamantium_door";
+        public static final String Revenum_Door="revenum_door";
         public static final String Mystic_Wood_Door_Item="mystic_wood_door_item";
         public static final String Shiny_Wood_Door_Item="shiny_wood_door_item";
         public static final String Soul_Wood_Door_Item="soul_wood_door_item";
-        public static final String Adamantium_Door_Item="adamantium_door_item";
+        public static final String Revenum_Door_Item="revenum_door_item";
         public static final String Plant_Blue_Cloud="plant_blue_cloud";
         public static final String Plant_Yellow_Cloud="plant_yellow_cloud";
         public static final String Magnethium_Shard="magnethium_shard";

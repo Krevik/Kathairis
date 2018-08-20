@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top_rh",
+    "textures": {
+        "bottom": "mystic:blocks/revenum_door_lower",
+        "top": "mystic:blocks/revenum_door_upper"
+    }
+}

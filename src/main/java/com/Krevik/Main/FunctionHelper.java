@@ -82,7 +82,7 @@ public class FunctionHelper {
     
     public ItemStack getRandomReward1() {
     	ItemStack is=null;
-    	Item[] rewards = {KCore.AdamantiumIngot,KCore.TitaniumIngot,KCore.MysticGem,KCore.CondensedBlueCloudDust,KCore.CottonCandy,
+    	Item[] rewards = {KCore.RevenumIngot,KCore.TitaniumIngot,KCore.MysticGem,KCore.CondensedBlueCloudDust,KCore.CottonCandy,
     			KCore.MagicBeansItem,KCore.CrystalsCluster,KCore.Heart,KCore.PotWithLivingFlower,Item.getItemFromBlock(KCore.ShinyTreeSapling),
     			KCore.BlueFruit,KCore.ShinyStick,KCore.Gooseberry,Item.getItemFromBlock(KCore.EnergyShard)};
     	is=new ItemStack(rewards[random.nextInt(rewards.length)],random.nextInt(6)+1);
@@ -93,7 +93,7 @@ public class FunctionHelper {
     
     public ItemStack getCloudTempleReward() {
     	ItemStack is=null;
-    	Item[] rewards = {KCore.AdamantiumIngot,KCore.TitaniumIngot,KCore.MysticGem,KCore.CondensedBlueCloudDust,KCore.CottonCandy,
+    	Item[] rewards = {KCore.RevenumIngot,KCore.TitaniumIngot,KCore.MysticGem,KCore.CondensedBlueCloudDust,KCore.CottonCandy,
     			KCore.MagicBeansItem,KCore.CrystalsCluster,KCore.Heart,KCore.PotWithLivingFlower,Item.getItemFromBlock(KCore.ShinyTreeSapling),
     			KCore.BlueFruit,KCore.ShinyStick,KCore.Gooseberry,KCore.CloudBoots,KCore.CloudEssence,Item.getItemFromBlock(KCore.EnergyShard)};
     	is=new ItemStack(rewards[random.nextInt(rewards.length)],random.nextInt(6)+4);

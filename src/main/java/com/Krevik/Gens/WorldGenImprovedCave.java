@@ -101,7 +101,7 @@ public class WorldGenImprovedCave {
     														world.getBlockState(new BlockPos(pos.getX()+shiftX,x+shiftY-1,pos.getZ()+z+shiftZ))==KCore.MythicStone.getDefaultState()||
     														world.getBlockState(new BlockPos(pos.getX()+shiftX,x+shiftY,pos.getZ()+z+shiftZ+1))==KCore.MythicStone.getDefaultState()||
     														world.getBlockState(new BlockPos(pos.getX()+shiftX,x+shiftY,pos.getZ()+z+shiftZ-1))==KCore.MythicStone.getDefaultState())) {
-    					world.setBlockState(new BlockPos(pos.getX()+shiftX,x+shiftY,pos.getZ()+z+shiftZ), KCore.AdamantiumOre.getDefaultState());
+    					world.setBlockState(new BlockPos(pos.getX()+shiftX,x+shiftY,pos.getZ()+z+shiftZ), KCore.RevenumOre.getDefaultState());
     				}
     				if(random.nextInt(100)==1&&shiftY<60) {
     					BlockCrystal crystal = pickRandomCrystalBlock(random);

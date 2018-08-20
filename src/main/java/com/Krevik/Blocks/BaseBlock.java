@@ -259,7 +259,7 @@ public class BaseBlock extends Block
     		return KCore.BlueFruit;
     	}else if(this==KCore.MagicBeans) {
     		return KCore.MagicBeansItem;
-    	}else if(this==KCore.GemsOre||this==KCore.TitaniumOre||this==KCore.AdamantiumOre) {
+    	}else if(this==KCore.GemsOre||this==KCore.TitaniumOre||this==KCore.RevenumOre) {
         	Item item=Items.DIAMOND;
         	if(this==KCore.GemsOre) {
         		int i=rand.nextInt(4);

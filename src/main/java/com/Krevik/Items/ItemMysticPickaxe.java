@@ -35,12 +35,12 @@ public class ItemMysticPickaxe extends MysticTool
     		Blocks.MOSSY_COBBLESTONE, Blocks.NETHERRACK, Blocks.PACKED_ICE, Blocks.RAIL, Blocks.REDSTONE_ORE, Blocks.SANDSTONE, 
     		Blocks.RED_SANDSTONE, Blocks.STONE, Blocks.STONE_SLAB, Blocks.STONE_BUTTON, Blocks.STONE_PRESSURE_PLATE,KCore.MythicStone,
     		KCore.TitaniumOre,KCore.TitaniumBlock,KCore.MythicStoneTiles,KCore.WeatheredRock,KCore.HardenedWeatheredRock,KCore.WeatheredRockTiles,
-    		KCore.WeatheredRockBricks,KCore.ShinyRock,KCore.AdamantiumOre,KCore.YellowCrystal,KCore.BlueCrystal,KCore.VioletCrystal,
+    		KCore.WeatheredRockBricks,KCore.ShinyRock,KCore.RevenumOre,KCore.YellowCrystal,KCore.BlueCrystal,KCore.VioletCrystal,
     		KCore.MythicStonePillar,KCore.GemsOre,KCore.HardenedWeatheredRockStairs,KCore.MythicStoneStairs,
     		KCore.MythicStoneWall,KCore.HardenedWeatheredRockWall,KCore.BlueCloudBricks,KCore.YellowCloudBlock,KCore.TurtleShellPlate,
     		KCore.Magnethium,KCore.HardenedWeatheredRockBricksStairs,KCore.SoulStoneBricksWithBones,KCore.SoulStoneBricks,KCore.BoneBricks,
-    		KCore.ChiseledBoneBricks,KCore.Magnethium,KCore.Mystic_Gem_Block,KCore.Mythic_Cobblestone,KCore.Adamantium_Trapdoor,
-    		KCore.Adamantium_Door);
+    		KCore.ChiseledBoneBricks,KCore.Magnethium,KCore.Mystic_Gem_Block,KCore.Mythic_Cobblestone,KCore.Revenum_Trapdoor,
+    		KCore.Revenum_Door);
 
     public ItemMysticPickaxe(String Name, CreativeTabs tab, Item.ToolMaterial material)
     {

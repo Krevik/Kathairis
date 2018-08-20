@@ -78,7 +78,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
 	private static final int TitaniumPerChunk = 5;
 	private static final int AdamantiumPerChunk = 2;
 	private static final WorldGenMysticOre TitaniumGen = new WorldGenMysticOre(KCore.TitaniumOre.getDefaultState(), 3);
-	private static final WorldGenMysticOre AdamantiumGen = new WorldGenMysticOre(KCore.AdamantiumOre.getDefaultState(), 1);
+	private static final WorldGenMysticOre AdamantiumGen = new WorldGenMysticOre(KCore.RevenumOre.getDefaultState(), 1);
     public static final WorldGenCrystalChamber CrystalChamber = new WorldGenCrystalChamber();
     public static final WorldGenCloudTemple CloudTemple = new WorldGenCloudTemple();
     public static final WorldGenFloatingIslands FloatingIsland = new WorldGenFloatingIslands(1);
