@@ -762,7 +762,6 @@ public class KCore {
     }
 
     public MusicTicker.MusicType ketherMusicDay;
-
     public MusicTicker.MusicType ketherMusicNight;
 
     @Mod.EventHandler
