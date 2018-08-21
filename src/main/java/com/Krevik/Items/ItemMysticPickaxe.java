@@ -40,7 +40,8 @@ public class ItemMysticPickaxe extends MysticTool
     		KCore.MythicStoneWall,KCore.HardenedWeatheredRockWall,KCore.BlueCloudBricks,KCore.YellowCloudBlock,KCore.TurtleShellPlate,
     		KCore.Magnethium,KCore.HardenedWeatheredRockBricksStairs,KCore.SoulStoneBricksWithBones,KCore.SoulStoneBricks,KCore.BoneBricks,
     		KCore.ChiseledBoneBricks,KCore.Magnethium,KCore.Mystic_Gem_Block,KCore.Mythic_Cobblestone,KCore.Revenum_Trapdoor,
-    		KCore.Revenum_Door);
+    		KCore.Revenum_Door, KCore.Block_Iron_Gold, KCore.Refined_Cloud_Blue, KCore.Refined_Cloud_Yellow, KCore.Solis_Crystals
+    		);
 
     public ItemMysticPickaxe(String Name, CreativeTabs tab, Item.ToolMaterial material)
     {

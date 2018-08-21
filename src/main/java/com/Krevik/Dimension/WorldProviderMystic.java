@@ -133,7 +133,7 @@ public class WorldProviderMystic extends WorldProviderSurface
         f1 = f1 * (f * 0.94F + 0.06F);
         f2 = f2 * (f * 0.94F + 0.06F);
         f3 = f3 * (f * 0.91F + 0.09F);
-        return new Vec3d((double)f1/5, (double)f2/5, (double)f3/5);
+        return new Vec3d((double)f1/3, (double)f2/3, (double)f3/3);
     }
 
     public IChunkGenerator createChunkGenerator()
