@@ -751,6 +751,9 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Solis_Crystal)
 	public static final BaseItem Solis_Crystal = new BaseItem(Ref.Solis_Crystal, CreativeTabsMystic.mainTab);
     
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Nectar_bowl)
+	public static final ItemMysticFood Nectar_Bowl = new ItemMysticFood(Ref.Nectar_bowl, CreativeTabsMystic.mainTab,4,0.4F,false);
+    
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         regHelper.initModels();
@@ -996,6 +999,7 @@ public class KCore {
         public static final String Ritual_Blade="ritual_blade";
         public static final String Solis_Crystal="solis_crystal";
         public static final String Gecko_Eggs="gecko_eggs";
+        public static final String Nectar_bowl="nectar_bowl";
     }
     
 

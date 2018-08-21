@@ -186,6 +186,6 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Iron Gold Block"),new ResourceLocation("Blocks"), new ItemStack(KCore.Block_Iron_Gold,1),"XXX","XXX","XXX", Character.valueOf('X'), KCore.Ingot_Iron_Gold);
 		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Iron Gold Ingot"),new ResourceLocation("Ingots"), new ItemStack(KCore.Ingot_Iron_Gold,9),Ingredient.fromItem(Item.getItemFromBlock(KCore.Block_Iron_Gold)));
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Ritual Blade"),new ResourceLocation("Items"), new ItemStack(KCore.Ritual_Blade,1),"X  "," Y ","  Z", Character.valueOf('X'), Items.STICK, Character.valueOf('Y'),KCore.Ingot_Iron_Gold,Character.valueOf('Z'),KCore.MysticGem);
-
+		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Bowl of Nectar"), new ResourceLocation("Food"), new ItemStack(KCore.Nectar_Bowl), Ingredient.fromItem(Items.BOWL), Ingredient.fromItem(KCore.ButterflyFlowerNectar));
 	}
 }

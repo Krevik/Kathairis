@@ -8,6 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
@@ -84,6 +85,10 @@ public class ItemMysticFood extends ItemFood
                 }
                 if(this==KCore.Fungal_Drug) {
                 	entityplayer.addPotionEffect(new PotionEffect(Potion.getPotionById(9),400,3));
+                }
+                if(this==KCore.Nectar_Bowl) {
+                	entityplayer.addItemStackToInventory(new ItemStack(Items.BOWL,1));
+                	entityplayer.addPotionEffect(new PotionEffect(Potion.getPotionById(10),250,2));
                 }
             }
             
