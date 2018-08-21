@@ -1,26 +1,19 @@
 package com.Krevik.Events;
 
-import org.lwjgl.opengl.GL20;
-
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Items.ItemMysticArmor;
 import com.Krevik.Main.KCore;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDustStormClient;
-import com.Krevik.Shaders.StaticShader;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
@@ -148,5 +141,6 @@ public class KetherEventsHandler {
 	public void onRenderPost(RenderGameOverlayEvent.Post event){
 
 	}
+	
 	
 }

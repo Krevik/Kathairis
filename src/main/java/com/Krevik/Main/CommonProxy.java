@@ -21,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -77,7 +78,6 @@ public class CommonProxy {
 		BiomeDictionary.addTypes(KCore.instance.FloatingIslands, BiomeDictionary.Type.MAGICAL,BiomeDictionary.Type.OCEAN);
 	}
     public void preInit(FMLPreInitializationEvent e) {
-
     }
     
 
