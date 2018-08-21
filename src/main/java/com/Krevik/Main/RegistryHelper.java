@@ -3,6 +3,7 @@ package com.Krevik.Main;
 import java.util.ArrayList;
 
 import com.Krevik.Blocks.BaseBlock;
+import com.Krevik.Blocks.BlockMysticLeaf;
 import com.Krevik.Blocks.BlockMysticSlabBase;
 import com.Krevik.Items.BaseItem;
 import com.Krevik.Items.ItemMysticArmor;
@@ -17,6 +18,7 @@ public class RegistryHelper {
 	}
 	
 	public ArrayList<BaseBlock> blocksList = new ArrayList();
+	public ArrayList<BlockMysticLeaf> leavesBlocksList = new ArrayList();
 	public ArrayList<BlockMysticSlabBase> slabList = new ArrayList();
 	public ArrayList<BaseItem> itemList = new ArrayList();
 	public ArrayList<MysticTool> toolList = new ArrayList();
@@ -27,6 +29,9 @@ public class RegistryHelper {
 	public void initModels() {
 		for(int x=0;x<blocksList.size();x++) {
 			blocksList.get(x).initModel();
+		}
+		for(int x=0;x<leavesBlocksList.size();x++) {
+			leavesBlocksList.get(x).initModel();
 		}
 		for(int x=0;x<slabList.size();x++) {
 			slabList.get(x).initModel();

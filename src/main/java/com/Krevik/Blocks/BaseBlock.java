@@ -243,10 +243,6 @@ public class BaseBlock extends Block
     		return KCore.YellowCrystalShard;
     	}else if(this==KCore.BlueCrystal) {
     		return KCore.BlueCrystalShard;
-    	}else if(this==KCore.ShinyLeaves) {
-    		return null;
-    	}else if(this==KCore.MysticLeaves) {
-    		return null;
     	}else if(this==KCore.MysticMultiGrass) {
     		return null;
     	}else if(this==KCore.MysticTallGrass) {

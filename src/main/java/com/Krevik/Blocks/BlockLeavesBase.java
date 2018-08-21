@@ -212,17 +212,7 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
     /**
      * Get the Item that this Block should drop when harvested.
      */
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-    	if(this==KCore.MysticLeaves) {
-            return Item.getItemFromBlock(KCore.MysticSapling);
-    	}else if(this==KCore.SoulLeaves) {
-    		return Item.getItemFromBlock(KCore.SoulSapling);
-    	}else {
-    		return null;
-    	}
 
-    }
 
     /**
      * Spawns this Block's drops into the World as EntityItems.

@@ -7,31 +7,55 @@ import javax.annotation.Nullable;
 import com.Krevik.Main.KCore;
 import com.Krevik.Particles.ParticleSoulTree;
 
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMysticLeaf extends BlockLeavesBase
+public class BlockMysticLeaf extends BlockLeaves
 {
 
     public BlockMysticLeaf(String Name, Material material, CreativeTabs tab)
     {
-    	super(Name, material, tab);
+    	super();
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+        this.setCreativeTab(tab);
+        this.setHardness(0.5F);
+        this.setResistance(0.1F);
+        this.setSoundType(SoundType.PLANT);
+        this.setRegistryName(Name);
+        this.setUnlocalizedName(Name);
+        KCore.instance.regHelper.leavesBlocksList.add(this);
+        this.leavesFancy=true;
+    }
+    
+    public String getLocalizedName()
+    {
+        return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void initModel() {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
     protected int getSaplingDropChance(IBlockState state)
@@ -127,6 +151,18 @@ public class BlockMysticLeaf extends BlockLeavesBase
         {
             super.harvestBlock(worldIn, player, pos, state, te, stack);
         }
+    }
+    
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
+    	if(this==KCore.MysticLeaves) {
+            return Item.getItemFromBlock(KCore.MysticSapling);
+    	}else if(this==KCore.SoulLeaves) {
+    		return Item.getItemFromBlock(KCore.SoulSapling);
+    	}else {
+    		return null;
+    	}
+
     }
 
     @Override
