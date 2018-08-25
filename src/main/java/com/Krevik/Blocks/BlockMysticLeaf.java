@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.Krevik.Main.KCore;
 import com.Krevik.Particles.ParticleSoulTree;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -26,6 +27,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -47,6 +49,9 @@ public class BlockMysticLeaf extends BlockLeaves
         KCore.instance.regHelper.leavesBlocksList.add(this);
         this.leavesFancy=true;
     }
+    
+    @Override 
+    public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos){ return true; }
     
     public String getLocalizedName()
     {

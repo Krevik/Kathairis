@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 
 public class WorldGenMegaMysticTree extends WorldGenHugeTreesMysticBase
 {
@@ -21,7 +22,6 @@ public class WorldGenMegaMysticTree extends WorldGenHugeTreesMysticBase
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-
         int i = this.getHeight(rand);
 
         if (!this.ensureGrowable(worldIn, rand, position, i))
@@ -141,9 +141,4 @@ public class WorldGenMegaMysticTree extends WorldGenHugeTreesMysticBase
         IBlockState state = world.getBlockState(pos);
         return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos);
     }
-    protected void setBlockAndNotifyAdequately(World worldIn, BlockPos pos, IBlockState state)
-    {
-            worldIn.setBlockState(pos, state, 2);
-    }
-
 }

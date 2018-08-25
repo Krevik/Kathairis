@@ -187,12 +187,10 @@ public class RenderMysticSky extends IRenderHandler {
 		                	Vec3d vec3 = new Vec3d(star.getPos().x+0.5,star.getPos().y,star.getPos().z);
 		                	Vec3d vec4 = new Vec3d(star.getPos().x,star.getPos().y-0.5,star.getPos().z);
 
-		                	
 		        		bufferbuilder.pos(vec1.x, vec1.y, vec1.z).color(244, 238, 66, 200).endVertex();
 		        		bufferbuilder.pos(vec2.x, vec2.y, vec2.z).color(244, 238, 66, 200).endVertex();
 		        		bufferbuilder.pos(vec3.x, vec3.y, vec3.z).color(244, 238, 66, 200).endVertex();
 		        		bufferbuilder.pos(vec4.x, vec4.y, vec4.z).color(244, 238, 66, 200).endVertex();
-		        		
 
 		        		if(helper.random.nextInt(500)==0) {
 		        			this.fallingStarsList.remove(x);
@@ -204,6 +202,7 @@ public class RenderMysticSky extends IRenderHandler {
 
 		        tessellator.draw();
 		        GlStateManager.popMatrix();
+		        
     	}
         
         //stars end
