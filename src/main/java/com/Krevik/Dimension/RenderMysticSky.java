@@ -214,8 +214,6 @@ public class RenderMysticSky extends IRenderHandler {
         //stars end
         
         float f17 = 20.0F;
-
-
         
         float[] afloat = world.provider.calcSunriseSunsetColors(world.getCelestialAngle(partialTicks), partialTicks);
 
