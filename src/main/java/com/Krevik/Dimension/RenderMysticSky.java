@@ -1,5 +1,7 @@
 package com.Krevik.Dimension;
 
+import static org.lwjgl.opengl.GL11.GL_QUAD_STRIP;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,6 +19,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
@@ -28,7 +31,7 @@ public class RenderMysticSky extends IRenderHandler {
 
     private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("mystic:textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("mystic:textures/environment/sun.png");
-    private static final ResourceLocation GALAXY_TEXTURES = new ResourceLocation("mystic:textures/environment/night_galaxy_part.png");
+    private static final ResourceLocation NEBULA_TEXTURES = new ResourceLocation("mystic:textures/environment/nebula.png");
 
     private VertexBuffer starVBO;
     private int starGLCallList = -1;
@@ -280,7 +283,7 @@ public class RenderMysticSky extends IRenderHandler {
         //sun end
         
 
-        
+        //moon start
         f17 = 20.0F;
         mc.renderEngine.bindTexture(MOON_PHASES_TEXTURES);
         int k1 = world.getMoonPhase();
@@ -296,8 +299,11 @@ public class RenderMysticSky extends IRenderHandler {
         bufferbuilder.pos((double)f17, -100.0D, (double)(-f17)).tex((double)f22, (double)f23).endVertex();
         bufferbuilder.pos((double)(-f17), -100.0D, (double)(-f17)).tex((double)f24, (double)f23).endVertex();
         tessellator.draw();
+        //moon end
         
         f17 = 20.0F;
+        
+        
 
 
         
@@ -360,8 +366,7 @@ public class RenderMysticSky extends IRenderHandler {
         GlStateManager.popMatrix();
         GlStateManager.enableTexture2D();
         GlStateManager.depthMask(true);
-
-
     }
+            
     
 }
