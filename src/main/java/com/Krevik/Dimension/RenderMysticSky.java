@@ -32,6 +32,7 @@ public class RenderMysticSky extends IRenderHandler {
     private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("mystic:textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("mystic:textures/environment/sun.png");
     private static final ResourceLocation NEBULA_TEXTURES = new ResourceLocation("mystic:textures/environment/nebula.png");
+    private static final ResourceLocation STAR_TEXTURES = new ResourceLocation("mystic:textures/environment/star.png");
 
     private VertexBuffer starVBO;
     private int starGLCallList = -1;
@@ -39,6 +40,7 @@ public class RenderMysticSky extends IRenderHandler {
     
     public RenderMysticSky()
     {
+    	
     }
     
     private int[] constantLight = new int[1501];
@@ -127,6 +129,7 @@ public class RenderMysticSky extends IRenderHandler {
 		                    double d25 = d24 * d9 - d22 * d10;
 		                    double d26 = d22 * d9 + d24 * d10;
 		                    bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color((int)color.x, (int)color.y, (int)color.z, (int)color.w).endVertex();
+
 		                }
 		            }
 		        }
@@ -211,19 +214,8 @@ public class RenderMysticSky extends IRenderHandler {
         //stars end
         
         float f17 = 20.0F;
-        //galaxy start
-        /*
-        GlStateManager.pushMatrix();
-        mc.renderEngine.bindTexture(GALAXY_TEXTURES);
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double)(-f17), -100.0D, (double)(f17)).tex(0.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)f17, -100.0D, (double)(f17)).tex(1.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)f17, -100.0D, (double)-f17).tex(1.0D, 1.0D).endVertex();
-        bufferbuilder.pos((double)(-f17), -100.0D, (double)-f17).tex(0.0D, 1.0D).endVertex();
-        tessellator.draw();
-        GlStateManager.popMatrix();
-        */
-        //galaxy end
+
+
         
         float[] afloat = world.provider.calcSunriseSunsetColors(world.getCelestialAngle(partialTicks), partialTicks);
 
@@ -302,8 +294,6 @@ public class RenderMysticSky extends IRenderHandler {
         //moon end
         
         f17 = 20.0F;
-        
-        
 
 
         

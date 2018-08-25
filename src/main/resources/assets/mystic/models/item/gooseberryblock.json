@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/gooseberryblock",
+	"parent": "mystic:block/gooseberry_bush",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],
