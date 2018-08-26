@@ -40,7 +40,7 @@ public class BlockGeckoEggs extends BaseBlock{
 
     boolean ignoreSimilarity=true;
 	public BlockGeckoEggs(String Name) {
-		super(Name, Material.CORAL, CreativeTabsMystic.mainTab, 0.5F, 0.5F, SoundType.STONE);
+		super(Name, Material.CORAL, CreativeTabsMystic.miscellaneous, 0.5F, 0.5F, SoundType.STONE);
 		this.setTickRandomly(true);
 	}
 	int timer=0;

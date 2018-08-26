@@ -31,7 +31,7 @@ public class BlockEnergyShard extends BaseBlock
 
     public BlockEnergyShard(String Name)
     {
-    	super(Name,Material.GLASS,CreativeTabsMystic.mainTab,1F,1F,SoundType.GLASS);
+    	super(Name,Material.GLASS,CreativeTabsMystic.miscellaneous,1F,1F,SoundType.GLASS);
     }
     
     

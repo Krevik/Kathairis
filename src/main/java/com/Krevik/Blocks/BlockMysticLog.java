@@ -25,7 +25,7 @@ public class BlockMysticLog extends BlockBaseLog
 
     public BlockMysticLog(String Name)
     {
-    	super(Name,Material.WOOD,CreativeTabsMystic.mainTab,3F,3F,SoundType.WOOD);
+    	super(Name,Material.WOOD,CreativeTabsMystic.buildingBlocks,3F,3F,SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockMysticLog.EnumAxis.Y));
     }
     

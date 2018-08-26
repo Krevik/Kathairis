@@ -31,7 +31,7 @@ public class ItemMysticSeedFood extends ItemMysticFood implements net.minecraftf
 
     public ItemMysticSeedFood(String Name,int healAmount, float saturation, Block crops, Block soil)
     {
-        super(Name, CreativeTabsMystic.mainTab, healAmount, saturation, false);
+        super(Name, CreativeTabsMystic.food, healAmount, saturation, false);
         this.crops = crops;
         this.soilId = soil;
     }

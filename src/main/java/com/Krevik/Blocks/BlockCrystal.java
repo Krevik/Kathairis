@@ -40,7 +40,7 @@ public class BlockCrystal extends BaseBlock
 
     public BlockCrystal(String Name)
     {
-    	super(Name,Material.GLASS,CreativeTabsMystic.mainTab,3F,3F,SoundType.GLASS);
+    	super(Name,Material.GLASS,CreativeTabsMystic.buildingBlocks,3F,3F,SoundType.GLASS);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
     }
     

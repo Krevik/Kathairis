@@ -33,7 +33,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
         super(KCore.Ref.CorruptedGrass, Material.GRASS, CreativeTabs.SEARCH, 2F, 2F, SoundType.PLANT);
         this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)));
         this.setTickRandomly(true);
-        this.setCreativeTab(CreativeTabsMystic.mainTab);
+        this.setCreativeTab(CreativeTabsMystic.buildingBlocks);
     }
 
     /**

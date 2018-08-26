@@ -45,7 +45,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
     boolean replacable;
     public BlockMysticBush(String Name, boolean b, boolean replacable1)
     {
-        super(Name,Material.PLANTS,CreativeTabsMystic.mainTab,0.0F,0.0F,SoundType.PLANT);
+        super(Name,Material.PLANTS,CreativeTabsMystic.plants,0.0F,0.0F,SoundType.PLANT);
         this.setTickRandomly(true);
         multi=b;
         replacable=replacable1;

@@ -32,7 +32,7 @@ public class BlockRefinedCloud extends BaseBlock{
 
     boolean ignoreSimilarity=true;
 	public BlockRefinedCloud(String Name) {
-		super(Name, Material.GLASS, CreativeTabsMystic.mainTab, 2F, 2F, KCore.instance.proxy.CLOUDGLASS);
+		super(Name, Material.GLASS, CreativeTabsMystic.buildingBlocks, 2F, 2F, KCore.instance.proxy.CLOUDGLASS);
 	}
 	
     

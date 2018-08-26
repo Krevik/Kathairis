@@ -47,7 +47,7 @@ public class BlockMysticWoodTrapdoor extends BaseBlock
     
     public BlockMysticWoodTrapdoor(String Name)
     {
-        super(Name,Material.WOOD,CreativeTabsMystic.mainTab,3,3,SoundType.WOOD);
+        super(Name,Material.WOOD,CreativeTabsMystic.buildingBlocks,3,3,SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, Boolean.valueOf(false)).withProperty(HALF, BlockMysticWoodTrapdoor.DoorHalf.BOTTOM));
     }
     

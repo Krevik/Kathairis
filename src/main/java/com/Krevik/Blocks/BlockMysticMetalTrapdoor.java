@@ -47,7 +47,7 @@ public class BlockMysticMetalTrapdoor extends BaseBlock
     
     public BlockMysticMetalTrapdoor(String Name,float hardness,float resistance)
     {
-        super(Name,Material.IRON,CreativeTabsMystic.mainTab,hardness,resistance,SoundType.METAL);
+        super(Name,Material.IRON,CreativeTabsMystic.buildingBlocks,hardness,resistance,SoundType.METAL);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, Boolean.valueOf(false)).withProperty(HALF, BlockMysticMetalTrapdoor.DoorHalf.BOTTOM));
 
         

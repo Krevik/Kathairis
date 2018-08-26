@@ -105,7 +105,8 @@
         "category": "music",
 		"sounds":
         [
-            {"name": "mystic:kether/kether_day", "stream": true}
+            {"name": "mystic:kether/kether_day", "stream": true},
+			{"name": "mystic:kether/kether_day1", "stream": true}
         ]
     },
 	"mob.ghost.living":

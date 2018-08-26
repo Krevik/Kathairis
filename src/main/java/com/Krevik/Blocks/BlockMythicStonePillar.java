@@ -30,7 +30,7 @@ public class BlockMythicStonePillar extends BaseBlock
     
     public BlockMythicStonePillar(String Name)
     {
-    	super(Name,Material.ROCK,CreativeTabsMystic.mainTab,3F,3F,SoundType.STONE);
+    	super(Name,Material.ROCK,CreativeTabsMystic.buildingBlocks,3F,3F,SoundType.STONE);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockMythicStonePillar.EnumType.NOCONNECTION));
     }
     

@@ -25,7 +25,7 @@ public class BlockMysticOre extends BaseBlock
 	int maxExp1;
     public BlockMysticOre(String Name, float hardness1, float resistance, int minDrop,int maxDrop, int minExp, int maxExp)
     {
-        super(Name,Material.ROCK,CreativeTabsMystic.mainTab,hardness1,resistance,SoundType.STONE);
+        super(Name,Material.ROCK,CreativeTabsMystic.buildingBlocks,hardness1,resistance,SoundType.STONE);
         minDrop1=minDrop;
         maxDrop1=maxDrop;
         minExp1=minExp;

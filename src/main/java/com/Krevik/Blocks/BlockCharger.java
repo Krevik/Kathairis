@@ -45,7 +45,7 @@ public class BlockCharger extends BlockContainer
         setTickRandomly(false);
         useNeighborBrightness = false;
     
-        this.setCreativeTab(CreativeTabsMystic.mainTab);
+        this.setCreativeTab(CreativeTabsMystic.miscellaneous);
         this.setHardness(3F);
         this.setResistance(3F);
         this.setSoundType(SoundType.STONE);

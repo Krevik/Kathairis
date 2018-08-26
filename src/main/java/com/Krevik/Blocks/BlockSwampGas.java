@@ -41,7 +41,7 @@ public class BlockSwampGas extends BlockMysticCloud{
 		super(Name);
         this.setTickRandomly(true);
         this.setHardness(-1F);
-        this.setCreativeTab(CreativeTabsMystic.mainTab);
+        this.setCreativeTab(CreativeTabsMystic.miscellaneous);
 	}
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {

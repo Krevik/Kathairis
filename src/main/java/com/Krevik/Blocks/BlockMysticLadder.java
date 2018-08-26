@@ -29,7 +29,7 @@ public class BlockMysticLadder extends BaseBlock
 
     public BlockMysticLadder(String name)
     {
-        super(name, Material.CIRCUITS, CreativeTabsMystic.mainTab, 0.5F, 0.5F, SoundType.LADDER);
+        super(name, Material.CIRCUITS, CreativeTabsMystic.buildingBlocks, 0.5F, 0.5F, SoundType.LADDER);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

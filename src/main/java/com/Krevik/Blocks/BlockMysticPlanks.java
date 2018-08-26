@@ -12,7 +12,7 @@ public class BlockMysticPlanks extends BaseBlock
 
     public BlockMysticPlanks(String Name)
     {
-        super(Name, Material.WOOD, CreativeTabsMystic.mainTab, 4F, 4F, SoundType.WOOD);
+        super(Name, Material.WOOD, CreativeTabsMystic.buildingBlocks, 4F, 4F, SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState());
     }
 

@@ -32,7 +32,7 @@ public class BlockMysticCloud extends BaseBlock
     boolean ignoreSimilarity=false;
     public BlockMysticCloud(String Name)
     {
-        super(Name, Material.CLOTH, CreativeTabsMystic.mainTab, 0.5F, 0.5F, SoundType.CLOTH);
+        super(Name, Material.CLOTH, CreativeTabsMystic.buildingBlocks, 0.5F, 0.5F, SoundType.CLOTH);
         this.setDefaultState(this.blockState.getBaseState());
         this.setLightOpacity(1);
     }
