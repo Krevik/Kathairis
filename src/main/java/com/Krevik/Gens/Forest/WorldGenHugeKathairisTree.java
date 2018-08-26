@@ -11,9 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenKathairisTree extends WorldGenAbstractTree{
+public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 	
-	public WorldGenKathairisTree() {
+	public WorldGenHugeKathairisTree() {
 		super(true);
 	}
 	Random random = new Random();

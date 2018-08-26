@@ -11,10 +11,8 @@ import com.Krevik.Gens.WorldGenMysticMultiGrass;
 import com.Krevik.Gens.WorldGenNewTree;
 import com.Krevik.Gens.WorldGenSingleGen;
 import com.Krevik.Gens.Forest.WorldGenBasicMysticTree;
-import com.Krevik.Gens.Forest.WorldGenCrownTree;
 import com.Krevik.Gens.Forest.WorldGenCustomTree2;
-import com.Krevik.Gens.Forest.WorldGenKathairisTree;
-import com.Krevik.Gens.Forest.WorldGenMegaMysticTree;
+import com.Krevik.Gens.Forest.WorldGenHugeKathairisTree;
 import com.Krevik.Gens.Forest.WorldGenShinyTree;
 import com.Krevik.Main.KCore;
 
@@ -34,14 +32,12 @@ public class BiomeMysticForest extends KetherBiome
     protected static WorldGenAbstractTree TREE_FEATURE4 = new WorldGenNewTree();
     protected static WorldGenCustomTree2 CUSTOMTREE2 = new WorldGenCustomTree2();
     //protected static final WorldGenAbstractTree CUSTOMTREE3 = new WorldGenMysticForestTree();
-    protected static WorldGenAbstractTree CUSTOMTREE3 = new WorldGenMegaMysticTree(true,10,20,KCore.MysticLog.getDefaultState(),KCore.MysticLeaves.getDefaultState());
     protected static WorldGenMiniTallGrass TALLGRASS1 = new WorldGenMiniTallGrass(KCore.MysticTallGrass);
     protected static WorldGenMiniTallGrass TALLGRASS2 = new WorldGenMiniTallGrass(KCore.MysticMiniGrass);
     protected static WorldGenSingleGen SINGLEGEN = new WorldGenSingleGen();
     protected static WorldGenSingleGen SINGLEGEN2 = new WorldGenSingleGen(3);
     protected static WorldGenMysticMultiGrass GrassGen = new WorldGenMysticMultiGrass(KCore.SteppedSucculent);
-    protected static WorldGenAbstractTree GAUSSIANTREE = new WorldGenCrownTree(true);
-    protected static WorldGenAbstractTree CUSTOMTREE4 = new WorldGenKathairisTree();
+    protected static WorldGenAbstractTree CUSTOMTREE4 = new WorldGenHugeKathairisTree();
     
     public BiomeMysticForest(Biome.BiomeProperties properties)
     {
