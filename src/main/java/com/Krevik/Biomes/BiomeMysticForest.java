@@ -73,8 +73,6 @@ public class BiomeMysticForest extends KetherBiome
     		}else {
         		return (WorldGenAbstractTree)TREE_FEATURE2;
     		}
-    	}else if(rand.nextInt(10)==0) {
-    		return GAUSSIANTREE;
     	}
     	else if(rand.nextInt(5)==3) {
     		return TREE_FEATURE4;
