@@ -38,7 +38,6 @@ public class WorldGenKathairisTree extends WorldGenAbstractTree{
 	
 	private void doTrunkPieceFromHeight(World world,BlockPos pos,IBlockState state) {
 		int groundHeight=world.getHeight(pos).getY();
-		if(pos.getY()-groundHeight<5) {
 			if(pos.getY()-groundHeight>2) {
 				for(int c=pos.getY();c>=groundHeight;c--) {
 					this.setBlock(world, new BlockPos(pos.getX(),c-1,pos.getZ()), state);
@@ -48,7 +47,6 @@ public class WorldGenKathairisTree extends WorldGenAbstractTree{
 					this.setBlock(world, new BlockPos(pos.getX(),c,pos.getZ()), state);
 				}
 			}
-		}
 
 	}
 	
