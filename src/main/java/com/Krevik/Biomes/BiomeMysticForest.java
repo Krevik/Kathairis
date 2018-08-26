@@ -13,6 +13,7 @@ import com.Krevik.Gens.WorldGenSingleGen;
 import com.Krevik.Gens.Forest.WorldGenBasicMysticTree;
 import com.Krevik.Gens.Forest.WorldGenCrownTree;
 import com.Krevik.Gens.Forest.WorldGenCustomTree2;
+import com.Krevik.Gens.Forest.WorldGenKathairisTree;
 import com.Krevik.Gens.Forest.WorldGenMegaMysticTree;
 import com.Krevik.Gens.Forest.WorldGenShinyTree;
 import com.Krevik.Main.KCore;
@@ -40,6 +41,7 @@ public class BiomeMysticForest extends KetherBiome
     protected static WorldGenSingleGen SINGLEGEN2 = new WorldGenSingleGen(3);
     protected static WorldGenMysticMultiGrass GrassGen = new WorldGenMysticMultiGrass(KCore.SteppedSucculent);
     protected static WorldGenAbstractTree GAUSSIANTREE = new WorldGenCrownTree(true);
+    protected static WorldGenAbstractTree CUSTOMTREE4 = new WorldGenKathairisTree();
     
     public BiomeMysticForest(Biome.BiomeProperties properties)
     {
@@ -84,7 +86,7 @@ public class BiomeMysticForest extends KetherBiome
     		return CUSTOMTREE2;
     	}
     	else{
-            return (WorldGenAbstractTree)CUSTOMTREE3;
+            return (WorldGenAbstractTree)CUSTOMTREE4;
     	}    	
     }
     
