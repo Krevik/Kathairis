@@ -18,9 +18,11 @@ public class WorldGenMysticSwampsTree extends WorldGenAbstractBasicMysticTree{
 	public WorldGenMysticSwampsTree() {
 		super(true);
 	}
+	Random random;
 	
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {	
+    	random = rand;
     	IBlockState logState=KCore.MysticLog.getDefaultState();
     	int posX=position.getX();
     	int posZ=position.getZ();
@@ -78,7 +80,16 @@ public class WorldGenMysticSwampsTree extends WorldGenAbstractBasicMysticTree{
     					setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z), KCore.MysticLeaves.getDefaultState());
     					setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()+x,pos.getY()-y,pos.getZ()-z), KCore.MysticLeaves.getDefaultState());
     					setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()-z), KCore.MysticLeaves.getDefaultState());
-
+    					if(((x*x)+(z*z)+(y*y)<(radius*radius-radius))) {
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), KCore.MysticLog.getDefaultState());}
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()+z), KCore.MysticLog.getDefaultState());}
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()-z), KCore.MysticLog.getDefaultState());}
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()-z), KCore.MysticLog.getDefaultState());}
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()+x,pos.getY()-y,pos.getZ()+z), KCore.MysticLog.getDefaultState());}
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z), KCore.MysticLog.getDefaultState());}
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()+x,pos.getY()-y,pos.getZ()-z), KCore.MysticLog.getDefaultState());}
+        					if(random.nextInt(8)==0) {setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()-z), KCore.MysticLog.getDefaultState());}
+    					}
     				}
     			}
     		}
