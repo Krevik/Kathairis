@@ -2,11 +2,15 @@ package com.Krevik.Gens.Forest;
 
 import java.util.Random;
 
+import com.Krevik.Blocks.BlockLuminescentGnarl;
 import com.Krevik.Blocks.BlockMysticLog;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockVine;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -48,6 +52,22 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 				}
 			}
 
+	}
+	
+	private void placeGnalr(World world,BlockPos position,int x,int z) {
+			if(x<0&&z>0) {
+				this.setBlockAndNotifyAdequately(world, new BlockPos(position.getX(),position.getY(),position.getZ()), KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.WEST));	
+				world.updateBlockTick(position, KCore.LuminescentGnarl, 1, 2);
+			}else if(x==0&&z>0) {
+				this.setBlockAndNotifyAdequately(world, new BlockPos(position.getX(),position.getY(),position.getZ()), KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.SOUTH));	
+				world.updateBlockTick(position, KCore.LuminescentGnarl, 1, 2);
+			}else if(x>0&&z>0) {
+				this.setBlockAndNotifyAdequately(world, new BlockPos(position.getX(),position.getY(),position.getZ()), KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.EAST));	
+				world.updateBlockTick(position, KCore.LuminescentGnarl, 1, 2);
+			}else if(x<0&&z<0) {
+				this.setBlockAndNotifyAdequately(world, new BlockPos(position.getX(),position.getY(),position.getZ()), KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.NORTH));	
+				world.updateBlockTick(position, KCore.LuminescentGnarl, 1, 2);
+			}
 	}
 	
 	private void generateTree(World worldIn, Random rand, BlockPos position) {
@@ -107,15 +127,19 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 			for(int y=0;y<=baseTreeHeight;y++) {
 				if(k==0) {
 					this.setBlock(worldIn, logState, new BlockPos(X,Y+y,Z));
+					if(random.nextInt(45)==0) {placeGnalr(worldIn,new BlockPos(X-1,Y+y,Z),-1,1);}
 				}
 				if(k==1) {
 					this.setBlock(worldIn, logState, new BlockPos(X,Y+y,Z+1));
+					if(random.nextInt(45)==0) {placeGnalr(worldIn,new BlockPos(X,Y+y,Z+2),0,+2);}
 				}
 				if(k==2) {
 					this.setBlock(worldIn, logState, new BlockPos(X+1,Y+y,Z+1));
+					if(random.nextInt(45)==0) {placeGnalr(worldIn,new BlockPos(X+2,Y+y,Z+1),+2,+2);}
 				}
 				if(k==3) {
 					this.setBlock(worldIn, logState, new BlockPos(X+1,Y+y,Z));
+					if(random.nextInt(45)==0) {placeGnalr(worldIn,new BlockPos(X-1,Y+y,Z-1),-1,-1);}
 				}
 			}
 		}
@@ -209,12 +233,18 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
     			}
     		}
     	}
+    	placeVines(worldIn,radius,pos);
+	}
+	
+	void placeVines(World worldIn, int radius, BlockPos pos) {
+		
 	}
 	
 	void setBlock(World worldIn,BlockPos pos,IBlockState state) {
 		if(worldIn.isAirBlock(pos)||(worldIn.getBlockState(pos).getBlock() instanceof BlockLeaves&&state.getBlock() instanceof BlockMysticLog)) {
 			worldIn.setBlockState(pos, state, 2);
 		}
+
 	}
 	
 	void setBlock(World worldIn,IBlockState state,BlockPos pos) {
