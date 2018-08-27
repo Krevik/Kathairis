@@ -233,11 +233,17 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
     			}
     		}
     	}
-    	placeVines(worldIn,radius,pos);
+    	//placeVines(worldIn,radius,pos);
 	}
 	
 	void placeVines(World worldIn, int radius, BlockPos pos) {
-		
+    	for(int x=0;x<=(radius+2);x++) {
+    		for(int z=0;z<=(radius+2);z++) {
+    			for(int y=0;y<=(radius-2)/2;y++) {
+    				
+    			}
+    		}
+    	}
 	}
 	
 	void setBlock(World worldIn,BlockPos pos,IBlockState state) {
