@@ -106,7 +106,8 @@
 		"sounds":
         [
             {"name": "mystic:kether/kether_day", "stream": true},
-			{"name": "mystic:kether/kether_day1", "stream": true}
+			{"name": "mystic:kether/kether_day1", "stream": true},
+			{"name": "mystic:kether/kether_day2", "stream": true}
         ]
     },
 	"mob.ghost.living":
