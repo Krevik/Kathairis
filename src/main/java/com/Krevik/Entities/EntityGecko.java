@@ -1,6 +1,5 @@
 package com.Krevik.Entities;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -10,9 +9,7 @@ import com.Krevik.Main.MysticLootTables;
 import com.google.common.collect.Sets;
 
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -38,9 +35,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.datafix.DataFixer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -51,6 +46,7 @@ public class EntityGecko extends EntityAnimal
     private static final DataParameter<Boolean> isClimbing = EntityDataManager.<Boolean>createKey(EntityGecko.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> canWalkOnWall = EntityDataManager.<Boolean>createKey(EntityGecko.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> climbingSide = EntityDataManager.<Integer>createKey(EntityGecko.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityGecko.class, DataSerializers.VARINT);
 
     public EntityGecko(World worldIn)
     {
@@ -58,6 +54,7 @@ public class EntityGecko extends EntityAnimal
         this.setSize(0.7F, 0.25F);
         this.experienceValue=10;
     }
+    
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.PORKCHOP);
     public boolean isBreedingItem(ItemStack stack)
     {
@@ -86,7 +83,17 @@ public class EntityGecko extends EntityAnimal
         this.dataManager.register(isClimbing, Boolean.FALSE);
         this.dataManager.register(canWalkOnWall, Boolean.FALSE);
         this.dataManager.register(climbingSide, Integer.valueOf(-1));
+        this.dataManager.register(VARIANT, Integer.valueOf(0));
 
+    }
+    public int getVariant()
+    {
+        return MathHelper.clamp(((Integer)this.dataManager.get(VARIANT)).intValue(), 0, 4);
+    }
+
+    public void setVariant(int p_191997_1_)
+    {
+        this.dataManager.set(VARIANT, Integer.valueOf(p_191997_1_));
     }
     public boolean isClimbing() {
         return ((Boolean)this.dataManager.get(isClimbing)).booleanValue();
@@ -220,6 +227,7 @@ public class EntityGecko extends EntityAnimal
         compound.setBoolean("isClimbing", this.isClimbing());
         compound.setBoolean("canWalkOnWall", this.canWalkOnWall());
         compound.setInteger("climbingSide", this.climbingSide());
+        compound.setInteger("Variant", this.getVariant());
 
     }
 
@@ -229,6 +237,7 @@ public class EntityGecko extends EntityAnimal
         this.dataManager.set(isClimbing, compound.getBoolean("isClimbing"));
         this.setCanWalkOnWall(compound.getBoolean("canWalkOnWall"));
         this.setClimbingSide(compound.getInteger("climbingSide"));
+        this.setVariant(compound.getInteger("Variant"));
     }
     
 
@@ -265,6 +274,7 @@ public class EntityGecko extends EntityAnimal
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
     {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
+        this.setVariant(this.rand.nextInt(4));
         return livingdata;
     }
 
