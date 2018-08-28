@@ -44,7 +44,7 @@ public class ParticleSwampGas extends Particle
         this.particleGreen=1;
         this.particleBlue=1;
         this.particleAlpha=50;
-        this.particleMaxAge = (int)(Math.random() * 10.0D) + 40;
+        this.particleMaxAge = 90;
 
         TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.swampGasParticle.toString());
 
@@ -68,7 +68,7 @@ public class ParticleSwampGas extends Particle
       double minV = this.particleTexture.getMinV();
       double maxV = this.particleTexture.getMaxV();
 
-      double scale = 0.1F * this.particleScale;  // vanilla scaling factor
+      double scale = 0.5F * this.particleScale;  // vanilla scaling factor
       final double scaleLR = scale;
       final double scaleUD = scale;
       double x = this.prevPosX + (this.posX - this.prevPosX) * partialTick - interpPosX;
@@ -138,8 +138,6 @@ public class ParticleSwampGas extends Particle
     public void onUpdate()
     {
     	super.onUpdate();
-        float f = (float)this.particleAge / (float)this.particleMaxAge;
-
         if (this.particleAge++ >= this.particleMaxAge)
         {
             this.setExpired();

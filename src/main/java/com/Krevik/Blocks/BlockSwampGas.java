@@ -96,19 +96,18 @@ public class BlockSwampGas extends BlockMysticCloud{
     	super.breakBlock(worldIn, pos, state);
     }
     
+
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-        for (int i = 0; i < 8; ++i)
-        {
-        	double d2=pos.getZ()+rand.nextDouble();
-        	double d1=pos.getY()+rand.nextDouble();
-        	double d0=pos.getX()+rand.nextDouble();
-        	double d4=rand.nextDouble()-rand.nextDouble()*0.00000000000001;
-        	//EnumParticleTypes type = EnumParticleTypes.SPELL;
-            KCore.cproxy.drawParticle(worldIn, new ParticleSwampGas(worldIn,d0,d1,d2,0,0,0));
+    	for(int x=0;x<=1+rand.nextInt(8);x++) {
+        	double d2=pos.getZ()+rand.nextFloat();
+        	double d1=pos.getY()+rand.nextFloat();
+        	double d0=pos.getX()+rand.nextFloat();
+        	ParticleSwampGas particle=new ParticleSwampGas(worldIn,d0,d1,d2,0,0,0);
+            KCore.cproxy.drawParticle(worldIn, particle);
         	//worldIn.spawnParticle(type, d0, d1, d2, d3, d4, d5,0);
-        }
+    	}
     }
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {

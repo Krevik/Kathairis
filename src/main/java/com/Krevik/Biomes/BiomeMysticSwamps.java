@@ -4,14 +4,17 @@ import java.util.Random;
 
 import com.Krevik.Entities.EntityMysticBird;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
-import com.Krevik.Gens.WorldGenMudPaddle;
-import com.Krevik.Gens.WorldGenMysticSwampsTree;
-import com.Krevik.Gens.WorldGenMysticSwampsWater;
 import com.Krevik.Gens.WorldGenSingleGen;
+import com.Krevik.GensSwamps.WorldGenMudPaddle;
+import com.Krevik.GensSwamps.WorldGenMysticSwampsTree;
+import com.Krevik.GensSwamps.WorldGenMysticSwampsWater;
+import com.Krevik.GensSwamps.WorldGenOldTrunk;
+import com.Krevik.GensSwamps.WorldGenSwampLakes;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -39,7 +42,7 @@ public class BiomeMysticSwamps extends KetherBiome
         this.decorator.treesPerChunk = 1;
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;
-        this.decorator.grassPerChunk = 3;
+        this.decorator.grassPerChunk = 11;
         this.topBlock=KCore.CorruptedGrass.getDefaultState();
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Swamps");
@@ -50,15 +53,15 @@ public class BiomeMysticSwamps extends KetherBiome
     public WorldGenerator getRandomWorldGenForGrass(Random rand)
     {
     	int k=rand.nextInt(30);
-    	if(k==0||k==1||k==2||k==3||k==15||k==16||k==17||k==18) {
+    	if(k==3||k==15) {
     		return MUDPADDLESWAMPS;
     	}else if(k==5) {
     		return SWAMPGASSWAMPS;
-    	}else if(k==4||k==6||k==7||k==19||k==20||k==21) {
+    	}else if(k==4||k==6||k==7) {
     		return SINGLEGENSWAMPS;
-    	}else if(k==8||k==9||k==22||k==23||k==24) {
+    	}else if(k==8||k==9) {
     		return SWAMPSGENSWAMPS;
-    	}else if(k==10||k==11||k==12||k==13||k==14) {
+    	}else if(k==10||k==11) {
     		return TALLGRASS1SWAMPS;
     	}else {
         	return TALLGRASS1SWAMPS;
@@ -74,9 +77,21 @@ public class BiomeMysticSwamps extends KetherBiome
     
 
     
-    public void decorate(World worldIn, Random rand, BlockPos pos)
+    public void decorate(World world, Random random, BlockPos pos)
     {
-
+    			int rx = pos.getX() + random.nextInt(16) + 8;
+    			int rz = pos.getZ() + random.nextInt(16) + 8;
+    			new WorldGenSwampLakes(KCore.MudBlock).generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+    			if(random.nextInt(2)==0) {
+        			rx = pos.getX() + random.nextInt(16) + 8;
+        			rz = pos.getZ() + random.nextInt(16) + 8;
+        			new WorldGenSwampLakes(Blocks.WATER).generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+    			}
+    			if(random.nextInt(2)==0) {
+        			rx = pos.getX() + random.nextInt(16) + 8;
+        			rz = pos.getZ() + random.nextInt(16) + 8;
+        			new WorldGenOldTrunk().generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+    			}
     }
     
 

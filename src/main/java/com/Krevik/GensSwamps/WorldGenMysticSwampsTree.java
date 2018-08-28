@@ -1,8 +1,9 @@
-package com.Krevik.Gens;
+package com.Krevik.GensSwamps;
 
 import java.util.Random;
 
 import com.Krevik.Blocks.BlockJadeVines;
+import com.Krevik.Gens.WorldGenAbstractBasicMysticTree;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.state.IBlockState;
