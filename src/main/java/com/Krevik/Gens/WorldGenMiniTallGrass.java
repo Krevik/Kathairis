@@ -2,7 +2,9 @@ package com.Krevik.Gens;
 
 import java.util.Random;
 
+import com.Krevik.Blocks.BlockBlueFruitPlant;
 import com.Krevik.Blocks.BlockMysticBush;
+import com.Krevik.Main.KCore;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +33,11 @@ public class WorldGenMiniTallGrass extends WorldGenerator
 
             if (worldIn.isAirBlock(blockpos) && grassToGen.canBlockStay(worldIn, blockpos, grassToGen.getDefaultState()))
             {
+            	if(grassToGen==KCore.BlueFruitPlant) {
+                	setBlockAndNotifyAdequately(worldIn,blockpos, KCore.BlueFruitPlant.getDefaultState().withProperty(BlockBlueFruitPlant.AGE, rand.nextInt(7)));
+            	}else {
             	setBlockAndNotifyAdequately(worldIn,blockpos, this.grassToGen.getDefaultState());
+            	}
             }
         }
 
