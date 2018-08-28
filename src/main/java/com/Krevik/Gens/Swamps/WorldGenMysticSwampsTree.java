@@ -1,4 +1,4 @@
-package com.Krevik.GensSwamps;
+package com.Krevik.Gens.Swamps;
 
 import java.util.Random;
 

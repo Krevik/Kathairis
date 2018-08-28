@@ -5,11 +5,11 @@ import java.util.Random;
 import com.Krevik.Entities.EntityMysticBird;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
 import com.Krevik.Gens.WorldGenSingleGen;
-import com.Krevik.GensSwamps.WorldGenMudPaddle;
-import com.Krevik.GensSwamps.WorldGenMysticSwampsTree;
-import com.Krevik.GensSwamps.WorldGenMysticSwampsWater;
-import com.Krevik.GensSwamps.WorldGenOldTrunk;
-import com.Krevik.GensSwamps.WorldGenSwampLakes;
+import com.Krevik.Gens.Swamps.WorldGenMudPaddle;
+import com.Krevik.Gens.Swamps.WorldGenMysticSwampsTree;
+import com.Krevik.Gens.Swamps.WorldGenMysticSwampsWater;
+import com.Krevik.Gens.Swamps.WorldGenOldTrunk;
+import com.Krevik.Gens.Swamps.WorldGenSwampLakes;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.material.Material;
