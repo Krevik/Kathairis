@@ -43,6 +43,8 @@ public static final ResourceLocation Mystic_Gem_Block_Particle = new ResourceLoc
 public static final ResourceLocation dust_particle = new ResourceLocation(KCore.MODID+":"+"effect/dust_particle");
 public static final ResourceLocation kether_portal_particle = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
 
+public MusicTicker.MusicType ketherMusicDay;
+public MusicTicker.MusicType ketherMusicNight;
 
  public void registerItemRenderer(Item item, int meta, String id) {
  ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(KCore.MODID + ":" + id, "inventory"));
@@ -61,7 +63,8 @@ public static final ResourceLocation kether_portal_particle = new ResourceLocati
 	
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
-
+		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDay, 100, 500);
+		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNight, 100, 500);
 	    MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
     }
 	

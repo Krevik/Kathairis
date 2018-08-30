@@ -209,9 +209,9 @@ public class WorldProviderMystic extends WorldProviderSurface
     public net.minecraft.client.audio.MusicTicker.MusicType getMusicType()
     {        
     	if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
-            return KCore.instance.ketherMusicNight;
+            return KCore.instance.cproxy.ketherMusicNight;
     	}else {
-            return KCore.instance.ketherMusicDay;
+            return KCore.instance.cproxy.ketherMusicDay;
     	}
     }
     
