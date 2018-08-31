@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import com.Krevik.Dimension.TileEntityKether;
 import com.Krevik.Gui.GuiHandler;
 import com.Krevik.Sounds.SoundHelper;
@@ -13,6 +15,7 @@ import com.google.common.base.Preconditions;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -20,8 +23,8 @@ import net.minecraft.item.ItemSlab;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -44,8 +47,8 @@ public class CommonProxy {
 	public static SoundHelper bison_dead = new SoundHelper("bison","dead");
 	public static SoundHelper bison_hurt = new SoundHelper("bison","hurt");
 	public static SoundHelper bison_living = new SoundHelper("bison","living");
-	public static SoundEvent ketherMusicDay = new SoundHelper("music.day");
-	public static SoundEvent ketherMusicNight = new SoundHelper("music.night");
+	public static SoundEvent ketherMusicDaySound = new SoundHelper("music.day");
+	public static SoundEvent ketherMusicNightSound = new SoundHelper("music.night");
 	public static SoundHelper ghost_living = new SoundHelper("ghost","living");
 	public static SoundHelper ghost_attack = new SoundHelper("ghost","attack");
 	public static SoundHelper ghost_dead = new SoundHelper("ghost","dead");
@@ -63,6 +66,7 @@ public class CommonProxy {
 
     public static final SoundType CLOUDGLASS = new SoundType(1.0F, 1.0F, cloud_glass_break, SoundEvents.BLOCK_GLASS_STEP, SoundEvents.BLOCK_GLASS_PLACE, SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
 
+
 	public static ArrayList<Biome> biomeList = new ArrayList();
 	public static ArrayList<Item> itemList = new ArrayList();
 	@SubscribeEvent
@@ -77,7 +81,9 @@ public class CommonProxy {
 		BiomeDictionary.addTypes(KCore.instance.MysticSwamps, BiomeDictionary.Type.DRY);
 		BiomeDictionary.addTypes(KCore.instance.FloatingIslands, BiomeDictionary.Type.MAGICAL,BiomeDictionary.Type.OCEAN);
 	}
+
     public void preInit(FMLPreInitializationEvent e) {
+    	
     }
     
 

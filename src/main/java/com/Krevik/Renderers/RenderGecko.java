@@ -52,7 +52,18 @@ public class RenderGecko extends RenderLiving<EntityGecko>
         	GlStateManager.scale(0.8, 0.8, 0.8);
     	}
     	if(entityLiving.isClimbing()) {
-
+    		if(entityLiving.climbingSide()==0) {
+    			GlStateManager.rotate(90, 0, 0, 1);
+    		}
+    		else if(entityLiving.climbingSide()==1) {
+    			GlStateManager.rotate(90, 0, 0, -1);
+    		}
+    		else if(entityLiving.climbingSide()==2) {
+    			GlStateManager.rotate(90, 1, 0, 0);
+    		}
+    		else if(entityLiving.climbingSide()==3) {
+    			GlStateManager.rotate(90,-1,0,0);
+    		}
     	}
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         

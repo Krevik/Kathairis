@@ -2,6 +2,8 @@ package com.Krevik.Main;
 
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import com.Krevik.Particles.TextureStitcherParicleManager;
 import com.Krevik.TileEntity.TileEntityMythicStoneSign;
 import com.Krevik.TileEntity.TileEntityMythicStoneSignRenderer;
@@ -43,8 +45,10 @@ public static final ResourceLocation Mystic_Gem_Block_Particle = new ResourceLoc
 public static final ResourceLocation dust_particle = new ResourceLocation(KCore.MODID+":"+"effect/dust_particle");
 public static final ResourceLocation kether_portal_particle = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
 
-public MusicTicker.MusicType ketherMusicDay;
-public MusicTicker.MusicType ketherMusicNight;
+public static MusicTicker.MusicType ketherMusicDay;
+public static MusicTicker.MusicType ketherMusicNight;
+
+
 
  public void registerItemRenderer(Item item, int meta, String id) {
  ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(KCore.MODID + ":" + id, "inventory"));
@@ -60,16 +64,17 @@ public MusicTicker.MusicType ketherMusicNight;
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMythicStoneSign.class, new TileEntityMythicStoneSignRenderer());
  }
 
-	
+
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
-		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDay, 100, 500);
-		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNight, 100, 500);
+		
 	    MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
     }
 	
 	@Override
 	public void init() {
+		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDaySound, 100, 500);
+		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNightSound, 100, 500);
 	}
 	
 	public static void drawParticle(World worldObj, Particle particle) {

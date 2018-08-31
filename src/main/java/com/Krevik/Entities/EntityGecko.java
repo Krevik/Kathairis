@@ -35,6 +35,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
@@ -161,6 +162,7 @@ public class EntityGecko extends EntityAnimal
     private void OperateWalkingOnWall() {
 
     }
+    BlockPos destPos;
     
     public void onUpdate() {
     	super.onUpdate();
@@ -168,6 +170,7 @@ public class EntityGecko extends EntityAnimal
     	this.setCanWalkOnWall(this.collidedHorizontally);
     	//operate climbing side
     	if(this.canWalkOnWall()) {
+    		destPos=this.getPosition();
     		if(!this.world.isAirBlock(getPosition().east())) {
     			this.setClimbingSide(0);
     		}else if(!this.world.isAirBlock(getPosition().west())) {
@@ -191,6 +194,12 @@ public class EntityGecko extends EntityAnimal
     		if(this.getRNG().nextInt(100)==0) {
     			this.setClimbing(true);
     		}
+    	}
+    	
+    	if(this.isClimbing()) {    		
+    		this.motionX=(destPos.getX()+0.5)-this.posX;
+    		this.motionY=(destPos.getY()+0.5)-this.posY;
+    		this.motionZ=(destPos.getZ()+0.5)-this.posZ;
     	}
     	
     }
