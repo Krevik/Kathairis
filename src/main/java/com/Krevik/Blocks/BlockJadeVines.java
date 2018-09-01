@@ -5,6 +5,8 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.Krevik.Main.KCore;
+import com.Krevik.Networking.KetherPacketHandler;
+import com.Krevik.Networking.PacketJadeVinesServer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockShulkerBox;
@@ -180,10 +182,9 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
     
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
-    	if(entityIn instanceof EntityPlayerMP) {
-    		EntityPlayerMP player = (EntityPlayerMP) entityIn;
+    	if(worldIn.isRemote) {
     		if(Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown()) {
-    			player.motionY=0.1;
+				KetherPacketHandler.CHANNEL.sendToServer(new PacketJadeVinesServer());
     		}
     	}
     }
