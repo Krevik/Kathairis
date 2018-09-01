@@ -48,16 +48,17 @@ public class PacketDeathHandlerServer implements IMessage {
 
 				@Override
 				public void run() {
-					KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).setIsDeathSpawned(message.isDeathSpawned);
-					KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).setIsDeathFighting(message.isDeathFighting);
-					KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).setIsDeathDefeated(message.isDeathDefeated);
+					KetherDataStorage.getDataInstance(ctx.getServerHandler().player.getServerWorld()).setIsDeathSpawned(message.isDeathSpawned);
+					KetherDataStorage.getDataInstance(ctx.getServerHandler().player.getServerWorld()).setIsDeathFighting(message.isDeathFighting);
+					KetherDataStorage.getDataInstance(ctx.getServerHandler().player.getServerWorld()).setIsDeathDefeated(message.isDeathDefeated);
+					IMessage message11 = new PacketDeathHandlerClient(message.isDeathSpawned,message.isDeathFighting,message.isDeathDefeated);
+					KetherPacketHandler.CHANNEL.sendToAll(message11);
 				}
 				
 			});
 
 
-			IMessage message11 = new PacketDeathHandlerClient(message.isDeathSpawned,message.isDeathFighting,message.isDeathDefeated);
-			KetherPacketHandler.CHANNEL.sendToAll(message11);
+
 			return null;
 		}
 	}

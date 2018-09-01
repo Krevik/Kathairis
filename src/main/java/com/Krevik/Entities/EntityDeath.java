@@ -145,7 +145,7 @@ public class EntityDeath extends EntityLiving
     public void onUpdate() {
     	super.onUpdate();
 	    	if(data==null) {
-	    		data=KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.instance.DIMENSION_ID));
+	    		data=KetherDataStorage.getDataInstance(world);
 	    	}
     	if(data!=null) {
     			this.isFighting=data.getIsDeathFighting();
@@ -154,19 +154,22 @@ public class EntityDeath extends EntityLiving
     			}
     	    	if(this.getHealth()<5) {
     	    		if(!this.world.isRemote) {
-    	            int damage=KCore.functionHelper.getRandomInteger(700, 990);
-    	            ItemStack wand = new ItemStack(KCore.DeathWand,1,damage);
-    	            this.dropItem(KCore.DarknessEssence, 10+rand.nextInt(20));
-    	            this.dropItem(KCore.RevenumIngot, 1+rand.nextInt(5));
-    	            this.entityDropItem(wand,0);
-    	            defeated=true;
-    	            this.setDead();
-    	            this.onDeath(DamageSource.GENERIC);
+	    	            int damage=KCore.functionHelper.getRandomInteger(700, 990);
+	    	            ItemStack wand = new ItemStack(KCore.DeathWand,1,damage);
+	    	            this.dropItem(KCore.DarknessEssence, 10+rand.nextInt(20));
+	    	            this.dropItem(KCore.RevenumIngot, 1+rand.nextInt(5));
+	    	            this.entityDropItem(wand,0);
+	    	            defeated=true;
+	    	            this.setDead();
+	    	            this.onDeath(DamageSource.GENERIC);
+	    	    		
+	
+
     	    		}
-
-    				IMessage message2 = new PacketDeathHandlerServer(true,true,true);
-    				KetherPacketHandler.CHANNEL.sendToServer(message2);
-
+    	    		if(this.world.isRemote) {
+	    				IMessage message2 = new PacketDeathHandlerServer(true,true,true);
+	    				KetherPacketHandler.CHANNEL.sendToServer(message2);
+    	    		}
     	    	}
     	    	this.posX=prevPosX;
     	    	this.posY=prevPosY;
@@ -179,14 +182,18 @@ public class EntityDeath extends EntityLiving
 	        	}else {
 	        		this.setAttackTarget(null);
 	        		this.isFighting=false;
-        			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
-        			KetherPacketHandler.CHANNEL.sendToServer(message2);
+	        		if(world.isRemote) {
+	        			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
+	        			KetherPacketHandler.CHANNEL.sendToServer(message2);
+	        		}
 	        	}
 	            if(this.getAttackTarget()==null) {
 	            	if(isFighting) {
 	            		this.isFighting=false;
-	        			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
-	        			KetherPacketHandler.CHANNEL.sendToServer(message2);
+		        		if(world.isRemote) {
+		        			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
+		        			KetherPacketHandler.CHANNEL.sendToServer(message2);
+		        		}
 	            	}
 	            }
 	            if(!isFighting) {
@@ -202,8 +209,10 @@ public class EntityDeath extends EntityLiving
     				}
     	        	if(this.getAttackTarget().isDead) {
     	        		this.isFighting=false;
-    	    			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
-    	    			KetherPacketHandler.CHANNEL.sendToServer(message2);
+		        		if(world.isRemote) {
+	    	    			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
+	    	    			KetherPacketHandler.CHANNEL.sendToServer(message2);
+		        		}
     	        	}
 
 

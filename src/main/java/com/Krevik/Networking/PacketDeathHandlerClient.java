@@ -44,9 +44,9 @@ public class PacketDeathHandlerClient implements IMessage {
 		@Override
 		public IMessage onMessage(PacketDeathHandlerClient message, MessageContext ctx) {
 
-					KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).setIsDeathSpawned(message.isDeathSpawned);
-					KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).setIsDeathFighting(message.isDeathFighting);
-					KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).setIsDeathDefeated(message.isDeathDefeated);
+					KetherDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathSpawned(message.isDeathSpawned);
+					KetherDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathFighting(message.isDeathFighting);
+					KetherDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathDefeated(message.isDeathDefeated);
 
 			return null;
 		}

@@ -76,7 +76,7 @@ public class GuiOldMan extends GuiScreen {
 		}
 		//Death Screen
 		if(mode==2) {
-			if(!KetherDataStorage.getDataInstance(Minecraft.getMinecraft().getIntegratedServer().getWorld(KCore.DIMENSION_ID)).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(Minecraft.getMinecraft().getIntegratedServer().getWorld(KCore.DIMENSION_ID)).getIsDeathDefeated()) {
+			if(!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
 				Fight.visible=true;
 				Fight.enabled=true;
 			}
@@ -110,7 +110,7 @@ public class GuiOldMan extends GuiScreen {
 			this.drawCenteredString(fontRenderer, "Kathairis - our destiny", (int) (width / 2.0), 90, 0Xbfbfbf);
 			}
 		if(mode==2) {
-			if(!KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathDefeated()) {
+			if(!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
 				this.drawCenteredString(fontRenderer, "The Death have reached our land", (int) (width / 2.0), 30, 0X00253D);
 				this.drawCenteredString(fontRenderer, "Probably because of me, cause", (int) (width / 2.0), 40, 0X00253D);
 				this.drawCenteredString(fontRenderer, "I cheated her once", (int) (width / 2.0), 50, 0X00253D);
@@ -118,11 +118,11 @@ public class GuiOldMan extends GuiScreen {
 				this.drawCenteredString(fontRenderer, "Take this sword of light!", (int) (width / 2.0), 70, 0X00253D);
 				this.drawCenteredString(fontRenderer, "She's at: X:666, Z:666", (int) (width / 2.0), 80, 0X00253D);
 			}
-			if(KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathDefeated()) {
+			if(KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
 				this.drawCenteredString(fontRenderer, "Hurry up! Do it!", (int) (width / 2.0), 30, 0X00253D);
 				this.drawCenteredString(fontRenderer, "She's at: X:666, Z:666", (int) (width / 2.0), 40, 0X00253D);
 			}
-			if(KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathSpawned()&&KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID)).getIsDeathDefeated()) {
+			if(KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
 				this.drawCenteredString(fontRenderer, "Thanks god you did it!", (int) (width / 2.0), 30, 0X00253D);
 			}
 		}

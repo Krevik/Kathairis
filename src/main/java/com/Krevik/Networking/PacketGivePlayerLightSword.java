@@ -38,7 +38,7 @@ public class PacketGivePlayerLightSword implements IMessage {
 		@Override
 		public IMessage onMessage(PacketGivePlayerLightSword message, MessageContext ctx) {
 			ctx.getServerHandler().player.getServerWorld().addScheduledTask(new Runnable() {
-				IBlockState iblockstate = DimensionManager.getWorld(KCore.DIMENSION_ID).getBlockState(new BlockPos(666,ctx.getServerHandler().player.getEntityWorld().getHeight(666, 666),666));
+				IBlockState iblockstate = ctx.getServerHandler().player.world.getBlockState(new BlockPos(666,ctx.getServerHandler().player.getEntityWorld().getHeight(666, 666),666));
 				Random random = new Random();
 				@Override
 				public void run() {
