@@ -6,7 +6,6 @@ import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Entities.EntityStrangeWanderer;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDeathHandlerServer;
-import com.Krevik.Networking.PacketGivePlayerLightSword;
 import com.Krevik.Networking.PacketSpawnDeathServer;
 
 import net.minecraft.client.Minecraft;
