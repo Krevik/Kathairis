@@ -4,8 +4,8 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Enchantments.KathairisEnchantments;
 import com.Krevik.Main.KCore;
-import com.Krevik.Main.KathairisEnchantments;
 import com.Krevik.Main.MysticLootTables;
 
 import net.minecraft.enchantment.Enchantment;

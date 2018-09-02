@@ -6,6 +6,7 @@ import com.Krevik.Main.KCore;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDustStormClient;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -139,7 +140,7 @@ public class KetherEventsHandler {
 	}
 	@SubscribeEvent
 	public void onRenderPost(RenderGameOverlayEvent.Post event){
-		
+
 	}
 	
 }

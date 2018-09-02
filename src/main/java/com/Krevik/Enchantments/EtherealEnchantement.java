@@ -1,4 +1,4 @@
-package com.Krevik.Main;
+package com.Krevik.Enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantment.Rarity;

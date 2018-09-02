@@ -1,4 +1,4 @@
-package com.Krevik.Main;
+package com.Krevik.Enchantments;
 
 import java.util.ArrayList;
 import java.util.List;

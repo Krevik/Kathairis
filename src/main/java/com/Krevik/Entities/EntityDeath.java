@@ -7,8 +7,8 @@ import javax.annotation.Nullable;
 
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Dimension.TileEntityKether;
+import com.Krevik.Enchantments.KathairisEnchantments;
 import com.Krevik.Main.KCore;
-import com.Krevik.Main.KathairisEnchantments;
 import com.Krevik.Main.MysticLootTables;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDeathHandlerServer;
