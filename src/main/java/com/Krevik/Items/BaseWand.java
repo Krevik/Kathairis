@@ -149,5 +149,8 @@ public class BaseWand extends BaseItem{
 	    {
 	    	tooltip.add("Durability: " + (this.getMaxDamage()-this.getDamage(stack))+ " /1000");
 	    }
-	 
+	    public boolean isEnchantable(ItemStack stack)
+	    {
+	        return false;
+	    }
 }
