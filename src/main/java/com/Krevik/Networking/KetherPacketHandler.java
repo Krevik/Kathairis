@@ -14,7 +14,6 @@ public class KetherPacketHandler {
 		CHANNEL.registerMessage(PacketDeathHandlerServer.Handler.class, PacketDeathHandlerServer.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(PacketDeathHandlerClient.Handler.class, PacketDeathHandlerClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketSpawnDeathServer.Handler.class, PacketSpawnDeathServer.class, id++, Side.SERVER);
-		CHANNEL.registerMessage(PacketGivePlayerLightSword.Handler.class, PacketGivePlayerLightSword.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(PacketCloudOisterClient.Handler.class, PacketCloudOisterClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketOnCloudBootsUseClient.Handler.class, PacketOnCloudBootsUseClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketOnCloudBootsUseServer.Handler.class, PacketOnCloudBootsUseServer.class, id++, Side.SERVER);

@@ -1,12 +1,14 @@
 package com.Krevik.Entities;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Dimension.TileEntityKether;
 import com.Krevik.Main.KCore;
+import com.Krevik.Main.KathairisEnchantments;
 import com.Krevik.Main.MysticLootTables;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDeathHandlerServer;
@@ -14,6 +16,8 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -290,7 +294,8 @@ public class EntityDeath extends EntityLiving
     	if(isFighting) {
     		if(source.getTrueSource() instanceof EntityPlayer) {
     			EntityPlayer attacker = (EntityPlayer) source.getTrueSource();
-    			if(attacker.getHeldItemMainhand().getItem().equals(KCore.LightSword)) {
+            	Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(attacker.getHeldItemMainhand());
+    			if(map.containsKey(KathairisEnchantments.Ethereal)) {
     				this.damageEntity(source, 6);
     				return true;
     			}

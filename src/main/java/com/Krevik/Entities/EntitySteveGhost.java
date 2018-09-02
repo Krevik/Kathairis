@@ -1,11 +1,15 @@
 package com.Krevik.Entities;
 
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
 import com.Krevik.Main.KCore;
+import com.Krevik.Main.KathairisEnchantments;
 import com.Krevik.Main.MysticLootTables;
 
-import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -28,7 +32,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntitySteveGhost extends EntityMob
@@ -102,7 +105,8 @@ public class EntitySteveGhost extends EntityMob
     {
     	if(source.getTrueSource() instanceof EntityPlayerMP) {
     		EntityPlayerMP ep = (EntityPlayerMP) source.getTrueSource();
-    		if(ep.getHeldItemMainhand().getItem().equals(KCore.LightSword)) {
+        	Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(ep.getHeldItemMainhand());
+    		if(map.containsKey(KathairisEnchantments.Ethereal)) {
     			this.setDead();
     			return true;
     		}else {

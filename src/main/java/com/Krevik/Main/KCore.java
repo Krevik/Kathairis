@@ -712,9 +712,6 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.DarknessEssence)
 	public static final BaseItem DarknessEssence = new BaseItem(Ref.DarknessEssence, CreativeTabsMystic.miscellaneous);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.LightSword)
-	public static final ItemMysticSword LightSword = new ItemMysticSword(Ref.LightSword, CreativeTabsMystic.weapons,KCore.LIGHT);
-    
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.DeathWand)
 	public static final BaseWand DeathWand = new BaseWand(Ref.DeathWand, CreativeTabsMystic.weapons);
     
@@ -946,7 +943,6 @@ public class KCore {
         public static final String CursedFlower = "cursedflower";
         public static final String DarknessSword = "darknesssword";
         public static final String DarknessEssence = "darknessessence";
-        public static final String LightSword = "lightsword";
         public static final String DeathWand =  "deathwand";
         public static final String SteppedSucculent =  "steppedsucculent";
         public static final String MythicStoneStandingSign = "mythicstonestandingsign";

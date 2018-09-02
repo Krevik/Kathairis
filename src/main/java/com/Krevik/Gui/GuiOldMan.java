@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Entities.EntityStrangeWanderer;
-import com.Krevik.Main.KCore;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDeathHandlerServer;
 import com.Krevik.Networking.PacketGivePlayerLightSword;
@@ -16,7 +15,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -115,7 +113,7 @@ public class GuiOldMan extends GuiScreen {
 				this.drawCenteredString(fontRenderer, "Probably because of me, cause", (int) (width / 2.0), 40, 0X00253D);
 				this.drawCenteredString(fontRenderer, "I cheated her once", (int) (width / 2.0), 50, 0X00253D);
 				this.drawCenteredString(fontRenderer, "You must send her back!", (int) (width / 2.0), 60, 0X00253D);
-				this.drawCenteredString(fontRenderer, "Take this sword of light!", (int) (width / 2.0), 70, 0X00253D);
+				this.drawCenteredString(fontRenderer, "Remember that your weapon must have ETHEREAL enchantment", (int) (width / 2.0), 70, 0X00253D);
 				this.drawCenteredString(fontRenderer, "She's at: X:666, Z:666", (int) (width / 2.0), 80, 0X00253D);
 			}
 			if(KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
@@ -165,8 +163,6 @@ public class GuiOldMan extends GuiScreen {
 			}
 		}
 		if(button == Fight){
-			IMessage message = new PacketGivePlayerLightSword();
-			KetherPacketHandler.CHANNEL.sendToServer(message);
 			
 			IMessage message1 = new PacketSpawnDeathServer();
 			KetherPacketHandler.CHANNEL.sendToServer(message1);
