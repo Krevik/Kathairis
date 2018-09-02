@@ -77,6 +77,7 @@ public class BlockMysticCloud extends BaseBlock
     {
         return false;
     }
+    
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -85,6 +86,7 @@ public class BlockMysticCloud extends BaseBlock
 
         return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
+    
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
             return null;

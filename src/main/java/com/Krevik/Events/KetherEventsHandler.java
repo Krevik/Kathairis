@@ -139,8 +139,7 @@ public class KetherEventsHandler {
 	}
 	@SubscribeEvent
 	public void onRenderPost(RenderGameOverlayEvent.Post event){
-
+		
 	}
-	
 	
 }

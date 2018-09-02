@@ -223,9 +223,11 @@ public class EntitySkyray extends EntityFlying
 
         
         travel();
-   
-        
-        this.motionY=this.randomMotionVecY;
+        if(MathHelper.sin(this.ticksExisted)<0) {
+        	if(rand.nextInt(25)==0) {
+        	this.setMovementVector(rand.nextFloat()-rand.nextFloat(), rand.nextFloat()-rand.nextFloat(), rand.nextFloat()-rand.nextFloat());
+        	}
+        }
     }
 
     public void travel()
@@ -287,6 +289,7 @@ public class EntitySkyray extends EntityFlying
             float destZ;
             public void updateTask()
             {
+            	
             	if(this.squid.getAdult()==0&&this.squid.parent==null) {
             	     //watch for parent
             		if(this.squid.getRNG().nextInt(25)==0) {
@@ -301,50 +304,50 @@ public class EntitySkyray extends EntityFlying
             	        }
             		}
             	}
-            	if(this.squid.getParent()==null) {
-                	Vec3d look = this.squid.getLookVec().normalize();
-                	double lookX=look.x;
-                	double lookY=look.y;
-                	double lookZ=look.z;
-
-                	float f2=this.squid.randomMotionVecY;
-                	float f1=this.squid.randomMotionVecX;
-                	float f3=this.squid.randomMotionVecZ;
-                    //float f = this.squid.getRNG().nextFloat() * ((float)Math.PI/64);
-                    //float f1 = MathHelper.cos(f) * 0.2F;
-                	if(this.squid.getRNG().nextInt(100)==0) {
-                	}
-                    //float f3 = MathHelper.sin(f) * 0.2F;
-
-                    
-                    if(this.squid.getRNG().nextInt(100)==0||!this.squid.hasMovementVector()) {
-                    	float ff = (float) (this.squid.getRNG().nextFloat()*(Math.PI*2F));
-                    	this.destX=MathHelper.sin(ff);
-                    	this.destZ=MathHelper.cos(ff);
-                        f2 = (this.squid.getRNG().nextFloat()-this.squid.getRNG().nextFloat()) * 0.2F;
-                    }
-                	float diffX=(float) (destX-lookX);
-                	float diffZ=(float) (destZ-lookZ);
-                	if(diffX>0.1) {
-                        f1=(float) (lookX+diffX/100);
-                	}
-                	if(diffZ>0.1) {
-                        f3=(float) (lookZ+diffZ/100);
-                	}
-                    if(this.squid.posY>240&&squid.randomMotionVecY>0) {
-                    	f2=-squid.getRNG().nextFloat();
-                    }
-                    if(this.squid.posY<120&&squid.randomMotionVecY<0) {
-                    	f2=squid.getRNG().nextFloat();
-                    }
-                    this.squid.setMovementVector(f1, f2, f3);
-                }else {
-                	float f1=(float) (this.squid.getParent().posX-this.squid.posX)/3;
-                	float f2=(float) (this.squid.getParent().posY-this.squid.posY)/3;
-                	float f3=(float) (this.squid.getParent().posZ-this.squid.posZ)/3;
-                	
-                	this.squid.setMovementVector(f1, f2, f3);
-                }
+	            	if(this.squid.getParent()==null) {
+	                	Vec3d look = this.squid.getLookVec().normalize();
+	                	double lookX=look.x;
+	                	double lookY=look.y;
+	                	double lookZ=look.z;
+	
+	                	float f2=this.squid.randomMotionVecY;
+	                	float f1=this.squid.randomMotionVecX;
+	                	float f3=this.squid.randomMotionVecZ;
+	                    //float f = this.squid.getRNG().nextFloat() * ((float)Math.PI/64);
+	                    //float f1 = MathHelper.cos(f) * 0.2F;
+	                	if(this.squid.getRNG().nextInt(100)==0) {
+	                	}
+	                    //float f3 = MathHelper.sin(f) * 0.2F;
+	
+	                    
+	                    if(this.squid.getRNG().nextInt(30)==0||!this.squid.hasMovementVector()) {
+	                    	float ff = (float) (this.squid.getRNG().nextFloat()*(Math.PI*2F));
+	                    	this.destX=MathHelper.sin(ff);
+	                    	this.destZ=MathHelper.cos(ff);
+	                        f2 = (this.squid.getRNG().nextFloat()-this.squid.getRNG().nextFloat()) * 0.2F;
+	                    }
+	                	float diffX=(float) (destX-lookX);
+	                	float diffZ=(float) (destZ-lookZ);
+	                	if(diffX>0.1) {
+	                        f1=(float) (lookX+diffX/100);
+	                	}
+	                	if(diffZ>0.1) {
+	                        f3=(float) (lookZ+diffZ/100);
+	                	}
+	                    if(this.squid.posY>240&&squid.randomMotionVecY>0) {
+	                    	f2=-squid.getRNG().nextFloat();
+	                    }
+	                    if(this.squid.posY<120&&squid.randomMotionVecY<0) {
+	                    	f2=squid.getRNG().nextFloat();
+	                    }
+	                    this.squid.setMovementVector(f1, f2, f3);
+	                }else {
+	                	float f1=(float) (this.squid.getParent().posX-this.squid.posX)/3;
+	                	float f2=(float) (this.squid.getParent().posY-this.squid.posY)/3;
+	                	float f3=(float) (this.squid.getParent().posZ-this.squid.posZ)/3;
+	                	
+	                	this.squid.setMovementVector(f1, f2, f3);
+	                }
             	}
         }
     
