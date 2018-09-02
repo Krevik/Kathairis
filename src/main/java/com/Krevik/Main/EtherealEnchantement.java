@@ -18,16 +18,40 @@ public class EtherealEnchantement extends Enchantment {
         return 1;
     }
 
+    @Override
+    public int getMaxEnchantability(int enchantmentLevel) {
+        return this.getMinEnchantability(enchantmentLevel) + 15;
+    }
+    
     public boolean canApply(ItemStack stack)
     {
         return canApplyAtEnchantingTable(stack);
     }
+    
     public boolean canApplyAtEnchantingTable(ItemStack stack)
     {
         return stack.getItem().canApplyAtEnchantingTable(stack, this);
     }
+
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
-        return this.getMinEnchantability(enchantmentLevel) + 15;
+    public int getMinLevel()
+    {
+        return 1;
+    }
+
+    @Override
+    public int getMaxLevel()
+    {
+        return 1;
+    }
+    
+    protected boolean canApplyTogether(Enchantment ench)
+    {
+        return this != ench;
+    }
+    
+    public boolean isAllowedOnBooks()
+    {
+        return true;
     }
 }
