@@ -70,6 +70,9 @@ public class WorldGenRedwoodTree extends WorldGenAbstractBasicMysticTree{
 	private IBlockState getProperStateForHeight(int actualHeight,int maxHeight) {
 		IBlockState result = KCore.Redwood_log_full.getDefaultState();
 		int stages=7;
+		if(actualHeight==0) {
+			actualHeight=1;
+		}
 		float steps = maxHeight/stages;
 		float actualStage=(actualHeight/steps);
 		if(actualStage<1) result=KCore.Redwood_log_full.getDefaultState();
