@@ -442,6 +442,11 @@ public class CommonProxy {
         Blocks.FIRE.setFireInfo(KCore.MysticLeaves, 30, 60);
         Blocks.FIRE.setFireInfo(KCore.ShinyLeaves, 30, 60);
         Blocks.FIRE.setFireInfo(KCore.SoulLeaves, 30, 60);
+        Blocks.FIRE.setFireInfo(KCore.JadeVine_bottom, 30, 60);
+        Blocks.FIRE.setFireInfo(KCore.JadeVine_empty, 30, 60);
+        Blocks.FIRE.setFireInfo(KCore.JadeVine_mid, 30, 60);
+        Blocks.FIRE.setFireInfo(KCore.JadeVine_top, 30, 60);
+
 	}
 
 
