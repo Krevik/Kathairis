@@ -36,27 +36,27 @@ public class BlockRedwoodLog extends BlockBaseLog
     protected static final AxisAlignedBB[] FULL_SIZES_AABB = new AxisAlignedBB[] {
     		new AxisAlignedBB(0D, 0.0D, 0D, 1D, 1D, 1D)};
     protected static final AxisAlignedBB[] SIZES_6_AABB = new AxisAlignedBB[] {
-    		new AxisAlignedBB(0D, 0.0625D, 0.0625D, 0.9375D, 0.9375D, 1D),
+    		new AxisAlignedBB(0D, 0.0625D, 0.0625D, 1.0D, 0.9375D, 0.9375D),
     		new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1D, 0.9375D),
     		new AxisAlignedBB(0.0625D, 0.0625D, 0D, 0.9375D, 0.9375D, 1D)};
     protected static final AxisAlignedBB[] SIZES_5_AABB = new AxisAlignedBB[] {
-    		new AxisAlignedBB(0D, 0.125D, 0.125D, 0.875D, 0.875D, 1D),
+    		new AxisAlignedBB(0D, 0.125D, 0.125D, 1D, 0.875D, 0.875D),
     		new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1D, 0.875D),
     		new AxisAlignedBB(0.125D, 0.125D, 0D, 0.875D, 0.875D, 1D)};
     protected static final AxisAlignedBB[] SIZES_4_AABB = new AxisAlignedBB[] {
-    		new AxisAlignedBB(0D, 0.1875D, 0.1875D, 0.8125D, 0.8125D, 1D),
+    		new AxisAlignedBB(0D, 0.1875D, 0.1875D, 1D, 0.8125D, 0.8125D),
     		new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 1D, 0.8125D),
     		new AxisAlignedBB(0.1875D, 0.1875D, 0D, 0.8125D, 0.8125D, 1D)};
     protected static final AxisAlignedBB[] SIZES_3_AABB = new AxisAlignedBB[] {
-    		new AxisAlignedBB(0D, 0.25D, 0.25D, 0.75D, 0.75D, 1D),
+    		new AxisAlignedBB(0D, 0.25D, 0.25D, 1D, 0.75D, 0.75D),
     		new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1D, 0.75D),
     		new AxisAlignedBB(0.25D, 0.25D, 0D, 0.75D, 0.75D, 1D)};
     protected static final AxisAlignedBB[] SIZES_2_AABB = new AxisAlignedBB[] {
-    		new AxisAlignedBB(0D, 0.3125D, 0.3125D, 0.6875D, 0.6875D, 1D),
+    		new AxisAlignedBB(0D, 0.3125D, 0.3125D, 1D, 0.6875D, 0.6875D),
     		new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1D, 0.6875D),
     		new AxisAlignedBB(0.3125D, 0.3125D, 0D, 0.6875D, 0.6875D, 1D)};
     protected static final AxisAlignedBB[] SIZES_1_AABB = new AxisAlignedBB[] {
-    		new AxisAlignedBB(0D, 0.375D, 0.375D, 0.625D, 0.625D, 1D),
+    		new AxisAlignedBB(0D, 0.375D, 0.375D, 1D, 0.625D, 0.625D),
     		new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1D, 0.625D),
     		new AxisAlignedBB(0.375D, 0.375D, 0D, 0.625D, 0.625D, 1D)};
     
