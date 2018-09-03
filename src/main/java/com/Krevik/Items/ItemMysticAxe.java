@@ -29,7 +29,10 @@ public class ItemMysticAxe extends MysticTool
     		KCore.ShinyLogBark,KCore.SoulWoodStairs,KCore.MysticWoodHalfSlab,KCore.MysticWoodDoubleSlab,KCore.ShinyWoodHalfSlab,
     		KCore.ShinyWoodDoubleSlab,KCore.SoulWoodHalfSlab,KCore.SoulWoodDoubleSlab,KCore.MysticLogBark,KCore.SoulLogBark,
     		KCore.Stripped_Mystic_Log,KCore.Stripped_Shiny_Log,KCore.Stripped_Soul_Log,KCore.Mystic_Wood_Trap_Door,KCore.Shiny_Wood_Trap_Door,
-    		KCore.Soul_Wood_Trap_Door,KCore.Mystic_Wood_Door,KCore.Shiny_Wood_Door,KCore.Soul_Wood_Door);
+    		KCore.Soul_Wood_Trap_Door,KCore.Mystic_Wood_Door,KCore.Shiny_Wood_Door,KCore.Soul_Wood_Door,KCore.Redwood_log_full,
+    		KCore.Redwood_planks,KCore.Redwood_log_size_6,KCore.Redwood_log_size_5,KCore.Redwood_log_size_4,KCore.Redwood_log_size_3
+    		,KCore.Redwood_log_size_2,KCore.Redwood_log_size_1
+    		);
     private static final float[] ATTACK_DAMAGES = new float[] {6.0F, 8.0F, 8.0F, 8.0F, 6.0F};
     private static final float[] ATTACK_SPEEDS = new float[] { -3.2F, -3.2F, -3.1F, -3.0F, -3.0F};
 

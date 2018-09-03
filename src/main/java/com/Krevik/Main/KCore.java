@@ -45,6 +45,7 @@ import com.Krevik.Blocks.BlockMysticWoodTrapdoor;
 import com.Krevik.Blocks.BlockMythicStonePillar;
 import com.Krevik.Blocks.BlockMythicStoneStandingSign;
 import com.Krevik.Blocks.BlockMythicStoneWallSign;
+import com.Krevik.Blocks.BlockRedwoodLog;
 import com.Krevik.Blocks.BlockRefinedCloud;
 import com.Krevik.Blocks.BlockSwampGas;
 import com.Krevik.Blocks.BlockTurtleShellPlate;
@@ -72,7 +73,6 @@ import com.Krevik.Recipes.RecipeHandler;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -80,7 +80,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -477,6 +476,32 @@ public class KCore {
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Gecko_Eggs)
     public static final BlockGeckoEggs Gecko_Eggs = new BlockGeckoEggs(Ref.Gecko_Eggs);
+    
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_full)
+    public static final BlockRedwoodLog Redwood_log_full = new BlockRedwoodLog(Ref.Redwood_log_full);
+    
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_size_6)
+    public static final BlockRedwoodLog Redwood_log_size_6 = new BlockRedwoodLog(Ref.Redwood_log_size_6);
+    
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_size_5)
+    public static final BlockRedwoodLog Redwood_log_size_5 = new BlockRedwoodLog(Ref.Redwood_log_size_5);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_size_4)
+   	public static final BlockRedwoodLog Redwood_log_size_4 = new BlockRedwoodLog(Ref.Redwood_log_size_4);
+    
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_size_3)
+    public static final BlockRedwoodLog Redwood_log_size_3 = new BlockRedwoodLog(Ref.Redwood_log_size_3);
+    
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_size_2)
+    public static final BlockRedwoodLog Redwood_log_size_2 = new BlockRedwoodLog(Ref.Redwood_log_size_2);
+    
+   	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_size_1)
+    public static final BlockRedwoodLog Redwood_log_size_1 = new BlockRedwoodLog(Ref.Redwood_log_size_1);
+    
+   @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_planks)
+   public static final BlockMysticPlanks Redwood_planks = new BlockMysticPlanks(Ref.Redwood_planks);
+    
+   
     
     //@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Hell_Plant)
    //public static final BlockMysticBush Hell_Plant = (BlockMysticBush) new BlockMysticBush(Ref.Hell_Plant,true,false).setLightLevel(0.5F);
@@ -993,6 +1018,14 @@ public class KCore {
         public static final String Solis_Crystal="solis_crystal";
         public static final String Gecko_Eggs="gecko_eggs";
         public static final String Nectar_bowl="nectar_bowl";
+        public static final String Redwood_log_full="redwood_log_full";
+        public static final String Redwood_log_size_6="redwood_log_size_6";
+        public static final String Redwood_log_size_5="redwood_log_size_5";
+        public static final String Redwood_log_size_4="redwood_log_size_4";
+        public static final String Redwood_log_size_3="redwood_log_size_3";
+        public static final String Redwood_log_size_2="redwood_log_size_2";
+        public static final String Redwood_log_size_1="redwood_log_size_1";
+        public static final String Redwood_planks="redwood_planks";
     }
     
 

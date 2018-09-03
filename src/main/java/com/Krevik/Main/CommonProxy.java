@@ -248,7 +248,15 @@ public class CommonProxy {
 					KCore.Refined_Cloud_Yellow,
 					KCore.Refined_Cloud_Blue,
 					KCore.Block_Iron_Gold,
-					KCore.Gecko_Eggs
+					KCore.Gecko_Eggs,
+					KCore.Redwood_log_full,
+					KCore.Redwood_planks,
+					KCore.Redwood_log_size_6,
+					KCore.Redwood_log_size_5,
+					KCore.Redwood_log_size_4,
+					KCore.Redwood_log_size_3,
+					KCore.Redwood_log_size_2,
+					KCore.Redwood_log_size_1
 					//KCore.Hell_Plant
 					//KCore.Butterfly_Analysing_Table
 
@@ -376,7 +384,15 @@ public class CommonProxy {
 					new ItemBlock(KCore.Refined_Cloud_Blue),
 					new ItemBlock(KCore.Refined_Cloud_Yellow),
 					new ItemBlock(KCore.Block_Iron_Gold),
-					new ItemBlock(KCore.Gecko_Eggs)
+					new ItemBlock(KCore.Gecko_Eggs),
+					new ItemBlock(KCore.Redwood_log_full),
+					new ItemBlock(KCore.Redwood_planks),
+					new ItemBlock(KCore.Redwood_log_size_6),
+					new ItemBlock(KCore.Redwood_log_size_5),
+					new ItemBlock(KCore.Redwood_log_size_4),
+					new ItemBlock(KCore.Redwood_log_size_3),
+					new ItemBlock(KCore.Redwood_log_size_2),
+					new ItemBlock(KCore.Redwood_log_size_1)
 					//new ItemBlock(KCore.Hell_Plant)
 					//new ItemBlock(KCore.Butterfly_Analysing_Table)
 					};
