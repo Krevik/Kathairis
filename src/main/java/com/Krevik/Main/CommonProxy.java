@@ -16,6 +16,7 @@ import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.audio.MusicTicker;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -92,8 +93,8 @@ public class CommonProxy {
     	GameRegistry.registerTileEntity(TileEntityCharger.class, new ResourceLocation("mystic:charger").toString());
     	GameRegistry.registerTileEntity(TileEntityKether.class, "mystic:entityDimKether");
     	GameRegistry.registerTileEntity(TileEntityMythicStoneSign.class, "mystic:mythicstonesign");
-
     	NetworkRegistry.INSTANCE.registerGuiHandler(KCore.instance, new GuiHandler()); 
+    	this.initFlamables();
 
 
     	//GameRegistry.registerWorldGenerator(new WorldGeneratorHandler(), 10);
@@ -411,7 +412,38 @@ public class CommonProxy {
 		
 	}
 
+	public void initFlamables() {
+		Blocks.FIRE.setFireInfo(KCore.MysticPlanks, 5, 20);
+		Blocks.FIRE.setFireInfo(KCore.ShinyPlanks, 5, 20);
+		Blocks.FIRE.setFireInfo(KCore.SoulPlanks, 5, 20);
+		Blocks.FIRE.setFireInfo(KCore.Redwood_planks, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.MysticWoodDoubleSlab, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.ShinyWoodDoubleSlab, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.SoulWoodDoubleSlab, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.MysticWoodHalfSlab, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.SoulWoodHalfSlab, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.ShinyWoodHalfSlab, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.MysticWoodFenceGate, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.ShinyWoodFenceGate, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.MysticWoodFence, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.ShinyWoodFence, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.MysticWoodStairs, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.ShinyWoodStairs, 5, 20);
+        Blocks.FIRE.setFireInfo(KCore.MysticLog, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.ShinyLog, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.SoulLog, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.Redwood_log_full, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.Redwood_log_size_6, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.Redwood_log_size_5, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.Redwood_log_size_4, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.Redwood_log_size_3, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.Redwood_log_size_2, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.Redwood_log_size_1, 5, 5);
+        Blocks.FIRE.setFireInfo(KCore.MysticLeaves, 30, 60);
+        Blocks.FIRE.setFireInfo(KCore.ShinyLeaves, 30, 60);
+        Blocks.FIRE.setFireInfo(KCore.SoulLeaves, 30, 60);
 
+	}
 
 
 	public void init() {
