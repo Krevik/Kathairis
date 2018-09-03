@@ -26,7 +26,7 @@ public abstract class WorldGenAbstractBasicMysticTree extends WorldGenAbstractTr
     {
         Material material = blockType.getDefaultState().getMaterial();
         return material == Material.AIR || material == Material.LEAVES || blockType == Blocks.GRASS || blockType == Blocks.DIRT || blockType == Blocks.LOG || blockType == Blocks.LOG2 || blockType == Blocks.SAPLING || blockType == Blocks.VINE ||
-        		blockType == KCore.CorruptedDirt || blockType == KCore.CorruptedGrass || blockType == KCore.MysticLog;
+        		blockType == KCore.CorruptedDirt || blockType == KCore.CorruptedGrass || blockType == KCore.MysticLog || blockType==KCore.ForgottenSand;
     }
 
     public void generateSaplings(World worldIn, Random random, BlockPos pos)

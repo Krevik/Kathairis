@@ -5,12 +5,12 @@ import java.util.Random;
 import com.Krevik.Entities.EntityBigTurtle;
 import com.Krevik.Entities.EntityCamel;
 import com.Krevik.Entities.EntityPoisonousScorpion;
-import com.Krevik.Gens.WorldGenFloatingIslands;
 import com.Krevik.Gens.WorldGenMovingSand;
 import com.Krevik.Gens.WorldGenMysticDesertCactus;
 import com.Krevik.Gens.WorldGenSingleGen;
 import com.Krevik.Gens.Desert.WorldGenBigRockMushroom;
 import com.Krevik.Gens.Desert.WorldGenOldLibrary;
+import com.Krevik.Gens.Desert.WorldGenRedwoodTree;
 import com.Krevik.Gens.Desert.WorldGenRockMushroom;
 import com.Krevik.Gens.Desert.WorldGenWeatheredCaveCustom;
 import com.Krevik.Main.KCore;
@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeMysticDesert extends KetherBiome
@@ -33,6 +34,7 @@ public class BiomeMysticDesert extends KetherBiome
     protected static WorldGenOldLibrary OLDLIBRARY = new WorldGenOldLibrary();
     protected static WorldGenMysticDesertCactus CACTUS = new WorldGenMysticDesertCactus();
     protected static WorldGenSingleGen SINGLEGENDESERT = new WorldGenSingleGen(1);
+    protected static WorldGenRedwoodTree REDWOODTREE = new WorldGenRedwoodTree();
     
     public BiomeMysticDesert(Biome.BiomeProperties properties)
     {
@@ -70,9 +72,19 @@ public class BiomeMysticDesert extends KetherBiome
     		return CACTUS;
     	}
     }
+    
+    public WorldGenAbstractTree getRandomTreeFeature(Random rand)
+    {
+    	return REDWOODTREE;
+    }
 
     public void decorate(World world, Random random, BlockPos pos)
     {
+        if(random.nextInt(8)==0){
+			int rx = pos.getX() + random.nextInt(16) + 8;
+			int rz = pos.getZ() + random.nextInt(16) + 8;
+    		REDWOODTREE.generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+        }
         
         if(random.nextInt(3)==0){
         	if(random.nextInt(4)==1) {

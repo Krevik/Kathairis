@@ -143,7 +143,7 @@ public class FunctionHelper {
     	boolean is=false;
     	IBlockState state = world.getBlockState(pos);
     	Block block = state.getBlock();
-    	if((block==KCore.CorruptedDirt||block==KCore.CorruptedGrass||block==KCore.ForgottenSand||block==KCore.WeatheredRock)) {
+    	if((block==KCore.CorruptedDirt||block==KCore.CorruptedGrass||block==KCore.ForgottenSand)) {
     		if(world.isAirBlock(pos.up())) {
     			is=true;
     		}
