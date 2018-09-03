@@ -43,7 +43,7 @@ public class RenderMysticSky extends IRenderHandler {
     	
     }
     
-    private int[] constantLight = new int[1501];
+    private int[] constantLight = new int[3000];
     
     private ArrayList<FallingStar> fallingStarsList = new ArrayList();
 
@@ -76,7 +76,7 @@ public class RenderMysticSky extends IRenderHandler {
         
         //stars
         if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
-		    		for(int x=0;x<1501;x++) {
+		    		for(int x=0;x<3000;x++) {
 		    			if(constantLight[x]>=255) {
 		    				constantLight[x]-=helper.getRandomInteger(0, 8);
 		    			}else if(constantLight[x]<=0) {
@@ -88,7 +88,7 @@ public class RenderMysticSky extends IRenderHandler {
 		        GlStateManager.pushMatrix();
 		        Random random = new Random(10842L);
 		        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		        for (int i = 0; i < 1500; ++i)
+		        for (int i = 0; i < 3000; ++i)
 		        {
 		            double d0 = (double)(random.nextFloat() * 2.0F - 1.0F);
 		            double d1 = (double)(random.nextFloat() * 2.0F - 1.0F);
