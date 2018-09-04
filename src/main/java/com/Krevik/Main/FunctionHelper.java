@@ -43,21 +43,6 @@ public class FunctionHelper {
     	return tmp;
     }
     
-    public void updateJellyFishMotion(Entity entity) {
-    	if(!entity.world.isRemote) {
-        	BlockPos Destination = this.getRandomDestination(entity,10,10);
-        	if(!entity.world.isAirBlock(Destination)) {
-        		Destination = this.getRandomDestination(entity,10,10);
-        	}
-        	if(entity.world.isAirBlock(Destination)) {
-            	entity.motionX=(Destination.getX()-entity.posX)/20;
-            	entity.motionY=(Destination.getY()-entity.posY)/1000;
-            	entity.motionZ=(Destination.getZ()-entity.posZ)/20;
-        	}
-    	}
-
-    }
-    
     public void JellyFishFlee(Entity entity) {
     	BlockPos Destination = this.getRandomDestination(entity,15,15);
     	if(!entity.world.isAirBlock(Destination)) {
