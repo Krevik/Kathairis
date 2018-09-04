@@ -57,8 +57,7 @@ public class EntityJellyFish extends EntityMob
     {
         return 2;
     }
-    EntityJellyFish jellyfish=null;
-    EntityPlayer target=null;
+    public EntityJellyFish jellyfish=null;
     public void onUpdate()
     {
         super.onUpdate();
@@ -231,9 +230,10 @@ public class EntityJellyFish extends EntityMob
         				this.parentEntity.motionX=(ep.posX-this.parentEntity.posX)/3;
         				this.parentEntity.motionY=(ep.posY-this.parentEntity.posY)/3;
         				this.parentEntity.motionZ=(ep.posZ-this.parentEntity.posZ)/3;
-
+        				this.parentEntity.jellyfish=list.get(0);
         			}else {
         				this.parentEntity.setAttackTarget(null);
+        				this.parentEntity.jellyfish=null;
         			}
         		}
         	}
