@@ -5,13 +5,17 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIAttackTarget;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
-import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
+import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -23,21 +27,31 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityJellyFish extends EntityFlying implements IMob
+public class EntityJellyFish extends EntityMob
 {   
 	protected Random random = new Random();
 	
 	private AxisAlignedBB bb = new AxisAlignedBB(0.3,1,0.3,0.7,1.3,0.7);
-	
+    private float randomMotionVecX;
+    private float randomMotionVecY;
+    private float randomMotionVecZ;
     public EntityJellyFish(World worldIn)
     {
         super(worldIn);
         this.experienceValue = 30;
         this.setEntityBoundingBox(bb);
+        this.moveHelper = new EntityJellyFish.JellyFishMoveHelper(this);
+        this.setNoGravity(true);
     }
-
     protected void initEntityAI()
     {
+    	super.initEntityAI();
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(4, new EntityAIWanderAvoidWaterFlying(this, 1.0D));
+        this.targetTasks.addTask(1, new EntityAIAttackTarget(this, this.getAttackTarget()));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        //this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
+
     }
     public int getMaxSpawnedInChunk()
     {
@@ -52,43 +66,29 @@ public class EntityJellyFish extends EntityFlying implements IMob
         {
             this.setDead();
         }   
-        List<EntityJellyFish> e = this.world.getEntitiesWithinAABB(EntityJellyFish.class, new AxisAlignedBB(posX - 5, posY - 5, posZ - 5, posX + 5, posY + 5, posZ + 5));
+        if(!this.world.isRemote) {
+	        this.fallDistance=0;
+	        if(this.hasMovementVector()&&this.getAttackTarget()==null) {
+	        	this.motionX=this.randomMotionVecX/5;
+	        	this.motionY=this.randomMotionVecY/5;
+	        	this.motionZ=this.randomMotionVecZ/5;
+	        }
+        }
+    }
+    
+    
+    
+    public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn)
+    {
+        this.randomMotionVecX = randomMotionVecXIn;
+        this.randomMotionVecY = randomMotionVecYIn;
+        this.randomMotionVecZ = randomMotionVecZIn;
+    }
 
-        if (!this.world.isRemote) {
-        if(e.size()>1) {
-            target=getNearestPlayer();
-        	if(target!=null) {
-        		if(!target.isCreative()) {
-	        		this.setAttackTarget(target);
-	        		if(random.nextInt(20)==1) {
-	        			this.motionX=(target.posX-this.posX)/10;
-	        			this.motionY=(target.posY-this.posY)/10;
-	        			this.motionZ=(target.posZ-this.posZ)/10;
-	        		}
-	        		if(this.getDistance(target)<1.5) {
-	        					target.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
-	        		}
-        		}
-        	}
-            
-        }else {
-            if(random.nextInt(100)==1) {
-            	KCore.functionHelper.updateJellyFishMotion(this);
-            }
-        }
-        }
-        
+    public boolean hasMovementVector()
+    {
+        return this.randomMotionVecX != 0.0F || this.randomMotionVecY != 0.0F || this.randomMotionVecZ != 0.0F;
     }
-    
-    @Nullable
-    private EntityPlayer getNearestPlayer() {
-    	if(this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 30, false)!=null) {
-    		return this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 30, false);
-    	}else {
-    		return null;
-    	}
-    }
-    
 
     /**
      * Called when the entity is attacked.
@@ -119,7 +119,11 @@ public class EntityJellyFish extends EntityFlying implements IMob
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.6000000059604645D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.40000000298023224D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
     }
 
     public SoundCategory getSoundCategory()
@@ -189,5 +193,50 @@ public class EntityJellyFish extends EntityFlying implements IMob
     public float getEyeHeight()
     {
         return 2.6F;
+    }
+    static class JellyFishMoveHelper extends EntityMoveHelper
+    {
+        private final EntityJellyFish parentEntity;
+        private int courseChangeCooldown;
+
+        public JellyFishMoveHelper(EntityJellyFish ghast)
+        {
+            super(ghast);
+            this.parentEntity = ghast;
+        }
+
+        public void onUpdateMoveHelper()
+        {
+        	if(!this.parentEntity.hasMovementVector()||this.parentEntity.getRNG().nextInt(40)==0) {
+        		this.parentEntity.randomMotionVecX=this.parentEntity.getRNG().nextFloat()-this.parentEntity.getRNG().nextFloat();
+        		this.parentEntity.randomMotionVecX=this.parentEntity.getRNG().nextFloat()-this.parentEntity.getRNG().nextFloat();
+        		this.parentEntity.randomMotionVecY=this.parentEntity.getRNG().nextFloat()-this.parentEntity.getRNG().nextFloat();
+        		if(this.parentEntity.posY < this.parentEntity.world.getHeight(this.parentEntity.getPosition()).getY()+1&&this.parentEntity.randomMotionVecY<0) {
+        			this.parentEntity.randomMotionVecY=-this.parentEntity.randomMotionVecY;
+        		}
+        		if(this.parentEntity.randomMotionVecY>0&&this.parentEntity.posY>220) {
+        			this.parentEntity.randomMotionVecY=-this.parentEntity.randomMotionVecY;
+        		}
+        		
+        	}
+        	EntityPlayer ep = this.parentEntity.world.getNearestAttackablePlayer(this.parentEntity.getPosition(), 10, 10);
+        	if(ep!=null) {
+        		if(ep.isDead) {
+        			this.parentEntity.setAttackTarget(null);
+        		}
+        		if(ep!=null) {
+        			List<EntityJellyFish> list = this.parentEntity.world.getEntitiesWithinAABB(EntityJellyFish.class, this.parentEntity.getEntityBoundingBox().grow(10));
+        			if(list.size()>1) {
+        				this.parentEntity.setAttackTarget(ep);
+        				this.parentEntity.motionX=(ep.posX-this.parentEntity.posX)/3;
+        				this.parentEntity.motionY=(ep.posY-this.parentEntity.posY)/3;
+        				this.parentEntity.motionZ=(ep.posZ-this.parentEntity.posZ)/3;
+
+        			}else {
+        				this.parentEntity.setAttackTarget(null);
+        			}
+        		}
+        	}
+        }
     }
 }
