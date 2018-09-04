@@ -107,6 +107,9 @@ public class ItemMysticSword extends ItemSword
         	target.addPotionEffect(new PotionEffect(Potion.getPotionById(2),50,1));
         	target.addPotionEffect(new PotionEffect(Potion.getPotionById(27),50,1));
         }
+    	if(stack.getItem().equals(KCore.Magnethium_Sword)) {
+    		target.addPotionEffect(new PotionEffect(Potion.getPotionById(25),25,1));
+    	}
         return true;
     }
 

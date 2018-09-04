@@ -13,6 +13,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -22,6 +24,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -37,6 +40,20 @@ public class ItemMysticShovel extends MysticTool
     public ItemMysticShovel(String Name,CreativeTabs tab,Item.ToolMaterial material)
     {
         super(Name,tab,1.5F, -3.0F, material, EFFECTIVE_ON);
+    }
+    
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
+    {
+    	if(!worldIn.isRemote) {
+        	if(stack.getItem().equals(KCore.Magnethium_Shovel)) {
+	        	EntityLivingBase player = entityLiving;
+	        	List<EntityItem> list = worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(player.posX-5,player.posY-5,player.posZ-5,player.posX+5,player.posY+5,player.posZ+5));
+	        	for(int c=0;c<list.size();c++) {
+	        		list.get(c).setNoGravity(true);
+	        	}
+        	}
+    	}
+    	return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
     }
 
     /**

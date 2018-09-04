@@ -86,6 +86,20 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Axe"),new ResourceLocation("Axes"),new ItemStack(KCore.CloudAxe),"XX ", "XC ", " C ", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.CloudPickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Shovel"),new ResourceLocation("Shovels"),new ItemStack(KCore.CloudShovel),"X", "C", "C", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Sword1"),new ResourceLocation("Swords"),new ItemStack(KCore.Magnethium_Sword)," X ", " X ", " C ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Sword2"),new ResourceLocation("Swords"),new ItemStack(KCore.Magnethium_Sword),"X  ", "X  ", "C  ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Sword3"),new ResourceLocation("Swords"),new ItemStack(KCore.Magnethium_Sword),"  X", "  X", "  C", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Axe"),new ResourceLocation("Axes"),new ItemStack(KCore.Magnethium_Axe),"XX ", "XC ", " C ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.Magnethium_Pickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Hoe1"),new ResourceLocation("Hoes"),new ItemStack(KCore.Magnethium_Hoe)," XX", " C ", " C ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Hoe2"),new ResourceLocation("Hoes"),new ItemStack(KCore.Magnethium_Hoe),"XX ", " C ", " C ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Hoe3"),new ResourceLocation("Hoes"),new ItemStack(KCore.Magnethium_Hoe),"XX ", "C  ", "C  ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Hoe4"),new ResourceLocation("Hoes"),new ItemStack(KCore.Magnethium_Hoe)," XX", "  C", "  C", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Shovel1"),new ResourceLocation("Shovels"),new ItemStack(KCore.Magnethium_Shovel)," X ", " C ", " C ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Shovel2"),new ResourceLocation("Shovels"),new ItemStack(KCore.Magnethium_Shovel),"X  ", "C  ", "C  ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Shovel3"),new ResourceLocation("Shovels"),new ItemStack(KCore.Magnethium_Shovel),"  X", "  C", "  C", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
+		
 	}
 	private static void addArmorSets() {
 

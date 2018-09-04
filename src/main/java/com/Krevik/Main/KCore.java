@@ -52,7 +52,7 @@ import com.Krevik.Blocks.BlockTurtleShellPlate;
 import com.Krevik.Commands.SandstormCommand;
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Dimension.WorldProviderMystic;
-import com.Krevik.Events.KetherEventsHandler;
+import com.Krevik.Events.KathairisEventsHandler;
 import com.Krevik.Items.BaseItem;
 import com.Krevik.Items.BaseWand;
 import com.Krevik.Items.ItemGlassJar;
@@ -130,7 +130,8 @@ public class KCore {
 	public static Item.ToolMaterial CLOUD = EnumHelper.addToolMaterial("cloud", 3, 250, 1F, 2.5F, 1);
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21);
 	public static Item.ToolMaterial LIGHT = EnumHelper.addToolMaterial("light", 1, 1000, 0.5F, 0.5F, 1);
-	
+	public static Item.ToolMaterial MAGNETHIUM = EnumHelper.addToolMaterial("magnethium", 3, 800, 6F, 3F, 20);
+
 
 	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticPortal)
     public static final BlockMysticPortal MysticPortal = (BlockMysticPortal) new BlockMysticPortal(Ref.MysticPortal).setLightLevel(1F);
@@ -776,6 +777,22 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Nectar_bowl)
 	public static final ItemMysticFood Nectar_Bowl = new ItemMysticFood(Ref.Nectar_bowl, CreativeTabsMystic.food,4,0.4F,false);
     
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Axe)
+ 	public static final ItemMysticAxe Magnethium_Axe = new ItemMysticAxe(Ref.Magnethium_Axe, CreativeTabsMystic.tools,KCore.MAGNETHIUM);
+     
+     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Pickaxe)
+ 	public static final ItemMysticPickaxe Magnethium_Pickaxe = new ItemMysticPickaxe(Ref.Magnethium_Pickaxe, CreativeTabsMystic.tools,KCore.MAGNETHIUM);
+     
+     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Shovel)
+ 	public static final ItemMysticShovel Magnethium_Shovel = new ItemMysticShovel(Ref.Magnethium_Shovel, CreativeTabsMystic.tools,KCore.MAGNETHIUM);
+     
+     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Hoe)
+ 	public static final ItemMysticHoe Magnethium_Hoe = new ItemMysticHoe(Ref.Magnethium_Hoe, CreativeTabsMystic.tools,KCore.MAGNETHIUM);
+     
+     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Sword)
+ 	public static final ItemMysticSword Magnethium_Sword = new ItemMysticSword(Ref.Magnethium_Sword, CreativeTabsMystic.weapons,KCore.MAGNETHIUM);
+     
+    
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         regHelper.initModels();
@@ -810,7 +827,7 @@ public class KCore {
     public void postInit(FMLPostInitializationEvent e) {
         proxy.postInit(e);
         KetherDataStorage.initialise();
-        MinecraftForge.EVENT_BUS.register(KetherEventsHandler.class);
+        MinecraftForge.EVENT_BUS.register(KathairisEventsHandler.class);
     }
 	
 	
@@ -1026,6 +1043,11 @@ public class KCore {
         public static final String Redwood_log_size_2="redwood_log_size_2";
         public static final String Redwood_log_size_1="redwood_log_size_1";
         public static final String Redwood_planks="redwood_planks";
+        public static final String Magnethium_Axe="magnethium_axe";
+        public static final String Magnethium_Pickaxe="magnethium_pickaxe";
+        public static final String Magnethium_Shovel="magnethium_shovel";
+        public static final String Magnethium_Hoe="magnethium_hoe";
+        public static final String Magnethium_Sword="magnethium_sword";
     }
     
 

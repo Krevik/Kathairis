@@ -1,20 +1,26 @@
 package com.Krevik.Events;
 
+import java.util.List;
+
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Items.ItemMysticArmor;
 import com.Krevik.Main.KCore;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDustStormClient;
 
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
@@ -22,7 +28,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class KetherEventsHandler {
+public class KathairisEventsHandler {
 	
 
 	@SubscribeEvent
@@ -134,13 +140,68 @@ public class KetherEventsHandler {
 	}
 	
 	
-	@SubscribeEvent
-	public void onRenderPre(RenderGameOverlayEvent.Pre event) {
+	/*@SubscribeEvent
+	public static void onRenderPre(RenderGameOverlayEvent.Pre event) {
 
 	}
 	@SubscribeEvent
-	public void onRenderPost(RenderGameOverlayEvent.Post event){
+	public static void onRenderPost(RenderGameOverlayEvent.Post event){
 
+	}*/
+	
+	
+	@SubscribeEvent
+	public static void blockBreakEvent(BlockEvent.HarvestDropsEvent event) {
+		EntityPlayer breaker = event.getHarvester();
+			ItemStack heldStack = breaker.getHeldItemMainhand();
+			Item heldItem = heldStack.getItem();
+			if(heldItem.equals(KCore.Magnethium_Axe)) {
+				event.setDropChance(0);
+				List<ItemStack> items=event.getDrops();
+				for(int c=0;c<items.size();c++) {
+					ItemStack itemStack=items.get(c);
+					EntityItem currentItem=new EntityItem(breaker.world,event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,itemStack);
+					if(!breaker.world.isRemote) {
+						breaker.world.spawnEntity(currentItem);
+					}
+	        		currentItem.motionX=breaker.posX-currentItem.posX;
+	        		currentItem.motionY=breaker.posY-currentItem.posY;
+	        		currentItem.motionZ=breaker.posZ-currentItem.posZ;
+				}
+			}
+			if(heldItem.equals(KCore.Magnethium_Pickaxe)) {
+				event.setDropChance(0);
+				List<ItemStack> items=event.getDrops();
+				for(int c=0;c<items.size();c++) {
+					ItemStack itemStack=items.get(c);
+					EntityItem currentItem=new EntityItem(breaker.world,event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,itemStack);
+	        		currentItem.setNoGravity(true);
+	        		currentItem.motionX=0;
+	        		currentItem.motionY=-0.01;
+	        		currentItem.motionZ=0;
+					if(!breaker.world.isRemote) {
+						breaker.world.spawnEntity(currentItem);
+					}
+
+				}
+			}
+			if(heldItem.equals(KCore.Magnethium_Shovel)) {
+				event.setDropChance(0);
+				List<ItemStack> items=event.getDrops();
+				for(int c=0;c<items.size();c++) {
+					ItemStack itemStack=items.get(c);
+					EntityItem currentItem=new EntityItem(breaker.world,event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,itemStack);
+	        		currentItem.setNoGravity(true);
+	        		currentItem.motionX=0;
+	        		currentItem.motionY=0;
+	        		currentItem.motionZ=0;
+					if(!breaker.world.isRemote) {
+						breaker.world.spawnEntity(currentItem);
+					}
+
+				}
+			}
+			
 	}
 	
 }

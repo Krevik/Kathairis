@@ -92,6 +92,12 @@ item.magnethium_shard.name=Magnethium Shard
 item.ingot_iron_gold.name=Iron Gold Ingot
 item.ritual_blade.name=Ritual Blade
 item.solis_crystal.name=Solis Crystal
+item.nectar_bowl.name=Nectar Bowl
+item.magnethium_axe.name=Magnethium Axe
+item.magnethium_pickaxe.name=Magnethium Pickaxe
+item.magnethium_shovel.name=Magnethium Shovel
+item.magnethium_hoe.name=Magnethium Hoe
+item.magnethium_sword.name=Magnethium Sword
 
 
 tile.corrupteddirt.name=Mystic Dirt
@@ -209,6 +215,14 @@ tile.refined_cloud_yellow.name=Yellow Refined Cloud
 tile.refined_cloud_blue.name=Blue Refined Cloud
 tile.block_iron_gold.name=Iron Gold Block
 tile.gecko_eggs.name=Gecko Eggs
+tile.redwood_planks.name=Redwood Planks
+tile.redwood_log_full.name=Full Redwood Log
+tile.redwood_log_size_6.name=Redwood Log Size-6
+tile.redwood_log_size_5.name=Redwood Log Size-5
+tile.redwood_log_size_4.name=Redwood Log Size-4
+tile.redwood_log_size_3.name=Redwood Log Size-3
+tile.redwood_log_size_2.name=Redwood Log Size-2
+tile.redwood_log_size_1.name=Redwood Log Size-1
 
 entity.PoisonousScorpion.name=Poisonous Scorpion
 entity.BigTurtle.name=Desert Tortoise
