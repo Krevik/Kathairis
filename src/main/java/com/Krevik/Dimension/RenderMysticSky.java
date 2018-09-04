@@ -7,6 +7,8 @@ import java.util.Random;
 
 import javax.vecmath.Vector4d;
 
+import org.lwjgl.opengl.GL11;
+
 import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
 
@@ -358,7 +360,6 @@ public class RenderMysticSky extends IRenderHandler {
             bufferbuilder.pos(1.0D, -1.0D, -1.0D).color(0, 0, 0, 255).endVertex();
             tessellator.draw();
         }
-
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(0.0F, -((float)(d3 - 16.0D)), 0.0F);
