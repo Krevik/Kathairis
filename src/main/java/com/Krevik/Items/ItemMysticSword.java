@@ -67,12 +67,7 @@ public class ItemMysticSword extends ItemSword
     }
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-    	if(this==KCore.CloudSword) {
-	    	if(entityIn instanceof EntityPlayer) {
-	    		EntityPlayer ep = (EntityPlayer)entityIn;
-	    		this.attackDamage=(1+(int)(entityIn.posY/9));
-	    	}
-    	}
+    	
     }
     public float getStrVsBlock(ItemStack stack, IBlockState state)
     {

@@ -72,21 +72,9 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Sword3"),new ResourceLocation("Swords"),new ItemStack(KCore.RevenumSword),"  X", "  X", "  C", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Axe"),new ResourceLocation("Axes"),new ItemStack(KCore.RevenumAxe),"XX ", "XC ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.RevenumPickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe1"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe)," XX", " C ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe2"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe),"XX ", " C ", " C ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe3"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe),"XX ", "C  ", "C  ", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Hoe4"),new ResourceLocation("Hoes"),new ItemStack(KCore.RevenumHoe)," XX", "  C", "  C", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Shovel"),new ResourceLocation("Shovels"),new ItemStack(KCore.RevenumShovel),"X", "C", "C", Character.valueOf('X'), KCore.RevenumIngot,Character.valueOf('C'),KCore.TitaniumRod);
 
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Crystal Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.CrystalPickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.CrystalsCluster,Character.valueOf('C'),KCore.TitaniumRod);
-		
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Sword1"),new ResourceLocation("Swords"),new ItemStack(KCore.CloudSword)," X ", " X ", " C ", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Sword2"),new ResourceLocation("Swords"),new ItemStack(KCore.CloudSword),"X  ", "X  ", "C  ", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Sword3"),new ResourceLocation("Swords"),new ItemStack(KCore.CloudSword),"  X", "  X", "  C", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Axe"),new ResourceLocation("Axes"),new ItemStack(KCore.CloudAxe),"XX ", "XC ", " C ", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Pickaxe"),new ResourceLocation("Pickaxes"),new ItemStack(KCore.CloudPickaxe),"XXX", " C ", " C ", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Cloud Shovel"),new ResourceLocation("Shovels"),new ItemStack(KCore.CloudShovel),"X", "C", "C", Character.valueOf('X'), KCore.CloudEssence,Character.valueOf('C'),KCore.TitaniumRod);
-		
+				
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Sword1"),new ResourceLocation("Swords"),new ItemStack(KCore.Magnethium_Sword)," X ", " X ", " C ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Sword2"),new ResourceLocation("Swords"),new ItemStack(KCore.Magnethium_Sword),"X  ", "X  ", "C  ", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Sword3"),new ResourceLocation("Swords"),new ItemStack(KCore.Magnethium_Sword),"  X", "  X", "  C", Character.valueOf('X'), KCore.Magnethium_Shard,Character.valueOf('C'),KCore.TitaniumRod);
@@ -202,11 +190,9 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Mystic Wood Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Mystic_Wood_Trap_Door,2),"XXX", "XXX", Character.valueOf('X'), KCore.MysticPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Shiny Wood Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Shiny_Wood_Trap_Door,2),"XXX", "XXX", Character.valueOf('X'), KCore.ShinyPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Soul Wood Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Soul_Wood_Trap_Door,2),"XXX", "XXX", Character.valueOf('X'), KCore.SoulPlanks);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Trap Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Revenum_Trapdoor,1),"XX", "XX", Character.valueOf('X'), KCore.RevenumIngot);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Mystic Wood Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Mystic_Wood_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.MysticPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Shiny Wood Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Shiny_Wood_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.ShinyPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Soul Wood Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Soul_Wood_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.SoulPlanks);
-		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Revenum Door"),new ResourceLocation("Blocks"), new ItemStack(KCore.Revenum_Door,3),"XX","XX", "XX", Character.valueOf('X'), KCore.RevenumIngot);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium"),new ResourceLocation("Blocks"), new ItemStack(KCore.Magnethium,1),"XX","XX", Character.valueOf('X'), KCore.Magnethium_Shard);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Magnethium Shards"),new ResourceLocation("Blocks"), new ItemStack(KCore.Magnethium_Shard,4),"X", Character.valueOf('X'), KCore.Magnethium);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Iron Gold Ingot"),new ResourceLocation("Ingots"), new ItemStack(KCore.Ingot_Iron_Gold,3),"XYX", Character.valueOf('X'), Items.IRON_INGOT, Character.valueOf('Y'),Items.GOLD_INGOT);

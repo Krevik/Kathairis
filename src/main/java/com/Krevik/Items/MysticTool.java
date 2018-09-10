@@ -89,13 +89,7 @@ public class MysticTool extends ItemTool
     }
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-    	if(this==KCore.CloudAxe||this==KCore.CloudPickaxe||this==KCore.CloudShovel) {
-	    	if(entityIn instanceof EntityPlayer) {
-	    		EntityPlayer ep = (EntityPlayer)entityIn;
-	    		this.efficiencyOnProperMaterial=6+((int)(ep.posY/4));
-	    		this.efficiency=efficiencyOnProperMaterial;
-	    	}
-    	}
+    	
     }
 
     /**

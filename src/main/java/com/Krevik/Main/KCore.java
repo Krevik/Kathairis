@@ -442,9 +442,6 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Soul_Wood_Trap_Door)
     public static final BlockMysticWoodTrapdoor Soul_Wood_Trap_Door = new BlockMysticWoodTrapdoor(Ref.Soul_Wood_Trap_Door);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Revenum_Trapdoor)
-    public static final BlockMysticMetalTrapdoor Revenum_Trapdoor = new BlockMysticMetalTrapdoor(Ref.Revenum_Trapdoor,20F,50F);
-    
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Mystic_Wood_Door)
     public static final BlockMysticDoors Mystic_Wood_Door = new BlockMysticDoors(Ref.Mystic_Wood_Door,Material.WOOD,null,4F,4F,SoundType.WOOD);
     
@@ -453,9 +450,6 @@ public class KCore {
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Soul_Wood_Door)
     public static final BlockMysticDoors Soul_Wood_Door = new BlockMysticDoors(Ref.Soul_Wood_Door,Material.WOOD,null,4F,4F,SoundType.WOOD);
-    
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Revenum_Door)
-    public static final BlockMysticDoors Revenum_Door = new BlockMysticDoors(Ref.Revenum_Door,Material.IRON,null,20F,25F,SoundType.METAL);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Plant_Blue_Cloud)
     public static final BlockMysticBush Plant_Blue_Cloud = new BlockMysticBush(Ref.Plant_Blue_Cloud,false,false);
@@ -627,14 +621,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumPickaxe)
 	public static final ItemMysticPickaxe RevenumPickaxe = new ItemMysticPickaxe(Ref.RevenumPickaxe, CreativeTabsMystic.tools,KCore.REVENUM);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumShovel)
-	public static final ItemMysticShovel RevenumShovel = new ItemMysticShovel(Ref.RevenumShovel, CreativeTabsMystic.tools,KCore.REVENUM);
-    
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumSword)
 	public static final ItemMysticSword RevenumSword = new ItemMysticSword(Ref.RevenumSword, CreativeTabsMystic.weapons,KCore.REVENUM);
-    
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumHoe)
-	public static final ItemMysticHoe RevenumHoe = new ItemMysticHoe(Ref.RevenumHoe, CreativeTabsMystic.tools,KCore.REVENUM);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.VioletCrystalShard)
     public static final BaseItem VioletCrystalShard = new BaseItem(Ref.VioletCrystalShard, CreativeTabsMystic.miscellaneous);
@@ -693,18 +681,6 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CloudEssence)
 	public static final BaseItem CloudEssence = new BaseItem(Ref.CloudEssence, CreativeTabsMystic.miscellaneous);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CloudAxe)
-	public static final ItemMysticAxe CloudAxe = new ItemMysticAxe(Ref.CloudAxe, CreativeTabsMystic.tools,KCore.CLOUD);
-    
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CloudPickaxe)
-	public static final ItemMysticPickaxe CloudPickaxe = new ItemMysticPickaxe(Ref.CloudPickaxe, CreativeTabsMystic.tools,KCore.CLOUD);
-    
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CloudShovel)
-	public static final ItemMysticShovel CloudShovel = new ItemMysticShovel(Ref.CloudShovel, CreativeTabsMystic.tools,KCore.CLOUD);
-    
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CloudSword)
-	public static final ItemMysticSword CloudSword = new ItemMysticSword(Ref.CloudSword, CreativeTabsMystic.weapons,KCore.CLOUD);
-	
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.ShockWand)
 	public static final BaseWand ShockWand = new BaseWand(Ref.ShockWand, CreativeTabsMystic.weapons);
     
@@ -758,9 +734,6 @@ public class KCore {
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Soul_Wood_Door_Item)
 	public static final ItemMysticDoor Soul_Wood_Door_Item = new ItemMysticDoor(Ref.Soul_Wood_Door_Item, CreativeTabsMystic.buildingBlocks,Soul_Wood_Door);
-    
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Revenum_Door_Item)
-	public static final ItemMysticDoor Revenum_Door_Item = new ItemMysticDoor(Ref.Revenum_Door_Item, CreativeTabsMystic.buildingBlocks,Revenum_Door);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Shard)
 	public static final BaseItem Magnethium_Shard = new BaseItem(Ref.Magnethium_Shard, CreativeTabsMystic.miscellaneous);
@@ -866,9 +839,7 @@ public class KCore {
         public static final String RevenumBoots = "revenumboots";
         public static final String RevenumAxe = "revenumaxe";
         public static final String RevenumPickaxe = "revenumpickaxe";
-        public static final String RevenumShovel = "revenumshovel";
         public static final String RevenumSword = "revenumsword";
-        public static final String RevenumHoe = "revenumhoe";
         public static final String VioletCrystalShard = "violetcrystalshard";
         public static final String YellowCrystalShard = "yellowcrystalshard";
         public static final String BlueCrystalShard = "bluecrystalshard";
@@ -886,10 +857,6 @@ public class KCore {
         public static final String ShinyStick = "shinystick";
         public static final String Gooseberry = "gooseberry";
         public static final String CloudEssence = "cloudessence";
-        public static final String CloudAxe = "cloudaxe";
-        public static final String CloudPickaxe = "cloudpickaxe";
-        public static final String CloudShovel = "cloudshovel";
-        public static final String CloudSword = "cloudsword";
         public static final String MysticPortal = "mysticportal";
         public static final String CorruptedDirt = "corrupteddirt";
         public static final String CorruptedGrass = "corruptedgrass";
@@ -1012,15 +979,12 @@ public class KCore {
         public static final String Mystic_Wood_Trap_Door="mystic_wood_trap_door";
         public static final String Shiny_Wood_Trap_Door="shiny_wood_trap_door";
         public static final String Soul_Wood_Trap_Door="soul_wood_trap_door";
-        public static final String Revenum_Trapdoor="revenum_trapdoor";
         public static final String Mystic_Wood_Door="mystic_wood_door";
         public static final String Shiny_Wood_Door="shiny_wood_door";
         public static final String Soul_Wood_Door="soul_wood_door";
-        public static final String Revenum_Door="revenum_door";
         public static final String Mystic_Wood_Door_Item="mystic_wood_door_item";
         public static final String Shiny_Wood_Door_Item="shiny_wood_door_item";
         public static final String Soul_Wood_Door_Item="soul_wood_door_item";
-        public static final String Revenum_Door_Item="revenum_door_item";
         public static final String Plant_Blue_Cloud="plant_blue_cloud";
         public static final String Plant_Yellow_Cloud="plant_yellow_cloud";
         public static final String Magnethium_Shard="magnethium_shard";
