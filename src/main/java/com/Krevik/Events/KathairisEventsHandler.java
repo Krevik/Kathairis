@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class KathairisEventsHandler {
-	
+
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
@@ -58,7 +58,7 @@ public class KathairisEventsHandler {
 		}
 		*/
 	}
-	
+
 
 	static KetherDataStorage data = null;
 	@SubscribeEvent
@@ -91,14 +91,14 @@ public class KathairisEventsHandler {
 						data.setSandstormX(0);
 						data.setSandstormZ(0);
 					}
-					
+
 					if(data.getIsSandstorm()) {
 						IMessage message2 = new PacketDustStormClient();
 						KetherPacketHandler.CHANNEL.sendToAll(message2);
 					}
 				}
 	}
-	
+
 	@SubscribeEvent
 	public static void onEvent2(PlayerTickEvent event)
 	{
@@ -148,60 +148,44 @@ public class KathairisEventsHandler {
 	public static void onRenderPost(RenderGameOverlayEvent.Post event){
 
 	}*/
-	
-	
+
+
 	@SubscribeEvent
 	public static void blockBreakEvent(BlockEvent.HarvestDropsEvent event) {
-		EntityPlayer breaker = event.getHarvester();
-			ItemStack heldStack = breaker.getHeldItemMainhand();
-			Item heldItem = heldStack.getItem();
-			if(heldItem.equals(KCore.Magnethium_Axe)) {
-				event.setDropChance(0);
-				List<ItemStack> items=event.getDrops();
-				for(int c=0;c<items.size();c++) {
-					ItemStack itemStack=items.get(c);
-					EntityItem currentItem=new EntityItem(breaker.world,event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,itemStack);
-					if(!breaker.world.isRemote) {
-						breaker.world.spawnEntity(currentItem);
-					}
-	        		currentItem.motionX=breaker.posX-currentItem.posX;
-	        		currentItem.motionY=breaker.posY-currentItem.posY;
-	        		currentItem.motionZ=breaker.posZ-currentItem.posZ;
-				}
-			}
-			if(heldItem.equals(KCore.Magnethium_Pickaxe)) {
-				event.setDropChance(0);
-				List<ItemStack> items=event.getDrops();
-				for(int c=0;c<items.size();c++) {
-					ItemStack itemStack=items.get(c);
-					EntityItem currentItem=new EntityItem(breaker.world,event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,itemStack);
-	        		currentItem.setNoGravity(true);
-	        		currentItem.motionX=0;
-	        		currentItem.motionY=-0.01;
-	        		currentItem.motionZ=0;
-					if(!breaker.world.isRemote) {
-						breaker.world.spawnEntity(currentItem);
-					}
+		if (!event.getWorld().isRemote) {
+			EntityPlayer breaker = event.getHarvester();
+			if (breaker != null) {
+				ItemStack heldStack = breaker.getHeldItemMainhand();
+				Item heldItem = heldStack.getItem();
+				if (heldItem.equals(KCore.Magnethium_Axe) || heldItem.equals(KCore.Magnethium_Pickaxe) || heldItem.equals(KCore.Magnethium_Shovel)) {
+					event.setDropChance(0);
 
-				}
-			}
-			if(heldItem.equals(KCore.Magnethium_Shovel)) {
-				event.setDropChance(0);
-				List<ItemStack> items=event.getDrops();
-				for(int c=0;c<items.size();c++) {
-					ItemStack itemStack=items.get(c);
-					EntityItem currentItem=new EntityItem(breaker.world,event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,itemStack);
-	        		currentItem.setNoGravity(true);
-	        		currentItem.motionX=0;
-	        		currentItem.motionY=0;
-	        		currentItem.motionZ=0;
-					if(!breaker.world.isRemote) {
+					double x = event.getPos().getX() + 0.5;
+					double y = event.getPos().getY() + 0.5;
+					double z = event.getPos().getZ() + 0.5;
+
+					for (ItemStack itemStack : event.getDrops()) {
+						EntityItem currentItem = new EntityItem(breaker.world, x, y, z, itemStack);
+
+						if (heldItem.equals(KCore.Magnethium_Axe)) {
+							currentItem.motionX = breaker.posX - currentItem.posX;
+							currentItem.motionY = breaker.posY - currentItem.posY;
+							currentItem.motionZ = breaker.posZ - currentItem.posZ;
+						} else if (heldItem.equals(KCore.Magnethium_Pickaxe)) {
+							currentItem.setNoGravity(true);
+							currentItem.motionX = 0;
+							currentItem.motionY = -0.01;
+							currentItem.motionZ = 0;
+						} else if (heldItem.equals(KCore.Magnethium_Shovel)) {
+							currentItem.setNoGravity(true);
+							currentItem.motionX = 0;
+							currentItem.motionY = 0;
+							currentItem.motionZ = 0;
+						}
 						breaker.world.spawnEntity(currentItem);
 					}
-
 				}
 			}
-			
+		}
 	}
-	
 }
