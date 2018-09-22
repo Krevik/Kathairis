@@ -1,10 +1,8 @@
 package com.Krevik.Renderers;
 
 import com.Krevik.Entities.EntityGecko;
-import com.Krevik.Entities.Butterflies.EntitySkylight;
 import com.Krevik.Main.EntityAndRenderRegistry;
 import com.Krevik.Models.ModelGecko;
-import com.Krevik.Renderers.RenderGecko.Factory;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
@@ -46,25 +44,23 @@ public class RenderGecko extends RenderLiving<EntityGecko>
     
     protected void applyRotations(EntityGecko entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	if(entityLiving.isChild()) {
+    	/*if(entityLiving.isChild()) {
         	GlStateManager.scale(0.5, 0.5, 0.5);
     	}else {
         	GlStateManager.scale(0.8, 0.8, 0.8);
-    	}
-    	if(entityLiving.isClimbing()) {
-    		if(entityLiving.climbingSide()==0) {
-    			GlStateManager.rotate(90, 0, 0, 1);
-    		}
-    		else if(entityLiving.climbingSide()==1) {
-    			GlStateManager.rotate(90, 0, 0, -1);
-    		}
-    		else if(entityLiving.climbingSide()==2) {
-    			GlStateManager.rotate(90, 1, 0, 0);
-    		}
-    		else if(entityLiving.climbingSide()==3) {
-    			GlStateManager.rotate(90,-1,0,0);
-    		}
-    	}
+    	}*/
+        if (entityLiving.isClimbing()) {
+            if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.EAST) {
+                GlStateManager.rotate(90, 0, 0, 1);
+            } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.WEST) {
+                GlStateManager.rotate(90, 0, 0, -1);
+            } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.NORTH) {
+                GlStateManager.rotate(90, 1, 0, 0);
+            } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.SOUTH) {
+                GlStateManager.rotate(90, -1, 0, 0);
+            }
+            GlStateManager.translate(0f, -0.3F, 0F);
+        }
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         
     }
