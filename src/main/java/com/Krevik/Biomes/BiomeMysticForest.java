@@ -3,6 +3,7 @@ package com.Krevik.Biomes;
 import java.util.Random;
 
 import com.Krevik.Entities.EntityFungite;
+import com.Krevik.Entities.EntityGecko;
 import com.Krevik.Entities.EntityHowler;
 import com.Krevik.Entities.EntityLivingFlower;
 import com.Krevik.Entities.EntityMysticBird;
@@ -55,6 +56,7 @@ public class BiomeMysticForest extends KetherBiome
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Forest");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 12, 1, 2));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityGecko.class, 4, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityLivingFlower.class, 8, 1, 1));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHowler.class, 5, 1, 1));
         //this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 98, 1, 1));
