@@ -40,7 +40,6 @@ public class SandstormCommand extends CommandBase{
 				if(DimensionManager.getWorld(KCore.instance.DIMENSION_ID)==world) {
 					if(data!=null) {
 						if(args[0]!=null) {
-
 							if(Integer.parseInt(args[0])==0) {
 								data.setIsSandstorm(false);
 								data.setSandstormTime(Integer.parseInt(args[0]));
@@ -52,7 +51,7 @@ public class SandstormCommand extends CommandBase{
 							}
 		                    notifyCommandListener(sender, this, "sandstorm time set to: "+Integer.parseInt(args[0]), new Object[] {Integer.parseInt(args[0]), sender.getName()});
 						}else {
-				            throw new WrongUsageException("usage: /sandstorm <time>", new Object[0]);
+				            throw new WrongUsageException("/sandstorm <time>", new Object[0]);
 						}
 					}else {
 			            throw new WrongUsageException("Kathairis data storage is not loaded!", new Object[0]);	
