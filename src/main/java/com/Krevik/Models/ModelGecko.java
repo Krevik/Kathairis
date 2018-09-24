@@ -166,7 +166,6 @@ public class ModelGecko extends ModelBase {
 
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5, Entity entity)
     {
-
         super.setRotationAngles(limbSwing, limbSwingAmount, f2, f3, f4, f5, entity);
         this.legmain_1.rotateAngleX = (KCore.functionHelper.degToRad(41.74F))+MathHelper.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         this.legmain_2.rotateAngleX = (KCore.functionHelper.degToRad(49.57F))+MathHelper.sin(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
