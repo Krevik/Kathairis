@@ -7,17 +7,21 @@ import com.Krevik.Main.CreativeTabsMystic;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStone;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,12 +30,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCorruptedGrass extends BaseBlock implements IGrowable
 {
+    public static final PropertyBool FLOWER = PropertyBool.create("flower");
     public static final PropertyBool SNOWY = PropertyBool.create("snowy");
 
     public BlockCorruptedGrass()
     {
-        super(KCore.Ref.CorruptedGrass, Material.GRASS, CreativeTabs.SEARCH, 2F, 2F, SoundType.PLANT);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)));
+        super(KCore.Ref.CorruptedGrass, Material.GRASS, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.PLANT);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false)));
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabsMystic.buildingBlocks);
     }
@@ -43,13 +48,22 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
-        return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
+        return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER)).withProperty(FLOWER, state.getValue(FLOWER));
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!worldIn.isRemote)
         {
+        	if(worldIn.getBiome(pos)==KCore.MysticPlains) {
+        		if(worldIn.getBlockState(pos)==KCore.CorruptedGrass.getDefaultState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false))) {
+	        		if(rand.nextInt(100)==0) {
+	        			if(worldIn.isAirBlock(pos.up())) {
+	        			worldIn.setBlockState(pos, KCore.CorruptedGrass.getDefaultState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(true)));
+	        			}
+	        		}
+        		}
+        	}
             if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)
             {
                 worldIn.setBlockState(pos, KCore.CorruptedDirt.getDefaultState());
@@ -109,7 +123,6 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
         
     }
     
-
     /**
      * Whether this IGrowable can grow
      */
@@ -125,6 +138,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
 
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
+
         BlockPos blockpos = pos.up();
 
         for (int i = 0; i < 128; ++i)
@@ -167,7 +181,6 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
                 }
 
                 blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-
                 if (worldIn.getBlockState(blockpos1.down()).getBlock() != KCore.CorruptedGrass || worldIn.getBlockState(blockpos1).isNormalCube())
                 {
                     break;
@@ -194,6 +207,6 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
 
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {SNOWY});
+        return new BlockStateContainer(this, new IProperty[] {FLOWER,SNOWY});
     }
 }

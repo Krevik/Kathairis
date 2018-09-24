@@ -493,8 +493,8 @@ public class KCore {
    	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_log_size_1)
     public static final BlockRedwoodLog Redwood_log_size_1 = new BlockRedwoodLog(Ref.Redwood_log_size_1);
     
-   @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_planks)
-   public static final BlockMysticPlanks Redwood_planks = new BlockMysticPlanks(Ref.Redwood_planks);
+   	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_planks)
+   	public static final BlockMysticPlanks Redwood_planks = new BlockMysticPlanks(Ref.Redwood_planks);
     
    
     
