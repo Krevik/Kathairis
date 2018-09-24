@@ -1,9 +1,11 @@
 package com.Krevik.Models;
 
+import com.Krevik.Main.KCore;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * gecko - HKhugo
@@ -155,12 +157,21 @@ public class ModelGecko extends ModelBase {
         this.legmain_1.render(f5);
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
+    }
+
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5, Entity entity)
+    {
+
+        super.setRotationAngles(limbSwing, limbSwingAmount, f2, f3, f4, f5, entity);
+        this.legmain_1.rotateAngleX = (KCore.functionHelper.degToRad(41.74F))+MathHelper.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.legmain_2.rotateAngleX = (KCore.functionHelper.degToRad(49.57F))+MathHelper.sin(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        this.legmain_3.rotateAngleX = (KCore.functionHelper.degToRad(49.57F))+MathHelper.sin(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        this.legmain_4.rotateAngleX = (KCore.functionHelper.degToRad(41.74F))+MathHelper.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+
     }
 }
