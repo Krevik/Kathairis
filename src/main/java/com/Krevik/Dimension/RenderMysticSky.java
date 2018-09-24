@@ -221,18 +221,18 @@ public class RenderMysticSky extends IRenderHandler {
 			        		{
 				                for (int j = 0; j < 4; ++j)
 				                {
-					                //
-				                    double d17 = 0.0D;
-				                    double d18 = (double)((j & 2) - 1) * d33 ;
-				                    double d19 = (double)((j + 1 & 2) - 1) * d33 ;
-				                    double d20 = 0.0D;
-				                    double d21 = d18 * d16 - d19 * d15;
-				                    double d22 = d19 * d16 + d18 * d15;
-				                    double d23 = d21 * d12 + 0.0D * d13;
-				                    double d24 = 0.0D * d12 - d21 * d13;
-				                    double d25 = d24 * d9 - d22 * d10;
-				                    double d26 = d22 * d9 + d24 * d10;
-				                    bufferbuilder.pos(star.getPos().x+d5+d25-(star.getMotion().x*cc*0.07), star.getPos().y+d6+d23-(star.getMotion().y*cc*0.07), star.getPos().z+d7+d26-(star.getMotion().z*cc*0.07)).color(168, 244, 244, 200-cc).endVertex();
+                                        //
+                                        double d17 = 0.0D;
+                                        double d18 = (double) ((j & 2) - 1) * d33;
+                                        double d19 = (double) ((j + 1 & 2) - 1) * d33;
+                                        double d20 = 0.0D;
+                                        double d21 = d18 * d16 - d19 * d15;
+                                        double d22 = d19 * d16 + d18 * d15;
+                                        double d23 = d21 * d12 + 0.0D * d13;
+                                        double d24 = 0.0D * d12 - d21 * d13;
+                                        double d25 = d24 * d9 - d22 * d10;
+                                        double d26 = d22 * d9 + d24 * d10;
+                                        bufferbuilder.pos(star.getPos().x + d5 + d25 - (star.getMotion().x * cc * 0.07), star.getPos().y + d6 + d23 - (star.getMotion().y * cc * 0.07), star.getPos().z + d7 + d26 - (star.getMotion().z * cc * 0.07)).color(168, 244, 244, 200 - cc).endVertex();
 				                }
 			        		}
 			                	/*Vec3d vec1 = new Vec3d(star.getPos().x-0.5,star.getPos().y,star.getPos().z);
