@@ -121,6 +121,7 @@ public class EntityGecko extends EntityAnimal {
 
     public void onUpdate() {
         super.onUpdate();
+        this.fallDistance=0;
         //operate can walk on wall
         if (!world.isRemote) {
             //operate climbing side
@@ -131,6 +132,11 @@ public class EntityGecko extends EntityAnimal {
                 else if (!world.isAirBlock(pos.north())) setClimbingSide(EnumClimbSide.NORTH);
                 else if (!world.isAirBlock(pos.south())) setClimbingSide(EnumClimbSide.SOUTH);
             } else setClimbingSide(EnumClimbSide.FLOOR);
+            if(!world.isAirBlock(getPosition())) {
+            	motionY=-1;
+            	motionX=-0.5+getRNG().nextDouble();
+            	motionZ=-0.5+getRNG().nextDouble();
+            }
         }
     }
     
