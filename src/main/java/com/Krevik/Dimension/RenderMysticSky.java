@@ -23,6 +23,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 public class RenderMysticSky extends IRenderHandler {
 
@@ -30,6 +31,7 @@ public class RenderMysticSky extends IRenderHandler {
     private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("mystic:textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("mystic:textures/environment/sun.png");
     private static final ResourceLocation STAR_TEXTURES = new ResourceLocation("mystic:textures/environment/star.png");
+    private static final ResourceLocation NEBULA_TEXTURES = new ResourceLocation("mystic:textures/environment/nebula.png");
 
 
     public RenderMysticSky()
@@ -40,6 +42,7 @@ public class RenderMysticSky extends IRenderHandler {
     private int[] constantLight = new int[3000];
     
     private ArrayList<FallingStar> fallingStarsList = new ArrayList();
+    private Nebula nebula = null;
 
     FunctionHelper helper = KCore.instance.functionHelper;
     @Override
@@ -295,12 +298,82 @@ public class RenderMysticSky extends IRenderHandler {
             GlStateManager.shadeModel(7424);
         }
 
+
+
         GlStateManager.enableTexture2D();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.pushMatrix();
         float f16 = 1.0F - world.getRainStrength(partialTicks);
         GlStateManager.color(1.0F, 1.0F, 1.0F, f16);
         GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
+
+        /*nebula start
+        GL11.glDepthRange(0,5);
+        mc.renderEngine.bindTexture(NEBULA_TEXTURES);
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        if(nebula==null){
+            nebula = new Nebula(122886L);
+        }else {
+            Random random = new Random(nebula.getSeed());
+            double x = (double) (random.nextFloat() * 2.0F - 1.0F);
+            double y = (double) (random.nextFloat() * 2.0F - 1.0F);
+            double z = (double) (random.nextFloat() * 2.0F - 1.0F);
+            double d4 = x * x + y * y + z * z;
+            double size = (double) 300;
+            if (d4 < 1.0D && d4 > 0.01D) {
+
+                d4 = 1.0D / Math.sqrt(d4);
+                x = x * d4;
+                y = y * d4;
+                z = z * d4;
+                double d5 = x * 100.0D;
+                double d6 = y * 100.0D;
+                double d7 = z * 100.0D;
+                double d8 = Math.atan2(x, z);
+                double d9 = Math.sin(d8);
+                double d10 = Math.cos(d8);
+                double d11 = Math.atan2(Math.sqrt(x * x + z * z), y);
+                double d12 = Math.sin(d11);
+                double d13 = Math.cos(d11);
+                double d14 = random.nextDouble() * Math.PI * 2.0D;
+                double d15 = Math.sin(d14);
+                double d16 = Math.cos(d14);
+                int u = 0;
+                int v = 0;
+                for (int j = 0; j < 4; ++j) {
+                    if (j == 0) {
+                        u = 0;
+                        v = 0;
+                    }
+                    if (j == 1) {
+                        u = 1;
+                        v = 0;
+                    }
+                    if (j == 2) {
+                        u = 1;
+                        v = 1;
+                    }
+                    if (j == 3) {
+                        u = 0;
+                        v = 1;
+                    }
+                    double d18 = (double) ((j & 2) - 1) * size;
+                    double d19 = (double) ((j + 1 & 2) - 1) * size;
+                    double d21 = d18 * d16 - d19 * d15;
+                    double d22 = d19 * d16 + d18 * d15;
+                    double d23 = d21 * d12 + 0.0D * d13;
+                    double d24 = 0.0D * d12 - d21 * d13;
+                    double d25 = d24 * d9 - d22 * d10;
+                    double d26 = d22 * d9 + d24 * d10;
+                    bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).tex(u, v).endVertex();
+                }
+            }
+        }
+        tessellator.draw();
+        //nebula end
+        */
+
+
         GlStateManager.rotate(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
         f17 = 30.0F;
         //sun start
@@ -312,6 +385,8 @@ public class RenderMysticSky extends IRenderHandler {
         bufferbuilder.pos((double)(-f17), 100.0D, (double)f17).tex(0.0D, 1.0D).endVertex();
         tessellator.draw();
         //sun end
+
+
         
 
         //moon start
@@ -394,6 +469,7 @@ public class RenderMysticSky extends IRenderHandler {
         GlStateManager.popMatrix();
         GlStateManager.enableTexture2D();
         GlStateManager.depthMask(true);
+
     }
             
     
