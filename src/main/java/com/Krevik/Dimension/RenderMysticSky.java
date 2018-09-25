@@ -1,13 +1,11 @@
 package com.Krevik.Dimension;
 
-import static org.lwjgl.opengl.GL11.GL_QUAD_STRIP;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.vecmath.Vector4d;
 
-import org.lwjgl.opengl.GL11;
 
 import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
@@ -19,9 +17,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
@@ -35,10 +31,7 @@ public class RenderMysticSky extends IRenderHandler {
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("mystic:textures/environment/sun.png");
     private static final ResourceLocation STAR_TEXTURES = new ResourceLocation("mystic:textures/environment/star.png");
 
-    private VertexBuffer starVBO;
-    private int starGLCallList = -1;
-    private boolean vboEnabled=true;
-    
+
     public RenderMysticSky()
     {
     	
@@ -77,164 +70,152 @@ public class RenderMysticSky extends IRenderHandler {
         
         //stars
         if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
-		    		for(int x=0;x<3000;x++) {
-		    			if(constantLight[x]>=255) {
-		    				constantLight[x]-=helper.getRandomInteger(0, 8);
-		    			}else if(constantLight[x]<=0) {
-		    				constantLight[x]=helper.getRandomInteger(0, 256);
-		    			}else {
-		        			constantLight[x]+=(helper.getRandomInteger(0, 8)-helper.getRandomInteger(0, 8));
-		    			}
-		    		}
-		        GlStateManager.pushMatrix();
-		        Random random = new Random(10842L);
-		        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		        for (int i = 0; i < 3000; ++i)
-		        {
-		            double d0 = (double)(random.nextFloat() * 2.0F - 1.0F);
-		            double d1 = (double)(random.nextFloat() * 2.0F - 1.0F);
-		            double d2 = (double)(random.nextFloat() * 2.0F - 1.0F);
-		            double d33 = (double)(0.15F + random.nextFloat() * 0.1F);
-		            double d4 = d0 * d0 + d1 * d1 + d2 * d2;
-		
-		            if (d4 < 1.0D && d4 > 0.01D)
-		            {
-		                d4 = 1.0D / Math.sqrt(d4);
-		                d0 = d0 * d4;
-		                d1 = d1 * d4;
-		                d2 = d2 * d4;
-		                double d5 = d0 * 100.0D;
-		                double d6 = d1 * 100.0D;
-		                double d7 = d2 * 100.0D;
-		                double d8 = Math.atan2(d0, d2);
-		                double d9 = Math.sin(d8);
-		                double d10 = Math.cos(d8);
-		                double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
-		                double d12 = Math.sin(d11);
-		                double d13 = Math.cos(d11);
-		                double d14 = random.nextDouble() * Math.PI * 2.0D;
-		                double d15 = Math.sin(d14);
-		                double d16 = Math.cos(d14);
-		
-		                for (int j = 0; j < 4; ++j)
-		                {
-		                	Vector4d color = new Vector4d(helper.getRandomInteger(10842L,66, 137),helper.getRandomInteger(10842L,65, 244),helper.getRandomInteger(10842L,229, 244),constantLight[i]);
-		                    double d17 = 0.0D;
-		                    double d18 = (double)((j & 2) - 1) * d33;
-		                    double d19 = (double)((j + 1 & 2) - 1) * d33;
-		                    double d20 = 0.0D;
-		                    double d21 = d18 * d16 - d19 * d15;
-		                    double d22 = d19 * d16 + d18 * d15;
-		                    double d23 = d21 * d12 + 0.0D * d13;
-		                    double d24 = 0.0D * d12 - d21 * d13;
-		                    double d25 = d24 * d9 - d22 * d10;
-		                    double d26 = d22 * d9 + d24 * d10;
-		                    bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color((int)color.x, (int)color.y, (int)color.z, (int)color.w).endVertex();
+            for (int x = 0; x < 3000; x++) {
+                if (constantLight[x] >= 255) {
+                    constantLight[x] -= helper.getRandomInteger(0, 8);
+                } else if (constantLight[x] <= 0) {
+                    constantLight[x] = helper.getRandomInteger(0, 256);
+                } else {
+                    constantLight[x] += (helper.getRandomInteger(0, 8) - helper.getRandomInteger(0, 8));
+                }
+            }
+            GlStateManager.pushMatrix();
+            Random random = new Random(10842L);
+            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
+            for (int i = 0; i < 3000; ++i) {
+                double d0 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                double d1 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                double d2 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                double d33 = (double) (0.15F + random.nextFloat() * 0.1F);
+                double d4 = d0 * d0 + d1 * d1 + d2 * d2;
 
-		                }
-		            }
-		        }
-		
-		        tessellator.draw();
-		        GlStateManager.popMatrix();
-		        
-		        GlStateManager.pushMatrix();
-		        if(helper.random.nextInt(100)==0) {
-			        random = new Random();
-		        	//generate falling star
-		            double d0 = (double)(random.nextFloat() * 6.0F - 2F);
-		            double d1 = (double)(random.nextFloat() * 6.0F - 2F);
-		            double d2 = (double)(random.nextFloat() * 6.0F - 2F);
-		            double d33 = (double)(0.15F + random.nextFloat() * 0.1F);
-		            double d4 = d0 * d0 + d1 * d1 + d2 * d2;
-		
-		                d4 = 1.0D / Math.sqrt(d4);
-		                d0 = d0 * d4;
-		                d1 = d1 * d4;
-		                d2 = d2 * d4;
-		                double d5 = d0 * 60.0D;
-		                double d6 = d1 * 60.0D;
-		                double d7 = d2 * 60.0D;
-		                double d8 = Math.atan2(d0, d2);
-		                double d9 = Math.sin(d8);
-		                double d10 = Math.cos(d8);
-		                double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
-		                double d12 = Math.sin(d11);
-		                double d13 = Math.cos(d11);
-		                double d14 = random.nextDouble() * Math.PI * 2.0D;
-		                double d15 = Math.sin(d14);
-		                double d16 = Math.cos(d14);
-		
-		                //for (int j = 0; j < 4; ++j)
-		                //{
-		                    double d17 = 0.0D;
-		                    double d18 = (double)((0 & 2) - 1) * d33;
-		                    double d19 = (double)((1 + 1 & 2) - 1) * d33;
-		                    double d20 = 0.0D;
-		                    double d21 = d18 * d16 - d19 * d15;
-		                    double d22 = d19 * d16 + d18 * d15;
-		                    double d23 = d21 * d12 + 0.0D * d13;
-		                    double d24 = 0.0D * d12 - d21 * d13;
-		                    double d25 = d24 * d9 - d22 * d10;
-		                    double d26 = d22 * d9 + d24 * d10;
-		                    FallingStar star = new FallingStar(this.fallingStarsList.size(),d5 + d25, d6 + d23, d7 + d26,-0.5F+random.nextFloat(),-0.5F+random.nextFloat(),-0.5F+random.nextFloat(),new Random().nextLong());
-		                    this.fallingStarsList.add(star);
-		                    //bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color(244, 238, 66, 200).endVertex();
-		               // }
-		                
-		        }
-		        //operate existing falling stars
-		        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		        for(int x=0;x<this.fallingStarsList.size();x++) {
-		        	if(this.fallingStarsList.get(x)!=null) {
-		        		FallingStar star = this.fallingStarsList.get(x);
-		        		star.update();
-		        		Long starSeed = star.getSeed();
-		        		
-		        		random = new Random(starSeed);
-			            double d0 = (double)(random.nextFloat() * 2.0F - 1.0F);
-			            double d1 = (double)(random.nextFloat() * 2.0F - 1.0F);
-			            double d2 = (double)(random.nextFloat() * 2.0F - 1.0F);
-			            double d33 = (double)(0.15F + random.nextFloat() * 0.1F);
-			            double d4 = d0 * d0 + d1 * d1 + d2 * d2;
-		                d4 = 1.0D;
-		                d0 = d0 * d4;
-		                d1 = d1 * d4;
-		                d2 = d2 * d4;
-		                double d5 = d0 * 100.0D;
-		                double d6 = d1 * 100.0D;
-		                double d7 = d2 * 100.0D;
-		                double d8 = Math.atan2(d0, d2);
-		                double d9 = Math.sin(d8);
-		                double d10 = Math.cos(d8);
-		                double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
-		                double d12 = Math.sin(d11);
-		                double d13 = Math.cos(d11);
-		                double d14 = random.nextDouble() * Math.PI * 2.0D;
-		                double d15 = Math.sin(d14);
-		                double d16 = Math.cos(d14);
+                if (d4 < 1.0D && d4 > 0.01D) {
+                    d4 = 1.0D / Math.sqrt(d4);
+                    d0 = d0 * d4;
+                    d1 = d1 * d4;
+                    d2 = d2 * d4;
+                    double d5 = d0 * 100.0D;
+                    double d6 = d1 * 100.0D;
+                    double d7 = d2 * 100.0D;
+                    double d8 = Math.atan2(d0, d2);
+                    double d9 = Math.sin(d8);
+                    double d10 = Math.cos(d8);
+                    double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+                    double d12 = Math.sin(d11);
+                    double d13 = Math.cos(d11);
+                    double d14 = random.nextDouble() * Math.PI * 2.0D;
+                    double d15 = Math.sin(d14);
+                    double d16 = Math.cos(d14);
+
+                    for (int j = 0; j < 4; ++j) {
+                        Vector4d color = new Vector4d(helper.getRandomInteger(10842L, 66, 137), helper.getRandomInteger(10842L, 65, 244), helper.getRandomInteger(10842L, 229, 244), constantLight[i]);
+                        double d18 = (double) ((j & 2) - 1) * d33;
+                        double d19 = (double) ((j + 1 & 2) - 1) * d33;
+                        double d21 = d18 * d16 - d19 * d15;
+                        double d22 = d19 * d16 + d18 * d15;
+                        double d23 = d21 * d12 + 0.0D * d13;
+                        double d24 = 0.0D * d12 - d21 * d13;
+                        double d25 = d24 * d9 - d22 * d10;
+                        double d26 = d22 * d9 + d24 * d10;
+                        bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color((int) color.x, (int) color.y, (int) color.z, (int) color.w).endVertex();
+
+                    }
+                }
+            }
+
+            tessellator.draw();
+            GlStateManager.popMatrix();
+
+            GlStateManager.pushMatrix();
+            if (helper.random.nextInt(100) == 0) {
+                random = new Random();
+                //generate falling star
+                double d0 = (double) (random.nextFloat() * 6.0F - 2F);
+                double d1 = (double) (random.nextFloat() * 6.0F - 2F);
+                double d2 = (double) (random.nextFloat() * 6.0F - 2F);
+                double d33 = (double) (0.15F + random.nextFloat() * 0.1F);
+                double d4 = d0 * d0 + d1 * d1 + d2 * d2;
+
+                d4 = 1.0D / Math.sqrt(d4);
+                d0 = d0 * d4;
+                d1 = d1 * d4;
+                d2 = d2 * d4;
+                double d5 = d0 * 60.0D;
+                double d6 = d1 * 60.0D;
+                double d7 = d2 * 60.0D;
+                double d8 = Math.atan2(d0, d2);
+                double d9 = Math.sin(d8);
+                double d10 = Math.cos(d8);
+                double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+                double d12 = Math.sin(d11);
+                double d13 = Math.cos(d11);
+                double d14 = random.nextDouble() * Math.PI * 2.0D;
+                double d15 = Math.sin(d14);
+                double d16 = Math.cos(d14);
+
+                //for (int j = 0; j < 4; ++j)
+                //{
+                double d18 = (double) ((0 & 2) - 1) * d33;
+                double d19 = (double) ((1 + 1 & 2) - 1) * d33;
+                double d21 = d18 * d16 - d19 * d15;
+                double d22 = d19 * d16 + d18 * d15;
+                double d23 = d21 * d12 + 0.0D * d13;
+                double d24 = 0.0D * d12 - d21 * d13;
+                double d25 = d24 * d9 - d22 * d10;
+                double d26 = d22 * d9 + d24 * d10;
+                FallingStar star = new FallingStar(this.fallingStarsList.size(), d5 + d25, d6 + d23, d7 + d26, -0.5F + random.nextFloat(), -0.5F + random.nextFloat(), -0.5F + random.nextFloat(), new Random().nextLong());
+                this.fallingStarsList.add(star);
+                //bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color(244, 238, 66, 200).endVertex();
+                // }
+
+            }
+            //operate existing falling stars
+            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
+            for (int x = 0; x < this.fallingStarsList.size(); x++) {
+                if (this.fallingStarsList.get(x) != null) {
+                    FallingStar star = this.fallingStarsList.get(x);
+                    star.update();
+                    Long starSeed = star.getSeed();
+
+                    random = new Random(starSeed);
+                    double d0 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                    double d1 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                    double d2 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                    double d33 = (double) (0.15F + random.nextFloat() * 0.1F);
+                    double d4 = d0 * d0 + d1 * d1 + d2 * d2;
+                    d4 = 1.0D;
+                    d0 = d0 * d4;
+                    d1 = d1 * d4;
+                    d2 = d2 * d4;
+                    double d5 = d0 * 100.0D;
+                    double d6 = d1 * 100.0D;
+                    double d7 = d2 * 100.0D;
+                    double d8 = Math.atan2(d0, d2);
+                    double d9 = Math.sin(d8);
+                    double d10 = Math.cos(d8);
+                    double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+                    double d12 = Math.sin(d11);
+                    double d13 = Math.cos(d11);
+                    double d14 = random.nextDouble() * Math.PI * 2.0D;
+                    double d15 = Math.sin(d14);
+                    double d16 = Math.cos(d14);
 
 
-			                
-			                int trailSteps=200;
-			                for(int cc=1;cc<=trailSteps;cc++)
-			        		{
-				                for (int j = 0; j < 4; ++j)
-				                {
-                                        //
-                                        double d17 = 0.0D;
-                                        double d18 = (double) ((j & 2) - 1) * d33;
-                                        double d19 = (double) ((j + 1 & 2) - 1) * d33;
-                                        double d20 = 0.0D;
-                                        double d21 = d18 * d16 - d19 * d15;
-                                        double d22 = d19 * d16 + d18 * d15;
-                                        double d23 = d21 * d12 + 0.0D * d13;
-                                        double d24 = 0.0D * d12 - d21 * d13;
-                                        double d25 = d24 * d9 - d22 * d10;
-                                        double d26 = d22 * d9 + d24 * d10;
-                                        bufferbuilder.pos(star.getPos().x + d5 + d25 - (star.getMotion().x * cc * 0.07), star.getPos().y + d6 + d23 - (star.getMotion().y * cc * 0.07), star.getPos().z + d7 + d26 - (star.getMotion().z * cc * 0.07)).color(168, 244, 244, 200 - cc).endVertex();
-				                }
-			        		}
+                    int trailSteps = 200;
+                    for (int cc = 1; cc <= trailSteps; cc++) {
+                        for (int j = 0; j < 4; ++j) {
+                            //
+                            double d18 = (double) ((j & 2) - 1) * d33;
+                            double d19 = (double) ((j + 1 & 2) - 1) * d33;
+                            double d21 = d18 * d16 - d19 * d15;
+                            double d22 = d19 * d16 + d18 * d15;
+                            double d23 = d21 * d12 + 0.0D * d13;
+                            double d24 = 0.0D * d12 - d21 * d13;
+                            double d25 = d24 * d9 - d22 * d10;
+                            double d26 = d22 * d9 + d24 * d10;
+                            bufferbuilder.pos(star.getPos().x + d5 + d25 - (star.getMotion().x * cc * 0.07), star.getPos().y + d6 + d23 - (star.getMotion().y * cc * 0.07), star.getPos().z + d7 + d26 - (star.getMotion().z * cc * 0.07)).color(168, 244, 244, 200 - cc).endVertex();
+                        }
+                    }
 			                	/*Vec3d vec1 = new Vec3d(star.getPos().x-0.5,star.getPos().y,star.getPos().z);
 			                	Vec3d vec2 = new Vec3d(star.getPos().x,star.getPos().y+0.5,star.getPos().z);
 			                	Vec3d vec3 = new Vec3d(star.getPos().x+0.5,star.getPos().y,star.getPos().z);
@@ -254,22 +235,24 @@ public class RenderMysticSky extends IRenderHandler {
 	                	bufferbuilder.pos(vec2.x, vec2.y, vec2.z).color(244, 238, 66, 100).endVertex();
 	                	bufferbuilder.pos(vec3.x, vec3.y, vec3.z).color(244, 238, 66, 100).endVertex();
 	                	bufferbuilder.pos(vec4.x, vec4.y, vec4.z).color(244, 238, 66, 100).endVertex();*/
-	                	
-	                	
-		        		if(helper.random.nextInt(1500)==0||fallingStarsList.size()>30) {
-		        			this.fallingStarsList.remove(x);
-		        		}
-		        	}
-		        	
-		        }
 
-		        tessellator.draw();
-		        
-		        GlStateManager.popMatrix();
-		        
-    	}
+
+                    if (helper.random.nextInt(1500) == 0 || fallingStarsList.size() > 30) {
+                        this.fallingStarsList.remove(x);
+                    }
+                }
+
+            }
+
+            tessellator.draw();
+
+            GlStateManager.popMatrix();
+
+        }
         
         //stars end
+
+
         
         float f17 = 20.0F;
         
