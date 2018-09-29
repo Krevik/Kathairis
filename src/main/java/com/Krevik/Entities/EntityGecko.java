@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 import com.google.common.collect.Sets;
@@ -63,6 +64,8 @@ public class EntityGecko extends EntityAnimal {
         tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         tasks.addTask(8, new EntityAILookIdle(this));
         tasks.addTask(3, new EntityAITempt(this, 1.25D, false, TEMPTATION_ITEMS));
+        tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+
     }
 
     @Nonnull
