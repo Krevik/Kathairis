@@ -3,6 +3,7 @@ package com.Krevik.TileEntity;
 import java.nio.FloatBuffer;
 import java.util.List;
 
+import com.Krevik.Shaders.StaticShader;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -30,7 +31,6 @@ public class TileEntityMythicStoneSignRenderer extends TileEntitySpecialRenderer
     private final ModelSign model = new ModelSign();
     
     private static FloatBuffer newBuffer = BufferUtils.createFloatBuffer(4);
-
 
     public void render(TileEntityMythicStoneSign te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
     {
@@ -88,8 +88,9 @@ public class TileEntityMythicStoneSignRenderer extends TileEntitySpecialRenderer
         GlStateManager.enableRescaleNormal();
         GlStateManager.pushMatrix();
         GlStateManager.scale(0.6666667F, -0.6666667F, -0.6666667F);
+
         this.model.renderSign();
-        
+
         GlStateManager.popMatrix();
         FontRenderer fontrenderer = this.getFontRenderer();
         float f3 = 0.010416667F;

@@ -61,7 +61,6 @@ public abstract class ShaderProgram {
 		GL20.glDeleteShader(vertexShaderID);
 		GL20.glDeleteShader(fragmentShaderID);
 		GL20.glDeleteProgram(programID);
-		
 	}
 	
 	protected abstract void bindAttributes();
