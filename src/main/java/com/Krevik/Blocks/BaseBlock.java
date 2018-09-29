@@ -291,7 +291,7 @@ public class BaseBlock extends Block
     		return 1+random.nextInt(5);
     	}
     	if(this==KCore.YellowCrystal||this==KCore.VioletCrystal||this==KCore.BlueCrystal) {
-    		return 0;
+    		return 1+random.nextInt(5);
     	}
          return 1;
     }
