@@ -102,7 +102,7 @@ public class KCore {
 	
 	public static final String MODID = "mystic";
 	public static final String name = "Kathairis";
-	public static final String version = "0.8.0";
+	public static final String version = "1.4-beta";
 	
 	@Mod.Instance(MODID)
 	public static KCore instance;
