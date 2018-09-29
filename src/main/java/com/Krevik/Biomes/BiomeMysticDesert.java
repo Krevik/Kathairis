@@ -34,7 +34,7 @@ public class BiomeMysticDesert extends KetherBiome
     protected static WorldGenOldLibrary OLDLIBRARY = new WorldGenOldLibrary();
     protected static WorldGenMysticDesertCactus CACTUS = new WorldGenMysticDesertCactus();
     protected static WorldGenSingleGen SINGLEGENDESERT = new WorldGenSingleGen(1);
-    protected static WorldGenRedwoodTree REDWOODTREE = new WorldGenRedwoodTree();
+    //protected static WorldGenRedwoodTree REDWOODTREE = new WorldGenRedwoodTree();
     
     public BiomeMysticDesert(Biome.BiomeProperties properties)
     {
@@ -75,16 +75,16 @@ public class BiomeMysticDesert extends KetherBiome
     
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
-    	return REDWOODTREE;
+    	return null;
     }
 
     public void decorate(World world, Random random, BlockPos pos)
     {
-        if(random.nextInt(8)==0){
+        /*if(random.nextInt(8)==0){
 			int rx = pos.getX() + random.nextInt(16) + 8;
 			int rz = pos.getZ() + random.nextInt(16) + 8;
     		REDWOODTREE.generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
-        }
+        }*/
         
         if(random.nextInt(3)==0){
         	if(random.nextInt(4)==1) {
