@@ -113,7 +113,10 @@ public class FunctionHelper {
             if (item == Item.getItemFromBlock(KCore.EnergyShard))
             {
                 return 200;
-            }else {
+            }else if(item==KCore.Solis_Crystal){
+            	return 400;
+			}
+            else {
             	return 0;
             }
         }
