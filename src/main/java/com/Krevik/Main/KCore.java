@@ -123,8 +123,8 @@ public class KCore {
 	
 	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", "mystic:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F);
 
-	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 20000, 20F, 7F, 18);
-	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 40, new int[]{4, 6, 8, 4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4F);
+	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18);
+	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 15, new int[]{3, 5, 7, 3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4F);
 	
 	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 3F, 2.5F, 12);
 	public static Item.ToolMaterial CLOUD = EnumHelper.addToolMaterial("cloud", 3, 250, 1F, 2.5F, 1);
