@@ -68,14 +68,14 @@ public static MusicTicker.MusicType ketherMusicNight;
 
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
-		
+		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDaySound, 100, 500);
+		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNightSound, 100, 500);
 	    MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
     }
 	
 	@Override
 	public void init() {
-		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDaySound, 100, 500);
-		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNightSound, 100, 500);
+
 	}
 	
 	public static void drawParticle(World worldObj, Particle particle) {
