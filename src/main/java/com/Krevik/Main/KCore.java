@@ -780,6 +780,7 @@ public class KCore {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
+        KetherDataStorage.initialise();
 
     	World.MAX_ENTITY_RADIUS=12D;
     	KetherPacketHandler.init();
@@ -799,7 +800,6 @@ public class KCore {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
         proxy.postInit(e);
-        KetherDataStorage.initialise();
         MinecraftForge.EVENT_BUS.register(KathairisEventsHandler.class);
     }
 	

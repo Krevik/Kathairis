@@ -48,7 +48,7 @@ public class KetherDataStorage extends WorldSavedData
 			instance = new KetherDataStorage();
 			storage.setData(DATA_NAME, instance);
 		}
-		return instance;
+		return (KetherDataStorage) storage.getOrLoadData(KetherDataStorage.class, DATA_NAME);
 	}
 	
 	public static KetherDataStorage initialise() {
