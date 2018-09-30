@@ -4,10 +4,10 @@
   "name": "Kathairis",
   "description": "Mod that adds a whole new world.",
   "version": "${version}",
-  "url": "",
+  "url": "https://minecraft.curseforge.com/projects/beta-kathairis",
   "updateUrl": "",
   "authorList": ["Krevik"],
-  "credits": "Freesound.org for great free sound samples, Mystical Spire [PMC] for great textures and bug finding, Feranogame [CurseForge] for great textures and bug finding, Modpacks_4_dayz43 for great background music",
+  "credits": "Freesound.org for great free sound samples, Mystical Spire [PMC] for great textures and bug finding, Feranogame [CurseForge] for great textures and bug finding, Modpacks_4_dayz43 for great background music, HKDragonBoy for great models and textures, Raven for being uber-ultra-multi-tasking, Oktet for nice sounds, ShadowWalkerEraZ, YungBlitzkrieg for nice sound",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
