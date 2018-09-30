@@ -83,7 +83,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
 
                         if (iblockstate1.getBlock() == KCore.CorruptedGrass && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
                         {
-                            worldIn.setBlockState(blockpos, KCore.CorruptedGrass.getDefaultState());
+                            worldIn.setBlockState(blockpos, KCore.CorruptedGrass.getDefaultState(),2);
                         }
                     }
                 }
@@ -112,7 +112,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
 		        			er.setPosition(pos.getX()+rand.nextInt(4)-rand.nextInt(4), pos.getY()+1, pos.getZ()+rand.nextInt(4)-rand.nextInt(4));
 		        			worldIn.spawnEntity(er);
 	        				}
-	        			worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), KCore.EasterEgg.getDefaultState());
+	        			worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), KCore.EasterEgg.getDefaultState(),2);
         			}
     			}
         	}
