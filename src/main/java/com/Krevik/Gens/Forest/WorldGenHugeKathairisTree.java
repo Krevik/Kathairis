@@ -42,15 +42,17 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 	
 	private void doTrunkPieceFromHeight(World world,BlockPos pos,IBlockState state) {
 		int groundHeight=world.getHeight(pos).getY();
-			if(pos.getY()-groundHeight>2) {
-				for(int c=pos.getY();c>=groundHeight;c--) {
-					this.setBlock(world, new BlockPos(pos.getX(),c-1,pos.getZ()), state);
+		if(pos.getY()-groundHeight<6) {
+			if (pos.getY() - groundHeight > 2) {
+				for (int c = pos.getY(); c >= groundHeight; c--) {
+					this.setBlock(world, new BlockPos(pos.getX(), c - 1, pos.getZ()), state);
 				}
-			}else {
-				for(int c=pos.getY();c>=groundHeight;c--) {
-					this.setBlock(world, new BlockPos(pos.getX(),c,pos.getZ()), state);
+			} else {
+				for (int c = pos.getY(); c >= groundHeight; c--) {
+					this.setBlock(world, new BlockPos(pos.getX(), c, pos.getZ()), state);
 				}
 			}
+		}
 
 	}
 	
@@ -85,8 +87,9 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 					int groundHeight=worldIn.getHeight(root).getY();
 					if((root.getY()+length-shift)-groundHeight>5) {
 						break outerloop;
+					}else {
+						doTrunkPieceFromHeight(worldIn, new BlockPos(root.getX() - shift, root.getY() + length - shift, root.getZ() - shift), logState);
 					}
-					doTrunkPieceFromHeight(worldIn,new BlockPos(root.getX()-shift,root.getY()+length-shift,root.getZ()-shift),logState);
 				}
 			}
 			if(rootsNumber==1) {
@@ -95,8 +98,9 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 
 					if((root.getY()+length-shift)-groundHeight>5) {
 						break outerloop;
+					}else {
+						doTrunkPieceFromHeight(worldIn, new BlockPos(root.getX() - shift, root.getY() + length - shift, root.getZ() + 1 + shift), logState);
 					}
-					doTrunkPieceFromHeight(worldIn,new BlockPos(root.getX()-shift,root.getY()+length-shift,root.getZ()+1+shift),logState);
 				}
 			}
 			if(rootsNumber==2) {
@@ -106,7 +110,9 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 					if((root.getY()+length-shift)-groundHeight>5) {
 						break outerloop;
 					}
-					doTrunkPieceFromHeight(worldIn,new BlockPos(root.getX()+1+shift,root.getY()+length-shift,root.getZ()+1+shift),logState);
+					else {
+						doTrunkPieceFromHeight(worldIn, new BlockPos(root.getX() + 1 + shift, root.getY() + length - shift, root.getZ() + 1 + shift), logState);
+					}
 				}
 			}
 			if(rootsNumber==3) {
@@ -115,8 +121,9 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 
 					if((root.getY()+length-shift)-groundHeight>5) {
 						break outerloop;
+					}else {
+						doTrunkPieceFromHeight(worldIn, new BlockPos(root.getX() + 1 + shift, root.getY() + length - shift, root.getZ() - shift), logState);
 					}
-					doTrunkPieceFromHeight(worldIn,new BlockPos(root.getX()+1+shift,root.getY()+length-shift,root.getZ()-shift),logState);
 				}
 			}
 		}
