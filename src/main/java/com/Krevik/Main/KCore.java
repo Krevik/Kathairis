@@ -112,7 +112,6 @@ public class KCore {
     public static final RegistryHelper regHelper = new RegistryHelper();
 
 	public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();
-	public static final String DIM_NAME = "Kathairis";
 	public static int updateRendererCount=0;
 	
 	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12);
@@ -127,9 +126,7 @@ public class KCore {
 	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 15, new int[]{3, 5, 7, 3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4F);
 	
 	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 3F, 2.5F, 12);
-	public static Item.ToolMaterial CLOUD = EnumHelper.addToolMaterial("cloud", 3, 250, 1F, 2.5F, 1);
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21);
-	public static Item.ToolMaterial LIGHT = EnumHelper.addToolMaterial("light", 1, 1000, 0.5F, 0.5F, 1);
 	public static Item.ToolMaterial MAGNETHIUM = EnumHelper.addToolMaterial("magnethium", 3, 800, 6F, 3F, 20);
 
 
