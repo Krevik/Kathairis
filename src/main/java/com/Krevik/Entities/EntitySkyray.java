@@ -137,8 +137,8 @@ public class EntitySkyray extends EntityFlying
     	super.initEntityAI();
         this.tasks.addTask(2, new EntitySkyray.AIMoveRandom(this));
         this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
-        this.tasks.addTask(3, new EntityAILookIdle(this));
+        this.tasks.addTask(2, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
+        this.tasks.addTask(2, new EntityAILookIdle(this));
 
     }
     
@@ -295,19 +295,23 @@ public class EntitySkyray extends EntityFlying
             		if(this.squid.getRNG().nextInt(25)==0) {
                     List<EntitySkyray> skyrays = new ArrayList<EntitySkyray>();
             	        	skyrays=this.squid.world.getEntitiesWithinAABB(EntitySkyray.class, new AxisAlignedBB(this.squid.posX - 15, this.squid.posY - 15, this.squid.posZ - 15, this.squid.posX  + 15, this.squid.posY + 15, this.squid.posZ + 15));
-            	        	if(skyrays.size()>0);
-            	        	this.squid.parent=skyrays.get(this.squid.getRNG().nextInt(skyrays.size()));
+            	        	if(skyrays.size()>0) {
+            	        	    for(int x=0;x<skyrays.size();x++) {
+            	        	        if(skyrays.get(x).getAdult()==1){
+            	        	            squid.parent=skyrays.get(x);
+                                    }
+                                }
+                            }
             	        if(this.squid.parent!=null) {
-            	        	if(this.squid.parent.isDead) {
+            	        	if(this.squid.parent.isDead||squid.getParent().getAdult()==0) {
             	        		this.squid.parent=null;
             	        	}
             	        }
             		}
             	}
-	            	if(this.squid.getParent()==null) {
+	            	if(this.squid.getParent()==null&&this.squid.getAdult()==1) {
 	                	Vec3d look = this.squid.getLookVec().normalize();
 	                	double lookX=look.x;
-	                	double lookY=look.y;
 	                	double lookZ=look.z;
 	
 	                	float f2=this.squid.randomMotionVecY;
@@ -315,7 +319,9 @@ public class EntitySkyray extends EntityFlying
 	                	float f3=this.squid.randomMotionVecZ;
 	                    //float f = this.squid.getRNG().nextFloat() * ((float)Math.PI/64);
 	                    //float f1 = MathHelper.cos(f) * 0.2F;
-	                	if(this.squid.getRNG().nextInt(100)==0) {
+	                	if(this.squid.getRNG().nextInt(100)==0)
+	                	{
+
 	                	}
 	                    //float f3 = MathHelper.sin(f) * 0.2F;
 	
@@ -341,12 +347,16 @@ public class EntitySkyray extends EntityFlying
 	                    	f2=squid.getRNG().nextFloat();
 	                    }
 	                    this.squid.setMovementVector(f1, f2, f3);
-	                }else {
-	                	float f1=(float) (this.squid.getParent().posX-this.squid.posX)/3;
-	                	float f2=(float) (this.squid.getParent().posY-this.squid.posY)/3;
-	                	float f3=(float) (this.squid.getParent().posZ-this.squid.posZ)/3;
-	                	
-	                	this.squid.setMovementVector(f1, f2, f3);
+	                }
+
+	                if(this.squid.getAdult()==0&&this.squid.getParent()!=null){
+	                    if(this.squid.getDistance(this.squid.getParent())>5) {
+                            float f1 = (float) (this.squid.getParent().posX - this.squid.posX) / 3;
+                            float f2 = (float) (this.squid.getParent().posY - this.squid.posY) / 3;
+                            float f3 = (float) (this.squid.getParent().posZ - this.squid.posZ) / 3;
+
+                            this.squid.setMovementVector(f1, f2, f3);
+                        }
 	                }
             	}
         }
