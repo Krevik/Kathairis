@@ -85,6 +85,8 @@ public class BiomeMysticDesert extends KetherBiome
 			int rz = pos.getZ() + random.nextInt(16) + 8;
     		REDWOODTREE.generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
         }*/
+
+
         
         if(random.nextInt(3)==0){
         	if(random.nextInt(4)==1) {

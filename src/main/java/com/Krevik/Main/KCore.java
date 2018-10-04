@@ -1020,7 +1020,7 @@ public class KCore {
 	}
 
     public static FunctionHelper functionHelper = new FunctionHelper();
-    public ChargerRecipes chargerRecipes = new ChargerRecipes();
+    public static ChargerRecipes chargerRecipes = new ChargerRecipes();
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
