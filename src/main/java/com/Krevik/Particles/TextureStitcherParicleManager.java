@@ -19,6 +19,7 @@ public class TextureStitcherParicleManager
 	    ResourceLocation Mystic_Gem_Block_Particle = KCore.instance.cproxy.Mystic_Gem_Block_Particle;
 	    ResourceLocation dust_particle = KCore.instance.cproxy.dust_particle;
 	    ResourceLocation kether_portal_particle = KCore.instance.cproxy.kether_portal_particle;
+	    ResourceLocation living_particle = KCore.instance.cproxy.living_particle;
 
 	    event.getMap().registerSprite(particleBlueCloud);
 	    event.getMap().registerSprite(shockingBall);
@@ -28,6 +29,7 @@ public class TextureStitcherParicleManager
 	    event.getMap().registerSprite(Mystic_Gem_Block_Particle);
 	    event.getMap().registerSprite(dust_particle);
 	    event.getMap().registerSprite(kether_portal_particle);
+	    event.getMap().registerSprite(living_particle);
 
 	  }
 }

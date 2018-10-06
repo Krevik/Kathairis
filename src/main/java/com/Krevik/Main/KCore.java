@@ -1,5 +1,6 @@
 package com.Krevik.Main;
 
+import net.minecraft.init.Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -653,9 +654,9 @@ public class KCore {
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.BisonMeat)
     public static final ItemMysticFood BisonMeat = new ItemMysticFood(Ref.BisonMeat,CreativeTabsMystic.food, 6,0.9F,false);
-    
+
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CookedBisonMeat)
-    public static final ItemMysticFood CookedBisonMeat = new ItemMysticFood(Ref.CookedBisonMeat,CreativeTabsMystic.food, 6,0.9F,false);
+    public static final ItemMysticFood CookedBisonMeat = new ItemMysticFood(Ref.CookedBisonMeat,CreativeTabsMystic.food, 8,1.2F,false);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.ButterflyFlowerNectar)
 	public static final BaseItem ButterflyFlowerNectar = new BaseItem(Ref.ButterflyFlowerNectar, CreativeTabsMystic.miscellaneous);
