@@ -16,7 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.vecmath.Vector3d;
 import java.util.Random;
-import java.util.Vector;
 
 @SideOnly(Side.CLIENT)
 public class LivingParticle extends Particle
@@ -37,9 +36,6 @@ public class LivingParticle extends Particle
         this.spawnPosZ = this.posZ;
         this.particleScale = this.rand.nextFloat() * 0.2F+0.05f;
         this.portalParticleScale = this.particleScale;
-        // this.particleRed = 2.32F;
-        // this.particleGreen = 2.50F;
-        // this.particleBlue = 2.54F;
         this.particleRed=0.8f;
         this.particleGreen=0.8f;
         this.particleBlue=1f;
