@@ -22,7 +22,7 @@ public class RenderPoisonousScorpion extends RenderLiving<EntityPoisonousScorpio
 
     public RenderPoisonousScorpion(RenderManager renderManagerIn)
     {
-        super(renderManagerIn, new ModelPoisonousScorpion(), 0.2F);
+        super(renderManagerIn, new ModelPoisonousScorpion(), 0.4F);
     }
 
     
@@ -45,7 +45,7 @@ public class RenderPoisonousScorpion extends RenderLiving<EntityPoisonousScorpio
     
     protected void applyRotations(EntityPoisonousScorpion entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scale(0.2, 0.2, 0.2);
+    	GlStateManager.scale(0.5, 0.5, 0.5);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         
     }
