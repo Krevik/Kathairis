@@ -1,6 +1,7 @@
 package com.Krevik.Models;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
@@ -199,14 +200,13 @@ public class ModelLivingFlower extends ModelBase {
         modelRenderer.rotateAngleZ = z;
     }
   
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+  public void setRotationAngles(float f, float f1, float age, float f3, float f4, float f5, Entity entity)
   {
-    super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    this.Lisc1.rotateAngleX=MathHelper.abs(MathHelper.sin(f2 * 0.006662F))*1.4F;
-    this.Lisc2.rotateAngleX=MathHelper.abs(MathHelper.sin(f2 * 0.006662F))*1.4F;
-    this.Lisc3.rotateAngleX=MathHelper.abs(MathHelper.sin(f2 * 0.006662F))*1.4F;
-    this.Lisc4.rotateAngleX=MathHelper.abs(MathHelper.sin(f2 * 0.006662F))*1.4F;
-    this.Lisc5.rotateAngleX=MathHelper.abs(MathHelper.sin(f2 * 0.006662F))*1.4F;
+    super.setRotationAngles(f, f1, age, f3, f4, f5, entity);
+    this.Lisc1.rotateAngleX=MathHelper.abs(MathHelper.sin(age * 0.006662F))*1.4F;
+    this.Lisc2.rotateAngleX=MathHelper.abs(MathHelper.sin(age * 0.006662F))*1.4F;
+    this.Lisc3.rotateAngleX=MathHelper.abs(MathHelper.sin(age * 0.006662F))*1.4F;
+    this.Lisc4.rotateAngleX=MathHelper.abs(MathHelper.sin(age * 0.006662F))*1.4F;
+    this.Lisc5.rotateAngleX=MathHelper.abs(MathHelper.sin(age * 0.006662F))*1.4F;
   }
-
 }
