@@ -17,6 +17,8 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -24,6 +26,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,6 +36,7 @@ public class EntityLivingFlower extends EntityMob
 {
 	private int timer=0;
 	public EntityPlayerMP target=null;
+    private static final DataParameter<Integer> animationTime = EntityDataManager.<Integer>createKey(EntityLivingFlower.class, DataSerializers.VARINT);
 
     public EntityLivingFlower(World worldIn)
     {
@@ -68,8 +72,17 @@ public class EntityLivingFlower extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
+        this.dataManager.register(animationTime, 0);
     }
 
+    public int getAnimationTime()
+    {
+        return MathHelper.clamp(dataManager.get(animationTime), 0, 4);
+    }
+
+    public void setAnimationTime(int meta) {
+        dataManager.set(animationTime, meta);
+    }
 
     public void notifyDataManagerChange(DataParameter<?> key)
     {
@@ -92,7 +105,13 @@ public class EntityLivingFlower extends EntityMob
         this.rotationPitch=0;
         this.rotationYaw=0;
         this.rotationYawHead=0;
-        EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 5);
+        if(getAnimationTime()>0){
+            setAnimationTime(getAnimationTime()+1);
+        }
+        if(getAnimationTime()>499){
+            setAnimationTime(0);
+        }
+            EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 5);
         if(ep!=null) {
         	if(ep instanceof EntityPlayerMP) {
         		EntityPlayerMP target = (EntityPlayerMP) ep;
@@ -105,6 +124,13 @@ public class EntityLivingFlower extends EntityMob
             				timer=0;
                     	}
         			}
+        			if(getRNG().nextInt(100)==0){
+        			    if(getAnimationTime()==0){
+                            setAnimationTime(1);
+                        }
+                    }
+
+
         		}
 
         	}
@@ -112,7 +138,7 @@ public class EntityLivingFlower extends EntityMob
         	target=null;
         }
         if(this.world.isRemote) {
-        	if(this.rand.nextInt(15)==1) {
+        	if(this.rand.nextInt(30)==1) {
         		if(ep!=null) {
         			this.world.spawnParticle(EnumParticleTypes.HEART, this.posX, this.posY+0.5, this.posZ, 0, (ep.posY-this.posY)/1000+1, 0);
         		}
@@ -200,6 +226,7 @@ public class EntityLivingFlower extends EntityMob
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
+        compound.setInteger("animation_time", getAnimationTime());
     }
 
     /**
@@ -208,6 +235,7 @@ public class EntityLivingFlower extends EntityMob
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
+        setAnimationTime(compound.getInteger("animation_time"));
 
     }
 

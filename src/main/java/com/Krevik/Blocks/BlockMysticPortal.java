@@ -241,7 +241,6 @@ public class BlockMysticPortal extends BaseBlock
     public boolean trySpawnPortal(World worldIn, BlockPos pos)
     {
         BlockMysticPortal.Size blockportal$size = new BlockMysticPortal.Size(worldIn, pos, EnumFacing.Axis.X);
-
         if (blockportal$size.isValid() && blockportal$size.portalBlockCount == 0)
         {
             blockportal$size.placePortalBlocks();

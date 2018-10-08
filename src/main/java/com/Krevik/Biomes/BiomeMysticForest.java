@@ -7,14 +7,11 @@ import com.Krevik.Entities.EntityGecko;
 import com.Krevik.Entities.EntityHowler;
 import com.Krevik.Entities.EntityLivingFlower;
 import com.Krevik.Entities.EntityMysticBird;
+import com.Krevik.Gens.Forest.*;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
 import com.Krevik.Gens.WorldGenMysticMultiGrass;
 import com.Krevik.Gens.WorldGenNewTree;
 import com.Krevik.Gens.WorldGenSingleGen;
-import com.Krevik.Gens.Forest.WorldGenBasicMysticTree;
-import com.Krevik.Gens.Forest.WorldGenCustomTree2;
-import com.Krevik.Gens.Forest.WorldGenHugeKathairisTree;
-import com.Krevik.Gens.Forest.WorldGenShinyTree;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.material.Material;
@@ -85,7 +82,7 @@ public class BiomeMysticForest extends KetherBiome
     	}
     	else{
             return (WorldGenAbstractTree)TREE_FEATURE2;
-    	}    	
+    	}
     }
     
     public WorldGenerator getRandomWorldGenForGrass(Random rand)

@@ -35,7 +35,6 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
     	}else {
     		generateTree(worldIn,random,new BlockPos(posX,posY,posZ));
     		return true;
-
     	}
 
     }
