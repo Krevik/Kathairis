@@ -46,7 +46,7 @@ public class PacketDustStormClient implements IMessage {
 				EntityPlayer player = Minecraft.getMinecraft().player;
 				if(player!=null) {	
 						if(Minecraft.getMinecraft().player.dimension==KCore.instance.DIMENSION_ID) {
-							KetherDataStorage data = KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.instance.DIMENSION_ID));
+							KetherDataStorage data = KetherDataStorage.getDataInstance(player.world);
 							if(data!=null) {
 							ArrayList<BlockPos> positions=new ArrayList<BlockPos>();
 							positions.add(player.getPosition());
