@@ -3,6 +3,8 @@ package com.Krevik.Commands;
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Main.KCore;
 
+import com.Krevik.Networking.KetherPacketHandler;
+import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -45,8 +47,12 @@ public class SandstormCommand extends CommandBase{
 							}else {
 								data.setIsSandstorm(true);
 								data.setSandstormTime(Integer.parseInt(args[0]));
-								data.setSandstormX((world.rand.nextDouble()-world.rand.nextDouble()));
-								data.setSandstormZ((world.rand.nextDouble()-world.rand.nextDouble()));
+								float X=(float)(world.rand.nextDouble()-world.rand.nextDouble());
+								float Z=(float)(world.rand.nextDouble()-world.rand.nextDouble());
+								data.setSandstormX(X);
+								data.setSandstormZ(Z);
+								PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, Integer.parseInt(args[0]),Z);
+								KetherPacketHandler.CHANNEL.sendToAll(message);
 							}
 		                    notifyCommandListener(sender, this, "sandstorm time set to: "+Integer.parseInt(args[0]), new Object[] {Integer.parseInt(args[0]), sender.getName()});
 						}else {
