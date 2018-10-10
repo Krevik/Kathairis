@@ -8,6 +8,7 @@ import com.Krevik.Main.KCore;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDustStormClient;
 
+import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -61,21 +62,30 @@ public class KathairisEventsHandler {
 
 
 	static KetherDataStorage data = null;
+
 	@SubscribeEvent
 	public static void onEvent1(WorldTickEvent event)
 	{
 		KCore.instance.updateRendererCount++;
 				if(data==null) {
-					data = KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.instance.DIMENSION_ID));
+					data = KetherDataStorage.getDataInstance(event.world);
 				}
+
 				if(data!=null&&event.world.getTotalWorldTime()>100) {
 					if(!event.world.isRaining()) {
 						if(!data.getIsSandstorm()) {
 							if(event.world.rand.nextInt(500000)==0) {
-								data.setSandstormTime(9000+event.world.rand.nextInt(20000));
-								data.setSandstormX((event.world.rand.nextDouble()-event.world.rand.nextDouble()));
-								data.setSandstormZ((event.world.rand.nextDouble()-event.world.rand.nextDouble()));
-								data.setIsSandstorm(true);
+								if(!event.world.isRemote) {
+									float time = 9000 + event.world.rand.nextInt(20000);
+									float X = (float) (event.world.rand.nextDouble() - event.world.rand.nextDouble());
+									float Z = (float) (event.world.rand.nextDouble() - event.world.rand.nextDouble());
+									data.setSandstormTime((int) time);
+									data.setSandstormX(X);
+									data.setSandstormZ(Z);
+									data.setIsSandstorm(true);
+									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
+									KetherPacketHandler.CHANNEL.sendToAll(message);
+								}
 							}
 						}
 					}
@@ -121,7 +131,7 @@ public class KathairisEventsHandler {
 								event.player.motionX+=data.getSandstormX()*0.022;
 								event.player.motionZ+=data.getSandstormZ()*0.022;
 							}
-							event.player.addPotionEffect(new PotionEffect(Potion.getPotionById(15),10,100));
+							event.player.addPotionEffect(new PotionEffect(Potion.getPotionById(15),100,100));
 						}
 					}
 				}
