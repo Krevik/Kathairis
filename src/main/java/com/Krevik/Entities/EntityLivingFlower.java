@@ -2,6 +2,7 @@ package com.Krevik.Entities;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIHealTargets;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
@@ -34,9 +35,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityLivingFlower extends EntityMob
 {
-	private int timer=0;
-	public EntityPlayerMP target=null;
-    private static final DataParameter<Integer> animationTime = EntityDataManager.<Integer>createKey(EntityLivingFlower.class, DataSerializers.VARINT);
 
     public EntityLivingFlower(World worldIn)
     {
@@ -47,7 +45,8 @@ public class EntityLivingFlower extends EntityMob
 
     protected void initEntityAI()
     {
-
+        super.initEntityAI();
+        this.tasks.addTask(1, new EntityAIHealTargets(this));
     }
     
     @Override
@@ -72,17 +71,9 @@ public class EntityLivingFlower extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.dataManager.register(animationTime, 0);
     }
 
-    public int getAnimationTime()
-    {
-        return MathHelper.clamp(dataManager.get(animationTime), 0, 4);
-    }
 
-    public void setAnimationTime(int meta) {
-        dataManager.set(animationTime, meta);
-    }
 
     public void notifyDataManagerChange(DataParameter<?> key)
     {
@@ -101,47 +92,12 @@ public class EntityLivingFlower extends EntityMob
     	this.motionZ=0;
     	this.posX=this.lastTickPosX;
     	this.posZ=this.lastTickPosZ;
-        timer++;
         this.rotationPitch=0;
         this.rotationYaw=0;
         this.rotationYawHead=0;
-        if(getAnimationTime()>0){
-            setAnimationTime(getAnimationTime()+1);
-        }
-        if(getAnimationTime()>499){
-            setAnimationTime(0);
-        }
-            EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 5);
-        if(ep!=null) {
-        	if(ep instanceof EntityPlayerMP) {
-        		EntityPlayerMP target = (EntityPlayerMP) ep;
-        		if(target!=null&&!target.isCreative()) {
-        			this.target=target;
-        			timer++;
-        			if(timer>=100) {
-                    	if(target!=null) {
-            				target.heal(1F);
-            				timer=0;
-                    	}
-        			}
-        			if(getRNG().nextInt(100)==0){
-        			    if(getAnimationTime()==0){
-                            setAnimationTime(1);
-                        }
-                    }
-
-
-        		}
-
-        	}
-        }else {
-        	target=null;
-        }
         if(this.world.isRemote) {
         	if(this.rand.nextInt(30)==1) {
-        		if(ep!=null) {
-        			this.world.spawnParticle(EnumParticleTypes.HEART, this.posX, this.posY+0.5, this.posZ, 0, (ep.posY-this.posY)/1000+1, 0);
-        		}
+        			this.world.spawnParticle(EnumParticleTypes.HEART, this.posX, this.posY+0.5, this.posZ, 0, 0.2, 0);
         	}
         }
         super.onLivingUpdate();
@@ -150,7 +106,6 @@ public class EntityLivingFlower extends EntityMob
     
     public void onUpdate() {
     	super.onUpdate();
-    
     }
 
 
@@ -226,7 +181,6 @@ public class EntityLivingFlower extends EntityMob
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setInteger("animation_time", getAnimationTime());
     }
 
     /**
@@ -235,8 +189,6 @@ public class EntityLivingFlower extends EntityMob
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-        setAnimationTime(compound.getInteger("animation_time"));
-
     }
 
     /**
