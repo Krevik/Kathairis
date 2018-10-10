@@ -21,6 +21,8 @@ public class KetherPacketHandler {
 		CHANNEL.registerMessage(PacketSpawnForgottenSandEntity.Handler.class, PacketSpawnForgottenSandEntity.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(PacketSquidHoldingPlayerServer.Handler.class, PacketSquidHoldingPlayerServer.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(PacketJadeVinesServer.Handler.class, PacketJadeVinesServer.class, id++, Side.SERVER);
+		CHANNEL.registerMessage(PacketSandstormUpdatedOnClient.Handler.class, PacketSandstormUpdatedOnClient.class, id++, Side.CLIENT);
+		CHANNEL.registerMessage(PacketSandstormUpdatedOnClient.Handler.class, PacketSandstormUpdatedOnClient.class, id++, Side.SERVER);
 
 	}
 
