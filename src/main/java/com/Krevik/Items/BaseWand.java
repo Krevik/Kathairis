@@ -39,11 +39,11 @@ public class BaseWand extends BaseItem{
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
     	if(stack.getItem()==KCore.DeathWand) {
-	    		if(!(target instanceof EntityPlayerMP)&&!(target instanceof EntityWither)&&!(target instanceof EntityDragon)) {
+	    		if(!(target instanceof EntityPlayer)&&!(target instanceof EntityPlayerMP)&&!(target instanceof EntityWither)&&!(target instanceof EntityDragon)) {
 	            stack.damageItem(2, attacker);
 	    		lastKilledEntity=target;
 	    		target.setDead();
-	    		target.onDeath(DamageSource.GENERIC);
+	    		target.onDeath(DamageSource.MAGIC);
 	    		}
     	}
     	
