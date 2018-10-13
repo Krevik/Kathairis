@@ -96,7 +96,7 @@ public class EntityAIAvoidMovingSands extends EntityAIBase
         {
             BlockPos blockpos1 = blockpos.add(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
 
-            if (this.creature.world.getBlockState(new BlockPos(blockpos1.getX(),this.creature.world.getHeight(blockpos1).getY()-2,blockpos1.getZ()))!=KCore.MovingSand.getDefaultState() && this.creature.getBlockPathWeight(blockpos1) < 0.0F)
+            if (this.creature.world.getBlockState(new BlockPos(blockpos1.getX(),this.creature.world.getHeight(blockpos1).getY()-1,blockpos1.getZ()))!=KCore.MovingSand.getDefaultState() && this.creature.getBlockPathWeight(blockpos1) < 0.0F)
             {
                 return new Vec3d((double)blockpos1.getX(), (double)blockpos1.getY(), (double)blockpos1.getZ());
             }
