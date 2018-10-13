@@ -19,10 +19,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
@@ -32,7 +30,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -156,7 +153,7 @@ public class EntityCloudySlime extends EntityTameable implements EntityFlying
 
 	            if (!this.world.isRemote)
 	            {
-	                if (this.rand.nextInt(10) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
+	                if (this.rand.nextInt(8) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
 	                {
 	                    this.setTamedBy(player);
 	                    this.playTameEffect(true);
@@ -174,9 +171,20 @@ public class EntityCloudySlime extends EntityTameable implements EntityFlying
         }
         else
         {
-            if (!this.world.isRemote && !this.isFlying() && this.isTamed() && this.isOwner(player))
+            if (!this.world.isRemote && this.isTamed() && this.isOwner(player))
             {
-                this.aiSit.setSitting(!this.isSitting());
+                if(itemstack.getItem().equals(KCore.CloudEssence)){
+                    if(this.getHealth()<this.getMaxHealth()){
+                        this.heal(3.0f);
+                        this.playTameEffect(true);
+                        if (!player.capabilities.isCreativeMode)
+                        {
+                            itemstack.shrink(1);
+                        }
+                    }
+                }else {
+                    this.aiSit.setSitting(!this.isSitting());
+                }
             }
 
             return super.processInteract(player, hand);
@@ -298,6 +306,14 @@ public class EntityCloudySlime extends EntityTameable implements EntityFlying
             if (this.aiSit != null)
             {
                 this.aiSit.setSitting(false);
+            }
+            if(source==DamageSource.IN_WALL){
+                if(this.getOwner()!=null&&getOwner().isEntityAlive()){
+                    setPosition(getOwner().posX,getOwner().posY,getOwner().posZ);
+                }else{
+                    BlockPos tmp = new BlockPos(posX,world.getHeight(getPosition()).getY()+1,posZ);
+                    setPosition(tmp.getX(),tmp.getY(),tmp.getZ());
+                }
             }
 
             return super.attackEntityFrom(source, amount);
