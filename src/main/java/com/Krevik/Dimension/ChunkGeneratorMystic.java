@@ -75,10 +75,8 @@ public class ChunkGeneratorMystic implements IChunkGenerator
     private int upperScale=130;
     public static final WorldGenSingleGen EnergyShard = new WorldGenSingleGen(4);
     public int cloudWeight=5;
-	private static final int TitaniumPerChunk = 5;
-	private static final int AdamantiumPerChunk = 2;
-	private static final WorldGenMysticOre TitaniumGen = new WorldGenMysticOre(KCore.TitaniumOre.getDefaultState(), 3);
-	private static final WorldGenMysticOre AdamantiumGen = new WorldGenMysticOre(KCore.RevenumOre.getDefaultState(), 1);
+
+
     public static final WorldGenCrystalChamber CrystalChamber = new WorldGenCrystalChamber();
     public static final WorldGenCloudTemple CloudTemple = new WorldGenCloudTemple();
     public static final WorldGenFloatingIslands FloatingIsland = new WorldGenFloatingIslands(1);
@@ -441,25 +439,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
         		BlockPos blockposnew = new BlockPos(X,TOP,Z);
             EnergyShard.generate(world, this.rand, blockpos.add(X,TOP,Z));
         }
-	       for(int c=0;c<this.TitaniumPerChunk;c++){
-	    		int X = this.rand.nextInt(16) + 8;
-	    		int Z = this.rand.nextInt(16) + 8;
-	        	int j3=this.rand.nextInt(248)+8;
-	        	if(j3>0){
-	        		int i4=this.rand.nextInt(j3);
-	        		TitaniumGen.generate(world, this.rand, blockpos.add(X,i4,Z));
-	        	}
-	        }
-	        for(int c=0;c<this.AdamantiumPerChunk;c++){
-	    		int X = this.rand.nextInt(16) + 8;
-	    		int Z = this.rand.nextInt(16) + 8;
-	        	int j3=this.rand.nextInt(248)+8;
-	        	if(j3<30){
-	        		int i4=this.rand.nextInt(j3);
-	        		BlockPos blockposnew = new BlockPos(X,i4,Z);
-	        		AdamantiumGen.generate(world, this.rand, blockpos.add(X,i4,Z));
-	        	}
-	        }
+
 	        if(this.rand.nextInt(100)==2) {
 	    		int X = this.rand.nextInt(16) + 8;
 	    		int Z = this.rand.nextInt(16) + 8;

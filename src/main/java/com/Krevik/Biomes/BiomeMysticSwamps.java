@@ -82,6 +82,7 @@ public class BiomeMysticSwamps extends KetherBiome
     
     public void decorate(World world, Random random, BlockPos pos)
     {
+        super.decorate(world,random,pos);
     			int rx = pos.getX() + random.nextInt(16) + 8;
     			int rz = pos.getZ() + random.nextInt(16) + 8;
     			new WorldGenSwampLakes(KCore.MudBlock).generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));

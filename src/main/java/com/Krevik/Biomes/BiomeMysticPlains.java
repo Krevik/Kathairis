@@ -68,6 +68,7 @@ public class BiomeMysticPlains extends KetherBiome
     }
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
+        super.decorate(worldIn,rand,pos);
         /*if(rand.nextInt(140)==20){
         int j = rand.nextInt(16) + 8;
         int k = rand.nextInt(16) + 8;

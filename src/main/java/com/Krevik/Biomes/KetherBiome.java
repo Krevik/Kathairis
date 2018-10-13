@@ -29,7 +29,8 @@ public abstract class KetherBiome extends Biome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityRubySile.class, 8, 1, 2));
 
     }
-    
+    private static final int TitaniumPerChunk = 9;
+    private static final int RevenumPerChunk = 15;
 
     @SideOnly(Side.CLIENT)
     public int getSkyColorByTemp(float currentTemperature)
@@ -42,14 +43,27 @@ public abstract class KetherBiome extends Biome
 
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
-        this.decorator.decorate(worldIn, rand, this, pos);
-        
-        for(int x=0;x<=2+rand.nextInt(4);x++){
+        for(int x=0;x<=4+rand.nextInt(4);x++){
         	WorldGenMysticOre normalStone = new WorldGenMysticOre(Blocks.STONE.getDefaultState(),2+rand.nextInt(16));
 			int rx = pos.getX() + rand.nextInt(16) + 8;
 			int rz = pos.getZ() + rand.nextInt(16) + 8;
 			int ry = 5 + rand.nextInt(128);
 			normalStone.generate(worldIn, rand, new BlockPos(rx,ry,rz));
+        }
+
+        for(int c=0;c<this.TitaniumPerChunk;c++){
+            int rx = pos.getX() + rand.nextInt(16) + 8;
+            int rz = pos.getZ() + rand.nextInt(16) + 8;
+            int ry = 5 + rand.nextInt(80);
+                BlockPos blockposnew = new BlockPos(rx,ry,rz);
+                new WorldGenMysticOre(KCore.TitaniumOre.getDefaultState(), 2+rand.nextInt(6)).generate(worldIn, rand, blockposnew);
+        }
+        for(int c=0;c<this.RevenumPerChunk;c++){
+            int rx = pos.getX() + rand.nextInt(16) + 8;
+            int rz = pos.getZ() + rand.nextInt(16) + 8;
+            int ry = 5 + rand.nextInt(128);
+                BlockPos blockposnew = new BlockPos(rx,ry,rz);
+                new WorldGenMysticOre(KCore.RevenumOre.getDefaultState(), 4+rand.nextInt(10)).generate(worldIn, rand, blockposnew);
         }
     }
 
