@@ -30,7 +30,7 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
     public BlockMysticTallGrass(String Name,boolean multi,boolean repl)
     {
         super(Name,multi,repl);
-        this.setHardness(0.1f);
+        this.setHardness(0.0f);
         replacable=repl;
     }
 
