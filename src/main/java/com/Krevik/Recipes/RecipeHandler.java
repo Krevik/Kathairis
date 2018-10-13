@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RecipeHandler {
 	
@@ -22,6 +23,7 @@ public class RecipeHandler {
 		addOther();
 		addFood();
 	}
+
 	private static void addGemsRecipes() {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Mystic Gem1"),new ResourceLocation("Gems1"),new ItemStack(KCore.MysticGem), "#Y#", "YXY", "#Y#", Character.valueOf('#'), Items.ENDER_PEARL,Character.valueOf('X'),Items.DIAMOND,Character.valueOf('Y'),new ItemStack(Items.DYE, 1, 4));
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Mystic Gem2"),new ResourceLocation("Gems2"),new ItemStack(KCore.MysticGem),"X#", Character.valueOf('#'), KCore.MysticFungus,Character.valueOf('X'),Items.DIAMOND);
