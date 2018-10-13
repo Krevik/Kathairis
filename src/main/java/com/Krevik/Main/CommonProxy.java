@@ -255,7 +255,8 @@ public class CommonProxy {
 					KCore.Redwood_log_size_4,
 					KCore.Redwood_log_size_3,
 					KCore.Redwood_log_size_2,
-					KCore.Redwood_log_size_1
+					KCore.Redwood_log_size_1,
+					KCore.Mythic_Stone_Bricks
 					//KCore.Hell_Plant
 					//KCore.Butterfly_Analysing_Table
 
@@ -389,7 +390,8 @@ public class CommonProxy {
 					new ItemBlock(KCore.Redwood_log_size_4),
 					new ItemBlock(KCore.Redwood_log_size_3),
 					new ItemBlock(KCore.Redwood_log_size_2),
-					new ItemBlock(KCore.Redwood_log_size_1)
+					new ItemBlock(KCore.Redwood_log_size_1),
+					new ItemBlock(KCore.Mythic_Stone_Bricks)
 					//new ItemBlock(KCore.Hell_Plant)
 					//new ItemBlock(KCore.Butterfly_Analysing_Table)
 					};
