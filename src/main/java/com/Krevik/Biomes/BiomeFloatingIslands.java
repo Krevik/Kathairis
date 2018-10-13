@@ -61,7 +61,8 @@ public class BiomeFloatingIslands extends KetherBiome
     }
 
     public void decorate(World worldIn, Random random, BlockPos pos)
-    {    
+    {
+        super.decorate(worldIn,random,pos);
         if(random.nextInt(3)==0) {
     		int X = pos.getX() + random.nextInt(16);
     		int Z = pos.getZ() + random.nextInt(16);

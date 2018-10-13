@@ -80,6 +80,7 @@ public class BiomeMysticDesert extends KetherBiome
 
     public void decorate(World world, Random random, BlockPos pos)
     {
+        super.decorate(world,random,pos);
         /*if(random.nextInt(8)==0){
 			int rx = pos.getX() + random.nextInt(16) + 8;
 			int rz = pos.getZ() + random.nextInt(16) + 8;

@@ -62,7 +62,8 @@ public class BiomeMysticForest extends KetherBiome
     }
 
     public void decorate(World worldIn, Random random, BlockPos pos)
-    {    
+    {
+        super.decorate(worldIn,random,pos);
     }
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
