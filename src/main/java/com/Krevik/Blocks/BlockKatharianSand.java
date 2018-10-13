@@ -90,7 +90,7 @@ public class BlockKatharianSand extends BaseBlock
                 KetherDataStorage data = KCore.data.getDataInstance(worldIn);
                 if(data!=null){
                     if(data.getIsSandstorm()){
-                        if(rand.nextInt(26)==0){
+                        if(rand.nextInt(40)==0){
                             if(worldIn.isAirBlock(pos.up())){
                                 worldIn.setBlockState(pos.up(),KCore.ForgottenSand.getDefaultState(),2);
                             }
