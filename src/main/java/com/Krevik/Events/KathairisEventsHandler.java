@@ -1,26 +1,17 @@
 package com.Krevik.Events;
 
-import java.util.List;
-
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Items.ItemMysticArmor;
 import com.Krevik.Main.KCore;
-import com.Krevik.Networking.*;
-
-import net.minecraft.entity.EntityLivingBase;
+import com.Krevik.Networking.KetherPacketHandler;
+import com.Krevik.Networking.PacketDustStormClient;
+import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
