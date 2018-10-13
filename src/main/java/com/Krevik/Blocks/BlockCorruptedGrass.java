@@ -3,6 +3,7 @@ package com.Krevik.Blocks;
 import com.Krevik.Main.CreativeTabsMystic;
 import com.Krevik.Main.KCore;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,8 +11,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
@@ -21,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -81,7 +79,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
                         IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == KCore.CorruptedGrass && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
+                        if (iblockstate1.getBlock() == KCore.CorruptedDirt && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
                         {
                             worldIn.setBlockState(blockpos, KCore.CorruptedGrass.getDefaultState(),2);
                         }
