@@ -15,8 +15,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
@@ -87,6 +89,13 @@ public class BlockCrystal extends BaseBlock
     	if(!worldIn.isRemote) {
     		entityIn.attackEntityFrom(DamageSource.MAGIC, 1);
     	}
+    }
+
+    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
+    {
+        if(!worldIn.isRemote) {
+            entityIn.attackEntityFrom(DamageSource.MAGIC, 1);
+        }
     }
     
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
