@@ -5,13 +5,12 @@ import java.util.List;
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Items.ItemMysticArmor;
 import com.Krevik.Main.KCore;
-import com.Krevik.Networking.KetherPacketHandler;
-import com.Krevik.Networking.PacketDustStormClient;
+import com.Krevik.Networking.*;
 
-import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -61,15 +60,12 @@ public class KathairisEventsHandler {
 	}
 
 
-	static KetherDataStorage data = null;
 
 	@SubscribeEvent
 	public static void onEvent1(WorldTickEvent event)
 	{
 		KCore.instance.updateRendererCount++;
-				if(data==null) {
-					data = KetherDataStorage.getDataInstance(event.world);
-				}
+					KetherDataStorage data = KCore.data.getDataInstance(event.world);
 
 				if(data!=null&&event.world.getTotalWorldTime()>100) {
 					if(!event.world.isRaining()) {
@@ -83,8 +79,8 @@ public class KathairisEventsHandler {
 									data.setSandstormX(X);
 									data.setSandstormZ(Z);
 									data.setIsSandstorm(true);
-									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
-									KetherPacketHandler.CHANNEL.sendToAll(message);
+									PacketSandstormUpdatedOnServer message = new PacketSandstormUpdatedOnServer(true, X, time, Z);
+									KetherPacketHandler.CHANNEL.sendToServer(message);
 								}
 							}
 						}
@@ -121,20 +117,7 @@ public class KathairisEventsHandler {
 					}
 				}
 			}
-				if(data!=null) {
-					if(data.getIsSandstorm()) {
-						if(event.player.world.getBiome(event.player.getPosition())==KCore.MysticDesert) {
-							if(event.player.motionY==0D) {
-								event.player.motionX+=data.getSandstormX()*0.09;
-								event.player.motionZ+=data.getSandstormZ()*0.09;
-							}else {
-								event.player.motionX+=data.getSandstormX()*0.022;
-								event.player.motionZ+=data.getSandstormZ()*0.022;
-							}
-							event.player.addPotionEffect(new PotionEffect(Potion.getPotionById(15),100,100));
-						}
-					}
-				}
+			KetherDataStorage data = KCore.data.getDataInstance(event.player.world);
 				if(data!=null) {
 					if(data.getIsSandstorm()) {
 						if(event.player.world.getBiome(event.player.getPosition())==KCore.MysticDesert) {
@@ -144,8 +127,6 @@ public class KathairisEventsHandler {
 						}
 					}
 				}
-
-
 		}
 	}
 	

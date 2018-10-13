@@ -47,12 +47,13 @@ public class PacketSandstormUpdatedOnClient implements IMessage {
 
         @Override
         public IMessage onMessage(PacketSandstormUpdatedOnClient message, MessageContext ctx) {
-            EntityPlayer ep=Minecraft.getMinecraft().player;
-            KetherDataStorage storage = KetherDataStorage.getDataInstance(ep.world);
-            storage.setIsSandstorm(message.isSandstorm);
-            storage.setSandstormX(message.mX);
-            storage.setSandstormTime((int)message.sandstormTime);
-            storage.setSandstormZ(message.mZ);
+            if(ctx.side.isClient()) {
+                KetherDataStorage storage = KCore.data.getDataInstance(Minecraft.getMinecraft().player.world);
+                storage.setIsSandstorm(message.isSandstorm);
+                storage.setSandstormX(message.mX);
+                storage.setSandstormTime((int) message.sandstormTime);
+                storage.setSandstormZ(message.mZ);
+            }
             return null;
         }
     }

@@ -5,6 +5,7 @@ import com.Krevik.Main.KCore;
 
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
+import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -37,7 +38,7 @@ public class SandstormCommand extends CommandBase{
             throw new WrongUsageException("/sandstorm <time>", new Object[0]);
 		}else {
 			World world = sender.getEntityWorld();
-			KetherDataStorage data = KetherDataStorage.getDataInstance(world);
+			KetherDataStorage data = KCore.data.getDataInstance(world);
 			if(!world.isRemote) {
 					if(data!=null) {
 						if(args[0]!=null) {
@@ -51,8 +52,8 @@ public class SandstormCommand extends CommandBase{
 								float Z=(float)(world.rand.nextDouble()-world.rand.nextDouble());
 								data.setSandstormX(X);
 								data.setSandstormZ(Z);
-								PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, Integer.parseInt(args[0]),Z);
-								KetherPacketHandler.CHANNEL.sendToAll(message);
+								PacketSandstormUpdatedOnServer message = new PacketSandstormUpdatedOnServer(true, X, Integer.parseInt(args[0]),Z);
+								KetherPacketHandler.CHANNEL.sendToServer(message);
 							}
 		                    notifyCommandListener(sender, this, "sandstorm time set to: "+Integer.parseInt(args[0]), new Object[] {Integer.parseInt(args[0]), sender.getName()});
 						}else {

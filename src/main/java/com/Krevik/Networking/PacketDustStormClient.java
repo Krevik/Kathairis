@@ -41,12 +41,11 @@ public class PacketDustStormClient implements IMessage {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public IMessage onMessage(PacketDustStormClient message, MessageContext ctx) {
-			
+			KetherDataStorage data = KCore.data.getDataInstance(Minecraft.getMinecraft().world);
 			if(ctx.side.isClient()) {
 				EntityPlayer player = Minecraft.getMinecraft().player;
 				if(player!=null) {	
-						if(Minecraft.getMinecraft().player.dimension==KCore.instance.DIMENSION_ID) {
-							KetherDataStorage data = KetherDataStorage.getDataInstance(player.world);
+						if(player.dimension==KCore.instance.DIMENSION_ID) {
 							if(data!=null) {
 							ArrayList<BlockPos> positions=new ArrayList<BlockPos>();
 							positions.add(player.getPosition());
@@ -88,6 +87,10 @@ public class PacketDustStormClient implements IMessage {
 									}
 								}
 							}
+								if(player.world.getBiome(player.getPosition())==KCore.instance.MysticDesert&&player.posY>63&&player.posY<84) {
+									MoveMeDuringSandstormServer message1 = new MoveMeDuringSandstormServer(data.getSandstormX(),data.getSandstormZ());
+									KetherPacketHandler.CHANNEL.sendToServer(message1);
+								}
 							}
 						}
 				}

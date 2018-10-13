@@ -3,8 +3,6 @@ package com.Krevik.Particles;
 import java.util.Random;
 
 import com.Krevik.Main.KCore;
-import com.Krevik.Networking.KetherPacketHandler;
-import com.Krevik.Networking.PacketSpawnForgottenSandEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
@@ -12,20 +10,14 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class DustParticle extends Particle
 {
-    private final float portalParticleScale;
-    private final double portalPosX;
-    private final double portalPosY;
-    private final double portalPosZ;
-    Random random = new Random();
+
     public DustParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
@@ -35,11 +27,7 @@ public class DustParticle extends Particle
         this.posX = xCoordIn;
         this.posY = yCoordIn;
         this.posZ = zCoordIn;
-        this.portalPosX = this.posX;
-        this.portalPosY = this.posY;
-        this.portalPosZ = this.posZ;
         this.particleScale = this.rand.nextFloat() * 0.2F + 0.5F;
-        this.portalParticleScale = this.particleScale;
        // this.particleRed = 2.32F;
        // this.particleGreen = 2.50F;
        // this.particleBlue = 2.54F;
@@ -145,12 +133,6 @@ public class DustParticle extends Particle
 
         if (this.particleAge++ >= this.particleMaxAge)
         {
-        	if(this.world.isAirBlock(new BlockPos(posX,posY,posZ))) {
-        		if(this.random.nextInt(30000)==0) {
-					IMessage message = new PacketSpawnForgottenSandEntity(posX,posY,posZ);
-					KetherPacketHandler.CHANNEL.sendToServer(message);
-        		}
-        	}
             this.setExpired();
         }
     }
