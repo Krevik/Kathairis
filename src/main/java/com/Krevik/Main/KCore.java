@@ -3,6 +3,7 @@ package com.Krevik.Main;
 import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -72,20 +73,20 @@ public class KCore {
 	public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();
 	public static int updateRendererCount=0;
 	
-	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12);
-	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", "mystic:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F);
+	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12).setRepairItem(new ItemStack(KCore.TitaniumIngot));
+	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", "mystic:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
 	
-	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("mystic", 3, 2000, 12F, 3.5F, 12);
-	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("mystic", "mystic:mystic", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F);
+	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("mystic", 3, 2000, 12F, 3.5F, 12).setRepairItem(new ItemStack(KCore.MysticGem));
+	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("mystic", "mystic:mystic", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.MysticGem));
 	
-	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", "mystic:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F);
+	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", "mystic:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(KCore.CloudPearl));
 
-	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18);
-	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 15, new int[]{3, 5, 7, 3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4F);
+	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18).setRepairItem(new ItemStack(KCore.RevenumIngot));
+	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	
-	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 3F, 2.5F, 12);
-	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21);
-	public static Item.ToolMaterial MAGNETHIUM = EnumHelper.addToolMaterial("magnethium", 3, 800, 6F, 3F, 20);
+	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 3F, 2.5F, 12).setRepairItem(new ItemStack(KCore.CrystalsCluster));
+	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21).setRepairItem(new ItemStack(KCore.DarknessEssence));
+	public static Item.ToolMaterial MAGNETHIUM = EnumHelper.addToolMaterial("magnethium", 3, 800, 6F, 3F, 20).setRepairItem(new ItemStack(KCore.Magnethium_Shard));
 
 
 	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticPortal)
@@ -613,7 +614,7 @@ public class KCore {
 	public static final BaseItem TurtleShell = new BaseItem(Ref.TurtleShell, CreativeTabsMystic.miscellaneous);
 	
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MagicBeansItem)
-    public static final ItemMysticSeedFood MagicBeansItem = new ItemMysticSeedFood(Ref.MagicBeansItem, 1,0.1F,KCore.MagicBeans,KCore.CorruptedGrass);
+    public static final ItemMysticSeedFood MagicBeansItem = (ItemMysticSeedFood) new ItemMysticSeedFood(Ref.MagicBeansItem, 0,0.1F,KCore.MagicBeans,KCore.CorruptedGrass).setAlwaysEdible();
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.BisonMeat)
     public static final ItemMysticFood BisonMeat = new ItemMysticFood(Ref.BisonMeat,CreativeTabsMystic.food, 6,0.9F,false);
@@ -685,7 +686,7 @@ public class KCore {
 	public static final BaseItem CloudPearl = new BaseItem(Ref.CloudPearl, CreativeTabsMystic.miscellaneous);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Fungal_Drug)
-    public static final ItemMysticFood Fungal_Drug = new ItemMysticFood(Ref.Fungal_Drug,CreativeTabsMystic.food, 2,0.4F,false);
+    public static final ItemMysticFood Fungal_Drug = (ItemMysticFood) new ItemMysticFood(Ref.Fungal_Drug,CreativeTabsMystic.food, 2,0.4F,false).setAlwaysEdible();
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Mystic_Wood_Door_Item)
 	public static final ItemMysticDoor Mystic_Wood_Door_Item = new ItemMysticDoor(Ref.Mystic_Wood_Door_Item, CreativeTabsMystic.buildingBlocks,Mystic_Wood_Door);

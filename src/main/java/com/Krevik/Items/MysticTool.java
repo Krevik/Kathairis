@@ -150,6 +150,7 @@ public class MysticTool extends ItemTool
         return super.getIsRepairable(toRepair, repair);
     }
 
+
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
