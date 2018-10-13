@@ -1,5 +1,6 @@
 package com.Krevik.Main;
 
+import com.Krevik.Blocks.*;
 import net.minecraft.init.Items;
 import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import org.apache.logging.log4j.LogManager;
@@ -10,47 +11,6 @@ import com.Krevik.Biomes.BiomeMysticDesert;
 import com.Krevik.Biomes.BiomeMysticForest;
 import com.Krevik.Biomes.BiomeMysticPlains;
 import com.Krevik.Biomes.BiomeMysticSwamps;
-import com.Krevik.Blocks.BaseBlock;
-import com.Krevik.Blocks.BlockBlueFruitPlant;
-import com.Krevik.Blocks.BlockButterflyFlower;
-import com.Krevik.Blocks.BlockCharger;
-import com.Krevik.Blocks.BlockCloudParticleEmitter;
-import com.Krevik.Blocks.BlockCorruptedGrass;
-import com.Krevik.Blocks.BlockCrystal;
-import com.Krevik.Blocks.BlockEasterEgg;
-import com.Krevik.Blocks.BlockEnergyShard;
-import com.Krevik.Blocks.BlockGeckoEggs;
-import com.Krevik.Blocks.BlockGooseberry;
-import com.Krevik.Blocks.BlockJadeVines;
-import com.Krevik.Blocks.BlockLuminescentGnarl;
-import com.Krevik.Blocks.BlockMagicBeans;
-import com.Krevik.Blocks.BlockMysticBush;
-import com.Krevik.Blocks.BlockMysticCloud;
-import com.Krevik.Blocks.BlockMysticDeadGrass;
-import com.Krevik.Blocks.BlockMysticDoors;
-import com.Krevik.Blocks.BlockMysticFence;
-import com.Krevik.Blocks.BlockMysticFenceGate;
-import com.Krevik.Blocks.BlockMysticFungus;
-import com.Krevik.Blocks.BlockMysticLeaf;
-import com.Krevik.Blocks.BlockMysticLog;
-import com.Krevik.Blocks.BlockMysticMetalTrapdoor;
-import com.Krevik.Blocks.BlockMysticMiniGrass;
-import com.Krevik.Blocks.BlockMysticOre;
-import com.Krevik.Blocks.BlockMysticPlanks;
-import com.Krevik.Blocks.BlockMysticPortal;
-import com.Krevik.Blocks.BlockMysticSapling;
-import com.Krevik.Blocks.BlockMysticSlabBase;
-import com.Krevik.Blocks.BlockMysticStairs;
-import com.Krevik.Blocks.BlockMysticTallGrass;
-import com.Krevik.Blocks.BlockMysticWall;
-import com.Krevik.Blocks.BlockMysticWoodTrapdoor;
-import com.Krevik.Blocks.BlockMythicStonePillar;
-import com.Krevik.Blocks.BlockMythicStoneStandingSign;
-import com.Krevik.Blocks.BlockMythicStoneWallSign;
-import com.Krevik.Blocks.BlockRedwoodLog;
-import com.Krevik.Blocks.BlockRefinedCloud;
-import com.Krevik.Blocks.BlockSwampGas;
-import com.Krevik.Blocks.BlockTurtleShellPlate;
 import com.Krevik.Commands.SandstormCommand;
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Dimension.WorldProviderMystic;
@@ -172,7 +132,7 @@ public class KCore {
     public static final BlockMysticBush MysticNightFlower = (BlockMysticBush) new BlockMysticBush(Ref.MysticNightFlower,false,false);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.TitaniumOre)
-    public static final BlockMysticOre TitaniumOre = new BlockMysticOre(Ref.TitaniumOre,5F,15F,1,1,5,10);
+    public static final BlockMysticOre TitaniumOre = new BlockMysticOre(Ref.TitaniumOre,5F,15F,1,1,0,1);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.TitaniumBlock)
     public static final BaseBlock TitaniumBlock = new BaseBlock(Ref.TitaniumBlock,Material.IRON,CreativeTabsMystic.buildingBlocks,7F,20F,SoundType.METAL);
@@ -193,7 +153,7 @@ public class KCore {
     public static final BlockMysticPlanks ShinyPlanks = (BlockMysticPlanks) new BlockMysticPlanks(Ref.ShinyPlanks).setLightLevel(0.3F);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.ForgottenSand)
-    public static final BaseBlock ForgottenSand = new BaseBlock(Ref.ForgottenSand, Material.GROUND, CreativeTabsMystic.buildingBlocks, 1.5F, 1.5F, SoundType.GROUND);
+    public static final BlockKatharianSand ForgottenSand = new BlockKatharianSand(Ref.ForgottenSand, Material.GROUND, CreativeTabsMystic.buildingBlocks, 1.5F, 1.5F, SoundType.GROUND);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MovingSand)
     public static final BaseBlock MovingSand = new BaseBlock(Ref.MovingSand, Material.GOURD, CreativeTabsMystic.buildingBlocks, 1.5F, 1.5F, SoundType.GROUND);
@@ -223,7 +183,7 @@ public class KCore {
     public static final BlockMysticCloud BlueCloud = (BlockMysticCloud) new BlockMysticCloud(Ref.BlueCloud).setLightLevel(0.1F).setLightOpacity(0);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumOre)
-    public static final BlockMysticOre RevenumOre = new BlockMysticOre(Ref.RevenumOre,25F,50F,1,1,25,75);
+    public static final BlockMysticOre RevenumOre = new BlockMysticOre(Ref.RevenumOre,25F,50F,1,1,0,1);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.VioletCrystal)
     public static final BlockCrystal VioletCrystal = (BlockCrystal) new BlockCrystal(Ref.VioletCrystal).setLightOpacity(0);
@@ -775,11 +735,10 @@ public class KCore {
         new RecipeHandler().addRecipes();
     }
 
+    public static KetherDataStorage data = KetherDataStorage.initialise();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-
-        KetherDataStorage.initialise();
 
     	World.MAX_ENTITY_RADIUS=12D;
     	KetherPacketHandler.init();
