@@ -454,9 +454,13 @@ public class KCore {
     
    	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Redwood_planks)
    	public static final BlockMysticPlanks Redwood_planks = new BlockMysticPlanks(Ref.Redwood_planks);
-    
-   
-    
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Mythic_Stone_Bricks)
+    public static final BlockMythicStoneBricks Mythic_Stone_Bricks = new BlockMythicStoneBricks(Ref.Mythic_Stone_Bricks, Material.ROCK, CreativeTabsMystic.buildingBlocks, 2.5F, 2.5F, SoundType.STONE);
+
+
+
+
     //@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Hell_Plant)
    //public static final BlockMysticBush Hell_Plant = (BlockMysticBush) new BlockMysticBush(Ref.Hell_Plant,true,false).setLightLevel(0.5F);
     
@@ -970,6 +974,7 @@ public class KCore {
         public static final String Magnethium_Shovel="magnethium_shovel";
         public static final String Magnethium_Hoe="magnethium_hoe";
         public static final String Magnethium_Sword="magnethium_sword";
+        public static final String Mythic_Stone_Bricks="mythic_stone_bricks";
     }
     
 

@@ -39,6 +39,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(KCore.BisonMeat, new ItemStack(KCore.CookedBisonMeat), 0.2f);
 		GameRegistry.addSmelting(KCore.BlueCloud, new ItemStack(KCore.Refined_Cloud_Blue), 0.5f);
 		GameRegistry.addSmelting(KCore.YellowCloud, new ItemStack(KCore.Refined_Cloud_Yellow), 0.5f);
+		GameRegistry.addSmelting(KCore.MythicStone, new ItemStack(KCore.Mythic_Stone_Bricks), 0.5f);
 
 
 	}
