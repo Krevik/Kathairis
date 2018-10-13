@@ -65,7 +65,7 @@ public class ItemMysticSeedFood extends ItemMysticFood implements net.minecraftf
     
     private void setRandomPotionEffectOnPlayer(EntityPlayerMP ep) {
     	int[] allowedPotionIds = {1,3,4,5,6,8,10,11,12,13,14,16,21,22,23,24,25,26};
-    	ep.addPotionEffect(new PotionEffect(Potion.getPotionById(allowedPotionIds[random.nextInt(allowedPotionIds.length)]),random.nextInt(420),random.nextInt(5)));
+    	ep.addPotionEffect(new PotionEffect(Potion.getPotionById(allowedPotionIds[random.nextInt(allowedPotionIds.length)]),300+random.nextInt(2000),random.nextInt(5)));
     }
     /**
      * Called when a Block is right-clicked with this Item
