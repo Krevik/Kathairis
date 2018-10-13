@@ -128,8 +128,6 @@ public class EntityCloudOister extends EntityAmbientCreature
 	        			IMessage message = new PacketCloudOisterClient((float)posX,(float)posY,(float)posZ);
 	        			KetherPacketHandler.CHANNEL.sendToAll(message);
 	        		}
-	        		
-	        		
 	        		if(!this.onGround) {
 	        			if(this.getRNG().nextInt(100)==0) {
 	        				double destPosX=this.posX-this.getRNG().nextInt(6)+this.getRNG().nextInt(6);
