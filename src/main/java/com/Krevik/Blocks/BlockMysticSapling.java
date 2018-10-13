@@ -2,9 +2,8 @@ package com.Krevik.Blocks;
 
 import java.util.Random;
 
-import com.Krevik.Gens.Forest.WorldGenBasicMysticTree;
-import com.Krevik.Gens.Forest.WorldGenShinyTree;
-import com.Krevik.Gens.Forest.WorldGenSoulTree;
+import com.Krevik.Gens.Forest.*;
+import com.Krevik.Gens.WorldGenNewTree;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.IGrowable;
@@ -71,6 +70,15 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
     {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
         WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenBasicMysticTree(true,6,false));
+        if(rand.nextInt(5)==0){
+            worldgenerator = new WorldGenNewTree();
+        }
+        if(rand.nextInt(5)==0){
+            worldgenerator = new WorldGenCustomTree2();
+        }
+        if(rand.nextInt(10)==0){
+            worldgenerator = new WorldGenHugeKathairisTree();
+        }
         int i = 0;
         int j = 0;
         boolean flag = false;
