@@ -41,7 +41,7 @@ public class PacketDustStormClient implements IMessage {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public IMessage onMessage(PacketDustStormClient message, MessageContext ctx) {
-			KetherDataStorage data = KCore.data.getDataInstance(Minecraft.getMinecraft().world);
+			KetherDataStorage data = KCore.data.getDataInstance(Minecraft.getMinecraft().player.world);
 			if(ctx.side.isClient()) {
 				EntityPlayer player = Minecraft.getMinecraft().player;
 				if(player!=null) {	
