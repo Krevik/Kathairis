@@ -1,16 +1,12 @@
 package com.Krevik.Main;
 
+import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
 import net.minecraft.init.Items;
 import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.Krevik.Biomes.BiomeFloatingIslands;
-import com.Krevik.Biomes.BiomeMysticDesert;
-import com.Krevik.Biomes.BiomeMysticForest;
-import com.Krevik.Biomes.BiomeMysticPlains;
-import com.Krevik.Biomes.BiomeMysticSwamps;
 import com.Krevik.Commands.SandstormCommand;
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Dimension.WorldProviderMystic;
@@ -477,8 +473,10 @@ public class KCore {
 	public static final BiomeMysticSwamps MysticSwamps = new BiomeMysticSwamps(new Biome.BiomeProperties("Mystic Swamps").setBaseBiome("Mystic Swamps").setBaseHeight(0.4f).setHeightVariation(0.1f).setWaterColor(132240255));
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "Floating Islands")
 	public static final BiomeFloatingIslands FloatingIslands = new BiomeFloatingIslands(new Biome.BiomeProperties("Floating Islands").setBaseBiome("Floating Islands").setBaseHeight(-1f).setHeightVariation(0.5f).setWaterColor(132240255));
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ "Katharian Ocean")
+    public static final BiomeKatharianOcean KatharianOcean = new BiomeKatharianOcean(new Biome.BiomeProperties("Katharian Ocean").setBaseBiome("Katharian Ocean").setBaseHeight(-1.4f).setHeightVariation(0.5f).setWaterColor(132240255));
 
-	public static final DimensionType Mystic_DIMENSION = DimensionType.register("KATHAIRIS", "_kathairis", DIMENSION_ID, WorldProviderMystic.class, false);
+    public static final DimensionType Mystic_DIMENSION = DimensionType.register("KATHAIRIS", "_kathairis", DIMENSION_ID, WorldProviderMystic.class, false);
 	
     public static void dimRegistry()
 	{

@@ -9,7 +9,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerMystic extends GenLayer{
 	
-	protected Biome[] allowedBiomes = {KCore.MysticForest,KCore.MysticPlains,KCore.MysticDesert,KCore.MysticSwamps};
+	protected Biome[] allowedBiomes = {KCore.MysticForest,KCore.MysticPlains,KCore.MysticDesert,KCore.MysticSwamps,KCore.KatharianOcean};
 
 	public GenLayerMystic(long seed, GenLayer genlayer) {
 		super(seed);

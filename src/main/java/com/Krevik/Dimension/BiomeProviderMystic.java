@@ -33,7 +33,8 @@ public class BiomeProviderMystic extends BiomeProvider
     private final BiomeCache biomeCache;
     /** A list of biomes that the player can spawn in. */
     private final List<Biome> biomesToSpawnIn;
-    public static List<Biome> allowedBiomes = Lists.newArrayList(KCore.MysticForest,KCore.MysticPlains,KCore.MysticDesert,KCore.MysticSwamps);
+    public static List<Biome> allowedBiomes = Lists.newArrayList(KCore.MysticForest,KCore.MysticPlains,KCore.MysticDesert,KCore.MysticSwamps,
+            KCore.KatharianOcean);
 
     protected BiomeProviderMystic()
     {
