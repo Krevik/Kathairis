@@ -117,160 +117,171 @@ public class ItemMysticPickaxe extends MysticTool
             return this.toolMaterial.getHarvestLevel() >= 2;
         }
     }
-    
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
-    {
-    	boolean done=false;
-        if (!worldIn.isRemote && (double)state.getBlockHardness(worldIn, pos) != 0.0D)
-        {
-            stack.damageItem(1, entityLiving);
-        }
-        if(this==KCore.CrystalPickaxe) {
-        	if(!worldIn.isRemote) {
-           		//down
-        		if(!done) {
-            	if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
-            			!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
-            			!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
-            		worldIn.destroyBlock(pos.east(), true);
-            		worldIn.destroyBlock(pos.west(), true);
-            		worldIn.destroyBlock(pos.south(), true);
-            		worldIn.destroyBlock(pos.north(), true);
-            		worldIn.destroyBlock(pos.south().east(), true);
-            		worldIn.destroyBlock(pos.south().west(), true);
-            		worldIn.destroyBlock(pos.north().east(), true);
-            		worldIn.destroyBlock(pos.north().west(), true);
-            		done=true;
-            	}
 
-            	}	
-            	//up
-        		if(!done)
-        		{
-            	if(!worldIn.isAirBlock(pos.up())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
-            			!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
-            			!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
-            		worldIn.destroyBlock(pos.east(), true);
-            		worldIn.destroyBlock(pos.west(), true);
-            		worldIn.destroyBlock(pos.south(), true);
-            		worldIn.destroyBlock(pos.north(), true);
-            		worldIn.destroyBlock(pos.south().east(), true);
-            		worldIn.destroyBlock(pos.south().west(), true);
-            		worldIn.destroyBlock(pos.north().east(), true);
-            		worldIn.destroyBlock(pos.north().west(), true);
-            		done=true;
-            	}
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
+	{
 
-            	}
-            	//west/east
-        		if(!done)
-        		{
-            	if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
-            		!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())
-            		&&!worldIn.isAirBlock(pos.west().up())&&!worldIn.isAirBlock(pos.west().down())
-            		&&!worldIn.isAirBlock(pos.east().up())&&!worldIn.isAirBlock(pos.east().down())) {
-            		worldIn.destroyBlock(pos.down(), true);
-            		worldIn.destroyBlock(pos.up(), true);
-            		worldIn.destroyBlock(pos.west(), true);
-            		worldIn.destroyBlock(pos.east(), true);
-            		worldIn.destroyBlock(pos.west().down(), true);
-            		worldIn.destroyBlock(pos.west().up(), true);
-            		worldIn.destroyBlock(pos.east().down(), true);
-            		worldIn.destroyBlock(pos.east().up(), true);
-            		done=true;
-            	}
-            	}
-            	//north/south
-        		if(!done) {
-            	if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
-                		!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())
-                		&&!worldIn.isAirBlock(pos.north().up())&&!worldIn.isAirBlock(pos.north().down())
-                		&&!worldIn.isAirBlock(pos.south().up())&&!worldIn.isAirBlock(pos.south().down())) {
-                		worldIn.destroyBlock(pos.down(), true);
-                		worldIn.destroyBlock(pos.up(), true);
-                		worldIn.destroyBlock(pos.north(), true);
-                		worldIn.destroyBlock(pos.south(), true);
-                		worldIn.destroyBlock(pos.north().down(), true);
-                		worldIn.destroyBlock(pos.north().up(), true);
-                		worldIn.destroyBlock(pos.south().down(), true);
-                		worldIn.destroyBlock(pos.south().up(), true);
-                		done=true;
-            	}
-                	}
-        	}else {
-           		//down
-        		if(!done) {
-            	if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
-            			!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
-            			!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
-            		worldIn.destroyBlock(pos.east(), true);
-            		worldIn.destroyBlock(pos.west(), true);
-            		worldIn.destroyBlock(pos.south(), true);
-            		worldIn.destroyBlock(pos.north(), true);
-            		worldIn.destroyBlock(pos.south().east(), true);
-            		worldIn.destroyBlock(pos.south().west(), true);
-            		worldIn.destroyBlock(pos.north().east(), true);
-            		worldIn.destroyBlock(pos.north().west(), true);
-            		done=true;
-            	}
+		boolean done=false;
+		if (!worldIn.isRemote && (double)state.getBlockHardness(worldIn, pos) != 0.0D)
+		{
+			stack.damageItem(1, entityLiving);
+		}
+		if(this==KCore.CrystalPickaxe) {
+			if(entityLiving instanceof EntityPlayer){
+				EntityPlayer player = (EntityPlayer) entityLiving;
+				player.addExhaustion(1f);
+			}
+			if(!worldIn.isRemote) {
+				//down
+				if(!done) {
+					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
+							!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
+							!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
+						destroyBlock(worldIn,pos.east(), true);
+						destroyBlock(worldIn,pos.west(), true);
+						destroyBlock(worldIn,pos.south(), true);
+						destroyBlock(worldIn,pos.north(), true);
+						destroyBlock(worldIn,pos.south().east(), true);
+						destroyBlock(worldIn,pos.south().west(), true);
+						destroyBlock(worldIn,pos.north().east(), true);
+						destroyBlock(worldIn,pos.north().west(), true);
+						done=true;
+					}
 
-            	}	
-            	//up
-        		if(!done)
-        		{
-            	if(!worldIn.isAirBlock(pos.up())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
-            			!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
-            			!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
-            		worldIn.destroyBlock(pos.east(), true);
-            		worldIn.destroyBlock(pos.west(), true);
-            		worldIn.destroyBlock(pos.south(), true);
-            		worldIn.destroyBlock(pos.north(), true);
-            		worldIn.destroyBlock(pos.south().east(), true);
-            		worldIn.destroyBlock(pos.south().west(), true);
-            		worldIn.destroyBlock(pos.north().east(), true);
-            		worldIn.destroyBlock(pos.north().west(), true);
-            		done=true;
-            	}
-            	}
-            	//west/east
-        		if(!done) {
-            	if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
-            		!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())
-            		&&!worldIn.isAirBlock(pos.west().up())&&!worldIn.isAirBlock(pos.west().down())
-            		&&!worldIn.isAirBlock(pos.east().up())&&!worldIn.isAirBlock(pos.east().down())) {
-            		worldIn.destroyBlock(pos.down(), true);
-            		worldIn.destroyBlock(pos.up(), true);
-            		worldIn.destroyBlock(pos.west(), true);
-            		worldIn.destroyBlock(pos.east(), true);
-            		worldIn.destroyBlock(pos.west().down(), true);
-            		worldIn.destroyBlock(pos.west().up(), true);
-            		worldIn.destroyBlock(pos.east().down(), true);
-            		worldIn.destroyBlock(pos.east().up(), true);
-            		done=true;
-            	}
-            	}
-            	//north/south
-        		if(!done) {
-            	if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
-                		!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())
-                		&&!worldIn.isAirBlock(pos.north().up())&&!worldIn.isAirBlock(pos.north().down())
-                		&&!worldIn.isAirBlock(pos.south().up())&&!worldIn.isAirBlock(pos.south().down())) {
-                		worldIn.destroyBlock(pos.down(), true);
-                		worldIn.destroyBlock(pos.up(), true);
-                		worldIn.destroyBlock(pos.north(), true);
-                		worldIn.destroyBlock(pos.south(), true);
-                		worldIn.destroyBlock(pos.north().down(), true);
-                		worldIn.destroyBlock(pos.north().up(), true);
-                		worldIn.destroyBlock(pos.south().down(), true);
-                		worldIn.destroyBlock(pos.south().up(), true);
-                		done=true;
-                	}
-        		}
-        	}
- 
-        }
-        return true;
-    }
+				}
+				//up
+				if(!done)
+				{
+					if(!worldIn.isAirBlock(pos.up())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
+							!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
+							!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
+						destroyBlock(worldIn,pos.east(), true);
+						destroyBlock(worldIn,pos.west(), true);
+						destroyBlock(worldIn,pos.south(), true);
+						destroyBlock(worldIn,pos.north(), true);
+						destroyBlock(worldIn,pos.south().east(), true);
+						destroyBlock(worldIn,pos.south().west(), true);
+						destroyBlock(worldIn,pos.north().east(), true);
+						destroyBlock(worldIn,pos.north().west(), true);
+						done=true;
+					}
+
+				}
+				//west/east
+				if(!done)
+				{
+					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
+							!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())
+							&&!worldIn.isAirBlock(pos.west().up())&&!worldIn.isAirBlock(pos.west().down())
+							&&!worldIn.isAirBlock(pos.east().up())&&!worldIn.isAirBlock(pos.east().down())) {
+						destroyBlock(worldIn,pos.down(), true);
+						destroyBlock(worldIn,pos.up(), true);
+						destroyBlock(worldIn,pos.west(), true);
+						destroyBlock(worldIn,pos.east(), true);
+						destroyBlock(worldIn,pos.west().down(), true);
+						destroyBlock(worldIn,pos.west().up(), true);
+						destroyBlock(worldIn,pos.east().down(), true);
+						destroyBlock(worldIn,pos.east().up(), true);
+						done=true;
+					}
+				}
+				//north/south
+				if(!done) {
+					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
+							!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())
+							&&!worldIn.isAirBlock(pos.north().up())&&!worldIn.isAirBlock(pos.north().down())
+							&&!worldIn.isAirBlock(pos.south().up())&&!worldIn.isAirBlock(pos.south().down())) {
+						destroyBlock(worldIn,pos.down(), true);
+						destroyBlock(worldIn,pos.up(), true);
+						destroyBlock(worldIn,pos.north(), true);
+						destroyBlock(worldIn,pos.south(), true);
+						destroyBlock(worldIn,pos.north().down(), true);
+						destroyBlock(worldIn,pos.north().up(), true);
+						destroyBlock(worldIn,pos.south().down(), true);
+						destroyBlock(worldIn,pos.south().up(), true);
+						done=true;
+					}
+				}
+			}else {
+				//down
+				if(!done) {
+					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
+							!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
+							!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
+						destroyBlock(worldIn,pos.east(), true);
+						destroyBlock(worldIn,pos.west(), true);
+						destroyBlock(worldIn,pos.south(), true);
+						destroyBlock(worldIn,pos.north(), true);
+						destroyBlock(worldIn,pos.south().east(), true);
+						destroyBlock(worldIn,pos.south().west(), true);
+						destroyBlock(worldIn,pos.north().east(), true);
+						destroyBlock(worldIn,pos.north().west(), true);
+						done=true;
+					}
+
+				}
+				//up
+				if(!done)
+				{
+					if(!worldIn.isAirBlock(pos.up())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
+							!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
+							!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
+						destroyBlock(worldIn,pos.east(), true);
+						destroyBlock(worldIn,pos.west(), true);
+						destroyBlock(worldIn,pos.south(), true);
+						destroyBlock(worldIn,pos.north(), true);
+						destroyBlock(worldIn,pos.south().east(), true);
+						destroyBlock(worldIn,pos.south().west(), true);
+						destroyBlock(worldIn,pos.north().east(), true);
+						destroyBlock(worldIn,pos.north().west(), true);
+						done=true;
+					}
+				}
+				//west/east
+				if(!done) {
+					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
+							!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())
+							&&!worldIn.isAirBlock(pos.west().up())&&!worldIn.isAirBlock(pos.west().down())
+							&&!worldIn.isAirBlock(pos.east().up())&&!worldIn.isAirBlock(pos.east().down())) {
+						destroyBlock(worldIn,pos.down(), true);
+						destroyBlock(worldIn,pos.up(), true);
+						destroyBlock(worldIn,pos.west(), true);
+						destroyBlock(worldIn,pos.east(), true);
+						destroyBlock(worldIn,pos.west().down(), true);
+						destroyBlock(worldIn,pos.west().up(), true);
+						destroyBlock(worldIn,pos.east().down(), true);
+						destroyBlock(worldIn,pos.east().up(), true);
+						done=true;
+					}
+				}
+				//north/south
+				if(!done) {
+					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.up())&&
+							!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())
+							&&!worldIn.isAirBlock(pos.north().up())&&!worldIn.isAirBlock(pos.north().down())
+							&&!worldIn.isAirBlock(pos.south().up())&&!worldIn.isAirBlock(pos.south().down())) {
+						destroyBlock(worldIn,pos.down(), true);
+						destroyBlock(worldIn,pos.up(), true);
+						destroyBlock(worldIn,pos.north(), true);
+						destroyBlock(worldIn,pos.south(), true);
+						destroyBlock(worldIn,pos.north().down(), true);
+						destroyBlock(worldIn,pos.north().up(), true);
+						destroyBlock(worldIn,pos.south().down(), true);
+						destroyBlock(worldIn,pos.south().up(), true);
+						done=true;
+					}
+				}
+			}
+
+		}
+		return true;
+	}
+
+    private void destroyBlock(World worldIn, BlockPos pos, boolean dropBlock){
+    	if(worldIn.getBlockState(pos).getBlock()!=Blocks.BEDROCK){
+    		worldIn.destroyBlock(pos,dropBlock);
+		}
+	}
     
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {

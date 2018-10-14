@@ -84,7 +84,7 @@ public class KCore {
 	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	
-	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 3F, 2.5F, 12).setRepairItem(new ItemStack(KCore.CrystalsCluster));
+	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 1F, 4F, 22).setRepairItem(new ItemStack(KCore.CrystalsCluster));
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21).setRepairItem(new ItemStack(KCore.DarknessEssence));
 	public static Item.ToolMaterial MAGNETHIUM = EnumHelper.addToolMaterial("magnethium", 3, 800, 6F, 3F, 20).setRepairItem(new ItemStack(KCore.Magnethium_Shard));
 
@@ -129,7 +129,7 @@ public class KCore {
     public static final BlockMysticBush MysticNightFlower = (BlockMysticBush) new BlockMysticBush(Ref.MysticNightFlower,false,false);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.TitaniumOre)
-    public static final BlockMysticOre TitaniumOre = new BlockMysticOre(Ref.TitaniumOre,5F,15F,1,1,0,1);
+    public static final BlockMysticOre TitaniumOre = new BlockMysticOre(Ref.TitaniumOre,5F,15F,1,1,0,0);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.TitaniumBlock)
     public static final BaseBlock TitaniumBlock = new BaseBlock(Ref.TitaniumBlock,Material.IRON,CreativeTabsMystic.buildingBlocks,7F,20F,SoundType.METAL);
@@ -180,7 +180,7 @@ public class KCore {
     public static final BlockMysticCloud BlueCloud = (BlockMysticCloud) new BlockMysticCloud(Ref.BlueCloud).setLightLevel(0.1F).setLightOpacity(0);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.RevenumOre)
-    public static final BlockMysticOre RevenumOre = new BlockMysticOre(Ref.RevenumOre,25F,50F,1,1,0,1);
+    public static final BlockMysticOre RevenumOre = new BlockMysticOre(Ref.RevenumOre,25F,50F,1,1,0,0);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.VioletCrystal)
     public static final BlockCrystal VioletCrystal = (BlockCrystal) new BlockCrystal(Ref.VioletCrystal).setLightOpacity(0);
