@@ -2,6 +2,7 @@ package com.Krevik.Entities;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
@@ -21,11 +22,15 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,18 +38,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityBison extends EntityAnimal
 {
-	public boolean shouldPanic=false;
-	
+    private static final DataParameter<Float> animTimer = EntityDataManager.<Float>createKey(EntityBison.class, DataSerializers.FLOAT);
+    private static final DataParameter<Boolean> shouldAnimTail = EntityDataManager.<Boolean>createKey(EntityBison.class, DataSerializers.BOOLEAN);
+
     public EntityBison(World worldIn)
     {
         super(worldIn);
-        this.setSize(2F, 2F);
+        this.setSize(1.5F, 1.7F);
         this.experienceValue=30;
     }
 
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
@@ -75,7 +82,28 @@ public class EntityBison extends EntityAnimal
     protected void entityInit()
     {
         super.entityInit();
+        this.dataManager.register(animTimer, Float.valueOf(0));
+        this.dataManager.register(shouldAnimTail, Boolean.valueOf(false));
     }
+
+    public boolean getShouldAnimTail()
+    {
+        return (this.dataManager.get(shouldAnimTail));
+    }
+
+    public void setShouldAnimTail(boolean value)
+    {
+        this.dataManager.set(shouldAnimTail,value);
+    }
+
+    public void setAnimTimer(float time){
+        this.dataManager.set(animTimer,time);
+    }
+
+    public float getAnimTimer(){
+        return this.dataManager.get(animTimer);
+    }
+
 
     protected ResourceLocation getLootTable()
     {
@@ -92,22 +120,41 @@ public class EntityBison extends EntityAnimal
     {
     	return super.processInteract(player, hand);
     }
-    
+
+    public void onUpdate(){
+        super.onUpdate();
+        if(!getShouldAnimTail()) {
+            if(getRNG().nextInt(750)==0) {
+                setShouldAnimTail(true);
+            }
+        }
+        if(getShouldAnimTail()) {
+            setAnimTimer(getAnimTimer()+2);
+            if(getAnimTimer()>400) {
+                setAnimTimer(0);
+                setShouldAnimTail(false);
+            }
+        }
+
+    }
     public void onLivingUpdate()
     {
     	super.onLivingUpdate();
-
     }
 
 
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
+        compound.setBoolean("shouldAnimTail",getShouldAnimTail());
+        compound.setFloat("animTimer",getAnimTimer());
     }
 
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
+        setShouldAnimTail(compound.getBoolean("shouldAnimTail"));
+        setAnimTimer(compound.getFloat("animTimer"));
     }
 
     protected SoundEvent getAmbientSound()

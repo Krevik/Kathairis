@@ -2,7 +2,9 @@ package com.Krevik.Models;
 
 import java.util.Random;
 
+import com.Krevik.Entities.EntityBison;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
@@ -155,33 +157,24 @@ public class ModelBison extends ModelBase {
         modelRenderer.rotateAngleZ = z;
     }
     
-    protected boolean shouldAnimateTail=false;
-    protected int timer=0;
-    protected Random random = new Random();
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5, Entity entity)
     {
     	
     	super.setRotationAngles(limbSwing, limbSwingAmount, f2, f3, f4, f5, entity);
 
         
-        this.RightThigh.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.LeftThigh.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.FrontRightUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.FrontLeftUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.RightThigh.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F) * 1F * limbSwingAmount;
+        this.LeftThigh.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F + (float)Math.PI) * 1F * limbSwingAmount;
+        this.FrontRightUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F + (float)Math.PI) * 1F * limbSwingAmount;
+        this.FrontLeftUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F) * 1F * limbSwingAmount;
         
-        if(!shouldAnimateTail) {
-        	if(random.nextInt(750)==0) {
-        		shouldAnimateTail=true;
-        	}
-        }
-        if(shouldAnimateTail) {
-        	timer++;
-        	Tail1.rotateAngleZ=(MathHelper.sin((timer/25)*0.6F));
-        	if(timer>400) {
-        		timer=0;
-        		shouldAnimateTail=false;
-        		Tail1.rotateAngleZ=0;
-        	}
+        if(entity instanceof EntityBison) {
+            EntityBison bison = (EntityBison) entity;
+            if (bison.getShouldAnimTail()) {
+                Tail1.rotateAngleZ = (MathHelper.sin((bison.getAnimTimer() / 25) * 0.6F));
+            } else {
+                Tail1.rotateAngleZ = 0;
+            }
         }
         
     }
