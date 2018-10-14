@@ -66,22 +66,7 @@ public class BlockMysticOre extends BaseBlock
     
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
     {
-    	Random random = new Random();
-    	if(this==KCore.RevenumOre) {
-    		for(int c=0;c<3+random.nextInt(3);c++) {
-    			EntityWolf ew = new EntityWolf(worldIn);
-    			ew.setPosition(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5);
-    			ew.setAngry(true);
-    			if(!worldIn.isRemote) {
-        			worldIn.spawnEntity(ew);
-        			ew.setAngry(true);
-        			EntityPlayer ep = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, false);
-        			if(ep!=null) {
-            			ew.setAttackTarget(ep);
-        			}
-    			}
-    		}
-    	}
+    super.onBlockDestroyedByPlayer(worldIn,pos,state);
     }
     
     /**
