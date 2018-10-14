@@ -109,7 +109,7 @@ public class KathairisEventsHandler {
 					}
 				}
 			}
-			KetherDataStorage data = KCore.data.getDataInstance(event.player.world);
+			KetherDataStorage data = KCore.data.getDataInstance(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(KCore.instance.DIMENSION_ID));
 				if(data!=null) {
 					if(data.getIsSandstorm()) {
 						if(event.player.world.getBiome(event.player.getPosition())==KCore.MysticDesert) {
