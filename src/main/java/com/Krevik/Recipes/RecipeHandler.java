@@ -203,5 +203,9 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Iron Gold Ingot"),new ResourceLocation("Ingots"), new ItemStack(KCore.Ingot_Iron_Gold,9),Ingredient.fromItem(Item.getItemFromBlock(KCore.Block_Iron_Gold)));
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Ritual Blade"),new ResourceLocation("Items"), new ItemStack(KCore.Ritual_Blade,1),"X  "," Y ","  Z", Character.valueOf('X'), Items.STICK, Character.valueOf('Y'),KCore.Ingot_Iron_Gold,Character.valueOf('Z'),KCore.MysticGem);
 		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Bowl of Nectar"), new ResourceLocation("Food"), new ItemStack(KCore.Nectar_Bowl), Ingredient.fromItem(Items.BOWL), Ingredient.fromItem(KCore.ButterflyFlowerNectar));
+
+		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Mystic Planks"),new ResourceLocation("Blocks"), new ItemStack(Item.getItemFromBlock(KCore.MysticPlanks),4),Ingredient.fromItem(Item.getItemFromBlock(KCore.Stripped_Mystic_Log)));
+		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Shiny Planks"),new ResourceLocation("Blocks"), new ItemStack(Item.getItemFromBlock(KCore.ShinyPlanks),4),Ingredient.fromItem(Item.getItemFromBlock(KCore.Stripped_Shiny_Log)));
+		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Soul Planks"),new ResourceLocation("Blocks"), new ItemStack(Item.getItemFromBlock(KCore.SoulPlanks),4),Ingredient.fromItem(Item.getItemFromBlock(KCore.Stripped_Soul_Log)));
 	}
 }
