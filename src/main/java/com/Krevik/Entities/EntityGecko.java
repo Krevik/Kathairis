@@ -204,4 +204,5 @@ public class EntityGecko extends EntityAnimal {
     public float getEyeHeight() {
         return 0.95F * height;
     }
+
 }
