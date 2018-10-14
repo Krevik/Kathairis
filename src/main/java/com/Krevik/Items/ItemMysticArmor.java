@@ -101,7 +101,7 @@ public class ItemMysticArmor extends ItemArmor
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 
-	    if (itemStack.getItem().equals(KCore.CloudBoots)) {
+	    if (itemStack.getItem().equals(KCore.CloudBoots)&&player.inventory.getStackInSlot(36).getItem().equals(KCore.CloudBoots)) {
 	    	player.fallDistance=0;
 	    	if(Minecraft.getMinecraft().gameSettings.keyBindJump.isPressed()&&!wereCloudBootsUsed&&!player.onGround) {
 	    		wereCloudBootsUsed=true;
@@ -130,9 +130,12 @@ public class ItemMysticArmor extends ItemArmor
     
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-    	if(stack.getItem().equals(KCore.CloudBoots)) {
-    		entityIn.fallDistance=0;
-    	}
+        if(entityIn instanceof  EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entityIn;
+            if (stack.getItem().equals(KCore.CloudBoots) && player.inventory.getStackInSlot(36).getItem().equals(KCore.CloudBoots)) {
+                entityIn.fallDistance = 0;
+            }
+        }
     }
     
     public EnumRarity getRarity(ItemStack stack)
