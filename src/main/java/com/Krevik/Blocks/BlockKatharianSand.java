@@ -45,7 +45,6 @@ public class BlockKatharianSand extends BaseBlock
     public BlockKatharianSand(String Name, Material material, CreativeTabs tab, float hardness1, float resistance, SoundType soundType)
     {
         super(Name,material,tab,hardness1,resistance,soundType);
-        this.setTickRandomly(true);
     }
 
     @SideOnly(Side.CLIENT)
@@ -84,20 +83,6 @@ public class BlockKatharianSand extends BaseBlock
         if (!worldIn.isRemote)
         {
             this.checkFallable(worldIn, pos);
-        }
-        if(worldIn.getBiome(pos)==KCore.instance.MysticDesert){
-            if(!worldIn.isRemote){
-                KetherDataStorage data = KCore.data.getDataInstance(worldIn);
-                if(data!=null){
-                    if(data.getIsSandstorm()){
-                        if(rand.nextInt(40)==0){
-                            if(worldIn.isAirBlock(pos.up())){
-                                worldIn.setBlockState(pos.up(),KCore.ForgottenSand.getDefaultState(),2);
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 
