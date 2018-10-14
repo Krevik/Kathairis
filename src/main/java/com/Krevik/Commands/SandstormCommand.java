@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class SandstormCommand extends CommandBase{
 
@@ -38,7 +39,7 @@ public class SandstormCommand extends CommandBase{
             throw new WrongUsageException("/sandstorm <time>", new Object[0]);
 		}else {
 			World world = sender.getEntityWorld();
-			KetherDataStorage data = KCore.data.getDataInstance(world);
+			KetherDataStorage data = KCore.data.getDataInstance(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(KCore.instance.DIMENSION_ID));
 			if(!world.isRemote) {
 					if(data!=null) {
 						if(args[0]!=null) {

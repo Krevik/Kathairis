@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -41,7 +42,7 @@ public class PacketDustStormClient implements IMessage {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public IMessage onMessage(PacketDustStormClient message, MessageContext ctx) {
-			KetherDataStorage data = KCore.data.getDataInstance(Minecraft.getMinecraft().player.world);
+			KetherDataStorage data = KCore.data.getDataInstance(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(KCore.instance.DIMENSION_ID));
 			if(ctx.side.isClient()) {
 				EntityPlayer player = Minecraft.getMinecraft().player;
 				if(player!=null) {	

@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
@@ -56,7 +57,7 @@ public class KathairisEventsHandler {
 	public static void onEvent1(WorldTickEvent event)
 	{
 		KCore.instance.updateRendererCount++;
-					KetherDataStorage data = KCore.data.getDataInstance(event.world);
+					KetherDataStorage data = KCore.data.getDataInstance(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(KCore.instance.DIMENSION_ID));
 
 				if(data!=null&&event.world.getTotalWorldTime()>100) {
 					if(!event.world.isRaining()) {

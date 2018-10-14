@@ -3,6 +3,7 @@ package com.Krevik.Networking;
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Main.KCore;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -49,7 +50,7 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(new Runnable() {
                 @Override
                 public void run() {
-                    KetherDataStorage data = KCore.data.getDataInstance(ctx.getServerHandler().player.getServerWorld());
+                    KetherDataStorage data = KCore.data.getDataInstance(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(KCore.instance.DIMENSION_ID));
                     data.setIsSandstorm(message.isSandstorm);
                     data.setSandstormX(message.mX);
                     data.setSandstormTime((int) message.sandstormTime);
