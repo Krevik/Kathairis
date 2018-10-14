@@ -107,7 +107,6 @@ public class EntityCloudOister extends EntityAmbientCreature
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-       
         this.setTimeUntilNextPearl(this.timeUntilNextPearl()-1);
         if (!this.world.isRemote && this.timeUntilNextPearl() <= 0)
         {

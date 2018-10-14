@@ -9,6 +9,7 @@ import com.Krevik.Biomes.GenLayerMysticMain;
 import com.Krevik.Main.KCore;
 import com.google.common.collect.Lists;
 
+import net.minecraft.block.BlockBed;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.init.Biomes;
