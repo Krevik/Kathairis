@@ -315,7 +315,6 @@ public class EntityCloudySlime extends EntityTameable implements EntityFlying
                     setPosition(tmp.getX(),tmp.getY(),tmp.getZ());
                 }
             }
-
             return super.attackEntityFrom(source, amount);
         }
     }
