@@ -81,6 +81,8 @@ public class CommonProxy {
 		BiomeDictionary.addTypes(KCore.instance.MysticDesert, BiomeDictionary.Type.PLAINS,BiomeDictionary.Type.DEAD,BiomeDictionary.Type.HOT);
 		BiomeDictionary.addTypes(KCore.instance.MysticSwamps, BiomeDictionary.Type.DRY);
 		BiomeDictionary.addTypes(KCore.instance.FloatingIslands, BiomeDictionary.Type.MAGICAL,BiomeDictionary.Type.OCEAN);
+		BiomeDictionary.addTypes(KCore.instance.KatharianOcean, BiomeDictionary.Type.MAGICAL,BiomeDictionary.Type.OCEAN);
+
 	}
 
     public void preInit(FMLPreInitializationEvent e) {
