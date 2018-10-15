@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.Krevik.Entities.EntityShockingBall;
+import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -52,42 +53,43 @@ public class BaseWand extends BaseItem{
 	
 	
 	
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn)
     {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
+        ItemStack itemstack = player.getHeldItem(handIn);
 
-    	if(this==KCore.ShockWand) {
-		    	if(this.getMaxDamage()-this.getDamage(itemstack)>1) {
-		
-		        if (!playerIn.capabilities.isCreativeMode)
-		        {
-		            itemstack.damageItem(1, playerIn);
-		        }
-		
-		        //worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-		        
-		        if (!worldIn.isRemote)
-		        {
-		            EntityShockingBall entityegg = new EntityShockingBall(worldIn, playerIn.posX+playerIn.getForward().x,playerIn.posY+playerIn.eyeHeight,playerIn.posZ+playerIn.getForward().z);
-		            entityegg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-		            worldIn.spawnEntity(entityegg);
-		        }
-		        
-		
-		        playerIn.addStat(StatList.getObjectUseStats(this));
-		        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
-	    	}else {
-		        return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
-	    	}
-    	}
-    	
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+		FunctionHelper helper = KCore.instance.functionHelper;
+		if(itemstack.getItem()==KCore.ShockWand) {
+			if(this.getMaxDamage()-this.getDamage(itemstack)>1) {
+
+				if (!player.capabilities.isCreativeMode)
+				{
+					itemstack.damageItem(1, player);
+				}
+
+				//worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
+				if (!worldIn.isRemote)
+				{
+					EntityShockingBall entityegg = new EntityShockingBall(worldIn, player.posX+helper.getForward(player).x,player.posY+player.eyeHeight,player.posZ+helper.getForward(player).z);
+					entityegg.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
+					worldIn.spawnEntity(entityegg);
+				}
+
+
+				player.addStat(StatList.getObjectUseStats(this));
+				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+			}else {
+				return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+			}
+		}
+		return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
 
 	}
       	
         public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
         {
             ItemStack itemstack = player.getHeldItem(hand);
+
 
           	if(this==KCore.DeathWand) {
     	    	if(this.getMaxDamage()-this.getDamage(itemstack)>6) {

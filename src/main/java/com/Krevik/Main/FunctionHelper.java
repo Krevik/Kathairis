@@ -2,6 +2,12 @@ package com.Krevik.Main;
 
 import java.util.Random;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -155,5 +161,32 @@ public class FunctionHelper {
     	Matrix4f.scale(new Vector3f(scale,scale,scale), matrix, matrix);
     	return matrix;
     }
+
+	public Vec3d getForward(EntityPlayer ep)
+	{
+		return fromPitchYawVector(getPitchYaw(ep));
+	}
+
+	public Vec2fNonClientOnly getPitchYaw(Entity ep)
+	{
+		return new Vec2fNonClientOnly(ep.rotationPitch, ep.rotationYaw);
+	}
+
+	public static Vec3d fromPitchYawVector(Vec2fNonClientOnly p_189984_0_)
+	{
+		return fromPitchYaw(p_189984_0_.x, p_189984_0_.y);
+	}
+
+	/**
+	 * returns a Vec3d from given pitch and yaw degrees
+	 */
+	public static Vec3d fromPitchYaw(float p_189986_0_, float p_189986_1_)
+	{
+		float f = MathHelper.cos(-p_189986_1_ * 0.017453292F - (float)Math.PI);
+		float f1 = MathHelper.sin(-p_189986_1_ * 0.017453292F - (float)Math.PI);
+		float f2 = -MathHelper.cos(-p_189986_0_ * 0.017453292F);
+		float f3 = MathHelper.sin(-p_189986_0_ * 0.017453292F);
+		return new Vec3d((double)(f1 * f2), (double)f3, (double)(f * f2));
+	}
 
 }
