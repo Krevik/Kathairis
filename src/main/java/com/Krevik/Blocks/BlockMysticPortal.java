@@ -358,11 +358,9 @@ public class BlockMysticPortal extends BaseBlock
     {   
 		if ((entityIn.getRidingEntity() == null) && ((entityIn instanceof EntityPlayerMP)))
 		{
-			
 			EntityPlayerMP player1 = (EntityPlayerMP)entityIn;
 		
 			TileEntityKether.tele(player1);
-		
 		}
 
 

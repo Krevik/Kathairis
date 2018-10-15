@@ -6,6 +6,7 @@ import com.Krevik.Networking.PacketDeathHandlerClient;
 import com.Krevik.Networking.PacketDeathHandlerServer;
 import com.Krevik.Networking.PacketSpawnDeathServer;
 
+import net.minecraft.block.BlockPortal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -106,7 +107,7 @@ public class TileEntityKether extends TileEntity
 	
 	public static void tele(EntityPlayer player)
 	{
-		
+
 		
 		if ((player.getRidingEntity() == null) && ((player instanceof EntityPlayerMP)))
 		{
