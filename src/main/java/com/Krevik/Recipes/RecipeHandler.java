@@ -183,6 +183,7 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Turtle Shell Plate"),new ResourceLocation("Blocks"), new ItemStack(KCore.TurtleShellPlate,1),"XXX", "XXX","XXX", Character.valueOf('X'), KCore.TurtleShell);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Big Wings"),new ResourceLocation("Items"), new ItemStack(KCore.BigWings,1),"XXX", "XXX","XXX", Character.valueOf('X'), KCore.WingsPiece);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Shiny Bark"),new ResourceLocation("Blocks"), new ItemStack(KCore.ShinyLogBark,3),"XX", "XX", Character.valueOf('X'), KCore.ShinyLog);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Mystic Wood Slab"),new ResourceLocation("Blocks"), new ItemStack(KCore.MysticWoodHalfSlab,6),"XXX", Character.valueOf('X'), KCore.MysticPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Shiny Wood Slab"),new ResourceLocation("Blocks"), new ItemStack(KCore.ShinyWoodHalfSlab,6),"XXX", Character.valueOf('X'), KCore.ShinyPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Soul Wood Slab"),new ResourceLocation("Blocks"), new ItemStack(KCore.SoulWoodHalfSlab,6),"XXX", Character.valueOf('X'), KCore.SoulPlanks);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Soul Wood Stairs"),new ResourceLocation("Blocks"), new ItemStack(Item.getItemFromBlock(KCore.SoulWoodStairs),6),"  X", " XX", "XXX", Character.valueOf('X'), KCore.SoulPlanks);
