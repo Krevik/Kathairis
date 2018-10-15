@@ -50,7 +50,7 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(new Runnable() {
                 @Override
                 public void run() {
-                    KetherDataStorage data = KCore.data.getDataInstance(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(KCore.instance.DIMENSION_ID));
+                    KetherDataStorage data = KCore.data.getDataInstance(ctx.getServerHandler().player.world);
                     data.setIsSandstorm(message.isSandstorm);
                     data.setSandstormX(message.mX);
                     data.setSandstormTime((int) message.sandstormTime);
