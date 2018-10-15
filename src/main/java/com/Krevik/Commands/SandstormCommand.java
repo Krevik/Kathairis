@@ -40,9 +40,9 @@ public class SandstormCommand extends CommandBase{
             throw new WrongUsageException("/sandstorm <time>", new Object[0]);
 		}else {
 			World world = sender.getEntityWorld();
-			KetherDataStorage data = KCore.data.getDataInstance(world);
 			if(!world.isRemote) {
-					if(data!=null) {
+				KetherDataStorage data = KCore.data.getDataInstance(world);
+				if(data!=null) {
 						if(args[0]!=null) {
 							if(Integer.parseInt(args[0])==0) {
 								data.setIsSandstorm(false);
@@ -50,8 +50,8 @@ public class SandstormCommand extends CommandBase{
 							}else {
 								data.setIsSandstorm(true);
 								data.setSandstormTime(Integer.parseInt(args[0]));
-								float X=(float)(world.rand.nextDouble()-world.rand.nextDouble());
-								float Z=(float)(world.rand.nextDouble()-world.rand.nextDouble());
+								double X=(world.rand.nextDouble()-world.rand.nextDouble());
+								double Z=(world.rand.nextDouble()-world.rand.nextDouble());
 								data.setSandstormX(X);
 								data.setSandstormZ(Z);
 								PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, Integer.parseInt(args[0]),Z);
