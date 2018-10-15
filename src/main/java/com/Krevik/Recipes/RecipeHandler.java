@@ -22,6 +22,13 @@ public class RecipeHandler {
 		addOresBlocks();
 		addOther();
 		addFood();
+		registerOreDictionary();
+	}
+
+	private static void registerOreDictionary(){
+		OreDictionary.registerOre("stickWood",new ItemStack(KCore.ShinyStick));
+		OreDictionary.registerOre("plankWood",new ItemStack(KCore.MysticPlanks));
+		OreDictionary.registerOre("plankWood",new ItemStack(KCore.SoulPlanks));
 	}
 
 	private static void addGemsRecipes() {
