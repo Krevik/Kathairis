@@ -5,6 +5,7 @@ import com.Krevik.Items.ItemMysticArmor;
 import com.Krevik.Main.KCore;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDustStormClient;
+import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
@@ -61,20 +62,29 @@ public class KathairisEventsHandler {
 		KCore.instance.updateRendererCount++;
 					KetherDataStorage data = KCore.data.getDataInstance(event.world);
 
+					if(!event.world.isRemote){
+						data = KCore.data.getDataInstance(event.world);
+						if(data.getIsSandstorm()) {
+							PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getIsSandstorm(), data.getSandstormX(), data.getSandstormTime(), data.getSandstormZ());
+							KetherPacketHandler.CHANNEL.sendToAll(message);
+						}
+					}
+
 				if(data!=null&&event.world.getTotalWorldTime()>100) {
 					if(!event.world.isRaining()) {
 						if(!data.getIsSandstorm()) {
 							if(event.world.rand.nextInt(500000)==0) {
 								if(!event.world.isRemote) {
+									data = KCore.data.getDataInstance(event.world);
 									float time = 9000 + event.world.rand.nextInt(20000);
-									float X = (float) (event.world.rand.nextDouble() - event.world.rand.nextDouble());
-									float Z = (float) (event.world.rand.nextDouble() - event.world.rand.nextDouble());
+									double X = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
+									double Z = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
 									data.setSandstormTime((int) time);
 									data.setSandstormX(X);
 									data.setSandstormZ(Z);
 									data.setIsSandstorm(true);
-									PacketSandstormUpdatedOnServer message = new PacketSandstormUpdatedOnServer(true, X, time, Z);
-									KetherPacketHandler.CHANNEL.sendToServer(message);
+									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
+									KetherPacketHandler.CHANNEL.sendToAll(message);
 								}
 							}
 						}

@@ -13,14 +13,14 @@ import java.util.Random;
 public class PacketSandstormUpdatedOnServer implements IMessage {
 
     private boolean isSandstorm;
-    private float mX;
+    private double mX;
     private float sandstormTime;
-    private float mZ;
+    private double mZ;
 
     public PacketSandstormUpdatedOnServer() {
     }
 
-    public PacketSandstormUpdatedOnServer(boolean isSandstorm1, float mx,float sandstormtime,float mz) {
+    public PacketSandstormUpdatedOnServer(boolean isSandstorm1, double mx,float sandstormtime,double mz) {
         isSandstorm=isSandstorm1;
         this.mX=mx;
         this.sandstormTime=sandstormtime;
@@ -30,17 +30,17 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
     @Override
     public void fromBytes(ByteBuf buf) {
         isSandstorm=buf.readBoolean();
-        mX=buf.readFloat();
+        mX=buf.readDouble();
         sandstormTime=buf.readFloat();
-        mZ=buf.readFloat();
+        mZ=buf.readDouble();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeBoolean(isSandstorm);
-        buf.writeFloat(mX);
+        buf.writeDouble(mX);
         buf.writeFloat(sandstormTime);
-        buf.writeFloat(mZ);
+        buf.writeDouble(mZ);
     }
 
     public static class Handler implements IMessageHandler<PacketSandstormUpdatedOnServer, IMessage> {
