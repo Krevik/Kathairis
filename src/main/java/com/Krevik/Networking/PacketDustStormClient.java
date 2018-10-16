@@ -92,7 +92,7 @@ public class PacketDustStormClient implements IMessage {
 							}
 								if(player.world.getBiome(player.getPosition())==KCore.instance.MysticDesert&&player.posY>63&&player.posY<84) {
 									MoveMeDuringSandstormServer message1 = new MoveMeDuringSandstormServer(data.getSandstormX(),data.getSandstormZ());
-									KetherPacketHandler.CHANNEL.sendToServer(message1);
+									//KetherPacketHandler.CHANNEL.sendToServer(message1);
 								}
 							}
 						}

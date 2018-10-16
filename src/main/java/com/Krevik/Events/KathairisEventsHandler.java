@@ -15,6 +15,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -76,24 +78,25 @@ public class KathairisEventsHandler {
 					}
 
 				if(data!=null&&event.world.getTotalWorldTime()>100) {
-					if(!event.world.isRaining()) {
-						if(!data.getIsSandstorm()) {
-							if(event.world.rand.nextInt(500000)==0) {
-								if(!event.world.isRemote) {
-									data = KCore.data.getDataInstance(event.world);
-									float time = 9000 + event.world.rand.nextInt(20000);
-									double X = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
-									double Z = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
-									data.setSandstormTime((int) time);
-									data.setSandstormX(X);
-									data.setSandstormZ(Z);
-									data.setIsSandstorm(true);
-									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
-									KetherPacketHandler.CHANNEL.sendToAll(message);
-								}
-							}
-						}
-					}
+                    if (!event.world.isRaining()) {
+                        if (!data.getIsSandstorm()) {
+                            if (event.world.rand.nextInt(500000) == 0) {
+                                if (!event.world.isRemote) {
+                                    data = KCore.data.getDataInstance(event.world);
+                                    float time = 9000 + event.world.rand.nextInt(20000);
+                                    double X = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
+                                    double Z = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
+                                    data.setSandstormTime((int) time);
+                                    data.setSandstormX(X);
+                                    data.setSandstormZ(Z);
+                                    data.setIsSandstorm(true);
+                                    PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
+                                    KetherPacketHandler.CHANNEL.sendToAll(message);
+                                }
+                            }
+                        }
+                    }
+                }
 					if(data.getSandstormTime()>0) {
 						data.setIsSandstorm(true);
 						data.setSandstormTime(data.getSandstormTime()-1);
@@ -111,7 +114,24 @@ public class KathairisEventsHandler {
 						IMessage message2 = new PacketDustStormClient();
 						KetherPacketHandler.CHANNEL.sendToAll(message2);
 					}
-				}
+					if(data.getIsSandstorm()){
+						if(!event.world.isRemote){
+							for(EntityPlayer player:event.world.getMinecraftServer().getPlayerList().getPlayers()) {
+							    if(event.world.getBiome(player.getPosition())==KCore.MysticDesert) {
+                                    if (player.motionY == 0D) {
+                                        player.motionX += data.getSandstormX() * 0.0080;
+                                        player.motionZ += data.getSandstormZ() * 0.0080;
+                                        player.velocityChanged = true;
+                                    } else {
+                                        player.motionX += data.getSandstormX() * 0.0017;
+                                        player.motionZ += data.getSandstormZ() * 0.0017;
+                                        player.velocityChanged = true;
+                                    }
+                                    player.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 100, 100));
+                                }
+							}
+						}
+					}
 	}
 
 	@SubscribeEvent
