@@ -78,7 +78,6 @@ public class KathairisEventsHandler {
 					}
 
 				if(data!=null&&event.world.getTotalWorldTime()>100) {
-                    if (!event.world.isRaining()) {
                         if (!data.getIsSandstorm()) {
                             if (event.world.rand.nextInt(500000) == 0) {
                                 if (!event.world.isRemote) {
@@ -95,7 +94,6 @@ public class KathairisEventsHandler {
                                 }
                             }
                         }
-                    }
                 }
 					if(data.getSandstormTime()>0) {
 						data.setIsSandstorm(true);

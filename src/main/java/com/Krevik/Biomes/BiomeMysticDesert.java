@@ -55,6 +55,7 @@ public class BiomeMysticDesert extends KetherBiome
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityPoisonousScorpion.class, 90, 1, 2));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCamel.class, 6, 1, 2));
 
+
     }
     
     public WorldGenerator getRandomWorldGenForGrass(Random rand)

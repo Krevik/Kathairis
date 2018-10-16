@@ -471,7 +471,7 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "MysticPlains")
 	public static final BiomeMysticPlains MysticPlains = new BiomeMysticPlains(new Biome.BiomeProperties("Mystic Plains").setBaseBiome("Mystic Plains").setBaseHeight(0.5f).setHeightVariation(0.1f).setWaterColor(132240255));
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "MysticDesert")
-	public static final BiomeMysticDesert MysticDesert = new BiomeMysticDesert(new Biome.BiomeProperties("Mystic Desert").setBaseBiome("Mystic Desert").setBaseHeight(0.5f).setHeightVariation(0.1f).setWaterColor(132240255));
+	public static final BiomeMysticDesert MysticDesert = new BiomeMysticDesert(new Biome.BiomeProperties("Mystic Desert").setBaseBiome("Mystic Desert").setBaseHeight(0.5f).setHeightVariation(0.1f).setWaterColor(132240255).setRainDisabled());
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "MysticSwamps")
 	public static final BiomeMysticSwamps MysticSwamps = new BiomeMysticSwamps(new Biome.BiomeProperties("Mystic Swamps").setBaseBiome("Mystic Swamps").setBaseHeight(0.4f).setHeightVariation(0.1f).setWaterColor(132240255));
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "Floating Islands")
