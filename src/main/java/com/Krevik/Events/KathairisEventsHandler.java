@@ -8,11 +8,15 @@ import com.Krevik.Networking.PacketDustStormClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -184,5 +188,25 @@ public class KathairisEventsHandler {
 				}
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public static void healAnimalsWithHeartEvent(PlayerInteractEvent.EntityInteract event){
+		ItemStack itemstack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
+			if(itemstack.getItem().equals(KCore.Heart)	){
+				Entity entity = event.getTarget();
+				if(entity instanceof EntityLivingBase){
+					EntityLivingBase animal = (EntityLivingBase) entity;
+					if(animal.getHealth()<animal.getMaxHealth()){
+						if(!event.getEntityPlayer().world.isRemote) {
+							animal.heal(1);
+							if (!event.getEntityPlayer().capabilities.isCreativeMode) {
+								itemstack.shrink(1);
+							}
+						}
+						KCore.instance.functionHelper.playTameEffect(event.getEntityPlayer().world,KCore.instance.functionHelper.random,animal,true);
+					}
+				}
+			}
 	}
 }

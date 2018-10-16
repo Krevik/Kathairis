@@ -2,7 +2,9 @@ package com.Krevik.Main;
 
 import java.util.Random;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
@@ -187,6 +189,24 @@ public class FunctionHelper {
 		float f2 = -MathHelper.cos(-p_189986_0_ * 0.017453292F);
 		float f3 = MathHelper.sin(-p_189986_0_ * 0.017453292F);
 		return new Vec3d((double)(f1 * f2), (double)f3, (double)(f * f2));
+	}
+
+	public void playTameEffect(World world, Random rand, EntityLivingBase animal, boolean play)
+	{
+		EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
+
+		if (!play)
+		{
+			enumparticletypes = EnumParticleTypes.SMOKE_NORMAL;
+		}
+
+		for (int i = 0; i < 7; ++i)
+		{
+			double d0 = rand.nextGaussian() * 0.02D;
+			double d1 = rand.nextGaussian() * 0.02D;
+			double d2 = rand.nextGaussian() * 0.02D;
+			world.spawnParticle(enumparticletypes, animal.posX + (double)(rand.nextFloat() * animal.width * 2.0F) - (double)animal.width, animal.posY + 0.5D + (double)(rand.nextFloat() * animal.height), animal.posZ + (double)(rand.nextFloat() * animal.width * 2.0F) - (double)animal.width, d0, d1, d2);
+		}
 	}
 
 }
