@@ -84,7 +84,7 @@ public class KCore {
 	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	
-	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 1F, 4F, 22).setRepairItem(new ItemStack(KCore.CrystalsCluster));
+	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 2F, 4F, 22).setRepairItem(new ItemStack(KCore.CrystalsCluster));
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21).setRepairItem(new ItemStack(KCore.DarknessEssence));
 	public static Item.ToolMaterial MAGNETHIUM = EnumHelper.addToolMaterial("magnethium", 3, 800, 6F, 3F, 20).setRepairItem(new ItemStack(KCore.Magnethium_Shard));
 
