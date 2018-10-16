@@ -91,10 +91,6 @@ public class EntityShockingBall extends EntityThrowable
             	el.addPotionEffect(new PotionEffect(Potion.getPotionById(2),100,7));
             }
             result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 7F);
-            
-
-
-            
         }
 
         if (!this.world.isRemote)
