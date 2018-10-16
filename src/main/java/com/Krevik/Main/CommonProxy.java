@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 import com.Krevik.Dimension.TileEntityKether;
 import com.Krevik.Gui.GuiHandler;
+import com.Krevik.Items.ItemSand;
 import com.Krevik.Sounds.SoundHelper;
 import com.Krevik.TileEntity.TileEntityCharger;
 import com.Krevik.TileEntity.TileEntityMythicStoneSign;
@@ -21,6 +22,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
+import net.minecraft.item.ItemSnow;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
@@ -258,7 +260,8 @@ public class CommonProxy {
 					KCore.Redwood_log_size_3,
 					KCore.Redwood_log_size_2,
 					KCore.Redwood_log_size_1,
-					KCore.Mythic_Stone_Bricks
+					KCore.Mythic_Stone_Bricks,
+					KCore.Layered_Sand
 					//KCore.Hell_Plant
 					//KCore.Butterfly_Analysing_Table
 
@@ -393,7 +396,8 @@ public class CommonProxy {
 					new ItemBlock(KCore.Redwood_log_size_3),
 					new ItemBlock(KCore.Redwood_log_size_2),
 					new ItemBlock(KCore.Redwood_log_size_1),
-					new ItemBlock(KCore.Mythic_Stone_Bricks)
+					new ItemBlock(KCore.Mythic_Stone_Bricks),
+					new ItemSand(KCore.Layered_Sand)
 					//new ItemBlock(KCore.Hell_Plant)
 					//new ItemBlock(KCore.Butterfly_Analysing_Table)
 					};

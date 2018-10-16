@@ -455,6 +455,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Mythic_Stone_Bricks)
     public static final BlockMythicStoneBricks Mythic_Stone_Bricks = new BlockMythicStoneBricks(Ref.Mythic_Stone_Bricks, Material.ROCK, CreativeTabsMystic.buildingBlocks, 2.5F, 2.5F, SoundType.STONE);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Layered_Sand)
+    public static final BlockLayeredSand Layered_Sand = new BlockLayeredSand(Ref.Layered_Sand,CreativeTabsMystic.buildingBlocks);
 
 
 
@@ -974,6 +976,7 @@ public class KCore {
         public static final String Magnethium_Hoe="magnethium_hoe";
         public static final String Magnethium_Sword="magnethium_sword";
         public static final String Mythic_Stone_Bricks="mythic_stone_bricks";
+        public static final String Layered_Sand="layered_sand";
     }
     
 

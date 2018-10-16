@@ -92,6 +92,7 @@ item.magnethium_pickaxe.name=Magnethium Pickaxe
 item.magnethium_shovel.name=Magnethium Shovel
 item.magnethium_hoe.name=Magnethium Hoe
 item.magnethium_sword.name=Magnethium Sword
+item.layered_sand.name=Layered Sand
 
 
 tile.corruptedgrass.name=Katharian Grass
@@ -220,6 +221,7 @@ tile.redwood_log_size_3.name=Redwood Log Size-3
 tile.redwood_log_size_2.name=Redwood Log Size-2
 tile.redwood_log_size_1.name=Redwood Log Size-1
 tile.mythic_stone_bricks.name=Mythic Stone Bricks
+tile.layered_sand.name=Layered Sand
 
 entity.PoisonousScorpion.name=Scorpion
 entity.BigTurtle.name=Desert Tortoise

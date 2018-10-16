@@ -7,6 +7,7 @@ import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDustStormClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
+import net.minecraft.block.BlockSnow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
