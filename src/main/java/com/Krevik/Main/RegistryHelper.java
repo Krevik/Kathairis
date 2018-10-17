@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import com.Krevik.Blocks.BaseBlock;
 import com.Krevik.Blocks.BlockMysticLeaf;
 import com.Krevik.Blocks.BlockMysticSlabBase;
-import com.Krevik.Items.BaseItem;
-import com.Krevik.Items.ItemMysticArmor;
-import com.Krevik.Items.ItemMysticFood;
-import com.Krevik.Items.ItemMysticSword;
-import com.Krevik.Items.MysticTool;
+import com.Krevik.Items.*;
 
 public class RegistryHelper {
 	
@@ -25,6 +21,8 @@ public class RegistryHelper {
 	public ArrayList<ItemMysticArmor> armorList = new ArrayList();
 	public ArrayList<ItemMysticFood> foodList = new ArrayList();
 	public ArrayList<ItemMysticSword> swordList = new ArrayList();
+	public ArrayList<ItemBasicKathairisMusicDisc> recordsList = new ArrayList();
+
 
 	public void initModels() {
 		for(int x=0;x<blocksList.size();x++) {
@@ -52,6 +50,9 @@ public class RegistryHelper {
 		}
 		for(int x=0;x<swordList.size();x++) {
 			swordList.get(x).initModel();
+		}
+		for(int x=0;x<recordsList.size();x++) {
+			recordsList.get(x).initModel();
 		}
 	}
 }

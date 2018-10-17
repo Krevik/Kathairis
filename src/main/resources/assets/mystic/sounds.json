@@ -246,5 +246,21 @@
 			"mystic:sandstorm/sandstorm2",
 			"mystic:sandstorm/sandstorm3"
         ]
+    },
+	"kether.music_disc.jazzy":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "mystic:music_disc/jazzy", "stream": true}
+        ]
+    },
+	"kether.music_disc.8bit":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "mystic:music_disc/8bit", "stream": true}
+        ]
     }
 }

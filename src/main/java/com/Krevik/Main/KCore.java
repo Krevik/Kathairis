@@ -2,7 +2,9 @@ package com.Krevik.Main;
 
 import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
+import com.Krevik.Items.*;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import org.apache.logging.log4j.LogManager;
@@ -12,20 +14,6 @@ import com.Krevik.Commands.SandstormCommand;
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Dimension.WorldProviderMystic;
 import com.Krevik.Events.KathairisEventsHandler;
-import com.Krevik.Items.BaseItem;
-import com.Krevik.Items.BaseWand;
-import com.Krevik.Items.ItemGlassJar;
-import com.Krevik.Items.ItemMysticArmor;
-import com.Krevik.Items.ItemMysticAxe;
-import com.Krevik.Items.ItemMysticDoor;
-import com.Krevik.Items.ItemMysticFood;
-import com.Krevik.Items.ItemMysticHoe;
-import com.Krevik.Items.ItemMysticPickaxe;
-import com.Krevik.Items.ItemMysticSeedFood;
-import com.Krevik.Items.ItemMysticShovel;
-import com.Krevik.Items.ItemMysticSword;
-import com.Krevik.Items.ItemMythicStoneSign;
-import com.Krevik.Items.ItemRitualBlade;
 import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Recipes.ChargerRecipes;
 import com.Krevik.Recipes.RecipeHandler;
@@ -728,8 +716,13 @@ public class KCore {
      
      @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Sword)
  	public static final ItemMysticSword Magnethium_Sword = new ItemMysticSword(Ref.Magnethium_Sword, CreativeTabsMystic.weapons,KCore.MAGNETHIUM);
-     
-    
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.music_disc_8bit)
+    public static final ItemBasicKathairisMusicDisc Music_Disc_8bit = new ItemBasicKathairisMusicDisc(Ref.music_disc_8bit, KCore.instance.cproxy.music_disc_8bit,"In-universe by YungBlitzkrieg");
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.music_disc_jazzy)
+    public static final ItemBasicKathairisMusicDisc Music_Disc_jazzy = new ItemBasicKathairisMusicDisc(Ref.music_disc_jazzy, KCore.instance.cproxy.music_disc_jazzy,"Jazzy by YungBlitzkrieg");
+
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         regHelper.initModels();
@@ -977,6 +970,9 @@ public class KCore {
         public static final String Magnethium_Sword="magnethium_sword";
         public static final String Mythic_Stone_Bricks="mythic_stone_bricks";
         public static final String Layered_Sand="layered_sand";
+        public static final String music_disc_jazzy="music_disc_jazzy";
+        public static final String music_disc_8bit="music_disc_8bit";
+
     }
     
 

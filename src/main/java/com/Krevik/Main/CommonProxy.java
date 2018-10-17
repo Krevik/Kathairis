@@ -67,11 +67,15 @@ public class CommonProxy {
 	public static SoundHelper cloud_glass_break = new SoundHelper("cloudglass.break");
 	public static SoundHelper sandstorm = new SoundHelper("sandstorm");
 
-    public static final SoundType CLOUDGLASS = new SoundType(1.0F, 1.0F, cloud_glass_break, SoundEvents.BLOCK_GLASS_STEP, SoundEvents.BLOCK_GLASS_PLACE, SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
+	public static SoundEvent music_disc_jazzy = new SoundHelper("music_disc.jazzy");
+	public static SoundEvent music_disc_8bit = new SoundHelper("music_disc.8bit");
+
+	public static final SoundType CLOUDGLASS = new SoundType(1.0F, 1.0F, cloud_glass_break, SoundEvents.BLOCK_GLASS_STEP, SoundEvents.BLOCK_GLASS_PLACE, SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
 
 
 	public static ArrayList<Biome> biomeList = new ArrayList();
 	public static ArrayList<Item> itemList = new ArrayList();
+
 	@SubscribeEvent
 	public static void registerBiomes(final RegistryEvent.Register<Biome> event) {
 		final IForgeRegistry<Biome> registry = event.getRegistry();
