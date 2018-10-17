@@ -145,91 +145,79 @@ public class BlockLayeredSand extends BaseBlock {
                 }
             }
         }
-        giveSandToNeighbours(state,worldIn,pos);
+        if(!worldIn.isRemote) {
+            giveSandToNeighboursNew(state, worldIn, pos);
+        }
 
     }
 
-    //TODO FINISH
-    private void giveSandToNeighbours(IBlockState thisState, World world, BlockPos pos){
+    private void giveSandToNeighboursNew(IBlockState thisState, World world, BlockPos pos){
         int layers = getLayers(thisState);
         if(layers>2){
-            IBlockState state1 = KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,1);
-            IBlockState state2 = KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,2);
-            IBlockState state3 = KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,3);
-            IBlockState state4 = KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,4);
-            IBlockState state5 = KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,5);
-            BlockPos pos1 = pos.down().east();
-            IBlockState actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
-                }
-            }
-            pos1 = pos.down().west();
-            actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
-                }
-            }
-            pos1 = pos.down().south();
-            actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
-                }
-            }
-            pos1 = pos.down().north();
-            actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
-                }
-            }
-            pos1 = pos.south();
-            actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
-                }
-            }
-            pos1 = pos.north();
-            actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
-                }
-            }
-            pos1 = pos.east();
-            actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
+            BlockPos pos1 = pos.east();
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                if (getLayers(world.getBlockState(pos1))+1 < layers) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    layers--;
                 }
             }
             pos1 = pos.west();
-            actualState1 = world.getBlockState(pos1);
-            if(actualState1==state1||actualState1==state2||actualState1==state3||actualState1==state4||actualState1==state5){
-                if(getLayers(thisState)>getLayers(actualState1)) {
-                    world.setBlockState(pos1, actualState1.withProperty(LAYERS, getLayers(actualState1) + 1), 2);
-                    world.setBlockState(pos, thisState.withProperty(LAYERS, getLayers(thisState) - 1), 2);
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                if (getLayers(world.getBlockState(pos1))+1 < layers) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    layers--;
                 }
+            }
+            pos1 = pos.south();
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                if (getLayers(world.getBlockState(pos1))+1 < layers) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    layers--;
+                }
+            }
+            pos1 = pos.north();
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                if (getLayers(world.getBlockState(pos1))+1 < layers) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    layers--;
+                }
+            }
+            pos1 = pos.down().north();
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    layers--;
+            }
+            pos1 = pos.down().south();
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    layers--;
+            }
+            pos1 = pos.down().east();
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    layers--;
+            }
+            pos1 = pos.down().west();
+            if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
+                    world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
             }
         }
     }
+    
 
     protected int getLayers(IBlockState state)
     {
-        return ((Integer)state.getValue(this.getAgeProperty())).intValue();
+        return ((Integer)state.getValue(this.getLayersProperty())).intValue();
     }
-    protected PropertyInteger getAgeProperty()
+    protected PropertyInteger getLayersProperty()
     {
         return LAYERS;
     }
