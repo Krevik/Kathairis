@@ -41,7 +41,7 @@ public class BlockCharger extends BlockContainer
     public BlockCharger(String Name)
     {
         super(Material.ROCK);
-        lightOpacity = 255; // cast a light shadow
+        lightOpacity = 0;
         setTickRandomly(false);
         useNeighborBrightness = false;
     

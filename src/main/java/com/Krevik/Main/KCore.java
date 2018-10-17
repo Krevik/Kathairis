@@ -282,7 +282,7 @@ public class KCore {
     public static final BlockGooseberry GooseberryBlock = new BlockGooseberry(Ref.GooseberryBlock);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Charger)
-    public static final BlockCharger Charger = (BlockCharger)new BlockCharger(Ref.Charger).setLightOpacity(255);
+    public static final BlockCharger Charger = (BlockCharger)new BlockCharger(Ref.Charger).setLightOpacity(0);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.EnergyShard)
     public static final BlockEnergyShard EnergyShard = new BlockEnergyShard(Ref.EnergyShard);
