@@ -88,7 +88,7 @@ public class EntityFlyingSquid extends EntityFlying
     		setIsHoldingPlayer(false);
     		setDiving(false);
     	}
-    	return true;
+    	return super.attackEntityFrom(source,amount);
     }
     
 
