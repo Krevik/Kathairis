@@ -189,29 +189,42 @@ public class BlockLayeredSand extends BaseBlock {
             pos1 = pos.down().north();
             if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
                     world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
-                    world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    if(layers-1<=0){
+                        world.setBlockToAir(pos);
+                    }else {
+                        world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
+                    }
                     layers--;
             }
             pos1 = pos.down().south();
             if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
                     world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                if(layers-1<=0){
+                    world.setBlockToAir(pos);
+                }else {
                     world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
-                    layers--;
+                }                    layers--;
             }
             pos1 = pos.down().east();
             if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
                     world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                if(layers-1<=0){
+                    world.setBlockToAir(pos);
+                }else {
                     world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
-                    layers--;
+                }                    layers--;
             }
             pos1 = pos.down().west();
             if(world.getBlockState(pos1).getBlock()==KCore.Layered_Sand) {
                     world.setBlockState(pos1, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, getLayers(world.getBlockState(pos1)) + 1), 2);
+                if(layers-1<=0){
+                    world.setBlockToAir(pos);
+                }else {
                     world.setBlockState(pos, KCore.Layered_Sand.getDefaultState().withProperty(LAYERS, layers - 1), 2);
-            }
+                }            }
         }
     }
-    
+
 
     protected int getLayers(IBlockState state)
     {
