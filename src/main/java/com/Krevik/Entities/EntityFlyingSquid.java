@@ -234,7 +234,7 @@ public class EntityFlyingSquid extends EntityFlying
 		    			this.setIsHoldingPlayer(false);
 		    		}
 		    		ep.setPositionAndUpdate(this.posX,this.posY-2,this.posZ);
-			    		PacketSquidHoldingPlayerServer packet = new PacketSquidHoldingPlayerServer(this.posX,this.posY-2,this.posZ);
+			    		//PacketSquidHoldingPlayerServer packet = new PacketSquidHoldingPlayerServer(this.posX,this.posY-2,this.posZ);
 			    		//KetherPacketHandler.CHANNEL.sendToServer(packet);
 			    		//maybe add client side to make it working?
 	        	}
