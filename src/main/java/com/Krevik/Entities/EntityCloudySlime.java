@@ -26,6 +26,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityFlyHelper;
+import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityTameable;
@@ -48,10 +49,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-
 public class EntityCloudySlime extends EntityTameable implements EntityFlying
 {
-	
     private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityCloudySlime.class, DataSerializers.VARINT);
     private static final Set<Item> TAME_ITEMS = Sets.newHashSet(KCore.CloudEssence);
 
