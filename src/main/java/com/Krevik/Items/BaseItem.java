@@ -89,6 +89,7 @@ public class BaseItem extends Item{
 		 if(!worldIn.isRemote) {
 			 EntityLivingFlower elv = new EntityLivingFlower(worldIn);
 			 elv.setPosition(pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5);
+			 elv.deallowDespawning();
 			 worldIn.spawnEntity(elv);
 	    	 ItemStack itemstack = player.getHeldItem(hand);
 	    	 itemstack.shrink(1);

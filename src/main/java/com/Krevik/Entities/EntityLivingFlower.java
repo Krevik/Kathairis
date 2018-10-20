@@ -7,10 +7,12 @@ import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -33,14 +35,24 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityLivingFlower extends EntityMob
+public class EntityLivingFlower extends EntityAnimal
 {
-
+    private static final DataParameter<Boolean> canDespawn = EntityDataManager.<Boolean>createKey(EntityLivingFlower.class, DataSerializers.BOOLEAN);
     public EntityLivingFlower(World worldIn)
     {
         super(worldIn);
         this.setSize(0.3F, 0.5F);
         this.experienceValue=10;
+    }
+
+    public void deallowDespawning(){
+        dataManager.set(canDespawn,false);
+    }
+
+    @Nullable
+    @Override
+    public EntityAgeable createChild(EntityAgeable ageable) {
+        return null;
     }
 
     protected void initEntityAI()
@@ -52,7 +64,7 @@ public class EntityLivingFlower extends EntityMob
     @Override
     protected boolean canDespawn()
     {
-        return false;
+        return dataManager.get(canDespawn).booleanValue();
     }
     public int getMaxSpawnedInChunk()
     {
@@ -71,6 +83,7 @@ public class EntityLivingFlower extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
+        this.dataManager.register(canDespawn, Boolean.valueOf(true));
     }
 
 
@@ -124,10 +137,6 @@ public class EntityLivingFlower extends EntityMob
         return null;
     }
 
-    protected SoundEvent getStepSound()
-    {
-        return null;
-    }
 
     
     public boolean processInteract(EntityPlayer player, EnumHand hand)
@@ -181,6 +190,7 @@ public class EntityLivingFlower extends EntityMob
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
+        compound.setBoolean("canDespawn",this.dataManager.get(canDespawn));
     }
 
     /**
@@ -189,6 +199,7 @@ public class EntityLivingFlower extends EntityMob
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
+        dataManager.set(canDespawn,compound.getBoolean("canDespawn"));
     }
 
     /**
