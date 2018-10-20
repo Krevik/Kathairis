@@ -49,6 +49,7 @@ public class EntityAndRenderRegistry {
 	public static final ResourceLocation IllukiniLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/illukini.png");
 	public static final ResourceLocation RubySileLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/rubysile.png");
 	public static final ResourceLocation GeckoLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/gecko.png");
+	public static final ResourceLocation GaznowelLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/gaznowel.png");
 
 	static int id=1;
 
@@ -101,8 +102,11 @@ public class EntityAndRenderRegistry {
                     EntityRegistry.registerModEntity(RubySileLoc, EntityRubySile.class, "RubySile", id++, KCore.instance, 64, 3, true);
 					EntityRegistry.registerEgg(RubySileLoc, 0x996600, 0x00ff00);	
                     EntityRegistry.registerModEntity(GeckoLoc, EntityGecko.class, "Gecko", id++, KCore.instance, 64, 3, true);
-					EntityRegistry.registerEgg(GeckoLoc, 0x996600, 0x00ff00);	
-    }
+					EntityRegistry.registerEgg(GeckoLoc, 0x996600, 0x00ff00);
+		EntityRegistry.registerModEntity(GaznowelLoc, EntityGaznowel.class, "Gaznowel", id++, KCore.instance, 64, 3, true);
+		EntityRegistry.registerEgg(GaznowelLoc, 0x996600, 0x00ff00);
+
+	}
     public static void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityLivingFlower.class, RenderLivingFlower.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityMysticBird.class, RenderMysticBird.FACTORY);
@@ -129,6 +133,7 @@ public class EntityAndRenderRegistry {
         RenderingRegistry.registerEntityRenderingHandler(EntityIllukini.class, RenderIllukini.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityRubySile.class, RenderRubySile.FACTORY);
         RenderingRegistry.registerEntityRenderingHandler(EntityGecko.class, RenderGecko.FACTORY);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGaznowel.class, RenderGaznowel.FACTORY);
 
     }
 }
