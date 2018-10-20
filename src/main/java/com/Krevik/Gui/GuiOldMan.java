@@ -1,5 +1,6 @@
 package com.Krevik.Gui;
 
+import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 
 import com.Krevik.Dimension.KetherDataStorage;
@@ -22,19 +23,24 @@ public class GuiOldMan extends GuiScreen {
 
 	
 	Minecraft mc = Minecraft.getMinecraft();
-	private final int ImageHeight = 250, ImageWidth = 250, ImageScale = 250;
+	private final int ImageHeight = 340, ImageWidth = 704, ImageScale = 250;
 	private static final ResourceLocation GUITextures = new ResourceLocation("mystic:textures/gui/oldman.png");
 
 	private static int mode=0;
-	private GenericButton Lets_Start;
+	private GenericButton Next;
 	private GenericButton Back;
-	private GenericButton Death;
-	private GenericButton Fight;
+	private GenericButton Knowledge;
+	private GenericButton Power;
+	private GenericButton Adventure;
+	private EntityPlayer player;
+	int margin=15;
+
 
 	private EntityStrangeWanderer oldman;
 
-	public GuiOldMan(EntityStrangeWanderer entity){
+	public GuiOldMan(EntityStrangeWanderer entity, EntityPlayer player1){
 		oldman=entity;
+		player=player1;
 	}
 
 	@Override
@@ -42,10 +48,11 @@ public class GuiOldMan extends GuiScreen {
 		buttonList.clear();
 		int offLeft = (width - ImageWidth) / 2;
 		int offTop = 0;
-		buttonList.add(Lets_Start = new GenericButton(offLeft + (145 - 140) + (60 / 3)-20, 42 + offTop, 80, 20, "Where am I?"));
-		buttonList.add(Back = new GenericButton(offLeft + (145 - 140) + (60 / 3)+65, 42 + offTop+180, 60, 20, "Back"));
-		buttonList.add(Death = new GenericButton(offLeft + (145 - 140) + (60 / 3)+65, 42 + offTop, 80, 20, "Death?"));
-		buttonList.add(Fight = new GenericButton(offLeft + (145 - 140) + (60 / 3)+65, 42 + offTop+155, 60, 20, "Fight!"));
+		buttonList.add(Next = new GenericButton(ImageWidth/4+margin*2, (int)(ImageHeight/2-margin), 80, 20, "Next"));
+		buttonList.add(Back = new GenericButton(ImageWidth/4+margin*2, (int)(ImageHeight/2+margin/2), 60, 20, "Back"));
+		buttonList.add(Knowledge = new GenericButton(ImageWidth/4+margin*8, (int)(ImageHeight/2-margin), 80, 20, "Knowledge"));
+		buttonList.add(Power = new GenericButton(ImageWidth/4+margin*8, (int)(ImageHeight/2+margin/2), 60, 20, "Power"));
+		buttonList.add(Adventure = new GenericButton(ImageWidth/4+margin*8, (int)(ImageHeight/2+margin*2), 60, 20, "Adventure"));
 
 	}
 
@@ -53,37 +60,66 @@ public class GuiOldMan extends GuiScreen {
 	public void updateScreen() {
 		Back.visible=true;
 		Back.enabled=true;
-		Lets_Start.visible = false;
-		Lets_Start.enabled = false;
-		Death.visible=false;
-		Death.enabled=false;
-		Fight.visible=false;
-		Fight.enabled=false;
+		Next.visible = false;
+		Next.enabled = false;
+		Knowledge.visible=false;
+		Knowledge.enabled=false;
+		Power.visible=false;
+		Power.enabled=false;
+		Adventure.visible=false;
+		Adventure.enabled=false;
 		//main Screen
 		if(mode==0) {
-			Lets_Start.visible = true;
-			Lets_Start.enabled = true;
-			Death.visible=true;
-			Death.enabled=true;
+			Next.visible = true;
+			Next.enabled = true;
 		}
 		//Lets_start screen
 		if(mode==1) {
-			Lets_Start.visible = false;
-			Lets_Start.enabled = false;
+			Next.visible = false;
+			Next.enabled = false;
+			Knowledge.visible=true;
+			Knowledge.enabled=true;
+			Power.visible=true;
+			Power.enabled=true;
+			Adventure.visible=true;
+			Adventure.enabled=true;
 		}
 		//Death Screen
-		if(mode==2) {
-			if(!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
-				Fight.visible=true;
-				Fight.enabled=true;
-			}
+		if(mode==2||mode==3||mode==4) {
+			Next.visible = false;
+			Next.enabled = false;
+			Knowledge.visible=false;
+			Knowledge.enabled=false;
+			Power.visible=false;
+			Power.enabled=false;
+			Adventure.visible=false;
+			Adventure.enabled=false;
 		}
+
 	}
 	
     public void drawCenteredString(FontRenderer fontRendererIn, String text, int x, int y, int color)
     {
-        fontRendererIn.drawString(text, (x - fontRendererIn.getStringWidth(text) / 2), y, color);
-    }
+		GlStateManager.scale(0.4f,0.4f,0.4f);
+		fontRendererIn.drawString(text, (x - fontRendererIn.getStringWidth(text) / 2), y, color);
+		GlStateManager.scale(2.5f,2.5f,2.5f);
+	}
+
+	public void drawString(FontRenderer fontRendererIn, String text, int x, int y, int color)
+	{
+		GlStateManager.scale(0.4f,0.4f,0.4f);
+		fontRendererIn.drawString(text, (int)x, (int)y, color);
+		GlStateManager.scale(2.5f,2.5f,2.5f);
+	}
+
+	public void drawCenteredString(String someString,FontRenderer fontRendererIn, String text, int x, int y, int color)
+	{
+		GlStateManager.scale(0.4f,0.4f,0.4f);
+		fontRendererIn.drawString(text, (x - fontRendererIn.getStringWidth(text) / 2), y, color);
+		GlStateManager.scale(2.5f,2.5f,2.5f);
+	}
+
+
 
 	@Override
 	public void drawScreen(int parWidth, int parHeight, float particle) {
@@ -91,37 +127,36 @@ public class GuiOldMan extends GuiScreen {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.enableColorMaterial();
 		this.mc.getTextureManager().bindTexture(GUITextures);
-
-		int offLeft = (int) ((width - ImageWidth) / 2.0F);
+		int offLeft = (int) ((200) / 2.0F);
 		int offTop = 0;
-		drawModalRectWithCustomSizedTexture(offLeft, offTop, 0, 0, ImageScale,ImageScale,ImageScale,ImageScale);
-		fontRenderer.drawString("Welcome to the Kathairis!", (int) (width / 2.0) - 55, 20, 0X353f51); 
+		drawModalRectWithCustomSizedTexture(margin, ImageHeight/2-15, 0, 0, ImageWidth/4,ImageHeight/4,ImageWidth/4,ImageHeight/4);
+		//fontRenderer.drawString("Welcome to the Kathairis!", (int) (width / 2.0) - 55, 20, 0X353f51);
+		this.drawCenteredString("someString", fontRenderer, "Mysterious Stranger", (int) ImageWidth/10+(int)(margin*2f), (int)(ImageHeight*1.18f), 0X191414);
 
+		if(mode==0){
+			this.drawString(fontRenderer, "Well hello there, "+ player.getName() +". It has been a long time since someone ", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f), 0X747474);
+			this.drawString(fontRenderer, "has walked through the gateway itself and walked this world. I am sure", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin), 0X747474);
+			this.drawString(fontRenderer, "you have many questions, but perhaps we should discuss more important", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*2), 0X747474);
+			this.drawString(fontRenderer, "matters.", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*3), 0X747474);
+		}
 		if(mode==1) {
-			this.drawCenteredString(fontRenderer, "I went through mountains,", (int) (width / 2.0), 30, 0Xbfbfbf);
-			this.drawCenteredString(fontRenderer, "I went through villages and rivers", (int) (width / 2.0), 40, 0Xbfbfbf);
-			this.drawCenteredString(fontRenderer, "I've been in Nether and End", (int) (width / 2.0), 50, 0Xbfbfbf);
-			this.drawCenteredString(fontRenderer, "I've fought with dragons", (int) (width / 2.0), 60, 0Xbfbfbf);
-			this.drawCenteredString(fontRenderer, "I've got to Heaven", (int) (width / 2.0), 70, 0Xbfbfbf);
-			this.drawCenteredString(fontRenderer, "Now I am here as you are", (int) (width / 2.0), 80, 0Xbfbfbf);
-			this.drawCenteredString(fontRenderer, "Kathairis - our destiny", (int) (width / 2.0), 90, 0Xbfbfbf);
-			}
+			this.drawCenteredString(fontRenderer, "What is it that you seek to find here?", (int) ImageWidth/3+(int)(margin), (int)(ImageHeight*1.25f), 0X747474);
+		}
 		if(mode==2) {
-			if(!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
-				this.drawCenteredString(fontRenderer, "The Death have reached our land", (int) (width / 2.0), 30, 0X00253D);
-				this.drawCenteredString(fontRenderer, "Probably because of me, cause", (int) (width / 2.0), 40, 0X00253D);
-				this.drawCenteredString(fontRenderer, "I cheated her once", (int) (width / 2.0), 50, 0X00253D);
-				this.drawCenteredString(fontRenderer, "You must send her back!", (int) (width / 2.0), 60, 0X00253D);
-				this.drawCenteredString(fontRenderer, "Remember that your weapon must have ETHEREAL enchantment", (int) (width / 2.0), 70, 0X00253D);
-				this.drawCenteredString(fontRenderer, "She's at: X:666, Z:666", (int) (width / 2.0), 80, 0X00253D);
-			}
-			if(KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&!KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
-				this.drawCenteredString(fontRenderer, "Hurry up! Do it!", (int) (width / 2.0), 30, 0X00253D);
-				this.drawCenteredString(fontRenderer, "She's at: X:666, Z:666", (int) (width / 2.0), 40, 0X00253D);
-			}
-			if(KetherDataStorage.getDataInstance(mc.player.world).getIsDeathSpawned()&&KetherDataStorage.getDataInstance(mc.player.world).getIsDeathDefeated()) {
-				this.drawCenteredString(fontRenderer, "Thanks god you did it!", (int) (width / 2.0), 30, 0X00253D);
-			}
+			this.drawString(fontRenderer, "There is plenty knowledge to be found in Kathairis, land of pure", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f), 0X747474);
+			this.drawString(fontRenderer, "magic and rich histories. Much of this you will find in your travels", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin), 0X747474);
+			this.drawString(fontRenderer, "through-out these lands.", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*2), 0X747474);
+		}
+		if(mode==3){
+			this.drawString(fontRenderer, "Dominance comes easily to those capable enough to tame these wild", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f), 0X747474);
+			this.drawString(fontRenderer, "lands. Much darkness has erupted in past years, and there shall always", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin), 0X747474);
+			this.drawString(fontRenderer, "be plenty of beasts to sate you thirst for power and strength.", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*2), 0X747474);
+		}
+		if(mode==4){
+			this.drawString(fontRenderer, "The lands you have entered are ones filled with equal expanse as the", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f), 0X747474);
+			this.drawString(fontRenderer, "land you hail from. There will be many new discoveries and trials that", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin), 0X747474);
+			this.drawString(fontRenderer, "will lie before you, and endless stories for you to write of your own", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*2), 0X747474);
+			this.drawString(fontRenderer, "adventures.", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*3), 0X747474);
 		}
 
 		super.drawScreen(parWidth, parHeight, particle);
@@ -140,23 +175,32 @@ public class GuiOldMan extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		if(button == Lets_Start){
-			if(Lets_Start.visible&&Lets_Start.enabled) {
+		if(button == Next){
+			if(Next.visible&&Next.enabled) {
 				mode=1;
 			}
 		}
 		if(button == Back){
-			if(mode==0) {
-				Minecraft.getMinecraft().player.closeScreen();			
+				if(mode==0) {
+					Minecraft.getMinecraft().player.closeScreen();
 				}
-			if(mode==1) {
-				mode=0;
-			}
-			if(mode==2) {
-				mode=0;
-			}
+				if(mode==1){
+					mode=0;
+				}
+				if(mode==2||mode==3||mode==4){
+					mode=1;
+				}
 		}
-		if(button == Death){
+		if(button==Knowledge){
+			mode=2;
+		}
+		if(button==Power){
+			mode=3;
+		}
+		if(button==Adventure){
+			mode=4;
+		}
+		/*if(button == Death){
 			if(Death.visible&&Death.enabled) {
 				mode=2;
 			}
@@ -169,7 +213,7 @@ public class GuiOldMan extends GuiScreen {
 				IMessage message2 = new PacketDeathHandlerServer(true,false,false);
 				KetherPacketHandler.CHANNEL.sendToServer(message2);
 
-		}
+		}*/
 		
 	}
 

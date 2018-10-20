@@ -43,7 +43,7 @@ public class GuiHandler implements IGuiHandler
         if (ID == KCore.GUI_ENUM.OLDMAN.ordinal())
         {
             List<EntityStrangeWanderer> e = world.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(player.posX - 5,player.posY - 5, player.posZ - 5, player.posX  + 5, player.posY + 5, player.posZ + 5));
-            return new GuiOldMan(e.get(0));
+            return new GuiOldMan(e.get(0),player);
         }
         if (ID == KCore.GUI_ENUM.DEATH.ordinal())
         {
