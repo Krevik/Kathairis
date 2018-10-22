@@ -4,6 +4,7 @@ package com.Krevik.Dimension;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.vecmath.Vector3d;
 import javax.vecmath.Vector4d;
 
 
@@ -24,6 +25,7 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL21;
 
 public class RenderMysticSky extends IRenderHandler {
 
@@ -386,6 +388,12 @@ public class RenderMysticSky extends IRenderHandler {
         tessellator.draw();
         //sun end
 
+        /*int R=100;int G=100;int B=20;int Alpha=255;
+        for(int c=10;c<=30;c++){
+            Alpha=255-c*8;
+            Vector4d color = new Vector4d(R,G,B,Alpha);
+            DrawCircle(f17,-f17,c,100,color,tessellator);
+        }*/
 
         
 
@@ -470,6 +478,23 @@ public class RenderMysticSky extends IRenderHandler {
         GlStateManager.enableTexture2D();
         GlStateManager.depthMask(true);
 
+    }
+
+    void DrawCircle(float cx, float cy, float r, int num_segments, Vector4d color,Tessellator tessellator)
+    {
+        BufferBuilder builder=tessellator.getBuffer();
+        builder.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
+
+        for(int ii = 0; ii < num_segments; ii++)
+        {
+            float theta = 2.0f * 3.1415926f *(float)ii / (float)(num_segments);
+
+            float x = r * MathHelper.cos(theta);//calculate the x component
+            float y = r * MathHelper.sin(theta);//calculate the y component
+
+            builder.pos(x+cx,100D,y+cy).color((float)color.x,(float)color.y,(float)color.z,(float)color.w).endVertex();
+        }
+        tessellator.draw();
     }
             
     
