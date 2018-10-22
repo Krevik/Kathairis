@@ -10,6 +10,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,6 +23,8 @@ public class KetherPortalParticle extends Particle
     private final double portalPosY;
     private final double portalPosZ;
     Random random = new Random();
+    private final ResourceLocation texture = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
+
     public KetherPortalParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
@@ -45,11 +48,19 @@ public class KetherPortalParticle extends Particle
         this.particleAlpha=50;
         this.particleMaxAge = (int)(Math.random() * 120.0D);
 
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.kether_portal_particle.toString());
+        //TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.kether_portal_particle.toString());
 
-        setParticleTexture(sprite);
+        //setParticleTexture(sprite);
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
+        setParticleTexture(sprite);  // initialise the icon to our custom texture
 
     }
+
+    public int getFXLayer()
+    {
+        return 1;
+    }
+
 
     public void move(double x, double y, double z)
     {
@@ -145,11 +156,6 @@ public class KetherPortalParticle extends Particle
         }
     }
 
-    
-    public int getFXLayer()
-    {
-        return 1;
-    }
 
     @SideOnly(Side.CLIENT)
     public static class Factory implements IParticleFactory

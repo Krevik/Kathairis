@@ -44,7 +44,7 @@ public static final ResourceLocation swampGasParticle = new ResourceLocation(KCo
 public static final ResourceLocation soulTreeParticle = new ResourceLocation(KCore.MODID+":"+"effect/soultreeparticle");
 public static final ResourceLocation Mystic_Gem_Block_Particle = new ResourceLocation(KCore.MODID+":"+"effect/mystic_gem_block_particle");
 public static final ResourceLocation dust_particle = new ResourceLocation(KCore.MODID+":"+"effect/dust_particle");
-public static final ResourceLocation kether_portal_particle = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
+//public static final ResourceLocation kether_portal_particle = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
 public static final ResourceLocation living_particle = new ResourceLocation(KCore.MODID+":"+"effect/living_particle");
 
 public static MusicTicker.MusicType ketherMusicDay;

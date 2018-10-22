@@ -21,6 +21,7 @@ public class DynamicMovementParticle extends Particle
     private final double portalPosY;
     private final double portalPosZ;
     private int baseSpellTextureIndex = 128;
+    private final ResourceLocation texture = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
 
     public DynamicMovementParticle(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
     {
@@ -47,9 +48,11 @@ public class DynamicMovementParticle extends Particle
         this.particleMaxAge = (int)(Math.random() * 800.0D) + 500;
 
         //TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.particleBlueCloud.toString());
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.kether_portal_particle.toString());
+       // TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.kether_portal_particle.toString());
 
-        setParticleTexture(sprite);
+       //setParticleTexture(sprite);
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
+        setParticleTexture(sprite);  // initialise the icon to our custom texture
 
     }
 
