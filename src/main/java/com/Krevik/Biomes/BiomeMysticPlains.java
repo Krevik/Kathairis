@@ -45,7 +45,7 @@ public class BiomeMysticPlains extends KetherBiome
         this.setRegistryName(KCore.MODID, "Mystic Plains");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 12, 1, 3));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityJellyFish.class, 10, 1, 1));
-       this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityBison.class, 8, 1, 2));
+       this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityBison.class, 8, 2, 4));
        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityButterfly.class, 10, 1, 1));
        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityButterfly1.class, 10, 1, 1));
     }

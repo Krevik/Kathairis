@@ -121,6 +121,7 @@ public class EntityBison extends EntityAnimal
             shouldDeleteRevenegeTarget=true;
         }
         else if(k>10&&k<50){
+            //attack in hordes
             if(source.getTrueSource() instanceof EntityLivingBase) {
                 List<EntityBison> bisons = new ArrayList<EntityBison>();
                 bisons=world.getEntitiesWithinAABB(EntityBison.class, new AxisAlignedBB(posX - 15, posY - 15, posZ - 15, posX  + 15, posY + 15, posZ + 15));
@@ -129,7 +130,6 @@ public class EntityBison extends EntityAnimal
                 }
                 setAttackTarget((EntityLivingBase) source.getTrueSource());
             }
-            //attack in hordes
             shouldDeleteRevenegeTarget=true;
         }
         else if(k>50){
