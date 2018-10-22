@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/luminescentgnarl",
+	"parent": "mystic:block/fluofungus",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

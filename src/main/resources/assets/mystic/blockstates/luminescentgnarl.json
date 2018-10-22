@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"facing=east": { "model": "mystic:luminescentgnarle" },
-		"facing=west": { "model": "mystic:luminescentgnarlw" },
-		"facing=south": { "model": "mystic:luminescentgnarls" },
-		"facing=north": { "model": "mystic:luminescentgnarln" }
+		"facing=east": { "model": "mystic:fluofungus", "y": 270 },
+		"facing=west": { "model": "mystic:fluofungus", "y": 90 },
+		"facing=south": { "model": "mystic:fluofungus", "z": 270 },
+		"facing=north": { "model": "mystic:fluofungus", "y": 180 }
 	}
 }

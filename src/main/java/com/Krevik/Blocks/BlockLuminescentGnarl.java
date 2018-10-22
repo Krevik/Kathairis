@@ -20,6 +20,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -27,15 +28,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockLuminescentGnarl extends BaseBlock{
 	
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    
-    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.6875D, 0.1875D, 0.25D, 1D, 0.6875D, 0.75D);
-    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0D, 0.1875D, 0.25D, 0.3125D, 0.6875D, 0.75D);
-    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.25D, 0.1875D, 0.6875D, 0.75D, 0.6875D, 1D);
-    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.25D, 0.1875D, 0D, 0.75D, 0.6875D, 0.3125D);
 
 	public BlockLuminescentGnarl(String Name, Material material, CreativeTabs tab, float hardness1, float resistance,
 			SoundType soundType) {
@@ -55,19 +53,19 @@ public class BlockLuminescentGnarl extends BaseBlock{
 	   
 	   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	    {
-		   if(worldIn.getBlockState(pos.north()).getBlock().getMaterial(worldIn.getBlockState(pos.north()))==Material.WOOD&&worldIn.getBlockState(pos)==
+		   if(worldIn.isBlockFullCube(pos.north())&&worldIn.getBlockState(pos)==
 				   KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.SOUTH)) {
 			   return true;
 		   }
-		   else if(worldIn.getBlockState(pos.south()).getBlock().getMaterial(worldIn.getBlockState(pos.north()))==Material.WOOD&&worldIn.getBlockState(pos)==
+		   else if(worldIn.isBlockFullCube(pos.south())&&worldIn.getBlockState(pos)==
 				   KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.NORTH)) {
 			   return true;
 		   }
-		   else if(worldIn.getBlockState(pos.east()).getBlock().getMaterial(worldIn.getBlockState(pos.north()))==Material.WOOD&&worldIn.getBlockState(pos)==
+		   else if(worldIn.isBlockFullCube(pos.east())&&worldIn.getBlockState(pos)==
 				   KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.WEST)) {
 			   return true;
 		   }
-		   else if(worldIn.getBlockState(pos.west()).getBlock().getMaterial(worldIn.getBlockState(pos.north()))==Material.WOOD&&worldIn.getBlockState(pos)==
+		   else if(worldIn.isBlockFullCube(pos.west())&&worldIn.getBlockState(pos)==
 				   KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.EAST)) {
 			   return true;
 		   }else {
@@ -91,22 +89,7 @@ public class BlockLuminescentGnarl extends BaseBlock{
 	
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
-    	if(enumfacing==EnumFacing.NORTH) {
-    		return NORTH_AABB;
-    	}
-    	else if(enumfacing==EnumFacing.SOUTH) {
-    		return SOUTH_AABB;
-    	}
-    	else if(enumfacing==EnumFacing.EAST){
-    		return EAST_AABB;
-    	}
-    	else if(enumfacing==EnumFacing.WEST){
-    		return WEST_AABB;
-    	}else {
     		return FULL_BLOCK_AABB;
-    	}
-    	
     }
     
     
@@ -122,7 +105,7 @@ public class BlockLuminescentGnarl extends BaseBlock{
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
-    	return this.getBoundingBox(blockState, worldIn, pos);
+    	return null;
     }
 	
     public boolean isOpaqueCube(IBlockState state)
@@ -164,6 +147,11 @@ public class BlockLuminescentGnarl extends BaseBlock{
         return ((EnumFacing)state.getValue(FACING)).getIndex();
     }
 
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
     /**
      * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
      * blockstate.
