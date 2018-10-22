@@ -1,6 +1,7 @@
 package com.Krevik.Items;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -13,6 +14,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +27,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -120,23 +124,23 @@ public class ItemMysticPickaxe extends MysticTool
 
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
 	{
-
 		boolean done=false;
 		if (!worldIn.isRemote && (double)state.getBlockHardness(worldIn, pos) != 0.0D)
 		{
 			stack.damageItem(1, entityLiving);
 		}
 		if(this==KCore.CrystalPickaxe) {
-			if(entityLiving instanceof EntityPlayer){
+			if (entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) entityLiving;
 				player.addExhaustion(1f);
 			}
-			if(!worldIn.isRemote) {
+			if (!worldIn.isRemote) {
 				//down
 				if(!done) {
 					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
 							!worldIn.isAirBlock(pos.north())&&!worldIn.isAirBlock(pos.south())&&!worldIn.isAirBlock(pos.south().west())&&!worldIn.isAirBlock(pos.south().east())&&
 							!worldIn.isAirBlock(pos.north().east())&&!worldIn.isAirBlock(pos.north().west())) {
+
 						destroyBlock(worldIn,pos.east(), true);
 						destroyBlock(worldIn,pos.west(), true);
 						destroyBlock(worldIn,pos.south(), true);
@@ -272,7 +276,6 @@ public class ItemMysticPickaxe extends MysticTool
 					}
 				}
 			}
-
 		}
 		return true;
 	}
