@@ -2,22 +2,16 @@ package com.Krevik.Entities;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Entities.AI.EntityAIAttackMeleeBison;
 import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import com.Krevik.Networking.KetherPacketHandler;
+import com.Krevik.Networking.PacketCloudOisterClient;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -30,11 +24,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityBison extends EntityAnimal
 {
@@ -60,6 +60,8 @@ public class EntityBison extends EntityAnimal
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.WHEAT, false));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(1,new EntityAIAttackMeleeBison(this,1.2D,true));
+
     }
 
     protected void updateAITasks()
@@ -86,6 +88,12 @@ public class EntityBison extends EntityAnimal
         this.dataManager.register(shouldAnimTail, Boolean.valueOf(false));
     }
 
+    public boolean attackEntityAsMob(Entity entityIn)
+    {
+        entityIn.attackEntityFrom(DamageSource.causeMobDamage(this),2F);
+        return true;
+    }
+
     public boolean getShouldAnimTail()
     {
         return (this.dataManager.get(shouldAnimTail));
@@ -102,6 +110,33 @@ public class EntityBison extends EntityAnimal
 
     public float getAnimTimer(){
         return this.dataManager.get(animTimer);
+    }
+
+    boolean shouldDeleteRevenegeTarget=false;
+    public boolean attackEntityFrom(DamageSource source, float amount)
+    {
+        int k = getRNG().nextInt(100);
+        if(k>=0&&k<=10){
+            //do nothing - ingore
+            shouldDeleteRevenegeTarget=true;
+        }
+        else if(k>10&&k<50){
+            if(source.getTrueSource() instanceof EntityLivingBase) {
+                List<EntityBison> bisons = new ArrayList<EntityBison>();
+                bisons=world.getEntitiesWithinAABB(EntityBison.class, new AxisAlignedBB(posX - 15, posY - 15, posZ - 15, posX  + 15, posY + 15, posZ + 15));
+                for(int x=0;x<bisons.size();x++) {
+                    bisons.get(x).setAttackTarget((EntityLivingBase) source.getTrueSource());
+                }
+                setAttackTarget((EntityLivingBase) source.getTrueSource());
+            }
+            //attack in hordes
+            shouldDeleteRevenegeTarget=true;
+        }
+        else if(k>50){
+            //flee
+            shouldDeleteRevenegeTarget=false;
+        }
+        return super.attackEntityFrom(source, amount);
     }
 
 
@@ -134,6 +169,9 @@ public class EntityBison extends EntityAnimal
                 setAnimTimer(0);
                 setShouldAnimTail(false);
             }
+        }
+        if(shouldDeleteRevenegeTarget==true){
+            setRevengeTarget(null);
         }
 
     }
