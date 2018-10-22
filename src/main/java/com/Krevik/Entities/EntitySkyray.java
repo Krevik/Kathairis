@@ -220,8 +220,6 @@ public class EntitySkyray extends EntityFlying
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-
-        
         travel();
         if(MathHelper.sin(this.ticksExisted)<0) {
         	if(rand.nextInt(25)==0) {
