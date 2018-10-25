@@ -2,10 +2,7 @@ package com.Krevik.Biomes;
 
 import java.util.Random;
 
-import com.Krevik.Entities.EntityCloudOister;
-import com.Krevik.Entities.EntityCloudySlime;
-import com.Krevik.Entities.EntityFlyingSquid;
-import com.Krevik.Entities.EntitySkyray;
+import com.Krevik.Entities.*;
 import com.Krevik.Entities.Butterflies.EntityCloudShimmer;
 import com.Krevik.Gens.WorldGenClouds;
 import com.Krevik.Gens.WorldGenHugeSoulTree;
@@ -57,7 +54,7 @@ public class BiomeFloatingIslands extends KetherBiome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCloudShimmer.class, 4, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityFlyingSquid.class, 4, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySkyray.class, 2, 2, 4));
-
+        this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGaznowel.class, 2, 1, 1));
     }
 
     public void decorate(World worldIn, Random random, BlockPos pos)
