@@ -17,6 +17,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -49,8 +50,14 @@ public class BlockMysticLeaf extends BlockLeaves
         KCore.instance.regHelper.leavesBlocksList.add(this);
         this.leavesFancy=true;
     }
-    
-    @Override 
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        worldIn.setBlockState(pos, state.withProperty(CHECK_DECAY,Boolean.valueOf(false)).withProperty(DECAYABLE,Boolean.valueOf(false)),2);
+    }
+
+    @Override
     public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos){ return true; }
     
     public String getLocalizedName()
