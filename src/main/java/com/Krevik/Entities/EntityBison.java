@@ -11,10 +11,12 @@ import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketCloudOisterClient;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -40,6 +42,7 @@ public class EntityBison extends EntityAnimal
 {
     private static final DataParameter<Float> animTimer = EntityDataManager.<Float>createKey(EntityBison.class, DataSerializers.FLOAT);
     private static final DataParameter<Boolean> shouldAnimTail = EntityDataManager.<Boolean>createKey(EntityBison.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Float> hapiness = EntityDataManager.<Float>createKey(EntityBison.class, DataSerializers.FLOAT);
 
     public EntityBison(World worldIn)
     {
@@ -86,6 +89,8 @@ public class EntityBison extends EntityAnimal
         super.entityInit();
         this.dataManager.register(animTimer, Float.valueOf(0));
         this.dataManager.register(shouldAnimTail, Boolean.valueOf(false));
+        this.dataManager.register(hapiness, Float.valueOf(0));
+
     }
 
     public boolean attackEntityAsMob(Entity entityIn)
@@ -111,6 +116,15 @@ public class EntityBison extends EntityAnimal
     public float getAnimTimer(){
         return this.dataManager.get(animTimer);
     }
+
+    public void setHapiness(float time){
+        this.dataManager.set(hapiness,time);
+    }
+
+    public float getHapiness(){
+        return this.dataManager.get(hapiness);
+    }
+
 
     boolean shouldDeleteRevenegeTarget=false;
     public boolean attackEntityFrom(DamageSource source, float amount)
@@ -153,7 +167,28 @@ public class EntityBison extends EntityAnimal
 
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
-    	return super.processInteract(player, hand);
+        ItemStack itemstack = player.getHeldItem(hand);
+        boolean c=super.processInteract(player, hand);
+        if (!itemstack.isEmpty())
+        {
+            if (itemstack.getItem().equals(KCore.BlueFruit)) {
+                if(!world.isRemote) {
+                    this.consumeItemFromStack(player, itemstack);
+                    setHapiness(getHapiness() + rand.nextFloat());
+                    if(getHapiness()>3+rand.nextInt(4)+rand.nextFloat()){
+                        setHapiness(0);
+                        dropItem(KCore.functionHelper.getRandomMusicDisc(),0);
+                        EntityItem item = new EntityItem(world,posX+0.5f,posY+0.5f,posZ+0.5f);
+                        item.setItem(new ItemStack(KCore.instance.functionHelper.getRandomMusicDisc(),1));
+                        world.spawnEntity(item);
+                    }
+                }
+                KCore.instance.functionHelper.playTameEffect(world,getRNG(),this,true);
+
+                return true;
+            }
+        }
+    	return c;
     }
 
     public void onUpdate(){
@@ -186,6 +221,8 @@ public class EntityBison extends EntityAnimal
         super.writeEntityToNBT(compound);
         compound.setBoolean("shouldAnimTail",getShouldAnimTail());
         compound.setFloat("animTimer",getAnimTimer());
+        compound.setFloat("hapiness",getHapiness());
+
     }
 
     public void readEntityFromNBT(NBTTagCompound compound)
@@ -193,6 +230,7 @@ public class EntityBison extends EntityAnimal
         super.readEntityFromNBT(compound);
         setShouldAnimTail(compound.getBoolean("shouldAnimTail"));
         setAnimTimer(compound.getFloat("animTimer"));
+        setHapiness(compound.getFloat("hapiness"));
     }
 
     protected SoundEvent getAmbientSound()

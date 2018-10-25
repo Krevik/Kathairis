@@ -191,6 +191,13 @@ public class FunctionHelper {
 		return new Vec3d((double)(f1 * f2), (double)f3, (double)(f * f2));
 	}
 
+	public Item getRandomMusicDisc(){
+		int k=random.nextInt(2);
+		if(k==0)return KCore.Music_Disc_8bit;
+		else if(k==1) return KCore.Music_Disc_jazzy;
+		else return KCore.Music_Disc_jazzy;
+	}
+
 	public void playTameEffect(World world, Random rand, EntityLivingBase animal, boolean play)
 	{
 		EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
