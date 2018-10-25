@@ -487,7 +487,6 @@ public class ChunkGeneratorMystic implements IChunkGenerator
         
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
             WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);
-
         	blockpos = blockpos.add(8, 0, 8);
         
 

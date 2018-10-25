@@ -36,7 +36,9 @@ public class BiomeMysticForest extends KetherBiome
     protected static WorldGenSingleGen SINGLEGEN2 = new WorldGenSingleGen(3);
     protected static WorldGenMysticMultiGrass GrassGen = new WorldGenMysticMultiGrass(KCore.SteppedSucculent);
     protected static WorldGenAbstractTree CUSTOMTREE4 = new WorldGenHugeKathairisTree();
-    
+
+    protected static WorldGenAbstractTree FlippedHeartTree = new WorldGenFlippedHeartTree(2);
+
     public BiomeMysticForest(Biome.BiomeProperties properties)
     {
         super(properties);
