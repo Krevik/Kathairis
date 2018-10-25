@@ -67,7 +67,6 @@ public class RenderLayerHeldItem implements LayerRenderer<EntityLivingBase>
             GlStateManager.scale(0.75f,0.75f,0.75f);
             if(p_188358_1_ instanceof EntityLiving){
                 EntityLiving entity = (EntityLiving) p_188358_1_;
-
                 if(entity.getAttackTarget()!=null){
                     GlStateManager.translate(0F,0.8F,0F);
                 }else{

@@ -3,8 +3,9 @@ package com.Krevik.Models;
 import com.Krevik.Entities.EntityGaznowel;
 import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.*;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 
 /**
@@ -262,9 +263,9 @@ public class ModelGaznowel extends ModelBase {
     {
         this.getArmForSide(side).postRender(scale);
     }
-
     protected ModelRenderer getArmForSide(EnumHandSide side)
     {
         return side == EnumHandSide.LEFT ? this.LeftArm2 : this.RightArm2;
     }
+
 }
