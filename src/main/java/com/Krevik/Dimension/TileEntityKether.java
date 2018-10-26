@@ -67,7 +67,7 @@ public class TileEntityKether extends TileEntity
 		nbt.setDouble(S_PLAYER_X2, prevX2);
 		nbt.setDouble(S_PLAYER_Y2, prevY2);
 		nbt.setDouble(S_PLAYER_Z2, prevZ2);
-		nbt.setInteger(dme, 2);
+		nbt.setInteger(dme, KCore.DIMENSION_ID);
 
 		return nbt;
 	}
