@@ -7,13 +7,21 @@ import com.Krevik.Networking.PacketDeathHandlerServer;
 import com.Krevik.Networking.PacketSpawnDeathServer;
 
 import net.minecraft.block.BlockPortal;
+import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
@@ -100,51 +108,84 @@ public class TileEntityKether extends TileEntity
 		
 	}
 
+	public static void teleEntity(Entity entity)
+	{
+		if(!entity.world.isRemote) {
+			if (!entity.isBeingRidden() && entity.getRidingEntity() == null) {
+				MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+				entity.setPortal(entity.getPosition());
+				if (entity.timeUntilPortal > 0) {
+					entity.timeUntilPortal = 10;
+				} else if (entity.dimension != KCore.DIMENSION_ID) {
+					entity.timeUntilPortal = 10;
+					if (prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0) {
+						entity.timeUntilPortal = 10;
+						setDme21();
+						setOverworldXYZ(entity.posX, entity.posY, entity.posZ);
+						//mcServer.getPlayerList().transferPlayerToDimension(entity, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
+						entity.changeDimension(KCore.DIMENSION_ID, new TeleporterMystic(server.getWorld(KCore.DIMENSION_ID)));
+						setTestXYZ(entity.posX, entity.posY, entity.posZ);
+					} else if (prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0) {
+						entity.timeUntilPortal = 10;
+						setDme22();
+						setOverworldXYZ(entity.posX, entity.posY, entity.posZ);
+						entity.changeDimension(KCore.DIMENSION_ID, new TeleporterMystic(server.getWorld(KCore.DIMENSION_ID)));
+					}
+				} else if (entity.dimension == KCore.DIMENSION_ID) {
+
+					entity.timeUntilPortal = 10;
+					setDme22();
+					setTestXYZ(entity.posX, entity.posY, entity.posZ);
+					entity.changeDimension(0, new TeleporterMystic(server.getWorld(KCore.DIMENSION_ID)));
+				}
+			}
+		}
+	}
+
 	public static void tele(EntityPlayer player)
 	{
-		if ((player.getRidingEntity() == null) && ((player instanceof EntityPlayerMP)))
-		{
-			
-			EntityPlayerMP player1 = (EntityPlayerMP)player;
-			MinecraftServer mcServer = player1.getServer();
-			player1.setPortal(new BlockPos(player1.posX,player1.posY,player1.posZ));
-			
-			if(player1.timeUntilPortal > 0)
-			{
-				
-				player1.timeUntilPortal = 10;
-				
-			}else if(player1.dimension != KCore.DIMENSION_ID){
-				
-				player1.timeUntilPortal = 10;
-				
-				if(prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0)
-				{
+		if(!player.world.isRemote) {
+			if ((player.getRidingEntity() == null) && ((player instanceof EntityPlayerMP))) {
+
+				EntityPlayerMP player1 = (EntityPlayerMP) player;
+				MinecraftServer mcServer = player1.getServer();
+				player1.setPortal(new BlockPos(player1.posX, player1.posY, player1.posZ));
+
+				if (player1.timeUntilPortal > 0) {
+
 					player1.timeUntilPortal = 10;
-					setDme21();
-					setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
-					mcServer.getPlayerList().transferPlayerToDimension(player1, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
-					setTestXYZ(player1.posX, player1.posY, player1.posZ);
-					
-					
-				}else if(prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0){
+
+				} else if (player1.dimension != KCore.DIMENSION_ID) {
+
+					player1.timeUntilPortal = 10;
+
+					if (prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0) {
+						player1.timeUntilPortal = 10;
+						setDme21();
+						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
+						mcServer.getPlayerList().transferPlayerToDimension(player1, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
+						setTestXYZ(player1.posX, player1.posY, player1.posZ);
+
+
+					} else if (prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0) {
+						player1.timeUntilPortal = 10;
+						setDme22();
+						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
+						mcServer.getPlayerList().transferPlayerToDimension(player1, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
+
+
+					}
+
+				} else if (player1.dimension == KCore.DIMENSION_ID) {
+
 					player1.timeUntilPortal = 10;
 					setDme22();
-					setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
-					mcServer.getPlayerList().transferPlayerToDimension(player1, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
-					
-					
+					setTestXYZ(player1.posX, player1.posY, player1.posZ);
+					mcServer.getPlayerList().transferPlayerToDimension(player1, 0, new TeleporterMystic(mcServer.getWorld(0)));
+
 				}
-				
-			}else if(player1.dimension == KCore.DIMENSION_ID){
-				
-				player1.timeUntilPortal = 10;
-				setDme22();
-				setTestXYZ(player1.posX, player1.posY, player1.posZ);
-				mcServer.getPlayerList().transferPlayerToDimension(player1, 0, new TeleporterMystic(mcServer.getWorld(0)));
-				
+
 			}
-		
 		}
 	}
 }

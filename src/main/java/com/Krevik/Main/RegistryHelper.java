@@ -12,7 +12,6 @@ public class RegistryHelper {
 	public RegistryHelper() {
 		
 	}
-	
 	public ArrayList<BaseBlock> blocksList = new ArrayList();
 	public ArrayList<BlockMysticLeaf> leavesBlocksList = new ArrayList();
 	public ArrayList<BlockMysticSlabBase> slabList = new ArrayList();
@@ -34,6 +33,7 @@ public class RegistryHelper {
 		for(int x=0;x<slabList.size();x++) {
 			slabList.get(x).initModel();
 		}
+		KCore.MysticPortal.initModel();
 		KCore.MythicStoneSign.initModel();
 		KCore.Charger.initModel();
 		for(int x=0;x<itemList.size();x++) {

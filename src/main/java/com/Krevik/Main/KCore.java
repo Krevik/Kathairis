@@ -3,10 +3,8 @@ package com.Krevik.Main;
 import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
 import com.Krevik.Items.*;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemRecord;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -58,8 +56,10 @@ public class KCore {
 
     public static final RegistryHelper regHelper = new RegistryHelper();
 
-	public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();
-	public static int updateRendererCount=0;
+
+    public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();
+    public static final DimensionType Mystic_DIMENSION = DimensionType.register("KATHAIRIS", "_kathairis", DIMENSION_ID, WorldProviderMystic.class, false);
+    public static int updateRendererCount=0;
 	
 	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12).setRepairItem(new ItemStack(KCore.TitaniumIngot));
 	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", "mystic:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
@@ -78,7 +78,7 @@ public class KCore {
 
 
 	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticPortal)
-    public static final BlockMysticPortal MysticPortal = (BlockMysticPortal) new BlockMysticPortal(Ref.MysticPortal).setLightLevel(1F);
+    public static final BlockMysticPortal MysticPortal = (BlockMysticPortal) new BlockMysticPortal(Ref.MysticPortal, CreativeTabsMystic.buildingBlocks,-1f,-1f, SoundType.GLASS).setLightLevel(1F);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CorruptedDirt)
     public static final BaseBlock CorruptedDirt = new BaseBlock(Ref.CorruptedDirt, Material.GROUND, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.GROUND);
@@ -467,8 +467,7 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "Katharian Ocean")
     public static final BiomeKatharianOcean KatharianOcean = new BiomeKatharianOcean(new Biome.BiomeProperties("Katharian Ocean").setBaseBiome("Katharian Ocean").setBaseHeight(-1.4f).setHeightVariation(0.5f).setWaterColor(132240255));
 
-    public static final DimensionType Mystic_DIMENSION = DimensionType.register("KATHAIRIS", "_kathairis", DIMENSION_ID, WorldProviderMystic.class, false);
-	
+
     public static void dimRegistry()
 	{
 		DimensionManager.registerDimension(DIMENSION_ID, KCore.Mystic_DIMENSION);

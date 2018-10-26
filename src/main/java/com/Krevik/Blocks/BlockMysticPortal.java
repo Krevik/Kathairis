@@ -16,6 +16,7 @@ import com.google.common.cache.LoadingCache;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockPortal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -25,12 +26,16 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -42,42 +47,31 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMysticPortal extends BaseBlock
+public class BlockMysticPortal extends BlockPortal
 {
-    public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z);
-    protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
-    protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
-    protected static final AxisAlignedBB Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
-
-    public BlockMysticPortal(String Name)
+    public BlockMysticPortal(String Name, CreativeTabs tab, float hardness1, float resistance,SoundType soundType)
     {
-        super(Name, KathairisMaterials.KATHAIRISPORTAL, null, -1, -1, SoundType.STONE);
+        super();
         this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
         this.setTickRandomly(true);
+        this.setCreativeTab(tab);
+        this.setHardness(hardness1);
+        this.setResistance(resistance);
+        this.setSoundType(soundType);
+        this.setRegistryName(Name);
+        this.setUnlocalizedName(Name);
     }
 
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        switch ((EnumFacing.Axis)state.getValue(AXIS))
-        {
-            case X:
-                return X_AABB;
-            case Y:
-            default:
-                return Y_AABB;
-            case Z:
-                return Z_AABB;
-        }
+    @SideOnly(Side.CLIENT)
+    public void initModel() {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
-    
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
-    
+
+
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
@@ -355,13 +349,19 @@ public class BlockMysticPortal extends BaseBlock
      * Called When an Entity Collided with the Block
      */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {   
-		if ((entityIn.getRidingEntity() == null) && ((entityIn instanceof EntityPlayerMP)))
+    {
+        if(entityIn instanceof EntityPlayer){
+            TileEntityKether.tele((EntityPlayer) entityIn);
+        }else {
+            TileEntityKether.teleEntity(entityIn);
+        }
+
+        /*if ((entityIn.getRidingEntity() == null) && ((entityIn instanceof EntityPlayerMP)))
 		{
 			EntityPlayerMP player1 = (EntityPlayerMP)entityIn;
 		
 			TileEntityKether.tele(player1);
-		}
+		}*/
 
 
     }

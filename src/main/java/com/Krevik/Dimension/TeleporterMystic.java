@@ -208,11 +208,7 @@ public class TeleporterMystic extends Teleporter
             else
             {
                 entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
-                if (!this.world.isRemote) { 
-             	   EntityEnderPearl entityenderpearl = new EntityEnderPearl(this.world, (EntityLivingBase) entityIn);
-             	   entityenderpearl.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch); 
-             	   entityenderpearl.motionY=-1;
-             	   this.world.spawnEntity(entityenderpearl); 
+                if (!this.world.isRemote) {
              	}
             }
 
