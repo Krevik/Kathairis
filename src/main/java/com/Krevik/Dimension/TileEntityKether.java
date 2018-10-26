@@ -89,7 +89,7 @@ public class TileEntityKether extends TileEntity
 	public static void setDme22()
 	{
 		
-		dme2 = 2;
+		dme2 = KCore.DIMENSION_ID;
 		
 	}
 	
@@ -99,16 +99,9 @@ public class TileEntityKether extends TileEntity
 		dme2 = 0;
 		
 	}
-	
-	public boolean onPlayerActivate(EntityPlayer player)
-	{
-		return true;
-	}
-	
+
 	public static void tele(EntityPlayer player)
 	{
-
-		
 		if ((player.getRidingEntity() == null) && ((player instanceof EntityPlayerMP)))
 		{
 			
