@@ -1,6 +1,7 @@
 package com.Krevik.Items;
 
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
@@ -20,7 +21,11 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MysticTool extends ItemTool
 {
-    private final Set<Block> effectiveBlocks;
+    public final Set<Block> effectiveBlocks;
     protected float efficiencyOnProperMaterial;
     /** Damage versus entities. */
     protected float damageVsEntity;
@@ -75,8 +80,7 @@ public class MysticTool extends ItemTool
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
     
-    
-    public float getStrVsBlock(ItemStack stack, IBlockState state)
+    public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
     	float tmp=0;
         for (String type : getToolClasses(stack))
@@ -89,7 +93,7 @@ public class MysticTool extends ItemTool
     }
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-    	
+
     }
 
     /**

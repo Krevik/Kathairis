@@ -1,11 +1,13 @@
 package com.Krevik.Items;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Enchantments.KathairisEnchantments;
 import com.Krevik.Main.KCore;
 import com.google.common.collect.Sets;
 
@@ -16,21 +18,25 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.Sys;
 
 public class ItemMysticPickaxe extends MysticTool
 {
@@ -47,6 +53,7 @@ public class ItemMysticPickaxe extends MysticTool
     		KCore.ChiseledBoneBricks,KCore.Magnethium,KCore.Mystic_Gem_Block,KCore.Mythic_Cobblestone,
     		KCore.Block_Iron_Gold, KCore.Refined_Cloud_Blue, KCore.Refined_Cloud_Yellow, KCore.Solis_Crystals
     		);
+	private EntityPlayer player;
 
     public ItemMysticPickaxe(String Name, CreativeTabs tab, Item.ToolMaterial material)
     {
@@ -122,6 +129,7 @@ public class ItemMysticPickaxe extends MysticTool
         }
     }
 
+
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
 	{
 		boolean done=false;
@@ -133,8 +141,100 @@ public class ItemMysticPickaxe extends MysticTool
 			if (entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) entityLiving;
 				player.addExhaustion(1f);
+				Vec3d vec = new Vec3d(pos.getX() - player.posX, pos.getY() - player.posY, pos.getZ() - player.posZ).normalize();
+				EnumFacing facing = null;
+				if (vec.z >= 0.5f && MathHelper.abs((float) vec.x) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f) {
+					facing = EnumFacing.SOUTH;
+				} else if (vec.z <= -0.5f && MathHelper.abs((float) vec.x) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f) {
+					facing = EnumFacing.NORTH;
+				} else if (MathHelper.abs((float) vec.z) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f && vec.x >= 0.5f) {
+					facing = EnumFacing.EAST;
+				} else if (MathHelper.abs((float) vec.z) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f && vec.x <= -0.5f) {
+					facing = EnumFacing.WEST;
+				} else if (vec.y >= 0.5f) {
+					facing = EnumFacing.UP;
+				} else if (vec.y <= -0.5f) {
+					facing = EnumFacing.DOWN;
+				} else {
+					facing = EnumFacing.EAST;
+				}
+				ArrayList<BlockPos> blocksToBreak = new ArrayList<>();
+				if (facing == EnumFacing.SOUTH|| facing==EnumFacing.NORTH) {
+					BlockPos pos0 = pos.west();
+					BlockPos pos1 = pos.east();
+					BlockPos pos2 = pos.up();
+					BlockPos pos3 = pos.down();
+					BlockPos pos4 = pos.west().down();
+					BlockPos pos5 = pos.east().up();
+					BlockPos pos6 = pos.west().up();
+					BlockPos pos7 = pos.east().down();
+					blocksToBreak.add(pos0);
+					blocksToBreak.add(pos1);
+					blocksToBreak.add(pos2);
+					blocksToBreak.add(pos3);
+					blocksToBreak.add(pos4);
+					blocksToBreak.add(pos5);
+					blocksToBreak.add(pos6);
+					blocksToBreak.add(pos7);
+				}
+				if(facing==EnumFacing.EAST||facing==EnumFacing.WEST){
+					BlockPos pos0 = pos.north();
+					BlockPos pos1 = pos.south();
+					BlockPos pos2 = pos.up();
+					BlockPos pos3 = pos.down();
+					BlockPos pos4 = pos.north().down();
+					BlockPos pos5 = pos.south().up();
+					BlockPos pos6 = pos.north().up();
+					BlockPos pos7 = pos.south().down();
+					blocksToBreak.add(pos0);
+					blocksToBreak.add(pos1);
+					blocksToBreak.add(pos2);
+					blocksToBreak.add(pos3);
+					blocksToBreak.add(pos4);
+					blocksToBreak.add(pos5);
+					blocksToBreak.add(pos6);
+					blocksToBreak.add(pos7);
+				}
+				if(facing==EnumFacing.UP||facing==EnumFacing.DOWN){
+					BlockPos pos0 = pos.north();
+					BlockPos pos1 = pos.south();
+					BlockPos pos2 = pos.east();
+					BlockPos pos3 = pos.west();
+					BlockPos pos4 = pos.north().west();
+					BlockPos pos5 = pos.south().east();
+					BlockPos pos6 = pos.north().east();
+					BlockPos pos7 = pos.south().west();
+					blocksToBreak.add(pos0);
+					blocksToBreak.add(pos1);
+					blocksToBreak.add(pos2);
+					blocksToBreak.add(pos3);
+					blocksToBreak.add(pos4);
+					blocksToBreak.add(pos5);
+					blocksToBreak.add(pos6);
+					blocksToBreak.add(pos7);
+				}
+				if(!worldIn.isRemote){
+					Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
+					if(map.containsKey(Enchantments.SILK_TOUCH)&&!map.containsKey(Enchantments.FORTUNE)) {
+						for(BlockPos positionToBreak:blocksToBreak){
+							Block.spawnAsEntity(worldIn,positionToBreak,new ItemStack(worldIn.getBlockState(positionToBreak).getBlock(),1));
+							destroyBlock(worldIn,positionToBreak, false);
+						}
+					}
+					else if(!map.containsKey(Enchantments.SILK_TOUCH)&&map.containsKey(Enchantments.FORTUNE)) {
+						for (BlockPos positionToBreak : blocksToBreak) {
+							worldIn.getBlockState(positionToBreak).getBlock().dropBlockAsItem(worldIn,positionToBreak,worldIn.getBlockState(positionToBreak),map.get(Enchantments.FORTUNE).intValue());
+							destroyBlock(worldIn,positionToBreak, false);
+						}
+					} else{
+						for(BlockPos positionToBreak:blocksToBreak){
+							destroyBlock(worldIn,positionToBreak, true);
+						}
+					}
+				}
 			}
-			if (!worldIn.isRemote) {
+
+			/*if (!worldIn.isRemote) {
 				//down
 				if(!done) {
 					if(!worldIn.isAirBlock(pos.down())&&!worldIn.isAirBlock(pos.west())&&!worldIn.isAirBlock(pos.east())&&!worldIn.isAirBlock(pos.west())&&
@@ -276,25 +376,131 @@ public class ItemMysticPickaxe extends MysticTool
 					}
 				}
 			}
+		}*/
 		}
 		return true;
 	}
-
-    private void destroyBlock(World worldIn, BlockPos pos, boolean dropBlock){
-    	if(worldIn.getBlockState(pos).getBlock()!=Blocks.BEDROCK){
-    		worldIn.destroyBlock(pos,dropBlock);
+	private void destroyBlock(World worldIn, BlockPos pos, boolean dropBlock){
+		if(worldIn.getBlockState(pos).getBlock()!=Blocks.BEDROCK&&!worldIn.isAirBlock(pos)){
+			worldIn.destroyBlock(pos,dropBlock);
 		}
 	}
-    
+
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }
 
-    public float getStrVsBlock(ItemStack stack, IBlockState state)
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		if(stack.getItem().equals(KCore.CrystalPickaxe)) {
+			if (entityIn != null) {
+				if (entityIn instanceof EntityPlayer) {
+					player = (EntityPlayer) entityIn;
+				} else {
+					player = null;
+				}
+			}
+		}
+	}
+
+    public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
+		if(stack.getItem().equals(KCore.CrystalPickaxe)){
+			if(player!=null){
+				Vec3d posVec = new Vec3d(player.posX,player.posY,player.posZ);
+				Vec3d lookVec = player.getLookVec();
+				RayTraceResult ray = player.world.rayTraceBlocks(posVec, lookVec);
+				if(ray!=null) {
+					BlockPos pos = ray.getBlockPos();
+					Vec3d vec = new Vec3d(pos.getX() - player.posX, pos.getY() - player.posY, pos.getZ() - player.posZ).normalize();
+					EnumFacing facing = null;
+					if (vec.z >= 0.5f && MathHelper.abs((float) vec.x) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f) {
+						facing = EnumFacing.SOUTH;
+					} else if (vec.z <= -0.5f && MathHelper.abs((float) vec.x) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f) {
+						facing = EnumFacing.NORTH;
+					} else if (MathHelper.abs((float) vec.z) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f && vec.x >= 0.5f) {
+						facing = EnumFacing.EAST;
+					} else if (MathHelper.abs((float) vec.z) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f && vec.x <= -0.5f) {
+						facing = EnumFacing.WEST;
+					} else if (vec.y >= 0.5f) {
+						facing = EnumFacing.UP;
+					} else if (vec.y <= -0.5f) {
+						facing = EnumFacing.DOWN;
+					} else {
+						facing = EnumFacing.EAST;
+					}
+					ArrayList<BlockPos> blocksToBreak = new ArrayList<>();
+					if (facing == EnumFacing.SOUTH || facing == EnumFacing.NORTH) {
+						BlockPos pos0 = pos.west();
+						BlockPos pos1 = pos.east();
+						BlockPos pos2 = pos.up();
+						BlockPos pos3 = pos.down();
+						BlockPos pos4 = pos.west().down();
+						BlockPos pos5 = pos.east().up();
+						BlockPos pos6 = pos.west().up();
+						BlockPos pos7 = pos.east().down();
+						blocksToBreak.add(pos0);
+						blocksToBreak.add(pos1);
+						blocksToBreak.add(pos2);
+						blocksToBreak.add(pos3);
+						blocksToBreak.add(pos4);
+						blocksToBreak.add(pos5);
+						blocksToBreak.add(pos6);
+						blocksToBreak.add(pos7);
+					}
+					if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
+						BlockPos pos0 = pos.north();
+						BlockPos pos1 = pos.south();
+						BlockPos pos2 = pos.up();
+						BlockPos pos3 = pos.down();
+						BlockPos pos4 = pos.north().down();
+						BlockPos pos5 = pos.south().up();
+						BlockPos pos6 = pos.north().up();
+						BlockPos pos7 = pos.south().down();
+						blocksToBreak.add(pos0);
+						blocksToBreak.add(pos1);
+						blocksToBreak.add(pos2);
+						blocksToBreak.add(pos3);
+						blocksToBreak.add(pos4);
+						blocksToBreak.add(pos5);
+						blocksToBreak.add(pos6);
+						blocksToBreak.add(pos7);
+					}
+					if (facing == EnumFacing.UP || facing == EnumFacing.DOWN) {
+						BlockPos pos0 = pos.north();
+						BlockPos pos1 = pos.south();
+						BlockPos pos2 = pos.east();
+						BlockPos pos3 = pos.west();
+						BlockPos pos4 = pos.north().west();
+						BlockPos pos5 = pos.south().east();
+						BlockPos pos6 = pos.north().east();
+						BlockPos pos7 = pos.south().west();
+						blocksToBreak.add(pos0);
+						blocksToBreak.add(pos1);
+						blocksToBreak.add(pos2);
+						blocksToBreak.add(pos3);
+						blocksToBreak.add(pos4);
+						blocksToBreak.add(pos5);
+						blocksToBreak.add(pos6);
+						blocksToBreak.add(pos7);
+					}
+					float averageEffection=0;
+					int counter=0;
+					for(BlockPos blockToBreakPos:blocksToBreak){
+						if(!player.world.isAirBlock(blockToBreakPos)) {
+							counter++;
+							averageEffection += player.world.getBlockState(blockToBreakPos).getBlockHardness(player.world, blockToBreakPos)*efficiencyOnProperMaterial;
+						}
+					}
+					averageEffection+=state.getBlockHardness(player.world,pos)*efficiencyOnProperMaterial;
+					averageEffection=(averageEffection/counter+1);
+					return averageEffection;
+				}
+			}
+		}
         Material material = state.getMaterial();
-        return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
+        return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getDestroySpeed(stack, state) : this.efficiencyOnProperMaterial;
     }
     
     @SideOnly(Side.CLIENT)
