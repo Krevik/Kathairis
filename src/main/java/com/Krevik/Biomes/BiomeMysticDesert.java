@@ -39,11 +39,6 @@ public class BiomeMysticDesert extends KetherBiome
     public BiomeMysticDesert(Biome.BiomeProperties properties)
     {
         super(properties);
-        this.spawnableCreatureList.clear();
-        this.spawnableCaveCreatureList.clear();
-        this.spawnableMonsterList.clear();
-        this.spawnableWaterCreatureList.clear();
-        this.decorator=createBiomeDecorator();
         this.decorator.treesPerChunk = 0;
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;

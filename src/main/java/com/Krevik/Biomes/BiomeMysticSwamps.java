@@ -37,11 +37,6 @@ public class BiomeMysticSwamps extends KetherBiome
     public BiomeMysticSwamps(Biome.BiomeProperties properties)
     {
         super(properties);
-        this.spawnableCreatureList.clear();
-        this.spawnableCaveCreatureList.clear();
-        this.spawnableMonsterList.clear();
-        this.spawnableWaterCreatureList.clear();
-        this.decorator=createBiomeDecorator();
         this.decorator.treesPerChunk = 1;
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;

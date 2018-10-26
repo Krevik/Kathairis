@@ -24,6 +24,11 @@ public abstract class KetherBiome extends Biome
     public KetherBiome(Biome.BiomeProperties properties)
     {
     	super(properties);
+        //this.decorator=createBiomeDecorator();
+        this.spawnableCreatureList.clear();
+        this.spawnableCaveCreatureList.clear();
+        this.spawnableMonsterList.clear();
+        this.spawnableWaterCreatureList.clear();
     	KCore.instance.cproxy.biomeList.add(this);
         this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityIllukini.class, 2, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityRubySile.class, 8, 1, 2));
@@ -83,10 +88,10 @@ public abstract class KetherBiome extends Biome
         return getModdedBiomeFoliageColor(ColorizerFoliage.getFoliageColor(d0, d1));
     }
 
-    public BiomeDecorator getModdedBiomeDecorator(BiomeDecorator original)
+    /*public BiomeDecorator getModdedBiomeDecorator(BiomeDecorator original)
     {
         return new net.minecraftforge.event.terraingen.DeferredBiomeDecorator(original);
-    }
+    }*/
 
     public int getModdedBiomeGrassColor(int original)
     {
