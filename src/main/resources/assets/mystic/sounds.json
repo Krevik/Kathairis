@@ -262,5 +262,13 @@
         [
             {"name": "mystic:music_disc/8bit", "stream": true}
         ]
+    },
+	"kether.pickaxe_turn":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:misc/pickaxe_turn"
+        ]
     }
 }

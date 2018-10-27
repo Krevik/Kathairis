@@ -27,11 +27,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.*;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -40,6 +38,7 @@ import org.lwjgl.Sys;
 
 public class ItemMysticPickaxe extends MysticTool
 {
+	private int mode;
     private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.ACTIVATOR_RAIL, Blocks.COAL_ORE, Blocks.COBBLESTONE, 
     		Blocks.DETECTOR_RAIL, Blocks.DIAMOND_BLOCK, Blocks.DIAMOND_ORE, Blocks.DOUBLE_STONE_SLAB, Blocks.GOLDEN_RAIL, Blocks.GOLD_BLOCK, 
     		Blocks.GOLD_ORE, Blocks.ICE, Blocks.IRON_BLOCK, Blocks.IRON_ORE, Blocks.LAPIS_BLOCK, Blocks.LAPIS_ORE, Blocks.LIT_REDSTONE_ORE, 
@@ -58,6 +57,7 @@ public class ItemMysticPickaxe extends MysticTool
     public ItemMysticPickaxe(String Name, CreativeTabs tab, Item.ToolMaterial material)
     {
         super(Name,tab, 1.0F, -2.8F, material, EFFECTIVE_ON);
+        mode=0;
     }
 
     /**
@@ -137,7 +137,7 @@ public class ItemMysticPickaxe extends MysticTool
 		{
 			stack.damageItem(1, entityLiving);
 		}
-		if(this==KCore.CrystalPickaxe) {
+		if(this==KCore.CrystalPickaxe&&mode==0) {
 			if (entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) entityLiving;
 				player.addExhaustion(1f);
@@ -388,6 +388,27 @@ public class ItemMysticPickaxe extends MysticTool
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
+    	ItemStack stack = playerIn.getHeldItem(handIn);
+    	if(stack.getItem().equals(KCore.CrystalPickaxe)){
+    		if(mode==0){
+    			if(!worldIn.isRemote){
+					mode=1;
+				}
+				if(worldIn.isRemote) {
+					playerIn.sendMessage(new TextComponentString("Mythical power is OFF"));
+					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.cproxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
+				}
+			}else{
+				if(!worldIn.isRemote) {
+					mode = 0;
+				}
+				if(worldIn.isRemote) {
+					playerIn.sendMessage(new TextComponentString("Mythical power is ON"));
+					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.cproxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
+				}
+			}
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+		}
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }
 
@@ -406,7 +427,7 @@ public class ItemMysticPickaxe extends MysticTool
 
     public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
-		if(stack.getItem().equals(KCore.CrystalPickaxe)){
+		if(stack.getItem().equals(KCore.CrystalPickaxe)&&mode==0){
 			if(player!=null){
 				Vec3d posVec = new Vec3d(player.posX,player.posY,player.posZ);
 				Vec3d lookVec = player.getLookVec();
