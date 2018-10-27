@@ -40,11 +40,7 @@ public class ClientProxy extends CommonProxy {
 public static final ResourceLocation particleBlueCloud = new ResourceLocation(KCore.MODID+":"+"effect/bluecloud");
 public static final ResourceLocation shockingBall = new ResourceLocation(KCore.MODID+":"+"effect/shockingball");
 public static final ResourceLocation shockingParticle = new ResourceLocation(KCore.MODID+":"+"effect/shockingparticle");
-public static final ResourceLocation swampGasParticle = new ResourceLocation(KCore.MODID+":"+"effect/swampgasparticle");
-public static final ResourceLocation soulTreeParticle = new ResourceLocation(KCore.MODID+":"+"effect/soultreeparticle");
 public static final ResourceLocation Mystic_Gem_Block_Particle = new ResourceLocation(KCore.MODID+":"+"effect/mystic_gem_block_particle");
-public static final ResourceLocation dust_particle = new ResourceLocation(KCore.MODID+":"+"effect/dust_particle");
-//public static final ResourceLocation kether_portal_particle = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
 public static final ResourceLocation living_particle = new ResourceLocation(KCore.MODID+":"+"effect/living_particle");
 
 public static MusicTicker.MusicType ketherMusicDay;

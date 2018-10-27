@@ -5,9 +5,9 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.Krevik.Main.KCore;
-import com.Krevik.Particles.ParticleSoulTree;
+import com.Krevik.Particles.DynamicParticle;
 
-import net.minecraft.block.Block;
+import com.Krevik.Particles.ParticlesFactory;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -15,6 +15,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -133,9 +135,22 @@ public class BlockMysticLeaf extends BlockLeaves
                 double d1 = (double)((float)pos.getY() + 1);
                 double d2 = (double)((float)pos.getZ() + rand.nextFloat());
                 double d3 = 0;
-                double d4 = -rand.nextFloat()*0.1;
+                double d4 = 0;
                 double d5 = 0;
-                KCore.cproxy.drawParticle(worldIn, new ParticleSoulTree(worldIn,d0,d1,d2,d3,d4,d5));
+                //KCore.cproxy.drawParticle(worldIn, new ParticleSoulTree(worldIn,d0,d1,d2,d3,d4,d5));
+                Particle theParticle = new DynamicParticle(
+                        ParticlesFactory.SOULTREE,
+                        worldIn,
+                        d0, d1, d2,
+                        d3, d4, d5)
+                        .setRotSpeed(((float) Math.random() - 0.5F) * 0.1F)
+                        .setLifeSpan((20 + rand.nextInt(20))*10)
+                        .setGravity(0.01F)
+                        .setScale(2.0F)
+                        .setInitialAlpha(1.0F)
+                        .setFinalAlpha(0.1F)
+                        .setEnableDepth(true).setCanCollide(false);
+                Minecraft.getMinecraft().effectRenderer.addEffect(theParticle);
     		}
 
     	}

@@ -10,25 +10,16 @@ public class TextureStitcherParicleManager
 {
 	  @SubscribeEvent
 	  public void stitcherEventPre(TextureStitchEvent.Pre event) {
-	  	ResourceLocation kether_portal_particle = new ResourceLocation(KCore.MODID+":"+"effect/kether_portal_particle");
 		  ResourceLocation particleBlueCloud = KCore.instance.cproxy.particleBlueCloud;
 	    ResourceLocation shockingBall = KCore.instance.cproxy.shockingBall;
 	    ResourceLocation shockingParticle = KCore.instance.cproxy.shockingParticle;
-	    ResourceLocation swampGasParticle = KCore.instance.cproxy.swampGasParticle;
-	    ResourceLocation soulTreeParticle = KCore.instance.cproxy.soulTreeParticle;
 	    ResourceLocation Mystic_Gem_Block_Particle = KCore.instance.cproxy.Mystic_Gem_Block_Particle;
-	    ResourceLocation dust_particle = KCore.instance.cproxy.dust_particle;
-	    //ResourceLocation kether_portal_particle = KCore.instance.cproxy.kether_portal_particle;
 	    ResourceLocation living_particle = KCore.instance.cproxy.living_particle;
 
 	    event.getMap().registerSprite(particleBlueCloud);
 	    event.getMap().registerSprite(shockingBall);
 	    event.getMap().registerSprite(shockingParticle);
-	    event.getMap().registerSprite(swampGasParticle);
-	    event.getMap().registerSprite(soulTreeParticle);
 	    event.getMap().registerSprite(Mystic_Gem_Block_Particle);
-	    event.getMap().registerSprite(dust_particle);
-	    event.getMap().registerSprite(kether_portal_particle);
 	    event.getMap().registerSprite(living_particle);
 
 	  }

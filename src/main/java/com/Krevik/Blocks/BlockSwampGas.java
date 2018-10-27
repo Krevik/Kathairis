@@ -1,17 +1,18 @@
 package com.Krevik.Blocks;
 
-import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import com.Krevik.Main.CreativeTabsMystic;
 import com.Krevik.Main.KCore;
-import com.Krevik.Particles.ParticleSwampGas;
+import com.Krevik.Particles.DynamicParticle;
 
+import com.Krevik.Particles.ParticlesFactory;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -29,10 +30,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fml.server.FMLServerHandler;
 
 public class BlockSwampGas extends BlockMysticCloud{
 
@@ -101,11 +100,21 @@ public class BlockSwampGas extends BlockMysticCloud{
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
     	for(int x=0;x<=1+rand.nextInt(8);x++) {
-        	double d2=pos.getZ()+rand.nextFloat();
-        	double d1=pos.getY()+rand.nextFloat();
-        	double d0=pos.getX()+rand.nextFloat();
-        	ParticleSwampGas particle=new ParticleSwampGas(worldIn,d0,d1,d2,0,0,0);
-            KCore.cproxy.drawParticle(worldIn, particle);
+			double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+			double d1 = (double) ((float) pos.getY() + rand.nextFloat());
+			double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+			Particle theParticle = new DynamicParticle(
+					ParticlesFactory.SWAMPGAS,
+					worldIn,
+					d0, d1, d2,
+					0, 0, 0)
+					.setRotSpeed(0F)
+					.setLifeSpan(20 + rand.nextInt(20))
+					.setGravity(0F)
+					.setScale(2.5F)
+					.setInitialAlpha(1.0F)
+					.setFinalAlpha(0.1F);
+			Minecraft.getMinecraft().effectRenderer.addEffect(theParticle);
         	//worldIn.spawnParticle(type, d0, d1, d2, d3, d4, d5,0);
     	}
     }

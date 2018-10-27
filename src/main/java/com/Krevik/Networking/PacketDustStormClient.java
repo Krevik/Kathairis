@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 import com.Krevik.Dimension.KetherDataStorage;
 import com.Krevik.Main.KCore;
-import com.Krevik.Particles.DustParticle;
 
+import com.Krevik.Particles.DynamicParticle;
+import com.Krevik.Particles.ParticlesFactory;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -77,7 +75,7 @@ public class PacketDustStormClient implements IMessage {
 							}
 							for(int x=0;x<positions.size()-1;x++) {
 								if(player.world.isAirBlock(positions.get(x))) {
-									if(player.getRNG().nextInt(12)==0) {
+									if(player.getRNG().nextInt(50)==0) {
 										if(player.world.getBiome(positions.get(x))==KCore.instance.MysticDesert&&player.posY>63&&player.posY<84) {
 											double d0=positions.get(x).getX()+0.5+(player.getRNG().nextFloat()-player.getRNG().nextFloat())*0.5;
 											double d1=positions.get(x).getY()+0.5+(player.getRNG().nextFloat()-player.getRNG().nextFloat())*0.5;
@@ -85,7 +83,19 @@ public class PacketDustStormClient implements IMessage {
 											double d3=data.getSandstormX();
 											double d4=(player.getRNG().nextFloat()-player.getRNG().nextFloat())*0.3;
 											double d5=data.getSandstormZ();
-											KCore.instance.cproxy.drawParticle(player.world, new DustParticle(player.world,d0,d1,d2,d3,d4,d5));
+											//KCore.instance.cproxy.drawParticle(player.world, new DustParticle(player.world,d0,d1,d2,d3,d4,d5));
+											Particle theParticle = new DynamicParticle(
+													ParticlesFactory.DUST,
+													player.world,
+													d0, d1, d2,
+													d3, d4, d5)
+													.setRotSpeed((player.getRNG().nextFloat()-0.5f)*0.15f)
+													.setLifeSpan(40 + player.getRNG().nextInt(20))
+													.setGravity(0F)
+													.setScale(2.0F)
+													.setInitialAlpha(1.0F)
+													.setFinalAlpha(1.0F);
+											Minecraft.getMinecraft().effectRenderer.addEffect(theParticle);
 										}
 									}
 								}

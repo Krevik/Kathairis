@@ -9,9 +9,8 @@ import javax.annotation.Nullable;
 import com.Krevik.Dimension.TileEntityKether;
 import com.Krevik.Entities.EntityStrangeWanderer;
 import com.Krevik.Main.KCore;
-import com.Krevik.Main.KathairisMaterials;
-import com.Krevik.Particles.DynamicMovementParticle;
-import com.Krevik.Particles.KetherPortalParticle;
+import com.Krevik.Particles.DynamicParticle;
+import com.Krevik.Particles.ParticlesFactory;
 import com.google.common.cache.LoadingCache;
 
 import net.minecraft.block.Block;
@@ -20,19 +19,19 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -393,7 +392,7 @@ public class BlockMysticPortal extends BlockPortal
             worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
         }
 
-        for (int i = 0; i < 4; ++i)
+        /*for (int i = 0; i < 4; ++i)
         {
             double d0 = (double)((float)pos.getX() + rand.nextFloat());
             double d1 = (double)((float)pos.getY() + rand.nextFloat());
@@ -440,7 +439,28 @@ public class BlockMysticPortal extends BlockPortal
 	
 	            KCore.cproxy.drawParticle(worldIn, new DynamicMovementParticle(worldIn,d0,d1,d2,d3*0.01,d4*0.01,d5*0.01));
             }
-        }
+        }*/
+            for (int i = 0; i < 6; ++i) {
+                double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+                double d1 = (double) ((float) pos.getY() + rand.nextFloat());
+                double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+                double d3 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
+                double d4 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
+                double d5 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
+                Particle theParticle = new DynamicParticle(
+                        ParticlesFactory.PORTAL,
+                        worldIn,
+                        d0, d1, d2,
+                        d3, d4, d5)
+                        .setRotSpeed(((float) Math.random() - 0.5F) * 0.1F)
+                        .setLifeSpan(20 + rand.nextInt(20))
+                        .setGravity(0F)
+                        .setScale(2.0F)
+                        .setInitialAlpha(1.0F)
+                        .setFinalAlpha(0.1F)
+                        .setEnableDepth(true);
+                Minecraft.getMinecraft().effectRenderer.addEffect(theParticle);
+            }
     }
 
     /**
