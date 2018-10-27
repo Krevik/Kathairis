@@ -349,59 +349,49 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         private final double moveSpeedAmp=1;
         private int attackCooldown=15;
         public void updateTask() {
-            gaznowel.getLookHelper().setLookPositionWithEntity(gaznowel.getAttackTarget(), 10.0F, 100F);
-            gaznowel.faceEntity(gaznowel.getAttackTarget(),1000,1000);
-            gaznowel.getLookHelper().onUpdateLook();
-            if(gaznowel.getDistance(gaznowel.getAttackTarget())>8F||!gaznowel.hasMovementVector||gaznowel.getRNG().nextInt(100)==0){
-                BlockPos targetPos = findPositionNearPlayer(gaznowel);
-                gaznowel.movementVector=new Vector3d(targetPos.getX(),targetPos.getY(),targetPos.getZ());
-                gaznowel.hasMovementVector=true;
-            }
-            EntityLiving entity = gaznowel;
-            EntityLivingBase entitylivingbase = entity.getAttackTarget();
-
-            if (entitylivingbase != null)
-            {
-                gaznowel.getDataManager().set(gaznowel.SWINGING_ARMS,true);
-                double d0 = entity.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ);
-                boolean flag = entity.getEntitySenses().canSee(entitylivingbase);
-                boolean flag1 = this.seeTime > 0;
-
-                if (flag != flag1)
-                {
-                    this.seeTime = 0;
+            if(gaznowel.getAttackTarget()!=null) {
+                gaznowel.getLookHelper().setLookPositionWithEntity(gaznowel.getAttackTarget(), 10.0F, 100F);
+                gaznowel.faceEntity(gaznowel.getAttackTarget(), 1000, 1000);
+                gaznowel.getLookHelper().onUpdateLook();
+                if (gaznowel.getDistance(gaznowel.getAttackTarget()) > 8F || !gaznowel.hasMovementVector || gaznowel.getRNG().nextInt(100) == 0) {
+                    BlockPos targetPos = findPositionNearPlayer(gaznowel);
+                    gaznowel.movementVector = new Vector3d(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+                    gaznowel.hasMovementVector = true;
                 }
+                EntityLiving entity = gaznowel;
+                EntityLivingBase entitylivingbase = entity.getAttackTarget();
 
-                if (flag)
-                {
-                    ++this.seeTime;
-                }
-                else
-                {
-                    --this.seeTime;
-                }
+                if (entitylivingbase != null) {
+                    gaznowel.getDataManager().set(gaznowel.SWINGING_ARMS, true);
+                    double d0 = entity.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ);
+                    boolean flag = entity.getEntitySenses().canSee(entitylivingbase);
+                    boolean flag1 = this.seeTime > 0;
 
-                if (entity.isHandActive())
-                {
-                    if (!flag && this.seeTime < -60)
-                    {
-                        entity.resetActiveHand();
+                    if (flag != flag1) {
+                        this.seeTime = 0;
                     }
-                    else if (flag)
-                    {
-                        int i = entity.getItemInUseMaxCount();
 
-                        if (i >= 15)
-                        {
+                    if (flag) {
+                        ++this.seeTime;
+                    } else {
+                        --this.seeTime;
+                    }
+
+                    if (entity.isHandActive()) {
+                        if (!flag && this.seeTime < -60) {
                             entity.resetActiveHand();
-                            ((IRangedAttackMob)entity).attackEntityWithRangedAttack(entitylivingbase, ItemBow.getArrowVelocity(i));
-                            this.attackTime = this.attackCooldown;
+                        } else if (flag) {
+                            int i = entity.getItemInUseMaxCount();
+
+                            if (i >= 15) {
+                                entity.resetActiveHand();
+                                ((IRangedAttackMob) entity).attackEntityWithRangedAttack(entitylivingbase, ItemBow.getArrowVelocity(i));
+                                this.attackTime = this.attackCooldown;
+                            }
                         }
+                    } else if (--this.attackTime <= 0 && this.seeTime >= -60) {
+                        entity.setActiveHand(EnumHand.MAIN_HAND);
                     }
-                }
-                else if (--this.attackTime <= 0 && this.seeTime >= -60)
-                {
-                    entity.setActiveHand(EnumHand.MAIN_HAND);
                 }
             }
         }

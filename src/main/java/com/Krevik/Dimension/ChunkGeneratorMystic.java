@@ -27,12 +27,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkGeneratorSettings;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.NoiseGeneratorSimplex;
+import net.minecraft.world.gen.*;
 
 public class ChunkGeneratorMystic implements IChunkGenerator
 {
@@ -488,7 +483,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
             WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);
         	blockpos = blockpos.add(8, 0, 8);
-        
+
 
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
 
