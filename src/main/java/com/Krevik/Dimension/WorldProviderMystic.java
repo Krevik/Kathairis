@@ -17,17 +17,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderMystic extends WorldProviderSurface
 {
-    /**
-     * Creates a new {@link BiomeProvider} for the WorldProvider, and also sets the values of {@link #hasSkylight} and
-     * {@link #hasNoSky} appropriately.
-     *  
-     * Note that subclasses generally override this method without calling the parent version.
-     */
+
     public void init()
     {
         this.setDimension(KCore.DIMENSION_ID);
         this.biomeProvider = new BiomeProviderMystic(world.getWorldInfo().getSeed(),world.getWorldType());
-        this.generateLightBrightnessTable();
         this.hasSkyLight = true;
     }
 
@@ -40,23 +34,7 @@ public class WorldProviderMystic extends WorldProviderSurface
     {
         return WorldSleepResult.ALLOW;
     }
-    public float getSunBrightnessFactor(float par1)
-    {
-        return world.getSunBrightnessFactor(par1);
-    }
 
-
-
-    protected void generateLightBrightnessTable()
-    {
-        float f = 0.0F;
-
-        for (int i = 0; i <= 15; ++i)
-        {
-            float f1 = 1.0F - (float)i / 15.0F;
-            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F + 0.0F;
-        }
-    }
 
     
 	@Override
@@ -224,6 +202,12 @@ public class WorldProviderMystic extends WorldProviderSurface
 	    	}else {
 	            return KCore.cproxy.ketherMusicDay;
 	    	}
+    }
+
+    @Override
+    public boolean isSurfaceWorld()
+    {
+        return true;
     }
     
 }
