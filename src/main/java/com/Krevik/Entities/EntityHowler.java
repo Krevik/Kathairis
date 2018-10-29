@@ -41,11 +41,14 @@ import net.minecraft.world.World;
 
 public class EntityHowler extends EntityMob
 {
+    private static final DataParameter<Float> animTimer = EntityDataManager.<Float>createKey(EntityHowler.class, DataSerializers.FLOAT);
+    private static final DataParameter<Boolean> shouldAnimTail = EntityDataManager.<Boolean>createKey(EntityHowler.class, DataSerializers.BOOLEAN);
+
 
     public EntityHowler(World worldIn)
     {
         super(worldIn);
-        this.setSize(0.6F, 1F);
+        this.setSize(0.85F, 1F);
     }
 
 
@@ -86,7 +89,7 @@ public class EntityHowler extends EntityMob
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5000000417232513D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3000000417232513D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
@@ -97,8 +100,27 @@ public class EntityHowler extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
+        this.dataManager.register(animTimer, Float.valueOf(0));
+        this.dataManager.register(shouldAnimTail, Boolean.valueOf(false));
     }
 
+    public boolean getShouldAnimTail()
+    {
+        return (this.dataManager.get(shouldAnimTail));
+    }
+
+    public void setShouldAnimTail(boolean value)
+    {
+        this.dataManager.set(shouldAnimTail,value);
+    }
+
+    public void setAnimTimer(float time){
+        this.dataManager.set(animTimer,time);
+    }
+
+    public float getAnimTimer(){
+        return this.dataManager.get(animTimer);
+    }
     /**
      * Get the experience points the entity currently has.
      */
@@ -137,8 +159,32 @@ public class EntityHowler extends EntityMob
 
         return flag;
     }
+
+    public int shouldAnimEars=0;
     public void onUpdate() {
     	super.onUpdate();
+        if(!getShouldAnimTail()) {
+            if(getRNG().nextInt(1000)==0) {
+                setShouldAnimTail(true);
+            }
+        }
+        if(getShouldAnimTail()) {
+            setAnimTimer(getAnimTimer()+2);
+            if(getAnimTimer()>200) {
+                setAnimTimer(0);
+                setShouldAnimTail(false);
+            }
+        }
+        if(shouldAnimEars==0){
+            if(getRNG().nextInt(1000)==0){
+                shouldAnimEars=1;
+            }
+        }
+        if(shouldAnimEars==1){
+            if(getRNG().nextInt(100)==0){
+                shouldAnimEars=0;
+            }
+        }
  
     }
 
@@ -192,6 +238,8 @@ public class EntityHowler extends EntityMob
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
+        compound.setBoolean("shouldAnimTail",getShouldAnimTail());
+        compound.setFloat("animTimer",getAnimTimer());
     }
 
     /**
@@ -200,6 +248,8 @@ public class EntityHowler extends EntityMob
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
+        setShouldAnimTail(compound.getBoolean("shouldAnimTail"));
+        setAnimTimer(compound.getFloat("animTimer"));
     }
 
     /**

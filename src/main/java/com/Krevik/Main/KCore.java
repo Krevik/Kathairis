@@ -731,6 +731,12 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.music_disc_jazzy)
     public static final ItemBasicKathairisMusicDisc Music_Disc_jazzy = new ItemBasicKathairisMusicDisc(Ref.music_disc_jazzy, KCore.instance.cproxy.music_disc_jazzy,"Jazzy by YungBlitzkrieg");
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.skyray_feather)
+    public static final BaseItem skyray_feather = new BaseItem(Ref.skyray_feather, CreativeTabsMystic.miscellaneous);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.howler_fur)
+    public static final BaseItem howler_fur = new BaseItem(Ref.howler_fur, CreativeTabsMystic.miscellaneous);
+
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         regHelper.initModels();
@@ -980,6 +986,9 @@ public class KCore {
         public static final String Layered_Sand="layered_sand";
         public static final String music_disc_jazzy="music_disc_jazzy";
         public static final String music_disc_8bit="music_disc_8bit";
+        public static final String skyray_feather="skyray_feather";
+        public static final String howler_fur="howler_fur";
+
 
     }
     

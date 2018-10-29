@@ -1,5 +1,6 @@
 package com.Krevik.Models;
 
+import com.Krevik.Entities.EntityBison;
 import com.Krevik.Entities.EntityHowler;
 import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
@@ -224,24 +225,33 @@ public class ModelHowler extends ModelBase {
         BehindLeftLeg3.rotateAngleX=helper.degToRad(35)+MathHelper.clamp(MathHelper.sin(limbSwing*0.8f)*0.62f*limbSwingAmount,-100,0);
         */
 
-        FrontRightLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.abs(MathHelper.sin(age*0.1f)*0.2f);
-        FrontRightLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(age*0.1f)*0.8f);
-        FrontRightLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.sin(age*0.1f)*0.8f);
-        FrontLeftLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.abs(MathHelper.cos(age*0.1f)*0.2f);
-        FrontLeftLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(age*0.1f)*0.8f);
-        FrontLeftLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.cos(age*0.1f)*0.8f);
+        FrontRightLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
+        FrontRightLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
+        FrontRightLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*2f)*limbSwingAmount;
+        FrontLeftLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        FrontLeftLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        FrontLeftLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
 
         FrontRightLeg3.offsetZ=-0.02f;
         FrontLeftLeg3.offsetZ=-0.02f;
 
-        BehindRightLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.abs(MathHelper.cos(age*0.1f)*0.2f);
-        BehindRightLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.cos(age*0.1f)*0.8f);
-        BehindRightLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(age*0.1f)*0.8f);
-        BehindLeftLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.abs(MathHelper.sin(age*0.1f)*0.2f);
-        BehindLeftLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.sin(age*0.1f)*0.8f);
-        BehindLeftLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(age*0.1f)*0.8f);
+        BehindRightLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        BehindRightLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        BehindRightLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        BehindLeftLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
+        BehindLeftLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
+        BehindLeftLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
 
 
+          if (model.getShouldAnimTail()) {
+            Tail.rotateAngleY = (MathHelper.sin((model.getAnimTimer() / 10) * 0.6F));
+          } else {
+            Tail.rotateAngleY = 0;
+          }
+          if(model.getAttackTarget()==null){
+            LeftEar1.rotateAngleX=helper.degToRad(-28.7f)+MathHelper.abs(MathHelper.sin(age*model.shouldAnimEars*0.1f)*0.2f);
+            RightEar1.rotateAngleX=helper.degToRad(-28.7f)+MathHelper.abs(MathHelper.sin(age*model.shouldAnimEars*0.1f)*0.2f);
+          }
 
       }
   }
