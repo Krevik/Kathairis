@@ -38,6 +38,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySkyray extends EntityFlying
 {
+    private static final DataParameter<Integer> timeUntilNextFeather = EntityDataManager.<Integer>createKey(EntitySkyray.class, DataSerializers.VARINT);
+    public int timeUntilNextFeather() {
+        return ((Integer)this.dataManager.get(timeUntilNextFeather)).intValue();
+    }
+    public void setTimeUntilNextFeather(int x) {
+        this.dataManager.set(timeUntilNextFeather, Integer.valueOf(x));
+    }
+
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
@@ -50,6 +58,7 @@ public class EntitySkyray extends EntityFlying
         this.setSize(10F, 2.5F);    
         this.moveHelper = new EntityFlyHelper(this);
         this.setNoGravity(true);
+        this.setTimeUntilNextFeather(this.rand.nextInt(12000) + 12000);
     }
     
     public EntitySkyray getParent() {
@@ -74,6 +83,13 @@ public class EntitySkyray extends EntityFlying
     
     public void onUpdate() {
     	super.onUpdate();
+
+        this.setTimeUntilNextFeather(this.timeUntilNextFeather()-1);
+        if (!this.world.isRemote && this.timeUntilNextFeather() <= 0)
+        {
+            this.dropItem(KCore.skyray_feather, 1);
+            this.setTimeUntilNextFeather(this.rand.nextInt(12000) + 12000);
+        }
         if(this.getAdult()==0) {
         	width=10F;
         	height=2.5F;
@@ -114,6 +130,7 @@ public class EntitySkyray extends EntityFlying
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
+        compound.setInteger("timeUntilNextFeather", this.timeUntilNextFeather());
         compound.setInteger("Adult", this.getAdult());
     }
 
@@ -123,6 +140,7 @@ public class EntitySkyray extends EntityFlying
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
+        this.setTimeUntilNextFeather(compound.getInteger("timeUntilNextFeather"));
         this.setAdult(compound.getInteger("Adult"));
         if(this.getAdult()==0) {
             this.setSize(10F, 2.5F);    

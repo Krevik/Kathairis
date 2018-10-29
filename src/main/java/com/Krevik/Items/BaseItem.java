@@ -39,11 +39,9 @@ public class BaseItem extends Item{
  
  public EnumRarity getRarity(ItemStack stack)
  {
-	 if(this==KCore.MysticGem||this==KCore.CloudEssence||this==KCore.Ritual_Blade){
+	 if(stack.getItem().equals(KCore.MysticGem)||stack.getItem().equals(KCore.CloudEssence)||stack.getItem().equals(KCore.Ritual_Blade) ||stack.getItem().equals(KCore.skyray_feather)){
 		 return EnumRarity.EPIC;
-	 }
-	 else
-	 {
+	 }else {
 		 return EnumRarity.COMMON;
 	 }
  }
@@ -61,7 +59,8 @@ public class BaseItem extends Item{
  @SideOnly(Side.CLIENT)
  public boolean hasEffect(ItemStack stack)
  {
-	 if(this==KCore.MysticGem||this==KCore.CloudEssence||this==KCore.DarknessEssence||this==KCore.Ritual_Blade) return true;
+	 if(this==KCore.MysticGem||this==KCore.CloudEssence||this==KCore.DarknessEssence||
+			 this==KCore.Ritual_Blade||stack.getItem().equals(KCore.skyray_feather)) return true;
 	 else return false;
  }
  
