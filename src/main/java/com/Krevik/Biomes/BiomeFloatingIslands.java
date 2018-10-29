@@ -1,5 +1,6 @@
 package com.Krevik.Biomes;
 
+import java.util.List;
 import java.util.Random;
 
 import com.Krevik.Entities.*;
@@ -10,9 +11,11 @@ import com.Krevik.Gens.WorldGenMiniTallGrass;
 import com.Krevik.Gens.WorldGenSolisCrystals;
 import com.Krevik.Main.KCore;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mirror;
@@ -34,6 +37,7 @@ public class BiomeFloatingIslands extends KetherBiome
 {
     protected static WorldGenMiniTallGrass TALLGRASS_MINI = new WorldGenMiniTallGrass(KCore.MysticMiniGrass);
     protected static WorldGenAbstractTree TREE_FEATURE1 = new WorldGenHugeSoulTree();
+
     public BiomeFloatingIslands(Biome.BiomeProperties properties)
     {
         super(properties);
@@ -50,6 +54,20 @@ public class BiomeFloatingIslands extends KetherBiome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityFlyingSquid.class, 4, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySkyray.class, 2, 2, 4));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGaznowel.class, 2, 1, 1));
+    }
+
+    private static final int MONSTER_SPAWN_RATE = 20;
+    @Override
+    public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
+        if (creatureType == EnumCreatureType.MONSTER) {
+            return KCore.functionHelper.random.nextInt(MONSTER_SPAWN_RATE) == 0 ? this.spawnableMonsterList : Lists.newArrayList();
+        }
+        return super.getSpawnableList(creatureType);
+    }
+
+    public float getSpawningChance()
+    {
+        return 0.1F;
     }
 
     public void decorate(World worldIn, Random random, BlockPos pos)

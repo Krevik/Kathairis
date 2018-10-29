@@ -43,6 +43,8 @@ public static final ResourceLocation shockingParticle = new ResourceLocation(KCo
 public static final ResourceLocation Mystic_Gem_Block_Particle = new ResourceLocation(KCore.MODID+":"+"effect/mystic_gem_block_particle");
 public static final ResourceLocation living_particle = new ResourceLocation(KCore.MODID+":"+"effect/living_particle");
 
+public static final ResourceLocation stun_potion = new ResourceLocation(KCore.MODID+":"+"textures/effect/player/stun_potion.png");
+
 public static MusicTicker.MusicType ketherMusicDay;
 public static MusicTicker.MusicType ketherMusicNight;
 

@@ -1,5 +1,6 @@
 package com.Krevik.Biomes;
 
+import java.util.List;
 import java.util.Random;
 
 import com.Krevik.Entities.EntityBison;
@@ -12,8 +13,10 @@ import com.Krevik.Gens.WorldGenMysticMultiGrass;
 import com.Krevik.Gens.WorldGenSingleGen;
 import com.Krevik.Main.KCore;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -39,10 +42,19 @@ public class BiomeMysticPlains extends KetherBiome
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Plains");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 12, 1, 3));
-        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityJellyFish.class, 10, 1, 1));
+        this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityJellyFish.class, 10, 1, 1));
        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityBison.class, 8, 2, 4));
        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityButterfly.class, 10, 1, 1));
        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityButterfly1.class, 10, 1, 1));
+    }
+
+    private static final int MONSTER_SPAWN_RATE = 20;
+    @Override
+    public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
+        if (creatureType == EnumCreatureType.MONSTER) {
+            return KCore.functionHelper.random.nextInt(MONSTER_SPAWN_RATE) == 0 ? this.spawnableMonsterList : Lists.newArrayList();
+        }
+        return super.getSpawnableList(creatureType);
     }
 
     public WorldGenerator getRandomWorldGenForGrass(Random rand)

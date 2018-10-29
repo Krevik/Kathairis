@@ -99,7 +99,7 @@ public class EntityMothBase extends EntityAmbientCreature
             this.motionY *= 0.6000000238418579D;
             this.motionZ*=0.3;
             this.motionX*=0.3;    
-            if(this.world.isDaytime()) {
+            if(this.world.getWorldTime()<13000) {
             	EntityPlayer ep = this.world.getClosestPlayer(posX, posY, posZ, 25, true);
             	if(ep==null) {
             		this.posX=999;

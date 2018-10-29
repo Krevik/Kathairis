@@ -8,6 +8,7 @@ import com.Krevik.Main.KCore;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
@@ -23,6 +24,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class TeleporterMystic extends Teleporter
 {
@@ -43,7 +45,7 @@ public class TeleporterMystic extends Teleporter
 
     public void placeInPortal(Entity entityIn, float rotationYaw)
     {
-        if (this.world.provider.getDimensionType().getId() != 1)
+        if (this.world.provider.getDimensionType().getId() != -100)
         {
             if (!this.placeInExistingPortal(entityIn, rotationYaw))
             {
@@ -133,6 +135,62 @@ public class TeleporterMystic extends Teleporter
             }
         }
 
+        boolean shouldCheckFurther=true;
+        BlockPos anyPortalBlockPos=entityIn.getPosition();
+        loop1: for(int x=-20;x<=20;x++){
+            loop2: for(int y=-20;y<=20;y++){
+                loop3: for(int z=-20;z<=20;z++){
+                    BlockPos tmp = new BlockPos(blockpos.getX()+x,blockpos.getY()+y,blockpos.getZ()+z);
+                    if(world.getBlockState(tmp).getBlock()==KCore.MysticPortal){
+                        shouldCheckFurther=false;
+                        anyPortalBlockPos=tmp;
+                        d0=0;
+                        break loop3;
+                    }
+                    if(!shouldCheckFurther) break loop2;
+                }
+                if(!shouldCheckFurther) break loop1;
+            }
+        }
+        if(shouldCheckFurther){
+            loop1: for(int x=-128;x<=128;x++){
+                loop2: for(int y=-128;y<=128;y++){
+                    loop3: for(int z=-128;z<=128;z++){
+                        BlockPos tmp = new BlockPos(blockpos.getX()+x,blockpos.getY()+y,blockpos.getZ()+z);
+                        if(world.getBlockState(tmp).getBlock()==KCore.MysticPortal){
+                            shouldCheckFurther=false;
+                            anyPortalBlockPos=tmp;
+                            d0=0;
+                            break loop3;
+                        }
+                        if(!shouldCheckFurther) break loop2;
+                    }
+                    if(!shouldCheckFurther) break loop1;
+                }
+            }
+        }
+        if(shouldCheckFurther){
+            loop1: for(int x=-256;x<=256;x++){
+                loop2: for(int y=-128;y<=128;y++){
+                    loop3: for(int z=-256;z<=256;z++){
+                        BlockPos tmp = new BlockPos(blockpos.getX()+x,blockpos.getY()+y,blockpos.getZ()+z);
+                        if(world.getBlockState(tmp).getBlock()==KCore.MysticPortal){
+                            shouldCheckFurther=false;
+                            anyPortalBlockPos=tmp;
+                            d0=0;
+                            break loop3;
+                        }
+                        if(!shouldCheckFurther) break loop2;
+                    }
+                    if(!shouldCheckFurther) break loop1;
+                }
+            }
+        }
+        if(!world.isRemote) {
+            entityIn.setLocationAndAngles(anyPortalBlockPos.getX(), anyPortalBlockPos.getY(), anyPortalBlockPos.getZ(), 0, 0);
+            entityIn.setPosition(anyPortalBlockPos.getX(), anyPortalBlockPos.getY(), anyPortalBlockPos.getZ());
+        }
+
         if (d0 >= 0.0D)
         {
             if (flag)
@@ -193,23 +251,36 @@ public class TeleporterMystic extends Teleporter
             entityIn.motionZ = d3 * (double)f2 + d4 * (double)f1;
             entityIn.rotationYaw = rotationYaw - (float)(entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
 
+            EnumFacing.Axis axis = blockpattern$patternhelper.getForwards().getAxis();
+            double destX=blockpos.getX();
+            double destZ=blockpos.getZ();
+            if(axis==EnumFacing.Axis.X){
+                destZ+=1;
+
+            }
+
+            if(axis==EnumFacing.Axis.Z){
+                destX+=1;
+            }
+
             if (entityIn instanceof EntityPlayerMP)
             {
-            	((EntityPlayerMP)entityIn).addPotionEffect(new PotionEffect(Potion.getPotionById(10),10,10));
-                ((EntityPlayerMP)entityIn).connection.setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
+            	//((EntityPlayerMP)entityIn).addPotionEffect(new PotionEffect(Potion.getPotionById(10),10,10));
+                //((EntityPlayerMP)entityIn).connection.setPlayerLocation(destX, blockpos.getY()+1, destZ, entityIn.rotationYaw, entityIn.rotationPitch);
                 
-                if (!this.world.isRemote) { 
+                /*if (!this.world.isRemote) {
                 	   EntityEnderPearl entityenderpearl = new EntityEnderPearl(this.world, (EntityLivingBase) entityIn);
                 	   entityenderpearl.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch); 
                 	   entityenderpearl.motionY=-1;
-                	   this.world.spawnEntity(entityenderpearl); 
-                	}
+                	   this.world.spawnEntity(entityenderpearl);
+                    entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
+                }*/
             }
             else
             {
-                entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
                 if (!this.world.isRemote) {
-             	}
+                    //entityIn.setLocationAndAngles(destX, blockpos.getY()+1, destZ, entityIn.rotationYaw, entityIn.rotationPitch);
+                }
             }
 
             return true;
@@ -457,4 +528,5 @@ public class TeleporterMystic extends Teleporter
             this.lastUpdateTime = lastUpdate;
         }
     }
+
 }

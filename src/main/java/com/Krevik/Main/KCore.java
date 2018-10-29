@@ -3,8 +3,17 @@ package com.Krevik.Main;
 import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
 import com.Krevik.Items.*;
+import com.Krevik.Potion.StunPotion;
 import net.minecraft.client.audio.Sound;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldType;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -60,7 +69,7 @@ public class KCore {
     public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();
     public static final DimensionType Mystic_DIMENSION = DimensionType.register("KATHAIRIS", "_kathairis", DIMENSION_ID, WorldProviderMystic.class, false);
     public static int updateRendererCount=0;
-	
+
 	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12).setRepairItem(new ItemStack(KCore.TitaniumIngot));
 	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", "mystic:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
 	
@@ -988,5 +997,16 @@ public class KCore {
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new SandstormCommand());
+    }
+
+    @GameRegistry.ObjectHolder("stun")
+    public static final Potion stun_potion=new StunPotion(true,0xf51896);
+
+    public static void onRegisterPotions(RegistryEvent.Register<Potion> event) {
+        registerPotion("stun", new StunPotion(true, 0x56CBFD).setPotionName(KCore.MODID + ".effect.stun").registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "ab79a316-db47-11e8-9f8b-f2801f1b9fd1", 0D, 0), event);
+    }
+
+    public static void registerPotion(String name, Potion potion, RegistryEvent.Register<Potion> event){
+        event.getRegistry().register(potion.setRegistryName(new ResourceLocation(KCore.MODID, name)));
     }
 }

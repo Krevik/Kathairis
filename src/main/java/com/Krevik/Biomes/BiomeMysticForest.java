@@ -1,5 +1,6 @@
 package com.Krevik.Biomes;
 
+import java.util.List;
 import java.util.Random;
 
 import com.Krevik.Entities.EntityFungite;
@@ -14,8 +15,10 @@ import com.Krevik.Gens.WorldGenNewTree;
 import com.Krevik.Gens.WorldGenSingleGen;
 import com.Krevik.Main.KCore;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -55,7 +58,15 @@ public class BiomeMysticForest extends KetherBiome
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHowler.class, 5, 1, 1));
         //this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 98, 1, 1));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityFungite.class, 2, 1, 1));
+    }
 
+    private static final int MONSTER_SPAWN_RATE = 20;
+    @Override
+    public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
+        if (creatureType == EnumCreatureType.MONSTER) {
+            return KCore.functionHelper.random.nextInt(MONSTER_SPAWN_RATE) == 0 ? this.spawnableMonsterList : Lists.newArrayList();
+        }
+        return super.getSpawnableList(creatureType);
     }
 
     public void decorate(World worldIn, Random random, BlockPos pos)

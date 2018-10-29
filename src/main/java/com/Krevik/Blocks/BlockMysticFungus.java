@@ -1,14 +1,9 @@
 package com.Krevik.Blocks;
 
 import com.Krevik.Main.KCore;
-import com.Krevik.Particles.DynamicMovementParticle;
-import com.Krevik.Particles.KetherPortalParticle;
 import com.Krevik.Particles.LivingParticle;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;

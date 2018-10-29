@@ -32,6 +32,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -349,10 +350,21 @@ public class BlockMysticPortal extends BlockPortal
      */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
-        if(entityIn instanceof EntityPlayer){
+        /*if(entityIn instanceof EntityPlayer){
             TileEntityKether.tele((EntityPlayer) entityIn);
         }else {
             TileEntityKether.teleEntity(entityIn);
+        }*/
+        if ((entityIn.getRidingEntity() == null))
+        {
+            if(((entityIn instanceof EntityPlayerMP))) {
+                EntityPlayerMP player1 = (EntityPlayerMP) entityIn;
+
+                TileEntityKether.tele(player1);
+            }else{
+                TileEntityKether.teleEntity(entityIn);
+            }
+
         }
 
         /*if ((entityIn.getRidingEntity() == null) && ((entityIn instanceof EntityPlayerMP)))
@@ -457,7 +469,7 @@ public class BlockMysticPortal extends BlockPortal
                         .setGravity(0F)
                         .setScale(2.0F)
                         .setInitialAlpha(1.0F)
-                        .setFinalAlpha(0.1F)
+                        .setFinalAlpha(0.5F)
                         .setEnableDepth(true);
                 Minecraft.getMinecraft().effectRenderer.addEffect(theParticle);
             }

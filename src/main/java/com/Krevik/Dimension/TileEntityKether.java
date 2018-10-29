@@ -20,9 +20,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.server.FMLServerHandler;
 
 public class TileEntityKether extends TileEntity
@@ -97,7 +101,7 @@ public class TileEntityKether extends TileEntity
 	public static void setDme22()
 	{
 		
-		dme2 = KCore.DIMENSION_ID;
+		dme2 = 2;
 		
 	}
 	
@@ -125,18 +129,20 @@ public class TileEntityKether extends TileEntity
 						//mcServer.getPlayerList().transferPlayerToDimension(entity, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
 						entity.changeDimension(KCore.DIMENSION_ID, new TeleporterMystic(server.getWorld(KCore.DIMENSION_ID)));
 						setTestXYZ(entity.posX, entity.posY, entity.posZ);
+						//tryToPutInPortal(entity);
 					} else if (prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0) {
 						entity.timeUntilPortal = 10;
 						setDme22();
 						setOverworldXYZ(entity.posX, entity.posY, entity.posZ);
 						entity.changeDimension(KCore.DIMENSION_ID, new TeleporterMystic(server.getWorld(KCore.DIMENSION_ID)));
+						//tryToPutInPortal(entity);
 					}
 				} else if (entity.dimension == KCore.DIMENSION_ID) {
-
 					entity.timeUntilPortal = 10;
 					setDme22();
 					setTestXYZ(entity.posX, entity.posY, entity.posZ);
-					entity.changeDimension(0, new TeleporterMystic(server.getWorld(KCore.DIMENSION_ID)));
+					entity.changeDimension(0, new TeleporterMystic(server.getWorld(0)));
+					//tryToPutInPortal(entity);
 				}
 			}
 		}
@@ -163,6 +169,7 @@ public class TileEntityKether extends TileEntity
 						player1.timeUntilPortal = 10;
 						setDme21();
 						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
+						ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)player1, true, "invulnerableDimensionChange", "field_184851_cj");
 						mcServer.getPlayerList().transferPlayerToDimension(player1, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
 						setTestXYZ(player1.posX, player1.posY, player1.posZ);
 
@@ -171,8 +178,8 @@ public class TileEntityKether extends TileEntity
 						player1.timeUntilPortal = 10;
 						setDme22();
 						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
+						ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)player1, true, "invulnerableDimensionChange", "field_184851_cj");
 						mcServer.getPlayerList().transferPlayerToDimension(player1, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
-
 
 					}
 
@@ -181,6 +188,7 @@ public class TileEntityKether extends TileEntity
 					player1.timeUntilPortal = 10;
 					setDme22();
 					setTestXYZ(player1.posX, player1.posY, player1.posZ);
+					ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)player1, true, "invulnerableDimensionChange", "field_184851_cj");
 					mcServer.getPlayerList().transferPlayerToDimension(player1, 0, new TeleporterMystic(mcServer.getWorld(0)));
 
 				}

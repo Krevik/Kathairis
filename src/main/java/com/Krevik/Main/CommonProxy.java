@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import com.Krevik.Dimension.TileEntityKether;
+import com.Krevik.Entities.EntityGaznowel;
 import com.Krevik.Gui.GuiHandler;
 import com.Krevik.Items.ItemSand;
 import com.Krevik.Sounds.SoundHelper;
@@ -17,12 +18,14 @@ import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.audio.MusicTicker;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemSnow;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
@@ -35,6 +38,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -92,6 +96,11 @@ public class CommonProxy {
 
 	}
 
+	@SubscribeEvent
+	public static void registerPotions(final RegistryEvent.Register<Potion> event) {
+		KCore.onRegisterPotions(event);
+	}
+
     public void preInit(FMLPreInitializationEvent e) {
     	
     }
@@ -104,8 +113,6 @@ public class CommonProxy {
     	GameRegistry.registerTileEntity(TileEntityMythicStoneSign.class, "mystic:mythicstonesign");
     	NetworkRegistry.INSTANCE.registerGuiHandler(KCore.instance, new GuiHandler()); 
     	this.initFlamables();
-
-
     	//GameRegistry.registerWorldGenerator(new WorldGeneratorHandler(), 10);
 
 

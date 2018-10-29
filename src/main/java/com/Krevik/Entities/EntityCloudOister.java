@@ -248,7 +248,7 @@ public class EntityCloudOister extends EntityAmbientCreature
         int k = MathHelper.floor(this.posZ);
         BlockPos blockpos = new BlockPos(i, j, k);
         Block block = this.world.getBlockState(blockpos.down()).getBlock();
-        return block instanceof BlockMysticCloud && super.getCanSpawnHere();
+        return block instanceof BlockMysticCloud;
     }
     
 }

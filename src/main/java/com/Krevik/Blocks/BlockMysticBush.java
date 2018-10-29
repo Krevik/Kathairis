@@ -136,7 +136,6 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
 	        if(this==KCore.Succulent||this==KCore.SteppedSucculent) {
 	            if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent growing cactus from loading unloaded chunks with block update
 	            BlockPos blockpos = pos.up();
-
 	            if (worldIn.isAirBlock(blockpos))
 	            {
 	                int i;
@@ -146,9 +145,8 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
 	                    ;
 	                }
 
-	                if (i < 5)
+	                if (i < 3)
 	                {
-
 	                        worldIn.setBlockState(blockpos, this.getDefaultState());
 	                        IBlockState iblockstate = state;
 	                        worldIn.setBlockState(pos, iblockstate, 4);

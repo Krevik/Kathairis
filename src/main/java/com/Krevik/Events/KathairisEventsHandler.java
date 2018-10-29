@@ -19,16 +19,19 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.Sys;
 
 public class KathairisEventsHandler {
 
@@ -59,6 +62,11 @@ public class KathairisEventsHandler {
 			}
 		}
 		*/
+	}
+
+	@SubscribeEvent
+	public static void onChangeDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event){
+
 	}
 
 
@@ -145,7 +153,7 @@ public class KathairisEventsHandler {
 				}
 			}
 			if(event.player.world.isRemote) {
-				KetherDataStorage data = KCore.data.getDataInstance(event.player.world);
+				KetherDataStorage data = KCore.data.getDataInstance(event.player.getEntityWorld());
 				if (data != null) {
 					if (data.getIsSandstorm()) {
 						if (event.player.world.getBiome(event.player.getPosition()) == KCore.MysticDesert) {
@@ -227,5 +235,17 @@ public class KathairisEventsHandler {
 					}
 				}
 			}
+	}
+
+
+	@SubscribeEvent
+	public static void handleNewPotionEffectsOnEntityLiving(LivingEvent.LivingUpdateEvent  event){
+		if(event.getEntityLiving()!=null){
+			EntityLivingBase entityLivingBaseIn = event.getEntityLiving();
+			if(entityLivingBaseIn.isPotionActive(KCore.stun_potion)){
+				entityLivingBaseIn.setJumping(false);
+				entityLivingBaseIn.setPositionAndUpdate(entityLivingBaseIn.prevPosX,entityLivingBaseIn.prevPosY,entityLivingBaseIn.prevPosZ);
+			}
+		}
 	}
 }

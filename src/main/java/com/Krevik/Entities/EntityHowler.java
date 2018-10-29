@@ -1,31 +1,25 @@
 package com.Krevik.Entities;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
 
 import com.Krevik.Entities.AI.EntityAIAvoidMovingSands;
+import com.Krevik.Entities.AI.EntityAIHowlerAttackStun;
+import com.Krevik.Entities.AI.EntityAITargetSpecified;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
+import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,17 +33,21 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityHowler extends EntityMob
 {
+
     public EntityHowler(World worldIn)
     {
         super(worldIn);
         this.setSize(0.6F, 1F);
     }
+
 
     protected void initEntityAI()
     {
@@ -58,9 +56,19 @@ public class EntityHowler extends EntityMob
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new EntityAIHowlerAttackStun(this, 1.0D, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-
+        this.targetTasks.addTask(4, new EntityAITargetSpecified<>(this, EntityAnimal.class, false, new Predicate<Entity>()
+        {
+            public boolean apply(@Nullable Entity e)
+            {
+                return e instanceof EntitySheep || e instanceof EntityRabbit||e instanceof EntityPig||
+                        e instanceof EntityBison||e instanceof EntityBigTurtle||e instanceof EntityGecko||
+                        e instanceof EntityStrangeWanderer|| e instanceof EntityChicken||
+                        e instanceof EntityCamel||e instanceof EntityCloudySlime|| e instanceof EntityLlama||
+                        e instanceof EntityVillager;
+            }
+        }));
         this.experienceValue=15;
 
         this.applyEntityAI();
@@ -69,17 +77,20 @@ public class EntityHowler extends EntityMob
     {
         return 1;
     }
+
     protected void applyEntityAI()
     {
+
     }
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3000000417232513D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5000000417232513D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
 
     }
 
@@ -107,11 +118,6 @@ public class EntityHowler extends EntityMob
      */
     public void onLivingUpdate()
     {
-        
-        if(this.world.getNearestAttackablePlayer(getPosition(), 30, 5)!=null) {
-        	this.setAttackTarget(this.world.getNearestAttackablePlayer(getPosition(), 30, 5));
-        }
-
         super.onLivingUpdate();
     }
     

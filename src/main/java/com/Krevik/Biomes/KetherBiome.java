@@ -1,12 +1,16 @@
 package com.Krevik.Biomes;
 
+import java.util.List;
 import java.util.Random;
 
 import com.Krevik.Entities.Butterflies.EntityIllukini;
 import com.Krevik.Entities.Butterflies.EntityRubySile;
+import com.Krevik.Entities.Butterflies.EntitySkylight;
 import com.Krevik.Gens.WorldGenMysticOre;
 import com.Krevik.Main.KCore;
 
+import com.google.common.collect.Lists;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -32,8 +36,19 @@ public abstract class KetherBiome extends Biome
     	KCore.instance.cproxy.biomeList.add(this);
         this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityIllukini.class, 2, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityRubySile.class, 8, 1, 2));
+        this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 8, 1, 2));
 
     }
+
+    private static final int MONSTER_SPAWN_WEIGHT = 20;
+    @Override
+    public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
+        if (creatureType == EnumCreatureType.MONSTER) {
+            return KCore.functionHelper.random.nextInt(MONSTER_SPAWN_WEIGHT) == 0 ? this.spawnableMonsterList : Lists.newArrayList();
+        }
+        return super.getSpawnableList(creatureType);
+    }
+
     private static final int TitaniumPerChunk = 9;
     private static final int RevenumPerChunk = 15;
 

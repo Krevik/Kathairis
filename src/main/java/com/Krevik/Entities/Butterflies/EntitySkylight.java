@@ -28,7 +28,7 @@ public class EntitySkylight extends EntityMothBase
     }
     public int getMaxSpawnedInChunk()
     {
-        return 1;
+        return 3;
     }
     protected void entityInit()
     {

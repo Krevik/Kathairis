@@ -9,6 +9,7 @@ import com.Krevik.Entities.AI.EntityAIAttackTarget;
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
 
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -166,6 +167,7 @@ public class EntityJellyFish extends EntityMob
     {
         return this.rand.nextInt(5) == 0 && super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
     }
+
 
 
     public static void registerFixesJellyFish(DataFixer fixer)

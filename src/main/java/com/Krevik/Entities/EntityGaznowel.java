@@ -27,6 +27,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 import javax.annotation.Nullable;
 import javax.vecmath.Vector3d;
+import java.util.List;
 
 public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IMob {
 
@@ -232,10 +233,6 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         return 3.0F;
     }
 
-    public boolean getCanSpawnHere()
-    {
-        return this.rand.nextInt(20) == 0 && super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
-    }
 
     public int getMaxSpawnedInChunk()
     {
