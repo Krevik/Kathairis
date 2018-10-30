@@ -97,6 +97,7 @@ item.music_disc_jazzy.name=Jazzy Music Disc
 item.music_disc_8bit.name=8-bit Music Disc
 item.skyray_feather.name=Skyray feather
 item.howler_fur.name=Howler fur
+item.katharian_arrow.name=Katharian Arrow
 
 
 tile.corruptedgrass.name=Katharian Grass
@@ -255,6 +256,7 @@ entity.Illukini.name=Illukini
 entity.RubySile.name=Ruby Sile
 entity.Gecko.name=Gecko
 entity.Gaznowel.name=Gaznowel
+entity.Katharian Arrow.name=Katharian Arrow
 
 charger=Charger
 enchantment.ethereal=Ethereal

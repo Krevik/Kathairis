@@ -737,6 +737,9 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.howler_fur)
     public static final BaseItem howler_fur = new BaseItem(Ref.howler_fur, CreativeTabsMystic.miscellaneous);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.katharian_arrow)
+    public static final ItemKatharianArrow katharian_arrow = new ItemKatharianArrow(Ref.katharian_arrow);
+
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         regHelper.initModels();
@@ -988,6 +991,7 @@ public class KCore {
         public static final String music_disc_8bit="music_disc_8bit";
         public static final String skyray_feather="skyray_feather";
         public static final String howler_fur="howler_fur";
+        public static final String katharian_arrow="katharian_arrow";
 
 
     }

@@ -131,6 +131,7 @@ public class CommonProxy {
 			for(int x=0;x<itemList.size();x++) {
 				registry.register(itemList.get(x));
 			}
+			registry.register(KCore.katharian_arrow);
 		}
 	}
 	

@@ -54,5 +54,6 @@ public class RegistryHelper {
 		for(int x=0;x<recordsList.size();x++) {
 			recordsList.get(x).initModel();
 		}
+		KCore.katharian_arrow.initModel();
 	}
 }
