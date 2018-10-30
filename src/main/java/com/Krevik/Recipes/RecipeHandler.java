@@ -215,5 +215,10 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Mystic Planks S"),new ResourceLocation("Blocks"), new ItemStack(Item.getItemFromBlock(KCore.MysticPlanks),4),Ingredient.fromItem(Item.getItemFromBlock(KCore.Stripped_Mystic_Log)));
 		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Shiny Planks S"),new ResourceLocation("Blocks"), new ItemStack(Item.getItemFromBlock(KCore.ShinyPlanks),4),Ingredient.fromItem(Item.getItemFromBlock(KCore.Stripped_Shiny_Log)));
 		GameRegistry.addShapelessRecipe(new ResourceLocation("mystic:Soul Planks S"),new ResourceLocation("Blocks"), new ItemStack(Item.getItemFromBlock(KCore.SoulPlanks),4),Ingredient.fromItem(Item.getItemFromBlock(KCore.Stripped_Soul_Log)));
+
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Katharian Arrow1"),new ResourceLocation("Items"), new ItemStack(KCore.katharian_arrow,4),"X  "," Y ","  Z", Character.valueOf('X'), KCore.skyray_feather, Character.valueOf('Y'),KCore.ShinyStick,Character.valueOf('Z'),KCore.TitaniumIngot);
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Katharian Arrow2"),new ResourceLocation("Items"), new ItemStack(KCore.katharian_arrow,4)," X "," Y "," Z ", Character.valueOf('X'), KCore.skyray_feather, Character.valueOf('Y'),KCore.ShinyStick,Character.valueOf('Z'),KCore.TitaniumIngot);
+
+
 	}
 }
