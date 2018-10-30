@@ -59,9 +59,9 @@ public class EntityHowler extends EntityMob
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
-        this.tasks.addTask(2, new EntityAIHowlerAttackStun(this, 1.0D, true));
+        this.tasks.addTask(4, new EntityAIHowlerAttackStun(this, 1.0D, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(4, new EntityAITargetSpecified<>(this, EntityAnimal.class, false, new Predicate<Entity>()
+        this.targetTasks.addTask(2, new EntityAITargetSpecified<>(this, EntityAnimal.class, false, new Predicate<Entity>()
         {
             public boolean apply(@Nullable Entity e)
             {
@@ -69,7 +69,7 @@ public class EntityHowler extends EntityMob
                         e instanceof EntityBison||e instanceof EntityBigTurtle||e instanceof EntityGecko||
                         e instanceof EntityStrangeWanderer|| e instanceof EntityChicken||
                         e instanceof EntityCamel||e instanceof EntityCloudySlime|| e instanceof EntityLlama||
-                        e instanceof EntityVillager;
+                        e instanceof EntityVillager || e instanceof EntityCow;
             }
         }));
         this.experienceValue=15;
