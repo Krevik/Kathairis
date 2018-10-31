@@ -1,0 +1,15 @@
+{
+    "pools": [
+        {
+		    "name": "mystic:skyray_feather",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "mystic:skyray_feather"
+                }
+            ]
+        }
+    ]
+}
