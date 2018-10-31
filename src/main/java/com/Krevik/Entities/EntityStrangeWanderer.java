@@ -2,9 +2,12 @@ package com.Krevik.Entities;
 
 import javax.annotation.Nullable;
 
+import com.Krevik.Enchantments.KathairisEnchantments;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
@@ -22,6 +25,8 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import java.util.Map;
+
 public class EntityStrangeWanderer extends EntityMob
 {
     public EntityStrangeWanderer(World worldIn)
@@ -37,7 +42,15 @@ public class EntityStrangeWanderer extends EntityMob
     }
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
-        return this.isEntityInvulnerable(source) ? false : super.attackEntityFrom(source, amount);
+            if(source.getTrueSource() instanceof EntityPlayer) {
+                EntityPlayer attacker = (EntityPlayer) source.getTrueSource();
+                Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(attacker.getHeldItemMainhand());
+                if(map.containsKey(KathairisEnchantments.Ethereal)) {
+                    this.damageEntity(source, 6);
+                    return true;
+                }
+            }
+        return false;
     }
     public int getMaxSpawnedInChunk()
     {
