@@ -1,5 +1,6 @@
 package com.Krevik.Main;
 
+import com.Krevik.Blocks.BlockCorruptedGrass;
 import com.Krevik.Particles.TextureStitcherParicleManager;
 import com.Krevik.TileEntity.TileEntityMythicStoneSign;
 import com.Krevik.TileEntity.TileEntityMythicStoneSignRenderer;
@@ -25,10 +26,12 @@ import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IRegistryDelegate;
 
 import java.util.Map;
@@ -53,11 +56,14 @@ public static MusicTicker.MusicType ketherMusicNight;
  public void registerItemRenderer(Item item, int meta, String id) {
  ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(KCore.MODID + ":" + id, "inventory"));
  }
+
  @SubscribeEvent
  public static void registerModels(ModelRegistryEvent event) {
  	OBJLoader.INSTANCE.addDomain(KCore.instance.MODID);
      KCore.initModels();
  }
+
+
  @SubscribeEvent
  public static void registerRenders(ModelRegistryEvent event) {
 	EntityAndRenderRegistry.registerRenders(); 
@@ -70,12 +76,17 @@ public static MusicTicker.MusicType ketherMusicNight;
 		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDaySound, 100, 500);
 		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNightSound, 100, 500);
 	    MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
-    }
+	}
+
+	public void init(FMLInitializationEvent e) {
+ 		super.init(e);
+		ModBlockColorsHandler.registerBlockColors();
+	}
 	
 	@Override
 	public void init() {
-
 	}
+
 	
 	public static void drawParticle(World worldObj, Particle particle) {
 		if(particle != null)
