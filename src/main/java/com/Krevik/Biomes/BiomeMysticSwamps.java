@@ -1,5 +1,6 @@
 package com.Krevik.Biomes;
 
+import java.awt.*;
 import java.util.Random;
 
 import com.Krevik.Entities.EntityMysticBird;
@@ -10,8 +11,10 @@ import com.Krevik.Gens.Swamps.WorldGenMysticSwampsTree;
 import com.Krevik.Gens.Swamps.WorldGenMysticSwampsWater;
 import com.Krevik.Gens.Swamps.WorldGenOldTrunk;
 import com.Krevik.Gens.Swamps.WorldGenSwampLakes;
+import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
 
+import io.netty.util.internal.MathUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -45,9 +48,11 @@ public class BiomeMysticSwamps extends KetherBiome
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Swamps");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 5, 1, 3));
-
+        baseGrassColor=new Color(21,178,102);
     }
-    
+
+
+
     public WorldGenerator getRandomWorldGenForGrass(Random rand)
     {
     	int k=rand.nextInt(30);

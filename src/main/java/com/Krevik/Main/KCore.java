@@ -4,6 +4,7 @@ import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
 import com.Krevik.Items.*;
 import com.Krevik.Potion.StunPotion;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.Sound;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;

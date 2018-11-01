@@ -60,15 +60,6 @@ public class BiomeMysticForest extends KetherBiome
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityFungite.class, 2, 1, 1));
     }
 
-    private static final int MONSTER_SPAWN_RATE = 20;
-    @Override
-    public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
-        if (creatureType == EnumCreatureType.MONSTER) {
-            return KCore.functionHelper.random.nextInt(MONSTER_SPAWN_RATE) == 0 ? this.spawnableMonsterList : Lists.newArrayList();
-        }
-        return super.getSpawnableList(creatureType);
-    }
-
     public void decorate(World worldIn, Random random, BlockPos pos)
     {
         super.decorate(worldIn,random,pos);

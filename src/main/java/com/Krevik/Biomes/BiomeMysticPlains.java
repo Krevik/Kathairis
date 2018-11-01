@@ -48,15 +48,6 @@ public class BiomeMysticPlains extends KetherBiome
        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityButterfly1.class, 10, 1, 1));
     }
 
-    private static final int MONSTER_SPAWN_RATE = 20;
-    @Override
-    public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
-        if (creatureType == EnumCreatureType.MONSTER) {
-            return KCore.functionHelper.random.nextInt(MONSTER_SPAWN_RATE) == 0 ? this.spawnableMonsterList : Lists.newArrayList();
-        }
-        return super.getSpawnableList(creatureType);
-    }
-
     public WorldGenerator getRandomWorldGenForGrass(Random rand)
     {
     	int k=rand.nextInt(15);

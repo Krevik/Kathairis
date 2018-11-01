@@ -23,6 +23,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import scala.Int;
+import scala.collection.generic.BitOperations;
 
 public class FunctionHelper {
 
@@ -215,5 +217,7 @@ public class FunctionHelper {
 			world.spawnParticle(enumparticletypes, animal.posX + (double)(rand.nextFloat() * animal.width * 2.0F) - (double)animal.width, animal.posY + 0.5D + (double)(rand.nextFloat() * animal.height), animal.posZ + (double)(rand.nextFloat() * animal.width * 2.0F) - (double)animal.width, d0, d1, d2);
 		}
 	}
+
+
 
 }
