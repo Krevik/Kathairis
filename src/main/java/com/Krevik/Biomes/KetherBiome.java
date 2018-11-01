@@ -88,12 +88,7 @@ public abstract class KetherBiome extends Biome
 
 
         return Integer.parseInt(convertColorToHexadeimal(averageColor),16);
-        //return 0X15b266;
     }
-
-
-
-
 
     public static String convertColorToHexadeimal(Color color)
     {

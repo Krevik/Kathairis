@@ -1,5 +1,6 @@
 package com.Krevik.Biomes;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
@@ -52,8 +53,7 @@ public class BiomeMysticDesert extends KetherBiome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityBigTurtle.class, 12, 1, 1));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityPoisonousScorpion.class, 3, 1, 2));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCamel.class, 6, 1, 2));
-
-
+        baseGrassColor=new Color(255,242,0);
     }
     
     public WorldGenerator getRandomWorldGenForGrass(Random rand)
