@@ -75,12 +75,6 @@ public class WorldGenFlippedHeartTree extends WorldGenAbstractBasicMysticTree
             for (int x = -someRadius; x <= someRadius; x++) {
                 for (int y = -someRadius; y <= someRadius; y++) {
                     for (int z = -someRadius; z <= someRadius; z++) {
-                        //float part1 = (x*x+((9*(y*y))/4)+(z*z)-1);
-                        //float part2 = -(x*x)*(z*z*z)-((9*y*y*z*z*z)/80);
-                        //float part1=2*(x*x)+(9/4)*(y*y)+(z*z)-1;
-                        //float part2=(x*x)*(z*z*z);
-                        //float part3=(9/80)*y*y*z*z*z;
-                        //float equation=((part1*part1*part1)-part2-part3)*10;
                         if ((x * x + y * y + z * z - someRadius * 2) * (x * x + y * y + z * z - someRadius * 2) * (x * x + y * y + z * z - someRadius * 2) - someRadius * 2 * x * x * y * y * y - (y * y * z * z * z) / someRadius < 0) {
                             setBlockAndNotifyAdequately(worldIn, new BlockPos(pos.getX() + x, pos.getY() - y + TreeHeight + someRadius / 3, pos.getZ() + z), rand.nextInt(5) == 0 ? KCore.ShinyLog.getDefaultState() : KCore.ShinyLeaves.getDefaultState());
                         }
