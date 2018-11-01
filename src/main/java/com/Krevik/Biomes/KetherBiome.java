@@ -1,8 +1,11 @@
 package com.Krevik.Biomes;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.Krevik.Blocks.BaseBlock;
 import com.Krevik.Entities.Butterflies.EntityIllukini;
 import com.Krevik.Entities.Butterflies.EntityRubySile;
 import com.Krevik.Entities.Butterflies.EntitySkylight;
@@ -10,6 +13,8 @@ import com.Krevik.Gens.WorldGenMysticOre;
 import com.Krevik.Main.KCore;
 
 import com.google.common.collect.Lists;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class KetherBiome extends Biome
 {
+    public Color baseGrassColor;
 	
     public KetherBiome(Biome.BiomeProperties properties)
     {
@@ -37,16 +43,72 @@ public abstract class KetherBiome extends Biome
         this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityIllukini.class, 2, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityRubySile.class, 8, 1, 2));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 8, 1, 2));
-
+        baseGrassColor=new Color(29,242,228);
     }
 
-    private static final int MONSTER_SPAWN_WEIGHT = 20;
+    public void setBaseGrassColor(Color color){
+        baseGrassColor=color;
+    }
+
+    private static final int MONSTER_SPAWN_WEIGHT = 18;
+
     @Override
     public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
         if (creatureType == EnumCreatureType.MONSTER) {
             return KCore.functionHelper.random.nextInt(MONSTER_SPAWN_WEIGHT) == 0 ? this.spawnableMonsterList : Lists.newArrayList();
         }
         return super.getSpawnableList(creatureType);
+    }
+
+
+    @SideOnly(Side.CLIENT)
+    public int getGrassColorAtPos(BlockPos pos)
+    {
+        World world = Minecraft.getMinecraft().world;
+        ArrayList<BlockPos> toCalculate = new ArrayList<BlockPos>();
+        int radiusCalculation=4;
+        for(int x=-radiusCalculation;x<=radiusCalculation;x++){
+                for(int z=-radiusCalculation;z<=radiusCalculation;z++){
+                    toCalculate.add(new BlockPos(pos.getX()+x,pos.getY(),pos.getZ()+z));
+                }
+        }
+
+        int sumR=0;int sumG=0;int sumB=0;
+        int count=0;
+        for(BlockPos positionForAverage:toCalculate){
+            if(world.getBiome(positionForAverage) instanceof KetherBiome){
+                KetherBiome biome = (KetherBiome) world.getBiome(positionForAverage);
+                count++;
+                sumR+=biome.baseGrassColor.getRed();
+                sumG+=biome.baseGrassColor.getGreen();
+                sumB+=biome.baseGrassColor.getBlue();
+            }
+        }
+        Color averageColor = new Color(sumR/count,sumG/count,sumB/count);
+
+
+        return Integer.parseInt(convertColorToHexadeimal(averageColor),16);
+        //return 0X15b266;
+    }
+
+
+
+
+
+    public static String convertColorToHexadeimal(Color color)
+    {
+        String hex = Integer.toHexString(color.getRGB() & 0xffffff);
+        if(hex.length() < 6)
+        {
+            if(hex.length()==5)
+                hex = "0" + hex;
+            if(hex.length()==4)
+                hex = "00" + hex;
+            if(hex.length()==3)
+                hex = "000" + hex;
+        }
+        hex = hex;
+        return hex;
     }
 
     private static final int TitaniumPerChunk = 9;
@@ -85,14 +147,6 @@ public abstract class KetherBiome extends Biome
                 BlockPos blockposnew = new BlockPos(rx,ry,rz);
                 new WorldGenMysticOre(KCore.RevenumOre.getDefaultState(), 4+rand.nextInt(10)).generate(worldIn, rand, blockposnew);
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getGrassColorAtPos(BlockPos pos)
-    {
-        double d0 = (double)MathHelper.clamp(this.getTemperature(pos), 0.0F, 1.0F);
-        double d1 = (double)MathHelper.clamp(this.getRainfall(), 0.0F, 1.0F);
-        return getModdedBiomeGrassColor(ColorizerGrass.getGrassColor(d0, d1));
     }
 
     @SideOnly(Side.CLIENT)
