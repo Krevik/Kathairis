@@ -145,8 +145,10 @@ public class EntityButterfly1 extends EntityAmbientCreature
         }
     }
 
+    int ticker=0;
     protected void updateAITasks()
     {
+        ticker++;
         super.updateAITasks();
         BlockPos blockpos = new BlockPos(this);
         BlockPos blockpos1 = blockpos.down();
@@ -213,6 +215,21 @@ public class EntityButterfly1 extends EntityAmbientCreature
             if (this.rand.nextInt(100) == 0 && (this.world.getBlockState(blockpos1).isNormalCube()||this.world.getBlockState(blockpos1).getBlock()instanceof BlockMysticBush)||this.world.getBlockState(blockpos1)==KCore.ButterflyFlower.getDefaultState().withProperty(BlockButterflyFlower.VARIANT, BlockButterflyFlower.EnumType.WITH))
             {
                 this.setIsBirdSitting(true);
+            }
+            if(ticker>=30){
+                EntityPlayer ep = world.getNearestPlayerNotCreative(this,15D);
+                if(ep!=null){
+                    d0 = ep.posX + getRNG().nextFloat()-getRNG().nextFloat() + 0.5D - this.posX;
+                    d1 = ep.posY + getRNG().nextFloat() + 0.1D - this.posY;
+                    d2 = ep.posZ + getRNG().nextFloat()-getRNG().nextFloat() + 0.5D - this.posZ;
+                    this.motionX += (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
+                    this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
+                    this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
+                    f = (float)(MathHelper.atan2(this.motionZ, this.motionX) * (180D / Math.PI)) - 90.0F;
+                    f1 = MathHelper.wrapDegrees(f - this.rotationYaw);
+                    this.moveForward = 0.5F;
+                    this.rotationYaw += f1;
+                }
             }
         }
         }
