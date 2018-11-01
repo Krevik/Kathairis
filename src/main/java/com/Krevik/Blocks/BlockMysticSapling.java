@@ -116,7 +116,8 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
     public void generateShinyTree(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
-        WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenShinyTree(true,6,false));
+        //WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenShinyTree(true,6,false));
+        WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenFlippedHeartTree(7,3+rand.nextInt(7)));
         int i = 0;
         int j = 0;
         boolean flag = false;

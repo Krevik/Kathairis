@@ -2,6 +2,8 @@ package com.Krevik.Gens.Forest;
 
 import java.util.Random;
 
+import com.Krevik.Blocks.BlockMysticBush;
+import com.Krevik.Blocks.BlockMysticLeaf;
 import com.Krevik.Gens.WorldGenAbstractBasicMysticTree;
 import com.Krevik.Main.KCore;
 
@@ -20,35 +22,76 @@ public class WorldGenFlippedHeartTree extends WorldGenAbstractBasicMysticTree
 {
     /** The minimum height of a generated tree. */
     private final int minTreeHeight;
+    private final int crownRadius;
 
-
-    public WorldGenFlippedHeartTree(int minTreeHeightIn)
+    public WorldGenFlippedHeartTree(int minTreeHeightIn,int radiusOfCrown)
     {
         super(false);
         this.minTreeHeight = minTreeHeightIn;
+        crownRadius=radiusOfCrown; //it should be more than 3
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos pos)
     {
-        BlockPos position = new BlockPos(pos.getX(),pos.getY()+10,pos.getZ());
-        int someRadius=3;
-        for(int x=-6;x<=6;x++){
-            for(int y=-6;y<=6;y++){
-                for(int z=-6;z<=6;z++){
-                    //float part1 = (x*x+((9*(y*y))/4)+(z*z)-1);
-                    //float part2 = -(x*x)*(z*z*z)-((9*y*y*z*z*z)/80);
-                    float part1=216*2*(x*x)+(y*y)+(z*z)-1;
-                    float part2=216*(x*x)*((z*z*z)/10);
-                    float part3=216*y*y*z*z*z;
-                    float equation=(part1*part1*part1)-part2-part3;
-                    System.out.println(equation);
-                    if((part1*part1*part1)-part2-part3<0){
-                        setBlockAndNotifyAdequately(worldIn,new BlockPos(position.getX()+x,position.getY()+y,position.getZ()+z),KCore.ShinyLeaves.getDefaultState());
+        if(KCore.instance.functionHelper.isAvailableBlockToGenOn(worldIn, pos.down())) {
+            int TreeHeight = minTreeHeight + rand.nextInt(1 + crownRadius / 2);
+            int Y = worldIn.getHeight(pos).getY();
+            for (int c = 0; c <= TreeHeight; c++) {
+                setBlockAndNotifyAdequately(worldIn, new BlockPos(pos.getX(), Y + c, pos.getZ()), KCore.ShinyLog.getDefaultState());
+            }
+            if (rand.nextInt(3) == 0) {
+                BlockPos tmp = pos.east();
+                int height = worldIn.getHeight(tmp).getY();
+                if (MathHelper.abs(height - Y) < 2) {
+                    tmp = worldIn.getHeight(tmp);
+                    setBlockAndNotifyAdequately(worldIn, tmp, KCore.ShinyLog.getDefaultState());
+                }
+            }
+            if (rand.nextInt(3) == 0) {
+                BlockPos tmp = pos.west();
+                int height = worldIn.getHeight(tmp).getY();
+                if (MathHelper.abs(height - Y) < 2) {
+                    tmp = worldIn.getHeight(tmp);
+                    setBlockAndNotifyAdequately(worldIn, tmp, KCore.ShinyLog.getDefaultState());
+                }
+            }
+            if (rand.nextInt(3) == 0) {
+                BlockPos tmp = pos.south();
+                int height = worldIn.getHeight(tmp).getY();
+                if (MathHelper.abs(height - Y) < 2) {
+                    tmp = worldIn.getHeight(tmp);
+                    setBlockAndNotifyAdequately(worldIn, tmp, KCore.ShinyLog.getDefaultState());
+                }
+            }
+            if (rand.nextInt(3) == 0) {
+                BlockPos tmp = pos.north();
+                int height = worldIn.getHeight(tmp).getY();
+                if (MathHelper.abs(height - Y) < 2) {
+                    tmp = worldIn.getHeight(tmp);
+                    setBlockAndNotifyAdequately(worldIn, tmp, KCore.ShinyLog.getDefaultState());
+                }
+            }
+            int someRadius = crownRadius;
+            for (int x = -someRadius; x <= someRadius; x++) {
+                for (int y = -someRadius; y <= someRadius; y++) {
+                    for (int z = -someRadius; z <= someRadius; z++) {
+                        //float part1 = (x*x+((9*(y*y))/4)+(z*z)-1);
+                        //float part2 = -(x*x)*(z*z*z)-((9*y*y*z*z*z)/80);
+                        //float part1=2*(x*x)+(9/4)*(y*y)+(z*z)-1;
+                        //float part2=(x*x)*(z*z*z);
+                        //float part3=(9/80)*y*y*z*z*z;
+                        //float equation=((part1*part1*part1)-part2-part3)*10;
+                        if ((x * x + y * y + z * z - someRadius * 2) * (x * x + y * y + z * z - someRadius * 2) * (x * x + y * y + z * z - someRadius * 2) - someRadius * 2 * x * x * y * y * y - (y * y * z * z * z) / someRadius < 0) {
+                            setBlockAndNotifyAdequately(worldIn, new BlockPos(pos.getX() + x, pos.getY() - y + TreeHeight + someRadius / 3, pos.getZ() + z), rand.nextInt(5) == 0 ? KCore.ShinyLog.getDefaultState() : KCore.ShinyLeaves.getDefaultState());
+                        }
                     }
                 }
             }
+            return true;
+        }else{
+            return false;
         }
-        return true;
+
     }
 
 
@@ -57,20 +100,11 @@ public class WorldGenFlippedHeartTree extends WorldGenAbstractBasicMysticTree
         this.setBlockAndNotifyAdequately(worldIn, pos, Blocks.VINE.getDefaultState().withProperty(prop, Boolean.valueOf(true)));
     }
 
-    private void addHangingVine(World worldIn, BlockPos pos, PropertyBool prop)
-    {
-        this.addVine(worldIn, pos, prop);
-        int i = 4;
-
-        for (BlockPos blockpos = pos.down(); worldIn.isAirBlock(blockpos) && i > 0; --i)
-        {
-            this.addVine(worldIn, blockpos, prop);
-            blockpos = blockpos.down();
-        }
-    }
     protected void setBlockAndNotifyAdequately(World worldIn, BlockPos pos, IBlockState state)
     {
-        worldIn.setBlockState(pos, state, 2);
+        if(worldIn.isAirBlock(pos)||worldIn.getBlockState(pos).getBlock() instanceof BlockMysticLeaf||worldIn.getBlockState(pos) instanceof BlockMysticBush) {
+            worldIn.setBlockState(pos, state, 2);
+        }
     }
 
 }

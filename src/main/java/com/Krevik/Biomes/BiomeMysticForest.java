@@ -29,7 +29,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class BiomeMysticForest extends KetherBiome
 {
     protected static WorldGenAbstractTree TREE_FEATURE2 = new WorldGenBasicMysticTree(false);
-    protected static WorldGenAbstractTree TREE_FEATURE3 = new WorldGenShinyTree(true);
     protected static WorldGenAbstractTree TREE_FEATURE4 = new WorldGenNewTree();
     protected static WorldGenCustomTree2 CUSTOMTREE2 = new WorldGenCustomTree2();
     //protected static final WorldGenAbstractTree CUSTOMTREE3 = new WorldGenMysticForestTree();
@@ -39,8 +38,6 @@ public class BiomeMysticForest extends KetherBiome
     protected static WorldGenSingleGen SINGLEGEN2 = new WorldGenSingleGen(3);
     protected static WorldGenMysticMultiGrass GrassGen = new WorldGenMysticMultiGrass(KCore.SteppedSucculent);
     protected static WorldGenAbstractTree CUSTOMTREE4 = new WorldGenHugeKathairisTree();
-
-    protected static WorldGenAbstractTree FlippedHeartTree = new WorldGenFlippedHeartTree(2);
 
     public BiomeMysticForest(Biome.BiomeProperties properties)
     {
@@ -68,7 +65,7 @@ public class BiomeMysticForest extends KetherBiome
     {
     	if(rand.nextInt(5)==2){
     		if(rand.nextInt(50)==0) {
-    			return (WorldGenAbstractTree)TREE_FEATURE3;
+    			return (WorldGenAbstractTree)new WorldGenFlippedHeartTree(5,3+rand.nextInt(7));
     		}else {
         		return (WorldGenAbstractTree)TREE_FEATURE2;
     		}
