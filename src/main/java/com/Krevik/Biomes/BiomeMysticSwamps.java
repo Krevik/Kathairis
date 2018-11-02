@@ -48,7 +48,7 @@ public class BiomeMysticSwamps extends KetherBiome
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Swamps");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 5, 1, 3));
-        baseGrassColor=new Color(21,178,102);
+        baseGrassColor=new Color(92,105,77);
     }
 
 

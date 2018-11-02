@@ -1,5 +1,6 @@
 package com.Krevik.Biomes;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
@@ -55,6 +56,7 @@ public class BiomeMysticForest extends KetherBiome
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHowler.class, 5, 1, 1));
         //this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 98, 1, 1));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityFungite.class, 2, 1, 1));
+        baseGrassColor=new Color(21,178,102);
     }
 
     public void decorate(World worldIn, Random random, BlockPos pos)

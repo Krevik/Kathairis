@@ -30,7 +30,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class KetherBiome extends Biome
 {
     public Color baseGrassColor;
-	
+    private static final int TitaniumPerChunk = 9;
+    private static final int RevenumPerChunk = 15;
+
     public KetherBiome(Biome.BiomeProperties properties)
     {
     	super(properties);
@@ -106,8 +108,7 @@ public abstract class KetherBiome extends Biome
         return hex;
     }
 
-    private static final int TitaniumPerChunk = 9;
-    private static final int RevenumPerChunk = 15;
+
 
     @SideOnly(Side.CLIENT)
     public int getSkyColorByTemp(float currentTemperature)

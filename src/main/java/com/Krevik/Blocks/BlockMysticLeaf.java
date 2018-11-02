@@ -42,7 +42,6 @@ public class BlockMysticLeaf extends BlockLeaves
     public BlockMysticLeaf(String Name, Material material, CreativeTabs tab)
     {
     	super();
-        this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
         this.setCreativeTab(tab);
         this.setHardness(0.5F);
         this.setResistance(0.1F);

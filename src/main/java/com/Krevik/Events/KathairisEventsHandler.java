@@ -66,7 +66,9 @@ public class KathairisEventsHandler {
 
 	@SubscribeEvent
 	public static void onChangeDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event){
+		if(event.player!=null){
 
+		}
 	}
 
 

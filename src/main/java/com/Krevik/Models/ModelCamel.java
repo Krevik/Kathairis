@@ -220,7 +220,7 @@ public class ModelCamel extends ModelBase {
     }
     
     protected boolean shouldAnimateTail=false;
-    protected int timer=0;
+    protected float timer=0;
     protected Random random = new Random();
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5, Entity entity)
     {

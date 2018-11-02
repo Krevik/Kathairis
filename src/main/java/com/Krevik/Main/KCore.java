@@ -2,6 +2,7 @@ package com.Krevik.Main;
 
 import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
+import com.Krevik.Capabilities.CapabilityHandler;
 import com.Krevik.Items.*;
 import com.Krevik.Potion.StunPotion;
 import net.minecraft.client.Minecraft;
@@ -755,7 +756,7 @@ public class KCore {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-
+        CapabilityHandler.registerCapabilities();
     	World.MAX_ENTITY_RADIUS=12D;
     	KetherPacketHandler.init();
 
