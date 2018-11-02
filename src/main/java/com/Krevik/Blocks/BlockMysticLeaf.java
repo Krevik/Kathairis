@@ -186,9 +186,11 @@ public class BlockMysticLeaf extends BlockLeaves
             return Item.getItemFromBlock(KCore.MysticSapling);
     	}else if(this==KCore.SoulLeaves) {
     		return Item.getItemFromBlock(KCore.SoulSapling);
-    	}else {
-    		return null;
-    	}
+    	}else if(this==KCore.ShinyLeaves) {
+    		return Item.getItemFromBlock(KCore.ShinyTreeSapling);
+    	}else{
+    	    return null;
+        }
 
     }
 
