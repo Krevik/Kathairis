@@ -84,6 +84,7 @@ public class EntityAndRenderRegistry {
 					EntityRegistry.registerModEntity(SteveGhostLoc, EntitySteveGhost.class, "SteveGhost", id++, KCore.instance, 64, 3, true);
                     EntityRegistry.registerEgg(SteveGhostLoc, 0xffffff, 0xbca264);
 					EntityRegistry.registerModEntity(DeathLoc, EntityDeath.class, "Death", id++, KCore.instance, 64, 3, true);
+					EntityRegistry.registerEgg(DeathLoc, 0xffd36b, 0xf9c039);
 					EntityRegistry.registerModEntity(CamelLoc, EntityCamel.class, "Camel", id++, KCore.instance, 64, 3, true);
                     EntityRegistry.registerEgg(CamelLoc, 0xffd36b, 0xf9c039);
 					EntityRegistry.registerModEntity(FungiteLoc, EntityFungite.class, "Fungite", id++, KCore.instance, 64, 3, true);

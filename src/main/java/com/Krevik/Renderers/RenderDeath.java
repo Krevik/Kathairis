@@ -4,6 +4,8 @@ import com.Krevik.Entities.EntityDeath;
 import com.Krevik.Main.EntityAndRenderRegistry;
 import com.Krevik.Models.ModelDeath;
 
+import com.Krevik.Renderers.Layer.RenderLayerDeathScythe;
+import com.Krevik.Renderers.Layer.RenderLayerHeldItem;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -21,6 +23,8 @@ public class RenderDeath extends RenderLiving<EntityDeath>
     public RenderDeath(RenderManager renderManagerIn)
     {
         super(renderManagerIn, new ModelDeath(), 0.8F);
+        this.addLayer(new RenderLayerDeathScythe(this));
+
     }
 
     

@@ -14,6 +14,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -53,21 +54,40 @@ public class BlockGooseberry extends BlockMysticBush implements net.minecraftfor
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
-        if(rand.nextInt(150)==0) {
-        	worldIn.setBlockState(pos, KCore.GooseberryBlock.getDefaultState().withProperty(VARIANT, BlockGooseberry.EnumType.WITH));
+        if(!worldIn.isRemote) {
+            if (rand.nextInt(150) == 0) {
+                worldIn.setBlockState(pos, KCore.GooseberryBlock.getDefaultState().withProperty(VARIANT, BlockGooseberry.EnumType.WITH));
+            }
         }
     }
 	
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
        boolean result=false;
-       if(this==KCore.GooseberryBlock.getDefaultState().withProperty(VARIANT, BlockGooseberry.EnumType.WITH)) {
+       if(state==KCore.GooseberryBlock.getDefaultState().withProperty(VARIANT, BlockGooseberry.EnumType.WITH)) {
     	   playerIn.addItemStackToInventory(new ItemStack(KCore.Gooseberry,1+KCore.instance.functionHelper.random.nextInt(5)));
     	   result=true;
     	   worldIn.setBlockState(pos, KCore.GooseberryBlock.getDefaultState());
        }
        
        return result;
+    }
+
+
+
+    public void breakBlock(World world,BlockPos pos,IBlockState state) {
+	    Random random = new Random();
+	    if(state==KCore.GooseberryBlock.getDefaultState().withProperty(VARIANT, BlockGooseberry.EnumType.WITH)){
+            for(int c=0;c<(2+random.nextInt(4));c++) {
+                EntityItem is = new EntityItem(world);
+                is.setItem(new ItemStack(KCore.Gooseberry));
+                is.setPosition(pos.getX()+0.5, pos.getY(),pos.getZ()+0.5);
+                if(!world.isRemote) {
+                    world.spawnEntity(is);
+                }
+            }
+        }
+        super.breakBlock(world, pos, state);
     }
 	
     @SideOnly(Side.CLIENT)

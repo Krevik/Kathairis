@@ -18,16 +18,14 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -39,6 +37,7 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -135,16 +134,24 @@ public class EntityDeath extends EntityLiving
         super.removeTrackingPlayer(player);
         this.bossInfo.removePlayer(player);
     }
-    
+    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
+    {
+        super.setEquipmentBasedOnDifficulty(difficulty);
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(KCore.Scythe));
+    }
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+        livingdata = super.onInitialSpawn(difficulty, livingdata);
+        this.setEquipmentBasedOnDifficulty(difficulty);
+        this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(KCore.Scythe));
+        return livingdata;
+    }
     public boolean attackEntityAsMob(Entity entityIn)
     {
         boolean flag = super.attackEntityAsMob(entityIn);
         return flag;
     }
     
-    int mode=0;
-    int timer=300;
-    int mobStage=1;
     KetherDataStorage data;
     public void onUpdate() {
     	super.onUpdate();
@@ -152,140 +159,8 @@ public class EntityDeath extends EntityLiving
 	    		data=KetherDataStorage.getDataInstance(world);
 	    	}
     	if(data!=null) {
-    			this.isFighting=data.getIsDeathFighting();
-    			if(!this.world.isRemote) {
-    				isFighting=data.getIsDeathFighting();
-    			}
-    	    	if(this.getHealth()<5) {
-    	    		if(!this.world.isRemote) {
-	    	            int damage=KCore.functionHelper.getRandomInteger(700, 990);
-	    	            ItemStack wand = new ItemStack(KCore.DeathWand,1,damage);
-	    	            this.dropItem(KCore.DarknessEssence, 10+rand.nextInt(20));
-	    	            this.dropItem(KCore.RevenumIngot, 1+rand.nextInt(5));
-	    	            this.entityDropItem(wand,0);
-	    	            defeated=true;
-	    	            this.setDead();
-	    	            this.onDeath(DamageSource.GENERIC);
-	    	    		
-	
 
-    	    		}
-    	    		if(this.world.isRemote) {
-	    				IMessage message2 = new PacketDeathHandlerServer(true,true,true);
-	    				KetherPacketHandler.CHANNEL.sendToServer(message2);
-    	    		}
-    	    	}
-    	    	this.posX=prevPosX;
-    	    	this.posY=prevPosY;
-    	    	this.posZ=prevPosZ;
-    	        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-	        	EntityPlayer ep = this.world.getClosestPlayer(posX, posY, posZ, 15, false);
-	        	if(ep!=null) {
-	                this.getLookHelper().setLookPosition(ep.posX, ep.posY + (double)ep.getEyeHeight(), ep.posZ, (float)100, (float)100);
-	                this.setAttackTarget(ep);
-	        	}else {
-	        		this.setAttackTarget(null);
-	        		this.isFighting=false;
-	        		if(world.isRemote) {
-	        			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
-	        			KetherPacketHandler.CHANNEL.sendToServer(message2);
-	        		}
-	        	}
-	            if(this.getAttackTarget()==null) {
-	            	if(isFighting) {
-	            		this.isFighting=false;
-		        		if(world.isRemote) {
-		        			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
-		        			KetherPacketHandler.CHANNEL.sendToServer(message2);
-		        		}
-	            	}
-	            }
-	            if(!isFighting) {
-	            	this.setHealth( (float) this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getAttributeValue());
-	            	mode=0;
-	            	mobStage=1;
-	            	timer=300;
-	            }
-
-    	        if(this.getAttackTarget()!=null) {
-    				if(this.getDistance(this.getAttackTarget())<2) {
-    					this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), 15F);
-    				}
-    	        	if(this.getAttackTarget().isDead) {
-    	        		this.isFighting=false;
-		        		if(world.isRemote) {
-	    	    			IMessage message2 = new PacketDeathHandlerServer(true,false,false);
-	    	    			KetherPacketHandler.CHANNEL.sendToServer(message2);
-		        		}
-    	        	}
-
-
-    	        	if(isFighting) {
-    	        		timer++;
-    	        		if(timer>=400+mobStage*100) {
-    	        			if(mobStage==1) {
-    	            			for(int i=0;i<=3+mobStage;i++) {
-    	            				EntityZombie zombie = new EntityZombie(this.getEntityWorld());
-    	            				zombie.setPosition(this.posX-rand.nextInt(10), posY+2, posZ-rand.nextInt(7)+rand.nextInt(7));
-    	            				if(!this.world.isRemote) {
-    	            					this.world.spawnEntity(zombie);
-    	            				}
-    	            			}
-    	        			}
-    	        			else if(mobStage==2) {
-    	            			for(int i=0;i<=3+mobStage*2;i++) {
-    	            				EntitySkeletonWarrior mob = new EntitySkeletonWarrior(this.getEntityWorld());
-    	            				mob.setPosition(this.posX-rand.nextInt(10), posY+2, posZ-rand.nextInt(7)+rand.nextInt(7));
-    	            				if(!this.world.isRemote) {
-    	            					this.world.spawnEntity(mob);
-    	            				}
-    	            			}
-    	        			}
-    	        			else if(mobStage==3) {
-    	            			for(int i=0;i<=3+mobStage*2;i++) {
-    	            				EntitySkeleton mob = new EntitySkeleton(this.getEntityWorld());
-    	            				mob.setPosition(this.posX-rand.nextInt(10), posY+2, posZ-rand.nextInt(7)+rand.nextInt(7));
-    	            				if(!this.world.isRemote) {
-    	            				this.world.spawnEntity(mob);
-    	            				}
-    	            			}
-    	        			}
-    	        			else if(mobStage==4) {
-    	            			for(int i=0;i<=3+mobStage*2;i++) {
-	    	        				EntitySteveGhost mob = new EntitySteveGhost(this.getEntityWorld());
-	    	        				mob.setPosition(this.posX-rand.nextInt(10), posY+2, posZ-rand.nextInt(7)+rand.nextInt(7));
-	    	        				if(!this.world.isRemote) {
-	    	        					this.world.spawnEntity(mob);
-	    	        				}
-    	            			}
-    	        			}
-    	        			else if(mobStage==5) {
-    	            			for(int i=0;i<=3+mobStage*2;i++) {
-    	            				EntityWitherSkeleton mob = new EntityWitherSkeleton(this.getEntityWorld());
-    	            				mob.setPosition(this.posX-rand.nextInt(10), posY+2, posZ-rand.nextInt(7)+rand.nextInt(7));
-    	            				if(!this.world.isRemote) {
-    	            					this.world.spawnEntity(mob);
-    	            				}
-    	            			}
-    	        			}
-    	        			else if(mobStage>5) {
-    	            			for(int i=0;i<=13;i++) {
-    	            				EntityWitherSkeleton mob = new EntityWitherSkeleton(this.getEntityWorld());
-    	            				mob.setPosition(this.posX-rand.nextInt(10), posY+2, posZ-rand.nextInt(7)+rand.nextInt(7));
-    	            				if(!this.world.isRemote) {
-    	            					this.world.spawnEntity(mob);
-    	            				}
-    	            			}
-    	        			}
-    	        			mobStage++;
-    	        			timer=0;
-    	        			
-    	        		}
-    	        	}
-    	        }
     	}
-
-    	
     }
     
     

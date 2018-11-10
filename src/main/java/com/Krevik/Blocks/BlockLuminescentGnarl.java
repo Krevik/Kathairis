@@ -6,6 +6,8 @@ import javax.annotation.Nullable;
 
 import com.Krevik.Main.KCore;
 
+import com.Krevik.Particles.DynamicParticle;
+import com.Krevik.Particles.ParticlesFactory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockOldLog;
@@ -16,14 +18,14 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -150,7 +152,7 @@ public class BlockLuminescentGnarl extends BaseBlock{
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
-        return BlockRenderLayer.TRANSLUCENT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
     /**
      * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
@@ -173,5 +175,25 @@ public class BlockLuminescentGnarl extends BaseBlock{
     {
         return new BlockStateContainer(this, new IProperty[] {FACING});
     }
-
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    {
+        if(rand.nextInt(100)==0) {
+            double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+            double d1 = (double) ((float) pos.getY() + rand.nextFloat());
+            double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+            Particle theParticle = new DynamicParticle(
+                    ParticlesFactory.HIGHRESPARTICLE,
+                    worldIn,
+                    d0, d1, d2,new BlockPos(d0,d1,d2))
+                    .setRotSpeed(((float) Math.random() - 0.5F) * 0.1F)
+                    .setLifeSpan(400 + rand.nextInt(300))
+                    .setGravity(0F)
+                    .setScale(2.0F)
+                    .setInitialAlpha(1.0F)
+                    .setFinalAlpha(0.0F)
+                    .setEnableDepth(true);
+            Minecraft.getMinecraft().effectRenderer.addEffect(theParticle);
+        }
+    }
 }

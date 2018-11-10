@@ -4,6 +4,7 @@ import com.Krevik.Biomes.*;
 import com.Krevik.Blocks.*;
 import com.Krevik.Capabilities.CapabilityHandler;
 import com.Krevik.Items.*;
+import com.Krevik.Potion.DissolutionPotion;
 import com.Krevik.Potion.StunPotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.Sound;
@@ -86,6 +87,7 @@ public class KCore {
 	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 2F, 4F, 22).setRepairItem(new ItemStack(KCore.CrystalsCluster));
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21).setRepairItem(new ItemStack(KCore.DarknessEssence));
 	public static Item.ToolMaterial MAGNETHIUM = EnumHelper.addToolMaterial("magnethium", 3, 800, 6F, 3F, 20).setRepairItem(new ItemStack(KCore.Magnethium_Shard));
+    public static Item.ToolMaterial DEATH = EnumHelper.addToolMaterial("death", 3, 800, 6F, 3F, 30);
 
 
 	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticPortal)
@@ -742,6 +744,10 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.katharian_arrow)
     public static final ItemKatharianArrow katharian_arrow = new ItemKatharianArrow(Ref.katharian_arrow);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Scythe)
+    public static final ItemMysticSword Scythe = new ItemMysticSword(Ref.Scythe, CreativeTabsMystic.weapons,KCore.DEATH);
+
+
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         regHelper.initModels();
@@ -994,6 +1000,7 @@ public class KCore {
         public static final String skyray_feather="skyray_feather";
         public static final String howler_fur="howler_fur";
         public static final String katharian_arrow="katharian_arrow";
+        public static final String Scythe="scythe";
 
 
     }
@@ -1016,9 +1023,13 @@ public class KCore {
 
     @GameRegistry.ObjectHolder("stun")
     public static final Potion stun_potion=new StunPotion(true,0xf51896);
+    @GameRegistry.ObjectHolder("dissolution")
+    public static final Potion dissolution_potion=new StunPotion(true,0xf51896);
 
     public static void onRegisterPotions(RegistryEvent.Register<Potion> event) {
         registerPotion("stun", new StunPotion(true, 0x56CBFD).setPotionName(KCore.MODID + ".effect.stun").registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "ab79a316-db47-11e8-9f8b-f2801f1b9fd1", 0D, 0), event);
+        registerPotion("dissolution", new DissolutionPotion(true, 0x56CBFD).setPotionName(KCore.MODID + ".effect.dissolution").registerPotionAttributeModifier(SharedMonsterAttributes.LUCK, "00e48ce2-e4c8-11e8-9f32-f2801f1b9fd1", 0D, 0), event);
+
     }
 
     public static void registerPotion(String name, Potion potion, RegistryEvent.Register<Potion> event){

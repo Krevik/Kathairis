@@ -2,6 +2,8 @@ package com.Krevik.Particles;
 
 import java.awt.Color;
 
+import com.Krevik.Blocks.BlockMysticBush;
+import net.minecraft.block.BlockBush;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -11,6 +13,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -39,6 +42,8 @@ public class DynamicParticle extends Particle {
 
     private boolean enableDepth = true;
 
+    private BlockPos spawnPos;
+
 
     public DynamicParticle(
             TextureDefinition parTexDef,
@@ -47,6 +52,17 @@ public class DynamicParticle extends Particle {
         super(parWorld, parX, parY, parZ);
         TEXTURE_DEF = parTexDef;
     }
+
+    public DynamicParticle(
+            TextureDefinition parTexDef,
+            World parWorld,
+            double parX, double parY, double parZ,BlockPos spawnPosition) {
+        super(parWorld, parX, parY, parZ);
+        TEXTURE_DEF = parTexDef;
+        spawnPos=spawnPosition;
+    }
+
+
 
     public DynamicParticle(
             TextureDefinition parTexDef,
@@ -64,10 +80,44 @@ public class DynamicParticle extends Particle {
     public void onUpdate() {
         updateTick();
         processGravityAndDeccel();
+        if(TEXTURE_DEF.ShouldHaveCustomMovement()){
+            handleCustomMovement();
+        }
         move(motionX, motionY, motionZ);
         processAlphaTween();
         processTintTween();
         processScaleTween();
+    }
+
+    BlockPos target;
+    private void handleCustomMovement(){
+        if(target!=null){
+            motionX=(target.getX()-posX)/20;
+            motionY=(target.getY()-posY)/20;
+            motionZ=(target.getZ()-posZ)/20;
+        }else{
+            target = findSuitablePos();
+        }
+        if(rand.nextInt(50)==0){
+            //find suitable target
+            target = findSuitablePos();
+            motionX=(target.getX()-posX)/20;
+            motionY=(target.getY()-posY)/20;
+            motionZ=(target.getZ()-posZ)/20;
+        }
+    }
+
+    private BlockPos findSuitablePos(){
+        double targetX=spawnPos.getX()-2+4*rand.nextFloat();
+        double targetY=spawnPos.getY()-2+4*rand.nextFloat();
+        double targetZ=spawnPos.getZ()-2+4*rand.nextFloat();
+        BlockPos result = new BlockPos(targetX,targetY,targetZ);
+        if(world.isAirBlock(result)||world.getBlockState(result).getBlock() instanceof BlockBush||
+                world.getBlockState(result).getBlock() instanceof BlockMysticBush){
+            return result;
+        }else{
+            return findSuitablePos();
+        }
     }
 
     private void updateTick() {

@@ -13,6 +13,7 @@ public class TextureDefinition
     private float vMax;
     private boolean tweenAnimationMode;
     private int animationFrameCount;
+    private boolean shouldHaveCustomMovement;
 
     /**
      * Instantiates a new texture definition. It assumes that the image file
@@ -38,9 +39,10 @@ public class TextureDefinition
      * @param parAnimMode the animation mode
      * @param parAnimFrames the animation frames
      */
-    public TextureDefinition(String parName, boolean parAnimMode, int parAnimFrames)
+    public TextureDefinition(String parName, boolean parAnimMode, int parAnimFrames,boolean shouldHaveAnotherWayOfMovement)
     {
         this(parName, 0.0F, 0.0F, 1.0F, 1.0F / parAnimFrames, parAnimMode, parAnimFrames);
+        shouldHaveCustomMovement=shouldHaveAnotherWayOfMovement;
     }
 
     private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax, boolean parAnimMode, int parAnimFrames)
@@ -65,6 +67,7 @@ public class TextureDefinition
      * @return the name
      */
     public String getName() { return name; }
+    public boolean ShouldHaveCustomMovement() { return shouldHaveCustomMovement; }
 
     /**
      * Gets the resource location.

@@ -9,6 +9,10 @@ import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -18,6 +22,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -26,12 +33,15 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.Sys;
+
+import java.nio.Buffer;
 
 public class KathairisEventsHandler {
 
@@ -62,6 +72,11 @@ public class KathairisEventsHandler {
 			}
 		}
 		*/
+	}
+
+	@SubscribeEvent
+	public static void handleServerTick(TickEvent.ServerTickEvent event){
+
 	}
 
 	@SubscribeEvent
@@ -239,9 +254,34 @@ public class KathairisEventsHandler {
 			}
 	}
 
+	@SubscribeEvent
+	public static void handleDissolution(RenderGameOverlayEvent.Post event1){
+		Minecraft event = Minecraft.getMinecraft();
+		if(event.player!=null){
+			if(event.player instanceof EntityLivingBase){
+				EntityLivingBase elb = (EntityLivingBase) event.player;
+				if(elb.isPotionActive(KCore.dissolution_potion)){
+					if(elb.world.isRemote){
+						//TODO render dissolution effect
+						/*GlStateManager.pushMatrix();
+						Tessellator tess = Tessellator.getInstance();
+						BufferBuilder builder = tess.getBuffer();
+						builder.begin(6,DefaultVertexFormats.POSITION_COLOR);
+						builder.pos(0,0,0).color(255,255,255,255).endVertex();
+						builder.pos(Minecraft.getMinecraft().displayWidth/4,20,0).color(255,255,255,255).endVertex();
+						builder.pos(Minecraft.getMinecraft().displayWidth/2+Minecraft.getMinecraft().displayWidth/4,20,0).color(200,200,200,255).endVertex();
+						builder.pos(Minecraft.getMinecraft().displayWidth,0,0).color(200,200,200,255).endVertex();
+						tess.draw();
+						GlStateManager.popMatrix();*/
+					}
+				}
+			}
+		}
+	}
+
 
 	@SubscribeEvent
-	public static void handleNewPotionEffectsOnEntityLiving(LivingEvent.LivingUpdateEvent  event){
+	public static void handleStunPotionEffectOnEntityLiving(LivingEvent.LivingUpdateEvent  event){
 		if(event.getEntityLiving()!=null){
 			EntityLivingBase entityLivingBaseIn = event.getEntityLiving();
 			if(entityLivingBaseIn.isPotionActive(KCore.stun_potion)){

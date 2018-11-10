@@ -50,7 +50,7 @@ public class BlockCrystal extends BaseBlock
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
-        return BlockRenderLayer.TRANSLUCENT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
     /**
      * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
