@@ -19,9 +19,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -29,6 +30,8 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -42,11 +45,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class EntityDeath extends EntityLiving
+public class EntityDeath extends EntityMob
 {
 	private boolean defeated;
 	public boolean isFighting;
     private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
+    private static final DataParameter<Integer> scytheAttackTimer = EntityDataManager.<Integer>createKey(EntityDeath.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> isUsingSomeAttack = EntityDataManager.<Boolean>createKey(EntityDeath.class, DataSerializers.BOOLEAN);
 
     public EntityDeath(World worldIn)
     {
@@ -54,6 +59,8 @@ public class EntityDeath extends EntityLiving
         this.setSize(1.25F, 4F);
         defeated=false;
         isFighting=false;
+        dataManager.set(scytheAttackTimer,-1);
+        dataManager.set(isUsingSomeAttack,false);
     }
     
     @Override
@@ -71,19 +78,24 @@ public class EntityDeath extends EntityLiving
     {
         return 1;
     }
+
     protected void applyEntityAI()
     {
-    	
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+
     }
     
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000.0D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(500);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(15);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8F);
 
 
     }
@@ -91,6 +103,9 @@ public class EntityDeath extends EntityLiving
     protected void entityInit()
     {
         super.entityInit();
+        this.dataManager.register(scytheAttackTimer, Integer.valueOf(-1));
+        this.dataManager.register(isUsingSomeAttack, false);
+
     }
 
     /**
@@ -151,7 +166,8 @@ public class EntityDeath extends EntityLiving
         boolean flag = super.attackEntityAsMob(entityIn);
         return flag;
     }
-    
+
+    int mode=0;
     KetherDataStorage data;
     public void onUpdate() {
     	super.onUpdate();
@@ -159,8 +175,32 @@ public class EntityDeath extends EntityLiving
 	    		data=KetherDataStorage.getDataInstance(world);
 	    	}
     	if(data!=null) {
+    	    isFighting=data.getIsDeathFighting();
+            if(isFighting) {
 
+            }
+            if(getAttackTarget()!=null){
+                if(mode==0){
+
+                }
+            }
     	}
+
+    	if(!getIsUsingSomeAttack()){
+            if(getRNG().nextInt(500)==0){
+                dataManager.set(scytheAttackTimer,300);
+            }
+        }
+
+        if(dataManager.get(scytheAttackTimer)!=-1){
+            dataManager.set(isUsingSomeAttack,true);
+        }else{
+            dataManager.set(isUsingSomeAttack,false);
+        }
+    }
+
+    private boolean getIsUsingSomeAttack(){
+        return dataManager.get(isUsingSomeAttack);
     }
     
     
@@ -171,8 +211,7 @@ public class EntityDeath extends EntityLiving
     			EntityPlayer attacker = (EntityPlayer) source.getTrueSource();
             	Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(attacker.getHeldItemMainhand());
     			if(map.containsKey(KathairisEnchantments.Ethereal)) {
-    				this.damageEntity(source, 6);
-    				return true;
+    				return super.attackEntityFrom(source,amount);
     			}
     		}
     	}
@@ -263,8 +302,12 @@ public class EntityDeath extends EntityLiving
      */
     public void onKillEntity(EntityLivingBase entityLivingIn)
     {
-        super.onKillEntity(entityLivingIn);
         isFighting=false;
+        defeated=true;
+        PacketDeathHandlerServer message = new PacketDeathHandlerServer(true,false,true);
+        KetherPacketHandler.CHANNEL.sendToServer(message);
+        super.onKillEntity(entityLivingIn);
+
     }
 
     protected boolean canEquipItem(ItemStack stack)
@@ -277,9 +320,7 @@ public class EntityDeath extends EntityLiving
      */
     public void onDeath(DamageSource cause)
     {
-
         super.onDeath(cause);
-
     }
 
 }

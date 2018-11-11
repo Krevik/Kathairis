@@ -1,8 +1,12 @@
 package com.Krevik.Models;
 
+import com.Krevik.Main.FunctionHelper;
+import com.Krevik.Main.KCore;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
@@ -166,11 +170,31 @@ public class ModelDeath extends ModelBase {
         modelRenderer.rotateAngleZ = z;
     }
 
+
+    FunctionHelper helper = KCore.instance.functionHelper;
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, age, f3, f4, f5, entity);
         this.RightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / limbSwing;
+        this.RightLegLayer.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / limbSwing;
+
         this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / limbSwing;
+        this.LeftLegLayer.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / limbSwing;
+
+        //just holding the scythe
+        setRotateAngle(LeftArm1,helper.degToRad(-52.82f),helper.degToRad(-7.39f),helper.degToRad(0f));
+        setRotateAngle(RightArm1,helper.degToRad(-23.86f),helper.degToRad(-3.58f),helper.degToRad(0f));
+        setRotateAngle(RightArm2,helper.degToRad(3.27f),helper.degToRad(-0.32f),helper.degToRad(0f));
+        //a bit of arms movement during holding the scythe
+        setRotateAngle(LeftArm1,helper.degToRad(-52.82f)+MathHelper.sin(age*0.05f)*0.04f,helper.degToRad(-7.39f),helper.degToRad(0f));
+        LeftArmLayer.rotateAngleX=helper.degToRad(-52.82f)+MathHelper.sin(age*0.05f)*0.04f;
+        setRotateAngle(RightArm1,helper.degToRad(-23.86f)+MathHelper.sin(age*0.05f)*0.04f,helper.degToRad(-3.58f),helper.degToRad(0f));
+        RightArmLayer.rotateAngleX=helper.degToRad(-23.86f)+MathHelper.sin(age*0.05f)*0.04f;
+        //breathing
+        Body1.rotateAngleX=MathHelper.sin(age*0.05f)*0.04f;
+        Body2.rotateAngleX=-MathHelper.sin(age*0.05f)*0.06f;
+        Hips.rotateAngleX=MathHelper.sin(age*0.05f)*0.02f;
     }
+
 
     public void postRenderArm(float scale, EnumHandSide side)
     {
@@ -180,5 +204,6 @@ public class ModelDeath extends ModelBase {
     {
         return side == EnumHandSide.LEFT ? this.LeftArm2 : this.RightArm2;
     }
+
 }
 

@@ -65,7 +65,12 @@ public class RenderLayerDeathScythe implements LayerRenderer<EntityLivingBase>
             GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
             boolean flag=false;
             GlStateManager.translate((float)(flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
-            GlStateManager.scale(0.75f,0.75f,0.75f);
+            GlStateManager.rotate(90,0,90,0);
+            GlStateManager.scale(2.5f,2.5f,2.5f);
+            GlStateManager.translate(-0.7,+0.25,0);
+            GlStateManager.rotate(30,1,0,1);
+            GlStateManager.rotate(-20,0,1,0);
+
             Minecraft.getMinecraft().getItemRenderer().renderItemSide(p_188358_1_, p_188358_2_, p_188358_3_, flag);
             GlStateManager.popMatrix();
         }
