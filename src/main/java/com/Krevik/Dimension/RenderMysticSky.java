@@ -74,7 +74,7 @@ public class RenderMysticSky extends IRenderHandler {
         RenderHelper.disableStandardItemLighting();
         
         //stars
-        if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
+        if(world.getWorldTime()>13000&&world.getWorldTime()<=23000) {
             for (int x = 0; x < 3000; x++) {
                 if (constantLight[x] >= 255) {
                     constantLight[x] -= helper.getRandomInteger(0, 8);
