@@ -16,8 +16,6 @@ public class WorldGenClouds extends WorldGenerator{
 		
 	}
 
-    protected static WorldGenMiniTallGrass FRUPGEN = new WorldGenMiniTallGrass(KCore.BlueFruitPlant);
-
     public boolean generate(World worldIn, Random rand, BlockPos pos)
     {
     	int mode=1;

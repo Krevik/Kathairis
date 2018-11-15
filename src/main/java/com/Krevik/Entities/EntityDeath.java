@@ -191,6 +191,9 @@ public class EntityDeath extends EntityMob
                 dataManager.set(scytheAttackTimer,300);
             }
         }
+        if(dataManager.get(scytheAttackTimer)>=0){
+            dataManager.set(scytheAttackTimer,(Integer)dataManager.get(scytheAttackTimer)-1);
+        }
 
         if(dataManager.get(scytheAttackTimer)!=-1){
             dataManager.set(isUsingSomeAttack,true);
@@ -199,11 +202,14 @@ public class EntityDeath extends EntityMob
         }
     }
 
-    private boolean getIsUsingSomeAttack(){
+    public boolean getIsUsingSomeAttack(){
         return dataManager.get(isUsingSomeAttack);
     }
-    
-    
+    public int getScytheAttackTimer(){
+        return dataManager.get(scytheAttackTimer);
+    }
+
+
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
     	if(isFighting) {

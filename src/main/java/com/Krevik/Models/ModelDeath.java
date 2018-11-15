@@ -1,5 +1,6 @@
 package com.Krevik.Models;
 
+import com.Krevik.Entities.EntityDeath;
 import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
 import net.minecraft.client.model.ModelBase;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
+import scala.util.Left;
 
 
 /**
@@ -172,6 +174,15 @@ public class ModelDeath extends ModelBase {
 
 
     FunctionHelper helper = KCore.instance.functionHelper;
+    float[] rightArmScytheAttackStage1 = {helper.degToRad(-23.86f),helper.degToRad(-3.58f),helper.degToRad(0f)};
+    float[] leftArmScytheAttackStage1 = {helper.degToRad(-52.82f),helper.degToRad(-7.39f),helper.degToRad(0f)};
+    float[] rightArmScytheAttackStage2 = {helper.degToRad(-58.24f),helper.degToRad(44.23f),helper.degToRad(7.87f)};
+    float[] leftArmScytheAttackStage2 = {helper.degToRad(-84.30f),helper.degToRad(11.26f),helper.degToRad(0f)};
+    float[] rightArmScytheAttackStage3 = {helper.degToRad(-19.15f),helper.degToRad(-20.14f),helper.degToRad(7.87f)};
+    float[] leftArmScytheAttackStage3 = {helper.degToRad(-42.92f),helper.degToRad(-30.12f),helper.degToRad(0f)};
+    float[] rightArmScytheAttackStage4=rightArmScytheAttackStage1;
+    float[] leftArmScytheAttackStage4=leftArmScytheAttackStage1;
+
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, age, f3, f4, f5, entity);
         this.RightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / limbSwing;
@@ -186,13 +197,33 @@ public class ModelDeath extends ModelBase {
         setRotateAngle(RightArm2,helper.degToRad(3.27f),helper.degToRad(-0.32f),helper.degToRad(0f));
         //a bit of arms movement during holding the scythe
         setRotateAngle(LeftArm1,helper.degToRad(-52.82f)+MathHelper.sin(age*0.05f)*0.04f,helper.degToRad(-7.39f),helper.degToRad(0f));
-        LeftArmLayer.rotateAngleX=helper.degToRad(-52.82f)+MathHelper.sin(age*0.05f)*0.04f;
+        setRotateAngle(LeftArmLayer,LeftArm1.rotateAngleX,LeftArm1.rotateAngleY,LeftArm2.rotateAngleZ);
         setRotateAngle(RightArm1,helper.degToRad(-23.86f)+MathHelper.sin(age*0.05f)*0.04f,helper.degToRad(-3.58f),helper.degToRad(0f));
-        RightArmLayer.rotateAngleX=helper.degToRad(-23.86f)+MathHelper.sin(age*0.05f)*0.04f;
+        setRotateAngle(RightArmLayer,RightArm1.rotateAngleX,RightArm1.rotateAngleY,RightArm2.rotateAngleZ);
         //breathing
         Body1.rotateAngleX=MathHelper.sin(age*0.05f)*0.04f;
         Body2.rotateAngleX=-MathHelper.sin(age*0.05f)*0.06f;
         Hips.rotateAngleX=MathHelper.sin(age*0.05f)*0.02f;
+        if(entity instanceof EntityDeath){
+            EntityDeath death = (EntityDeath) entity;
+            if(death.getIsUsingSomeAttack()){
+                int scytheAttackTimer=death.getScytheAttackTimer();
+                if(scytheAttackTimer>-1){
+                    if(scytheAttackTimer>200&&scytheAttackTimer<=300){
+                        setRotateAngle(LeftArm1, LeftArm1.rotateAngleX+((leftArmScytheAttackStage2[0]-LeftArm1.rotateAngleX)/(scytheAttackTimer-200)),LeftArm1.rotateAngleY+((leftArmScytheAttackStage2[1]-LeftArm1.rotateAngleY)/(scytheAttackTimer-200)),LeftArm1.rotateAngleZ+((leftArmScytheAttackStage2[2]-LeftArm1.rotateAngleZ)/(scytheAttackTimer-200)));
+                        setRotateAngle(RightArm1, RightArm1.rotateAngleX+((rightArmScytheAttackStage2[0]-RightArm1.rotateAngleX)/(scytheAttackTimer-200)),RightArm1.rotateAngleY+((rightArmScytheAttackStage2[1]-RightArm1.rotateAngleY)/(scytheAttackTimer-200)),RightArm1.rotateAngleZ+((rightArmScytheAttackStage2[2]-RightArm1.rotateAngleZ)/(scytheAttackTimer-200)));
+                    }
+                    if(scytheAttackTimer>100&&scytheAttackTimer<=200){
+                        setRotateAngle(LeftArm1, leftArmScytheAttackStage2[0]+((leftArmScytheAttackStage3[0]-leftArmScytheAttackStage2[0])/(scytheAttackTimer-100)),leftArmScytheAttackStage2[1]+((leftArmScytheAttackStage3[1]-leftArmScytheAttackStage2[1])/(scytheAttackTimer-100)),leftArmScytheAttackStage2[2]+((leftArmScytheAttackStage3[2]-leftArmScytheAttackStage2[2])/(scytheAttackTimer-100)));
+                        setRotateAngle(RightArm1, rightArmScytheAttackStage2[0]+((rightArmScytheAttackStage3[0]-rightArmScytheAttackStage2[0])/(scytheAttackTimer-100)),rightArmScytheAttackStage2[1]+((rightArmScytheAttackStage3[1]-rightArmScytheAttackStage2[1])/(scytheAttackTimer-100)),rightArmScytheAttackStage2[2]+((rightArmScytheAttackStage3[2]-rightArmScytheAttackStage2[2])/(scytheAttackTimer-100)));
+                    }
+                    if(scytheAttackTimer>000&&scytheAttackTimer<=100){
+                        setRotateAngle(LeftArm1, leftArmScytheAttackStage3[0]+((leftArmScytheAttackStage4[0]-leftArmScytheAttackStage3[0])/scytheAttackTimer),leftArmScytheAttackStage3[1]+((leftArmScytheAttackStage4[1]-leftArmScytheAttackStage3[1])/scytheAttackTimer),leftArmScytheAttackStage3[2]+((leftArmScytheAttackStage4[2]-leftArmScytheAttackStage3[2])/scytheAttackTimer));
+                        setRotateAngle(RightArm1, rightArmScytheAttackStage3[0]+((rightArmScytheAttackStage4[0]-rightArmScytheAttackStage3[0])/scytheAttackTimer),rightArmScytheAttackStage3[1]+((rightArmScytheAttackStage4[1]-rightArmScytheAttackStage3[1])/scytheAttackTimer),rightArmScytheAttackStage3[2]+((rightArmScytheAttackStage4[2]-rightArmScytheAttackStage3[2])/scytheAttackTimer));
+                    }
+                }
+            }
+        }
     }
 
 
@@ -202,7 +233,7 @@ public class ModelDeath extends ModelBase {
     }
     protected ModelRenderer getArmForSide(EnumHandSide side)
     {
-        return side == EnumHandSide.LEFT ? this.LeftArm2 : this.RightArm2;
+        return side == EnumHandSide.LEFT ? this.LeftArm1 : this.RightArm1;
     }
 
 }

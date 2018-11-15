@@ -1,5 +1,6 @@
 package com.Krevik.Renderers.Layer;
 
+import com.Krevik.Entities.EntityDeath;
 import com.Krevik.Models.ModelDeath;
 import com.Krevik.Models.ModelGaznowel;
 import net.minecraft.client.Minecraft;
@@ -64,13 +65,20 @@ public class RenderLayerDeathScythe implements LayerRenderer<EntityLivingBase>
             GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
             boolean flag=false;
+
             GlStateManager.translate((float)(flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
             GlStateManager.rotate(90,0,90,0);
             GlStateManager.scale(2.5f,2.5f,2.5f);
-            GlStateManager.translate(-0.7,+0.25,0);
+            GlStateManager.translate(-0.1,+0.2,0);
             GlStateManager.rotate(30,1,0,1);
             GlStateManager.rotate(-20,0,1,0);
-
+            if(p_188358_1_ instanceof EntityDeath){
+                EntityDeath death = (EntityDeath) p_188358_1_;
+                int scytheAttackTimer=death.getScytheAttackTimer();
+                if(scytheAttackTimer>200&&scytheAttackTimer<300){
+                    GlStateManager.rotate(30,1,0,1);
+                }
+            }
             Minecraft.getMinecraft().getItemRenderer().renderItemSide(p_188358_1_, p_188358_2_, p_188358_3_, flag);
             GlStateManager.popMatrix();
         }

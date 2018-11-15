@@ -97,6 +97,8 @@ item.music_disc_8bit.name=8-bit Music Disc
 item.skyray_feather.name=Skyray feather
 item.howler_fur.name=Matted Fur
 item.katharian_arrow.name=Katharian Arrow
+item.scythe.name=Scythe
+
 
 
 tile.corruptedgrass.name=Katharian Grass
@@ -224,6 +226,7 @@ tile.redwood_log_size_3.name=Redwood Log Size-3
 tile.redwood_log_size_2.name=Redwood Log Size-2
 tile.redwood_log_size_1.name=Redwood Log Size-1
 tile.mythic_stone_bricks.name=Katharian Bricks
+tile.layered_sand.name=Layered Sand
 
 entity.PoisonousScorpion.name=Scorpion
 entity.BigTurtle.name=Tortoise
@@ -254,6 +257,8 @@ entity.RubySile.name=Ruby Sile
 entity.Gecko.name=Gecko
 entity.Gaznowel.name=Gaznowel
 entity.Katharian Arrow.name=Katharian Arrow
+entity.cacti_spore.name=Cacti Spore
+
 
 charger=Charger
 enchantment.ethereal=Ethereal

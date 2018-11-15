@@ -51,6 +51,7 @@ public class EntityAndRenderRegistry {
 	public static final ResourceLocation GeckoLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/gecko.png");
 	public static final ResourceLocation GaznowelLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/gaznowel.png");
 	public static final ResourceLocation KatharianArrowLoc = new ResourceLocation(KCore.MODID, "textures/entity/projectiles/katharian_arrow.png");
+	public static final ResourceLocation CactiSporeLoc = new ResourceLocation(KCore.MODID, "textures/entity/cacti_spore.png");
 
 	static int id=1;
 
@@ -108,6 +109,8 @@ public class EntityAndRenderRegistry {
 		EntityRegistry.registerModEntity(GaznowelLoc, EntityGaznowel.class, "Gaznowel", id++, KCore.instance, 64, 3, true);
 		EntityRegistry.registerEgg(GaznowelLoc, 0x996600, 0x00ff00);
 		EntityRegistry.registerModEntity(KatharianArrowLoc, EntityKatharianArrow.class, "Katharian Arrow", id++, KCore.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(CactiSporeLoc, EntityCactiSpore.class, "Cacti_Spore", id++, KCore.instance, 64, 3, true);
+		EntityRegistry.registerEgg(CactiSporeLoc, 0x996600, 0x00ff00);
 	}
     public static void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityLivingFlower.class, RenderLivingFlower.FACTORY);
@@ -137,6 +140,7 @@ public class EntityAndRenderRegistry {
         RenderingRegistry.registerEntityRenderingHandler(EntityGecko.class, RenderGecko.FACTORY);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGaznowel.class, RenderGaznowel.FACTORY);
 		RenderingRegistry.registerEntityRenderingHandler(EntityKatharianArrow.class, RenderKatharianArrow.FACTORY);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCactiSpore.class, RenderCactiSpore.FACTORY);
 
     }
 }

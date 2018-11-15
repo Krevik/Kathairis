@@ -24,5 +24,6 @@ public class MysticLootTables {
 	public static ResourceLocation LOOT_SKYRAY = LootTableList.register(new ResourceLocation(KCore.MODID+":"+"skyray"));
 	public static ResourceLocation LOOT_GECKO = LootTableList.register(new ResourceLocation(KCore.MODID+":"+"gecko"));
 	public static ResourceLocation LOOT_GAZNOWEL = LootTableList.register(new ResourceLocation(KCore.MODID+":"+"gaznowel"));
+	public static ResourceLocation LOOT_CACTISPORE = LootTableList.register(new ResourceLocation(KCore.MODID+":"+"cacti_spore"));
 
 }

@@ -195,8 +195,8 @@ public class EntityAIAttackDeath extends EntityAIBase
         if (p_190102_2_ <= d0 && this.attackTick <= 0)
         {
             this.attackTick = 20;
-            this.attacker.swingArm(EnumHand.MAIN_HAND);
-            this.attacker.attackEntityAsMob(p_190102_1_);
+            //this.attacker.swingArm(EnumHand.MAIN_HAND);
+            //this.attacker.attackEntityAsMob(p_190102_1_);
         }
     }
 

@@ -4,11 +4,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-import com.Krevik.Entities.EntityFungite;
-import com.Krevik.Entities.EntityGecko;
-import com.Krevik.Entities.EntityHowler;
-import com.Krevik.Entities.EntityLivingFlower;
-import com.Krevik.Entities.EntityMysticBird;
+import com.Krevik.Entities.*;
 import com.Krevik.Gens.Forest.*;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
 import com.Krevik.Gens.WorldGenMysticMultiGrass;
@@ -56,6 +52,7 @@ public class BiomeMysticForest extends KetherBiome
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHowler.class, 5, 1, 1));
         //this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 98, 1, 1));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityFungite.class, 2, 1, 1));
+        this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCactiSpore.class, 4, 1, 1));
         baseGrassColor=new Color(21,178,102);
     }
 
