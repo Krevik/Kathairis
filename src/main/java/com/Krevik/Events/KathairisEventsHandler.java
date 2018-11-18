@@ -256,16 +256,17 @@ public class KathairisEventsHandler {
 			}
 	}
 
+
 	@SubscribeEvent
 	public static void handleDissolution(RenderGameOverlayEvent.Post event1){
-		Minecraft event = Minecraft.getMinecraft();
+		/*Minecraft event = Minecraft.getMinecraft();
 		if(event.player!=null){
 			if(event.player instanceof EntityLivingBase){
 				EntityLivingBase elb = (EntityLivingBase) event.player;
 				if(elb.isPotionActive(KCore.dissolution_potion)){
 					if(elb.world.isRemote){
 						//TODO render dissolution effect
-						/*GlStateManager.pushMatrix();
+						GlStateManager.pushMatrix();
 						Tessellator tess = Tessellator.getInstance();
 						BufferBuilder builder = tess.getBuffer();
 						builder.begin(6,DefaultVertexFormats.POSITION_COLOR);
@@ -274,11 +275,12 @@ public class KathairisEventsHandler {
 						builder.pos(Minecraft.getMinecraft().displayWidth/2+Minecraft.getMinecraft().displayWidth/4,20,0).color(200,200,200,255).endVertex();
 						builder.pos(Minecraft.getMinecraft().displayWidth,0,0).color(200,200,200,255).endVertex();
 						tess.draw();
-						GlStateManager.popMatrix();*/
+						GlStateManager.popMatrix();
 					}
 				}
 			}
 		}
+					*/
 	}
 
 
