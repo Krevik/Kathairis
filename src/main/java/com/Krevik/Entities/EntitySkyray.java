@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
+import javax.vecmath.Vector3d;
 
 import com.Krevik.Main.KCore;
 import com.Krevik.Main.MysticLootTables;
@@ -18,6 +19,7 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -29,6 +31,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
@@ -102,7 +105,12 @@ public class EntitySkyray extends EntityFlying
         }
         if(this.getAdult()==0) {
         	if(this.rand.nextInt(99999999)==0) {
-        		this.dataManager.set(ADULT, Integer.valueOf(1));
+        	    EntitySkyray skyray = new EntitySkyray(world);
+        	    skyray.setAdult(1);
+        	    skyray.setPosition(posX,posY,posZ);
+        	    world.spawnEntity(skyray);
+        	    posX=posY=posZ=-10;
+        	    setDead();
         	}
         }
     }
@@ -179,6 +187,15 @@ public class EntitySkyray extends EntityFlying
         this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.4000000059604645D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4000000059604645D);
 
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount)
+    {
+        if(!(source.getTrueSource() instanceof EntityPlayerMP)){
+            this.setMovementVector(rand.nextFloat()-rand.nextFloat(), rand.nextFloat()-rand.nextFloat(), rand.nextFloat()-rand.nextFloat());
+        }
+        return super.attackEntityFrom(source,amount);
     }
     
     public int getMaxSpawnedInChunk()
