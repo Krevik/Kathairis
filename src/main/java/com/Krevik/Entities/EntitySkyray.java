@@ -42,6 +42,7 @@ public class EntitySkyray extends EntityFlying
     public int timeUntilNextFeather() {
         return ((Integer)this.dataManager.get(timeUntilNextFeather)).intValue();
     }
+
     public void setTimeUntilNextFeather(int x) {
         this.dataManager.set(timeUntilNextFeather, Integer.valueOf(x));
     }
@@ -125,6 +126,7 @@ public class EntitySkyray extends EntityFlying
     {
         super.entityInit();
         this.dataManager.register(ADULT, Integer.valueOf(0));
+        this.dataManager.register(timeUntilNextFeather,Integer.valueOf(12000));
     }
     
     public void writeEntityToNBT(NBTTagCompound compound)
