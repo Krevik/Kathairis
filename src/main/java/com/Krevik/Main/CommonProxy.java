@@ -47,6 +47,7 @@ public class CommonProxy {
 	public static SoundHelper bird = new SoundHelper("bird","bird");
 	public static SoundHelper Howler_living = new SoundHelper("howler","living");
 	public static SoundHelper Howler_dead = new SoundHelper("howler","dead");
+	public static SoundHelper Howler_hurt = new SoundHelper("howler","hurt");
 	public static SoundHelper jellyfish_living = new SoundHelper("jellyfish","living");
 	public static SoundHelper jellyfish_dead = new SoundHelper("jellyfish","dead");
 	public static SoundHelper jellyfish_hurt = new SoundHelper("jellyfish","hurt");

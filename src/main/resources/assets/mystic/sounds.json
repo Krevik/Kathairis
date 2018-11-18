@@ -26,6 +26,15 @@
             "mystic:howler/dead"
         ]
     },
+	"mob.howler.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "mystic:howler/hurt_1",
+			"mystic:howler/hurt_2"
+        ]
+    },
 	"mob.jellyfish.dead":
     {
         "category": "weather",
