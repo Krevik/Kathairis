@@ -60,7 +60,7 @@ public class RenderLayerHeldItem implements LayerRenderer<EntityLivingBase>
             }
             // Forge: moved this call down, fixes incorrect offset while sneaking.
             this.translateToHand(handSide);
-            GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
+            GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
             boolean flag=false;
             GlStateManager.translate((float)(flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
@@ -68,9 +68,9 @@ public class RenderLayerHeldItem implements LayerRenderer<EntityLivingBase>
             if(p_188358_1_ instanceof EntityLiving){
                 EntityLiving entity = (EntityLiving) p_188358_1_;
                 if(entity.getAttackTarget()!=null){
-                    GlStateManager.translate(0F,0.8F,0F);
+                    GlStateManager.translate(-0.5F,-3F,2F);
                 }else{
-                   GlStateManager.translate(0.6F,0.1F,0.40F);
+                   GlStateManager.translate(0.0F,-0.8F,+0.075F);
                 }
             }
             Minecraft.getMinecraft().getItemRenderer().renderItemSide(p_188358_1_, p_188358_2_, p_188358_3_, flag);
