@@ -257,6 +257,10 @@ public class ModelGaznowel extends ModelBase {
         LeftLeg1.rotateAngleX=helper.degToRad(-45f)-MathHelper.sin(age*0.05f+50)*0.03f;
         RightLeg1.rotateAngleZ=-MathHelper.sin(age*0.05f)*0.02f;
         LeftLeg1.rotateAngleZ=-MathHelper.sin(age*0.05f)*0.02f;
+
+        RightLeg2.rotateAngleX=helper.degToRad(90)+MathHelper.sin(age*0.05f)*0.03f;
+        LeftLeg2.rotateAngleX=helper.degToRad(90)-MathHelper.sin(age*0.05f)*0.03f;
+
     }
 
     public void postRenderArm(float scale, EnumHandSide side)
@@ -265,7 +269,7 @@ public class ModelGaznowel extends ModelBase {
     }
     protected ModelRenderer getArmForSide(EnumHandSide side)
     {
-        return side == EnumHandSide.LEFT ? this.LeftArm2 : this.RightArm2;
+        return side == EnumHandSide.LEFT ? this.LeftArm1 : this.RightArm1;
     }
 
 }

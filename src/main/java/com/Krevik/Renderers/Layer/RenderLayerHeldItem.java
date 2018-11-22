@@ -68,7 +68,9 @@ public class RenderLayerHeldItem implements LayerRenderer<EntityLivingBase>
             if(p_188358_1_ instanceof EntityLiving){
                 EntityLiving entity = (EntityLiving) p_188358_1_;
                 if(entity.getAttackTarget()!=null){
-                    GlStateManager.translate(-0.5F,-3F,2F);
+                    GlStateManager.translate(-0.1F,-1.3F,0.4F);
+                    GlStateManager.rotate(45F, -4.0F, 0F, 0F);
+                    GlStateManager.rotate(45F, 0F, 0.0F, -1F);
                 }else{
                    GlStateManager.translate(0.0F,-0.8F,+0.075F);
                 }
