@@ -225,22 +225,22 @@ public class ModelHowler extends ModelBase {
         BehindLeftLeg3.rotateAngleX=helper.degToRad(35)+MathHelper.clamp(MathHelper.sin(limbSwing*0.8f)*0.62f*limbSwingAmount,-100,0);
         */
 
-        FrontRightLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
-        FrontRightLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
-        FrontRightLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*2f)*limbSwingAmount;
-        FrontLeftLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
-        FrontLeftLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
-        FrontLeftLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        FrontRightLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.sin(limbSwing*0.4f)*1f*limbSwingAmount;
+        //FrontRightLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
+        //FrontRightLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*2f)*limbSwingAmount;
+        FrontLeftLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.sin(limbSwing*0.4f)*1f*limbSwingAmount;
+       // FrontLeftLeg2.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        //FrontLeftLeg3.rotateAngleX=helper.degToRad(-45)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
 
         FrontRightLeg3.offsetZ=-0.02f;
         FrontLeftLeg3.offsetZ=-0.02f;
 
-        BehindRightLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
-        BehindRightLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
-        BehindRightLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
-        BehindLeftLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
-        BehindLeftLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
-        BehindLeftLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
+        BehindRightLeg1.rotateAngleX=helper.degToRad(-25)+MathHelper.sin(limbSwing*0.4f)*1f*limbSwingAmount;
+       // BehindRightLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        //BehindRightLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.cos(limbSwing*0.3f)*1f)*limbSwingAmount;
+        BehindLeftLeg1.rotateAngleX=helper.degToRad(-25)-MathHelper.sin(limbSwing*0.4f)*1f*limbSwingAmount;
+        //BehindLeftLeg2.rotateAngleX=helper.degToRad(5)+MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
+        //BehindLeftLeg3.rotateAngleX=helper.degToRad(35)-MathHelper.abs(MathHelper.sin(limbSwing*0.3f)*1f)*limbSwingAmount;
 
 
           if (model.getShouldAnimTail()) {
