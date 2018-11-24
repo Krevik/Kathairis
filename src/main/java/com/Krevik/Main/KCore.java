@@ -91,7 +91,7 @@ public class KCore {
 
 
 	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticPortal)
-    public static final BlockMysticPortal MysticPortal = (BlockMysticPortal) new BlockMysticPortal(Ref.MysticPortal, CreativeTabsMystic.buildingBlocks,-1f,-1f, SoundType.GLASS).setLightLevel(1F);
+    public static final BlockMysticPortal MysticPortal = (BlockMysticPortal) new BlockMysticPortal(Ref.MysticPortal, null,-1f,-1f, SoundType.GLASS).setLightLevel(1F);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CorruptedDirt)
     public static final BaseBlock CorruptedDirt = new BaseBlock(Ref.CorruptedDirt, Material.GROUND, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.GROUND);
