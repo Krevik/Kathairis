@@ -51,6 +51,7 @@ public static final ResourceLocation dissolution_potion = new ResourceLocation(K
 
 public static MusicTicker.MusicType ketherMusicDay;
 public static MusicTicker.MusicType ketherMusicNight;
+public static MusicTicker.MusicType ketherMusicXmas;
 
 
 
@@ -76,7 +77,8 @@ public static MusicTicker.MusicType ketherMusicNight;
     public void preInit(FMLPreInitializationEvent e) {
 		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDaySound, 100, 500);
 		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNightSound, 100, 500);
-	    MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
+		ketherMusicXmas = EnumHelperClient.addMusicType("kether.xmas", KCore.instance.proxy.ketherMusicChristmasSound, 100, 500);;
+		MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
 	}
 
 	public void init(FMLInitializationEvent e) {

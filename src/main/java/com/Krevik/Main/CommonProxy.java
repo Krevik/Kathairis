@@ -72,6 +72,7 @@ public class CommonProxy {
 	public static SoundHelper cloud_glass_break = new SoundHelper("cloudglass.break");
 	public static SoundHelper sandstorm = new SoundHelper("sandstorm");
 	public static SoundHelper pickaxe_turn = new SoundHelper("pickaxe_turn");
+	public static SoundEvent ketherMusicChristmasSound = new SoundHelper("music.xmas");
 
 	public static SoundEvent music_disc_jazzy = new SoundHelper("music_disc.jazzy");
 	public static SoundEvent music_disc_8bit = new SoundHelper("music_disc.8bit");

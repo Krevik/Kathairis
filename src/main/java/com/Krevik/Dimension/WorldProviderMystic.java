@@ -15,6 +15,8 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Calendar;
+
 public class WorldProviderMystic extends WorldProviderSurface
 {
 
@@ -197,7 +199,11 @@ public class WorldProviderMystic extends WorldProviderSurface
     @SideOnly(Side.CLIENT)
     public net.minecraft.client.audio.MusicTicker.MusicType getMusicType()
     {
-	    	if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        if(month==11){
+            return KCore.cproxy.ketherMusicXmas;
+        }
+        if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
 	            return KCore.cproxy.ketherMusicNight;
 	    	}else {
 	            return KCore.cproxy.ketherMusicDay;

@@ -279,5 +279,15 @@
         [
             "mystic:misc/pickaxe_turn"
         ]
+    },
+	"kether.music.xmas":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "mystic:kether/xmas1", "stream": true},
+			{"name": "mystic:kether/xmas2", "stream": true},
+			{"name": "mystic:kether/xmas3", "stream": true}
+        ]
     }
 }
