@@ -12,6 +12,8 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Calendar;
+
 @SideOnly(Side.CLIENT)
 public class RenderStrangeWanderer extends RenderLiving<EntityStrangeWanderer>
 {
@@ -29,7 +31,12 @@ public class RenderStrangeWanderer extends RenderLiving<EntityStrangeWanderer>
      */
     protected ResourceLocation getEntityTexture(EntityStrangeWanderer entity)
     {
-        return EntityAndRenderRegistry.StrangeWandererLoc;
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        if(month==11){
+            return EntityAndRenderRegistry.Strange_Wanderer_Christmas_Loc;
+        }else {
+            return EntityAndRenderRegistry.StrangeWandererLoc;
+        }
     }
     
     public static class Factory implements IRenderFactory<EntityStrangeWanderer> {
