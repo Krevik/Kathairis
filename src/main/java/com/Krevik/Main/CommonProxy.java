@@ -276,7 +276,8 @@ public class CommonProxy {
 					KCore.Redwood_log_size_2,
 					KCore.Redwood_log_size_1,
 					KCore.Mythic_Stone_Bricks,
-					KCore.Layered_Sand
+					KCore.Layered_Sand,
+					KCore.bison_Stars
 					//KCore.Hell_Plant
 					//KCore.Butterfly_Analysing_Table
 
@@ -412,7 +413,8 @@ public class CommonProxy {
 					new ItemBlock(KCore.Redwood_log_size_2),
 					new ItemBlock(KCore.Redwood_log_size_1),
 					new ItemBlock(KCore.Mythic_Stone_Bricks),
-					new ItemSand(KCore.Layered_Sand)
+					new ItemSand(KCore.Layered_Sand),
+					new ItemBlock(KCore.bison_Stars)
 					//new ItemBlock(KCore.Hell_Plant)
 					//new ItemBlock(KCore.Butterfly_Analysing_Table)
 					};
@@ -474,6 +476,7 @@ public class CommonProxy {
         Blocks.FIRE.setFireInfo(KCore.MysticMultiGrass, 30, 60);
         Blocks.FIRE.setFireInfo(KCore.DeadLichen, 30, 60);
         Blocks.FIRE.setFireInfo(KCore.MysticDeadGrass, 30, 60);
+        Blocks.FIRE.setFireInfo(KCore.bison_Stars,30,60);
 
 	}
 

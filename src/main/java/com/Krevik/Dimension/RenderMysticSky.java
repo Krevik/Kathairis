@@ -2,10 +2,12 @@ package com.Krevik.Dimension;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector4d;
+import javax.vecmath.Vector4f;
 
 
 import com.Krevik.Main.FunctionHelper;
@@ -34,7 +36,7 @@ public class RenderMysticSky extends IRenderHandler {
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("mystic:textures/environment/sun.png");
     private static final ResourceLocation STAR_TEXTURES = new ResourceLocation("mystic:textures/environment/star.png");
     private static final ResourceLocation NEBULA_TEXTURES = new ResourceLocation("mystic:textures/environment/nebula.png");
-
+    private static final ResourceLocation CHRISTMAS_STAR_TEXTURES = new ResourceLocation("mystic:textures/environment/christmas_star.png");
 
     public RenderMysticSky()
     {
@@ -45,6 +47,7 @@ public class RenderMysticSky extends IRenderHandler {
     
     private ArrayList<FallingStar> fallingStarsList = new ArrayList();
     private Nebula nebula = null;
+    private ChristmasStar christmas_star = null;
 
     FunctionHelper helper = KCore.instance.functionHelper;
     @Override
@@ -252,10 +255,64 @@ public class RenderMysticSky extends IRenderHandler {
             tessellator.draw();
 
             GlStateManager.popMatrix();
-
         }
         
         //stars end
+
+        //christmas
+        //int month = Calendar.getInstance().get(Calendar.MONTH);
+        //int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        //if(month==10&&(day==23||day==25||day==26)) {
+
+        /*GlStateManager.pushMatrix();
+        bufferbuilder.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
+        Vector4f color = new Vector4f(242,242,234,5);
+        double d0 = (double) (0.456 * 6.0F - 2F);
+        double d1 = (double) (0.254 * 6.0F - 2F);
+        double d2 = (double) (0.674 * 6.0F - 2F);
+        double d33 = (double) (0.828F + 0.4 * 0.1F);
+        double d4 = d0 * d0 + d1 * d1 + d2 * d2;
+
+        d4 = 1.0D / Math.sqrt(d4);
+        d0 = d0 * d4;
+        d1 = d1 * d4;
+        d2 = d2 * d4;
+        double d5 = d0 * 60.0D;
+        double d6 = d1 * 60.0D;
+        double d7 = d2 * 60.0D;
+        double d8 = Math.atan2(d0, d2);
+        double d9 = Math.sin(d8);
+        double d10 = Math.cos(d8);
+        double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+        double d12 = Math.sin(d11);
+        double d13 = Math.cos(d11);
+        double d14 = 0.3 * Math.PI * 2.0D;
+        double d15 = Math.sin(d14);
+        double d16 = Math.cos(d14);
+
+        //for (int j = 0; j < 4; ++j)
+        //{
+        double d18 = (double) ((0 & 2) - 1) * d33;
+        double d19 = (double) ((1 + 1 & 2) - 1) * d33;
+        double d21 = d18 * d16 - d19 * d15;
+        double d22 = d19 * d16 + d18 * d15;
+        double d23 = d21 * d12 + 0.0D * d13;
+        double d24 = 0.0D * d12 - d21 * d13;
+        double d25 = d24 * d9 - d22 * d10;
+        double d26 = d22 * d9 + d24 * d10;
+
+        bufferbuilder.pos(d5+d25-20, d6+d23+20, d7+d26).color(color.x,color.y,color.z,color.w).endVertex();
+        bufferbuilder.pos(d5+d25+20, d6+d23+20, d7+d26).color(color.x,color.y,color.z,color.w).endVertex();
+        bufferbuilder.pos(d5+d25+20, d6+d23-20, d7+d26).color(color.x,color.y,color.z,color.w).endVertex();
+        bufferbuilder.pos(d5+d25-20, d6+d23+20, d7+d26).color(color.x,color.y,color.z,color.w).endVertex();
+        bufferbuilder.pos(d5+d25-20, d6+d23-20, d7+d26).color(color.x,color.y,color.z,color.w).endVertex();
+        bufferbuilder.pos(d5+d25+20, d6+d23-20, d7+d26).color(color.x,color.y,color.z,color.w).endVertex();
+
+        tessellator.draw();
+            GlStateManager.popMatrix();
+        //}*/
+
+
 
 
         
@@ -376,6 +433,10 @@ public class RenderMysticSky extends IRenderHandler {
         */
 
 
+
+
+
+
         GlStateManager.rotate(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
         f17 = 30.0F;
         //sun start
@@ -394,6 +455,8 @@ public class RenderMysticSky extends IRenderHandler {
             Vector4d color = new Vector4d(R,G,B,Alpha);
             DrawCircle(f17,-f17,c,100,color,tessellator);
         }*/
+
+
 
         
 

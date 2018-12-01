@@ -89,6 +89,9 @@ public class ItemMysticFood extends ItemFood
                 if(this==KCore.Nectar_Bowl) {
                 	entityplayer.addItemStackToInventory(new ItemStack(Items.BOWL,1));
                 	entityplayer.addPotionEffect(new PotionEffect(Potion.getPotionById(10),250,2));
+                	if(entityplayer.isPotionActive(KCore.dissolution_potion)){
+                	    entityplayer.removePotionEffect(KCore.dissolution_potion);
+                    }
                 }
             }
             

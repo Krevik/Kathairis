@@ -7,6 +7,7 @@ import com.Krevik.Networking.KetherPacketHandler;
 import com.Krevik.Networking.PacketDustStormClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
+import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -17,16 +18,23 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucketMilk;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketCamera;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.event.entity.item.ItemEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -41,6 +49,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.Sys;
+import org.lwjgl.opengl.GL11;
 import scala.collection.parallel.ParIterableLike;
 
 import java.nio.Buffer;
@@ -258,7 +267,37 @@ public class KathairisEventsHandler {
 
 
 	@SubscribeEvent
-	public static void handleDissolution(RenderGameOverlayEvent.Post event1){
+	@SideOnly(Side.CLIENT)
+	public static void handleDissolution(RenderGameOverlayEvent.Post event){
+		Minecraft mc = Minecraft.getMinecraft();
+		if(mc.player!=null){
+			if(mc.player.isPotionActive(KCore.dissolution_potion)){
+				Tessellator tess = Tessellator.getInstance();
+				BufferBuilder builder = tess.getBuffer();
+                GlStateManager.pushMatrix();
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                GL11.glDepthMask(false);
+                GL11.glBlendFunc(770, 771);
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glDisable(GL11.GL_ALPHA_TEST);
+                mc.renderEngine.bindTexture(new ResourceLocation(KCore.MODID,"textures/effect/player/dissolution.png"));
+				builder.begin(GL11.GL_QUADS,DefaultVertexFormats.POSITION_TEX);
+				builder.pos(0,0,0).tex(0,0).endVertex();
+				builder.pos(0,event.getResolution().getScaledHeight(),0).tex(0,1).endVertex();
+				builder.pos(event.getResolution().getScaledWidth(),event.getResolution().getScaledHeight(),0).tex(1,1).endVertex();
+				builder.pos(event.getResolution().getScaledWidth(),0,0).tex(1,0).endVertex();
+
+				tess.draw();
+                GL11.glDepthMask(true);
+                GL11.glEnable(GL11.GL_DEPTH_TEST);
+                GL11.glEnable(GL11.GL_ALPHA_TEST);
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glDisable(GL11.GL_BLEND);
+				GlStateManager.popMatrix();
+
+			}
+		}
 		/*Minecraft event = Minecraft.getMinecraft();
 		if(event.player!=null){
 			if(event.player instanceof EntityLivingBase){
@@ -284,15 +323,49 @@ public class KathairisEventsHandler {
 	}
 
 
+	static int ticker=0;
 	@SubscribeEvent
-	public static void handleStunPotionEffectOnEntityLiving(LivingEvent.LivingUpdateEvent  event){
-		if(event.getEntityLiving()!=null){
-			EntityLivingBase entityLivingBaseIn = event.getEntityLiving();
-			if(entityLivingBaseIn.isPotionActive(KCore.stun_potion)){
-				entityLivingBaseIn.setJumping(false);
-				entityLivingBaseIn.setPositionAndUpdate(entityLivingBaseIn.prevPosX,entityLivingBaseIn.prevPosY,entityLivingBaseIn.prevPosZ);
+	public static void handlePotionEffectsOnEntityLiving(LivingEvent.LivingUpdateEvent  event){
+		if(event.getEntityLiving()!=null) {
+            EntityLivingBase entityLivingBaseIn = event.getEntityLiving();
+            if (entityLivingBaseIn.isPotionActive(KCore.stun_potion)) {
+                entityLivingBaseIn.setJumping(false);
+                entityLivingBaseIn.setPositionAndUpdate(entityLivingBaseIn.prevPosX, entityLivingBaseIn.prevPosY, entityLivingBaseIn.prevPosZ);
+            }
+            if (entityLivingBaseIn.isPotionActive(KCore.dissolution_potion)) {
+                ticker++;
+                if (ticker >= 40) {
+                    ticker = 0;
+                    if (entityLivingBaseIn instanceof EntityPlayer) {
+                        EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
+                        player.addExhaustion(10);
+                        player.addPotionEffect(new PotionEffect(KCore.dissolution_potion, 1000, 1));
+                    }
+                }
+            }
+        }
+	}
+
+	@SubscribeEvent
+            public static void handlePotionsAgain(LivingEntityUseItemEvent.Finish event){
+            if(event.getItem().getItem() instanceof ItemFood){
+                ItemFood food = (ItemFood) event.getItem().getItem();
+                if(event.getEntityLiving().isPotionActive(KCore.dissolution_potion) && event.getEntityLiving() instanceof EntityPlayer){
+                    EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+                    player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel()-food.getHealAmount(event.getItem()));
+                }
+            }
+        }
+
+	@SubscribeEvent
+	public static void denyMilkBucketWhileDissolution(LivingEntityUseItemEvent.Tick event){
+		if(event.getItem().getItem().equals(Items.MILK_BUCKET)){
+			if(event.getEntityLiving().isPotionActive(KCore.dissolution_potion)){
+				event.setDuration(999999);
 			}
 		}
 	}
+
+
 
 }

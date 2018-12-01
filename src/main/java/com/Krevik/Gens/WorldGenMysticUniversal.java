@@ -13,15 +13,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenSingleGen extends WorldGenerator
+public class WorldGenMysticUniversal extends WorldGenerator
 {
 	int mode=0;
-    public WorldGenSingleGen(int i)
+    public WorldGenMysticUniversal(int i)
     {
     	mode=i;
     }
     
-    public WorldGenSingleGen()
+    public WorldGenMysticUniversal()
     {
     	mode=0;
     }

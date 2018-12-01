@@ -156,6 +156,7 @@ public class DynamicParticle extends Particle {
 
     protected void processAlphaTween() {
         particleAlpha = initialAlpha + progress * (finalAlpha - initialAlpha);
+
     }
 
     protected void processTintTween() {

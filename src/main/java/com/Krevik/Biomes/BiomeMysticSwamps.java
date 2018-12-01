@@ -3,38 +3,35 @@ package com.Krevik.Biomes;
 import java.awt.*;
 import java.util.Random;
 
+import com.Krevik.Entities.EntityCactiSpore;
 import com.Krevik.Entities.EntityMysticBird;
+import com.Krevik.Entities.EntityPhasm;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
-import com.Krevik.Gens.WorldGenSingleGen;
+import com.Krevik.Gens.WorldGenMysticUniversal;
 import com.Krevik.Gens.Swamps.WorldGenMudPaddle;
 import com.Krevik.Gens.Swamps.WorldGenMysticSwampsTree;
 import com.Krevik.Gens.Swamps.WorldGenMysticSwampsWater;
 import com.Krevik.Gens.Swamps.WorldGenOldTrunk;
 import com.Krevik.Gens.Swamps.WorldGenSwampLakes;
-import com.Krevik.Main.FunctionHelper;
 import com.Krevik.Main.KCore;
 
-import io.netty.util.internal.MathUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeSwamp;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeMysticSwamps extends KetherBiome
 {
     protected static WorldGenMiniTallGrass TALLGRASS1SWAMPS = new WorldGenMiniTallGrass(KCore.MysticTallGrass);
     protected static WorldGenAbstractTree TREE_FEATURE3SWAMPS = new WorldGenMysticSwampsTree();
     protected static WorldGenMudPaddle MUDPADDLESWAMPS = new WorldGenMudPaddle();
-    protected static WorldGenSingleGen SWAMPGASSWAMPS = new WorldGenSingleGen(5);
-    protected static WorldGenSingleGen SINGLEGENSWAMPS = new WorldGenSingleGen();
+    protected static WorldGenMysticUniversal SWAMPGASSWAMPS = new WorldGenMysticUniversal(5);
+    protected static WorldGenMysticUniversal SINGLEGENSWAMPS = new WorldGenMysticUniversal();
     protected static WorldGenMysticSwampsWater SWAMPSGENSWAMPS = new WorldGenMysticSwampsWater();
 
     public BiomeMysticSwamps(Biome.BiomeProperties properties)
@@ -48,6 +45,8 @@ public class BiomeMysticSwamps extends KetherBiome
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Swamps");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 5, 1, 3));
+        this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityPhasm.class, 2, 1, 1));
+
         baseGrassColor=new Color(92,105,77);
     }
 

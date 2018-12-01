@@ -16,6 +16,7 @@ import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -49,6 +50,7 @@ public class EntityBison extends EntityAnimal
         super(worldIn);
         this.setSize(1.5F, 1.7F);
         this.experienceValue=30;
+        spawnableBlock=KCore.CorruptedGrass;
     }
 
     protected void initEntityAI()
@@ -61,7 +63,7 @@ public class EntityBison extends EntityAnimal
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.WHEAT, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Item.getItemFromBlock(KCore.bison_Stars), false));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(1,new EntityAIAttackMeleeBison(this,1.2D,true));
 
@@ -90,7 +92,11 @@ public class EntityBison extends EntityAnimal
         this.dataManager.register(animTimer, Float.valueOf(0));
         this.dataManager.register(shouldAnimTail, Boolean.valueOf(false));
         this.dataManager.register(hapiness, Float.valueOf(0));
+    }
 
+    public boolean isBreedingItem(ItemStack stack)
+    {
+        return stack.getItem() == Item.getItemFromBlock(KCore.bison_Stars);
     }
 
     public boolean attackEntityAsMob(Entity entityIn)

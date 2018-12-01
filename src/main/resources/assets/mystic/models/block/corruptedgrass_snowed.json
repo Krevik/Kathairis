@@ -3,7 +3,7 @@
     "textures": {
         "particle": "mystic:blocks/corrupteddirt",
         "bottom": "mystic:blocks/corrupteddirt",
-        "top": "mystic:blocks/corruptedgrass_top",
+        "top": "mystic:blocks/corruptedgrass_top_snowed",
         "side": "mystic:blocks/corruptedgrass_side_snowed"
     }
 }

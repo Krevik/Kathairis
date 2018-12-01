@@ -10,8 +10,7 @@ import com.Krevik.Gens.WorldGenCrystalChamber;
 import com.Krevik.Gens.WorldGenFloatingIslands;
 import com.Krevik.Gens.WorldGenFloatingTree;
 import com.Krevik.Gens.WorldGenMysticLakes;
-import com.Krevik.Gens.WorldGenMysticOre;
-import com.Krevik.Gens.WorldGenSingleGen;
+import com.Krevik.Gens.WorldGenMysticUniversal;
 import com.Krevik.Main.KCore;
 
 import net.minecraft.block.BlockFalling;
@@ -68,7 +67,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
     private int chunkX = 0;
     private int chunkZ = 0;
     private int upperScale=130;
-    public static final WorldGenSingleGen EnergyShard = new WorldGenSingleGen(4);
+    public static final WorldGenMysticUniversal EnergyShard = new WorldGenMysticUniversal(4);
     public int cloudWeight=5;
 
 

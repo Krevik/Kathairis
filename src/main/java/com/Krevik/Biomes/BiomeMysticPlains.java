@@ -1,6 +1,5 @@
 package com.Krevik.Biomes;
 
-import java.util.List;
 import java.util.Random;
 
 import com.Krevik.Entities.EntityBison;
@@ -10,13 +9,11 @@ import com.Krevik.Entities.Butterflies.EntityButterfly;
 import com.Krevik.Entities.Butterflies.EntityButterfly1;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
 import com.Krevik.Gens.WorldGenMysticMultiGrass;
-import com.Krevik.Gens.WorldGenSingleGen;
+import com.Krevik.Gens.WorldGenMysticUniversal;
 import com.Krevik.Main.KCore;
 
-import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -26,10 +23,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class BiomeMysticPlains extends KetherBiome
 {
     protected static WorldGenMysticMultiGrass TALLGRASS3PLAINS = new WorldGenMysticMultiGrass();
-    protected static WorldGenSingleGen SINGLEGENPLAINS = new WorldGenSingleGen();
-    protected static WorldGenSingleGen SINGLEGEN1PLAINS = new WorldGenSingleGen(2);
+    protected static WorldGenMysticUniversal SINGLEGENPLAINS = new WorldGenMysticUniversal();
+    protected static WorldGenMysticUniversal SINGLEGEN1PLAINS = new WorldGenMysticUniversal(2);
     protected static WorldGenMiniTallGrass TALLGRASS1PLAINS = new WorldGenMiniTallGrass(KCore.MysticTallGrass);
     protected static WorldGenMiniTallGrass FRUPGEN = new WorldGenMiniTallGrass(KCore.BlueFruitPlant);
+    protected static WorldGenMiniTallGrass BISONSTARSGEN = new WorldGenMiniTallGrass(KCore.bison_Stars);
 
     public BiomeMysticPlains(Biome.BiomeProperties properties)
     {
@@ -58,7 +56,12 @@ public class BiomeMysticPlains extends KetherBiome
     	}else if(k==5||k==6||k==7) {
     		return TALLGRASS1PLAINS;
     	}else if(rand.nextInt(25)==0) {
-    		return FRUPGEN;
+    	    int c=rand.nextInt(4);
+    	    if(c==0||c==1||c==2){
+    	        return BISONSTARSGEN;
+            }else{
+                return FRUPGEN;
+            }
     	}
     	else {
     		return TALLGRASS3PLAINS;

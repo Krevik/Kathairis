@@ -31,6 +31,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
 {
     public static final PropertyBool FLOWER = PropertyBool.create("flower");
     public static final PropertyBool SNOWY = PropertyBool.create("snowy");
+    int month = Calendar.getInstance().get(Calendar.MONTH);
 
     public BlockCorruptedGrass()
     {
@@ -47,7 +48,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
-        return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER)).withProperty(FLOWER, state.getValue(FLOWER));
+        return state.withProperty(SNOWY, month==11?true:false).withProperty(FLOWER, state.getValue(FLOWER));
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)

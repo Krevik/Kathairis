@@ -1,7 +1,6 @@
 package com.Krevik.Biomes;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Random;
 
 import com.Krevik.Entities.EntityBigTurtle;
@@ -9,18 +8,15 @@ import com.Krevik.Entities.EntityCamel;
 import com.Krevik.Entities.EntityPoisonousScorpion;
 import com.Krevik.Gens.WorldGenMovingSand;
 import com.Krevik.Gens.WorldGenMysticDesertCactus;
-import com.Krevik.Gens.WorldGenSingleGen;
+import com.Krevik.Gens.WorldGenMysticUniversal;
 import com.Krevik.Gens.Desert.WorldGenBigRockMushroom;
 import com.Krevik.Gens.Desert.WorldGenOldLibrary;
-import com.Krevik.Gens.Desert.WorldGenRedwoodTree;
 import com.Krevik.Gens.Desert.WorldGenRockMushroom;
 import com.Krevik.Gens.Desert.WorldGenWeatheredCaveCustom;
 import com.Krevik.Main.KCore;
 
-import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -37,7 +33,7 @@ public class BiomeMysticDesert extends KetherBiome
     protected static WorldGenBigRockMushroom BIGROCKMUSHROOM = new WorldGenBigRockMushroom();
     protected static WorldGenOldLibrary OLDLIBRARY = new WorldGenOldLibrary();
     protected static WorldGenMysticDesertCactus CACTUS = new WorldGenMysticDesertCactus();
-    protected static WorldGenSingleGen SINGLEGENDESERT = new WorldGenSingleGen(1);
+    protected static WorldGenMysticUniversal SINGLEGENDESERT = new WorldGenMysticUniversal(1);
     //protected static WorldGenRedwoodTree REDWOODTREE = new WorldGenRedwoodTree();
 
     public BiomeMysticDesert(Biome.BiomeProperties properties)

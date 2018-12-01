@@ -34,6 +34,7 @@ public class EntityAndRenderRegistry {
 	public static final ResourceLocation Butterfly1Loc = new ResourceLocation(KCore.MODID+":"+"textures/entity/butterfly1.png");
 	public static final ResourceLocation ShockingBallLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/shockingball.png");
 	public static final ResourceLocation StrangeWandererLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/strangewanderer.png");
+	public static final ResourceLocation Strange_Wanderer_Christmas_Loc = new ResourceLocation(KCore.MODID+":"+"textures/entity/strange_wanderer_christmas.png");
 	public static final ResourceLocation SkylightLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/skylight.png");
 	public static final ResourceLocation SkeletonWarriorLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/skeletonwarrior.png");
 	public static final ResourceLocation SteveGhostLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/steveghost.png");
@@ -52,6 +53,7 @@ public class EntityAndRenderRegistry {
 	public static final ResourceLocation GaznowelLoc = new ResourceLocation(KCore.MODID+":"+"textures/entity/gaznowel.png");
 	public static final ResourceLocation KatharianArrowLoc = new ResourceLocation(KCore.MODID, "textures/entity/projectiles/katharian_arrow.png");
 	public static final ResourceLocation CactiSporeLoc = new ResourceLocation(KCore.MODID, "textures/entity/cacti_spore.png");
+	public static final ResourceLocation PhasmLoc = new ResourceLocation(KCore.MODID, "textures/entity/phasm.png");
 
 	static int id=1;
 
@@ -111,6 +113,8 @@ public class EntityAndRenderRegistry {
 		EntityRegistry.registerModEntity(KatharianArrowLoc, EntityKatharianArrow.class, "Katharian Arrow", id++, KCore.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(CactiSporeLoc, EntityCactiSpore.class, "Cacti_Spore", id++, KCore.instance, 64, 3, true);
 		EntityRegistry.registerEgg(CactiSporeLoc, 0x996600, 0x00ff00);
+		EntityRegistry.registerModEntity(PhasmLoc, EntityPhasm.class, "Phasm", id++, KCore.instance, 64, 3, true);
+		EntityRegistry.registerEgg(PhasmLoc, 0x996600, 0x00ff00);
 	}
     public static void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityLivingFlower.class, RenderLivingFlower.FACTORY);
@@ -141,6 +145,6 @@ public class EntityAndRenderRegistry {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGaznowel.class, RenderGaznowel.FACTORY);
 		RenderingRegistry.registerEntityRenderingHandler(EntityKatharianArrow.class, RenderKatharianArrow.FACTORY);
 		RenderingRegistry.registerEntityRenderingHandler(EntityCactiSpore.class, RenderCactiSpore.FACTORY);
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhasm.class, RenderPhasm.FACTORY);
     }
 }

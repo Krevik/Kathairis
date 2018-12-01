@@ -131,6 +131,7 @@ public class WorldProviderMystic extends WorldProviderSurface
     @SideOnly(Side.CLIENT)
     public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
     {
+        float time = world.getWorldTime();
         float f = MathHelper.cos(p_76562_1_ * ((float)Math.PI * 2F)) * 2.0F + 0.5F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
         float f1 = 2.37F;
@@ -139,7 +140,12 @@ public class WorldProviderMystic extends WorldProviderSurface
         f1 = f1 * (f * 0.94F + 0.06F);
         f2 = f2 * (f * 0.94F + 0.06F);
         f3 = f3 * (f * 0.91F + 0.09F);
-        return new Vec3d((double)f1/3, (double)f2/3, (double)f3/3);
+        float poraDnia= (float) ((float)((time*Math.PI)/12000)+Math.PI/12);
+        f1=f1*MathHelper.clamp(MathHelper.sin(poraDnia),0,100);
+        f2=f2*MathHelper.clamp(MathHelper.sin(poraDnia),0,100);
+        f3=f3*MathHelper.clamp(MathHelper.sin(poraDnia),0,100);
+
+        return new Vec3d((double)f1, (double)f2, (double)f3);
     }
 
     public IChunkGenerator createChunkGenerator()

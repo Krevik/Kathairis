@@ -75,9 +75,9 @@ public static MusicTicker.MusicType ketherMusicXmas;
 
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
-		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDaySound, 100, 500);
-		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNightSound, 100, 500);
-		ketherMusicXmas = EnumHelperClient.addMusicType("kether.xmas", KCore.instance.proxy.ketherMusicChristmasSound, 100, 500);;
+		ketherMusicDay = EnumHelperClient.addMusicType("kether.day", KCore.instance.proxy.ketherMusicDaySound, 1000, 5000);
+		ketherMusicNight = EnumHelperClient.addMusicType("kether.night", KCore.instance.proxy.ketherMusicNightSound, 1000, 5000);
+		ketherMusicXmas = EnumHelperClient.addMusicType("kether.xmas", KCore.instance.proxy.ketherMusicChristmasSound, 1000, 5000);;
 		MinecraftForge.EVENT_BUS.register(new TextureStitcherParicleManager());
 	}
 

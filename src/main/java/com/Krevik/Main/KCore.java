@@ -459,6 +459,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Layered_Sand)
     public static final BlockLayeredSand Layered_Sand = new BlockLayeredSand(Ref.Layered_Sand,CreativeTabsMystic.buildingBlocks);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.bison_Stars)
+    public static final BlockBisonStars bison_Stars = new BlockBisonStars(Ref.bison_Stars);
 
 
     //@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Hell_Plant)
@@ -712,7 +714,7 @@ public class KCore {
 	public static final BaseItem Solis_Crystal = new BaseItem(Ref.Solis_Crystal, CreativeTabsMystic.miscellaneous);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Nectar_bowl)
-	public static final ItemMysticFood Nectar_Bowl = new ItemMysticFood(Ref.Nectar_bowl, CreativeTabsMystic.food,4,0.4F,false);
+	public static final ItemMysticFood Nectar_Bowl = (ItemMysticFood) new ItemMysticFood(Ref.Nectar_bowl, CreativeTabsMystic.food,4,0.4F,false).setAlwaysEdible();
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Magnethium_Axe)
  	public static final ItemMysticAxe Magnethium_Axe = new ItemMysticAxe(Ref.Magnethium_Axe, CreativeTabsMystic.tools,KCore.MAGNETHIUM);
@@ -1001,6 +1003,7 @@ public class KCore {
         public static final String howler_fur="howler_fur";
         public static final String katharian_arrow="katharian_arrow";
         public static final String Scythe="scythe";
+        public static final String bison_Stars="bison_stars";
 
 
     }
@@ -1024,7 +1027,7 @@ public class KCore {
     @GameRegistry.ObjectHolder("stun")
     public static final Potion stun_potion=new StunPotion(true,0xf51896);
     @GameRegistry.ObjectHolder("dissolution")
-    public static final Potion dissolution_potion=new StunPotion(true,0xf51896);
+    public static final Potion dissolution_potion=new DissolutionPotion(true,0xf51896);
 
     public static void onRegisterPotions(RegistryEvent.Register<Potion> event) {
         registerPotion("stun", new StunPotion(true, 0x56CBFD).setPotionName(KCore.MODID + ".effect.stun").registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "ab79a316-db47-11e8-9f8b-f2801f1b9fd1", 0D, 0), event);

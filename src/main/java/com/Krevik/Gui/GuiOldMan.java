@@ -100,23 +100,23 @@ public class GuiOldMan extends GuiScreen {
 	
     public void drawCenteredString(FontRenderer fontRendererIn, String text, int x, int y, int color)
     {
-		GlStateManager.scale(0.4f,0.4f,0.4f);
+		GlStateManager.scale(0.8f,0.8f,0.8f);
 		fontRendererIn.drawString(text, (x - fontRendererIn.getStringWidth(text) / 2), y, color);
-		GlStateManager.scale(2.5f,2.5f,2.5f);
+		GlStateManager.scale(1.25f,1.25,1.25f);
 	}
 
 	public void drawString(FontRenderer fontRendererIn, String text, int x, int y, int color)
 	{
-		GlStateManager.scale(0.4f,0.4f,0.4f);
+		GlStateManager.scale(0.8f,0.8f,0.8f);
 		fontRendererIn.drawString(text, (int)x, (int)y, color);
-		GlStateManager.scale(2.5f,2.5f,2.5f);
+		GlStateManager.scale(1.25f,1.25,1.25f);
 	}
 
 	public void drawCenteredString(String someString,FontRenderer fontRendererIn, String text, int x, int y, int color)
 	{
-		GlStateManager.scale(0.4f,0.4f,0.4f);
+		GlStateManager.scale(0.8f,0.8f,0.8f);
 		fontRendererIn.drawString(text, (x - fontRendererIn.getStringWidth(text) / 2), y, color);
-		GlStateManager.scale(2.5f,2.5f,2.5f);
+		GlStateManager.scale(1.25f,1.25,1.25f);
 	}
 
 
@@ -134,10 +134,10 @@ public class GuiOldMan extends GuiScreen {
 		this.drawCenteredString("someString", fontRenderer, "Mysterious Stranger", (int) ImageWidth/10+(int)(margin*2f), (int)(ImageHeight*1.18f), 0X191414);
 
 		if(mode==0){
-			this.drawString(fontRenderer, "Well hello there, "+ player.getName() +". It has been a long time since someone ", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f), 0X747474);
-			this.drawString(fontRenderer, "has walked through the gateway itself and walked this world. I am sure", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin), 0X747474);
-			this.drawString(fontRenderer, "you have many questions, but perhaps we should discuss more important", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*2), 0X747474);
-			this.drawString(fontRenderer, "matters.", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*1.25f+margin*3), 0X747474);
+			this.drawString(fontRenderer, "Well hello there, "+ player.getName() +". It has been a long time since someone ", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*0.65f), 0X747474);
+			this.drawString(fontRenderer, "has walked through the gateway itself and walked this world. I am sure", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*0.65f+margin), 0X747474);
+			this.drawString(fontRenderer, "you have many questions, but perhaps we should discuss more important", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*0.65f+margin*2), 0X747474);
+			this.drawString(fontRenderer, "matters.", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*0.65f+margin*3), 0X747474);
 		}
 		if(mode==1) {
 			this.drawCenteredString(fontRenderer, "What is it that you seek to find here?", (int) ImageWidth/3+(int)(margin), (int)(ImageHeight*1.25f), 0X747474);

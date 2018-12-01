@@ -52,6 +52,7 @@ public class EntityDeath extends EntityMob
     private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
     private static final DataParameter<Integer> scytheAttackTimer = EntityDataManager.<Integer>createKey(EntityDeath.class, DataSerializers.VARINT);
     private static final DataParameter<Boolean> isUsingSomeAttack = EntityDataManager.<Boolean>createKey(EntityDeath.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> dissolutionAttackTimer = EntityDataManager.<Integer>createKey(EntityDeath.class, DataSerializers.VARINT);
 
     public EntityDeath(World worldIn)
     {
@@ -61,6 +62,8 @@ public class EntityDeath extends EntityMob
         isFighting=false;
         dataManager.set(scytheAttackTimer,-1);
         dataManager.set(isUsingSomeAttack,false);
+        dataManager.set(dissolutionAttackTimer,-1);
+
     }
     
     @Override
@@ -105,6 +108,7 @@ public class EntityDeath extends EntityMob
         super.entityInit();
         this.dataManager.register(scytheAttackTimer, Integer.valueOf(-1));
         this.dataManager.register(isUsingSomeAttack, false);
+        this.dataManager.register(dissolutionAttackTimer, Integer.valueOf(-1));
 
     }
 
@@ -152,19 +156,21 @@ public class EntityDeath extends EntityMob
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
     {
         super.setEquipmentBasedOnDifficulty(difficulty);
-        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(KCore.Scythe));
     }
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         this.setEquipmentBasedOnDifficulty(difficulty);
-        this.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(KCore.Scythe));
         return livingdata;
     }
     public boolean attackEntityAsMob(Entity entityIn)
     {
-        boolean flag = super.attackEntityAsMob(entityIn);
-        return flag;
+        if(getIsUsingSomeAttack()){
+            if(getScytheAttackTimer()>-1&&getScytheAttackTimer()<30){
+                return super.attackEntityAsMob(entityIn);
+            }
+        }
+        return false;
     }
 
     int mode=0;
@@ -187,15 +193,18 @@ public class EntityDeath extends EntityMob
     	}
 
     	if(!getIsUsingSomeAttack()){
-            if(getRNG().nextInt(500)==0){
-                dataManager.set(scytheAttackTimer,300);
+            if(getRNG().nextInt(100)==0){
+                dataManager.set(scytheAttackTimer,90);
             }
         }
         if(dataManager.get(scytheAttackTimer)>=0){
             dataManager.set(scytheAttackTimer,(Integer)dataManager.get(scytheAttackTimer)-1);
         }
+        if(dataManager.get(dissolutionAttackTimer)>=0){
+            dataManager.set(dissolutionAttackTimer,(Integer)dataManager.get(dissolutionAttackTimer)-1);
+        }
 
-        if(dataManager.get(scytheAttackTimer)!=-1){
+        if((dataManager.get(scytheAttackTimer)!=-1||dataManager.get(dissolutionAttackTimer)!=-1)){
             dataManager.set(isUsingSomeAttack,true);
         }else{
             dataManager.set(isUsingSomeAttack,false);
@@ -207,6 +216,9 @@ public class EntityDeath extends EntityMob
     }
     public int getScytheAttackTimer(){
         return dataManager.get(scytheAttackTimer);
+    }
+    public int getDissolutionAttackTimer(){
+        return dataManager.get(dissolutionAttackTimer);
     }
 
 

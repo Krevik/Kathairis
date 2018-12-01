@@ -227,6 +227,7 @@ tile.redwood_log_size_2.name=Redwood Log Size-2
 tile.redwood_log_size_1.name=Redwood Log Size-1
 tile.mythic_stone_bricks.name=Katharian Bricks
 tile.layered_sand.name=Layered Sand
+tile.bison_stars.name=Bison Stars
 
 entity.PoisonousScorpion.name=Scorpion
 entity.BigTurtle.name=Tortoise
