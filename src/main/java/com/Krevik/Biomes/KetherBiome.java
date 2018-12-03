@@ -2,6 +2,7 @@ package com.Krevik.Biomes;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +10,7 @@ import com.Krevik.Blocks.BaseBlock;
 import com.Krevik.Entities.Butterflies.EntityIllukini;
 import com.Krevik.Entities.Butterflies.EntityRubySile;
 import com.Krevik.Entities.Butterflies.EntitySkylight;
+import com.Krevik.Gens.StructureLoader.StructureLoader;
 import com.Krevik.Gens.WorldGenMysticOre;
 import com.Krevik.Main.KCore;
 
@@ -32,10 +34,11 @@ public abstract class KetherBiome extends Biome
     public Color baseGrassColor;
     private static final int TitaniumPerChunk = 9;
     private static final int RevenumPerChunk = 15;
+    private static StructureLoader structureLoader = new StructureLoader();
 
     public KetherBiome(Biome.BiomeProperties properties)
     {
-    	super(properties);
+        super(properties);
         //this.decorator=createBiomeDecorator();
         this.spawnableCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
@@ -46,6 +49,10 @@ public abstract class KetherBiome extends Biome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityRubySile.class, 8, 1, 2));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 8, 1, 2));
         baseGrassColor=new Color(29,242,228);
+    }
+
+    public static StructureLoader getStructureLoader(){
+        return structureLoader;
     }
 
     public void setBaseGrassColor(Color color){

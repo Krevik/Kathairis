@@ -36,9 +36,13 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
     public BlockCorruptedGrass()
     {
         super(KCore.Ref.CorruptedGrass, Material.GRASS, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.PLANT);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false)));
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabsMystic.buildingBlocks);
+        if(month==11){
+            this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(true)).withProperty(FLOWER, Boolean.valueOf(false)));
+        }else{
+            this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false)));
+        }
     }
 
     /**
@@ -56,13 +60,15 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
         if (!worldIn.isRemote)
         {
         	if(worldIn.getBiome(pos)==KCore.MysticPlains) {
-        		if(worldIn.getBlockState(pos)==KCore.CorruptedGrass.getDefaultState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false))) {
-	        		if(rand.nextInt(100)==0) {
-	        			if(worldIn.isAirBlock(pos.up())) {
-	        			worldIn.setBlockState(pos, KCore.CorruptedGrass.getDefaultState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(true)));
-	        			}
-	        		}
-        		}
+        	    if(month!=11) {
+                    if (worldIn.getBlockState(pos) == KCore.CorruptedGrass.getDefaultState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false))) {
+                        if (rand.nextInt(100) == 0) {
+                            if (worldIn.isAirBlock(pos.up())) {
+                                worldIn.setBlockState(pos, KCore.CorruptedGrass.getDefaultState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(true)));
+                            }
+                        }
+                    }
+                }
         	}
             if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)
             {

@@ -1,9 +1,13 @@
 {
     "variants": {
         "normal": { "model": "mystic:mysticleaves" },
-		"check_decay=false,decayable=false": { "model": "mystic:mysticleaves" },
-		"check_decay=false,decayable=true": { "model": "mystic:mysticleaves" },
-		"check_decay=true,decayable=false": { "model": "mystic:mysticleaves" },
-		"check_decay=true,decayable=true": { "model": "mystic:mysticleaves" }
+		"check_decay=false,decayable=false,snowy=false": { "model": "mystic:mysticleaves" },
+		"check_decay=false,decayable=true,snowy=false": { "model": "mystic:mysticleaves" },
+		"check_decay=true,decayable=false,snowy=false": { "model": "mystic:mysticleaves" },
+		"check_decay=true,decayable=true,snowy=false": { "model": "mystic:mysticleaves" },
+		"check_decay=false,decayable=false,snowy=true": { "model": "mystic:mysticleaves_snowy" },
+		"check_decay=false,decayable=true,snowy=true": { "model": "mystic:mysticleaves_snowy" },
+		"check_decay=true,decayable=false,snowy=true": { "model": "mystic:mysticleaves_snowy" },
+		"check_decay=true,decayable=true,snowy=true": { "model": "mystic:mysticleaves_snowy" }
     }
 }

@@ -1,10 +1,13 @@
 package com.Krevik.Biomes;
 
 import java.awt.*;
+import java.util.Calendar;
 import java.util.Random;
 
 import com.Krevik.Entities.*;
 import com.Krevik.Gens.Forest.*;
+import com.Krevik.Gens.StructureLoader.CreateTreeFromStructure;
+import com.Krevik.Gens.StructureLoader.StructureList;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
 import com.Krevik.Gens.WorldGenMysticMultiGrass;
 import com.Krevik.Gens.WorldGenNewTree;
@@ -17,6 +20,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeSnow;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -37,8 +41,8 @@ public class BiomeMysticForest extends KetherBiome
     public BiomeMysticForest(Biome.BiomeProperties properties)
     {
         super(properties);
-        this.decorator.treesPerChunk = 3;
-        this.decorator.extraTreeChance = 0F;
+        this.decorator.treesPerChunk = 4;
+        this.decorator.extraTreeChance = 5F;
         this.decorator.flowersPerChunk = 0;
         this.decorator.grassPerChunk = 2;
         this.topBlock=KCore.CorruptedGrass.getDefaultState();
@@ -48,7 +52,6 @@ public class BiomeMysticForest extends KetherBiome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityGecko.class, 4, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityLivingFlower.class, 8, 1, 1));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityHowler.class, 5, 1, 1));
-        //this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 98, 1, 1));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityFungite.class, 2, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCactiSpore.class, 4, 1, 1));
         baseGrassColor=new Color(21,178,102);
@@ -58,9 +61,47 @@ public class BiomeMysticForest extends KetherBiome
     {
         super.decorate(worldIn,random,pos);
     }
+
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
-    	if(rand.nextInt(5)==2){
+        int k=rand.nextInt(20);
+        if(k==0){
+            if(rand.nextInt(3)==0){
+                return (WorldGenAbstractTree)new WorldGenFlippedHeartTree(5,3+rand.nextInt(7));
+            }else{
+                return (WorldGenAbstractTree)TREE_FEATURE2;
+            }
+        }
+        else if(k==1|k==2||k==3){
+            return new CreateTreeFromStructure(StructureList.fauyn_Bush_1,getStructureLoader());
+        }
+        else if(k==4||k==5){
+            return new CreateTreeFromStructure(StructureList.fauyn_Tree_1,getStructureLoader());
+        }
+        else if(k==6||k==7){
+            return new CreateTreeFromStructure(StructureList.fauyn_Tree_2,getStructureLoader());
+        }
+        else if(k==8||k==9){
+            return new CreateTreeFromStructure(StructureList.nath_bush_1,getStructureLoader());
+        }
+        else if(k==10||k==11){
+            return new CreateTreeFromStructure(StructureList.nath_tree_1,getStructureLoader());
+        }
+        else if(k==12||k==13){
+            return TREE_FEATURE4;
+        }
+        else if(k==14||k==15){
+            return CUSTOMTREE2;
+        }
+        else if(k==16||k==17){
+            return CUSTOMTREE4;
+        }
+        else if(k==18||k==19){
+            return TREE_FEATURE2;
+        }else{
+            return TREE_FEATURE2;
+        }
+    	/*if(rand.nextInt(5)==2){
     		if(rand.nextInt(50)==0) {
     			return (WorldGenAbstractTree)new WorldGenFlippedHeartTree(5,3+rand.nextInt(7));
     		}else {
@@ -68,7 +109,21 @@ public class BiomeMysticForest extends KetherBiome
     		}
     	}
     	else if(rand.nextInt(5)==3) {
-    		return TREE_FEATURE4;
+    	    int k=rand.nextInt(10);
+    	    if(k==0){
+    	        return new CreateTreeFromStructure(StructureList.fauyn_Bush_1,getStructureLoader());
+            }else if(k==1){
+                return new CreateTreeFromStructure(StructureList.fauyn_Tree_1,getStructureLoader());
+            }else if(k==2){
+                return new CreateTreeFromStructure(StructureList.fauyn_Tree_2,getStructureLoader());
+            }else if(k==3){
+                return new CreateTreeFromStructure(StructureList.nath_bush_1,getStructureLoader());
+            }else if(k==4){
+                return new CreateTreeFromStructure(StructureList.nath_tree_1,getStructureLoader());
+            }
+            else {
+                return TREE_FEATURE4;
+            }
     	}else if(rand.nextInt(5)==1) {
     		return CUSTOMTREE2;
     	}else if(rand.nextInt(6)==2||rand.nextInt(6)==3) {
@@ -76,7 +131,7 @@ public class BiomeMysticForest extends KetherBiome
     	}
     	else{
             return (WorldGenAbstractTree)TREE_FEATURE2;
-    	}
+    	}*/
     }
     
     public WorldGenerator getRandomWorldGenForGrass(Random rand)

@@ -109,7 +109,7 @@ public class KCore {
     public static final BlockMysticLog MysticLog = new BlockMysticLog(Ref.MysticLog);
    
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticLeaves)
-    public static final BlockMysticLeaf MysticLeaves = new BlockMysticLeaf(Ref.MysticLeaves, Material.LEAVES, CreativeTabsMystic.buildingBlocks);
+    public static final BlockMysticLeafWithChristmas MysticLeaves = new BlockMysticLeafWithChristmas(Ref.MysticLeaves, Material.LEAVES, CreativeTabsMystic.buildingBlocks);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticSapling)
     public static final BlockMysticSapling MysticSapling = new BlockMysticSapling(Ref.MysticSapling);

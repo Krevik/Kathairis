@@ -1,5 +1,6 @@
 package com.Krevik.Biomes;
 
+import java.util.Calendar;
 import java.util.Random;
 
 import com.Krevik.Entities.EntityBison;
@@ -7,6 +8,9 @@ import com.Krevik.Entities.EntityJellyFish;
 import com.Krevik.Entities.EntityMysticBird;
 import com.Krevik.Entities.Butterflies.EntityButterfly;
 import com.Krevik.Entities.Butterflies.EntityButterfly1;
+import com.Krevik.Gens.StructureLoader.CreateTreeFromStructure;
+import com.Krevik.Gens.StructureLoader.StructureList;
+import com.Krevik.Gens.StructureLoader.StructureLoader;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
 import com.Krevik.Gens.WorldGenMysticMultiGrass;
 import com.Krevik.Gens.WorldGenMysticUniversal;
@@ -63,6 +67,9 @@ public class BiomeMysticPlains extends KetherBiome
                 return FRUPGEN;
             }
     	}
+    	else if(k==9){
+    	    return new CreateTreeFromStructure(StructureList.nathbush_01_plains,getStructureLoader());
+        }
     	else {
     		return TALLGRASS3PLAINS;
     	}

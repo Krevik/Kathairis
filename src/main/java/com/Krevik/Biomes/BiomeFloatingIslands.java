@@ -1,10 +1,13 @@
 package com.Krevik.Biomes;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
 import com.Krevik.Entities.*;
 import com.Krevik.Entities.Butterflies.EntityCloudShimmer;
+import com.Krevik.Gens.StructureLoader.CreateWorldGenFromStructure;
+import com.Krevik.Gens.StructureLoader.StructureList;
 import com.Krevik.Gens.WorldGenClouds;
 import com.Krevik.Gens.WorldGenHugeSoulTree;
 import com.Krevik.Gens.WorldGenMiniTallGrass;
@@ -44,7 +47,7 @@ public class BiomeFloatingIslands extends KetherBiome
         this.decorator.treesPerChunk = 0;
         this.decorator.extraTreeChance = 1F;
         this.decorator.flowersPerChunk = 0;
-        this.decorator.grassPerChunk = 5;
+        this.decorator.grassPerChunk = 6;
         this.topBlock=KCore.CorruptedGrass.getDefaultState();
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Floating Islands");
@@ -54,6 +57,11 @@ public class BiomeFloatingIslands extends KetherBiome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityFlyingSquid.class, 4, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySkyray.class, 2, 2, 4));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGaznowel.class, 2, 1, 1));
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        if(month==11){
+            properties.setTemperature(0.0F);
+            properties.setSnowEnabled();
+        }
     }
 
     public float getSpawningChance()
@@ -120,8 +128,11 @@ public class BiomeFloatingIslands extends KetherBiome
  			int ySize = template.getSize().getY();
  			int zSize = template.getSize().getZ();
 
- 			if(world.isAirBlock(position)&&world.isAirBlock(position.add(xSize, 0, 0))&&world.isAirBlock(position.add(0,ySize,0))&&
- 					world.isAirBlock(position.add(0, 0, zSize))&&world.isAirBlock(position.add(xSize, 0, zSize))&&world.isAirBlock(position.add(xSize, ySize, zSize))) {
+ 			if(world.isAirBlock(position)&&world.isAirBlock(position.add(xSize, 0, 0))
+                    &&world.isAirBlock(position.add(0,ySize,0))&&
+ 					world.isAirBlock(position.add(0, 0, zSize))&&
+                    world.isAirBlock(position.add(xSize, 0, zSize))&&
+                    world.isAirBlock(position.add(xSize, ySize, zSize))) {
  				IBlockState iblockstate = world.getBlockState(position);
  				world.notifyBlockUpdate(position, iblockstate, iblockstate, 3);
  				PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
@@ -131,9 +142,21 @@ public class BiomeFloatingIslands extends KetherBiome
  			}
      }
     
-    public WorldGenerator getRandomWorldGenForGrass(Random rand)
-    {
-    	return TALLGRASS_MINI;
+    public WorldGenerator getRandomWorldGenForGrass(Random rand) {
+        if (rand.nextInt(3) == 0) {
+            int k = rand.nextInt(3);
+            if (k == 0) {
+                return new CreateWorldGenFromStructure(StructureList.lahnbush_01, getStructureLoader());
+            }
+            else if (k == 1) {
+                return new CreateWorldGenFromStructure(StructureList.lahnbush_02, getStructureLoader());
+            }
+            else{
+                return new CreateWorldGenFromStructure(StructureList.lahntree_01, getStructureLoader());
+            }
+        } else {
+            return TALLGRASS_MINI;
+        }
     }
     
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
