@@ -48,11 +48,11 @@ public class GuiOldMan extends GuiScreen {
 		buttonList.clear();
 		int offLeft = (width - ImageWidth) / 2;
 		int offTop = 0;
-		buttonList.add(Next = new GenericButton(ImageWidth/4+margin*2, (int)(ImageHeight/2-margin), 80, 20, "Next"));
-		buttonList.add(Back = new GenericButton(ImageWidth/4+margin*2, (int)(ImageHeight/2+margin/2), 60, 20, "Back"));
-		buttonList.add(Knowledge = new GenericButton(ImageWidth/4+margin*8, (int)(ImageHeight/2-margin), 80, 20, "Knowledge"));
-		buttonList.add(Power = new GenericButton(ImageWidth/4+margin*8, (int)(ImageHeight/2+margin/2), 60, 20, "Power"));
-		buttonList.add(Adventure = new GenericButton(ImageWidth/4+margin*8, (int)(ImageHeight/2+margin*2), 60, 20, "Adventure"));
+		buttonList.add(Next = new GenericButton(ImageWidth/2+margin*2, (int)(height-ImageHeight/2-margin+margin), 80, 20, "Next"));
+		buttonList.add(Back = new GenericButton(ImageWidth/2+margin*2, (int)(height-ImageHeight/2-margin+margin*3), 60, 20, "Back"));
+		buttonList.add(Knowledge = new GenericButton(ImageWidth/2+margin*8, (int)(height-ImageHeight/2-margin+margin), 80, 20, "Knowledge"));
+		buttonList.add(Power = new GenericButton(ImageWidth/2+margin*8, (int)(height-ImageHeight/2-margin+margin*3), 60, 20, "Power"));
+		buttonList.add(Adventure = new GenericButton(ImageWidth/2+margin*8, (int)(height-ImageHeight/2-margin+margin*5), 60, 20, "Adventure"));
 
 	}
 
@@ -133,7 +133,6 @@ public class GuiOldMan extends GuiScreen {
 		drawModalRectWithCustomSizedTexture(margin, height-ImageHeight/2-margin, 0, 0, ImageWidth/2,ImageHeight/2,ImageWidth/2,ImageHeight/2);
 		//fontRenderer.drawString("Welcome to the Kathairis!", (int) (width / 2.0) - 55, 20, 0X353f51);
 		this.drawCenteredString("someString", fontRenderer, "Mysterious Stranger", (int) ImageWidth/10+(int)(margin*2f), (int)(ImageHeight*1.18f), 0X191414);
-
 		if(mode==0){
 			this.drawString(fontRenderer, "Well hello there, "+ player.getName() +". It has been a long time since someone ", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*0.65f), 0X747474);
 			this.drawString(fontRenderer, "has walked through the gateway itself and walked this world. I am sure", (int) ImageWidth/10+(int)(margin), (int)(ImageHeight*0.65f+margin), 0X747474);
