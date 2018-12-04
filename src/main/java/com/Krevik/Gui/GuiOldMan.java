@@ -129,7 +129,8 @@ public class GuiOldMan extends GuiScreen {
 		this.mc.getTextureManager().bindTexture(GUITextures);
 		int offLeft = (int) ((200) / 2.0F);
 		int offTop = 0;
-		drawModalRectWithCustomSizedTexture(margin, ImageHeight/2-15, 0, 0, ImageWidth/4,ImageHeight/4,ImageWidth/4,ImageHeight/4);
+		int scale = Minecraft.getMinecraft().gameSettings.guiScale;
+		drawModalRectWithCustomSizedTexture(margin, height-ImageHeight/2-margin, 0, 0, ImageWidth/2,ImageHeight/2,ImageWidth/2,ImageHeight/2);
 		//fontRenderer.drawString("Welcome to the Kathairis!", (int) (width / 2.0) - 55, 20, 0X353f51);
 		this.drawCenteredString("someString", fontRenderer, "Mysterious Stranger", (int) ImageWidth/10+(int)(margin*2f), (int)(ImageHeight*1.18f), 0X191414);
 
