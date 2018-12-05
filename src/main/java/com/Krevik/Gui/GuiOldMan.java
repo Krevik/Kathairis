@@ -135,23 +135,30 @@ public class GuiOldMan extends GuiScreen {
 			this.drawString(fontRenderer, "but perhaps we should discuss more important matters.", (int) (margin*1.75), (int)height-ImageHeight/2+margin*5, 0X747474);
 		}
 		if(mode==1) {
-			this.drawCenteredString(fontRenderer, "What is it that you seek to find here?", (int) (margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
+			this.drawString(fontRenderer, "What is it that you seek to find here?", (int) (margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
 		}
 		if(mode==2) {
-			this.drawString(fontRenderer, "There is plenty knowledge to be found in Kathairis, land of pure", (int)(margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
-			this.drawString(fontRenderer, "magic and rich histories. Much of this you will find in your travels", (int)(margin*1.75), (int)height-ImageHeight/2+margin*2, 0X747474);
-			this.drawString(fontRenderer, "through-out these lands.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*3, 0X747474);
+			this.drawString(fontRenderer, "There is plenty knowledge to be found in Kathairis,", (int)(margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
+			this.drawString(fontRenderer, "land of pure magic and rich histories.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*2, 0X747474);
+			this.drawString(fontRenderer, "Much of this you will find in your", (int)(margin*1.75), (int)height-ImageHeight/2+margin*3, 0X747474);
+			this.drawString(fontRenderer, "travels through-out these lands.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*4, 0X747474);
+
 		}
 		if(mode==3){
-			this.drawString(fontRenderer, "Dominance comes easily to those capable enough to tame these wild", (int)(margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
-			this.drawString(fontRenderer, "lands. Much darkness has erupted in past years, and there shall always", (int)(margin*1.75), (int)height-ImageHeight/2+margin*2, 0X747474);
-			this.drawString(fontRenderer, "be plenty of beasts to sate you thirst for power and strength.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*3, 0X747474);
+			this.drawString(fontRenderer, "Dominance comes easily to those capable enough", (int)(margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
+			this.drawString(fontRenderer, "to tame these wild lands. Much darkness has", (int)(margin*1.75), (int)height-ImageHeight/2+margin*2, 0X747474);
+			this.drawString(fontRenderer, "erupted in past years, and there shall always ", (int)(margin*1.75), (int)height-ImageHeight/2+margin*3, 0X747474);
+			this.drawString(fontRenderer, "be plenty of beasts to sate you thirst for", (int)(margin*1.75), (int)height-ImageHeight/2+margin*4, 0X747474);
+			this.drawString(fontRenderer, "power and strength.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*5, 0X747474);
+
+
 		}
 		if(mode==4){
-			this.drawString(fontRenderer, "The lands you have entered are ones filled with equal expanse as the", (int)(margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
-			this.drawString(fontRenderer, "land you hail from. There will be many new discoveries and trials that", (int)(margin*1.75), (int)height-ImageHeight/2+margin*2, 0X747474);
-			this.drawString(fontRenderer, "will lie before you, and endless stories for you to write of your own", (int)(margin*1.75), (int)height-ImageHeight/2+margin*3, 0X747474);
-			this.drawString(fontRenderer, "adventures.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*4, 0X747474);
+			this.drawString(fontRenderer, "The lands you have entered are ones filled with", (int)(margin*1.75), (int)height-ImageHeight/2+margin, 0X747474);
+			this.drawString(fontRenderer, "equal expanse as the land you hail from.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*2, 0X747474);
+			this.drawString(fontRenderer, "There will be many new discoveries", (int)(margin*1.75), (int)height-ImageHeight/2+margin*3, 0X747474);
+			this.drawString(fontRenderer, "and trials that will lie before you,", (int)(margin*1.75), (int)height-ImageHeight/2+margin*4, 0X747474);
+			this.drawString(fontRenderer, "and endless stories for you to write of your own adventures.", (int)(margin*1.75), (int)height-ImageHeight/2+margin*5, 0X747474);
 		}
 
 		super.drawScreen(parWidth, parHeight, particle);
