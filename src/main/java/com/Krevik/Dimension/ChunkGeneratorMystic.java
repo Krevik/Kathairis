@@ -77,7 +77,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
 
     public ChunkGeneratorMystic(World worldIn, long seed)
     {
-        //caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
+        caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
         this.world = worldIn;
         this.terrainType = worldIn.getWorldInfo().getTerrainType();
         this.rand = new Random(seed);
@@ -356,9 +356,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
 
 
        // this.caveGenerator.generate(this.world, x, z, chunkprimer);
-        if(rand.nextInt(15)==0) {
         	caveGenerator.generate(world, x, z, chunkprimer);
-        }
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
         byte[] abyte = chunk.getBiomeArray();
