@@ -749,6 +749,13 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Scythe)
     public static final ItemMysticSword Scythe = new ItemMysticSword(Ref.Scythe, CreativeTabsMystic.weapons,KCore.DEATH);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.christmas_chocolate)
+    public static final ItemMysticFood christmas_chocolate = new ItemMysticFood(Ref.christmas_chocolate,null, 3,0.7F,false);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.candy_cane)
+    public static final ItemMysticFood candy_cane = new ItemMysticFood(Ref.candy_cane,null, 3,0.7F,false);
+
+
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
@@ -1004,6 +1011,8 @@ public class KCore {
         public static final String katharian_arrow="katharian_arrow";
         public static final String Scythe="scythe";
         public static final String bison_Stars="bison_stars";
+        public static final String christmas_chocolate="christmas_chocolate";
+        public static final String candy_cane="candy_cane";
 
 
     }
