@@ -462,7 +462,14 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.bison_Stars)
     public static final BlockBisonStars bison_Stars = new BlockBisonStars(Ref.bison_Stars);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.christmas_gift)
+    public static final BlockChristmasGift christmas_gift = new BlockChristmasGift(Ref.christmas_gift);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.baurble)
+    public static final BlockBaurble baurble = new BlockBaurble(Ref.baurble);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.snowdrop_cyprepedium)
+    public static final BlockSnowdropCyprepedium snowdrop_Cyprepedium = new BlockSnowdropCyprepedium(Ref.snowdrop_cyprepedium);
     //@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Hell_Plant)
    //public static final BlockMysticBush Hell_Plant = (BlockMysticBush) new BlockMysticBush(Ref.Hell_Plant,true,false).setLightLevel(0.5F);
     
@@ -755,6 +762,8 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.candy_cane)
     public static final ItemMysticFood candy_cane = new ItemMysticFood(Ref.candy_cane,null, 3,0.7F,false);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_catcher)
+    public static final ItemButterflyCatcher butterfly_catcher = new ItemButterflyCatcher(Ref.butterfly_catcher);
 
 
     @SideOnly(Side.CLIENT)
@@ -1013,8 +1022,10 @@ public class KCore {
         public static final String bison_Stars="bison_stars";
         public static final String christmas_chocolate="christmas_chocolate";
         public static final String candy_cane="candy_cane";
-
-
+        public static final String christmas_gift="christmas_gift";
+        public static final String baurble="baurble";
+        public static final String butterfly_catcher="butterfly_catcher";
+        public static final String snowdrop_cyprepedium="snowdrop_cyprepedium";
     }
     
 

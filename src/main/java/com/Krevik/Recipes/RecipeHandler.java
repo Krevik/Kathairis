@@ -219,6 +219,7 @@ public class RecipeHandler {
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Katharian Arrow1"),new ResourceLocation("Items"), new ItemStack(KCore.katharian_arrow,4),"X  "," Y ","  Z", Character.valueOf('X'), KCore.skyray_feather, Character.valueOf('Y'),KCore.ShinyStick,Character.valueOf('Z'),KCore.TitaniumIngot);
 		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Katharian Arrow2"),new ResourceLocation("Items"), new ItemStack(KCore.katharian_arrow,4)," X "," Y "," Z ", Character.valueOf('X'), KCore.skyray_feather, Character.valueOf('Y'),KCore.ShinyStick,Character.valueOf('Z'),KCore.TitaniumIngot);
 
+		GameRegistry.addShapedRecipe(new ResourceLocation("mystic:Baurble"),new ResourceLocation("Blocks"), new ItemStack(KCore.baurble,1),"XZX","XYX","XXX", Character.valueOf('X'), Items.PAPER, Character.valueOf('Y'),Items.GLOWSTONE_DUST,Character.valueOf('Z'),KCore.ShinyStick);
 
 	}
 }

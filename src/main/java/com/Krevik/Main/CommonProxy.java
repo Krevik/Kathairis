@@ -277,7 +277,10 @@ public class CommonProxy {
 					KCore.Redwood_log_size_1,
 					KCore.Mythic_Stone_Bricks,
 					KCore.Layered_Sand,
-					KCore.bison_Stars
+					KCore.bison_Stars,
+					KCore.christmas_gift,
+					KCore.baurble,
+					KCore.snowdrop_Cyprepedium
 					//KCore.Hell_Plant
 					//KCore.Butterfly_Analysing_Table
 
@@ -414,7 +417,10 @@ public class CommonProxy {
 					new ItemBlock(KCore.Redwood_log_size_1),
 					new ItemBlock(KCore.Mythic_Stone_Bricks),
 					new ItemSand(KCore.Layered_Sand),
-					new ItemBlock(KCore.bison_Stars)
+					new ItemBlock(KCore.bison_Stars),
+					new ItemBlock(KCore.christmas_gift),
+					new ItemBlock(KCore.baurble),
+					new ItemBlock(KCore.snowdrop_Cyprepedium)
 					//new ItemBlock(KCore.Hell_Plant)
 					//new ItemBlock(KCore.Butterfly_Analysing_Table)
 					};

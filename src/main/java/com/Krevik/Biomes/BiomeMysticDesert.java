@@ -6,6 +6,7 @@ import java.util.Random;
 import com.Krevik.Entities.EntityBigTurtle;
 import com.Krevik.Entities.EntityCamel;
 import com.Krevik.Entities.EntityPoisonousScorpion;
+import com.Krevik.Gens.Desert.AncientLabirynth.WorldGenAncientLabirynth;
 import com.Krevik.Gens.WorldGenMovingSand;
 import com.Krevik.Gens.WorldGenMysticDesertCactus;
 import com.Krevik.Gens.WorldGenMysticUniversal;
@@ -23,6 +24,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.MapGenStronghold;
 
 public class BiomeMysticDesert extends KetherBiome
 {
@@ -105,6 +107,12 @@ public class BiomeMysticDesert extends KetherBiome
 			int rz = pos.getZ() + random.nextInt(16) + 8;
             OLDLIBRARY.generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
         }
+
+        /*if(random.nextInt(50)==0){
+            int rx = pos.getX() + random.nextInt(16) + 8;
+            int rz = pos.getZ() + random.nextInt(16) + 8;
+            new WorldGenAncientLabirynth().generateNew(world, random, world.getHeight(new BlockPos(rx, 0, rz)),world.getHeight(new BlockPos(rx, 0, rz)));
+        }*/
         
         /*if(random.nextInt(150)==0) {
     		int X = pos.getX() + random.nextInt(16)+8;
@@ -116,6 +124,7 @@ public class BiomeMysticDesert extends KetherBiome
         	}
         }
         */
+
     }
 
     @Override

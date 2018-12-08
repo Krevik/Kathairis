@@ -98,8 +98,9 @@ item.skyray_feather.name=Skyray feather
 item.howler_fur.name=Matted Fur
 item.katharian_arrow.name=Katharian Arrow
 item.scythe.name=Scythe
-item.christmas_chocolate=Christmas Chocolate
-item.candy_cane=Candy Cane
+item.christmas_chocolate.name=Christmas Chocolate
+item.candy_cane.name=Candy Cane
+item.butterfly_catcher.name=Butterfly Catcher
 
 
 
@@ -230,6 +231,9 @@ tile.redwood_log_size_1.name=Redwood Log Size-1
 tile.mythic_stone_bricks.name=Katharian Bricks
 tile.layered_sand.name=Layered Sand
 tile.bison_stars.name=Bison Stars
+tile.christmas_gift.name=Christmas Gift
+tile.baurble.name=Baurble
+tile.snowdrop_cyprepedium.name=Snowdrop Cyprepedium
 
 entity.PoisonousScorpion.name=Scorpion
 entity.BigTurtle.name=Tortoise

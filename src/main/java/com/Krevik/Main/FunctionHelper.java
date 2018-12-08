@@ -107,6 +107,30 @@ public class FunctionHelper {
     	
     	return is;
     }
+
+	public ItemStack getChristmasGiftDrop() {
+		ItemStack is=null;
+		ItemStack[] posibilities = {new ItemStack(KCore.bison_Stars,1+random.nextInt(10)),
+		new ItemStack(KCore.christmas_chocolate,1+random.nextInt(10)),
+		new ItemStack(KCore.candy_cane,1+random.nextInt(20)),
+		new ItemStack(KCore.MysticGem,1+random.nextInt(5)),
+		new ItemStack(KCore.CottonCandy,1+random.nextInt(10)),
+		new ItemStack(KCore.TitaniumIngot,1+random.nextInt(20)),
+		new ItemStack(KCore.CloudEssence,1+random.nextInt(20)),
+		new ItemStack(KCore.Magnethium_Shard,1+random.nextInt(50)),
+		new ItemStack(KCore.CrystalsCluster,1),
+				new ItemStack(KCore.snowdrop_Cyprepedium,1+random.nextInt(20)),
+				new ItemStack(KCore.christmas_chocolate,1+random.nextInt(10)),
+				new ItemStack(KCore.candy_cane,1+random.nextInt(20)),
+				new ItemStack(KCore.christmas_chocolate,1+random.nextInt(10)),
+				new ItemStack(KCore.candy_cane,1+random.nextInt(20)),
+				new ItemStack(KCore.christmas_chocolate,1+random.nextInt(10)),
+				new ItemStack(KCore.candy_cane,1+random.nextInt(20)),
+		new ItemStack(KCore.baurble,1),
+		new ItemStack(KCore.snowdrop_Cyprepedium,1+random.nextInt(20))};
+		is=posibilities[random.nextInt(posibilities.length)];
+		return is;
+	}
     
     public static int getItemBurnTime(ItemStack stack)
     {
