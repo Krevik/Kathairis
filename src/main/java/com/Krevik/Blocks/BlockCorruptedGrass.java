@@ -118,7 +118,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
     			}
         	}
         }
-        if(rand.nextInt(999999)==0) {
+        /*if(rand.nextInt(999999)==0) {
             int month = Calendar.getInstance().get(Calendar.MONTH);
             if (month == 11) {
                 if (worldIn.isAirBlock(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()))) {
@@ -127,7 +127,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
                     }
                 }
             }
-        }
+        }*/
     }
 
     private IBlockState getRandomGiftState(Random random){

@@ -1,6 +1,8 @@
 package com.Krevik.Events;
 
+import com.Krevik.Blocks.BlockChristmasGift;
 import com.Krevik.Dimension.KetherDataStorage;
+import com.Krevik.Entities.EntityStrangeWanderer;
 import com.Krevik.Items.ItemMysticArmor;
 import com.Krevik.Main.KCore;
 import com.Krevik.Networking.KetherPacketHandler;
@@ -9,6 +11,7 @@ import com.Krevik.Networking.PacketSandstormUpdatedOnClient;
 import com.Krevik.Networking.PacketSandstormUpdatedOnServer;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.BlockSnow;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,10 +23,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBucketMilk;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.network.play.server.SPacketCamera;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -31,6 +31,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
@@ -60,7 +61,9 @@ import scala.collection.parallel.ParIterableLike;
 
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class KathairisEventsHandler {
 
@@ -176,9 +179,39 @@ public class KathairisEventsHandler {
 					}
 	}
 
+	static int month = Calendar.getInstance().get(Calendar.MONTH);
+	private static IBlockState pickRandomPresentState(Random random){
+		int k=random.nextInt(3);
+		if(k==0){
+			return KCore.christmas_gift.getDefaultState().withProperty(BlockChristmasGift.VARIANT,BlockChristmasGift.EnumType.RED);
+		}
+		else if(k==1){
+			return KCore.christmas_gift.getDefaultState().withProperty(BlockChristmasGift.VARIANT,BlockChristmasGift.EnumType.YELLOW);
+		}
+		else if(k==2){
+			return KCore.christmas_gift.getDefaultState().withProperty(BlockChristmasGift.VARIANT,BlockChristmasGift.EnumType.VIOLET);
+		}else{
+			return KCore.christmas_gift.getDefaultState().withProperty(BlockChristmasGift.VARIANT,BlockChristmasGift.EnumType.VIOLET);
+		}
+	}
 	@SubscribeEvent
 	public static void onEvent2(PlayerTickEvent event)
 	{
+		if(event.player!=null){
+				if(KCore.instance.functionHelper.random.nextInt(800000)==0){
+					if(month==11){
+						BlockPos tmp = new BlockPos(event.player.posX-16+KCore.instance.functionHelper.random.nextInt(32),event.player.posY,event.player.posZ-16+KCore.instance.functionHelper.random.nextInt(32));
+						BlockPos ground = event.player.world.getHeight(tmp);
+						if(event.player.dimension==KCore.instance.DIMENSION_ID) {
+							if (event.player.world.isAirBlock(ground) && event.player.world.isBlockFullCube(ground.down())) {
+								event.player.world.setBlockState(ground, pickRandomPresentState(KCore.instance.functionHelper.random), 2);
+							}
+						}
+					}
+
+					}
+
+		}
 		if(event.player!=null) {
 			if(!event.player.inventory.getStackInSlot(36).isEmpty()) {
 				if(event.player.inventory.getStackInSlot(36).getItem().equals(KCore.CloudBoots)) {
@@ -373,6 +406,30 @@ public class KathairisEventsHandler {
 			}
 		}
 	}
+
+	@SubscribeEvent
+	public static void handleInteracts(PlayerInteractEvent.EntityInteractSpecific event){
+		int month=Calendar.MONTH;
+		if(month==11) {
+			if (event.getEntityPlayer() != null) {
+				if (!event.getEntityPlayer().world.isRemote) {
+					if (event.getEntity() != null) {
+						if (event.getTarget() instanceof EntityStrangeWanderer) {
+							ItemStack stack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
+							if (KCore.instance.functionHelper.isGift(stack)) {
+								if (event.getSide() == Side.SERVER) {
+									stack.shrink(1);
+									event.getEntityPlayer().inventory.addItemStackToInventory(new ItemStack(KCore.christmas_gift, 2));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+
 
 
 	/*@SideOnly(Side.CLIENT)
