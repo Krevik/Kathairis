@@ -25,6 +25,7 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import java.util.Calendar;
 import java.util.Map;
 
 public class EntityStrangeWanderer extends EntityMob
@@ -119,12 +120,23 @@ public class EntityStrangeWanderer extends EntityMob
     EntityPlayer lastTalker;
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
+        int month= Calendar.MONTH;
     	lastTalker=player;
-        player.openGui(KCore.instance, KCore.GUI_ENUM.OLDMAN.ordinal(), 
-                player.world, 
-                (int)player.posX, 
-                (int)player.posY, 
-                (int)player.posZ); 
+    	if(month==11) {
+            if (!KCore.instance.functionHelper.isGift(player.getHeldItemMainhand())) {
+                player.openGui(KCore.instance, KCore.GUI_ENUM.OLDMAN.ordinal(),
+                        player.world,
+                        (int) player.posX,
+                        (int) player.posY,
+                        (int) player.posZ);
+            }
+        }else{
+            player.openGui(KCore.instance, KCore.GUI_ENUM.OLDMAN.ordinal(),
+                    player.world,
+                    (int) player.posX,
+                    (int) player.posY,
+                    (int) player.posZ);
+        }
             return super.processInteract(player, hand);
     }
     

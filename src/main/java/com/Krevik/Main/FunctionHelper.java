@@ -242,6 +242,14 @@ public class FunctionHelper {
 		}
 	}
 
+	public static boolean isGift(ItemStack itemStack){
+		boolean is=false;
+		if(itemStack.getItem().equals(KCore.howler_fur)||itemStack.getItem().equals(KCore.Fungal_Drug)||
+				itemStack.getItem().equals(KCore.skyray_feather)){
+			is=true;
+		}
 
+		return is;
+	}
 
 }
