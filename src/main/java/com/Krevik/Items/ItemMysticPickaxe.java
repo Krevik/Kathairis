@@ -38,7 +38,7 @@ import org.lwjgl.Sys;
 
 public class ItemMysticPickaxe extends MysticTool
 {
-	private int mode;
+	protected int mode;
     private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.ACTIVATOR_RAIL, Blocks.COAL_ORE, Blocks.COBBLESTONE, 
     		Blocks.DETECTOR_RAIL, Blocks.DIAMOND_BLOCK, Blocks.DIAMOND_ORE, Blocks.DOUBLE_STONE_SLAB, Blocks.GOLDEN_RAIL, Blocks.GOLD_BLOCK, 
     		Blocks.GOLD_ORE, Blocks.ICE, Blocks.IRON_BLOCK, Blocks.IRON_ORE, Blocks.LAPIS_BLOCK, Blocks.LAPIS_ORE, Blocks.LIT_REDSTONE_ORE, 
@@ -391,17 +391,13 @@ public class ItemMysticPickaxe extends MysticTool
     	ItemStack stack = playerIn.getHeldItem(handIn);
     	if(stack.getItem().equals(KCore.CrystalPickaxe)){
     		if(mode==0){
-    			if(!worldIn.isRemote){
 					mode=1;
-				}
 				if(worldIn.isRemote) {
 					playerIn.sendMessage(new TextComponentString("Mythical power is OFF"));
 					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.cproxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
 				}
 			}else{
-				if(!worldIn.isRemote) {
 					mode = 0;
-				}
 				if(worldIn.isRemote) {
 					playerIn.sendMessage(new TextComponentString("Mythical power is ON"));
 					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.cproxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
