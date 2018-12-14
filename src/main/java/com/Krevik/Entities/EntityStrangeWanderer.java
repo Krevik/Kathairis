@@ -24,6 +24,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Calendar;
 import java.util.Map;
@@ -117,18 +118,29 @@ public class EntityStrangeWanderer extends EntityMob
         return null;
     }
 
+    int month = Calendar.getInstance().get(Calendar.MONTH);
     EntityPlayer lastTalker;
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
-        int month= Calendar.MONTH;
     	lastTalker=player;
+    	System.out.println(month);
     	if(month==11) {
-            if (!KCore.instance.functionHelper.isGift(player.getHeldItemMainhand())) {
+            if (!isGift(player.getHeldItemMainhand())) {
                 player.openGui(KCore.instance, KCore.GUI_ENUM.OLDMAN.ordinal(),
                         player.world,
                         (int) player.posX,
                         (int) player.posY,
                         (int) player.posZ);
+            }else{
+                if (player != null) {
+                    if (!world.isRemote) {
+                                ItemStack stack = player.getHeldItem(hand);
+                                if (isGift(stack)) {
+                                    stack.shrink(1);
+                                    player.inventory.addItemStackToInventory(new ItemStack(KCore.christmas_gift, 1));
+                                    }
+                    }
+                }
             }
         }else{
             player.openGui(KCore.instance, KCore.GUI_ENUM.OLDMAN.ordinal(),
@@ -138,6 +150,15 @@ public class EntityStrangeWanderer extends EntityMob
                     (int) player.posZ);
         }
             return super.processInteract(player, hand);
+    }
+
+    public boolean isGift(ItemStack itemStack){
+        boolean is=false;
+        if(itemStack.getItem().equals(KCore.howler_fur)||itemStack.getItem().equals(KCore.Fungal_Drug)||
+                itemStack.getItem().equals(KCore.skyray_feather)){
+            is=true;
+        }
+        return is;
     }
     
     /**

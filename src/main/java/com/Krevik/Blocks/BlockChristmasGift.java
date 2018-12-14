@@ -84,6 +84,8 @@ public class BlockChristmasGift extends BaseBlock {
         return false;
     }
 
+
+
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {

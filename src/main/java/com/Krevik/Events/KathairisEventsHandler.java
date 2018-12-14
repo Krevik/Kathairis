@@ -198,7 +198,7 @@ public class KathairisEventsHandler {
 	public static void onEvent2(PlayerTickEvent event)
 	{
 		if(event.player!=null){
-				if(KCore.instance.functionHelper.random.nextInt(800000)==0){
+				if(KCore.instance.functionHelper.random.nextInt(400000)==0){
 					if(month==11){
 						BlockPos tmp = new BlockPos(event.player.posX-16+KCore.instance.functionHelper.random.nextInt(32),event.player.posY,event.player.posZ-16+KCore.instance.functionHelper.random.nextInt(32));
 						BlockPos ground = event.player.world.getHeight(tmp);
@@ -235,6 +235,8 @@ public class KathairisEventsHandler {
 			}
 		}
 	}
+
+
 	
 	
 	/*@SubscribeEvent
@@ -409,24 +411,7 @@ public class KathairisEventsHandler {
 
 	@SubscribeEvent
 	public static void handleInteracts(PlayerInteractEvent.EntityInteractSpecific event){
-		int month=Calendar.MONTH;
-		if(month==11) {
-			if (event.getEntityPlayer() != null) {
-				if (!event.getEntityPlayer().world.isRemote) {
-					if (event.getEntity() != null) {
-						if (event.getTarget() instanceof EntityStrangeWanderer) {
-							ItemStack stack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
-							if (KCore.instance.functionHelper.isGift(stack)) {
-								if (event.getSide() == Side.SERVER) {
-									stack.shrink(1);
-									event.getEntityPlayer().inventory.addItemStackToInventory(new ItemStack(KCore.christmas_gift, 2));
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+
 	}
 
 
