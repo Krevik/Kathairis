@@ -9,6 +9,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,15 @@ public class BlockChristmasGift extends BaseBlock {
     public BlockChristmasGift(String Name){
         super(Name, Material.CLOTH, null,0,0, SoundType.CLOTH);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.RED));
+    }
+
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    {
+        int k=KCore.instance.functionHelper.random.nextInt(3);
+        if(k==0){worldIn.setBlockState(pos,state.withProperty(VARIANT,EnumType.RED));}
+        if(k==1){worldIn.setBlockState(pos,state.withProperty(VARIANT,EnumType.YELLOW));}
+        if(k==2){worldIn.setBlockState(pos,state.withProperty(VARIANT,EnumType.VIOLET));}
+
     }
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
