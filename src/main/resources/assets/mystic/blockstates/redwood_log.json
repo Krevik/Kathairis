@@ -1,0 +1,32 @@
+{
+    "variants": {
+        "axis=y,variant=full":  { "model": "mystic:redwood_log_full" },
+        "axis=z,variant=full":   { "model": "mystic:redwood_log_full", "x": 90 },
+        "axis=x,variant=full":   { "model": "mystic:redwood_log_full", "x": 90, "y": 90 },
+        "axis=none,variant=full": { "model": "mystic:redwood_log_full" },
+		"axis=y,variant=size_6":  { "model": "mystic:redwood_log_6" },
+        "axis=z,variant=size_6":   { "model": "mystic:redwood_log_6", "x": 90 },
+        "axis=x,variant=size_6":   { "model": "mystic:redwood_log_6", "x": 90, "y": 90 },
+        "axis=none,variant=size_6": { "model": "mystic:redwood_log_6" },
+		"axis=y,variant=size_5":  { "model": "mystic:redwood_log_5" },
+        "axis=z,variant=size_5":   { "model": "mystic:redwood_log_5", "x": 90 },
+        "axis=x,variant=size_5":   { "model": "mystic:redwood_log_5", "x": 90, "y": 90 },
+        "axis=none,variant=size_5": { "model": "mystic:redwood_log_5" },
+		"axis=y,variant=size_4":  { "model": "mystic:redwood_log_4" },
+        "axis=z,variant=size_4":   { "model": "mystic:redwood_log_4", "x": 90 },
+        "axis=x,variant=size_4":   { "model": "mystic:redwood_log_4", "x": 90, "y": 90 },
+        "axis=none,variant=size_4": { "model": "mystic:redwood_log_4" },
+		"axis=y,variant=size_3":  { "model": "mystic:redwood_log_3" },
+        "axis=z,variant=size_3":   { "model": "mystic:redwood_log_3", "x": 90 },
+        "axis=x,variant=size_3":   { "model": "mystic:redwood_log_3", "x": 90, "y": 90 },
+        "axis=none,variant=size_3": { "model": "mystic:redwood_log_3" },
+		"axis=y,variant=size_2":  { "model": "mystic:redwood_log_2" },
+        "axis=z,variant=size_2":   { "model": "mystic:redwood_log_2", "x": 90 },
+        "axis=x,variant=size_2":   { "model": "mystic:redwood_log_2", "x": 90, "y": 90 },
+        "axis=none,variant=size_2": { "model": "mystic:redwood_log_2" },
+		"axis=y,variant=size_1":  { "model": "mystic:redwood_log_1" },
+        "axis=z,variant=size_1":   { "model": "mystic:redwood_log_1", "x": 90 },
+        "axis=x,variant=size_1":   { "model": "mystic:redwood_log_1", "x": 90, "y": 90 },
+        "axis=none,variant=size_1": { "model": "mystic:redwood_log_1" }
+    }
+}

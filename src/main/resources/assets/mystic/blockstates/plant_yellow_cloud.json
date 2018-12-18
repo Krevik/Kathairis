@@ -1,0 +1,12 @@
+{
+    "variants": {
+		"normal": [ { "model": "mystic:grass_yellow_cloud" },
+		{ "model": "mystic:flower_yellow_cloud" },
+		{ "model": "mystic:grass_yellow_cloud", "y": 90 },
+		{ "model": "mystic:flower_yellow_cloud", "y": 90 },
+		{ "model": "mystic:grass_yellow_cloud", "y": 180 },
+		{ "model": "mystic:flower_yellow_cloud", "y": 180 },
+		{ "model": "mystic:grass_yellow_cloud", "y": 270 },
+		{ "model": "mystic:flower_yellow_cloud", "y": 270 } ]
+    }
+}

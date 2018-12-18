@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=without": { "model": "mystic:butterflyflower_without" },
+		"variant=with": { "model": "mystic:butterflyflower_with" }
+	}
+}

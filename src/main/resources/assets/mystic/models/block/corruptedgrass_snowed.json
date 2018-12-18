@@ -1,0 +1,9 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "particle": "mystic:blocks/corrupteddirt",
+        "bottom": "mystic:blocks/corrupteddirt",
+        "top": "mystic:blocks/corruptedgrass_top",
+        "side": "mystic:blocks/corruptedgrass_side_snowed"
+    }
+}

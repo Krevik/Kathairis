@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "mystic:shinyleaves" },
+		"check_decay=false,decayable=false": { "model": "mystic:shinyleaves" },
+		"check_decay=false,decayable=true": { "model": "mystic:shinyleaves" },
+		"check_decay=true,decayable=false": { "model": "mystic:shinyleaves" },
+		"check_decay=true,decayable=true": { "model": "mystic:shinyleaves" }
+    }
+}

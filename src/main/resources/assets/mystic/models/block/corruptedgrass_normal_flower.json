@@ -1,0 +1,10 @@
+{
+    "parent": "mystic:block/corruptedgrass",
+    "textures": {
+        "particle": "mystic:blocks/corrupteddirt",
+        "bottom": "mystic:blocks/corrupteddirt",
+        "top": "mystic:blocks/corruptedgrass_top_flower",
+        "side": "mystic:blocks/corruptedgrass_side",
+        "overlay": "mystic:blocks/corruptedgrass_side_overlay"
+    }
+}

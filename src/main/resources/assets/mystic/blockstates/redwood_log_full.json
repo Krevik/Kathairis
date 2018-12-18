@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "mystic:redwood_log_full" },
+        "axis=z":   { "model": "mystic:redwood_log_full", "x": 90 },
+        "axis=x":   { "model": "mystic:redwood_log_full", "x": 90, "y": 90 },
+        "axis=none": { "model": "mystic:redwood_log_full" }
+		}
+}

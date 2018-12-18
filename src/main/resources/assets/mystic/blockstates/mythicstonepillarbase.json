@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up":  { "model": "mystic:mythicstonepillarbase" },
+        "facing=down":   { "model": "mystic:mythicstonepillarbase", "x": 180 },
+        "facing=east":   { "model": "mystic:mythicstonepillarbase", "y": 90, "x": 90 },
+        "facing=south": { "model": "mystic:mythicstonepillarbase", "y": 180, "x": 90 },
+		"facing=west": { "model": "mystic:mythicstonepillarbase", "y": 270, "x": 90 },
+        "facing=north": { "model": "mystic:mythicstonepillarbase", "y": 0, "x": 90 }
+    }
+}

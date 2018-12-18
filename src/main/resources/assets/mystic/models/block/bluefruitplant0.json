@@ -1,0 +1,6 @@
+{
+	"parent": "block/crop",
+	"textures": {
+		"crop": "mystic:blocks/bluefruitplant0"
+	}
+}

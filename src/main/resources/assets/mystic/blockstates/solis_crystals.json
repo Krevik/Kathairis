@@ -1,0 +1,28 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "mystic:solis_crystals.obj",
+        "custom": {
+            "mesh": ["Base", "Lid"],
+			"scale":[ 0.5, 0.5, 0.5 ]
+        }
+     },
+    "variants": {
+        "normal": [{"model": "mystic:solis_crystals.obj"},
+		{"model": "mystic:solis_crystals1.obj"},
+		{"model": "mystic:solis_crystals2.obj"},
+		{"model": "mystic:solis_crystals3.obj"},
+		{"model": "mystic:solis_crystals4.obj"}],
+        "inventory": [{
+            "transform": "forge:default-block"
+        }],
+        "facing": {
+            "down": {"x": 90},
+            "up": {"x": 270},
+            "north": {"y": 180},
+            "south": {},
+            "west": {"y": 90},
+            "east": {"y": 270}
+        }
+    }
+}

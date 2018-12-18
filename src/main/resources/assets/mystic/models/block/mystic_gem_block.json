@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "up": "mystic:blocks/mystic_gem_block",
+        "side": "mystic:blocks/mystic_gem_block_side",
+		"down": "mystic:blocks/mystic_gem_block_down"
+    }
+}

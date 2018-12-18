@@ -1,0 +1,15 @@
+[
+{
+  "modid": "mystic",
+  "name": "Kathairis",
+  "description": "Mod that adds a whole new world.",
+  "version": "${version}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Krevik"],
+  "credits": "Freesound.org for great free sound samples, Mystical Spire [PMC] for great textures and bug finding, Feranogame [CurseForge] for great textures and bug finding, Modpacks_4_dayz43 for great background music",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

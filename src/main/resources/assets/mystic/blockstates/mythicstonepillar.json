@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "variant=noconnection":  { "model": "mystic:pillar_middle" },
+        "variant=cornerws":   { "model": "mystic:pillar_connection", "y": 90 },
+        "variant=oneconnections":   { "model": "mystic:pillar_middle"},
+		"variant=twoconnections":   { "model": "mystic:pillar_middle"},
+		"variant=threeconnectionswithoutw":   { "model": "mystic:pillar_side", "y": 0 },
+		"variant=threeconnectionswithouts":   { "model": "mystic:pillar_side", "y": 270 },
+		"variant=threeconnectionswithoute":   { "model": "mystic:pillar_side", "y": 180 },
+		"variant=threeconnectionswithoutn":   { "model": "mystic:pillar_side", "y": 90 },
+		"variant=fourconnections":   { "model": "mystic:mythicstone"},
+		"variant=cornerse":   { "model": "mystic:pillar_connection"},
+		"variant=corneren":   { "model": "mystic:pillar_connection", "y": 270},
+		"variant=cornernw":   { "model": "mystic:pillar_connection", "y": 180}
+    }
+}

@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=yellow": { "model": "mystic:cloudparticleemitter_yellow" },
+		"variant=blue": { "model": "mystic:cloudparticleemitter_blue" }
+	}
+}

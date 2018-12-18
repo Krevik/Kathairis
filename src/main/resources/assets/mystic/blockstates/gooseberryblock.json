@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=without": { "model": "mystic:goosberry_bush_picked" },
+		"variant=with": { "model": "mystic:gooseberry_bush" }
+	}
+}

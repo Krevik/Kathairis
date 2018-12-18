@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "mystic:shinylog" },
+        "axis=z":   { "model": "mystic:shinylog", "x": 90 },
+        "axis=x":   { "model": "mystic:shinylog", "x": 90, "y": 90 },
+        "axis=none": { "model": "mystic:shinylogbark" }
+    }
+}

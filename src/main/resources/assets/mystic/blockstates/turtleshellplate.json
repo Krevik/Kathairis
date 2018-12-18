@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=east": { "model": "mystic:turtleshellplateew" },
+		"facing=west": { "model": "mystic:turtleshellplatewe" },
+		"facing=south": { "model": "mystic:turtleshellplatesn" },
+		"facing=north": { "model": "mystic:turtleshellplatens" }
+	}
+}

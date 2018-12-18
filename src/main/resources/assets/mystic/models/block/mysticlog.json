@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "mystic:blocks/mysticlog_top",
+        "side": "mystic:blocks/mysticlog"
+    }
+}

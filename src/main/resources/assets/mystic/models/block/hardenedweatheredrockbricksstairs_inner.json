@@ -1,0 +1,8 @@
+{
+	"parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "mystic:blocks/hardenedweatheredrockbricks",
+        "top": "mystic:blocks/hardenedweatheredrockbricks",
+        "side": "mystic:blocks/hardenedweatheredrockbricks"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "variants": {
+        "flower=false,snowy=false": [
+            { "model": "mystic:corruptedgrass_normal" },
+            { "model": "mystic:corruptedgrass_normal", "y": 90 },
+            { "model": "mystic:corruptedgrass_normal", "y": 180 },
+            { "model": "mystic:corruptedgrass_normal", "y": 270 }
+        ],
+        "flower=false,snowy=true":  { "model": "mystic:corruptedgrass_snowed" },
+		"flower=true,snowy=false": [
+            { "model": "mystic:corruptedgrass_normal_flower" },
+            { "model": "mystic:corruptedgrass_normal_flower", "y": 90 },
+            { "model": "mystic:corruptedgrass_normal_flower", "y": 180 },
+            { "model": "mystic:corruptedgrass_normal_flower", "y": 270 }
+        ],
+		"flower=true,snowy=true":  { "model": "mystic:corruptedgrass_snowed" }
+    }
+}
