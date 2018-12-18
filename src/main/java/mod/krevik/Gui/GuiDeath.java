@@ -1,5 +1,6 @@
 package mod.krevik.Gui;
 
+import mod.krevik.Main.KCore;
 import org.lwjgl.opengl.GL11;
 
 import mod.krevik.Entities.EntityDeath;
@@ -24,7 +25,7 @@ public class GuiDeath extends GuiScreen {
 	
 	Minecraft mc = Minecraft.getMinecraft();
 	private final int ImageHeight = 250, ImageWidth = 250, ImageScale = 250;
-	private static final ResourceLocation GUITextures = new ResourceLocation("mystic:textures/gui/death.png");
+	private static final ResourceLocation GUITextures = new ResourceLocation(KCore.MODID,"textures/gui/death.png");
 	private static int mode=0;
 	private GenericButton Back;
 	private GenericButton Fight;

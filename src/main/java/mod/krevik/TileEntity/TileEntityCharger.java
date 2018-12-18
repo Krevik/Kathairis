@@ -474,7 +474,7 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
 
     public String getGuiID()
     {
-        return "mystic:charger";
+        return KCore.MODID+"kathairis:charger";
     }
 
     public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)

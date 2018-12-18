@@ -27,11 +27,11 @@ import org.lwjgl.opengl.GL11;
 public class RenderMysticSky extends IRenderHandler {
 
 
-    private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("mystic:textures/environment/moon_phases.png");
-    private static final ResourceLocation SUN_TEXTURES = new ResourceLocation("mystic:textures/environment/sun.png");
-    private static final ResourceLocation STAR_TEXTURES = new ResourceLocation("mystic:textures/environment/star.png");
-    private static final ResourceLocation NEBULA_TEXTURES = new ResourceLocation("mystic:textures/environment/nebula.png");
-    private static final ResourceLocation CHRISTMAS_STAR_TEXTURES = new ResourceLocation("mystic:textures/environment/christmas_star.png");
+    private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation(KCore.MODID,"kathairistextures/environment/moon_phases.png");
+    private static final ResourceLocation SUN_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/sun.png");
+    private static final ResourceLocation STAR_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/star.png");
+    private static final ResourceLocation NEBULA_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/nebula.png");
+    private static final ResourceLocation CHRISTMAS_STAR_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/christmas_star.png");
 
     public RenderMysticSky()
     {
@@ -44,7 +44,7 @@ public class RenderMysticSky extends IRenderHandler {
     private Nebula nebula = null;
     private ChristmasStar christmas_star = null;
 
-    FunctionHelper helper = KCore.instance.functionHelper;
+    private FunctionHelper helper = KCore.functionHelper;
     @Override
     @SideOnly(Side.CLIENT)
     public void render(float partialTicks, WorldClient world, Minecraft mc) {

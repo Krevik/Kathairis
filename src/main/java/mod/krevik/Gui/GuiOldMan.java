@@ -1,5 +1,6 @@
 package mod.krevik.Gui;
 
+import mod.krevik.Main.KCore;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 
@@ -19,7 +20,7 @@ public class GuiOldMan extends GuiScreen {
 	
 	Minecraft mc = Minecraft.getMinecraft();
 	private final int ImageHeight = 340, ImageWidth = 704, ImageScale = 250;
-	private static final ResourceLocation GUITextures = new ResourceLocation("mystic:textures/gui/oldman.png");
+	private static final ResourceLocation GUITextures = new ResourceLocation(KCore.MODID,"textures/gui/oldman.png");
 
 	private static int mode=0;
 	private GenericButton Next;

@@ -1,12 +1,13 @@
 package mod.krevik.Shaders;
 
+import mod.krevik.Main.KCore;
 import org.lwjgl.util.vector.Matrix4f;
 
 public class StaticShader extends ShaderProgram{
 
 	
-	private static final String vertexRes = "/assets/mystic/shaders/vertexshader.vs";
-	private static final String fragmentRes = "/assets/mystic/shaders/fragmentshader.fs";
+	private static final String vertexRes = "/assets/"+ KCore.MODID+"/shaders/vertexshader.vs";
+	private static final String fragmentRes = "/assets/"+ KCore.MODID+"/shaders/fragmentshader.fs";
 	
 	private int location_transformationMatrix;
 

@@ -148,7 +148,7 @@ public class BlockMysticSlabBase extends BlockSlab {
 
     public static enum MysticSlabVariant implements IStringSerializable
     {
-        MYSTIC(0,"mystic");
+        MYSTIC(0,"kathairis");
 
         private static final BlockMysticSlabBase.MysticSlabVariant[] META_LOOKUP = new BlockMysticSlabBase.MysticSlabVariant[values().length];
         private final int meta;

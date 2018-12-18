@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import mod.krevik.Dimension.TileEntityKether;
-import com.krevik.Gui.GuiHandler;
+import mod.krevik.Gui.GuiHandler;
 import mod.krevik.Items.ItemSand;
 import mod.krevik.Sounds.SoundHelper;
 import mod.krevik.TileEntity.TileEntityCharger;
@@ -102,9 +102,9 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent e) {
 		EntityAndRenderRegistry.registerEntitiesAndEggs();
-    	GameRegistry.registerTileEntity(TileEntityCharger.class, new ResourceLocation("mystic:charger").toString());
-    	GameRegistry.registerTileEntity(TileEntityKether.class, "mystic:entityDimKether");
-    	GameRegistry.registerTileEntity(TileEntityMythicStoneSign.class, "mystic:mythicstonesign");
+    	GameRegistry.registerTileEntity(TileEntityCharger.class, new ResourceLocation(KCore.MODID,"charger").toString());
+    	GameRegistry.registerTileEntity(TileEntityKether.class, new ResourceLocation(KCore.MODID,"entityDimKether"));
+    	GameRegistry.registerTileEntity(TileEntityMythicStoneSign.class, new ResourceLocation(KCore.MODID,"mythicstonesign"));
     	NetworkRegistry.INSTANCE.registerGuiHandler(KCore.instance, new GuiHandler()); 
     	this.initFlamables();
     	//GameRegistry.registerWorldGenerator(new WorldGeneratorHandler(), 10);

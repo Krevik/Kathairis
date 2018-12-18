@@ -1,9 +1,9 @@
 package mod.krevik.Main;
 
-import com.krevik.Biomes.*;
-import com.krevik.Blocks.*;
+import mod.krevik.Biomes.*;
+import mod.krevik.Blocks.*;
 import mod.krevik.Capabilities.CapabilityHandler;
-import com.krevik.Items.*;
+import mod.krevik.Items.*;
 import mod.krevik.Potion.DissolutionPotion;
 import mod.krevik.Potion.StunPotion;
 import mod.krevik.Biomes.BiomeFloatingIslands;
@@ -119,9 +119,8 @@ public class KCore {
 
 	@SidedProxy(serverSide = "CommonProxy", clientSide = "ClientProxy")
 	public static CommonProxy proxy;
-	public static ClientProxy cproxy;
 	
-	public static final String MODID = "mystic";
+	public static final String MODID = "kathairiskathairis";
 	public static final String name = "Kathairis";
 	public static final String version = "beta-1.5";
 	
@@ -138,15 +137,15 @@ public class KCore {
     public static int updateRendererCount=0;
 
 	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12).setRepairItem(new ItemStack(KCore.TitaniumIngot));
-	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", "mystic:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
+	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", KCore.MODID+"kathairis:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
 	
-	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("mystic", 3, 2000, 12F, 3.5F, 12).setRepairItem(new ItemStack(KCore.MysticGem));
-	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("mystic", "mystic:mystic", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.MysticGem));
+	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("kathairis", 3, 2000, 12F, 3.5F, 12).setRepairItem(new ItemStack(KCore.MysticGem));
+	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("kathairis", KCore.MODID+"kathairis:kathairis", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.MysticGem));
 	
-	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", "mystic:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(KCore.CloudPearl));
+	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", KCore.MODID+"kathairis:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(KCore.CloudPearl));
 
 	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18).setRepairItem(new ItemStack(KCore.RevenumIngot));
-	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", "mystic:revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
+	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", KCore.MODID+"kathairis:revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	
 	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 2F, 4F, 22).setRepairItem(new ItemStack(KCore.CrystalsCluster));
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21).setRepairItem(new ItemStack(KCore.DarknessEssence));
@@ -803,10 +802,10 @@ public class KCore {
  	public static final ItemMysticSword Magnethium_Sword = new ItemMysticSword(Ref.Magnethium_Sword, CreativeTabsMystic.weapons,KCore.MAGNETHIUM);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.music_disc_8bit)
-    public static final ItemBasicKathairisMusicDisc Music_Disc_8bit = new ItemBasicKathairisMusicDisc(Ref.music_disc_8bit, KCore.instance.cproxy.music_disc_8bit,"In-universe by YungBlitzkrieg");
+    public static final ItemBasicKathairisMusicDisc Music_Disc_8bit = new ItemBasicKathairisMusicDisc(Ref.music_disc_8bit, KCore.instance.proxy.music_disc_8bit,"In-universe by YungBlitzkrieg");
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.music_disc_jazzy)
-    public static final ItemBasicKathairisMusicDisc Music_Disc_jazzy = new ItemBasicKathairisMusicDisc(Ref.music_disc_jazzy, KCore.instance.cproxy.music_disc_jazzy,"Jazzy by YungBlitzkrieg");
+    public static final ItemBasicKathairisMusicDisc Music_Disc_jazzy = new ItemBasicKathairisMusicDisc(Ref.music_disc_jazzy, KCore.instance.proxy.music_disc_jazzy,"Jazzy by YungBlitzkrieg");
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.skyray_feather)
     public static final BaseItem skyray_feather = new BaseItem(Ref.skyray_feather, CreativeTabsMystic.miscellaneous);
