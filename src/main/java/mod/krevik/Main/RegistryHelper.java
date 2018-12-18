@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import mod.krevik.Blocks.BaseBlock;
 import mod.krevik.Blocks.BlockMysticLeaf;
 import mod.krevik.Blocks.BlockMysticSlabBase;
-import com.krevik.Items.*;
+import mod.krevik.Items.*;
 import mod.krevik.Items.BaseItem;
 import mod.krevik.Items.ItemBasicKathairisMusicDisc;
 import mod.krevik.Items.ItemMysticArmor;

@@ -389,13 +389,13 @@ public class ItemMysticPickaxe extends MysticTool
 					mode=1;
 				if(worldIn.isRemote) {
 					playerIn.sendMessage(new TextComponentString("Mythical power is OFF"));
-					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.cproxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
+					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.proxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
 				}
 			}else{
 					mode = 0;
 				if(worldIn.isRemote) {
 					playerIn.sendMessage(new TextComponentString("Mythical power is ON"));
-					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.cproxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
+					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.proxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
 				}
 			}
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));

@@ -3,14 +3,14 @@ package mod.krevik.Dimension;
 import java.util.List;
 import java.util.Random;
 
-import com.krevik.Gens.MapGenKetherCaves;
-import com.krevik.Gens.WorldGenCloudTemple;
-import com.krevik.Gens.WorldGenClouds;
-import com.krevik.Gens.WorldGenCrystalChamber;
-import com.krevik.Gens.WorldGenFloatingIslands;
-import com.krevik.Gens.WorldGenFloatingTree;
-import com.krevik.Gens.WorldGenMysticLakes;
-import com.krevik.Gens.WorldGenMysticUniversal;
+import mod.krevik.Gens.MapGenKetherCaves;
+import mod.krevik.Gens.WorldGenCloudTemple;
+import mod.krevik.Gens.WorldGenClouds;
+import mod.krevik.Gens.WorldGenCrystalChamber;
+import mod.krevik.Gens.WorldGenFloatingIslands;
+import mod.krevik.Gens.WorldGenFloatingTree;
+import mod.krevik.Gens.WorldGenMysticLakes;
+import mod.krevik.Gens.WorldGenMysticUniversal;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.block.BlockFalling;

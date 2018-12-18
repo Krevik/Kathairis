@@ -63,7 +63,7 @@ public class MysticTool extends ItemTool
             toolClass = "shovel";
         }
         KCore.instance.regHelper.toolList.add(this);
-        KCore.instance.cproxy.itemList.add(this);
+        KCore.instance.proxy.itemList.add(this);
 
         
     }

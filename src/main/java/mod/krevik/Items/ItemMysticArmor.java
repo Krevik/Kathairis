@@ -169,7 +169,7 @@ public class ItemMysticArmor extends ItemArmor
         this.maxStackSize = 1;
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DISPENSER_BEHAVIOR);
         KCore.instance.regHelper.armorList.add(this);
-        KCore.instance.cproxy.itemList.add(this);
+        KCore.instance.proxy.itemList.add(this);
 
     }
     

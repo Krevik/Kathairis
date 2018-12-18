@@ -3,7 +3,7 @@ package mod.krevik.Gens.Swamps;
 import java.util.Random;
 
 import mod.krevik.Blocks.BlockJadeVines;
-import com.krevik.Gens.WorldGenAbstractBasicMysticTree;
+import mod.krevik.Gens.WorldGenAbstractBasicMysticTree;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.block.state.IBlockState;

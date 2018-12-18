@@ -2,6 +2,7 @@ package mod.krevik.Particles;
 
 import java.util.Random;
 
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.client.Minecraft;
@@ -46,7 +47,7 @@ public class ParticleShocking extends Particle
         this.particleAlpha=50;
         this.particleMaxAge = (int)(Math.random() * 10.0D) + 40;
 
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.shockingParticle.toString());
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(ClientProxy.shockingParticle.toString());
 
         setParticleTexture(sprite);
 

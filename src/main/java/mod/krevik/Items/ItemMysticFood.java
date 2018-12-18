@@ -54,7 +54,7 @@ public class ItemMysticFood extends ItemFood
         setRegistryName(name);
         this.setCreativeTab(tab);
         KCore.instance.regHelper.foodList.add(this);
-        KCore.instance.cproxy.itemList.add(this);
+        KCore.instance.proxy.itemList.add(this);
 
     }
     

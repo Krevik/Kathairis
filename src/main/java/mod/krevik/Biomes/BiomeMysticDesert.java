@@ -6,12 +6,12 @@ import java.util.Random;
 import mod.krevik.Entities.EntityBigTurtle;
 import mod.krevik.Entities.EntityCamel;
 import mod.krevik.Entities.EntityPoisonousScorpion;
-import com.krevik.Gens.WorldGenMovingSand;
+import mod.krevik.Gens.WorldGenMovingSand;
 import mod.krevik.Gens.WorldGenMysticDesertCactus;
-import com.krevik.Gens.WorldGenMysticUniversal;
+import mod.krevik.Gens.WorldGenMysticUniversal;
 import mod.krevik.Gens.Desert.WorldGenBigRockMushroom;
 import mod.krevik.Gens.Desert.WorldGenOldLibrary;
-import com.krevik.Gens.Desert.WorldGenRockMushroom;
+import mod.krevik.Gens.Desert.WorldGenRockMushroom;
 import mod.krevik.Gens.Desert.WorldGenWeatheredCaveCustom;
 import mod.krevik.Main.KCore;
 

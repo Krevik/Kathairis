@@ -2,7 +2,7 @@ package mod.krevik.Gens.Forest;
 
 import java.util.Random;
 
-import com.krevik.Gens.WorldGenAbstractBasicMysticTree;
+import mod.krevik.Gens.WorldGenAbstractBasicMysticTree;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.block.BlockCocoa;

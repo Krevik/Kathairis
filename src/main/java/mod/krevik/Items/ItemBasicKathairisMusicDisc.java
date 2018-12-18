@@ -47,7 +47,7 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
         setRegistryName(name);
         this.setCreativeTab(CreativeTabsMystic.miscellaneous);
         KCore.instance.regHelper.recordsList.add(this);
-        KCore.instance.cproxy.itemList.add(this);
+        KCore.instance.proxy.itemList.add(this);
         Title=Title1;
     }
 

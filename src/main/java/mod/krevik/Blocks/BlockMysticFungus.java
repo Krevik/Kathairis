@@ -1,5 +1,6 @@
 package mod.krevik.Blocks;
 
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 import mod.krevik.Particles.LivingParticle;
 import net.minecraft.block.Block;
@@ -60,7 +61,7 @@ public class BlockMysticFungus extends BlockMysticBush
                 d2 = (double)pos.getZ() + 0.5D + 0.25D * (double)j;
             }
 
-            KCore.cproxy.drawParticle(worldIn, new LivingParticle(worldIn,d0,d1,d2));
+            ClientProxy.drawParticle(worldIn, new LivingParticle(worldIn,d0,d1,d2));
         }
     }
 }

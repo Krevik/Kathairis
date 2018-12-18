@@ -132,17 +132,17 @@ public class EntityJellyFish extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.cproxy.jellyfish_living;
+        return KCore.proxy.jellyfish_living;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
-        return KCore.cproxy.jellyfish_hurt;
+        return KCore.proxy.jellyfish_hurt;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return KCore.cproxy.jellyfish_dead;
+        return KCore.proxy.jellyfish_dead;
     }
 
     @Nullable

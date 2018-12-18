@@ -3,14 +3,14 @@ package mod.krevik.Biomes;
 import java.util.Calendar;
 import java.util.Random;
 
-import com.krevik.Entities.*;
+import mod.krevik.Entities.*;
 import mod.krevik.Entities.Butterflies.EntityCloudShimmer;
 import mod.krevik.Gens.StructureLoader.CreateWorldGenFromStructure;
 import mod.krevik.Gens.StructureLoader.StructureList;
-import com.krevik.Gens.WorldGenClouds;
-import com.krevik.Gens.WorldGenHugeSoulTree;
-import com.krevik.Gens.WorldGenMiniTallGrass;
-import com.krevik.Gens.WorldGenSolisCrystals;
+import mod.krevik.Gens.WorldGenClouds;
+import mod.krevik.Gens.WorldGenHugeSoulTree;
+import mod.krevik.Gens.WorldGenMiniTallGrass;
+import mod.krevik.Gens.WorldGenSolisCrystals;
 import mod.krevik.Main.KCore;
 
 import mod.krevik.Entities.EntityCloudOister;

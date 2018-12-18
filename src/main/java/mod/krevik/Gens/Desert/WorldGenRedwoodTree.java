@@ -2,7 +2,7 @@ package mod.krevik.Gens.Desert;
 
 import java.util.Random;
 
-import com.krevik.Gens.WorldGenAbstractBasicMysticTree;
+import mod.krevik.Gens.WorldGenAbstractBasicMysticTree;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.block.state.IBlockState;

@@ -179,17 +179,17 @@ public class EntityHowler extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.cproxy.Howler_living;
+        return KCore.proxy.Howler_living;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
-        return KCore.cproxy.Howler_hurt;
+        return KCore.proxy.Howler_hurt;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return KCore.cproxy.Howler_dead;
+        return KCore.proxy.Howler_dead;
     }
 
     protected SoundEvent getStepSound()

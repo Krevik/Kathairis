@@ -1,5 +1,6 @@
 package mod.krevik.Potion;
 
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
@@ -15,14 +16,14 @@ public class DissolutionPotion extends Potion {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
-        mc.renderEngine.bindTexture(KCore.instance.cproxy.dissolution_potion);
+        mc.renderEngine.bindTexture(ClientProxy.dissolution_potion);
         net.minecraft.client.gui.Gui.drawModalRectWithCustomSizedTexture(x + 3, y + 3, 0, 0, 16, 16, 16, 16);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
-        mc.renderEngine.bindTexture(KCore.instance.cproxy.dissolution_potion);
+        mc.renderEngine.bindTexture(ClientProxy.dissolution_potion);
         net.minecraft.client.gui.Gui.drawModalRectWithCustomSizedTexture(x + 6, y + 7, 0, 0, 16, 16, 16, 16);
     }
 

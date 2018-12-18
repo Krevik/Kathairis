@@ -9,7 +9,7 @@ import mod.krevik.Entities.Butterflies.EntityIllukini;
 import mod.krevik.Entities.Butterflies.EntityRubySile;
 import mod.krevik.Entities.Butterflies.EntitySkylight;
 import mod.krevik.Gens.StructureLoader.StructureLoader;
-import com.krevik.Gens.WorldGenMysticOre;
+import mod.krevik.Gens.WorldGenMysticOre;
 import mod.krevik.Main.KCore;
 
 import com.google.common.collect.Lists;
@@ -39,7 +39,7 @@ public abstract class KetherBiome extends Biome
         this.spawnableCaveCreatureList.clear();
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
-    	KCore.instance.cproxy.biomeList.add(this);
+    	KCore.instance.proxy.biomeList.add(this);
         this.spawnableCaveCreatureList.add(new Biome.SpawnListEntry(EntityIllukini.class, 2, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityRubySile.class, 8, 1, 2));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntitySkylight.class, 8, 1, 2));

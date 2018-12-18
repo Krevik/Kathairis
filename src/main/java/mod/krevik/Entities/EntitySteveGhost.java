@@ -134,17 +134,17 @@ public class EntitySteveGhost extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.instance.cproxy.ghost_living;
+        return KCore.instance.proxy.ghost_living;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
-        return KCore.instance.cproxy.ghost_attack;
+        return KCore.instance.proxy.ghost_attack;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return KCore.instance.cproxy.ghost_dead;
+        return KCore.instance.proxy.ghost_dead;
     }
 
     /**

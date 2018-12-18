@@ -93,7 +93,7 @@ public class EntityCamel extends AbstractHorse
 
         if (this.rand.nextInt(10) == 0)
         {
-            this.playSound(KCore.instance.cproxy.camel_breath, p_190680_1_.getVolume() * 0.6F, p_190680_1_.getPitch());
+            this.playSound(KCore.instance.proxy.camel_breath, p_190680_1_.getVolume() * 0.6F, p_190680_1_.getPitch());
         }
     }
 
@@ -121,19 +121,19 @@ public class EntityCamel extends AbstractHorse
     protected SoundEvent getAmbientSound()
     {
         super.getAmbientSound();
-        return KCore.instance.cproxy.camel_ambient;
+        return KCore.instance.proxy.camel_ambient;
     }
 
     protected SoundEvent getDeathSound()
     {
         super.getDeathSound();
-        return KCore.instance.cproxy.camel_dead;
+        return KCore.instance.proxy.camel_dead;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
         super.getHurtSound(damageSourceIn);
-        return KCore.instance.cproxy.camel_hurt;
+        return KCore.instance.proxy.camel_hurt;
     }
 
     protected SoundEvent getAngrySound()

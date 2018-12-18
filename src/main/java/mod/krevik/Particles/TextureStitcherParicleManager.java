@@ -1,5 +1,6 @@
 package mod.krevik.Particles;
 
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.util.ResourceLocation;
@@ -10,11 +11,11 @@ public class TextureStitcherParicleManager
 {
 	  @SubscribeEvent
 	  public void stitcherEventPre(TextureStitchEvent.Pre event) {
-		  ResourceLocation particleBlueCloud = KCore.instance.cproxy.particleBlueCloud;
-	    ResourceLocation shockingBall = KCore.instance.cproxy.shockingBall;
-	    ResourceLocation shockingParticle = KCore.instance.cproxy.shockingParticle;
-	    ResourceLocation Mystic_Gem_Block_Particle = KCore.instance.cproxy.Mystic_Gem_Block_Particle;
-	    ResourceLocation living_particle = KCore.instance.cproxy.living_particle;
+		  ResourceLocation particleBlueCloud = ClientProxy.particleBlueCloud;
+	    ResourceLocation shockingBall = ClientProxy.shockingBall;
+	    ResourceLocation shockingParticle = ClientProxy.shockingParticle;
+	    ResourceLocation Mystic_Gem_Block_Particle = ClientProxy.Mystic_Gem_Block_Particle;
+	    ResourceLocation living_particle = ClientProxy.living_particle;
 
 	    event.getMap().registerSprite(particleBlueCloud);
 	    event.getMap().registerSprite(shockingBall);

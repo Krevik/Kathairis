@@ -1,6 +1,7 @@
 package mod.krevik.Particles;
 
 import mod.krevik.Blocks.BlockMysticBush;
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
@@ -42,7 +43,7 @@ public class LivingParticle extends Particle
         this.particleAlpha=1f;
         this.particleMaxAge = (int)(Math.random() * 300.0D+100);
 
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.living_particle.toString());
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(ClientProxy.living_particle.toString());
 
         setParticleTexture(sprite);
 

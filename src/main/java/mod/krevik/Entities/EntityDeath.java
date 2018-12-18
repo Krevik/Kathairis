@@ -229,7 +229,7 @@ public class EntityDeath extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.instance.cproxy.death_living;
+        return KCore.instance.proxy.death_living;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)

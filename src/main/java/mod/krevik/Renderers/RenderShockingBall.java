@@ -1,6 +1,7 @@
 package mod.krevik.Renderers;
 
 import mod.krevik.Entities.EntityShockingBall;
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.client.Minecraft;
@@ -39,7 +40,7 @@ public class RenderShockingBall extends Render<EntityShockingBall>
         GlStateManager.translate((float)x, (float)y, (float)z);
         GlStateManager.enableRescaleNormal();
         GlStateManager.scale(this.scale, this.scale, this.scale);
-        TextureAtlasSprite textureatlassprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.shockingBall.toString());
+        TextureAtlasSprite textureatlassprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(ClientProxy.shockingBall.toString());
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         float f = textureatlassprite.getMinU();

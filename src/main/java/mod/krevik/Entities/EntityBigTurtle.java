@@ -114,7 +114,7 @@ public class EntityBigTurtle extends EntityAnimal
 
     protected SoundEvent getDeathSound()
     {
-        return KCore.cproxy.turtle_dead;
+        return KCore.proxy.turtle_dead;
     }
 
  

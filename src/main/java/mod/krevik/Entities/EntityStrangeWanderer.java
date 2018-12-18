@@ -98,7 +98,7 @@ public class EntityStrangeWanderer extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.instance.cproxy.oldman_ambient;
+        return KCore.instance.proxy.oldman_ambient;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)

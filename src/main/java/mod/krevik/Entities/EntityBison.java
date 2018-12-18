@@ -233,17 +233,17 @@ public class EntityBison extends EntityAnimal
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.cproxy.bison_living;
+        return KCore.proxy.bison_living;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
-        return KCore.cproxy.bison_hurt;
+        return KCore.proxy.bison_hurt;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return KCore.cproxy.bison_dead;
+        return KCore.proxy.bison_dead;
     }
 
  

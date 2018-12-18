@@ -48,7 +48,7 @@ public class ItemMysticSword extends ItemSword
         setRegistryName(name);
         this.setCreativeTab(tab);
         KCore.instance.regHelper.swordList.add(this);
-        KCore.instance.cproxy.itemList.add(this);
+        KCore.instance.proxy.itemList.add(this);
 
     }
     

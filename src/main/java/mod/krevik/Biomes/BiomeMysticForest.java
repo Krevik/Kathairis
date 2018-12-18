@@ -3,18 +3,18 @@ package mod.krevik.Biomes;
 import java.awt.*;
 import java.util.Random;
 
-import com.krevik.Entities.*;
-import com.krevik.Gens.Forest.*;
+import mod.krevik.Entities.*;
+import mod.krevik.Gens.Forest.*;
 import mod.krevik.Gens.Forest.WorldGenBasicMysticTree;
 import mod.krevik.Gens.Forest.WorldGenCustomTree2;
 import mod.krevik.Gens.Forest.WorldGenFlippedHeartTree;
 import mod.krevik.Gens.Forest.WorldGenHugeKathairisTree;
 import mod.krevik.Gens.StructureLoader.CreateTreeFromStructure;
 import mod.krevik.Gens.StructureLoader.StructureList;
-import com.krevik.Gens.WorldGenMiniTallGrass;
-import com.krevik.Gens.WorldGenMysticMultiGrass;
-import com.krevik.Gens.WorldGenNewTree;
-import com.krevik.Gens.WorldGenMysticUniversal;
+import mod.krevik.Gens.WorldGenMiniTallGrass;
+import mod.krevik.Gens.WorldGenMysticMultiGrass;
+import mod.krevik.Gens.WorldGenNewTree;
+import mod.krevik.Gens.WorldGenMysticUniversal;
 import mod.krevik.Main.KCore;
 
 import mod.krevik.Entities.EntityCactiSpore;

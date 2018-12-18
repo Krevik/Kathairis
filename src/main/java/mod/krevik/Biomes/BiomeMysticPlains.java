@@ -9,9 +9,9 @@ import mod.krevik.Entities.Butterflies.EntityButterfly;
 import mod.krevik.Entities.Butterflies.EntityButterfly1;
 import mod.krevik.Gens.StructureLoader.CreateTreeFromStructure;
 import mod.krevik.Gens.StructureLoader.StructureList;
-import com.krevik.Gens.WorldGenMiniTallGrass;
-import com.krevik.Gens.WorldGenMysticMultiGrass;
-import com.krevik.Gens.WorldGenMysticUniversal;
+import mod.krevik.Gens.WorldGenMiniTallGrass;
+import mod.krevik.Gens.WorldGenMysticMultiGrass;
+import mod.krevik.Gens.WorldGenMysticUniversal;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.block.material.Material;

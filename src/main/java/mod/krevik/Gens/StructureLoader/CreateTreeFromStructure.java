@@ -1,6 +1,6 @@
 package mod.krevik.Gens.StructureLoader;
 
-import com.krevik.Gens.WorldGenAbstractBasicMysticTree;
+import mod.krevik.Gens.WorldGenAbstractBasicMysticTree;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

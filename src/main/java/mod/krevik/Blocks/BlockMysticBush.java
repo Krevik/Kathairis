@@ -259,7 +259,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         if (rand.nextInt(1000) == 0)
         {
         	if(this==KCore.CursedFlower||this==KCore.DeadLichen) {
-                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, KCore.instance.cproxy.scary_flower, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, KCore.instance.proxy.scary_flower, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
         	}
         }
         /*if(this==KCore.Hell_Plant) {

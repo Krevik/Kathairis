@@ -29,7 +29,7 @@ public class BaseItem extends Item{
  setRegistryName(name);
  this.setCreativeTab(tab);
  KCore.instance.regHelper.itemList.add(this);
- KCore.instance.cproxy.itemList.add(this);
+ KCore.instance.proxy.itemList.add(this);
  }
  
  @SideOnly(Side.CLIENT)

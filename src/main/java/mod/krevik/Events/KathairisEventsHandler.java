@@ -205,7 +205,7 @@ public class KathairisEventsHandler {
 					if (data.getIsSandstorm()) {
 						if (event.player.world.getBiome(event.player.getPosition()) == KCore.MysticDesert) {
 							if (event.player.getRNG().nextInt(350) == 0) {
-								event.player.playSound(KCore.instance.cproxy.sandstorm, 1, 1);
+								event.player.playSound(KCore.instance.proxy.sandstorm, 1, 1);
 							}
 						}
 					}

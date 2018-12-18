@@ -2,8 +2,8 @@ package mod.krevik.Blocks;
 
 import java.util.Random;
 
-import com.krevik.Gens.Forest.*;
-import com.krevik.Gens.WorldGenNewTree;
+import mod.krevik.Gens.Forest.*;
+import mod.krevik.Gens.WorldGenNewTree;
 import mod.krevik.Gens.Forest.WorldGenBasicMysticTree;
 import mod.krevik.Gens.Forest.WorldGenCustomTree2;
 import mod.krevik.Gens.Forest.WorldGenFlippedHeartTree;

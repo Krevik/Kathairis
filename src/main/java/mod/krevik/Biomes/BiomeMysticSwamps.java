@@ -5,8 +5,8 @@ import java.util.Random;
 
 import mod.krevik.Entities.EntityMysticBird;
 import mod.krevik.Entities.EntityPhasm;
-import com.krevik.Gens.WorldGenMiniTallGrass;
-import com.krevik.Gens.WorldGenMysticUniversal;
+import mod.krevik.Gens.WorldGenMiniTallGrass;
+import mod.krevik.Gens.WorldGenMysticUniversal;
 import mod.krevik.Gens.Swamps.WorldGenMudPaddle;
 import mod.krevik.Gens.Swamps.WorldGenMysticSwampsTree;
 import mod.krevik.Gens.Swamps.WorldGenMysticSwampsWater;

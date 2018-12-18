@@ -2,6 +2,7 @@ package mod.krevik.Particles;
 
 import java.util.Random;
 
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.client.Minecraft;
@@ -46,7 +47,7 @@ public class ParticleMysticGemBlock extends Particle
         this.particleAlpha=50;
         this.particleMaxAge = (int)(Math.random() * 60.0D);
 
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(KCore.instance.cproxy.Mystic_Gem_Block_Particle.toString());
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(ClientProxy.Mystic_Gem_Block_Particle.toString());
 
         setParticleTexture(sprite);
 

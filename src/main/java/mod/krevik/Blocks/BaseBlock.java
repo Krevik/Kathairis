@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import mod.krevik.Entities.EntityPoisonousScorpion;
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 import mod.krevik.Particles.ParticleMysticGemBlock;
 
@@ -90,7 +91,7 @@ public class BaseBlock extends Block
                 double d3 = 0;
                 double d4 = rand.nextFloat()*0.1;
                 double d5 = 0;
-                KCore.cproxy.drawParticle(worldIn, new ParticleMysticGemBlock(worldIn,d0,d1,d2,d3,d4,d5));
+                ClientProxy.drawParticle(worldIn, new ParticleMysticGemBlock(worldIn,d0,d1,d2,d3,d4,d5));
     		}
 
     	}

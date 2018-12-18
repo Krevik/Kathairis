@@ -1,13 +1,13 @@
 package mod.krevik.Main;
 
-import com.krevik.Entities.*;
+import mod.krevik.Entities.*;
 import mod.krevik.Entities.Butterflies.EntityButterfly;
 import mod.krevik.Entities.Butterflies.EntityButterfly1;
 import mod.krevik.Entities.Butterflies.EntityCloudShimmer;
 import mod.krevik.Entities.Butterflies.EntityIllukini;
 import mod.krevik.Entities.Butterflies.EntityRubySile;
 import mod.krevik.Entities.Butterflies.EntitySkylight;
-import com.krevik.Renderers.*;
+import mod.krevik.Renderers.*;
 import mod.krevik.Renderers.Butterflies.RenderButterfly;
 import mod.krevik.Renderers.Butterflies.RenderButterfly1;
 import mod.krevik.Renderers.Butterflies.RenderCloudShimmer;

@@ -1,4 +1,4 @@
-package com.krevik.Gens;
+package mod.krevik.Gens;
 
 import java.util.Random;
 

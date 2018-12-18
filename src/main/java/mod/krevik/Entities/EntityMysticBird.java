@@ -3,6 +3,7 @@ package mod.krevik.Entities;
 import javax.annotation.Nullable;
 
 import mod.krevik.Blocks.BlockMysticBush;
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 import mod.krevik.Main.MysticLootTables;
 
@@ -88,7 +89,7 @@ public class EntityMysticBird extends EntityAmbientCreature
     public SoundEvent getAmbientSound()
     {
     	if(this.getIsBirdSitting()) {
-            return KCore.cproxy.bird;
+            return ClientProxy.bird;
     	}else {
     		return null;
     	}

@@ -2,7 +2,7 @@ package mod.krevik.Networking;
 
 import java.util.Random;
 
-import com.krevik.Gens.WorldGenDeathsTower;
+import mod.krevik.Gens.WorldGenDeathsTower;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;

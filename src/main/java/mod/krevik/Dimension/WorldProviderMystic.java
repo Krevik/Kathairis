@@ -2,6 +2,7 @@ package mod.krevik.Dimension;
 
 import javax.annotation.Nullable;
 
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.util.math.BlockPos;
@@ -206,12 +207,12 @@ public class WorldProviderMystic extends WorldProviderSurface
     {
         int month = Calendar.getInstance().get(Calendar.MONTH);
         if(month==11){
-            return KCore.cproxy.ketherMusicXmas;
+            return ClientProxy.ketherMusicXmas;
         }
         if(world.getWorldTime()>13000&&world.getWorldTime()<=25000) {
-	            return KCore.cproxy.ketherMusicNight;
+	            return ClientProxy.ketherMusicNight;
 	    	}else {
-	            return KCore.cproxy.ketherMusicDay;
+	            return ClientProxy.ketherMusicDay;
 	    	}
     }
 

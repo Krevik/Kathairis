@@ -2,6 +2,7 @@ package mod.krevik.Entities;
 
 import java.util.Random;
 
+import mod.krevik.Main.ClientProxy;
 import mod.krevik.Main.KCore;
 import mod.krevik.Particles.ParticleShocking;
 
@@ -55,7 +56,7 @@ public class EntityShockingBall extends EntityThrowable
             for (int i = 0; i < 8; ++i)
             {
             	ParticleShocking particle = new ParticleShocking(this.world,this.posX+random.nextDouble()-random.nextDouble(),this.posY+random.nextDouble()-random.nextDouble(),this.posZ+random.nextDouble()-random.nextDouble(),random.nextDouble()-random.nextDouble(),random.nextDouble()-random.nextDouble(),random.nextDouble()-random.nextDouble());
-            	KCore.instance.cproxy.drawParticle(this.world, particle);
+            	ClientProxy.drawParticle(this.world, particle);
             }
         }
     }
@@ -75,7 +76,7 @@ public class EntityShockingBall extends EntityThrowable
         /*if(this.world.isRemote) {
             for(int x=0;x<52;x++) {
             	ParticleShocking particle = new ParticleShocking(this.world,posX+random.nextDouble()-random.nextDouble(),posY+random.nextDouble()-random.nextDouble(),posZ+random.nextDouble()-random.nextDouble(),random.nextDouble()-random.nextDouble(),random.nextDouble()-random.nextDouble(),random.nextDouble()-random.nextDouble());
-            	KCore.instance.cproxy.drawParticle(this.world, particle);
+            	ClientProxy.drawParticle(this.world, particle);
             }
         }*/
         this.isDead = true;

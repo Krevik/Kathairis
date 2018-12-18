@@ -4,7 +4,7 @@ import java.util.Random;
 
 import mod.krevik.Blocks.BlockMysticBush;
 import mod.krevik.Blocks.BlockMysticLeaf;
-import com.krevik.Gens.WorldGenAbstractBasicMysticTree;
+import mod.krevik.Gens.WorldGenAbstractBasicMysticTree;
 import mod.krevik.Main.KCore;
 
 import net.minecraft.block.BlockLeaves;
