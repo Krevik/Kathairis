@@ -117,17 +117,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @Mod(modid = KCore.MODID, name = KCore.name, version = KCore.version, acceptedMinecraftVersions = "[1.12]")
 public class KCore {
 
-	@SidedProxy(serverSide = "CommonProxy", clientSide = "ClientProxy")
+	@SidedProxy(serverSide = "mod.krevik.Main.CommonProxy", clientSide = "mod.krevik.Main.ClientProxy")
 	public static CommonProxy proxy;
 	
-	public static final String MODID = "kathairiskathairis";
+	public static final String MODID = "kathairis";
 	public static final String name = "Kathairis";
-	public static final String version = "beta-1.5";
+	public static final String version = "1.5.1-beta1";
 	
 	@Mod.Instance(MODID)
 	public static KCore instance;
 	
-	public static final Logger LOGGER = LogManager.getLogger(KCore.instance.MODID);
+	public static final Logger LOGGER = LogManager.getLogger(KCore.MODID);
 
     public static final RegistryHelper regHelper = new RegistryHelper();
 
