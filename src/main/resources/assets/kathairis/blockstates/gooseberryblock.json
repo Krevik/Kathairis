@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"variant=without": { "model": "mystic:goosberry_bush_picked" },
-		"variant=with": { "model": "mystic:gooseberry_bush" }
+		"variant=without": { "model": "kathairis:goosberry_bush_picked" },
+		"variant=with": { "model": "kathairis:gooseberry_bush" }
 	}
 }

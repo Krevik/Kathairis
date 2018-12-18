@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "mystic:items/scythe",
-		"particle": "mystic:items/scythe"
+		"1": "kathairis:items/scythe",
+		"particle": "kathairis:items/scythe"
 	},
 	"elements": [
 		{

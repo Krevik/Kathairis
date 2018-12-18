@@ -1,19 +1,19 @@
 {
     "multipart": [
         {   "when": { "up": "true" },
-            "apply": { "model": "mystic:hardenedweatheredrockwall_post" }
+            "apply": { "model": "kathairis:hardenedweatheredrockwall_post" }
         },
         {   "when": { "north": "true" },
-            "apply": { "model": "mystic:hardenedweatheredrockwall_side", "uvlock": true }
+            "apply": { "model": "kathairis:hardenedweatheredrockwall_side", "uvlock": true }
         },
         {   "when": { "east": "true" },
-            "apply": { "model": "mystic:hardenedweatheredrockwall_side", "y": 90, "uvlock": true }
+            "apply": { "model": "kathairis:hardenedweatheredrockwall_side", "y": 90, "uvlock": true }
         },
         {   "when": { "south": "true" },
-            "apply": { "model": "mystic:hardenedweatheredrockwall_side", "y": 180, "uvlock": true }
+            "apply": { "model": "kathairis:hardenedweatheredrockwall_side", "y": 180, "uvlock": true }
         },
         {   "when": { "west": "true" },
-            "apply": { "model": "mystic:hardenedweatheredrockwall_side", "y": 270, "uvlock": true }
+            "apply": { "model": "kathairis:hardenedweatheredrockwall_side", "y": 270, "uvlock": true }
         }
     ]
 }

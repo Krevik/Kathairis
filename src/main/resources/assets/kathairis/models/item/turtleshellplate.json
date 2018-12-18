@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/turtleshellplate",
+	"parent": "kathairis:block/turtleshellplate",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

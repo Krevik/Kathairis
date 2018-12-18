@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/steppedsucculent",
+	"parent": "kathairis:block/steppedsucculent",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mystic:items/plant_yellow_cloud_item"
+        "layer0": "kathairis:items/plant_yellow_cloud_item"
     }
 }

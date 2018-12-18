@@ -1,6 +1,6 @@
 {
 	"parent": "block/crop",
 	"textures": {
-		"crop": "mystic:blocks/bluefruitplant3"
+		"crop": "kathairis:blocks/bluefruitplant3"
 	}
 }

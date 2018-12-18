@@ -1,13 +1,13 @@
 {
     "pools": [
         {
-		    "name": "mystic:cloudessence",
+		    "name": "kathairis:cloudessence",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "mystic:cloudessence",
+                    "name": "kathairis:cloudessence",
                     "functions": [
                         {
                             "function": "set_count",

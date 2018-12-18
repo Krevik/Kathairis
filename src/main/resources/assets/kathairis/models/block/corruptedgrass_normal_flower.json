@@ -1,10 +1,10 @@
 {
-    "parent": "mystic:block/corruptedgrass",
+    "parent": "kathairis:block/corruptedgrass",
     "textures": {
-        "particle": "mystic:blocks/corrupteddirt",
-        "bottom": "mystic:blocks/corrupteddirt",
-        "top": "mystic:blocks/corruptedgrass_top_flower",
-        "side": "mystic:blocks/corruptedgrass_side",
-        "overlay": "mystic:blocks/corruptedgrass_side_overlay"
+        "particle": "kathairis:blocks/corrupteddirt",
+        "bottom": "kathairis:blocks/corrupteddirt",
+        "top": "kathairis:blocks/corruptedgrass_top_flower",
+        "side": "kathairis:blocks/corruptedgrass_side",
+        "overlay": "kathairis:blocks/corruptedgrass_side_overlay"
     }
 }

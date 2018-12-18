@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/soulplanks",
+	"parent": "kathairis:block/soulplanks",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

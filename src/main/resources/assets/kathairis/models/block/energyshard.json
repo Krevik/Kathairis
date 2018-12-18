@@ -1,7 +1,7 @@
 {
 	"textures": {
-		"0": "mystic:blocks/energyshard",
-		"particle": "mystic:blocks/energyshard"
+		"0": "kathairis:blocks/energyshard",
+		"particle": "kathairis:blocks/energyshard"
 	},
 	"elements": [
 		{

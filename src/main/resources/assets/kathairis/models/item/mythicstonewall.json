@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/mythicstonewall",
+	"parent": "kathairis:block/mythicstonewall",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

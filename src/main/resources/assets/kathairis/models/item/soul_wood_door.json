@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "mystic:items/soul_wood_door_item"
+		"layer0": "kathairis:items/soul_wood_door_item"
     }
 }

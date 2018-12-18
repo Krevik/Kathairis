@@ -2,6 +2,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "mystic:items/jade_vine"
+		"layer0": "kathairis:items/jade_vine"
     }
 }

@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/baurble",
+	"parent": "kathairis:block/baurble",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

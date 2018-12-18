@@ -1,6 +1,6 @@
 {
     "variants": {
-        "stage=0": { "model": "mystic:mysticsapling" },
-        "stage=1": { "model": "mystic:mysticsapling" }
+        "stage=0": { "model": "kathairis:mysticsapling" },
+        "stage=1": { "model": "kathairis:mysticsapling" }
     }
 }

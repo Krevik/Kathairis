@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"variant=without": { "model": "mystic:butterflyflower_without" },
-		"variant=with": { "model": "mystic:butterflyflower_with" }
+		"variant=without": { "model": "kathairis:butterflyflower_without" },
+		"variant=with": { "model": "kathairis:butterflyflower_with" }
 	}
 }

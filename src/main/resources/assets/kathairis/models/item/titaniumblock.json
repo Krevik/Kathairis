@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/titaniumblock",
+	"parent": "kathairis:block/titaniumblock",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/mysticleaves",
+	"parent": "kathairis:block/mysticleaves",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

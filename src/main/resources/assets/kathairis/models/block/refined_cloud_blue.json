@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "mystic:blocks/refined_cloud_blue"
+        "all": "kathairis:blocks/refined_cloud_blue"
     }
 }

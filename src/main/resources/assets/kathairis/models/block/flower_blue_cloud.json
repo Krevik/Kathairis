@@ -1,8 +1,8 @@
 {
 	"ambientocclusion": false,
 	"textures": {
-		"0": "mystic:blocks/flower_blue_cloud",
-		"particle": "mystic:blocks/flower_blue_cloud"
+		"0": "kathairis:blocks/flower_blue_cloud",
+		"particle": "kathairis:blocks/flower_blue_cloud"
 	},
 	"elements": [
 		{

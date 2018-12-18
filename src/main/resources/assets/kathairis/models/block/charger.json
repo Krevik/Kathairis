@@ -1,10 +1,10 @@
 {
 	"textures": {
-		"0": "mystic:blocks/energyshard",
-		"1": "mystic:blocks/soulplanks",
-		"2": "mystic:blocks/mudbricks",
-		"3": "mystic:blocks/energy_thunder",
-		"particle": "mystic:blocks/soulplanks"
+		"0": "kathairis:blocks/energyshard",
+		"1": "kathairis:blocks/soulplanks",
+		"2": "kathairis:blocks/mudbricks",
+		"3": "kathairis:blocks/energy_thunder",
+		"particle": "kathairis:blocks/soulplanks"
 	},
 	"elements": [
 		{

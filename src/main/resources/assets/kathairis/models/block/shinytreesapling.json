@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "mystic:blocks/shinytreesapling"
+        "cross": "kathairis:blocks/shinytreesapling"
     }
 }

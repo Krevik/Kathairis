@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/butterflyflower",
+	"parent": "kathairis:block/butterflyflower",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

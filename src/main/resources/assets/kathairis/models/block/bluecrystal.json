@@ -1,7 +1,7 @@
 {
     "textures": {
-        "cross": "mystic:blocks/bluecrystal",
-	"particle": "mystic:blocks/bluecrystal"
+        "cross": "kathairis:blocks/bluecrystal",
+	"particle": "kathairis:blocks/bluecrystal"
 },
        "elements": [
         {   "from": [ 0.8, 0, 8 ],

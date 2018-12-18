@@ -1,7 +1,7 @@
 {
     "parent": "block/door_bottom",
     "textures": {
-        "bottom": "mystic:blocks/adamantium_door_lower",
-        "top": "mystic:blocks/adamantium_door_upper"
+        "bottom": "kathairis:blocks/adamantium_door_lower",
+        "top": "kathairis:blocks/adamantium_door_upper"
     }
 }

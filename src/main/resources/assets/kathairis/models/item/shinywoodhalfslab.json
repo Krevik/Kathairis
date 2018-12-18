@@ -1,5 +1,5 @@
 {
-    "parent": "mystic:block/shinywoodhalfslabbottom",
+    "parent": "kathairis:block/shinywoodhalfslabbottom",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

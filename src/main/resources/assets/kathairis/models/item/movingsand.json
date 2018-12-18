@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/movingsand",
+	"parent": "kathairis:block/movingsand",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

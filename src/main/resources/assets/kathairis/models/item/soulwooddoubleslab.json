@@ -1,5 +1,5 @@
 {
-    "parent": "mystic:block/soulwooddoubleslab",
+    "parent": "kathairis:block/soulwooddoubleslab",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

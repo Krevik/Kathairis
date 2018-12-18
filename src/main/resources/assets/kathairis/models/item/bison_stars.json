@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/bison_stars",
+	"parent": "kathairis:block/bison_stars",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

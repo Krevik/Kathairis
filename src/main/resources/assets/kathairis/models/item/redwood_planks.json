@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/redwood_planks",
+	"parent": "kathairis:block/redwood_planks",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

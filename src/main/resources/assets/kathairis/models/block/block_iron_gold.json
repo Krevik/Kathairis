@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "mystic:blocks/block_iron_gold"
+		"all": "kathairis:blocks/block_iron_gold"
 	}
 }

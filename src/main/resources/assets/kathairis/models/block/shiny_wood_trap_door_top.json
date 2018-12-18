@@ -1,6 +1,6 @@
 {
     "parent": "block/trapdoor_top",
     "textures": {
-        "texture": "mystic:blocks/shiny_wood_trap_door"
+        "texture": "kathairis:blocks/shiny_wood_trap_door"
     }
 }

@@ -1,5 +1,5 @@
 {
-    "parent": "mystic:block/layered_sand_height2",
+    "parent": "kathairis:block/layered_sand_height2",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

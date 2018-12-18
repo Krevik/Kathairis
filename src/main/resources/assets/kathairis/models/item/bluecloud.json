@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/bluecloud",
+	"parent": "kathairis:block/bluecloud",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

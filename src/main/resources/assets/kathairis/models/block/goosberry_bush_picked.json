@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"1": "mystic:blocks/gooseberryblock",
-		"particle": "mystic:blocks/gooseberryblock"
+		"1": "kathairis:blocks/gooseberryblock",
+		"particle": "kathairis:blocks/gooseberryblock"
 	},
 	"elements": [
 		{

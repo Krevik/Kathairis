@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "mystic:items/deathwand"
+        "layer0": "kathairis:items/deathwand"
     }
 }

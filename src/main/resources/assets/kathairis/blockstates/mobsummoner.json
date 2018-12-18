@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"variant=zombie": { "model": "mystic:mobsummoner" },
-		"variant=skeletonwarrior": { "model": "mystic:mobsummoner" },
-		"variant=skeletonarcher": { "model": "mystic:mobsummoner" },
-		"variant=steveghost": { "model": "mystic:mobsummoner" }
+		"variant=zombie": { "model": "kathairis:mobsummoner" },
+		"variant=skeletonwarrior": { "model": "kathairis:mobsummoner" },
+		"variant=skeletonarcher": { "model": "kathairis:mobsummoner" },
+		"variant=steveghost": { "model": "kathairis:mobsummoner" }
 	}
 }

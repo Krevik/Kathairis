@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/stripped_shiny_log",
+	"parent": "kathairis:block/stripped_shiny_log",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

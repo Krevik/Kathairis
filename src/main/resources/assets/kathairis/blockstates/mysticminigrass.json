@@ -1,13 +1,13 @@
 {
     "variants": {
-        "age=0": { "model": "mystic:mysticminigrass" }, 
-        "age=1": { "model": "mystic:mysticminigrass" },
-        "age=2": { "model": "mystic:mysticminigrass" },
-        "age=3": { "model": "mystic:mysticminigrass" },
-        "age=4": { "model": "mystic:mysticminigrass" },
-        "age=5": { "model": "mystic:mysticminigrass" },
-        "age=6": { "model": "mystic:mysticminigrass" },
-        "age=7": { "model": "mystic:mysticminigrass" },	
-		"age=8": { "model": "mystic:mysticminigrass" }	
+        "age=0": { "model": "kathairis:mysticminigrass" }, 
+        "age=1": { "model": "kathairis:mysticminigrass" },
+        "age=2": { "model": "kathairis:mysticminigrass" },
+        "age=3": { "model": "kathairis:mysticminigrass" },
+        "age=4": { "model": "kathairis:mysticminigrass" },
+        "age=5": { "model": "kathairis:mysticminigrass" },
+        "age=6": { "model": "kathairis:mysticminigrass" },
+        "age=7": { "model": "kathairis:mysticminigrass" },	
+		"age=8": { "model": "kathairis:mysticminigrass" }	
     }
 }

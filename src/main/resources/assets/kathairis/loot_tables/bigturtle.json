@@ -1,13 +1,13 @@
 {
     "pools": [
         {
-		    "name": "mystic:turtleshell",
+		    "name": "kathairis:turtleshell",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "mystic:turtleshell",
+                    "name": "kathairis:turtleshell",
                     "functions": [
                         {
                             "function": "set_count",

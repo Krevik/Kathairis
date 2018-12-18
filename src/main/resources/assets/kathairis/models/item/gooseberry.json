@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mystic:items/gooseberry"
+        "layer0": "kathairis:items/gooseberry"
     }
 }

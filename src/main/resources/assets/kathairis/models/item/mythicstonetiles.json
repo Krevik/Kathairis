@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/mythicstonetiles",
+	"parent": "kathairis:block/mythicstonetiles",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

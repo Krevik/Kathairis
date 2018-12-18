@@ -1,12 +1,12 @@
 {
     "variants": {
-		"normal": [ { "model": "mystic:grass_yellow_cloud" },
-		{ "model": "mystic:flower_yellow_cloud" },
-		{ "model": "mystic:grass_yellow_cloud", "y": 90 },
-		{ "model": "mystic:flower_yellow_cloud", "y": 90 },
-		{ "model": "mystic:grass_yellow_cloud", "y": 180 },
-		{ "model": "mystic:flower_yellow_cloud", "y": 180 },
-		{ "model": "mystic:grass_yellow_cloud", "y": 270 },
-		{ "model": "mystic:flower_yellow_cloud", "y": 270 } ]
+		"normal": [ { "model": "kathairis:grass_yellow_cloud" },
+		{ "model": "kathairis:flower_yellow_cloud" },
+		{ "model": "kathairis:grass_yellow_cloud", "y": 90 },
+		{ "model": "kathairis:flower_yellow_cloud", "y": 90 },
+		{ "model": "kathairis:grass_yellow_cloud", "y": 180 },
+		{ "model": "kathairis:flower_yellow_cloud", "y": 180 },
+		{ "model": "kathairis:grass_yellow_cloud", "y": 270 },
+		{ "model": "kathairis:flower_yellow_cloud", "y": 270 } ]
     }
 }

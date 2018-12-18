@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "mystic:blocks/christmas_gift_yellow",
-		"particle": "mystic:blocks/christmas_gift_yellow"
+		"0": "kathairis:blocks/christmas_gift_yellow",
+		"particle": "kathairis:blocks/christmas_gift_yellow"
 	},
 	"elements": [
 		{

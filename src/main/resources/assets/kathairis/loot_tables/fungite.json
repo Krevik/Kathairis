@@ -1,13 +1,13 @@
 {
     "pools": [
         {
-		    "name": "mystic:fungal_drug",
+		    "name": "kathairis:fungal_drug",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "mystic:fungal_drug"
+                    "name": "kathairis:fungal_drug"
                 }
             ]
         }

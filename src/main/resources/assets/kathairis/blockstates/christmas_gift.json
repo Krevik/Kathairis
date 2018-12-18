@@ -1,7 +1,7 @@
 {
 	"variants": {
-		"color=red": { "model": "mystic:christmas_gift_red" },
-		"color=yellow": { "model": "mystic:christmas_gift_yellow" },
-		"color=violet": { "model": "mystic:christmas_gift_violet" }
+		"color=red": { "model": "kathairis:christmas_gift_red" },
+		"color=yellow": { "model": "kathairis:christmas_gift_yellow" },
+		"color=violet": { "model": "kathairis:christmas_gift_violet" }
 	}
 }

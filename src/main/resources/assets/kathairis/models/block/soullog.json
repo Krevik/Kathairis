@@ -1,7 +1,7 @@
 {
     "parent": "block/cube_column",
     "textures": {
-        "end": "mystic:blocks/soullog_top",
-        "side": "mystic:blocks/soullog"
+        "end": "kathairis:blocks/soullog_top",
+        "side": "kathairis:blocks/soullog"
     }
 }

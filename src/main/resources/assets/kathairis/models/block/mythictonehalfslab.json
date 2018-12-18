@@ -1,8 +1,8 @@
 {
     "parent": "block/half_slab",
     "textures": {
-        "bottom": "mystic:blocks/mythicstone",
-        "top": "mystic:blocks/mythicstone",
-        "side": "mystic:blocks/mythicstone"
+        "bottom": "kathairis:blocks/mythicstone",
+        "top": "kathairis:blocks/mythicstone",
+        "side": "kathairis:blocks/mythicstone"
     }
 }

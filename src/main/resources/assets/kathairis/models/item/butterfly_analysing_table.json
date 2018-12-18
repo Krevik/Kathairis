@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/butterfly_analysing_table",
+	"parent": "kathairis:block/butterfly_analysing_table",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "mystic:items/titaniumshovel"
+        "layer0": "kathairis:items/titaniumshovel"
     }
 }

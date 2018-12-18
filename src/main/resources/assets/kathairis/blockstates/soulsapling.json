@@ -1,6 +1,6 @@
 {
     "variants": {
-        "stage=0": { "model": "mystic:soulsapling" },
-        "stage=1": { "model": "mystic:soulsapling" }
+        "stage=0": { "model": "kathairis:soulsapling" },
+        "stage=1": { "model": "kathairis:soulsapling" }
     }
 }

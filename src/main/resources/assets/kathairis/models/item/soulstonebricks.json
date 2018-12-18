@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/soulstonebricks",
+	"parent": "kathairis:block/soulstonebricks",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

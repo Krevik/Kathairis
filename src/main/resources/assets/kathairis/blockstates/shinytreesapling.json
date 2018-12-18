@@ -1,6 +1,6 @@
 {
     "variants": {
-        "stage=0": { "model": "mystic:shinytreesapling" },
-        "stage=1": { "model": "mystic:shinytreesapling" }
+        "stage=0": { "model": "kathairis:shinytreesapling" },
+        "stage=1": { "model": "kathairis:shinytreesapling" }
     }
 }

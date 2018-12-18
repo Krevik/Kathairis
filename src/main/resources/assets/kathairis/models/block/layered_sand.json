@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "mystic:blocks/layered_sand"
+        "all": "kathairis:blocks/layered_sand"
     }
 }

@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/weatheredrock",
+	"parent": "kathairis:block/weatheredrock",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

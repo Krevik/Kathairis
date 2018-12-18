@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "mystic:blocks/fluofungus_part_copy",
-		"1": "mystic:blocks/fluofungus",
-		"particle": "mystic:blocks/fluofungus"
+		"0": "kathairis:blocks/fluofungus_part_copy",
+		"1": "kathairis:blocks/fluofungus",
+		"particle": "kathairis:blocks/fluofungus"
 	},
 	"elements": [
 		{

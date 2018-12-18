@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "mystic:blocks/butterflyflower",
-		"1": "mystic:blocks/butterflyflower",
-		"particle": "mystic:blocks/butterflyflower"
+		"0": "kathairis:blocks/butterflyflower",
+		"1": "kathairis:blocks/butterflyflower",
+		"particle": "kathairis:blocks/butterflyflower"
 	},
 	"elements": [
 		{

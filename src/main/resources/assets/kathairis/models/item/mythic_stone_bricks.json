@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/mythic_stone_bricks",
+	"parent": "kathairis:block/mythic_stone_bricks",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

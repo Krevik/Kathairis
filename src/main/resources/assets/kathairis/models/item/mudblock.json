@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/mudblock",
+	"parent": "kathairis:block/mudblock",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

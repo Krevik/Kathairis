@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/chiseledbonebricks",
+	"parent": "kathairis:block/chiseledbonebricks",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

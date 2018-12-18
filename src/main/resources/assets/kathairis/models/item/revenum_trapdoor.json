@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/revenum_trapdoor",
+	"parent": "kathairis:block/revenum_trapdoor",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

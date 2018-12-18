@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "mystic:items/butterfly_catcher"
+        "layer0": "kathairis:items/butterfly_catcher"
     }
 }

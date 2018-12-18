@@ -1,12 +1,12 @@
 {
     "variants": {
-        "age=0": { "model": "mystic:magicbeans0" }, 
-        "age=1": { "model": "mystic:magicbeans1" },
-        "age=2": { "model": "mystic:magicbeans2" },
-        "age=3": { "model": "mystic:magicbeans3" },
-        "age=4": { "model": "mystic:magicbeans4" },
-        "age=5": { "model": "mystic:magicbeans5" },
-        "age=6": { "model": "mystic:magicbeans6" },
-        "age=7": { "model": "mystic:magicbeans7" }
+        "age=0": { "model": "kathairis:magicbeans0" }, 
+        "age=1": { "model": "kathairis:magicbeans1" },
+        "age=2": { "model": "kathairis:magicbeans2" },
+        "age=3": { "model": "kathairis:magicbeans3" },
+        "age=4": { "model": "kathairis:magicbeans4" },
+        "age=5": { "model": "kathairis:magicbeans5" },
+        "age=6": { "model": "kathairis:magicbeans6" },
+        "age=7": { "model": "kathairis:magicbeans7" }
     }
 }

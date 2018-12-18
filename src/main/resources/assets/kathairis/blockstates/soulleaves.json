@@ -1,9 +1,9 @@
 {
     "variants": {
-        "normal": { "model": "mystic:soulleaves" },
-		"check_decay=false,decayable=false": { "model": "mystic:soulleaves" },
-		"check_decay=false,decayable=true": { "model": "mystic:soulleaves" },
-		"check_decay=true,decayable=false": { "model": "mystic:soulleaves" },
-		"check_decay=true,decayable=true": { "model": "mystic:soulleaves" }
+        "normal": { "model": "kathairis:soulleaves" },
+		"check_decay=false,decayable=false": { "model": "kathairis:soulleaves" },
+		"check_decay=false,decayable=true": { "model": "kathairis:soulleaves" },
+		"check_decay=true,decayable=false": { "model": "kathairis:soulleaves" },
+		"check_decay=true,decayable=true": { "model": "kathairis:soulleaves" }
     }
 }

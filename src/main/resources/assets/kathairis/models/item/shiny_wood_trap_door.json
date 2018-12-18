@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/shiny_wood_trap_door",
+	"parent": "kathairis:block/shiny_wood_trap_door",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

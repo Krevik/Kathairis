@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
-	"textures": {"1": "mystic:blocks/gecko_eggs",
-				"particle": "mystic:blocks/gecko_eggs"},
+	"textures": {"1": "kathairis:blocks/gecko_eggs",
+				"particle": "kathairis:blocks/gecko_eggs"},
 	"elements": [
 		{
 			"name": "cube",

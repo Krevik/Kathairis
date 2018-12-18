@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "mystic:items/revenum_door_item"
+		"layer0": "kathairis:items/revenum_door_item"
     }
 }

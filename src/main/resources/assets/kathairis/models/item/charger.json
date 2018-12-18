@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/charger",
+	"parent": "kathairis:block/charger",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

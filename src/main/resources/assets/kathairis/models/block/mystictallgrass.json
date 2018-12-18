@@ -1,6 +1,6 @@
 {
 	"parent": "block/tinted_cross",
 	"textures": {
-		"cross": "mystic:blocks/mystictallgrass"
+		"cross": "kathairis:blocks/mystictallgrass"
 	}
 }

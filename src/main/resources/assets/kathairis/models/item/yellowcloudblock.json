@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/yellowcloudblock",
+	"parent": "kathairis:block/yellowcloudblock",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

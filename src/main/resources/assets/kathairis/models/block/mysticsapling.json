@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "mystic:blocks/mysticsapling"
+        "cross": "kathairis:blocks/mysticsapling"
     }
 }

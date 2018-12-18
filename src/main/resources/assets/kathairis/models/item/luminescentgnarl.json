@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/fluofungus",
+	"parent": "kathairis:block/fluofungus",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

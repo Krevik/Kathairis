@@ -4,10 +4,10 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:bird/bird1",
-			"mystic:bird/bird2",
-			"mystic:bird/bird3",
-			"mystic:bird/bird4"
+            "kathairis:bird/bird1",
+			"kathairis:bird/bird2",
+			"kathairis:bird/bird3",
+			"kathairis:bird/bird4"
         ]
     },
 	"mob.howler.living":
@@ -15,7 +15,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:howler/living"
+            "kathairis:howler/living"
         ]
     },
 	"mob.howler.dead":
@@ -23,7 +23,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:howler/dead"
+            "kathairis:howler/dead"
         ]
     },
 	"mob.howler.hurt":
@@ -31,8 +31,8 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:howler/hurt_1",
-			"mystic:howler/hurt_2"
+            "kathairis:howler/hurt_1",
+			"kathairis:howler/hurt_2"
         ]
     },
 	"mob.jellyfish.dead":
@@ -40,7 +40,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:jellyfish/dead"
+            "kathairis:jellyfish/dead"
         ]
     },
 	"mob.jellyfish.hurt":
@@ -48,7 +48,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:jellyfish/hurt"
+            "kathairis:jellyfish/hurt"
         ]
     },
 	"mob.jellyfish.living":
@@ -56,9 +56,9 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:jellyfish/living1",
-			"mystic:jellyfish/living2",
-			"mystic:jellyfish/living3"
+            "kathairis:jellyfish/living1",
+			"kathairis:jellyfish/living2",
+			"kathairis:jellyfish/living3"
         ]
     },
 	"mob.turtle.dead":
@@ -66,7 +66,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:turtle/turtle_dead"
+            "kathairis:turtle/turtle_dead"
         ]
     },
 	"mob.bison.dead":
@@ -74,7 +74,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:bison/dead"
+            "kathairis:bison/dead"
         ]
     },
 	"mob.bison.hurt":
@@ -82,7 +82,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:bison/hurt"
+            "kathairis:bison/hurt"
         ]
     },
 	"mob.bison.living":
@@ -90,13 +90,13 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:bison/1",
-			"mystic:bison/2",
-			"mystic:bison/3",
-			"mystic:bison/4",
-			"mystic:bison/5",
-			"mystic:bison/6",
-			"mystic:bison/7"
+            "kathairis:bison/1",
+			"kathairis:bison/2",
+			"kathairis:bison/3",
+			"kathairis:bison/4",
+			"kathairis:bison/5",
+			"kathairis:bison/6",
+			"kathairis:bison/7"
         ]
     },
 	"kether.music.night":
@@ -104,9 +104,9 @@
         "category": "music",
 		"sounds":
         [
-            {"name": "mystic:kether/kether_night", "stream": true},
-			{"name": "mystic:kether/kether_night2", "stream": true},
-			{"name": "mystic:kether/kether_night3", "stream": true}
+            {"name": "kathairis:kether/kether_night", "stream": true},
+			{"name": "kathairis:kether/kether_night2", "stream": true},
+			{"name": "kathairis:kether/kether_night3", "stream": true}
         ]
     },
 	"kether.music.day":
@@ -114,9 +114,9 @@
         "category": "music",
 		"sounds":
         [
-            {"name": "mystic:kether/kether_day", "stream": true},
-			{"name": "mystic:kether/kether_day1", "stream": true},
-			{"name": "mystic:kether/kether_day2", "stream": true}
+            {"name": "kathairis:kether/kether_day", "stream": true},
+			{"name": "kathairis:kether/kether_day1", "stream": true},
+			{"name": "kathairis:kether/kether_day2", "stream": true}
         ]
     },
 	"mob.ghost.living":
@@ -124,10 +124,10 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:ghost/ghost1",
-			"mystic:ghost/ghost2",
-			"mystic:ghost/ghost3",
-			"mystic:ghost/ghost4"
+            "kathairis:ghost/ghost1",
+			"kathairis:ghost/ghost2",
+			"kathairis:ghost/ghost3",
+			"kathairis:ghost/ghost4"
         ]
     },
 	"mob.ghost.attack":
@@ -135,7 +135,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:ghost/ghost_attack"
+            "kathairis:ghost/ghost_attack"
         ]
     },
 	"mob.ghost.dead":
@@ -143,7 +143,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:ghost/ghost_dead"
+            "kathairis:ghost/ghost_dead"
         ]
     },
 	"mob.death.living":
@@ -151,16 +151,16 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:death/death1",
-			"mystic:death/death2",
-			"mystic:death/death3",
-			"mystic:death/death4",
-			"mystic:death/death5",
-			"mystic:death/death6",
-			"mystic:death/death7",
-			"mystic:death/death8",
-			"mystic:death/death9",
-			"mystic:death/death10"
+            "kathairis:death/death1",
+			"kathairis:death/death2",
+			"kathairis:death/death3",
+			"kathairis:death/death4",
+			"kathairis:death/death5",
+			"kathairis:death/death6",
+			"kathairis:death/death7",
+			"kathairis:death/death8",
+			"kathairis:death/death9",
+			"kathairis:death/death10"
         ]
     },
 	"mob.scary.flower":
@@ -168,11 +168,11 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:scary/scary1",
-			"mystic:scary/scary2",
-			"mystic:scary/scary3",
-			"mystic:scary/scary4",
-			"mystic:scary/scary5"
+            "kathairis:scary/scary1",
+			"kathairis:scary/scary2",
+			"kathairis:scary/scary3",
+			"kathairis:scary/scary4",
+			"kathairis:scary/scary5"
         ]
     },
 	"mob.camel.ambient":
@@ -180,11 +180,11 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:camel/camel_ambient1",
-			"mystic:camel/camel_ambient2",
-			"mystic:camel/camel_ambient3",
-			"mystic:camel/camel_ambient4",
-			"mystic:camel/camel_ambient5"
+            "kathairis:camel/camel_ambient1",
+			"kathairis:camel/camel_ambient2",
+			"kathairis:camel/camel_ambient3",
+			"kathairis:camel/camel_ambient4",
+			"kathairis:camel/camel_ambient5"
         ]
     },
 	"mob.camel.breath":
@@ -192,7 +192,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:camel/camel_breath"
+            "kathairis:camel/camel_breath"
         ]
     },
 	"mob.camel.dead":
@@ -200,7 +200,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:camel/camel_dead"
+            "kathairis:camel/camel_dead"
         ]
     },
 	"mob.camel.hurt":
@@ -208,7 +208,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:camel/camel_hurt"
+            "kathairis:camel/camel_hurt"
         ]
     },
 	"mob.oldman.ambient":
@@ -216,7 +216,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:oldman/ambient"
+            "kathairis:oldman/ambient"
         ]
     },
 	"mob.skyray.ambient":
@@ -224,9 +224,9 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:skyray/skyray1",
-			"mystic:skyray/skyray2",
-            "mystic:skyray/skyray3"
+            "kathairis:skyray/skyray1",
+			"kathairis:skyray/skyray2",
+            "kathairis:skyray/skyray3"
         ]
     },
 	"mob.skyray.hurt":
@@ -234,7 +234,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:skyray/skyray_hurt"
+            "kathairis:skyray/skyray_hurt"
         ]
     },
 	"kether.cloudglass.break":
@@ -242,8 +242,8 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:blocks/cloud_glass/cloudglass1",
-			"mystic:blocks/cloud_glass/cloudglass2"
+            "kathairis:blocks/cloud_glass/cloudglass1",
+			"kathairis:blocks/cloud_glass/cloudglass2"
         ]
     },
 	"kether.sandstorm":
@@ -251,9 +251,9 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:sandstorm/sandstorm1",
-			"mystic:sandstorm/sandstorm2",
-			"mystic:sandstorm/sandstorm3"
+            "kathairis:sandstorm/sandstorm1",
+			"kathairis:sandstorm/sandstorm2",
+			"kathairis:sandstorm/sandstorm3"
         ]
     },
 	"kether.music_disc.jazzy":
@@ -261,7 +261,7 @@
         "category": "music",
 		"sounds":
         [
-            {"name": "mystic:music_disc/jazzy", "stream": true}
+            {"name": "kathairis:music_disc/jazzy", "stream": true}
         ]
     },
 	"kether.music_disc.8bit":
@@ -269,7 +269,7 @@
         "category": "music",
 		"sounds":
         [
-            {"name": "mystic:music_disc/8bit", "stream": true}
+            {"name": "kathairis:music_disc/8bit", "stream": true}
         ]
     },
 	"kether.pickaxe_turn":
@@ -277,7 +277,7 @@
         "category": "weather",
 		"sounds":
         [
-            "mystic:misc/pickaxe_turn"
+            "kathairis:misc/pickaxe_turn"
         ]
     },
 	"kether.music.xmas":
@@ -285,9 +285,9 @@
         "category": "music",
 		"sounds":
         [
-            {"name": "mystic:kether/xmas1", "stream": true},
-			{"name": "mystic:kether/xmas2", "stream": true},
-			{"name": "mystic:kether/xmas3", "stream": true}
+            {"name": "kathairis:kether/xmas1", "stream": true},
+			{"name": "kathairis:kether/xmas2", "stream": true},
+			{"name": "kathairis:kether/xmas3", "stream": true}
         ]
     }
 }

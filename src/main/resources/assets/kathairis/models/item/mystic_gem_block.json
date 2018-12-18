@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/mystic_gem_block",
+	"parent": "kathairis:block/mystic_gem_block",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

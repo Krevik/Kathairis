@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "mystic:items/turtleshell"
+		"layer0": "kathairis:items/turtleshell"
     }
 }

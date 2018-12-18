@@ -1,6 +1,6 @@
 {
     "parent": "block/trapdoor_open",
     "textures": {
-        "texture": "mystic:blocks/adamantium_trapdoor"
+        "texture": "kathairis:blocks/adamantium_trapdoor"
     }
 }

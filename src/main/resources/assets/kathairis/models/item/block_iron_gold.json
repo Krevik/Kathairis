@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/block_iron_gold",
+	"parent": "kathairis:block/block_iron_gold",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

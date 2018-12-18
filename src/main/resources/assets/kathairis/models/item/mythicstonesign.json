@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-        "layer0": "mystic:items/mythicstonesign"
+        "layer0": "kathairis:items/mythicstonesign"
     },
 	"display": {
 		"thirdperson": {

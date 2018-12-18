@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"facing=east": { "model": "mystic:fluofungus", "y": 270 },
-		"facing=west": { "model": "mystic:fluofungus", "y": 90 },
-		"facing=south": { "model": "mystic:fluofungus", "z": 270 },
-		"facing=north": { "model": "mystic:fluofungus", "y": 180 }
+		"facing=east": { "model": "kathairis:fluofungus", "y": 270 },
+		"facing=west": { "model": "kathairis:fluofungus", "y": 90 },
+		"facing=south": { "model": "kathairis:fluofungus", "z": 270 },
+		"facing=north": { "model": "kathairis:fluofungus", "y": 180 }
 	}
 }

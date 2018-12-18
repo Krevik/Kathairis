@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/soulleaves",
+	"parent": "kathairis:block/soulleaves",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

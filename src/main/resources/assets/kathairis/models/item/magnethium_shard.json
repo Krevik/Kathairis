@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "mystic:items/magnethium_shard"
+        "layer0": "kathairis:items/magnethium_shard"
     }
 }

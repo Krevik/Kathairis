@@ -1,13 +1,13 @@
 {
     "pools": [
         {
-			"name": "mystic:gooseberry",
+			"name": "kathairis:gooseberry",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "mystic:gooseberry",
+                    "name": "kathairis:gooseberry",
                     "functions": [
                         {
                             "function": "set_count",

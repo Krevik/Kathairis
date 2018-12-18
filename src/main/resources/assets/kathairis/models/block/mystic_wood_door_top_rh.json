@@ -1,7 +1,7 @@
 {
     "parent": "block/door_top_rh",
     "textures": {
-        "bottom": "mystic:blocks/mystic_wood_door_lower",
-        "top": "mystic:blocks/mystic_wood_door_upper"
+        "bottom": "kathairis:blocks/mystic_wood_door_lower",
+        "top": "kathairis:blocks/mystic_wood_door_upper"
     }
 }

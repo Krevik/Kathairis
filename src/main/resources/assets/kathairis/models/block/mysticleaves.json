@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "mystic:blocks/mysticleaves"
+        "all": "kathairis:blocks/mysticleaves"
     }
 }

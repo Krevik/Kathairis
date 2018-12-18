@@ -1,20 +1,20 @@
 {
 	"variants": {
-		"rotation=0": { "model": "mystic:swampgas" },
-		"rotation=1": { "model": "mystic:swampgas" },
-		"rotation=2": { "model": "mystic:swampgas" },
-		"rotation=3": { "model": "mystic:swampgas" },
-		"rotation=4": { "model": "mystic:swampgas" },
-		"rotation=5": { "model": "mystic:swampgas" },
-		"rotation=6": { "model": "mystic:swampgas" },
-		"rotation=7": { "model": "mystic:swampgas" },
-		"rotation=8": { "model": "mystic:swampgas" },
-		"rotation=9": { "model": "mystic:swampgas" },
-		"rotation=10": { "model": "mystic:swampgas" },
-		"rotation=11": { "model": "mystic:swampgas" },
-		"rotation=12": { "model": "mystic:swampgas" },
-		"rotation=13": { "model": "mystic:swampgas" },
-		"rotation=14": { "model": "mystic:swampgas" },
-		"rotation=15": { "model": "mystic:swampgas" }
+		"rotation=0": { "model": "kathairis:swampgas" },
+		"rotation=1": { "model": "kathairis:swampgas" },
+		"rotation=2": { "model": "kathairis:swampgas" },
+		"rotation=3": { "model": "kathairis:swampgas" },
+		"rotation=4": { "model": "kathairis:swampgas" },
+		"rotation=5": { "model": "kathairis:swampgas" },
+		"rotation=6": { "model": "kathairis:swampgas" },
+		"rotation=7": { "model": "kathairis:swampgas" },
+		"rotation=8": { "model": "kathairis:swampgas" },
+		"rotation=9": { "model": "kathairis:swampgas" },
+		"rotation=10": { "model": "kathairis:swampgas" },
+		"rotation=11": { "model": "kathairis:swampgas" },
+		"rotation=12": { "model": "kathairis:swampgas" },
+		"rotation=13": { "model": "kathairis:swampgas" },
+		"rotation=14": { "model": "kathairis:swampgas" },
+		"rotation=15": { "model": "kathairis:swampgas" }
 	}
 }

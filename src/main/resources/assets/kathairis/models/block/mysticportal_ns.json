@@ -1,7 +1,7 @@
 {
     "textures": {
-        "particle": "mystic:blocks/mysticportal",
-        "portal": "mystic:blocks/mysticportal"
+        "particle": "kathairis:blocks/mysticportal",
+        "portal": "kathairis:blocks/mysticportal"
     },
     "elements": [
         {   "from": [ 0, 0, 6 ],

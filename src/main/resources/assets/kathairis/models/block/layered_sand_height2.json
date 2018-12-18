@@ -1,7 +1,7 @@
 {   "parent": "block/thin_block",
     "textures": {
-        "particle": "mystic:blocks/layered_sand",
-        "texture": "mystic:blocks/layered_sand"
+        "particle": "kathairis:blocks/layered_sand",
+        "texture": "kathairis:blocks/layered_sand"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],

@@ -1,7 +1,7 @@
 {
     "parent": "block/tinted_cross",
     "textures": {
-        "cross": "mystic:blocks/jadevine_bottom"
+        "cross": "kathairis:blocks/jadevine_bottom"
 },
        "elements": [
         {   "from": [ 0.8, 0, 8 ],

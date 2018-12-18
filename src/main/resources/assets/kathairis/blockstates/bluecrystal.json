@@ -1,10 +1,10 @@
 {
     "variants": {
-        "facing=up":  { "model": "mystic:bluecrystal" },
-        "facing=down":   { "model": "mystic:bluecrystal", "x": 180 },
-        "facing=east":   { "model": "mystic:bluecrystal", "y": 90, "x": 90 },
-        "facing=south": { "model": "mystic:bluecrystal", "y": 180, "x": 90 },
-		"facing=west": { "model": "mystic:bluecrystal", "y": 270, "x": 90 },
-        "facing=north": { "model": "mystic:bluecrystal", "y": 0, "x": 90 }
+        "facing=up":  { "model": "kathairis:bluecrystal" },
+        "facing=down":   { "model": "kathairis:bluecrystal", "x": 180 },
+        "facing=east":   { "model": "kathairis:bluecrystal", "y": 90, "x": 90 },
+        "facing=south": { "model": "kathairis:bluecrystal", "y": 180, "x": 90 },
+		"facing=west": { "model": "kathairis:bluecrystal", "y": 270, "x": 90 },
+        "facing=north": { "model": "kathairis:bluecrystal", "y": 0, "x": 90 }
     }
 }

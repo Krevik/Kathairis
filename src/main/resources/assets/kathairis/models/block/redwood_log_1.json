@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "mystic:blocks/redwood_log",
-		"particle": "mystic:blocks/redwood_log"
+		"0": "kathairis:blocks/redwood_log",
+		"particle": "kathairis:blocks/redwood_log"
 	},
 	"elements": [
 		{

@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/christmas_gift_red",
+	"parent": "kathairis:block/christmas_gift_red",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

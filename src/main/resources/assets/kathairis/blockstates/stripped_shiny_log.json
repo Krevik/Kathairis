@@ -1,8 +1,8 @@
 {
     "variants": {
-        "axis=y":  { "model": "mystic:stripped_shiny_log" },
-        "axis=z":   { "model": "mystic:stripped_shiny_log", "x": 90 },
-        "axis=x":   { "model": "mystic:stripped_shiny_log", "x": 90, "y": 90 },
-        "axis=none": { "model": "mystic:shinylogbark" }
+        "axis=y":  { "model": "kathairis:stripped_shiny_log" },
+        "axis=z":   { "model": "kathairis:stripped_shiny_log", "x": 90 },
+        "axis=x":   { "model": "kathairis:stripped_shiny_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "kathairis:shinylogbark" }
     }
 }

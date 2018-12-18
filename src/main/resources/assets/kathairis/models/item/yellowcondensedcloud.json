@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/yellowcondensedcloud",
+	"parent": "kathairis:block/yellowcondensedcloud",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/shinyleaves",
+	"parent": "kathairis:block/shinyleaves",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

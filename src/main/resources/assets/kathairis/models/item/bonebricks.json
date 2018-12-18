@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/bonebricks",
+	"parent": "kathairis:block/bonebricks",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

@@ -1,7 +1,7 @@
 {
     "parent": "block/tinted_cross",
     "textures": {
-        "cross": "mystic:blocks/eyeplant"
+        "cross": "kathairis:blocks/eyeplant"
 },
        "elements": [
 

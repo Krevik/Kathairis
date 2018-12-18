@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "mystic:blocks/bison_stars",
-		"particle": "mystic:blocks/bison_stars"
+		"0": "kathairis:blocks/bison_stars",
+		"particle": "kathairis:blocks/bison_stars"
 	},
 	"elements": [
 		{

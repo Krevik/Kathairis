@@ -1,6 +1,6 @@
 {
     "variants": {
-        "half=bottom,variant=mystic": { "model": "mystic:soulwoodhalfslabbottom" },
-        "half=top,variant=mystic": { "model": "mystic:soulwoodhalfslabtop" }
+        "half=bottom,variant=mystic": { "model": "kathairis:soulwoodhalfslabbottom" },
+        "half=top,variant=mystic": { "model": "kathairis:soulwoodhalfslabtop" }
     }
 }

@@ -1,6 +1,6 @@
 {
     "parent": "block/wall_side",
     "textures": {
-        "wall": "mystic:blocks/mythicstone"
+        "wall": "kathairis:blocks/mythicstone"
     }
 }

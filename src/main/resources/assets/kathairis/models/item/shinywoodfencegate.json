@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/shinywoodfencegate",
+	"parent": "kathairis:block/shinywoodfencegate",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

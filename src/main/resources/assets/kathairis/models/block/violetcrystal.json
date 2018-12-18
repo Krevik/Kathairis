@@ -1,7 +1,7 @@
 {
     "textures": {
-        "cross": "mystic:blocks/violetcrystal",
-	"particle": "mystic:blocks/violetcrystal"
+        "cross": "kathairis:blocks/violetcrystal",
+	"particle": "kathairis:blocks/violetcrystal"
 },
        "elements": [
         {   "from": [ 0.8, 0, 8 ],

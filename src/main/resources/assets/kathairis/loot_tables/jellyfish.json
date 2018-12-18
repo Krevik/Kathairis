@@ -1,13 +1,13 @@
 {
     "pools": [
         {
-		    "name": "mystic:jellyfishtentacle",
+		    "name": "kathairis:jellyfishtentacle",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "mystic:jellyfishtentacle",
+                    "name": "kathairis:jellyfishtentacle",
                     "functions": [
                         {
                             "function": "set_count",

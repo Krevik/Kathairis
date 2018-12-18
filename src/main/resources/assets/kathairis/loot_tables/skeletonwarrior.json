@@ -1,13 +1,13 @@
 {
     "pools": [
         {
-		    "name": "mystic:darknessessence",
+		    "name": "kathairis:darknessessence",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "mystic:darknessessence",
+                    "name": "kathairis:darknessessence",
                     "functions": [
                         {
                             "function": "set_count",
@@ -39,13 +39,13 @@
             ]
         },
         {
-		    "name": "mystic:darknesssword",
+		    "name": "kathairis:darknesssword",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "mystic:darknesssword",
+                    "name": "kathairis:darknesssword",
                     "functions": [
                         {
                             "function": "set_count",

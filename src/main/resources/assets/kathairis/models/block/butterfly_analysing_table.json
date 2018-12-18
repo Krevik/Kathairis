@@ -1,10 +1,10 @@
 {
 	"textures": {
-		"0": "mystic:blocks/mudbricks",
-		"1": "mystic:blocks/mysticlog",
-		"2": "mystic:blocks/mysticplanks",
-		"3": "mystic:blocks/bluecloud",
-		"particle": "mystic:blocks/mudbricks"
+		"0": "kathairis:blocks/mudbricks",
+		"1": "kathairis:blocks/mysticlog",
+		"2": "kathairis:blocks/mysticplanks",
+		"3": "kathairis:blocks/bluecloud",
+		"particle": "kathairis:blocks/mudbricks"
 	},
 	"elements": [
 		{

@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/redwood_log_full",
+	"parent": "kathairis:block/redwood_log_full",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

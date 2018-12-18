@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/soullog",
+	"parent": "kathairis:block/soullog",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

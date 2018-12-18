@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"facing=east": { "model": "mystic:swampgas" },
-		"facing=west": { "model": "mystic:swampgas" },
-		"facing=south": { "model": "mystic:swampgas" },
-		"facing=north": { "model": "mystic:swampgas" }
+		"facing=east": { "model": "kathairis:swampgas" },
+		"facing=west": { "model": "kathairis:swampgas" },
+		"facing=south": { "model": "kathairis:swampgas" },
+		"facing=north": { "model": "kathairis:swampgas" }
 	}
 }

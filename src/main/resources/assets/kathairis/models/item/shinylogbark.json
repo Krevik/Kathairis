@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/shinylogbark",
+	"parent": "kathairis:block/shinylogbark",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

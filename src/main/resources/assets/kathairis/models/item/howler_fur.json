@@ -2,6 +2,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mystic:items/howler_fur"
+        "layer0": "kathairis:items/howler_fur"
     }
 }

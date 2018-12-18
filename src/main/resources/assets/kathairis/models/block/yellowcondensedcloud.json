@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "mystic:blocks/yellowcondensedcloud"
+		"all": "kathairis:blocks/yellowcondensedcloud"
 	}
 }

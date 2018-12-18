@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "mystic:blocks/mysticdeadgrass",
-		"particle": "mystic:blocks/mysticdeadgrass"
+		"0": "kathairis:blocks/mysticdeadgrass",
+		"particle": "kathairis:blocks/mysticdeadgrass"
 	},
 	"elements": [
 		{

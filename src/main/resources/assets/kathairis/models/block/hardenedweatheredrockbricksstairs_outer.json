@@ -1,8 +1,8 @@
 {
 	"parent": "block/outer_stairs",
     "textures": {
-        "bottom": "mystic:blocks/hardenedweatheredrockbricks",
-        "top": "mystic:blocks/hardenedweatheredrockbricks",
-        "side": "mystic:blocks/hardenedweatheredrockbricks"
+        "bottom": "kathairis:blocks/hardenedweatheredrockbricks",
+        "top": "kathairis:blocks/hardenedweatheredrockbricks",
+        "side": "kathairis:blocks/hardenedweatheredrockbricks"
     }
 }

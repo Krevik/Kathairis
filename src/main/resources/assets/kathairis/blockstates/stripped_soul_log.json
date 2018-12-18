@@ -1,8 +1,8 @@
 {
     "variants": {
-        "axis=y":  { "model": "mystic:stripped_soul_log" },
-        "axis=z":   { "model": "mystic:stripped_soul_log", "x": 90 },
-        "axis=x":   { "model": "mystic:stripped_soul_log", "x": 90, "y": 90 },
-        "axis=none": { "model": "mystic:soullogbark" }
+        "axis=y":  { "model": "kathairis:stripped_soul_log" },
+        "axis=z":   { "model": "kathairis:stripped_soul_log", "x": 90 },
+        "axis=x":   { "model": "kathairis:stripped_soul_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "kathairis:soullogbark" }
     }
 }

@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/pillar_middle",
+	"parent": "kathairis:block/pillar_middle",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

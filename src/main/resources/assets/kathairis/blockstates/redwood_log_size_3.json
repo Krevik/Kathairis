@@ -1,8 +1,8 @@
 {
     "variants": {
-        "axis=y":  { "model": "mystic:redwood_log_3" },
-        "axis=z":   { "model": "mystic:redwood_log_3", "x": 90 },
-        "axis=x":   { "model": "mystic:redwood_log_3", "x": 90, "y": 90 },
-        "axis=none": { "model": "mystic:redwood_log_3" }
+        "axis=y":  { "model": "kathairis:redwood_log_3" },
+        "axis=z":   { "model": "kathairis:redwood_log_3", "x": 90 },
+        "axis=x":   { "model": "kathairis:redwood_log_3", "x": 90, "y": 90 },
+        "axis=none": { "model": "kathairis:redwood_log_3" }
 		}
 }

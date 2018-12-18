@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mystic:items/records/music_disc_jazzy"
+        "layer0": "kathairis:items/records/music_disc_jazzy"
     }
 }

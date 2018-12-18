@@ -1,8 +1,8 @@
 {
 	"parent": "block/outer_stairs",
     "textures": {
-        "bottom": "mystic:blocks/shinyplanks",
-        "top": "mystic:blocks/shinyplanks",
-        "side": "mystic:blocks/shinyplanks"
+        "bottom": "kathairis:blocks/shinyplanks",
+        "top": "kathairis:blocks/shinyplanks",
+        "side": "kathairis:blocks/shinyplanks"
     }
 }

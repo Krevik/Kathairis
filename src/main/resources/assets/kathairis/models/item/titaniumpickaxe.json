@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "mystic:items/titaniumpickaxe"
+        "layer0": "kathairis:items/titaniumpickaxe"
     }
 }

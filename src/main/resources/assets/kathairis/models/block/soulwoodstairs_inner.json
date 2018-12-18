@@ -1,8 +1,8 @@
 {
 	"parent": "block/inner_stairs",
     "textures": {
-        "bottom": "mystic:blocks/soulplanks",
-        "top": "mystic:blocks/soulplanks",
-        "side": "mystic:blocks/soulplanks"
+        "bottom": "kathairis:blocks/soulplanks",
+        "top": "kathairis:blocks/soulplanks",
+        "side": "kathairis:blocks/soulplanks"
     }
 }

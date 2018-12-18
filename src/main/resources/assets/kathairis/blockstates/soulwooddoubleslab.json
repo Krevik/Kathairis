@@ -1,5 +1,5 @@
 {
     "variants": {
-        "variant=mystic": { "model": "mystic:soulplanks" }
+        "variant=mystic": { "model": "kathairis:soulplanks" }
     }
 }

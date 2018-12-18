@@ -1,5 +1,5 @@
 {
-	"parent": "mystic:block/succulent",
+	"parent": "kathairis:block/succulent",
 	"display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],
