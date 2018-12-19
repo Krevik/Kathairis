@@ -196,9 +196,9 @@ public class FunctionHelper {
 		return new Vec2fNonClientOnly(ep.rotationPitch, ep.rotationYaw);
 	}
 
-	public static Vec3d fromPitchYawVector(Vec2fNonClientOnly p_189984_0_)
+	public static Vec3d fromPitchYawVector(Vec2fNonClientOnly vec)
 	{
-		return fromPitchYaw(p_189984_0_.x, p_189984_0_.y);
+		return fromPitchYaw(vec.x, vec.y);
 	}
 
 	/**

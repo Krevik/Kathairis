@@ -5,12 +5,18 @@ import static mod.krevik.KCore.MODID;
 import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 
 import mod.krevik.KCore;
+import mod.krevik.client.renderer.tileentity.TileEntityMythicStoneSignRenderer;
+import mod.krevik.tileentity.TileEntityMythicStoneSign;
+import mod.krevik.util.EntityAndRenderRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -18,11 +24,17 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IRegistryDelegate;
 import org.lwjgl.opengl.GL11;
+
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = MODID, value = CLIENT)
 public final class ClientEventSubscriber {
@@ -144,6 +156,28 @@ public final class ClientEventSubscriber {
 			}
 		}
 					*/
+	}
+
+	@SubscribeEvent
+	public static void registerModels(ModelRegistryEvent event) {
+		OBJLoader.INSTANCE.addDomain(KCore.instance.MODID);
+		KCore.initModels();
+	}
+
+	@SubscribeEvent
+	public static void registerRenders(ModelRegistryEvent event) {
+		EntityAndRenderRegistry.registerRenders();
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMythicStoneSign.class, new TileEntityMythicStoneSignRenderer());
+	}
+
+	private static final Map<IRegistryDelegate<Block>, IStateMapper> stateMappers = ReflectionHelper.getPrivateValue(ModelLoader.class, null, "customStateMappers");
+	private static final IStateMapper defaultStateMapper = new DefaultStateMapper();
+
+	public static void registerToState(Block b, int itemMeta, IBlockState state) {
+		ModelResourceLocation mrl = stateMappers.getOrDefault(state.getBlock().delegate, defaultStateMapper)
+				.putStateModelLocations(state.getBlock())
+				.get(state);
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), itemMeta, mrl);
 	}
 
 }

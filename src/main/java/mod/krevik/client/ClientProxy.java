@@ -68,17 +68,6 @@ public class ClientProxy implements IProxy {
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(KCore.MODID + ":" + id, "inventory"));
 	}
 
-	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent event) {
-		OBJLoader.INSTANCE.addDomain(KCore.instance.MODID);
-		KCore.initModels();
-	}
-
-	@SubscribeEvent
-	public static void registerRenders(ModelRegistryEvent event) {
-		EntityAndRenderRegistry.registerRenders();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMythicStoneSign.class, new TileEntityMythicStoneSignRenderer());
-	}
 
 	@Override
 	public void preInit(FMLPreInitializationEvent e) {
@@ -99,16 +88,6 @@ public class ClientProxy implements IProxy {
 	public static void drawParticle(World worldObj, Particle particle) {
 		if (particle != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(particle);
-	}
-
-	private static final Map<IRegistryDelegate<Block>, IStateMapper> stateMappers = ReflectionHelper.getPrivateValue(ModelLoader.class, null, "customStateMappers");
-	private static final IStateMapper defaultStateMapper = new DefaultStateMapper();
-
-	public static void registerToState(Block b, int itemMeta, IBlockState state) {
-		ModelResourceLocation mrl = stateMappers.getOrDefault(state.getBlock().delegate, defaultStateMapper)
-				.putStateModelLocations(state.getBlock())
-				.get(state);
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), itemMeta, mrl);
 	}
 
 }
