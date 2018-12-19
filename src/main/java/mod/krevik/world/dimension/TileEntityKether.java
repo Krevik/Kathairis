@@ -151,7 +151,7 @@ public class TileEntityKether extends TileEntity
 	}
 
 	private static void notifyAllPlayersThatKathairisIsLoading() {
-		final String message = "Loading Kathairis, expect lots of lag";
+		final String message = "Loading Kathairis, expect some lag";
 		KCore.LOGGER.warn(message);
 		Arrays.stream(DimensionManager.getWorlds())
 			.forEach(worldServer -> worldServer.playerEntities
