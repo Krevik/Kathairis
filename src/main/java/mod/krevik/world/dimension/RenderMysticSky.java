@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderMysticSky extends IRenderHandler {
 
 
-    private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation(KCore.MODID,"kathairistextures/environment/moon_phases.png");
+    private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/sun.png");
     private static final ResourceLocation STAR_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/star.png");
     private static final ResourceLocation NEBULA_TEXTURES = new ResourceLocation(KCore.MODID,"textures/environment/nebula.png");
