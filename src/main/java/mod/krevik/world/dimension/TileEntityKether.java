@@ -9,9 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -113,7 +111,7 @@ public class TileEntityKether extends TileEntity
 
 					// notify everyone that Kathairis is loading (because it currently takes so long)
 					// this can be removed when the world gen is fixed
-					if(!dimensionKathairisHasBeenLoadedBefore(entity.world.getMinecraftServer())) {
+					if(!dimensionKathairisHasBeenLoadedBefore()) {
 						notifyAllPlayersThatKathairisIsLoading();
 					}
 
@@ -144,8 +142,8 @@ public class TileEntityKether extends TileEntity
 		}
 	}
 
-	// doesn't take worlds that have been generated but arent in memory (only on disk)
-	private static boolean dimensionKathairisHasBeenLoadedBefore(final MinecraftServer minecraftServer) {
+	// doesn't take worlds that have been generated but aren't in memory (only on disk)
+	private static boolean dimensionKathairisHasBeenLoadedBefore() {
 		if (net.minecraftforge.common.DimensionManager.getWorld(KCore.DIMENSION_ID, false) != null) {
 			return true;
 		}
@@ -153,11 +151,13 @@ public class TileEntityKether extends TileEntity
 	}
 
 	private static void notifyAllPlayersThatKathairisIsLoading() {
+		final String message = "Loading Kathairis, expect lots of lag";
+		KCore.LOGGER.warn(message);
 		Arrays.stream(DimensionManager.getWorlds())
 			.forEach(worldServer -> worldServer.playerEntities
 				.forEach(entityPlayer -> entityPlayer
 					.sendMessage(
-						new TextComponentString("Loading Kathairis for the first time, expect lots of lag")
+						new TextComponentString(message)
 					)
 				)
 			);
@@ -177,6 +177,12 @@ public class TileEntityKether extends TileEntity
 					player1.timeUntilPortal = 10;
 
 				} else if (player1.dimension != KCore.DIMENSION_ID) {
+
+					// notify everyone that Kathairis is loading (because it currently takes so long)
+					// this can be removed when the world gen is fixed
+					if(!dimensionKathairisHasBeenLoadedBefore()) {
+						notifyAllPlayersThatKathairisIsLoading();
+					}
 
 					player1.timeUntilPortal = 10;
 
