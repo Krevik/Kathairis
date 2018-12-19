@@ -9,8 +9,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+
+import java.util.Arrays;
 
 public class TileEntityKether extends TileEntity
 {
@@ -104,6 +110,13 @@ public class TileEntityKether extends TileEntity
 				if (entity.timeUntilPortal > 0) {
 					entity.timeUntilPortal = 10;
 				} else if (entity.dimension != KCore.DIMENSION_ID) {
+
+					// notify everyone that Kathairis is loading (because it currently takes so long)
+					// this can be removed when the world gen is fixed
+					if(!dimensionKathairisHasBeenLoadedBefore(entity.world.getMinecraftServer())) {
+						notifyAllPlayersThatKathairisIsLoading();
+					}
+
 					entity.timeUntilPortal = 10;
 					if (prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0) {
 						entity.timeUntilPortal = 10;
@@ -129,6 +142,25 @@ public class TileEntityKether extends TileEntity
 				}
 			}
 		}
+	}
+
+	// doesn't take worlds that have been generated but arent in memory (only on disk)
+	private static boolean dimensionKathairisHasBeenLoadedBefore(final MinecraftServer minecraftServer) {
+		if (net.minecraftforge.common.DimensionManager.getWorld(KCore.DIMENSION_ID, false) != null) {
+			return true;
+		}
+		return false;
+	}
+
+	private static void notifyAllPlayersThatKathairisIsLoading() {
+		Arrays.stream(DimensionManager.getWorlds())
+			.forEach(worldServer -> worldServer.playerEntities
+				.forEach(entityPlayer -> entityPlayer
+					.sendMessage(
+						new TextComponentString("Loading Kathairis for the first time, expect lots of lag")
+					)
+				)
+			);
 	}
 
 	public static void tele(EntityPlayer player)
