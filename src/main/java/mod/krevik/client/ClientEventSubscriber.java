@@ -160,7 +160,7 @@ public final class ClientEventSubscriber {
 
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event) {
-		OBJLoader.INSTANCE.addDomain(KCore.instance.MODID);
+		OBJLoader.INSTANCE.addDomain(KCore.MODID);
 		KCore.initModels();
 	}
 
