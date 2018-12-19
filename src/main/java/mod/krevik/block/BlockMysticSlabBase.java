@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import mod.krevik.client.ClientEventSubscriber;
 import mod.krevik.client.ClientProxy;
 import mod.krevik.KCore;
 
@@ -143,7 +144,7 @@ public class BlockMysticSlabBase extends BlockSlab {
 		if (this.isDouble())
 			ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(HALF).build());
 		else {
-			ClientProxy.registerToState(this, 0, getDefaultState());
+			ClientEventSubscriber.registerToState(this, 0, getDefaultState());
 		}
 	}
 
