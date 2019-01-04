@@ -6,8 +6,11 @@ import mod.krevik.KCore;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.server.FMLServerHandler;
 
 public class KetherDataStorage extends WorldSavedData
 {
@@ -41,6 +44,7 @@ public class KetherDataStorage extends WorldSavedData
 
 	public static KetherDataStorage getDataInstance(World world) 
 	{
+
 		MapStorage storage = world.getMapStorage();
 		KetherDataStorage instance = (KetherDataStorage) storage.getOrLoadData(KetherDataStorage.class, DATA_NAME);
 		if (instance == null) {
