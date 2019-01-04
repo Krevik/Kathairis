@@ -74,8 +74,8 @@ public class BiomeFloatingIslands extends KetherBiome
     {
         super.decorate(worldIn,random,pos);
         if(random.nextInt(3)==0) {
-    		int X = pos.getX() + random.nextInt(16);
-    		int Z = pos.getZ() + random.nextInt(16);
+    		int X = pos.getX() + random.nextInt(16) +8;
+    		int Z = pos.getZ() + random.nextInt(16) +8;
         	int j3=100+random.nextInt(25)+random.nextInt(25)+random.nextInt(25)+random.nextInt(25)+random.nextInt(25)+random.nextInt(25);
         	if(j3>0){
         		BlockPos blockposnew = new BlockPos(X,j3,Z);
@@ -84,14 +84,14 @@ public class BiomeFloatingIslands extends KetherBiome
         }
         if(random.nextInt(12)==0) {
         	for(int x=0;x<=1+random.nextInt(4);x++) {
-        		int X = pos.getX() + random.nextInt(16);
-        		int Z = pos.getZ() + random.nextInt(16);
+        		int X = pos.getX() + random.nextInt(16) +8;
+        		int Z = pos.getZ() + random.nextInt(16) +8;
         		new WorldGenSolisCrystals().generate(worldIn, random, new BlockPos(X,0,Z));
         	}
         }
         if(random.nextInt(20)==0) {
-    		int X = pos.getX() + random.nextInt(16);
-    		int Z = pos.getZ() + random.nextInt(16);
+    		int X = pos.getX() + random.nextInt(16) +8;
+    		int Z = pos.getZ() + random.nextInt(16) +8;
         	int Y = worldIn.getHeight(new BlockPos(X,50,Z)).getY();
         	if(worldIn.getBlockState(new BlockPos(X,Y-1,Z))!=Blocks.AIR.getDefaultState()) {
         		if(!worldIn.isAirBlock(new BlockPos(X+getStoneTemple(worldIn).getSize().getX(),Y-1,Z))) {

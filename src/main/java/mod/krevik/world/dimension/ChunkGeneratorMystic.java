@@ -67,13 +67,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
     private int chunkX = 0;
     private int chunkZ = 0;
     private int upperScale=130;
-    public static final WorldGenMysticUniversal EnergyShard = new WorldGenMysticUniversal(4);
-    public int cloudWeight=5;
 
-
-    public static final WorldGenCrystalChamber CrystalChamber = new WorldGenCrystalChamber();
-    public static final WorldGenCloudTemple CloudTemple = new WorldGenCloudTemple();
-    public static final WorldGenFloatingIslands FloatingIsland = new WorldGenFloatingIslands(1);
 
     public ChunkGeneratorMystic(World worldIn, long seed)
     {
@@ -414,59 +408,10 @@ public class ChunkGeneratorMystic implements IChunkGenerator
             }
         }
 
-        if(this.rand.nextInt(cloudWeight)==0) {
-    		int X = this.rand.nextInt(16) + 8;
-    		int Z = this.rand.nextInt(16) + 8;
-        	int j3=85+this.rand.nextInt(25)+this.rand.nextInt(25)+this.rand.nextInt(25)+this.rand.nextInt(25);
-        	if(j3>0){
-        		new WorldGenClouds().generate(world, this.rand, blockpos.add(X,j3,Z));
-        	}
-        }
-        if(this.rand.nextInt(30)==0)
-        {
-    		int X = this.rand.nextInt(16) + 8;
-    		int Z = this.rand.nextInt(16) + 8;
-    		BlockPos tmp = blockpos.add(X,0,Z);
-    		int TOP = world.getHeight(tmp).getY();
-        		BlockPos blockposnew = new BlockPos(X,TOP,Z);
-            EnergyShard.generate(world, this.rand, blockpos.add(X,TOP,Z));
-        }
 
-	        if(this.rand.nextInt(100)==2) {
-	    		int X = this.rand.nextInt(16) + 8;
-	    		int Z = this.rand.nextInt(16) + 8;
-	        	int j3=this.rand.nextInt(60)+8;
-	        	if(j3<70&&j3>10){
-	        		int i4=this.rand.nextInt(j3)+8;
-	        		BlockPos blockposnew = new BlockPos(X,i4,Z);
-	        		CrystalChamber.generate(world, this.rand, blockpos.add(X,i4,Z));
-	        	}
-	        }
-	        if(this.rand.nextInt(1200)==0) {
-	    		int X = this.rand.nextInt(16) + 8;
-	    		int Z = this.rand.nextInt(16) + 8;
-	        	int j3=90+this.rand.nextInt(45)+this.rand.nextInt(45)+this.rand.nextInt(45)+this.rand.nextInt(45);
-	        	if(j3>100&&j3<220){
-	        		CloudTemple.generate(world, this.rand, blockpos.add(X,j3,Z));
-	        	}
-	        }
-	        if(this.rand.nextInt(100)==0) {
-	    		int X = this.rand.nextInt(16) + 8;
-	    		int Z = this.rand.nextInt(16) + 8;
-	        	int j3=100+this.rand.nextInt(25)+this.rand.nextInt(25)+this.rand.nextInt(25)+this.rand.nextInt(25);
-	        		new WorldGenFloatingTree().generate2(world, this.rand, blockpos.add(X,j3,Z));
-	        }
-	        for(int c=0;c<biome.decorator.treesPerChunk;c++){
-	    		int X = this.rand.nextInt(16) + 8;
-	    		int Z = this.rand.nextInt(16) + 8;
-	        		biome.getRandomTreeFeature(this.rand).generate(world, this.rand, world.getHeight(blockpos.add(X,0,Z)));
-	        }
-	        for (int i3 = 0; i3 < biome.decorator.grassPerChunk; ++i3)
-	        {
-	    		int X = this.rand.nextInt(16) + 8;
-	    		int Z = this.rand.nextInt(16) + 8;
-				biome.getRandomWorldGenForGrass(this.rand).generate(world, this.rand, world.getHeight(blockpos.add(X,0,Z)));
-	        }
+
+
+
 	        
 	        /*if(this.rand.nextInt(1000)==0) {
 	    		int X = this.rand.nextInt(16) + 8;
