@@ -88,6 +88,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.RegistryEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -844,7 +845,7 @@ public class KCore {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         CapabilityHandler.registerCapabilities();
-    	World.MAX_ENTITY_RADIUS=12D;
+    	WorldServer.MAX_ENTITY_RADIUS=12D;
     	KetherPacketHandler.init();
 
     	KCore.instance.dimRegistry();
