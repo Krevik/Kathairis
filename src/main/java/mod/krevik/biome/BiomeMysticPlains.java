@@ -37,7 +37,7 @@ public class BiomeMysticPlains extends KetherBiome
         this.decorator.treesPerChunk = 0;
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;
-        this.decorator.grassPerChunk = 8;
+        this.decorator.grassPerChunk = 8; //8
         this.topBlock=KCore.CorruptedGrass.getDefaultState();
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Plains");

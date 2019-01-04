@@ -22,7 +22,7 @@ public class WorldGenClouds extends WorldGenerator{
     	IBlockState cloudState=rand.nextInt(2)==0?KCore.BlueCloud.getDefaultState():KCore.YellowCloud.getDefaultState();
 
     	if(mode==1) {
-    		int maxWidth=3+rand.nextInt(7);
+    		int maxWidth=3+rand.nextInt(6);
     		int maxLength=maxWidth+rand.nextInt(4)-rand.nextInt(4);
     		ellipse(worldIn,maxWidth,maxLength,cloudState,pos,true);
     		

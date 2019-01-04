@@ -37,7 +37,7 @@ public class WorldGenCrystalChamber extends WorldGenerator{
     	int Y=pos.getY();
     	int Z=pos.getZ();
     	if(Y<60) {
-    		int radius=2+rand.nextInt(6);
+    		int radius=2+rand.nextInt(2);
     		for(int x=0;x<=radius;x++) {
     			for(int y=0;y<=radius;y++) {
     				for(int z=0;z<=radius;z++) {

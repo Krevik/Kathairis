@@ -46,10 +46,10 @@ public class BiomeMysticForest extends KetherBiome
     public BiomeMysticForest(Biome.BiomeProperties properties)
     {
         super(properties);
-        this.decorator.treesPerChunk = 4;
-        this.decorator.extraTreeChance = 5F;
+        this.decorator.treesPerChunk = 5; //4
+        this.decorator.extraTreeChance = 0.9F; //5
         this.decorator.flowersPerChunk = 0;
-        this.decorator.grassPerChunk = 2;
+        this.decorator.grassPerChunk = 3;  //2
         this.topBlock=KCore.CorruptedGrass.getDefaultState();
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Forest");

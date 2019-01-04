@@ -40,7 +40,6 @@ public class BiomeDecoratorKathairis extends BiomeDecorator {
     {
         net.minecraft.util.math.ChunkPos forgeChunkPos = new net.minecraft.util.math.ChunkPos(chunkPos); // actual ChunkPos instead of BlockPos, used for events
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(worldIn, random, forgeChunkPos));
-        this.generateOres(worldIn, random);
 
         int k1 = this.treesPerChunk;
 
@@ -89,15 +88,12 @@ public class BiomeDecoratorKathairis extends BiomeDecorator {
             EnergyShard.generate(worldIn, random, chunkPos.add(X,TOP,Z));
         }
 
-        if(random.nextInt(100)==2) {
+        if(random.nextInt(15)==1) {
             int X = random.nextInt(16) + 8;
             int Z = random.nextInt(16) + 8;
-            int j3=random.nextInt(60)+8;
-            if(j3<70&&j3>10){
-                int i4=random.nextInt(j3)+8;
-                BlockPos blockposnew = new BlockPos(X,i4,Z);
-                CrystalChamber.generate(worldIn, random, chunkPos.add(X,i4,Z));
-            }
+            int j3=random.nextInt(45)+12;
+                BlockPos blockposnew = new BlockPos(X,j3,Z);
+                CrystalChamber.generate(worldIn, random, chunkPos.add(X,j3,Z));
         }
         if(random.nextInt(1200)==0) {
             int X = random.nextInt(16) + 8;
@@ -110,60 +106,4 @@ public class BiomeDecoratorKathairis extends BiomeDecorator {
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, forgeChunkPos));
     }
 
-    /**
-     * Generates ores in the current chunk
-     */
-    protected void generateOres(World worldIn, Random random)
-    {
-        net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Pre(worldIn, random, chunkPos));
-
-
-        net.minecraftforge.common.MinecraftForge.ORE_GEN_BUS.post(new net.minecraftforge.event.terraingen.OreGenEvent.Post(worldIn, random, chunkPos));
-    }
-
-    /**
-     * Standard ore generation helper. Vanilla uses this to generate most ores.
-     * The main difference between this and {@link #genStandardOre2} is that this takes min and max heights, while
-     * genStandardOre2 takes center and spread.
-     */
-    protected void genStandardOre1(World worldIn, Random random, int blockCount, WorldGenerator generator, int minHeight, int maxHeight)
-    {
-        if (maxHeight < minHeight)
-        {
-            int i = minHeight;
-            minHeight = maxHeight;
-            maxHeight = i;
-        }
-        else if (maxHeight == minHeight)
-        {
-            if (minHeight < 255)
-            {
-                ++maxHeight;
-            }
-            else
-            {
-                --minHeight;
-            }
-        }
-
-        for (int j = 0; j < blockCount; ++j)
-        {
-            BlockPos blockpos = this.chunkPos.add(random.nextInt(16), random.nextInt(maxHeight - minHeight) + minHeight, random.nextInt(16));
-            generator.generate(worldIn, random, blockpos);
-        }
-    }
-
-    /**
-     * Standard ore generation helper. Vanilla uses this to generate Lapis Lazuli.
-     * The main difference between this and {@link #genStandardOre1} is that this takes takes center and spread, while
-     * genStandardOre1 takes min and max heights.
-     */
-    protected void genStandardOre2(World worldIn, Random random, int blockCount, WorldGenerator generator, int centerHeight, int spread)
-    {
-        for (int i = 0; i < blockCount; ++i)
-        {
-            BlockPos blockpos = this.chunkPos.add(random.nextInt(16), random.nextInt(spread) + random.nextInt(spread) + centerHeight - spread, random.nextInt(16));
-            generator.generate(worldIn, random, blockpos);
-        }
-    }
 }

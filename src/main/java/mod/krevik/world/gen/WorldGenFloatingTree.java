@@ -58,8 +58,8 @@ public class WorldGenFloatingTree extends WorldGenerator{
 	
 	
 	public boolean generate2(World world, Random rand, BlockPos position) {
-		int xSize=3+rand.nextInt(7);
-		int zSize=3+rand.nextInt(7);
+		int xSize=3+rand.nextInt(6);
+		int zSize=3+rand.nextInt(6);
 		int ySize=2+rand.nextInt(7);
 		IBlockState cloudState=rand.nextInt(2)==2?KCore.BlueCloud.getDefaultState():KCore.YellowCloud.getDefaultState();
 		IBlockState grassState=KCore.CorruptedGrass.getDefaultState();

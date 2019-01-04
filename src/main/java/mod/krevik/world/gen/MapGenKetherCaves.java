@@ -187,11 +187,6 @@ public class MapGenKetherCaves extends MapGenBase
                                             }
 
                                             digBlock(p_180702_5_, j3, j2, i2, p_180702_3_, p_180702_4_, flag1, iblockstate1, iblockstate2);
-                                            if(rand.nextInt(50)==0) {
-                                                if (p_180702_5_.getBlockState(j3, j2, j2) == Blocks.AIR.getDefaultState() && p_180702_5_.getBlockState(j3, j2 - 1, j2) == KCore.MythicStone.getDefaultState()) {
-                                                    p_180702_5_.setBlockState(j3,j2,j2,KCore.MysticFungus.getDefaultState());
-                                                }
-                                            }
                                         }
                                     }
                                 }

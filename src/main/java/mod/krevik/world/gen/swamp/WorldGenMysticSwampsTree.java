@@ -25,7 +25,7 @@ public class WorldGenMysticSwampsTree extends WorldGenAbstractBasicMysticTree {
     	int posX=position.getX();
     	int posZ=position.getZ();
     	int posY=position.getY();
-    		int treeHeight=4+rand.nextInt(6);
+    		int treeHeight=4+rand.nextInt(5);
     		int shiftX=0;
     		int shiftZ=0;
     		if(KCore.instance.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())) {

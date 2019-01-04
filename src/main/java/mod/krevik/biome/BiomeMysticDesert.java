@@ -42,7 +42,7 @@ public class BiomeMysticDesert extends KetherBiome
         this.decorator.treesPerChunk = 0;
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;
-        this.decorator.grassPerChunk = 3;
+        this.decorator.grassPerChunk = 3; //3
         this.topBlock=KCore.ForgottenSand.getDefaultState();
         this.fillerBlock=KCore.WeatheredRock.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Desert");

@@ -46,9 +46,9 @@ public class BiomeFloatingIslands extends KetherBiome
     {
         super(properties);
         this.decorator.treesPerChunk = 0;
-        this.decorator.extraTreeChance = 1F;
+        this.decorator.extraTreeChance = 0.4F; //1
         this.decorator.flowersPerChunk = 0;
-        this.decorator.grassPerChunk = 6;
+        this.decorator.grassPerChunk = 6; //6
         this.topBlock=KCore.CorruptedGrass.getDefaultState();
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Floating Islands");
@@ -98,7 +98,9 @@ public class BiomeFloatingIslands extends KetherBiome
                		if(!worldIn.isAirBlock(new BlockPos(X,Y-1,Z+getStoneTemple(worldIn).getSize().getZ()))) {
                    		if(worldIn.isAirBlock(new BlockPos(X,Y,Z+getStoneTemple(worldIn).getSize().getZ()))) {
                        		if(worldIn.isAirBlock(new BlockPos(X+getStoneTemple(worldIn).getSize().getX(),Y,Z))) {
-                    			this.generateTemple(worldIn, new BlockPos(X,Y,Z));
+                       		    if(Y>80) {
+                                    this.generateTemple(worldIn, new BlockPos(X, Y, Z));
+                                }
                     		}
                 		}
             		}

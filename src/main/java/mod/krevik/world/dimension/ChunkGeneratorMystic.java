@@ -349,7 +349,6 @@ public class ChunkGeneratorMystic implements IChunkGenerator
         BlockPos blockpos = new BlockPos(ii, 0, j);
 
 
-       // this.caveGenerator.generate(this.world, x, z, chunkprimer);
         	caveGenerator.generate(world, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);

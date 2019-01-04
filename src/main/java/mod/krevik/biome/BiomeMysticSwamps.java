@@ -36,10 +36,10 @@ public class BiomeMysticSwamps extends KetherBiome
     public BiomeMysticSwamps(Biome.BiomeProperties properties)
     {
         super(properties);
-        this.decorator.treesPerChunk = 1;
+        this.decorator.treesPerChunk = 1; //1
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;
-        this.decorator.grassPerChunk = 11;
+        this.decorator.grassPerChunk = 11; //11
         this.topBlock=KCore.CorruptedGrass.getDefaultState();
         this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Swamps");
@@ -81,17 +81,20 @@ public class BiomeMysticSwamps extends KetherBiome
     public void decorate(World world, Random random, BlockPos pos)
     {
         super.decorate(world,random,pos);
-    			int rx = pos.getX() + random.nextInt(16) + 8;
-    			int rz = pos.getZ() + random.nextInt(16) + 8;
-    			new WorldGenSwampLakes(KCore.MudBlock).generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
-    			if(random.nextInt(2)==0) {
-        			rx = pos.getX() + random.nextInt(16) + 8;
-        			rz = pos.getZ() + random.nextInt(16) + 8;
-        			new WorldGenSwampLakes(Blocks.WATER).generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+
+
+    			if(random.nextInt(4)==0) {
+        			int rx = pos.getX() + random.nextInt(16) + 8;
+                    int rz = pos.getZ() + random.nextInt(16) + 8;
+        			if(random.nextInt(3)==0){
+                        new WorldGenSwampLakes(Blocks.WATER).generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+                    }else{
+                        new WorldGenSwampLakes(KCore.MudBlock).generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+                    }
     			}
     			if(random.nextInt(2)==0) {
-        			rx = pos.getX() + random.nextInt(16) + 8;
-        			rz = pos.getZ() + random.nextInt(16) + 8;
+                    int rx = pos.getX() + random.nextInt(16) + 8;
+                    int rz = pos.getZ() + random.nextInt(16) + 8;
         			new WorldGenOldTrunk().generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
     			}
     }
@@ -111,7 +114,6 @@ public class BiomeMysticSwamps extends KetherBiome
         int k = (int)(noiseVal / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
         int l = x & 15;
         int i1 = z & 15;
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
         for (int j1 = 255; j1 >= 0; --j1)
         {

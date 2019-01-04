@@ -97,7 +97,6 @@ public class WorldGenNewTree extends WorldGenAbstractBasicMysticTree{
     				if(c==branchesLenghts[k]) {
     					generateCrown(worldIn,tmp,branchesLenghts[k]/2+rand.nextInt(3));
     					setBlockAndNotifyAdequately(worldIn,tmp,KCore.MysticLog.getDefaultState());
-
     				}
     			}
     		}

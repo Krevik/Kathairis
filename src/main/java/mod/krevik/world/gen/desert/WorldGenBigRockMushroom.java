@@ -32,7 +32,7 @@ public class WorldGenBigRockMushroom extends WorldGenerator
     	double posZ = position.getZ();
     	double posY = position.getY();
     	BlockPos tmp = new BlockPos(posX,posY,posZ);
-    	int radius=rand.nextInt(4)+3;
+    	int radius=1+rand.nextInt(4);
     	if(posY>250||worldIn.getBlockState(position)==KCore.MysticLeaves.getDefaultState()) {
     		return false;
     	}else {

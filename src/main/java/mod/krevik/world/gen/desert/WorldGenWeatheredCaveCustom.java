@@ -20,7 +20,7 @@ public class WorldGenWeatheredCaveCustom {
     
     private BlockPos getTopSandBlock(World worldIn,BlockPos position){
     	int top=0;
-        	for(top=50;top<256;top++){
+        	for(top=50;top<100;top++){
         		if(worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))== KCore.ForgottenSand.getDefaultState()||
         				worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))==KCore.MovingSand){
         			break;
@@ -114,7 +114,7 @@ public class WorldGenWeatheredCaveCustom {
     	int CaveLenght=random.nextInt(15)+15;
     	int radius=3;
     	while(!world.isAirBlock(new BlockPos(pos.getX()+x,y,pos.getZ()))){
-    		
+
     		digCircleVertical(world,random,new BlockPos(pos.getX()+x,y,pos.getZ()),radius);
     		
     		if(random.nextInt(x+1)==0) {
