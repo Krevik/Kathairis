@@ -22,6 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -47,6 +48,12 @@ public abstract class KetherBiome extends Biome
         baseGrassColor=new Color(29,242,228);
     }
 
+    public BiomeDecorator createBiomeDecorator()
+    {
+        return getModdedBiomeDecorator(new BiomeDecoratorKathairis());
+    }
+
+
     public static StructureLoader getStructureLoader(){
         return structureLoader;
     }
@@ -70,29 +77,34 @@ public abstract class KetherBiome extends Biome
     public int getGrassColorAtPos(BlockPos pos)
     {
         World world = Minecraft.getMinecraft().world;
-        ArrayList<BlockPos> toCalculate = new ArrayList<BlockPos>();
-        int radiusCalculation=4;
-        for(int x=-radiusCalculation;x<=radiusCalculation;x++){
-                for(int z=-radiusCalculation;z<=radiusCalculation;z++){
-                    toCalculate.add(new BlockPos(pos.getX()+x,pos.getY(),pos.getZ()+z));
+        if(world.getBiome(pos) instanceof KetherBiome) {
+            ArrayList<BlockPos> toCalculate = new ArrayList<BlockPos>();
+            int radiusCalculation = 4;
+            for (int x = -radiusCalculation; x <= radiusCalculation; x++) {
+                for (int z = -radiusCalculation; z <= radiusCalculation; z++) {
+                    toCalculate.add(new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z));
                 }
-        }
-
-        int sumR=0;int sumG=0;int sumB=0;
-        int count=0;
-        for(BlockPos positionForAverage:toCalculate){
-            if(world.getBiome(positionForAverage) instanceof KetherBiome){
-                KetherBiome biome = (KetherBiome) world.getBiome(positionForAverage);
-                count++;
-                sumR+=biome.baseGrassColor.getRed();
-                sumG+=biome.baseGrassColor.getGreen();
-                sumB+=biome.baseGrassColor.getBlue();
             }
+
+            int sumR = 0;
+            int sumG = 0;
+            int sumB = 0;
+            int count = 0;
+            for (BlockPos positionForAverage : toCalculate) {
+                    KetherBiome biome = (KetherBiome) world.getBiome(positionForAverage);
+                    count++;
+                    sumR += biome.baseGrassColor.getRed();
+                    sumG += biome.baseGrassColor.getGreen();
+                    sumB += biome.baseGrassColor.getBlue();
+            }
+            Color averageColor = new Color(sumR / count, sumG / count, sumB / count);
+
+
+            return Integer.parseInt(convertColorToHexadeimal(averageColor), 16);
         }
-        Color averageColor = new Color(sumR/count,sumG/count,sumB/count);
-
-
-        return Integer.parseInt(convertColorToHexadeimal(averageColor),16);
+        else{
+            return super.getGrassColorAtPos(pos);
+        }
     }
 
     public static String convertColorToHexadeimal(Color color)
@@ -124,6 +136,7 @@ public abstract class KetherBiome extends Biome
 
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
+        super.decorate(worldIn,rand,pos);
         for(int x=0;x<=4+rand.nextInt(4);x++){
         	WorldGenMysticOre normalStone = new WorldGenMysticOre(Blocks.STONE.getDefaultState(),2+rand.nextInt(16));
 			int rx = pos.getX() + rand.nextInt(16) + 8;
@@ -146,6 +159,7 @@ public abstract class KetherBiome extends Biome
                 BlockPos blockposnew = new BlockPos(rx,ry,rz);
                 new WorldGenMysticOre(KCore.RevenumOre.getDefaultState(), 4+rand.nextInt(10)).generate(worldIn, rand, blockposnew);
         }
+
     }
 
     @SideOnly(Side.CLIENT)
