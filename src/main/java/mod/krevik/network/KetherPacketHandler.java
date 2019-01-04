@@ -23,7 +23,7 @@ public class KetherPacketHandler {
 		CHANNEL.registerMessage(PacketSandstormUpdatedOnClient.Handler.class, PacketSandstormUpdatedOnClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketSandstormUpdatedOnServer.Handler.class, PacketSandstormUpdatedOnServer.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(MoveMeDuringSandstormServer.Handler.class, MoveMeDuringSandstormServer.class, id++, Side.SERVER);
-
+		CHANNEL.registerMessage(OpenStrangeWandererGuiPacket.Handler.class, OpenStrangeWandererGuiPacket.class, id++, Side.CLIENT);
 	}
 
 }

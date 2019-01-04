@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.collection.parallel.ParIterableLike;
 
 public class GuiOldMan extends GuiScreen {
 
@@ -21,22 +22,17 @@ public class GuiOldMan extends GuiScreen {
 	Minecraft mc = Minecraft.getMinecraft();
 	private final int ImageHeight = 340, ImageWidth = 704, ImageScale = 250;
 	private static final ResourceLocation GUITextures = new ResourceLocation(KCore.MODID,"textures/gui/oldman.png");
-
 	private static int mode=0;
 	private GenericButton Next;
 	private GenericButton Back;
 	private GenericButton Knowledge;
 	private GenericButton Power;
 	private GenericButton Adventure;
-	private EntityPlayer player;
 	int margin=15;
 
 
-	private EntityStrangeWanderer oldman;
 
-	public GuiOldMan(EntityStrangeWanderer entity, EntityPlayer player1){
-		oldman=entity;
-		player=player1;
+	public GuiOldMan(){
 	}
 
 	@Override
@@ -123,7 +119,7 @@ public class GuiOldMan extends GuiScreen {
 		//fontRenderer.drawString("Welcome to the Kathairis!", (int) (width / 2.0) - 55, 20, 0X353f51);
 		this.drawString(fontRenderer, "Mysterious Stranger", (int)(margin*1.65), (int) ((int)height-ImageHeight/2-margin*0.4), 0X191414);
 		if(mode==0){
-			this.drawString(fontRenderer, "Well hello there, "+ player.getName() +".", (int) (margin*1.75), height-ImageHeight/2+margin, 0X747474);
+			this.drawString(fontRenderer, "Well hello there, "+ Minecraft.getMinecraft().player.getName() +".", (int) (margin*1.75), height-ImageHeight/2+margin, 0X747474);
 			this.drawString(fontRenderer, "It has been a long time since someone has walked", (int) (margin*1.75), (int)height-ImageHeight/2+margin*2, 0X747474);
 			this.drawString(fontRenderer, "through the gateway itself and walked this world.", (int) (margin*1.75), (int)height-ImageHeight/2+margin*3, 0X747474);
 			this.drawString(fontRenderer, "I am sure you have many questions, ", (int) (margin*1.75), (int)height-ImageHeight/2+margin*4, 0X747474);
