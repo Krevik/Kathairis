@@ -1,6 +1,7 @@
 package mod.krevik;
 
 import com.google.common.base.Preconditions;
+import mod.krevik.client.gui.GuiEnteringKathairis;
 import mod.krevik.item.ItemMysticArmor;
 import mod.krevik.item.ItemSand;
 import mod.krevik.block.BlockChristmasGift;
@@ -10,6 +11,8 @@ import mod.krevik.network.PacketSandstormUpdatedOnClient;
 import mod.krevik.world.dimension.KetherDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -26,6 +29,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -37,6 +41,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -465,9 +471,7 @@ public class EventSubscriber {
 						}
 					}
 				}
-
 			}
-
 		}
 		if(event.player!=null) {
 			if(!event.player.inventory.getStackInSlot(36).isEmpty()) {
@@ -633,14 +637,20 @@ public class EventSubscriber {
 
 	}
 
-
-
-
 	/*@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void doButterflyCatcherHandling(){
 
 	}*/
 
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public static void messageDimensionChange(GuiOpenEvent event){
+		if(event.getGui() instanceof GuiDownloadTerrain){
+			if(Minecraft.getMinecraft().player.dimension==KCore.DIMENSION_ID){
+				event.setGui(new GuiEnteringKathairis());
+			}
+		}
+	}
 
 }
