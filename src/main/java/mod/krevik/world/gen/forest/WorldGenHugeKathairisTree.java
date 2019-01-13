@@ -2,7 +2,7 @@ package mod.krevik.world.gen.forest;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockLuminescentGnarl;
+import mod.krevik.block.plants.BlockLuminescentGnarl;
 import mod.krevik.block.BlockMysticLog;
 import mod.krevik.KCore;
 
@@ -27,7 +27,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
     	int posX=pos.getX();
     	int posZ=pos.getZ();
     	int posY=pos.getY();
-    	if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!= KCore.CorruptedGrass.getDefaultState()||
+    	if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!= KCore.KatharianGrass.getDefaultState()||
     			worldIn.getBlockState(pos.down())==KCore.MysticLeaves.getDefaultState()) {
     		return false;
     	}else {

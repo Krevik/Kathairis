@@ -50,8 +50,8 @@ public class BiomeMysticForest extends KetherBiome
         this.decorator.extraTreeChance = 0.9F; //5
         this.decorator.flowersPerChunk = 0;
         this.decorator.grassPerChunk = 3;  //2
-        this.topBlock=KCore.CorruptedGrass.getDefaultState();
-        this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
+        this.topBlock=KCore.KatharianGrass.getDefaultState();
+        this.fillerBlock=KCore.KatharianDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Forest");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 12, 1, 2));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityGecko.class, 4, 1, 1));
@@ -61,6 +61,8 @@ public class BiomeMysticForest extends KetherBiome
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCactiSpore.class, 4, 1, 1));
         baseGrassColor=new Color(21,178,102);
     }
+
+
 
     public void decorate(World worldIn, Random random, BlockPos pos)
     {

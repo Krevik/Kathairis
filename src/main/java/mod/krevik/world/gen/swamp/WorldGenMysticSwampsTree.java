@@ -2,7 +2,7 @@ package mod.krevik.world.gen.swamp;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockJadeVines;
+import mod.krevik.block.plants.BlockJadeVines;
 import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import mod.krevik.KCore;
 

@@ -1,5 +1,6 @@
 package mod.krevik.block;
 
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
 

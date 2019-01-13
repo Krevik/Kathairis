@@ -42,7 +42,7 @@ public class EntityBison extends EntityAnimal
         super(worldIn);
         this.setSize(1.5F, 1.7F);
         this.experienceValue=30;
-        spawnableBlock=KCore.CorruptedGrass;
+        spawnableBlock=KCore.KatharianGrass;
     }
 
     protected void initEntityAI()

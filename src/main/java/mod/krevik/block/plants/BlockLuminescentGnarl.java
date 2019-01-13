@@ -1,4 +1,4 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
 import java.util.Random;
 
@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import mod.krevik.KCore;
 
+import mod.krevik.block.BaseBlock;
 import mod.krevik.client.particle.DynamicParticle;
 import mod.krevik.client.particle.ParticlesFactory;
 import net.minecraft.block.Block;
@@ -30,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLuminescentGnarl extends BaseBlock{
+public class BlockLuminescentGnarl extends BaseBlock {
 	
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 

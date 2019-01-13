@@ -27,7 +27,7 @@ public class WorldGenOldTrunk extends WorldGenerator{
 			for(int x=0;x<=length;x++) {
 				int ground = worldIn.getHeight(new BlockPos(X+x,0,Z)).getY();
 				BlockPos tmp=new BlockPos(X+x,ground,Z);
-				if((worldIn.isAirBlock(tmp)||worldIn.getBlockState(tmp).getBlock().isReplaceable(worldIn, tmp))&&worldIn.getBlockState(tmp.down())== KCore.CorruptedGrass.getDefaultState()) {
+				if((worldIn.isAirBlock(tmp)||worldIn.getBlockState(tmp).getBlock().isReplaceable(worldIn, tmp))&&worldIn.getBlockState(tmp.down())== KCore.KatharianGrass.getDefaultState()) {
 					this.setBlock(worldIn, tmp, KCore.MysticLog.getDefaultState().withProperty(BlockMysticLog.LOG_AXIS, BlockBaseLog.EnumAxis.X));
 				}
 			}
@@ -35,7 +35,7 @@ public class WorldGenOldTrunk extends WorldGenerator{
 			for(int x=0;x<=length;x++) {
 				int ground = worldIn.getHeight(new BlockPos(X,0,Z+x)).getY();
 				BlockPos tmp=new BlockPos(X,ground,Z+x);
-				if((worldIn.isAirBlock(tmp)||worldIn.getBlockState(tmp).getBlock().isReplaceable(worldIn, tmp))&&worldIn.getBlockState(tmp.down())==KCore.CorruptedGrass.getDefaultState()) {
+				if((worldIn.isAirBlock(tmp)||worldIn.getBlockState(tmp).getBlock().isReplaceable(worldIn, tmp))&&worldIn.getBlockState(tmp.down())==KCore.KatharianGrass.getDefaultState()) {
 					this.setBlock(worldIn, tmp, KCore.MysticLog.getDefaultState().withProperty(BlockMysticLog.LOG_AXIS, BlockBaseLog.EnumAxis.Z));
 				}
 			}

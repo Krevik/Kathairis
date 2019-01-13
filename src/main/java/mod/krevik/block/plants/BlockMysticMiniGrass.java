@@ -1,4 +1,4 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
 import java.util.Random;
 
@@ -6,12 +6,14 @@ import javax.annotation.Nullable;
 
 import mod.krevik.KCore;
 
+import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,12 +29,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMysticMiniGrass extends BlockMysticBush
 {
+    protected static final AxisAlignedBB MYSTICMINIGRASS_AABB = new AxisAlignedBB(0, 0.0D, 0, 1D, 0.4D, 1D);
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 8);
-    public BlockMysticMiniGrass(String Name,boolean c)
+    public BlockMysticMiniGrass(String Name)
     {
-    	super(Name,false,c);
+    	super(Name,true);
         this.setDefaultState(this.blockState.getBaseState().withProperty(this.getAgeProperty(), Integer.valueOf(0)));
         this.setTickRandomly(true);
+        addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND,KCore.KatharianGrass,KCore.KatharianDirt);
     }
     
     protected PropertyInteger getAgeProperty()
@@ -93,6 +97,12 @@ public class BlockMysticMiniGrass extends BlockMysticBush
         super.updateTick(worldIn, pos, state, rand);
 
     }
+
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+            return MYSTICMINIGRASS_AABB;
+    }
+
     
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)

@@ -1,4 +1,4 @@
-package mod.krevik.world.gen;
+package mod.krevik.world.gen.mapgens;
 
 import java.util.Random;
 
@@ -221,11 +221,11 @@ public class MapGenKetherCaves extends MapGenBase
         {
             return true;
         }
-        else if (p_175793_1_.getBlock() == KCore.CorruptedDirt)
+        else if (p_175793_1_.getBlock() == KCore.KatharianDirt)
         {
             return true;
         }
-        else if (p_175793_1_.getBlock() == KCore.CorruptedGrass)
+        else if (p_175793_1_.getBlock() == KCore.KatharianGrass)
         {
             return true;
         }
@@ -246,7 +246,7 @@ public class MapGenKetherCaves extends MapGenBase
     {
         int i = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(15) + 1) + 1);
 
-        if (this.rand.nextInt(7) != 0)
+        if (this.rand.nextInt(18) != 0)
         {
             i = 0;
         }
@@ -299,7 +299,7 @@ public class MapGenKetherCaves extends MapGenBase
     {
         net.minecraft.world.biome.Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
         IBlockState state = data.getBlockState(x, y, z);
-        return (isExceptionBiome(biome) ? state.getBlock() == KCore.CorruptedGrass : state.getBlock() == biome.topBlock);
+        return (isExceptionBiome(biome) ? state.getBlock() == KCore.KatharianGrass : state.getBlock() == biome.topBlock);
     }
 
     /**

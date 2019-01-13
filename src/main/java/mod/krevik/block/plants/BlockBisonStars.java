@@ -1,6 +1,8 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
+import mod.krevik.KCore;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -12,8 +14,9 @@ public class BlockBisonStars extends BlockMysticBush {
 
     public BlockBisonStars(String Name)
     {
-        super(Name,false,false);
+        super(Name,false);
         this.setTickRandomly(true);
+        addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND, KCore.KatharianGrass,KCore.KatharianDirt);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

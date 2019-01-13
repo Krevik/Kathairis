@@ -34,7 +34,7 @@ public class ItemMysticShovel extends MysticTool
 {
     private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, 
     		Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND, Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER,
-    		KCore.ForgottenSand, KCore.MovingSand, KCore.CorruptedDirt, KCore.CorruptedGrass,KCore.MudBlock
+    		KCore.ForgottenSand, KCore.MovingSand, KCore.KatharianDirt, KCore.KatharianGrass,KCore.MudBlock
     		,KCore.BlueCloud,KCore.BlueCondensedCloud,KCore.YellowCloud,KCore.YellowCondensedCloud);
 
     public ItemMysticShovel(String Name,CreativeTabs tab,Item.ToolMaterial material)

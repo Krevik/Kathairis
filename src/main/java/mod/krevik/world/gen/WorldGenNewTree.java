@@ -25,7 +25,7 @@ public class WorldGenNewTree extends WorldGenAbstractBasicMysticTree{
     	
     	boolean shouldGenMainCrown=false;
     	int treeHeight=8+rand.nextInt(4);
-    	if(position.getY()>200||!worldIn.isAirBlock(position)||worldIn.getBlockState(position.down())!=KCore.CorruptedGrass.getDefaultState()||
+    	if(position.getY()>200||!worldIn.isAirBlock(position)||worldIn.getBlockState(position.down())!=KCore.KatharianGrass.getDefaultState()||
     			worldIn.getBlockState(position.down())==KCore.MysticLeaves.getDefaultState()) {
     		return false;
     	}else {
@@ -146,7 +146,7 @@ public class WorldGenNewTree extends WorldGenAbstractBasicMysticTree{
     {
         Material material = blockType.getDefaultState().getMaterial();
         return material == Material.AIR || material == Material.LEAVES || blockType == Blocks.GRASS || blockType == Blocks.DIRT || blockType == Blocks.LOG || blockType == Blocks.LOG2 || blockType == Blocks.SAPLING || blockType == Blocks.VINE ||
-        		blockType == KCore.CorruptedDirt || blockType == KCore.CorruptedGrass || blockType == KCore.MysticLog;
+        		blockType == KCore.KatharianDirt || blockType == KCore.KatharianGrass || blockType == KCore.MysticLog;
     }
 
     public void generateSaplings(World worldIn, Random random, BlockPos pos)
@@ -158,9 +158,9 @@ public class WorldGenNewTree extends WorldGenAbstractBasicMysticTree{
      */
     protected void setDirtAt(World worldIn, BlockPos pos)
     {
-        if (worldIn.getBlockState(pos).getBlock() != KCore.CorruptedDirt)
+        if (worldIn.getBlockState(pos).getBlock() != KCore.KatharianDirt)
         {
-            this.setBlockAndNotifyAdequately(worldIn, pos, KCore.CorruptedDirt.getDefaultState());
+            this.setBlockAndNotifyAdequately(worldIn, pos, KCore.KatharianDirt.getDefaultState());
         }
     }
     

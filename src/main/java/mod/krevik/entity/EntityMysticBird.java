@@ -2,7 +2,7 @@ package mod.krevik.entity;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.client.ClientProxy;
 import mod.krevik.util.MysticLootTables;
 

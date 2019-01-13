@@ -1,4 +1,4 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
 import java.util.Random;
 
@@ -12,6 +12,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -31,9 +32,10 @@ public class BlockGooseberry extends BlockMysticBush implements net.minecraftfor
     public static final PropertyEnum<BlockGooseberry.EnumType> VARIANT = PropertyEnum.<BlockGooseberry.EnumType>create("variant", BlockGooseberry.EnumType.class);
 
 	public BlockGooseberry(String Name) {
-		super(Name, false,false);
+		super(Name,false);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockGooseberry.EnumType.WITHOUT));
         this.setTickRandomly(true);
+        addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND,KCore.KatharianGrass,KCore.KatharianDirt);
 	}
 	
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

@@ -64,7 +64,7 @@ public class FunctionHelper {
     public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
     {
     	boolean can=false;
-    	if(state==KCore.CorruptedDirt.getDefaultState() || state==KCore.CorruptedGrass.getDefaultState() || state==Blocks.GRASS.getDefaultState() 
+    	if(state==KCore.KatharianDirt.getDefaultState() || state==KCore.KatharianGrass.getDefaultState() || state==Blocks.GRASS.getDefaultState()
     			|| state==Blocks.DIRT.getDefaultState()||state==Blocks.FARMLAND.getDefaultState()){
     		can=true;
     	}
@@ -161,7 +161,7 @@ public class FunctionHelper {
     	boolean is=false;
     	IBlockState state = world.getBlockState(pos);
     	Block block = state.getBlock();
-    	if((block==KCore.CorruptedDirt||block==KCore.CorruptedGrass||block==KCore.ForgottenSand)) {
+    	if((block==KCore.KatharianDirt ||block==KCore.KatharianGrass ||block==KCore.ForgottenSand)) {
     		if(world.isAirBlock(pos.up())) {
     			is=true;
     		}

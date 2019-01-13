@@ -1,7 +1,8 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
 import java.util.Random;
 
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.world.gen.WorldGenNewTree;
 import mod.krevik.world.gen.forest.WorldGenBasicMysticTree;
 import mod.krevik.world.gen.forest.WorldGenCustomTree2;
@@ -29,8 +30,9 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
 
     public BlockMysticSapling(String Name)
     {
-    	super(Name,false,false);
+    	super(Name,false);
         this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
+        addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND,KCore.KatharianGrass,KCore.KatharianDirt);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

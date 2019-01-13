@@ -1,9 +1,13 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
+import mod.krevik.KCore;
 import mod.krevik.client.ClientProxy;
 import mod.krevik.client.particle.LivingParticle;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -19,8 +23,10 @@ public class BlockMysticFungus extends BlockMysticBush
 
     public BlockMysticFungus(String Name)
     {
-        super(Name,false,false);
+        super(Name,false);
         setTickRandomly(true);
+        addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND,KCore.KatharianGrass,KCore.KatharianDirt,KCore.MythicStone
+        ,KCore.Mythic_Cobblestone,Blocks.STONE,Blocks.COBBLESTONE,KCore.WeatheredRock);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -63,4 +69,13 @@ public class BlockMysticFungus extends BlockMysticBush
             ClientProxy.drawParticle(worldIn, new LivingParticle(worldIn,d0,d1,d2));
         }
     }
+
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+        this.checkAndDropBlock(worldIn, pos, state);
+    }
+
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
+
+
 }

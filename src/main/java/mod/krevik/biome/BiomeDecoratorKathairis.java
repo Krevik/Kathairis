@@ -1,6 +1,7 @@
 package mod.krevik.biome;
 
 import mod.krevik.world.gen.*;
+import mod.krevik.world.gen.desert.AncientLabirynth.WorldGenCrystalMaze;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.material.Material;
@@ -95,6 +96,13 @@ public class BiomeDecoratorKathairis extends BiomeDecorator {
                 BlockPos blockposnew = new BlockPos(X,j3,Z);
                 CrystalChamber.generate(worldIn, random, chunkPos.add(X,j3,Z));
         }
+        /*if(random.nextInt(100)==1) {
+            int X = random.nextInt(16) + 8;
+            int Z = random.nextInt(16) + 8;
+            int j3=random.nextInt(45)+12;
+            BlockPos blockposnew = new BlockPos(X,j3,Z);
+            new WorldGenCrystalMaze().generate(worldIn, random, chunkPos.add(X,j3,Z));
+        }*/
         if(random.nextInt(1200)==0) {
             int X = random.nextInt(16) + 8;
             int Z = random.nextInt(16) + 8;

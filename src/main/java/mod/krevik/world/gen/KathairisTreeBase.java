@@ -21,7 +21,7 @@ public class KathairisTreeBase extends WorldGenAbstractBasicMysticTree {
     {
         Material material = blockType.getDefaultState().getMaterial();
         return material == Material.AIR || material == Material.LEAVES || blockType == Blocks.GRASS || blockType == Blocks.DIRT || blockType == Blocks.LOG || blockType == Blocks.LOG2 || blockType == Blocks.SAPLING || blockType == Blocks.VINE ||
-                blockType == KCore.CorruptedDirt || blockType == KCore.CorruptedGrass || blockType == KCore.MysticLog || blockType==KCore.ForgottenSand;
+                blockType == KCore.KatharianDirt || blockType == KCore.KatharianGrass || blockType == KCore.MysticLog || blockType==KCore.ForgottenSand;
     }
 
     @Override
@@ -32,9 +32,9 @@ public class KathairisTreeBase extends WorldGenAbstractBasicMysticTree {
     @Override
     protected void setDirtAt(World worldIn, BlockPos pos)
     {
-        if (worldIn.getBlockState(pos).getBlock() != KCore.CorruptedDirt)
+        if (worldIn.getBlockState(pos).getBlock() != KCore.KatharianDirt)
         {
-            this.setBlockAndNotifyAdequately(worldIn, pos, KCore.CorruptedDirt.getDefaultState());
+            this.setBlockAndNotifyAdequately(worldIn, pos, KCore.KatharianDirt.getDefaultState());
         }
     }
 
@@ -82,7 +82,7 @@ public class KathairisTreeBase extends WorldGenAbstractBasicMysticTree {
     public boolean canGenerate(World worldIn, BlockPos pos)
     {
         int posY=pos.getY();
-        if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!=KCore.CorruptedGrass.getDefaultState()||
+        if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!=KCore.KatharianGrass.getDefaultState()||
                 worldIn.getBlockState(pos.down())==KCore.MysticLeaves.getDefaultState()) {
             return false;
         }else {

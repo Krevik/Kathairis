@@ -2,7 +2,7 @@ package mod.krevik.entity.butterfly;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.util.MysticLootTables;
 
 import net.minecraft.block.state.IBlockState;

@@ -95,8 +95,8 @@ public class EventSubscriber {
 
 		final Block[] blocks = {
 				KCore.MysticPortal,
-				KCore.CorruptedDirt,
-				KCore.CorruptedGrass,
+				KCore.KatharianDirt,
+				KCore.KatharianGrass,
 				KCore.MythicStone,
 				KCore.MysticPlanks,
 				KCore.MysticLog,
@@ -238,8 +238,8 @@ public class EventSubscriber {
 	public static void registerItemBlocks(final RegistryEvent.Register<Item> event) {
 		final ItemBlock[] items = {
 				new ItemBlock(KCore.MysticPortal),
-				new ItemBlock(KCore.CorruptedDirt),
-				new ItemBlock(KCore.CorruptedGrass),
+				new ItemBlock(KCore.KatharianDirt),
+				new ItemBlock(KCore.KatharianGrass),
 				new ItemBlock(KCore.MythicStone),
 				new ItemBlock(KCore.MysticPlanks),
 				new ItemBlock(KCore.MysticLog),

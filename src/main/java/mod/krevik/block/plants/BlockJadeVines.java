@@ -1,10 +1,11 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import mod.krevik.KCore;
+import mod.krevik.block.BaseBlock;
 import mod.krevik.network.KetherPacketHandler;
 import mod.krevik.network.PacketJadeVinesServer;
 

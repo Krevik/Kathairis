@@ -234,8 +234,8 @@ public class BaseBlock extends Block
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-    	if(this==KCore.CorruptedGrass) {
-    		return Item.getItemFromBlock(KCore.CorruptedDirt);
+    	if(this==KCore.KatharianGrass) {
+    		return Item.getItemFromBlock(KCore.KatharianDirt);
     	}else if(this==KCore.VioletCrystal){
     		return KCore.VioletCrystalShard;
     	}else if(this==KCore.YellowCrystal) {

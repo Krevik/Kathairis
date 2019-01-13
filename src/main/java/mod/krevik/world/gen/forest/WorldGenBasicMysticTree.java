@@ -85,7 +85,7 @@ public class WorldGenBasicMysticTree extends WorldGenAbstractBasicMysticTree
             {
                 IBlockState state = worldIn.getBlockState(position.down());
 
-                if ((worldIn.getBlockState(position.down()) == KCore.CorruptedDirt.getDefaultState() || worldIn.getBlockState(position)==KCore.CorruptedDirt.getDefaultState() || state.getBlock() == KCore.CorruptedGrass))
+                if ((worldIn.getBlockState(position.down()) == KCore.KatharianDirt.getDefaultState() || worldIn.getBlockState(position)==KCore.KatharianDirt.getDefaultState() || state.getBlock() == KCore.KatharianGrass))
                 {
                     for (int i3 = position.getY() - 3 + i; i3 <= position.getY() + i; ++i3)
                     {

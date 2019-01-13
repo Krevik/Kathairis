@@ -25,6 +25,6 @@ public class ModBlockColorsHandler implements IBlockColor
 
     public static void registerBlockColors()
     {
-        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(INSTANCE, KCore.CorruptedGrass);
+        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(INSTANCE, KCore.KatharianGrass);
     }
 }

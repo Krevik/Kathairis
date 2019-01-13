@@ -24,7 +24,7 @@ public class WorldGenCustomTree2 extends WorldGenAbstractTree{
     	int posX=pos.getX();
     	int posZ=pos.getZ();
     	int posY=pos.getY();
-    	if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!= KCore.CorruptedGrass.getDefaultState()||
+    	if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!= KCore.KatharianGrass.getDefaultState()||
     			worldIn.getBlockState(pos.down())==KCore.MysticLeaves.getDefaultState()) {
     		return false;
     	}else {

@@ -21,15 +21,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Calendar;
 import java.util.Random;
 
-public class BlockCorruptedGrass extends BaseBlock implements IGrowable
+public class BlockKatharianGrass extends BaseBlock implements IGrowable
 {
     public static final PropertyBool FLOWER = PropertyBool.create("flower");
     public static final PropertyBool SNOWY = PropertyBool.create("snowy");
     int month = Calendar.getInstance().get(Calendar.MONTH);
 
-    public BlockCorruptedGrass()
+    public BlockKatharianGrass()
     {
-        super(KCore.Ref.CorruptedGrass, Material.GRASS, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.PLANT);
+        super(KCore.Ref.KatharianGrass, Material.GRASS, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.PLANT);
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabsMystic.buildingBlocks);
             this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false)));
@@ -58,7 +58,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
         {
             if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)
             {
-                worldIn.setBlockState(pos, KCore.CorruptedDirt.getDefaultState());
+                worldIn.setBlockState(pos, KCore.KatharianDirt.getDefaultState());
             }
             else
             {
@@ -76,9 +76,9 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
                         IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == KCore.CorruptedDirt && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
+                        if (iblockstate1.getBlock() == KCore.KatharianDirt && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
                         {
-                            worldIn.setBlockState(blockpos, KCore.CorruptedGrass.getDefaultState(),2);
+                            worldIn.setBlockState(blockpos, KCore.KatharianGrass.getDefaultState(),2);
                         }
                     }
                 }
@@ -197,7 +197,7 @@ public class BlockCorruptedGrass extends BaseBlock implements IGrowable
                 }
 
                 blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-                if (worldIn.getBlockState(blockpos1.down()).getBlock() != KCore.CorruptedGrass || worldIn.getBlockState(blockpos1).isNormalCube())
+                if (worldIn.getBlockState(blockpos1.down()).getBlock() != KCore.KatharianGrass || worldIn.getBlockState(blockpos1).isNormalCube())
                 {
                     break;
                 }

@@ -2,8 +2,8 @@ package mod.krevik.entity.butterfly;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.block.BlockButterflyFlower;
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockButterflyFlower;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
 

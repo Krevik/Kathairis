@@ -37,7 +37,6 @@ public class WorldProviderMystic extends WorldProviderSurface
         return WorldSleepResult.ALLOW;
     }
 
-
     
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -166,7 +165,7 @@ public class WorldProviderMystic extends WorldProviderSurface
         }
         else
         {
-            return this.world.getGroundAboveSeaLevel(blockpos).getBlock() == KCore.CorruptedGrass;
+            return this.world.getGroundAboveSeaLevel(blockpos).getBlock() == KCore.KatharianGrass;
         }
     }
     

@@ -1,7 +1,9 @@
-package mod.krevik.block;
+package mod.krevik.block.plants;
 
 import java.util.Random;
 
+import mod.krevik.KCore;
+import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -9,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,13 +39,14 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
 
     protected BlockMysticCrops(String Name)
     {
-    	super(Name,false,false);
+    	super(Name,false);
         this.setDefaultState(this.blockState.getBaseState().withProperty(this.getAgeProperty(), Integer.valueOf(0)));
         this.setTickRandomly(true);
         this.setHardness(0.0F);
         this.setSoundType(SoundType.PLANT);
         this.disableStats();
         this.setCreativeTab(null);
+        addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND, KCore.KatharianGrass,KCore.KatharianDirt);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

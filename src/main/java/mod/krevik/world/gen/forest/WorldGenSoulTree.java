@@ -2,7 +2,7 @@ package mod.krevik.world.gen.forest;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockLuminescentGnarl;
+import mod.krevik.block.plants.BlockLuminescentGnarl;
 import mod.krevik.KCore;
 
 import net.minecraft.block.state.IBlockState;
