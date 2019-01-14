@@ -39,6 +39,7 @@ import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.util.FunctionHelper;
 import mod.krevik.util.IProxy;
 import mod.krevik.util.RegistryHelper;
+import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -91,15 +92,15 @@ public class KCore {
     public static int updateRendererCount=0;
 
 	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12).setRepairItem(new ItemStack(KCore.TitaniumIngot));
-	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", KCore.MODID+"kathairis:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
+	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", KCore.MODID+":titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
 	
-	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("kathairis", 3, 2000, 12F, 3.5F, 12).setRepairItem(new ItemStack(KCore.MysticGem));
-	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("kathairis", KCore.MODID+"kathairis:kathairis", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.MysticGem));
+	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("mystic", 3, 2000, 12F, 3.5F, 12).setRepairItem(new ItemStack(KCore.MysticGem));
+	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("mystic", KCore.MODID+":mystic", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.MysticGem));
 	
-	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", KCore.MODID+"kathairis:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(KCore.CloudPearl));
+	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", KCore.MODID+":cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(KCore.CloudPearl));
 
 	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18).setRepairItem(new ItemStack(KCore.RevenumIngot));
-	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", KCore.MODID+"kathairis:revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
+	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", KCore.MODID+":revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	
 	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 2F, 4F, 22).setRepairItem(new ItemStack(KCore.CrystalsCluster));
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21).setRepairItem(new ItemStack(KCore.DarknessEssence));
