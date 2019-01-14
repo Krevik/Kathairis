@@ -3,6 +3,7 @@ package mod.krevik.entity;
 import mod.krevik.util.MysticLootTables;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -178,6 +179,15 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         {
             return super.attackEntityFrom(source, amount);
         }
+    }
+
+    public void onDeath(DamageSource cause){
+        if(!world.isRemote) {
+            EntitySkeleton skeleton = new EntitySkeleton(world);
+            skeleton.setPositionAndUpdate(posX,posY,posZ);
+            world.spawnEntity(skeleton);
+        }
+        super.onDeath(cause);
     }
 
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
