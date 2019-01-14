@@ -70,7 +70,6 @@ public class EntityPhasm extends EntityFlying implements IMob {
     int ticker=100;
     FunctionHelper helper = KCore.instance.functionHelper;
 
-    @SideOnly(Side.CLIENT)
     public void onUpdate()
     {
         super.onUpdate();

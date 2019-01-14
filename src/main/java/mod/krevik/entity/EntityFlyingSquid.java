@@ -19,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -209,6 +210,10 @@ public class EntityFlyingSquid extends EntityFlying
     int swingTries=0;
     public void onUpdate() {
     	super.onUpdate();
+        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
+        {
+            this.setDead();
+        }
 	    	EntityPlayer ep=this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 5, true);
 	    	if(ep!=null) {
 	    		
