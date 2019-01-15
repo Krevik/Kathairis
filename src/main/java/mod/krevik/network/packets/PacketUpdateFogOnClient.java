@@ -40,10 +40,14 @@ public class PacketUpdateFogOnClient implements IMessage {
         @Override
         public IMessage onMessage(PacketUpdateFogOnClient message, MessageContext ctx) {
             EntityPlayer player = Minecraft.getMinecraft().player;
-            if(player.dimension==KCore.DIMENSION_ID){
-                KetherDataStorage data = KCore.data.getDataInstance(player.world);
-                data.setFogTime(message.fogTime);
-                data.setLastFogTime(message.lastFogTime);
+            if(player!=null) {
+                if (player.dimension == KCore.DIMENSION_ID) {
+                    KetherDataStorage data = KCore.data.getDataInstance(player.world);
+                    if(data!=null) {
+                        data.setFogTime(message.fogTime);
+                        data.setLastFogTime(message.lastFogTime);
+                    }
+                }
             }
             return null;
         }

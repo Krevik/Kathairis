@@ -190,31 +190,37 @@ public final class ClientEventSubscriber {
 	@SubscribeEvent
 	public static void updateFogColors(EntityViewRenderEvent.FogColors event){
 		EntityPlayer player = Minecraft.getMinecraft().player;
-		if(player.dimension==KCore.DIMENSION_ID){
-			KetherDataStorage data = KCore.data.getDataInstance(player.world);
-			if(data.getFogTime()>0){
-				float f = 1 + MathHelper.abs(data.getLastFogTime() + 1 - (data.getFogTime()) / 2) / 20000;
-				float r = event.getRed() / f;
-				float g = event.getGreen() / f;
-				float b = event.getBlue() / f;
-				event.setRed(r);
-				event.setGreen(g);
-				event.setBlue(b);
+		if(player!=null) {
+			if (player.dimension == KCore.DIMENSION_ID) {
+				KetherDataStorage data = KCore.data.getDataInstance(player.world);
+				if(data!=null) {
+					if (data.getFogTime() > 0) {
+						float f = 1 + MathHelper.abs(data.getLastFogTime() + 1 - (data.getFogTime()) / 2) / 20000;
+						float r = event.getRed() / f;
+						float g = event.getGreen() / f;
+						float b = event.getBlue() / f;
+						event.setRed(r);
+						event.setGreen(g);
+						event.setBlue(b);
+					}
+				}
 			}
-
-
 		}
 	}
 
 	@SubscribeEvent
 	public static void handleFogGl(EntityViewRenderEvent.RenderFogEvent event){
 		EntityPlayer player = Minecraft.getMinecraft().player;
-		if(player.dimension==KCore.DIMENSION_ID){
-			KetherDataStorage data = KCore.data.getDataInstance(player.world);
-			if(data.getFogTime()>0){
-				float f = MathHelper.sin((float) ((data.getFogTime() * Math.PI) / (data.getLastFogTime())));
-				GL11.glFogf(GL11.GL_FOG_START, 140f - 139.5f * f);
-				GL11.glFogf(GL11.GL_FOG_END, 180f - 10f * f);
+		if(player!=null) {
+			if (player.dimension == KCore.DIMENSION_ID) {
+				KetherDataStorage data = KCore.data.getDataInstance(player.world);
+				if(data!=null) {
+					if (data.getFogTime() > 0) {
+						float f = MathHelper.sin((float) ((data.getFogTime() * Math.PI) / (data.getLastFogTime())));
+						GL11.glFogf(GL11.GL_FOG_START, 140f - 139.5f * f);
+						GL11.glFogf(GL11.GL_FOG_END, 180f - 10f * f);
+					}
+				}
 			}
 		}
 	}
@@ -226,8 +232,10 @@ public final class ClientEventSubscriber {
 		if(player!=null) {
 			if (player.dimension == KCore.DIMENSION_ID) {
 				KetherDataStorage data = KCore.data.getDataInstance(player.world);
-				if (data.getFogTime() > -1) {
-					data.setFogTime(data.getFogTime() - 1);
+				if(data!=null) {
+					if (data.getFogTime() > -1) {
+						data.setFogTime(data.getFogTime() - 1);
+					}
 				}
 			}
 		}
