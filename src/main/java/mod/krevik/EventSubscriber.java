@@ -420,7 +420,7 @@ public class EventSubscriber {
 			if (fogTime == -1) {
 				sentMessage=false;
 				lastFogCounter++;
-				fogChance = 1000 - lastFogCounter;
+				fogChance = 100000 - lastFogCounter;
 				if (KCore.functionHelper.random.nextInt((int) fogChance) == 0) {
 					//fog Started
 					fogTime = 5000 + KCore.functionHelper.random.nextInt(30000);
