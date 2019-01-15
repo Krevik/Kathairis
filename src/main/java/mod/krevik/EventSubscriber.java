@@ -8,6 +8,7 @@ import mod.krevik.block.BlockChristmasGift;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.network.packets.PacketDustStormClient;
 import mod.krevik.network.packets.PacketSandstormUpdatedOnClient;
+import mod.krevik.network.packets.PacketUpdateFogOnClient;
 import mod.krevik.world.dimension.KetherDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -377,7 +378,7 @@ public class EventSubscriber {
 
 	}
 
-	@SideOnly(Side.CLIENT)
+	/*@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void updateFogColors(EntityViewRenderEvent.FogColors event){
 		if(fogTime>0) {
@@ -403,12 +404,13 @@ public class EventSubscriber {
 				GL11.glFogf(GL11.GL_FOG_END, 180f - 10f * f);
 			}
 		}
-	}
+	}*/
 
 	static float fogTime=-1;
 	static float fogChance=0;
 	static float lastFogCounter=0;
 	static float lastFogTime;
+	static boolean sentMessage=false;
 
 	@SubscribeEvent
 	public static void onEvent1(TickEvent.WorldTickEvent event)
@@ -416,8 +418,9 @@ public class EventSubscriber {
 		//operating fog mechanism
 		if(!event.world.isRemote) {
 			if (fogTime == -1) {
+				sentMessage=false;
 				lastFogCounter++;
-				fogChance = 100000 - lastFogCounter;
+				fogChance = 1000 - lastFogCounter;
 				if (KCore.functionHelper.random.nextInt((int) fogChance) == 0) {
 					//fog Started
 					fogTime = 5000 + KCore.functionHelper.random.nextInt(30000);
@@ -428,6 +431,11 @@ public class EventSubscriber {
 				if (fogTime > -1) {
 					fogTime--;
 					lastFogCounter = 0;
+					if(!sentMessage){
+						PacketUpdateFogOnClient message = new PacketUpdateFogOnClient(fogTime,lastFogTime);
+						KathairisPacketHandler.CHANNEL.sendToAll(message);
+						sentMessage=true;
+					}
 				}
 			}
 		}

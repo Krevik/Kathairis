@@ -23,6 +23,9 @@ public class KetherDataStorage extends WorldSavedData
 	private double sandstormX;
 	private double sandstormZ;
 
+	private static float fogTime;
+	private static float lastFogTime;
+
 	public KetherDataStorage() 
 	{
 		super(DATA_NAME);
@@ -33,6 +36,24 @@ public class KetherDataStorage extends WorldSavedData
 		sandstormTime=0;
 		sandstormX=0;
 		sandstormZ=0;
+		fogTime=0;
+		lastFogTime=0;
+	}
+
+	public static float getFogTime(){
+		return fogTime;
+	}
+
+	public static void setFogTime(float f){
+		fogTime=f;
+	}
+
+	public static float getLastFogTime(){
+		return lastFogTime;
+	}
+
+	public static void setLastFogTime(float f){
+		lastFogTime=f;
 	}
 
 	public KetherDataStorage(String name) 
