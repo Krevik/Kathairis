@@ -19,6 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -642,7 +643,15 @@ public class EventSubscriber {
 	@SubscribeEvent
 	public static void onChangeDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event){
 		if(event.player!=null){
-
+			if(fogTime>0){
+				if(event.player instanceof EntityPlayerMP) {
+					if(event.toDim==KCore.DIMENSION_ID) {
+						EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
+						PacketUpdateFogOnClient message = new PacketUpdateFogOnClient(fogTime, lastFogTime);
+						KathairisPacketHandler.CHANNEL.sendTo(message, playerMP);
+					}
+				}
+			}
 		}
 	}
 
