@@ -6,8 +6,8 @@ import javax.annotation.Nullable;
 
 import mod.krevik.KCore;
 import mod.krevik.block.BaseBlock;
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.PacketJadeVinesServer;
+import mod.krevik.network.KathairisPacketHandler;
+import mod.krevik.network.packets.PacketJadeVinesServer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockShulkerBox;
@@ -184,7 +184,7 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
     {
     	if(worldIn.isRemote) {
     		if(Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown()) {
-				KetherPacketHandler.CHANNEL.sendToServer(new PacketJadeVinesServer());
+				KathairisPacketHandler.CHANNEL.sendToServer(new PacketJadeVinesServer());
     		}
     	}
     }

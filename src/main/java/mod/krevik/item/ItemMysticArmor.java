@@ -7,8 +7,8 @@ import java.util.UUID;
 
 import mod.krevik.EventSubscriber;
 import mod.krevik.KCore;
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.PacketOnCloudBootsUseServer;
+import mod.krevik.network.KathairisPacketHandler;
+import mod.krevik.network.packets.PacketOnCloudBootsUseServer;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Multimap;
 
@@ -121,7 +121,7 @@ public class ItemMysticArmor extends ItemArmor
 	    		}
 	    		
 	    		PacketOnCloudBootsUseServer server = new PacketOnCloudBootsUseServer();
-	    		KetherPacketHandler.CHANNEL.sendToServer(server);
+	    		KathairisPacketHandler.CHANNEL.sendToServer(server);
 			    	player.fallDistance=0;
 
 	    	}

@@ -1,4 +1,4 @@
-package mod.krevik.network;
+package mod.krevik.network.packets;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

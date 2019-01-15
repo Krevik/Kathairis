@@ -100,4 +100,26 @@ public class BlockMysticMultiGrass extends BlockMysticBush implements IGrowable
     {
         return Block.EnumOffsetType.XYZ;
     }
+
+    protected boolean canSustainBush(IBlockState state)
+    {
+        boolean can=false;
+        if(state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND || state.getBlock()==KCore.KatharianDirt
+                || state.getBlock()==KCore.KatharianGrass
+                ||state.getBlock() == KCore.MysticMultiGrass){
+            can=true;
+        }
+        return can;
+    }
+
+    public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
+    {
+        boolean can=false;
+        if(state==KCore.KatharianDirt.getDefaultState() || state==KCore.KatharianGrass.getDefaultState() || state==Blocks.GRASS.getDefaultState() || state==Blocks.DIRT.getDefaultState()||
+                state==Blocks.FARMLAND.getDefaultState()||
+                state.getBlock() == KCore.MysticMultiGrass){
+            can=true;
+        }
+        return can;
+    }
 }

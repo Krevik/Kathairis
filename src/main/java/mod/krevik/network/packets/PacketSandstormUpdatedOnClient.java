@@ -1,4 +1,4 @@
-package mod.krevik.network;
+package mod.krevik.network.packets;
 
 import mod.krevik.world.dimension.KetherDataStorage;
 import mod.krevik.KCore;

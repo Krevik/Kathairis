@@ -2,11 +2,12 @@ package mod.krevik.network;
 
 import mod.krevik.KCore;
 
+import mod.krevik.network.packets.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class KetherPacketHandler {
+public class KathairisPacketHandler {
 	public static final SimpleNetworkWrapper CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel(KCore.MODID);
 
 	public static void init() {

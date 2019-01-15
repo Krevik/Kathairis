@@ -1,10 +1,10 @@
 package mod.krevik.command;
 
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.world.dimension.KetherDataStorage;
 import mod.krevik.KCore;
 
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.PacketSandstormUpdatedOnClient;
+import mod.krevik.network.packets.PacketSandstormUpdatedOnClient;
 import net.minecraft.command.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
@@ -44,7 +44,7 @@ public class SandstormCommand extends CommandBase {
 									data.setIsSandstorm(false);
 									data.setSandstormTime(0);
 									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(false, 0, 0, 0);
-									KetherPacketHandler.CHANNEL.sendToAll(message);
+									KathairisPacketHandler.CHANNEL.sendToAll(message);
 									notifyCommandListener(sender, this, "Sandstorm time set to: " + 0, new Object[]{0, sender.getName()});
 								}
 								if (word1.equalsIgnoreCase("true")) {
@@ -56,7 +56,7 @@ public class SandstormCommand extends CommandBase {
 									data.setSandstormX(X);
 									data.setSandstormZ(Z);
 									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
-									KetherPacketHandler.CHANNEL.sendToAll(message);
+									KathairisPacketHandler.CHANNEL.sendToAll(message);
 									notifyCommandListener(sender, this, "Sandstorm time set to: " + time, new Object[]{0, sender.getName()});
 								}
 							} else {
@@ -69,14 +69,14 @@ public class SandstormCommand extends CommandBase {
 									data.setSandstormX(X);
 									data.setSandstormZ(Z);
 									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
-									KetherPacketHandler.CHANNEL.sendToAll(message);
+									KathairisPacketHandler.CHANNEL.sendToAll(message);
 									notifyCommandListener(sender, this, "Sandstorm time set to: " + time, new Object[]{0, sender.getName()});
 								}
 								else if (Integer.parseInt(word1) == 0) {
 									data.setIsSandstorm(false);
 									data.setSandstormTime(0);
 									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(false, 0, 0, 0);
-									KetherPacketHandler.CHANNEL.sendToAll(message);
+									KathairisPacketHandler.CHANNEL.sendToAll(message);
 									notifyCommandListener(sender, this, "Sandstorm time set to: " + 0, new Object[]{0, sender.getName()});
 								}else{
 									throw new WrongUsageException("/sandstorm <time>|<true/false>", new Object[0]);
@@ -103,7 +103,7 @@ public class SandstormCommand extends CommandBase {
 								data.setSandstormX(X);
 								data.setSandstormZ(Z);
 								PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, Integer.parseInt(args[0]),Z);
-								KetherPacketHandler.CHANNEL.sendToAll(message);
+								KathairisPacketHandler.CHANNEL.sendToAll(message);
 							}
 		                    notifyCommandListener(sender, this, "sandstorm time set to: "+Integer.parseInt(args[0]), new Object[] {Integer.parseInt(args[0]), sender.getName()});
 						}

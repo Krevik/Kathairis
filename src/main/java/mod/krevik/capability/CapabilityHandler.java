@@ -5,12 +5,9 @@ import mod.krevik.capability.enteringkathairis.IWasInKathairisCapability;
 import mod.krevik.capability.enteringkathairis.WasInKathairisHandler;
 import mod.krevik.capability.enteringkathairis.WasInKathairisStorage;
 import mod.krevik.entity.EntityStrangeWanderer;
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.OpenStrangeWandererGuiPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -77,7 +74,7 @@ public class CapabilityHandler
         }
         //THIS IS NOT WORKING!!!!!!
         //OpenStrangeWandererGuiPacket message = new OpenStrangeWandererGuiPacket();
-        //KetherPacketHandler.CHANNEL.sendTo(message,(EntityPlayerMP) ep);
+        //KathairisPacketHandler.CHANNEL.sendTo(message,(EntityPlayerMP) ep);
     }
 
     private static BlockPos getSuitablePos(EntityPlayer player){

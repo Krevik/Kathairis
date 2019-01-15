@@ -201,10 +201,10 @@ public class GuiOldMan extends GuiScreen {
 		if(button == Fight){
 			
 			IMessage message1 = new PacketSpawnDeathServer();
-			KetherPacketHandler.CHANNEL.sendToServer(message1);
+			KathairisPacketHandler.CHANNEL.sendToServer(message1);
 
 				IMessage message2 = new PacketDeathHandlerServer(true,false,false);
-				KetherPacketHandler.CHANNEL.sendToServer(message2);
+				KathairisPacketHandler.CHANNEL.sendToServer(message2);
 
 		}*/
 

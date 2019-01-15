@@ -1,5 +1,6 @@
-package mod.krevik.network;
+package mod.krevik.network.packets;
 
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.world.dimension.KetherDataStorage;
 
 import io.netty.buffer.ByteBuf;
@@ -49,7 +50,7 @@ public class PacketDeathHandlerServer implements IMessage {
 					KetherDataStorage.getDataInstance(ctx.getServerHandler().player.getServerWorld()).setIsDeathFighting(message.isDeathFighting);
 					KetherDataStorage.getDataInstance(ctx.getServerHandler().player.getServerWorld()).setIsDeathDefeated(message.isDeathDefeated);
 					IMessage message11 = new PacketDeathHandlerClient(message.isDeathSpawned,message.isDeathFighting,message.isDeathDefeated);
-					KetherPacketHandler.CHANNEL.sendToAll(message11);
+					KathairisPacketHandler.CHANNEL.sendToAll(message11);
 				}
 				
 			});

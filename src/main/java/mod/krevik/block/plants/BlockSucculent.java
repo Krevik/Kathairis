@@ -24,14 +24,26 @@ public class BlockSucculent extends BlockMysticBush {
     public BlockSucculent(String Name) {
         super(Name, false);
         addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND,KCore.KatharianGrass,KCore.KatharianDirt,KCore.ForgottenSand,
-                KCore.MovingSand,KCore.WeatheredRock,Blocks.SAND);
+                KCore.MovingSand,KCore.WeatheredRock,Blocks.SAND,KCore.Succulent);
     }
 
     protected boolean canSustainBush(IBlockState state)
     {
         boolean can=false;
-        if(state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND || state.getBlock()== KCore.KatharianDirt
-                || state.getBlock()==KCore.KatharianGrass || state.getBlock()==KCore.Succulent){
+        if(state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND || state.getBlock()==KCore.KatharianDirt
+                || state.getBlock()==KCore.KatharianGrass || state.getBlock() == KCore.MovingSand || state.getBlock() == KCore.WeatheredRock ||
+                state.getBlock()==Blocks.SAND||state.getBlock()==KCore.Succulent ||state.getBlock()==KCore.ForgottenSand){
+            can=true;
+        }
+        return can;
+    }
+
+    public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
+    {
+        boolean can=false;
+        if(state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND || state.getBlock()==KCore.KatharianDirt
+                || state.getBlock()==KCore.KatharianGrass || state.getBlock() == KCore.MovingSand || state.getBlock() == KCore.WeatheredRock ||
+                state.getBlock()==Blocks.SAND||state.getBlock()==KCore.Succulent ||state.getBlock()==KCore.ForgottenSand){
             can=true;
         }
         return can;
@@ -83,16 +95,6 @@ public class BlockSucculent extends BlockMysticBush {
 
             state = worldIn.getBlockState(pos.down());
             return this.canSustainPlantRemake(state, worldIn, pos.down(), EnumFacing.UP, this) && !worldIn.getBlockState(pos.up()).getMaterial().isLiquid();
-    }
-
-    public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
-    {
-        boolean can=false;
-        if(state==KCore.KatharianDirt.getDefaultState() || state==KCore.KatharianGrass.getDefaultState() || state==Blocks.GRASS.getDefaultState() || state==Blocks.DIRT.getDefaultState()||
-                state==Blocks.FARMLAND.getDefaultState() || state.getBlock() == KCore.Succulent){
-            can=true;
-        }
-        return can;
     }
 
     @SideOnly(Side.CLIENT)

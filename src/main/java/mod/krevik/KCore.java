@@ -32,14 +32,13 @@ import mod.krevik.item.ItemMysticShovel;
 import mod.krevik.item.ItemMysticSword;
 import mod.krevik.item.ItemMythicStoneSign;
 import mod.krevik.item.ItemRitualBlade;
-import mod.krevik.network.KetherPacketHandler;
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.recipe.ChargerRecipes;
 import mod.krevik.recipe.RecipeHandler;
 import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.util.FunctionHelper;
 import mod.krevik.util.IProxy;
 import mod.krevik.util.RegistryHelper;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -798,7 +797,7 @@ public class KCore {
     public void preInit(FMLPreInitializationEvent event) {
         CapabilityHandler.registerCapabilities();
     	WorldServer.MAX_ENTITY_RADIUS=12D;
-    	KetherPacketHandler.init();
+    	KathairisPacketHandler.init();
 
     	KCore.instance.dimRegistry();
         proxy.preInit(event);

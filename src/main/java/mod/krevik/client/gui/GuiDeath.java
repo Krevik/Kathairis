@@ -1,11 +1,11 @@
 package mod.krevik.client.gui;
 
 import mod.krevik.KCore;
+import mod.krevik.network.KathairisPacketHandler;
 import org.lwjgl.opengl.GL11;
 
 import mod.krevik.entity.EntityDeath;
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.PacketDeathHandlerServer;
+import mod.krevik.network.packets.PacketDeathHandlerServer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -86,7 +86,7 @@ public class GuiDeath extends GuiScreen {
 		}
 		if(button == Fight) {
 			IMessage message = new PacketDeathHandlerServer(true,true,false);
-				KetherPacketHandler.CHANNEL.sendToServer(message);
+				KathairisPacketHandler.CHANNEL.sendToServer(message);
 				Minecraft.getMinecraft().player.closeScreen();			
 		}
 

@@ -1,4 +1,4 @@
-package mod.krevik.network;
+package mod.krevik.network.packets;
 
 import java.util.Random;
 

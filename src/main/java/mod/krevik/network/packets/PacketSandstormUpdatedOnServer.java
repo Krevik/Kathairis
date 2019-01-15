@@ -1,5 +1,6 @@
-package mod.krevik.network;
+package mod.krevik.network.packets;
 
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.world.dimension.KetherDataStorage;
 import mod.krevik.KCore;
 import io.netty.buffer.ByteBuf;
@@ -53,7 +54,7 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
                     data.setSandstormTime((int) message.sandstormTime);
                     data.setSandstormZ(message.mZ);
                     PacketSandstormUpdatedOnClient message1 = new PacketSandstormUpdatedOnClient(message.isSandstorm, message.mX,message.sandstormTime, message.mZ);
-                    KetherPacketHandler.CHANNEL.sendToAll(message1);
+                    KathairisPacketHandler.CHANNEL.sendToAll(message1);
                 }
 
             });

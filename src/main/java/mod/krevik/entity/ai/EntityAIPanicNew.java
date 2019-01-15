@@ -1,8 +1,8 @@
 package mod.krevik.entity.ai;
 
 import mod.krevik.entity.EntityCloudOister;
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.PacketCloudOisterClient;
+import mod.krevik.network.KathairisPacketHandler;
+import mod.krevik.network.packets.PacketCloudOisterClient;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
@@ -61,7 +61,7 @@ public class EntityAIPanicNew extends EntityAIBase
     		jumpTimer=0;
 			creature.motionY+=0.5;
 			IMessage message = new PacketCloudOisterClient((float)creature.posX,(float)creature.posY,(float)creature.posZ);
-			KetherPacketHandler.CHANNEL.sendToAll(message);
+			KathairisPacketHandler.CHANNEL.sendToAll(message);
 			double destPosX=creature.posX-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
 			double destPosZ=creature.posZ-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
 			creature.getNavigator().setPath(creature.getNavigator().getPathToPos(new BlockPos(destPosX,creature.posY,destPosZ)), 1);

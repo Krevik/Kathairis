@@ -1,4 +1,4 @@
-package mod.krevik.network;
+package mod.krevik.network.packets;
 
 import java.util.ArrayList;
 
@@ -102,7 +102,7 @@ public class PacketDustStormClient implements IMessage {
 							}
 								if(player.world.getBiome(player.getPosition())==KCore.instance.MysticDesert&&player.posY>63&&player.posY<84) {
 									MoveMeDuringSandstormServer message1 = new MoveMeDuringSandstormServer(data.getSandstormX(),data.getSandstormZ());
-									//KetherPacketHandler.CHANNEL.sendToServer(message1);
+									//KathairisPacketHandler.CHANNEL.sendToServer(message1);
 								}
 							}
 						}
