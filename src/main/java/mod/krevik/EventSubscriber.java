@@ -381,13 +381,15 @@ public class EventSubscriber {
 	@SubscribeEvent
 	public static void updateFogColors(EntityViewRenderEvent.FogColors event){
 		if(fogTime>0) {
-			float f = 1+MathHelper.abs(lastFogTime+1-(fogTime)/2)/20000;
-			float r = event.getRed() / f;
-			float g = event.getGreen() / f;
-			float b = event.getBlue() / f;
-			event.setRed(r);
-			event.setGreen(g);
-			event.setBlue(b);
+			if(Minecraft.getMinecraft().player.dimension==KCore.DIMENSION_ID) {
+				float f = 1 + MathHelper.abs(lastFogTime + 1 - (fogTime) / 2) / 20000;
+				float r = event.getRed() / f;
+				float g = event.getGreen() / f;
+				float b = event.getBlue() / f;
+				event.setRed(r);
+				event.setGreen(g);
+				event.setBlue(b);
+			}
 		}
 	}
 
@@ -395,13 +397,11 @@ public class EventSubscriber {
 	@SubscribeEvent
 	public static void handleFogGl(EntityViewRenderEvent.RenderFogEvent event){
 		if(fogTime>0){
-
-			float f = MathHelper.sin((float) ((fogTime*Math.PI)/(lastFogTime)));
-			//GL11.glFogf(GL11.GL_FOG_START, f1*f1*MathHelper.sin((float) (Math.PI+2*Math.PI*(lastFogTime/2-fogTime))));
-				//GL11.glFogf(GL11.GL_FOG_END, f1+1*MathHelper.sin((float) (Math.PI+2*Math.PI*(lastFogTime/2-fogTime))));
-			GL11.glFogf(GL11.GL_FOG_START, 140f-139.5f*f);
-			GL11.glFogf(GL11.GL_FOG_END, 180f-10f*f);
-		System.out.println(fogTime+" "+lastFogTime);
+			if(Minecraft.getMinecraft().player.dimension==KCore.DIMENSION_ID) {
+				float f = MathHelper.sin((float) ((fogTime * Math.PI) / (lastFogTime)));
+				GL11.glFogf(GL11.GL_FOG_START, 140f - 139.5f * f);
+				GL11.glFogf(GL11.GL_FOG_END, 180f - 10f * f);
+			}
 		}
 	}
 

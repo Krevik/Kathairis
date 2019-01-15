@@ -35,7 +35,6 @@ public class KetherDataStorage extends WorldSavedData
 		sandstormZ=0;
 	}
 
-
 	public KetherDataStorage(String name) 
 	{
 		super(name);
