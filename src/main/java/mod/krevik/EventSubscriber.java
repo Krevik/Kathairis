@@ -642,13 +642,15 @@ public class EventSubscriber {
 
 	@SubscribeEvent
 	public static void onChangeDimensionEvent(PlayerEvent.PlayerChangedDimensionEvent event){
-		if(event.player!=null){
-			if(fogTime>0){
-				if(event.player instanceof EntityPlayerMP) {
-					if(event.toDim==KCore.DIMENSION_ID) {
-						EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
-						PacketUpdateFogOnClient message = new PacketUpdateFogOnClient(fogTime, lastFogTime);
-						KathairisPacketHandler.CHANNEL.sendTo(message, playerMP);
+		if(!event.player.world.isRemote) {
+			if (event.player != null) {
+				if (fogTime > 0) {
+					if (event.player instanceof EntityPlayerMP) {
+						if (event.toDim == KCore.DIMENSION_ID) {
+							EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
+							PacketUpdateFogOnClient message = new PacketUpdateFogOnClient(fogTime, lastFogTime);
+							KathairisPacketHandler.CHANNEL.sendTo(message, playerMP);
+						}
 					}
 				}
 			}
