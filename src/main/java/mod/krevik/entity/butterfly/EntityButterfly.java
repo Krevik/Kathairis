@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityButterfly extends EntityAmbientCreature
+public class EntityButterfly extends EntityBasicButterfly
 {
     private static final DataParameter<Byte> SITTING = EntityDataManager.<Byte>createKey(EntityButterfly.class, DataSerializers.BYTE);
     /** Coordinates of where the bat spawned. */

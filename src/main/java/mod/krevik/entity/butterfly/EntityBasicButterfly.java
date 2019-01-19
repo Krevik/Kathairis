@@ -2,9 +2,7 @@ package mod.krevik.entity.butterfly;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.block.plants.BlockButterflyFlower;
 import mod.krevik.block.plants.BlockMysticBush;
-import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
 
 import net.minecraft.block.state.IBlockState;
@@ -25,30 +23,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityButterfly1 extends EntityBasicButterfly
+public class EntityBasicButterfly extends EntityAmbientCreature
 {
-    private static final DataParameter<Byte> SITTING = EntityDataManager.<Byte>createKey(EntityButterfly1.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> SITTING = EntityDataManager.<Byte>createKey(EntityIllukini.class, DataSerializers.BYTE);
     /** Coordinates of where the bat spawned. */
     private BlockPos spawnPosition;
-    public BlockPos butterflyFlowerPos=null;
 
-    public EntityButterfly1(World worldIn)
+    public EntityBasicButterfly(World worldIn)
     {
         super(worldIn);
         this.setSize(0.6F, 0.5F);
         this.setIsBirdSitting(true);
         this.experienceValue=1;
     }
-
+    public int getMaxSpawnedInChunk()
+    {
+        return 2;
+    }
     protected void entityInit()
     {
         super.entityInit();
         this.dataManager.register(SITTING, Byte.valueOf((byte)0));
     }
-    public int getMaxSpawnedInChunk()
-    {
-        return 2;
-    }
+
     /**
      * Returns the volume for the sounds this mob makes.
      */
@@ -68,7 +65,7 @@ public class EntityButterfly1 extends EntityBasicButterfly
     @Nullable
     public SoundEvent getAmbientSound()
     {
-    	return null;
+        return null;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
@@ -136,7 +133,7 @@ public class EntityButterfly1 extends EntityBasicButterfly
             this.motionZ = 0.0D;
             this.posY=this.world.getHeight(this.getPosition()).getY();
             if(this.rand.nextInt(1000)==0) {
-            	this.setIsBirdSitting(false);
+                this.setIsBirdSitting(false);
             }
         }
         else
@@ -145,42 +142,23 @@ public class EntityButterfly1 extends EntityBasicButterfly
         }
     }
 
-    int ticker=0;
     protected void updateAITasks()
     {
-        ticker++;
         super.updateAITasks();
         BlockPos blockpos = new BlockPos(this);
         BlockPos blockpos1 = blockpos.down();
-        if(butterflyFlowerPos!=null) {
-        if(this.getIsBirdSitting()) {
-    		if(this.getPosition()!=butterflyFlowerPos.up()) {
-    			this.setIsBirdSitting(false);
-    		}
-        }
-        }
-        if(butterflyFlowerPos!=null) {
-        	if(this.world.getBlockState(butterflyFlowerPos)==KCore.ButterflyFlower.getDefaultState().withProperty(BlockButterflyFlower.VARIANT, BlockButterflyFlower.EnumType.WITH)) {
-        		this.getMoveHelper().setMoveTo(butterflyFlowerPos.getX()+rand.nextFloat(), butterflyFlowerPos.getY()+5, butterflyFlowerPos.getZ()+rand.nextFloat(), 0.5);
-        		this.motionY*=1.6;
-        		if(this.getPosition()==butterflyFlowerPos.up()) {
-        			this.setIsBirdSitting(true);
-        		}
-        	}else {
-        		butterflyFlowerPos=null;
-        		this.setIsBirdSitting(false);
-        	}
-        	
-        }else {
+
         if (this.getIsBirdSitting())
         {
-            if (this.world.getBlockState(blockpos1).isNormalCube()||this.world.getBlockState(blockpos1)==KCore.ButterflyFlower.getDefaultState().withProperty(BlockButterflyFlower.VARIANT, BlockButterflyFlower.EnumType.WITH))
+            if (this.world.getBlockState(blockpos1).isNormalCube())
             {
 
                 if (this.world.getNearestPlayerNotCreative(this, 4.0D) != null)
                 {
-                    this.setIsBirdSitting(false);
-                    this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+                    if(!this.world.getNearestPlayerNotCreative(this, 4.0D).isSneaking()) {
+                        this.setIsBirdSitting(false);
+                        this.world.playEvent((EntityPlayer) null, 1025, blockpos, 0);
+                    }
                 }
             }
             else
@@ -212,26 +190,10 @@ public class EntityButterfly1 extends EntityBasicButterfly
             this.moveForward = 0.5F;
             this.rotationYaw += f1;
 
-            if (this.rand.nextInt(100) == 0 && (this.world.getBlockState(blockpos1).isNormalCube()||this.world.getBlockState(blockpos1).getBlock()instanceof BlockMysticBush)||this.world.getBlockState(blockpos1)==KCore.ButterflyFlower.getDefaultState().withProperty(BlockButterflyFlower.VARIANT, BlockButterflyFlower.EnumType.WITH))
+            if (this.rand.nextInt(100) == 0 && (this.world.getBlockState(blockpos1).isNormalCube()||this.world.getBlockState(blockpos1).getBlock()instanceof BlockMysticBush))
             {
                 this.setIsBirdSitting(true);
             }
-            if(ticker>=30){
-                EntityPlayer ep = world.getNearestPlayerNotCreative(this,15D);
-                if(ep!=null){
-                    d0 = ep.posX + getRNG().nextFloat()-getRNG().nextFloat() + 0.5D - this.posX;
-                    d1 = ep.posY + getRNG().nextFloat() + 0.1D - this.posY;
-                    d2 = ep.posZ + getRNG().nextFloat()-getRNG().nextFloat() + 0.5D - this.posZ;
-                    this.motionX += (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
-                    this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
-                    this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
-                    f = (float)(MathHelper.atan2(this.motionZ, this.motionX) * (180D / Math.PI)) - 90.0F;
-                    f1 = MathHelper.wrapDegrees(f - this.rotationYaw);
-                    this.moveForward = 0.5F;
-                    this.rotationYaw += f1;
-                }
-            }
-        }
         }
     }
 
@@ -282,7 +244,7 @@ public class EntityButterfly1 extends EntityBasicButterfly
 
     public static void registerFixesBat(DataFixer fixer)
     {
-        EntityLiving.registerFixesMob(fixer, EntityButterfly1.class);
+        EntityLiving.registerFixesMob(fixer, EntityIllukini.class);
     }
 
     /**

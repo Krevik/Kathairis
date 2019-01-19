@@ -24,14 +24,14 @@ public class BaseItem extends Item{
  
  protected String name;
  
- public BaseItem(String name, CreativeTabs tab) {
- this.name = name;
- setUnlocalizedName(name);
- setRegistryName(name);
- this.setCreativeTab(tab);
- KCore.instance.regHelper.itemList.add(this);
- EventSubscriber.itemList.add(this);
- }
+	 public BaseItem(String name, CreativeTabs tab) {
+		 this.name = name;
+		 setUnlocalizedName(name);
+		 setRegistryName(name);
+		 this.setCreativeTab(tab);
+		 KCore.instance.regHelper.itemList.add(this);
+		 EventSubscriber.itemList.add(this);
+	 }
  
  @SideOnly(Side.CLIENT)
  public void initModel() {
