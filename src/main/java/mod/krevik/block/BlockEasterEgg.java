@@ -70,6 +70,11 @@ public class BlockEasterEgg extends BaseBlock
     	return FULL_BLOCK_AABB;
     }
 
+    protected boolean canSilkHarvest()
+    {
+        return true;
+    }
+
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
