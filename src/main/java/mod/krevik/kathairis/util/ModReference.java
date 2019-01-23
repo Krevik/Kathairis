@@ -1,6 +1,6 @@
 package mod.krevik.kathairis.util;
 
-import io.github.cadiboo.examplemod.Kathairis;
+import mod.krevik.kathairis.Kathairis;
 
 /**
  * Holds mod-wide constant values
