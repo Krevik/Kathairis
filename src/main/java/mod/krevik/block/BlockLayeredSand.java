@@ -1,6 +1,6 @@
 package mod.krevik.block;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.KCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -132,19 +132,20 @@ public class BlockLayeredSand extends BaseBlock {
         {
             worldIn.setBlockToAir(pos);
         }*/
-        KetherDataStorage data = KCore.data.getDataInstance(worldIn);
-        if(data!=null){
-            if(data.getIsSandstorm()){
-                if(rand.nextInt(10)==0){
-                    int actualLayers=getLayers(state);
-                    if(actualLayers<8){
-                        worldIn.setBlockState(pos,KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,actualLayers+1),2);
+
+        if(!worldIn.isRemote) {
+            giveSandToNeighboursNew(state, worldIn, pos);
+            KathairisDataStorage data = KCore.data.getDataInstance(worldIn);
+            if(data!=null){
+                if(data.getSandstormTime()>-1){
+                    if(rand.nextInt(10)==0){
+                        int actualLayers=getLayers(state);
+                        if(actualLayers<8){
+                            worldIn.setBlockState(pos,KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,actualLayers+1),2);
+                        }
                     }
                 }
             }
-        }
-        if(!worldIn.isRemote) {
-            giveSandToNeighboursNew(state, worldIn, pos);
         }
 
     }

@@ -6,33 +6,30 @@ import mod.krevik.KCore;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.fml.server.FMLServerHandler;
 
-public class KetherDataStorage extends WorldSavedData
+public class KathairisDataStorage extends WorldSavedData
 {
 	private static final String DATA_NAME = KCore.MODID + "_data";
 	private boolean isDeathSpawned;
 	private boolean isDeathFighting;
 	private boolean isDeathDefeated;
-	private int sandstormTime;
-	private boolean isSandstorm;
-	private double sandstormX;
-	private double sandstormZ;
+	private static int sandstormTime;
+	private static double sandstormX;
+	private static double sandstormZ;
+	private static boolean shouldAddSandstormFog;
 
 	private static float fogTime;
 	private static float lastFogTime;
 
-	public KetherDataStorage() 
+	public KathairisDataStorage()
 	{
 		super(DATA_NAME);
 		isDeathSpawned=false;
 		isDeathFighting=false;
 		isDeathDefeated=false;
-		isSandstorm=false;
+		shouldAddSandstormFog=false;
 		sandstormTime=0;
 		sandstormX=0;
 		sandstormZ=0;
@@ -40,6 +37,16 @@ public class KetherDataStorage extends WorldSavedData
 		lastFogTime=0;
 	}
 
+	public static boolean getShouldAddSandstormFog(){
+		return shouldAddSandstormFog;
+	}
+
+	public static void setShouldAddSandstormFog(boolean c){
+		shouldAddSandstormFog=c;
+	}
+
+
+	@Nullable
 	public static float getFogTime(){
 		return fogTime;
 	}
@@ -48,6 +55,7 @@ public class KetherDataStorage extends WorldSavedData
 		fogTime=f;
 	}
 
+	@Nullable
 	public static float getLastFogTime(){
 		return lastFogTime;
 	}
@@ -56,33 +64,27 @@ public class KetherDataStorage extends WorldSavedData
 		lastFogTime=f;
 	}
 
-	public KetherDataStorage(String name) 
+	public KathairisDataStorage(String name)
 	{
 		super(name);
 	}
 	
 
-	public static KetherDataStorage getDataInstance(World world) 
+	public static KathairisDataStorage getDataInstance(World world)
 	{
 
 		MapStorage storage = world.getMapStorage();
-		KetherDataStorage instance = (KetherDataStorage) storage.getOrLoadData(KetherDataStorage.class, DATA_NAME);
+		KathairisDataStorage instance = (KathairisDataStorage) storage.getOrLoadData(KathairisDataStorage.class, DATA_NAME);
 		if (instance == null) {
-			instance = new KetherDataStorage();
+			instance = new KathairisDataStorage();
 			storage.setData(DATA_NAME, instance);
 		}
-		return (KetherDataStorage) storage.getOrLoadData(KetherDataStorage.class, DATA_NAME);
+		return (KathairisDataStorage) storage.getOrLoadData(KathairisDataStorage.class, DATA_NAME);
 	}
 	
-	public static KetherDataStorage initialise() {
-		KetherDataStorage instance = new KetherDataStorage();
+	public static KathairisDataStorage initialise() {
+		KathairisDataStorage instance = new KathairisDataStorage();
 		return instance;
-	}
-	
-	public void setIsSandstorm(boolean b)
-	{
-		this.isSandstorm=b;
-		markDirty();
 	}
 	
 	public void setSandstormX(double c)
@@ -119,29 +121,24 @@ public class KetherDataStorage extends WorldSavedData
 		this.isDeathDefeated=b;
 		markDirty();
 	}
+
 	
 	@Nullable
-	public Boolean getIsSandstorm()
+	public static int getSandstormTime()
 	{
-		return this.isSandstorm;
+		return sandstormTime;
 	}
 	
 	@Nullable
-	public int getSandstormTime()
+	public static double getSandstormX()
 	{
-		return this.sandstormTime;
+		return sandstormX;
 	}
 	
 	@Nullable
-	public double getSandstormX()
+	public static double getSandstormZ()
 	{
-		return this.sandstormX;
-	}
-	
-	@Nullable
-	public double getSandstormZ()
-	{
-		return this.sandstormZ;
+		return sandstormZ;
 	}
 	
 	@Nullable
@@ -168,10 +165,12 @@ public class KetherDataStorage extends WorldSavedData
 		this.isDeathSpawned=nbt.getBoolean("is");
 		this.isDeathFighting=nbt.getBoolean("fighting");
 		this.isDeathDefeated=nbt.getBoolean("defeated");
-		this.isSandstorm=nbt.getBoolean("sandstorm");
 		this.sandstormTime=nbt.getInteger("sandstormtime");
 		this.sandstormX=nbt.getDouble("sandstormx");
 		this.sandstormZ=nbt.getDouble("sandstormz");
+		this.fogTime=nbt.getFloat("fogTime");
+		this.lastFogTime=nbt.getFloat("lastFogTime");
+		this.shouldAddSandstormFog=nbt.getBoolean("shouldAddSandstormFog");
 
 	}
 
@@ -181,10 +180,12 @@ public class KetherDataStorage extends WorldSavedData
 		nbt.setBoolean("is", isDeathSpawned);
 		nbt.setBoolean("fighting", isDeathFighting);
 		nbt.setBoolean("defeated", isDeathDefeated);
-		nbt.setBoolean("sandstorm", isSandstorm);
 		nbt.setInteger("sandstormtime", sandstormTime);
 		nbt.setDouble("sandstormx", sandstormX);
 		nbt.setDouble("sandstormz", sandstormZ);
+		nbt.setFloat("fogTime",fogTime);
+		nbt.setFloat("lastFogTime",lastFogTime);
+		nbt.setBoolean("shouldAddSandstormFog", shouldAddSandstormFog);
 
 		return nbt;
 	}

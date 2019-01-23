@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.KCore;
 
 import net.minecraft.block.Block;
@@ -72,21 +72,22 @@ public class BlockKatharianSand extends BaseBlock
         if (!worldIn.isRemote)
         {
             this.checkFallable(worldIn, pos);
-        }
-        KetherDataStorage data = KCore.data.getDataInstance(worldIn);
-        if(data!=null){
-            if(data.getIsSandstorm()){
-                if(worldIn.getBiome(pos)==KCore.MysticDesert){
-                    if(worldIn.isAirBlock(pos.up())){
-                        if(worldIn.canBlockSeeSky(pos.up())){
-                            if(rand.nextInt(15)==0){
-                                worldIn.setBlockState(pos.up(), KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,1),2);
+            KathairisDataStorage data = KCore.data.getDataInstance(worldIn);
+            if(data!=null){
+                if(data.getSandstormTime()>-1){
+                    if(worldIn.getBiome(pos)==KCore.MysticDesert){
+                        if(worldIn.isAirBlock(pos.up())){
+                            if(worldIn.canBlockSeeSky(pos.up())){
+                                if(rand.nextInt(15)==0){
+                                    worldIn.setBlockState(pos.up(), KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,1),2);
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
     }
 
     @Override

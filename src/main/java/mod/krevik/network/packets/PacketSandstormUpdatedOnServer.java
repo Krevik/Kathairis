@@ -1,7 +1,7 @@
 package mod.krevik.network.packets;
 
 import mod.krevik.network.KathairisPacketHandler;
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.KCore;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketSandstormUpdatedOnServer implements IMessage {
 
-    private boolean isSandstorm;
     private double mX;
     private float sandstormTime;
     private double mZ;
@@ -18,8 +17,7 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
     public PacketSandstormUpdatedOnServer() {
     }
 
-    public PacketSandstormUpdatedOnServer(boolean isSandstorm1, double mx,float sandstormtime,double mz) {
-        isSandstorm=isSandstorm1;
+    public PacketSandstormUpdatedOnServer(double mx,float sandstormtime,double mz) {
         this.mX=mx;
         this.sandstormTime=sandstormtime;
         this.mZ=mz;
@@ -27,7 +25,6 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        isSandstorm=buf.readBoolean();
         mX=buf.readDouble();
         sandstormTime=buf.readFloat();
         mZ=buf.readDouble();
@@ -35,7 +32,6 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeBoolean(isSandstorm);
         buf.writeDouble(mX);
         buf.writeFloat(sandstormTime);
         buf.writeDouble(mZ);
@@ -48,13 +44,12 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(new Runnable() {
                 @Override
                 public void run() {
-                    KetherDataStorage data = KCore.data.getDataInstance(ctx.getServerHandler().player.world);
-                    data.setIsSandstorm(message.isSandstorm);
+                    KathairisDataStorage data = KCore.data.getDataInstance(ctx.getServerHandler().player.world);
                     data.setSandstormX(message.mX);
                     data.setSandstormTime((int) message.sandstormTime);
                     data.setSandstormZ(message.mZ);
-                    PacketSandstormUpdatedOnClient message1 = new PacketSandstormUpdatedOnClient(message.isSandstorm, message.mX,message.sandstormTime, message.mZ);
-                    KathairisPacketHandler.CHANNEL.sendToAll(message1);
+                    PacketSandstormUpdatedOnClient message2 = new PacketSandstormUpdatedOnClient(message.mX,message.sandstormTime,message.mZ);
+                    KathairisPacketHandler.CHANNEL.sendToAll(message2);
                 }
 
             });

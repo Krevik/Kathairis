@@ -13,7 +13,7 @@ import mod.krevik.biome.BiomeMysticPlains;
 import mod.krevik.biome.BiomeMysticSwamps;
 import mod.krevik.block.BlockKatharianGrass;
 import mod.krevik.command.SandstormCommand;
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.world.dimension.WorldProviderMystic;
 import mod.krevik.item.BaseItem;
 import mod.krevik.item.BaseWand;
@@ -791,7 +791,7 @@ public class KCore {
         new RecipeHandler().addRecipes();
     }
 
-    public static KetherDataStorage data = KetherDataStorage.initialise();
+    public static KathairisDataStorage data = KathairisDataStorage.initialise();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

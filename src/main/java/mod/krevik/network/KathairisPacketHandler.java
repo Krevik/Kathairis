@@ -18,14 +18,13 @@ public class KathairisPacketHandler {
 		CHANNEL.registerMessage(PacketCloudOisterClient.Handler.class, PacketCloudOisterClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketOnCloudBootsUseClient.Handler.class, PacketOnCloudBootsUseClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketOnCloudBootsUseServer.Handler.class, PacketOnCloudBootsUseServer.class, id++, Side.SERVER);
-		CHANNEL.registerMessage(PacketDustStormClient.Handler.class, PacketDustStormClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketSquidHoldingPlayerServer.Handler.class, PacketSquidHoldingPlayerServer.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(PacketJadeVinesServer.Handler.class, PacketJadeVinesServer.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(PacketSandstormUpdatedOnClient.Handler.class, PacketSandstormUpdatedOnClient.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketSandstormUpdatedOnServer.Handler.class, PacketSandstormUpdatedOnServer.class, id++, Side.SERVER);
-		CHANNEL.registerMessage(MoveMeDuringSandstormServer.Handler.class, MoveMeDuringSandstormServer.class, id++, Side.SERVER);
 		CHANNEL.registerMessage(OpenStrangeWandererGuiPacket.Handler.class, OpenStrangeWandererGuiPacket.class, id++, Side.CLIENT);
 		CHANNEL.registerMessage(PacketUpdateFogOnClient.Handler.class, PacketUpdateFogOnClient.class, id++, Side.CLIENT);
+		CHANNEL.registerMessage(PacketSandstormClient.Handler.class, PacketSandstormClient.class, id++, Side.CLIENT);
 
 	}
 

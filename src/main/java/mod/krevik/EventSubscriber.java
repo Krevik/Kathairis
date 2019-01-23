@@ -6,15 +6,14 @@ import mod.krevik.item.ItemMysticArmor;
 import mod.krevik.item.ItemSand;
 import mod.krevik.block.BlockChristmasGift;
 import mod.krevik.network.KathairisPacketHandler;
-import mod.krevik.network.packets.PacketDustStormClient;
+import mod.krevik.network.packets.PacketSandstormClient;
 import mod.krevik.network.packets.PacketSandstormUpdatedOnClient;
 import mod.krevik.network.packets.PacketUpdateFogOnClient;
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiDownloadTerrain;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -31,9 +30,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
@@ -49,7 +46,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -411,15 +407,18 @@ public class EventSubscriber {
 	static float fogChance=0;
 	static float lastFogCounter=0;
 	static float lastFogTime;
-	static boolean sentMessage=false;
+	static boolean sentMessageFog =false;
+
+	static boolean sentMessageSandstorm=false;
 
 	@SubscribeEvent
 	public static void onEvent1(TickEvent.WorldTickEvent event)
 	{
+		KCore.instance.updateRendererCount++;
 		//operating fog mechanism
 		if(!event.world.isRemote) {
 			if (fogTime == -1) {
-				sentMessage=false;
+				sentMessageFog =false;
 				lastFogCounter++;
 				fogChance = 100000 - lastFogCounter;
 				if (KCore.functionHelper.random.nextInt((int) fogChance) == 0) {
@@ -432,80 +431,59 @@ public class EventSubscriber {
 				if (fogTime > -1) {
 					fogTime--;
 					lastFogCounter = 0;
-					if(!sentMessage){
+					if(!sentMessageFog){
 						PacketUpdateFogOnClient message = new PacketUpdateFogOnClient(fogTime,lastFogTime);
 						KathairisPacketHandler.CHANNEL.sendToAll(message);
-						sentMessage=true;
+						sentMessageFog =true;
 					}
 				}
 			}
 		}
 		//
 
-		KCore.instance.updateRendererCount++;
-		KetherDataStorage data = KCore.data.getDataInstance(event.world);
-
-		if(!event.world.isRemote){
-			data = KCore.data.getDataInstance(event.world);
-			if(data.getIsSandstorm()) {
-				PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getIsSandstorm(), data.getSandstormX(), data.getSandstormTime(), data.getSandstormZ());
-				KathairisPacketHandler.CHANNEL.sendToAll(message);
-			}
-		}
-
-		if(data!=null&&event.world.getTotalWorldTime()>100) {
-			if (!data.getIsSandstorm()) {
-				if (event.world.rand.nextInt(500000) == 0) {
-					if (!event.world.isRemote) {
-						data = KCore.data.getDataInstance(event.world);
-						float time = 9000 + event.world.rand.nextInt(20000);
-						double X = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
-						double Z = (event.world.rand.nextDouble() - event.world.rand.nextDouble());
-						data.setSandstormTime((int) time);
-						data.setSandstormX(X);
-						data.setSandstormZ(Z);
-						data.setIsSandstorm(true);
-						PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(true, X, time, Z);
-						KathairisPacketHandler.CHANNEL.sendToAll(message);
-					}
-				}
-			}
-		}
-		if(data.getSandstormTime()>0) {
-			data.setIsSandstorm(true);
-			data.setSandstormTime(data.getSandstormTime()-1);
-			if(!data.getIsSandstorm()) {
-				data.setSandstormTime(0);
-			}
-		}else {
-			data.setSandstormTime(0);
-			data.setIsSandstorm(false);
-			data.setSandstormX(0);
-			data.setSandstormZ(0);
-		}
-
-		if(data.getIsSandstorm()) {
-			IMessage message2 = new PacketDustStormClient();
-			KathairisPacketHandler.CHANNEL.sendToAll(message2);
-		}
-		if(data.getIsSandstorm()){
-			if(!event.world.isRemote){
-				for(EntityPlayer player:event.world.getMinecraftServer().getPlayerList().getPlayers()) {
-					if(event.world.getBiome(player.getPosition())==KCore.MysticDesert) {
-						if (player.motionY == 0D) {
-							player.motionX += data.getSandstormX() * 0.0080;
-							player.motionZ += data.getSandstormZ() * 0.0080;
-							player.velocityChanged = true;
-						} else {
-							player.motionX += data.getSandstormX() * 0.0017;
-							player.motionZ += data.getSandstormZ() * 0.0017;
-							player.velocityChanged = true;
+		//opearting sandstorm mechanism
+		if(!event.world.isRemote) {
+			KathairisDataStorage data = KCore.instance.data.getDataInstance(event.world);
+				if (data != null){
+					if (data.getSandstormTime() == -1) {
+						sentMessageSandstorm = false;
+						data.setSandstormX(0);
+						data.setSandstormZ(0);
+						if (KCore.functionHelper.random.nextInt(1000000) == 0) {
+							//sandstorm started
+							data.setSandstormTime(5000 + KCore.functionHelper.random.nextInt(30000));
+							data.setSandstormX(KCore.functionHelper.random.nextFloat() - 0.5f);
+							data.setSandstormZ(KCore.functionHelper.random.nextFloat() - 0.5f);
 						}
-						player.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 100, 100));
+					} else {
+						PacketSandstormClient message1 = new PacketSandstormClient(data.getSandstormTime());
+						KathairisPacketHandler.CHANNEL.sendToAll(message1);
+						if (!sentMessageSandstorm) {
+							PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getSandstormX(), data.getSandstormTime(), data.getSandstormZ());
+							KathairisPacketHandler.CHANNEL.sendToAll(message);
+							sentMessageSandstorm = true;
+						}
+						for (EntityPlayer player : event.world.getMinecraftServer().getPlayerList().getPlayers()) {
+							if(player!=null) {
+								if (event.world.getBiome(player.getPosition()) == KCore.MysticDesert) {
+									if (player.motionY == 0D) {
+										player.motionX += data.getSandstormX() * 0.080;
+										player.motionZ += data.getSandstormZ() * 0.080;
+										player.velocityChanged = true;
+									} else {
+										player.motionX += data.getSandstormX() * 0.017;
+										player.motionZ += data.getSandstormZ() * 0.017;
+										player.velocityChanged = true;
+									}
+
+								}
+							}
+						}
+						data.setSandstormTime(data.getSandstormTime()-1);
 					}
-				}
 			}
 		}
+		//
 	}
 
 	static int month = Calendar.getInstance().get(Calendar.MONTH);
@@ -548,18 +526,7 @@ public class EventSubscriber {
 					}
 				}
 			}
-			if(event.player.world.isRemote) {
-				KetherDataStorage data = KCore.data.getDataInstance(event.player.getEntityWorld());
-				if (data != null) {
-					if (data.getIsSandstorm()) {
-						if (event.player.world.getBiome(event.player.getPosition()) == KCore.MysticDesert) {
-							if (event.player.getRNG().nextInt(350) == 0) {
-								event.player.playSound(KCore.instance.proxy.sandstorm, 1, 1);
-							}
-						}
-					}
-				}
-			}
+
 		}
 	}
 
@@ -636,8 +603,26 @@ public class EventSubscriber {
 	}
 
 	@SubscribeEvent
-	public static void handleServerTick(TickEvent.ServerTickEvent event){
-
+	public static void handlePlayerJoiningGame(PlayerEvent.PlayerLoggedInEvent event){
+		if(event.player!=null){
+			if(event.player.dimension==KCore.DIMENSION_ID){
+				KathairisDataStorage data = KCore.instance.data.getDataInstance(event.player.world);
+				if(data!=null){
+					if(event.player instanceof EntityPlayerMP){
+						EntityPlayerMP player = (EntityPlayerMP) event.player;
+						PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getSandstormX(),data.getSandstormTime(),data.getSandstormZ());
+						KathairisPacketHandler.CHANNEL.sendTo(message, player);
+					}
+				}
+				if(fogTime>0){
+					if(event.player instanceof EntityPlayerMP){
+						EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
+						PacketUpdateFogOnClient message = new PacketUpdateFogOnClient(fogTime, lastFogTime);
+						KathairisPacketHandler.CHANNEL.sendTo(message, playerMP);
+					}
+				}
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -653,16 +638,21 @@ public class EventSubscriber {
 						}
 					}
 				}
+				KathairisDataStorage data = KCore.instance.data.getDataInstance(event.player.world);
+					if (data != null){
+						if (data.getSandstormTime() > 0) {
+							if (event.player instanceof EntityPlayerMP) {
+								if (event.toDim == KCore.DIMENSION_ID) {
+									EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
+									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getSandstormX(), data.getSandstormTime(), data.getSandstormZ());
+									KathairisPacketHandler.CHANNEL.sendTo(message, playerMP);
+								}
+							}
+						}
+					}
 			}
 		}
 	}
-
-
-
-
-
-
-
 
 
 	static int ticker=0;

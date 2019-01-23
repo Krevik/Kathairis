@@ -1,6 +1,6 @@
 package mod.krevik.network.packets;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.KCore;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketSandstormUpdatedOnClient implements IMessage {
 
-    private boolean isSandstorm;
     private double mX;
     private float sandstormTime;
     private double mZ;
@@ -18,8 +17,7 @@ public class PacketSandstormUpdatedOnClient implements IMessage {
     public PacketSandstormUpdatedOnClient() {
     }
 
-    public PacketSandstormUpdatedOnClient(boolean isSandstorm1, double mx,float sandstormtime,double mz) {
-        isSandstorm=isSandstorm1;
+    public PacketSandstormUpdatedOnClient( double mx,float sandstormtime,double mz) {
         this.mX=mx;
         this.sandstormTime=sandstormtime;
         this.mZ=mz;
@@ -27,7 +25,6 @@ public class PacketSandstormUpdatedOnClient implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        isSandstorm=buf.readBoolean();
         mX=buf.readDouble();
         sandstormTime=buf.readFloat();
         mZ=buf.readDouble();
@@ -35,7 +32,6 @@ public class PacketSandstormUpdatedOnClient implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeBoolean(isSandstorm);
         buf.writeDouble(mX);
         buf.writeFloat(sandstormTime);
         buf.writeDouble(mZ);
@@ -46,11 +42,17 @@ public class PacketSandstormUpdatedOnClient implements IMessage {
         @Override
         public IMessage onMessage(PacketSandstormUpdatedOnClient message, MessageContext ctx) {
             if(ctx.side.isClient()) {
-                KetherDataStorage storage = KCore.data.getDataInstance(Minecraft.getMinecraft().player.world);
-                storage.setIsSandstorm(message.isSandstorm);
-                storage.setSandstormX(message.mX);
-                storage.setSandstormTime((int) message.sandstormTime);
-                storage.setSandstormZ(message.mZ);
+                if(Minecraft.getMinecraft().player.dimension==KCore.DIMENSION_ID) {
+                    KathairisDataStorage storage = KathairisDataStorage.getDataInstance(Minecraft.getMinecraft().player.world);
+                    storage.setSandstormX(message.mX);
+                    storage.setSandstormTime((int) message.sandstormTime);
+                    storage.setSandstormZ(message.mZ);
+                    if(message.sandstormTime>5) {
+                        storage.setShouldAddSandstormFog(true);
+                    }else{
+                        storage.setShouldAddSandstormFog(false);
+                    }
+                }
             }
             return null;
         }

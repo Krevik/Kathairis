@@ -5,13 +5,17 @@ import static mod.krevik.KCore.MODID;
 import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 
 import mod.krevik.KCore;
+import mod.krevik.biome.BiomeMysticDesert;
+import mod.krevik.client.particle.DynamicParticle;
+import mod.krevik.client.particle.ParticlesFactory;
 import mod.krevik.client.renderer.tileentity.TileEntityMythicStoneSignRenderer;
 import mod.krevik.tileentity.TileEntityMythicStoneSign;
 import mod.krevik.util.EntityAndRenderRegistry;
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -22,6 +26,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -34,12 +39,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IRegistryDelegate;
 import org.lwjgl.opengl.GL11;
-import scala.collection.parallel.ParIterableLike;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = MODID, value = CLIENT)
@@ -192,7 +195,7 @@ public final class ClientEventSubscriber {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(player!=null) {
 			if (player.dimension == KCore.DIMENSION_ID) {
-				KetherDataStorage data = KCore.data.getDataInstance(player.world);
+				KathairisDataStorage data = KCore.data.getDataInstance(player.world);
 				if(data!=null) {
 					if (data.getFogTime() > 0) {
 						float f = 1 + MathHelper.abs(data.getLastFogTime() + 1 - (data.getFogTime()) / 2) / 20000;
@@ -213,32 +216,64 @@ public final class ClientEventSubscriber {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(player!=null) {
 			if (player.dimension == KCore.DIMENSION_ID) {
-				KetherDataStorage data = KCore.data.getDataInstance(player.world);
+				KathairisDataStorage data = KCore.data.getDataInstance(player.world);
 				if(data!=null) {
 					if (data.getFogTime() > 0) {
 						float f = MathHelper.sin((float) ((data.getFogTime() * Math.PI) / (data.getLastFogTime())));
 						GL11.glFogf(GL11.GL_FOG_START, 140f - 139.5f * f);
 						GL11.glFogf(GL11.GL_FOG_END, 180f - 10f * f);
+					}else{
+						GL11.glFogf(GL11.GL_FOG_START, 140f);
+						GL11.glFogf(GL11.GL_FOG_END, 180f);
+					}
+					if(player.world.getBiome(player.getPosition()) instanceof BiomeMysticDesert) {
+							if (data.getShouldAddSandstormFog()) {
+								if(player.world.canBlockSeeSky(player.getPosition().up(6))) {
+									GL11.glFogf(GL11.GL_FOG_START, 1F);
+									GL11.glFogf(GL11.GL_FOG_END, 10F);
+								}
+							} else {
+								GL11.glFogf(GL11.GL_FOG_START, 140f);
+								GL11.glFogf(GL11.GL_FOG_END, 180f);
+							}
 					}
 				}
 			}
 		}
 	}
 
+	static KathairisDataStorage data;
+
 	//CAUTION: CLIENT ONLY
 	@SubscribeEvent
 	public static void onWorldTickEvent(TickEvent.WorldTickEvent event){
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(player!=null) {
+			data = KathairisDataStorage.getDataInstance(Minecraft.getMinecraft().player.world);
+			//fog
 			if (player.dimension == KCore.DIMENSION_ID) {
-				KetherDataStorage data = KCore.data.getDataInstance(player.world);
 				if(data!=null) {
 					if (data.getFogTime() > -1) {
 						data.setFogTime(data.getFogTime() - 1);
 					}
 				}
 			}
+			//
+
+			//sandstorm
+			if(data!=null){
+				if(data.getSandstormTime() > -1){
+					data.setSandstormTime(data.getSandstormTime()-1);
+								//TODO blind player
+				}else{
+					data.setSandstormZ(0);
+					data.setSandstormX(0);
+				}
+
+			}
 		}
 	}
+
+
 
 }
