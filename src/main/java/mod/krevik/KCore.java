@@ -115,15 +115,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = KCore.MODID, name = KCore.name, version = KCore.version, acceptedMinecraftVersions = "[1.12]")
+@Mod(modid = KCore.MODID, name = KCore.NAME, version = KCore.VERSION, acceptedMinecraftVersions = "[1.12]")
 public class KCore {
 
 	@SidedProxy(serverSide = "mod.krevik.server.ServerProxy", clientSide = "mod.krevik.client.ClientProxy")
 	public static IProxy proxy;
 	
 	public static final String MODID = "kathairis";
-	public static final String name = "Kathairis";
-	public static final String version = "1.5.1-beta1";
+	public static final String NAME = "Kathairis";
+	public static final String VERSION = "@VERSION@";
 	
 	@Mod.Instance(MODID)
 	public static KCore instance;
