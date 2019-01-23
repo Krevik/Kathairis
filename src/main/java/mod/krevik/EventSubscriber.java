@@ -709,14 +709,6 @@ public class EventSubscriber {
 
 	}*/
 
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public static void messageDimensionChange(GuiOpenEvent event){
-		if(event.getGui() instanceof GuiDownloadTerrain){
-			if(Minecraft.getMinecraft().player.dimension==KCore.DIMENSION_ID){
-				event.setGui(new GuiEnteringKathairis());
-			}
-		}
-	}
+
 
 }

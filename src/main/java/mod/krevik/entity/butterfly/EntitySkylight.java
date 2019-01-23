@@ -1,8 +1,12 @@
 package mod.krevik.entity.butterfly;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntitySkylight extends EntityMothBase
 {
@@ -13,6 +17,14 @@ public class EntitySkylight extends EntityMothBase
         this.setSize(0.15F, 0.15F);
         this.experienceValue=1;
     }
+
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+    {
+        this.setVariant(ButterflyType.COMMONMOTH.getMetadata());
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
+
     public int getMaxSpawnedInChunk()
     {
         return 3;

@@ -10,6 +10,7 @@ import mod.krevik.util.MysticLootTables;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,11 +24,11 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 public class EntityButterfly1 extends EntityBasicButterfly
 {
-    private static final DataParameter<Byte> SITTING = EntityDataManager.<Byte>createKey(EntityButterfly1.class, DataSerializers.BYTE);
     /** Coordinates of where the bat spawned. */
     private BlockPos spawnPosition;
     public BlockPos butterflyFlowerPos=null;
@@ -40,10 +41,16 @@ public class EntityButterfly1 extends EntityBasicButterfly
         this.experienceValue=1;
     }
 
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+    {
+        this.setVariant(ButterflyType.BASIC2.getMetadata());
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
+
     protected void entityInit()
     {
         super.entityInit();
-        this.dataManager.register(SITTING, Byte.valueOf((byte)0));
     }
     public int getMaxSpawnedInChunk()
     {
@@ -103,24 +110,7 @@ public class EntityButterfly1 extends EntityBasicButterfly
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
 
-    public boolean getIsBirdSitting()
-    {
-        return (((Byte)this.dataManager.get(SITTING)).byteValue() & 1) != 0;
-    }
 
-    public void setIsBirdSitting(boolean isHanging)
-    {
-        byte b0 = ((Byte)this.dataManager.get(SITTING)).byteValue();
-
-        if (isHanging)
-        {
-            this.dataManager.set(SITTING, Byte.valueOf((byte)(b0 | 1)));
-        }
-        else
-        {
-            this.dataManager.set(SITTING, Byte.valueOf((byte)(b0 & -2)));
-        }
-    }
 
     /**
      * Called to update the entity's position/logic.
@@ -291,7 +281,6 @@ public class EntityButterfly1 extends EntityBasicButterfly
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-        this.dataManager.set(SITTING, Byte.valueOf(compound.getByte("BatFlags")));
     }
 
     /**
@@ -300,7 +289,6 @@ public class EntityButterfly1 extends EntityBasicButterfly
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setByte("BatFlags", ((Byte)this.dataManager.get(SITTING)).byteValue());
     }
 
     public float getEyeHeight()

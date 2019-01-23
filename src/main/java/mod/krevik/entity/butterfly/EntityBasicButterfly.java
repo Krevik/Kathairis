@@ -3,6 +3,7 @@ package mod.krevik.entity.butterfly;
 import javax.annotation.Nullable;
 
 import mod.krevik.block.plants.BlockMysticBush;
+import mod.krevik.entity.EntityCloudySlime;
 import mod.krevik.util.MysticLootTables;
 
 import net.minecraft.block.state.IBlockState;
@@ -16,6 +17,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
@@ -25,6 +27,8 @@ import net.minecraft.world.World;
 
 public class EntityBasicButterfly extends EntityAmbientCreature
 {
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityBasicButterfly.class, DataSerializers.VARINT);
+
     private static final DataParameter<Byte> SITTING = EntityDataManager.<Byte>createKey(EntityIllukini.class, DataSerializers.BYTE);
     /** Coordinates of where the bat spawned. */
     private BlockPos spawnPosition;
@@ -39,11 +43,6 @@ public class EntityBasicButterfly extends EntityAmbientCreature
     public int getMaxSpawnedInChunk()
     {
         return 2;
-    }
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.dataManager.register(SITTING, Byte.valueOf((byte)0));
     }
 
     /**
@@ -247,22 +246,38 @@ public class EntityBasicButterfly extends EntityAmbientCreature
         EntityLiving.registerFixesMob(fixer, EntityIllukini.class);
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
+    public int getVariant()
+    {
+        return MathHelper.clamp(((Integer)this.dataManager.get(VARIANT)).intValue(), 0, ButterflyType.META_LOOKUP.length);
+    }
+
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataManager.register(VARIANT, Integer.valueOf(0));
+        this.dataManager.register(SITTING, Byte.valueOf((byte)1));
+    }
+
+
+    public void setVariant(int p_191997_1_)
+    {
+        this.dataManager.set(VARIANT, Integer.valueOf(p_191997_1_));
+    }
+
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
         this.dataManager.set(SITTING, Byte.valueOf(compound.getByte("BatFlags")));
+        this.setVariant(compound.getInteger("Variant"));
+
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
         compound.setByte("BatFlags", ((Byte)this.dataManager.get(SITTING)).byteValue());
+        compound.setInteger("Variant", this.getVariant());
+
     }
 
     public float getEyeHeight()
@@ -274,5 +289,53 @@ public class EntityBasicButterfly extends EntityAmbientCreature
     protected ResourceLocation getLootTable()
     {
         return MysticLootTables.LOOT_BUTTERFLY;
+    }
+
+    public static enum ButterflyType implements IStringSerializable
+    {
+        BASIC1(0,"basic1"),
+        BASIC2(1,"basic2"),
+        CLOUDSHIMMER(2,"cloud_shimmer"),
+        ILLUKINI(3,"illukini"),
+        RUBYSILE(4,"ruby_sile"),
+        COMMONMOTH(5,"common_moth");
+
+        private static final EntityBasicButterfly.ButterflyType[] META_LOOKUP = new EntityBasicButterfly.ButterflyType[values().length];
+        private final int meta;
+        private final String name;
+
+        private ButterflyType(int p_i46384_3_,String Name)
+        {
+            this.meta = p_i46384_3_;
+            name=Name;
+        }
+
+        public int getMetadata()
+        {
+            return this.meta;
+        }
+
+        public static EntityBasicButterfly.ButterflyType byMetadata(int meta)
+        {
+            if (meta < 0 || meta >= META_LOOKUP.length)
+            {
+                meta = 0;
+            }
+
+            return META_LOOKUP[meta];
+        }
+
+        static
+        {
+            for (EntityBasicButterfly.ButterflyType blockstone$enumtype : values())
+            {
+                META_LOOKUP[blockstone$enumtype.getMetadata()] = blockstone$enumtype;
+            }
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
     }
 }

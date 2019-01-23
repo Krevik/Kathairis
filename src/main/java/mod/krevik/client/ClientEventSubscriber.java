@@ -6,6 +6,7 @@ import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 
 import mod.krevik.KCore;
 import mod.krevik.biome.BiomeMysticDesert;
+import mod.krevik.client.gui.GuiEnteringKathairis;
 import mod.krevik.client.particle.DynamicParticle;
 import mod.krevik.client.particle.ParticlesFactory;
 import mod.krevik.client.renderer.tileentity.TileEntityMythicStoneSignRenderer;
@@ -15,6 +16,7 @@ import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -29,6 +31,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
@@ -39,6 +42,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IRegistryDelegate;
 import org.lwjgl.opengl.GL11;
 
@@ -274,6 +279,14 @@ public final class ClientEventSubscriber {
 		}
 	}
 
-
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public static void messageDimensionChange(GuiOpenEvent event){
+		if(event.getGui() instanceof GuiDownloadTerrain){
+			if(Minecraft.getMinecraft().player.dimension==KCore.DIMENSION_ID){
+				event.setGui(new GuiEnteringKathairis());
+			}
+		}
+	}
 
 }

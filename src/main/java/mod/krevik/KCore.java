@@ -3,6 +3,7 @@ package mod.krevik;
 import mod.krevik.block.*;
 import mod.krevik.block.plants.*;
 import mod.krevik.capability.CapabilityHandler;
+import mod.krevik.item.*;
 import mod.krevik.potion.DissolutionPotion;
 import mod.krevik.potion.StunPotion;
 import mod.krevik.biome.BiomeFloatingIslands;
@@ -15,23 +16,6 @@ import mod.krevik.block.BlockKatharianGrass;
 import mod.krevik.command.SandstormCommand;
 import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.world.dimension.WorldProviderMystic;
-import mod.krevik.item.BaseItem;
-import mod.krevik.item.BaseWand;
-import mod.krevik.item.ItemBasicKathairisMusicDisc;
-import mod.krevik.item.ItemButterflyCatcher;
-import mod.krevik.item.ItemGlassJar;
-import mod.krevik.item.ItemKatharianArrow;
-import mod.krevik.item.ItemMysticArmor;
-import mod.krevik.item.ItemMysticAxe;
-import mod.krevik.item.ItemMysticDoor;
-import mod.krevik.item.ItemMysticFood;
-import mod.krevik.item.ItemMysticHoe;
-import mod.krevik.item.ItemMysticPickaxe;
-import mod.krevik.item.ItemMysticSeedFood;
-import mod.krevik.item.ItemMysticShovel;
-import mod.krevik.item.ItemMysticSword;
-import mod.krevik.item.ItemMythicStoneSign;
-import mod.krevik.item.ItemRitualBlade;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.recipe.ChargerRecipes;
 import mod.krevik.recipe.RecipeHandler;
@@ -40,6 +24,7 @@ import mod.krevik.util.FunctionHelper;
 import mod.krevik.util.IProxy;
 import mod.krevik.util.RegistryHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -780,6 +765,20 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_catcher)
     public static final ItemButterflyCatcher butterfly_catcher = new ItemButterflyCatcher(Ref.butterfly_catcher);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_common_1)
+    public static final ItemButterfly butterfly_common_1= new ItemButterfly(Ref.butterfly_common_1,CreativeTabsMystic.miscellaneous, EnumRarity.COMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_common_2)
+    public static final ItemButterfly butterfly_common_2= new ItemButterfly(Ref.butterfly_common_2,CreativeTabsMystic.miscellaneous, EnumRarity.COMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_common_moth)
+    public static final ItemButterfly butterfly_common_moth= new ItemButterfly(Ref.butterfly_common_moth,CreativeTabsMystic.miscellaneous, EnumRarity.COMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_illukini)
+    public static final ItemButterfly butterfly_illukini= new ItemButterfly(Ref.butterfly_illukini,CreativeTabsMystic.miscellaneous, EnumRarity.UNCOMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_cloud_shimmer)
+    public static final ItemButterfly butterfly_cloud_shimmer= new ItemButterfly(Ref.butterfly_cloud_shimmer,CreativeTabsMystic.miscellaneous, EnumRarity.RARE);
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
@@ -1040,6 +1039,12 @@ public class KCore {
         public static final String baurble="baurble";
         public static final String butterfly_catcher="butterfly_catcher";
         public static final String snowdrop_cyprepedium="snowdrop_cyprepedium";
+
+        public static final String butterfly_common_1="butterfly_common_1";
+        public static final String butterfly_common_2="butterfly_common_2";
+        public static final String butterfly_illukini="butterfly_illukini";
+        public static final String butterfly_common_moth="butterfly_common_moth";
+        public static final String butterfly_cloud_shimmer="butterfly_cloud_shimmer";
     }
     
 
