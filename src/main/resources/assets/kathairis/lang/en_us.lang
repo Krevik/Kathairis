@@ -7,6 +7,7 @@ itemGroup.kathairis.armor=Kathairis Armor
 itemGroup.kathairis.tools=Kathairis Tools
 itemGroup.kathairis.misc=Kathairis Misc
 
+
 # Items
 item.kathairis.kathairis_gem.name=Resonating Gem
 
@@ -36,7 +37,6 @@ item.kathairis.revenum_sword.name=Revenum Spatha
 item.kathairis.revenum_hoe.name=Revenum Hoe
 
 ## Katharian
-item.kathairis.katharian_ingot.name=Katharian Ingot
 item.kathairis.katharian_helmet.name=Katharian Crown
 item.kathairis.katharian_chestplate.name=Katharian Bracers and Chestpiece
 item.kathairis.katharian_leggins.name=Katharian Greaves
@@ -46,3 +46,9 @@ item.kathairis.katharian_pickaxe.name=Katharian Pickaxe
 item.kathairis.katharian_shovel.name=Katharian Shovel
 item.kathairis.katharian_sword.name=Katharian Sword
 item.kathairis.katharian_hoe.name=Katharian Hoe
+
+
+# Blocks
+tile.kathairis.titanium_block.name=Titanium Block
+tile.kathairis.titanium_ore.name=Titanium Ore
+tile.kathairis.charger.name=Charger
