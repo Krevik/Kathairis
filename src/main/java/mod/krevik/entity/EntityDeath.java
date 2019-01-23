@@ -4,7 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.enchantment.KathairisEnchantments;
 import mod.krevik.KCore;
 import mod.krevik.network.KathairisPacketHandler;
@@ -165,11 +165,11 @@ public class EntityDeath extends EntityMob
     }
 
     int mode=0;
-    KetherDataStorage data;
+    KathairisDataStorage data;
     public void onUpdate() {
     	super.onUpdate();
 	    	if(data==null) {
-	    		data=KetherDataStorage.getDataInstance(world);
+	    		data= KathairisDataStorage.getDataInstance(world);
 	    	}
     	if(data!=null) {
     	    isFighting=data.getIsDeathFighting();

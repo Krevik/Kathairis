@@ -4,8 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.network.KathairisPacketHandler;
-import mod.krevik.network.packets.PacketSwampGasExplosionServer;
 import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
 import mod.krevik.client.particle.DynamicParticle;
@@ -16,7 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;

@@ -1,6 +1,6 @@
 package mod.krevik.network.packets;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -42,9 +42,9 @@ public class PacketDeathHandlerClient implements IMessage {
 		@Override
 		public IMessage onMessage(PacketDeathHandlerClient message, MessageContext ctx) {
 
-					KetherDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathSpawned(message.isDeathSpawned);
-					KetherDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathFighting(message.isDeathFighting);
-					KetherDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathDefeated(message.isDeathDefeated);
+					KathairisDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathSpawned(message.isDeathSpawned);
+					KathairisDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathFighting(message.isDeathFighting);
+					KathairisDataStorage.getDataInstance(Minecraft.getMinecraft().player.world).setIsDeathDefeated(message.isDeathDefeated);
 
 			return null;
 		}

@@ -2,9 +2,8 @@ package mod.krevik.network.packets;
 
 import io.netty.buffer.ByteBuf;
 import mod.krevik.KCore;
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -43,7 +42,7 @@ public class PacketUpdateFogOnClient implements IMessage {
             if(ctx.side.isClient()) {
                 if (Minecraft.getMinecraft().player != null) {
                     if (Minecraft.getMinecraft().player.dimension == KCore.DIMENSION_ID) {
-                        KetherDataStorage data = KCore.data.getDataInstance(Minecraft.getMinecraft().player.world);
+                        KathairisDataStorage data = KCore.data.getDataInstance(Minecraft.getMinecraft().player.world);
                         if (data != null) {
                             data.setFogTime(message.fogTime);
                             data.setLastFogTime(message.lastFogTime);

@@ -21,7 +21,7 @@ import net.minecraftforge.client.IRenderHandler;
 
 public class RenderWeatherRenderer extends IRenderHandler {
 
-	/*KetherDataStorage data = KetherDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID));
+	/*KathairisDataStorage data = KathairisDataStorage.getDataInstance(DimensionManager.getWorld(KCore.DIMENSION_ID));
     private static final ResourceLocation RAIN_TEXTURES = new ResourceLocation("textures/environment/rain.png");
     private static final ResourceLocation SNOW_TEXTURES = new ResourceLocation("textures/environment/snow.png");
     private static final ResourceLocation SANDSTORM_TEXTURES = cproxy.dust_particle;
