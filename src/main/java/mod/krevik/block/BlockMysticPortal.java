@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import mod.krevik.ModConfig;
 import mod.krevik.world.dimension.TileEntityKether;
 import mod.krevik.entity.EntityStrangeWanderer;
 import mod.krevik.KCore;
@@ -47,6 +48,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -115,9 +117,11 @@ public class BlockMysticPortal extends BlockPortal
             	}
             }
         }
-        	for(int x=0;x<1+rand.nextInt(4);x++) {
-        		updateBlocksAroundPortal(worldIn, pos, state, rand);
-        	}
+        if(ModConfig.shouldBlocksSpreadAroundPortal) {
+            for (int x = 0; x < 1 + rand.nextInt(4); x++) {
+                updateBlocksAroundPortal(worldIn, pos, state, rand);
+            }
+        }
 
     }
     
