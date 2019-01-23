@@ -1,0 +1,15 @@
+[
+{
+  "modid": "kathairis",
+  "name": "Kathairis",
+  "description": "Kathairis is a whole new dimension with a rich back-story, many new mobs, and so much more!",
+  "version": "${version}",
+  "url": "https://minecraft.curseforge.com/projects/beta-kathairis",
+  "updateUrl": "",
+  "authorList": ["Krevik"],
+  "credits": "FreeSound.org for their great audio samples; MCVinnyQ and HKDragonBoy for textures and Models; it3b for their amazing musical work; RavenOfTheWastes for his writing and community management; ShadowWalkerEraZ and our Beta testing team for helping ensure the mod is functional and (mostly) bug-free; Special thanks to past members of the development team: Feranogame, Oktet, and Mystical Spire;",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
