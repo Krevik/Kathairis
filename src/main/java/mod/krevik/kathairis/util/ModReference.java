@@ -1,6 +1,7 @@
 package mod.krevik.kathairis.util;
 
 import mod.krevik.kathairis.Kathairis;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Holds mod-wide constant values
@@ -58,5 +59,7 @@ public final class ModReference {
 	public static final String CERTIFICATE_FINGERPRINT = "@FINGERPRINT@";
 
 	public static final int KATHAIRIS_DIMENSION_ID = 123;
+
+	public static final ResourceLocation HAS_ENTERED_KATHAIRIS = new ResourceLocation(MOD_ID, "has_entered_kathairis");
 
 }

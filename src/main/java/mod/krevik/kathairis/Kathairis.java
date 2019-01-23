@@ -1,5 +1,6 @@
 package mod.krevik.kathairis;
 
+import mod.krevik.kathairis.capability.hasenteredkathairis.CapabilityHasEnteredKathairis;
 import mod.krevik.kathairis.util.IProxy;
 import mod.krevik.kathairis.util.ModGuiHandler;
 import net.minecraftforge.common.ForgeModContainer;
@@ -61,6 +62,8 @@ public final class Kathairis {
 		GameRegistry.registerWorldGenerator(new ModWorldGenerator(), 3);
 		new ModNetworkManager();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
+
+		CapabilityHasEnteredKathairis.register();
 
 		// register Capabilities if you have any
 
