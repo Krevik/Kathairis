@@ -1,0 +1,48 @@
+# Creative Tabs
+itemGroup.kathairis.blocks=Kathairis Blocks
+itemGroup.kathairis.food=Kathairis Food
+itemGroup.kathairis.plants=Kathairis Plants
+itemGroup.kathairis.weapons=Kathairis Weapons
+itemGroup.kathairis.armor=Kathairis Armor
+itemGroup.kathairis.tools=Kathairis Tools
+itemGroup.kathairis.misc=Kathairis Misc
+
+# Items
+item.kathairis.kathairis_gem.name=Resonating Gem
+
+## Titanium
+item.kathairis.titanium_rod.name=Titanium Rod
+item.kathairis.titanium_ingot.name=Titanium Ingot
+item.kathairis.titanium_helmet.name=Titanium Helmet
+item.kathairis.titanium_chestplate.name=Titanium Chestplate
+item.kathairis.titanium_leggins.name=Titanium Leggings
+item.kathairis.titanium_boots.name=Titanium Boots
+item.kathairis.titanium_axe.name=Titanium Axe
+item.kathairis.titanium_pickaxe.name=Titanium Pickaxe
+item.kathairis.titanium_shovel.name=Titanium Shovel
+item.kathairis.titanium_sword.name=Titanium Sword
+item.kathairis.titanium_hoe.name=Titanium Hoe
+
+## Revenum
+item.kathairis.revenum_ingot.name=Revenum Ingot
+item.kathairis.revenum_helmet.name=Revenum Headpiece
+item.kathairis.revenum_chestplate.name=Revenum Mantle
+item.kathairis.revenum_leggins.name=Revenum Greaves
+item.kathairis.revenum_boots.name=Revenum Sabatons
+item.kathairis.revenum_axe.name=Revenum Axe
+item.kathairis.revenum_pickaxe.name=Revenum Pickaxe
+item.kathairis.revenum_shovel.name=Revenum Shovel
+item.kathairis.revenum_sword.name=Revenum Spatha
+item.kathairis.revenum_hoe.name=Revenum Hoe
+
+## Katharian
+item.kathairis.katharian_ingot.name=Katharian Ingot
+item.kathairis.katharian_helmet.name=Katharian Crown
+item.kathairis.katharian_chestplate.name=Katharian Bracers and Chestpiece
+item.kathairis.katharian_leggins.name=Katharian Greaves
+item.kathairis.katharian_boots.name=Katharian Sabaton
+item.kathairis.katharian_axe.name=Katharian Axe
+item.kathairis.katharian_pickaxe.name=Katharian Pickaxe
+item.kathairis.katharian_shovel.name=Katharian Shovel
+item.kathairis.katharian_sword.name=Katharian Sword
+item.kathairis.katharian_hoe.name=Katharian Hoe
