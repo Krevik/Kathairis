@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "kathairis:blocks/easteregg"
+        "layer0": "kathairis:blocks/easter_egg_1"
     }
 }
