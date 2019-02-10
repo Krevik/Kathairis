@@ -8,6 +8,7 @@ import mod.krevik.KCore;
 import mod.krevik.client.particle.DynamicParticle;
 
 import mod.krevik.client.particle.ParticlesFactory;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -38,11 +39,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMysticLeaf extends BlockLeaves
 {
-
     public BlockMysticLeaf(String Name, Material material, CreativeTabs tab)
     {
     	super();
-        this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(false)).withProperty(DECAYABLE, Boolean.valueOf(true)));
         this.setCreativeTab(tab);
         this.setHardness(0.5F);
         this.setResistance(0.1F);

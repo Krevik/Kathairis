@@ -104,6 +104,7 @@ public class BlockMysticMiniGrass extends BlockMysticBush
     }
 
     
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
     {

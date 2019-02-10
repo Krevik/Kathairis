@@ -42,6 +42,7 @@ public class ItemMysticShovel extends MysticTool
         super(Name,tab,1.5F, -3.0F, material, EFFECTIVE_ON);
     }
     
+    @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
     {
     	if(!worldIn.isRemote) {
@@ -59,6 +60,7 @@ public class ItemMysticShovel extends MysticTool
     /**
      * Check whether this Item can harvest the given Block
      */
+    @Override
     public boolean canHarvestBlock(IBlockState blockIn)
     {
         Block block = blockIn.getBlock();
@@ -72,6 +74,7 @@ public class ItemMysticShovel extends MysticTool
             return block == Blocks.SNOW;
         }
     }
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
@@ -81,6 +84,7 @@ public class ItemMysticShovel extends MysticTool
     /**
      * Called when a Block is right-clicked with this Item
      */
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         ItemStack itemstack = player.getHeldItem(hand);

@@ -47,6 +47,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         }
     }
 
+    @Override
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
     {
         return replacable;
@@ -58,6 +59,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         return this;
     }
     
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         IBlockState soil = worldIn.getBlockState(pos.down());
@@ -90,6 +92,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         return can;
     }
 
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
@@ -97,10 +100,12 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
     }
 
     
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         this.checkAndDropBlock(worldIn, pos, state);
     }
+
 
     protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
     {
@@ -111,6 +116,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         }
     }
 
+
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
         if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
@@ -120,6 +126,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         }
         return this.canSustainBush(worldIn.getBlockState(pos.down()));
     }
+
 
     public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
     {
@@ -143,9 +150,11 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         return can;
     }
     
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) { }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     		return BUSH_AABB;
@@ -157,11 +166,13 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
             return NULL_AABB;
     }
 
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -187,6 +198,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
     {
         return BlockFaceShape.UNDEFINED;

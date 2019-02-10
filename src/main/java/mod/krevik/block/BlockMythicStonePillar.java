@@ -62,12 +62,14 @@ public class BlockMythicStonePillar extends BaseBlock
     /**
      * Checks if this block can be placed exactly at the given position.
      */
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
     	return true;
     }
     
-	   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	   @Override
+       public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	    {
 		   operateStatements(state,worldIn,pos,blockIn,fromPos);
 	    }

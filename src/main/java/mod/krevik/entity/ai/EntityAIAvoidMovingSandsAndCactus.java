@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityAIAvoidMovingSands extends EntityAIBase
+public class EntityAIAvoidMovingSandsAndCactus extends EntityAIBase
 {
     private final EntityCreature creature;
     private double shelterX;
@@ -22,7 +22,7 @@ public class EntityAIAvoidMovingSands extends EntityAIBase
     private final double movementSpeed;
     private final World world;
 
-    public EntityAIAvoidMovingSands(EntityCreature theCreatureIn, double movementSpeedIn)
+    public EntityAIAvoidMovingSandsAndCactus(EntityCreature theCreatureIn, double movementSpeedIn)
     {
         this.creature = theCreatureIn;
         this.movementSpeed = movementSpeedIn;
@@ -46,7 +46,7 @@ public class EntityAIAvoidMovingSands extends EntityAIBase
     		}
     	}
     	for(int c=0;c<poses.size();c++) {
-    		if(this.creature.world.getBlockState(poses.get(c))==KCore.MovingSand.getDefaultState()) {
+    		if(this.creature.world.getBlockState(poses.get(c))==KCore.MovingSand.getDefaultState()||this.creature.world.getBlockState(poses.get(c))==KCore.Succulent.getDefaultState()) {
     			areMovingSandsNear=true;
     		}
     	}
@@ -96,7 +96,7 @@ public class EntityAIAvoidMovingSands extends EntityAIBase
         {
             BlockPos blockpos1 = blockpos.add(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
 
-            if (this.creature.world.getBlockState(new BlockPos(blockpos1.getX(),this.creature.world.getHeight(blockpos1).getY()-1,blockpos1.getZ()))!=KCore.MovingSand.getDefaultState() && this.creature.getBlockPathWeight(blockpos1) < 0.0F)
+            if (this.creature.world.getBlockState(new BlockPos(blockpos1.getX(),this.creature.world.getHeight(blockpos1).getY()+1,blockpos1.getZ()))!=KCore.Succulent.getDefaultState()&&this.creature.world.getBlockState(new BlockPos(blockpos1.getX(),this.creature.world.getHeight(blockpos1).getY()-1,blockpos1.getZ()))!=KCore.MovingSand.getDefaultState() && this.creature.getBlockPathWeight(blockpos1) < 0.0F)
             {
                 return new Vec3d((double)blockpos1.getX(), (double)blockpos1.getY(), (double)blockpos1.getZ());
             }

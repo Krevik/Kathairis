@@ -3,7 +3,7 @@ package mod.krevik.entity;
 import javax.annotation.Nullable;
 
 import mod.krevik.entity.ai.EntityAIAttackMeleeBison;
-import mod.krevik.entity.ai.EntityAIAvoidMovingSands;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
 
@@ -48,7 +48,7 @@ public class EntityBison extends EntityAnimal
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));

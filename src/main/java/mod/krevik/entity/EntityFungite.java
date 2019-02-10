@@ -2,7 +2,7 @@ package mod.krevik.entity;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.entity.ai.EntityAIAvoidMovingSands;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.util.MysticLootTables;
 
 import net.minecraft.entity.*;
@@ -40,7 +40,7 @@ public class EntityFungite extends EntityMob
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
         this.applyEntityAI();
     }
 

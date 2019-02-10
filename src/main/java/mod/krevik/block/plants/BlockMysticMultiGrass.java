@@ -46,6 +46,7 @@ public class BlockMysticMultiGrass extends BlockMysticBush implements IGrowable
     /**
      * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
      */
+    @Override
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
     {
         return replacable;
@@ -101,6 +102,7 @@ public class BlockMysticMultiGrass extends BlockMysticBush implements IGrowable
         return Block.EnumOffsetType.XYZ;
     }
 
+    @Override
     protected boolean canSustainBush(IBlockState state)
     {
         boolean can=false;

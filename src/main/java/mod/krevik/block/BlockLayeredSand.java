@@ -76,6 +76,7 @@ public class BlockLayeredSand extends BaseBlock {
         return false;
     }
 
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos.down());
@@ -92,6 +93,7 @@ public class BlockLayeredSand extends BaseBlock {
         }
     }
 
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         this.checkAndDropBlock(worldIn, pos, state);
@@ -121,6 +123,7 @@ public class BlockLayeredSand extends BaseBlock {
         return Item.getItemFromBlock(KCore.Layered_Sand.getDefaultState().getBlock());
     }
 
+    @Override
     public int quantityDropped(Random random)
     {
         return 1;
@@ -246,6 +249,7 @@ public class BlockLayeredSand extends BaseBlock {
     }
 
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {

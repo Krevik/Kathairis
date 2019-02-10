@@ -31,7 +31,7 @@ public abstract class KetherBiome extends Biome
     public Color baseGrassColor;
     private static final int TitaniumPerChunk = 9;
     private static final int RevenumPerChunk = 15;
-    private static StructureLoader structureLoader = new StructureLoader();
+    private StructureLoader structureLoader = new StructureLoader();
 
     public KetherBiome(Biome.BiomeProperties properties)
     {
@@ -55,7 +55,7 @@ public abstract class KetherBiome extends Biome
     }
 
 
-    public static StructureLoader getStructureLoader(){
+    public StructureLoader getStructureLoader(){
         return structureLoader;
     }
 

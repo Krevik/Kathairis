@@ -104,8 +104,8 @@ item.butterfly_catcher.name=Butterfly Catcher
 item.butterfly_common_1.name=Common Butterfly
 item.butterfly_common_2.name=Common Butterfly
 item.butterfly_illukini.name=Illukini
-item.butterfly_common_moth=Common Moth
-item.butterfly_cloud_shimmer=Nimbus
+item.butterfly_common_moth.name=Common Moth
+item.butterfly_cloud_shimmer.name=Nimbus
 
 
 
@@ -239,6 +239,7 @@ tile.bison_stars.name=Bison Stars
 tile.christmas_gift.name=Christmas Gift
 tile.baurble.name=Baurble
 tile.snowdrop_cyprepedium.name=Snowdrop Cyprepedium
+tile.glowvines.name=Glowing Vines
 
 entity.PoisonousScorpion.name=Scorpion
 entity.BigTurtle.name=Tortoise

@@ -83,6 +83,7 @@ public class BlockMysticDeadGrass extends BlockMysticBush
         return can;
     }
 
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
             if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
@@ -93,6 +94,7 @@ public class BlockMysticDeadGrass extends BlockMysticBush
             return this.canSustainBush(worldIn.getBlockState(pos.down()));
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)

@@ -43,6 +43,7 @@ public class BlockEnergyShard extends BaseBlock
     	return AABB_ENERGYSHARD;
     }
     
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {   
     	if(!worldIn.isRemote) {
@@ -64,6 +65,7 @@ public class BlockEnergyShard extends BaseBlock
     /**
      * Checks if this block can be placed exactly at the given position.
      */
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
     	if(worldIn.getBlockState(pos.down())==KCore.VioletCrystal.getDefaultState()||worldIn.getBlockState(pos.down())==KCore.YellowCrystal.getDefaultState()||worldIn.getBlockState(pos.down())==KCore.BlueCrystal.getDefaultState()||

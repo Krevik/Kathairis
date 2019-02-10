@@ -45,6 +45,7 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
     	}
     }
 
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
         return super.canBlockStay(worldIn, pos, state);
@@ -53,6 +54,7 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
     /**
      * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
      */
+    @Override
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
     {
         return replacable;
@@ -87,6 +89,7 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
         }
     }
 
+    @Override
     protected boolean canSustainBush(IBlockState state)
     {
         boolean can=false;

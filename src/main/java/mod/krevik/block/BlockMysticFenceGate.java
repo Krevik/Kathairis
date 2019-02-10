@@ -95,6 +95,7 @@ public class BlockMysticFenceGate extends BlockMysticHorizontal
     /**
      * Checks if this block can be placed exactly at the given position.
      */
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return worldIn.getBlockState(pos.down()).getMaterial().isSolid() ? super.canPlaceBlockAt(worldIn, pos) : false;
@@ -176,6 +177,7 @@ public class BlockMysticFenceGate extends BlockMysticHorizontal
      * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
      * block, etc.
      */
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         if (!worldIn.isRemote)
@@ -194,6 +196,7 @@ public class BlockMysticFenceGate extends BlockMysticHorizontal
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {

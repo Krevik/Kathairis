@@ -97,11 +97,13 @@ public class BlockGooseberry extends BlockMysticBush implements net.minecraftfor
     {
     	return false;
     }
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
     	return true;
     }
+    @Override
     public int quantityDropped(Random random)
     {
         return 0;
@@ -111,6 +113,7 @@ public class BlockGooseberry extends BlockMysticBush implements net.minecraftfor
     {
         return NonNullList.withSize(1, new ItemStack(this, 1, 0));
     }
+    @Override
     protected boolean canSilkHarvest()
     {
     	return true;

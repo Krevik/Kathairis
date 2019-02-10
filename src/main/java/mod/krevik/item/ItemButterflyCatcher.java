@@ -15,6 +15,7 @@ public class ItemButterflyCatcher extends BaseItem {
         setMaxStackSize(1);
     }
 
+    @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {
         if(entity instanceof EntityBasicButterfly){

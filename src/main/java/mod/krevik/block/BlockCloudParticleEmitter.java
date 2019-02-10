@@ -39,6 +39,7 @@ public class BlockCloudParticleEmitter extends BlockMysticCloud{
     {
         return null;
     }
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     { 
     	
@@ -69,6 +70,7 @@ public class BlockCloudParticleEmitter extends BlockMysticCloud{
     	super.breakBlock(worldIn, pos, state);
     }
     
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {

@@ -129,6 +129,7 @@ public class ItemMysticArmor extends ItemArmor
 
     }
     
+    @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
         if(entityIn instanceof  EntityPlayer) {
@@ -139,6 +140,7 @@ public class ItemMysticArmor extends ItemArmor
         }
     }
     
+    @Override
     public EnumRarity getRarity(ItemStack stack)
     {
    	 if(this==KCore.CloudBoots){
@@ -184,6 +186,7 @@ public class ItemMysticArmor extends ItemArmor
     /**
      * Gets the equipment slot of this armor piece (formerly known as armor type)
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public EntityEquipmentSlot getEquipmentSlot()
     {
@@ -193,6 +196,7 @@ public class ItemMysticArmor extends ItemArmor
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
+    @Override
     public int getItemEnchantability()
     {
         return this.material.getEnchantability();
@@ -201,6 +205,7 @@ public class ItemMysticArmor extends ItemArmor
     /**
      * Return the armor material for this armor item.
      */
+    @Override
     public ItemArmor.ArmorMaterial getArmorMaterial()
     {
         return this.material;
@@ -210,6 +215,7 @@ public class ItemMysticArmor extends ItemArmor
     /**
      * Return whether this item is repairable in an anvil.
      */
+    @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
         ItemStack mat = this.material.getRepairItemStack();
@@ -220,6 +226,7 @@ public class ItemMysticArmor extends ItemArmor
     /**
      * Called when the equipped item is right clicked.
      */
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -241,6 +248,7 @@ public class ItemMysticArmor extends ItemArmor
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
+    @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
@@ -262,6 +270,7 @@ public class ItemMysticArmor extends ItemArmor
      * @param stack The stack
      * @return true/false
      */
+    @Override
     public boolean hasOverlay(ItemStack stack)
     {
         return this.material == ItemArmor.ArmorMaterial.LEATHER || getColor(stack) != 0x00FFFFFF;

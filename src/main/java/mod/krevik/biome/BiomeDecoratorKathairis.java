@@ -22,6 +22,7 @@ public class BiomeDecoratorKathairis extends BiomeDecorator {
     public static final WorldGenCrystalChamber CrystalChamber = new WorldGenCrystalChamber();
     public static final WorldGenCloudTemple CloudTemple = new WorldGenCloudTemple();
     public static final WorldGenFloatingIslands FloatingIsland = new WorldGenFloatingIslands(1);
+    @Override
     public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
     {
         if (this.decorating)
@@ -37,6 +38,7 @@ public class BiomeDecoratorKathairis extends BiomeDecorator {
         }
     }
 
+    @Override
     protected void genDecorations(Biome biomeIn, World worldIn, Random random)
     {
         net.minecraft.util.math.ChunkPos forgeChunkPos = new net.minecraft.util.math.ChunkPos(chunkPos); // actual ChunkPos instead of BlockPos, used for events

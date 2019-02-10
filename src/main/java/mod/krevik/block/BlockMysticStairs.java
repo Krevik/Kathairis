@@ -300,6 +300,7 @@ public class BlockMysticStairs extends BaseBlock
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
@@ -378,6 +379,7 @@ public class BlockMysticStairs extends BaseBlock
     /**
      * Checks if this block can be placed exactly at the given position.
      */
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return this.modelBlock.canPlaceBlockAt(worldIn, pos);
@@ -403,6 +405,7 @@ public class BlockMysticStairs extends BaseBlock
     /**
      * Called when the given entity walks on this Block
      */
+    @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
         this.modelBlock.onEntityWalk(worldIn, pos, entityIn);

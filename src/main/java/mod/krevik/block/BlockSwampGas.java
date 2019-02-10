@@ -46,6 +46,7 @@ public class BlockSwampGas extends BlockMysticCloud{
     {
         return null;
     }
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     { 
     	if(entityIn instanceof EntityPlayerMP) {
@@ -54,7 +55,8 @@ public class BlockSwampGas extends BlockMysticCloud{
     	}
     }
 
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    @Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         if(isFireNearby(worldIn,pos)) {
@@ -97,7 +99,8 @@ public class BlockSwampGas extends BlockMysticCloud{
     }
     
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
     	for(int x=0;x<=1+rand.nextInt(8);x++) {

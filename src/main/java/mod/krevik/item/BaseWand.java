@@ -37,7 +37,8 @@ public class BaseWand extends BaseItem{
 	}
 	private EntityLivingBase lastKilledEntity;
 	
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+    @Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
     	if(stack.getItem()==KCore.DeathWand) {
 	    		if(!(target instanceof EntityPlayer)&&!(target instanceof EntityPlayerMP)&&!(target instanceof EntityWither)&&!(target instanceof EntityDragon)) {
@@ -53,7 +54,8 @@ public class BaseWand extends BaseItem{
 	
 	
 	
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn)
+    @Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn)
     {
         ItemStack itemstack = player.getHeldItem(handIn);
 
@@ -86,7 +88,8 @@ public class BaseWand extends BaseItem{
 
 	}
       	
-        public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+        @Override
+		public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
         {
             ItemStack itemstack = player.getHeldItem(hand);
 
@@ -133,25 +136,29 @@ public class BaseWand extends BaseItem{
             return EnumActionResult.PASS;
         }
     	
-	 public EnumRarity getRarity(ItemStack stack)
+	 @Override
+     public EnumRarity getRarity(ItemStack stack)
 	 {
 		 if(this==KCore.DeathWand) {
 			 return EnumRarity.EPIC;
 		 }
 			 return EnumRarity.UNCOMMON;
 	 }
+	 @Override
 	 @SideOnly(Side.CLIENT)
 	 public boolean hasEffect(ItemStack stack)
 	 {
 		 return true;
 	 }
 	 
-	    @SideOnly(Side.CLIENT)
+	    @Override
+		@SideOnly(Side.CLIENT)
 	    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	    {
 	    	tooltip.add("Durability: " + (this.getMaxDamage()-this.getDamage(stack))+ " /1000");
 	    }
-	    public boolean isEnchantable(ItemStack stack)
+	    @Override
+		public boolean isEnchantable(ItemStack stack)
 	    {
 	        return false;
 	    }

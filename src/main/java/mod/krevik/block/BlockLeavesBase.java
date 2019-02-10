@@ -184,6 +184,7 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
         worldIn.setBlockToAir(pos);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
@@ -199,6 +200,7 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random random)
     {
         return random.nextInt(20) == 0 ? 1 : 0;
@@ -293,6 +295,7 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
     }
 
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {

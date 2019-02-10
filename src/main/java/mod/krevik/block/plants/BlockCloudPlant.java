@@ -15,6 +15,7 @@ public class BlockCloudPlant extends BlockMysticBush {
         addBlocksThatPlantCanStayOn(KCore.YellowCloud,KCore.BlueCloud);
     }
 
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
             state = worldIn.getBlockState(pos.down());

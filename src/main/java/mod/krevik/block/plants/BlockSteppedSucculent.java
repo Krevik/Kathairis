@@ -31,6 +31,7 @@ public class BlockSteppedSucculent extends BlockMysticBush {
     /**
      * Return true if the block can sustain a Bush
      */
+    @Override
     protected boolean canSustainBush(IBlockState state)
     {
         boolean can=false;
@@ -50,6 +51,7 @@ public class BlockSteppedSucculent extends BlockMysticBush {
      * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
      * block, etc.
      */
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
@@ -84,6 +86,7 @@ public class BlockSteppedSucculent extends BlockMysticBush {
         }
     }
 
+    @Override
     protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         if (!this.canBlockStay(worldIn, pos, state))
@@ -93,6 +96,7 @@ public class BlockSteppedSucculent extends BlockMysticBush {
         }
     }
 
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
             if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
@@ -114,6 +118,7 @@ public class BlockSteppedSucculent extends BlockMysticBush {
         return can;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) { }
 

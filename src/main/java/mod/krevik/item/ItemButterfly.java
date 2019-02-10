@@ -22,12 +22,14 @@ public class ItemButterfly extends BaseItem {
     }
 
 
+    @Override
     public EnumRarity getRarity(ItemStack stack)
     {
         return rarity;
     }
 
 
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         if(!worldIn.isRemote){

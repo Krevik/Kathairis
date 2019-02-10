@@ -1,6 +1,6 @@
 package mod.krevik.entity;
 
-import mod.krevik.entity.ai.EntityAIAvoidMovingSands;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
 
@@ -47,7 +47,7 @@ public class EntityBigTurtle extends EntityAnimal
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
     }
     
     public int getMaxSpawnedInChunk()

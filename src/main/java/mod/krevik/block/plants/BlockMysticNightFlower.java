@@ -29,8 +29,10 @@ public class BlockMysticNightFlower extends BlockMysticBush {
         this.checkAndDropBlock(worldIn, pos, state);
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {}
 

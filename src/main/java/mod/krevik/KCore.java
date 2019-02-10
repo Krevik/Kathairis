@@ -473,7 +473,11 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.snowdrop_cyprepedium)
     public static final BlockSnowdropCyprepedium snowdrop_Cyprepedium = new BlockSnowdropCyprepedium(Ref.snowdrop_cyprepedium);
 
-   // @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Butterfly_Analysing_Table)
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.glowvines)
+    public static final BlockGlowVines glowvines = (BlockGlowVines) new BlockGlowVines(Ref.glowvines,true).setLightLevel(0.6f);
+
+
+    // @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Butterfly_Analysing_Table)
     //public static final BlockButterflyAnalysingTable Butterfly_Analysing_Table = new BlockButterflyAnalysingTable(Ref.Butterfly_Analysing_Table);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "MysticForest")
@@ -1045,6 +1049,8 @@ public class KCore {
         public static final String butterfly_illukini="butterfly_illukini";
         public static final String butterfly_common_moth="butterfly_common_moth";
         public static final String butterfly_cloud_shimmer="butterfly_cloud_shimmer";
+
+        public static final String glowvines="glowvines";
     }
     
 

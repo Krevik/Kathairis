@@ -1,19 +1,22 @@
 package mod.krevik.block;
-/*
-import java.util.Random;
+
+/*import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import CreativeTabsMystic;
 import KCore;
 
+import mod.krevik.KCore;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -34,7 +37,7 @@ public class BlockButterflyAnalysingTable extends BlockContainer
     public BlockButterflyAnalysingTable(String Name)
     {
         super(Material.ROCK);
-        lightOpacity = 255; // cast a light shadow
+        lightOpacity = 255;
         setTickRandomly(false);
         useNeighborBrightness = false;
     
@@ -115,7 +118,7 @@ public class BlockButterflyAnalysingTable extends BlockContainer
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof TileEntityButterflyAnalysingTable)
         {
-            InventoryHelper.dropInventoryItems(worldIn, pos, 
+            InventoryHelper.dropInventoryItems(worldIn, pos,
                     (TileEntityButterflyAnalysingTable)tileentity);
 	                worldIn.updateComparatorOutputLevel(pos, this);
 
@@ -148,6 +151,4 @@ public class BlockButterflyAnalysingTable extends BlockContainer
     {
         return false;
     }
-
-}    
-*/
+}*/

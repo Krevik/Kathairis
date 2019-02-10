@@ -73,7 +73,8 @@ public class BlockLuminescentGnarl extends BaseBlock {
 		   }
 	    }
 	   
-	   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	   @Override
+       public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	    {
 	        if (!this.canBlockStay(worldIn, pos, state))
 	        {
@@ -173,6 +174,7 @@ public class BlockLuminescentGnarl extends BaseBlock {
     {
         return new BlockStateContainer(this, new IProperty[] {FACING});
     }
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {

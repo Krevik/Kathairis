@@ -1,5 +1,6 @@
 package mod.krevik.block;
 
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -14,6 +15,7 @@ import net.minecraft.world.World;
 
 public abstract class BlockBaseLog extends BlockRotatedPillarBase
 {
+
     public static final PropertyEnum<BlockBaseLog.EnumAxis> LOG_AXIS = PropertyEnum.<BlockBaseLog.EnumAxis>create("axis", BlockBaseLog.EnumAxis.class);
 
     public BlockBaseLog(String Name, Material material, CreativeTabs tab, float hardness1, float resistance, SoundType soundType)
@@ -24,6 +26,7 @@ public abstract class BlockBaseLog extends BlockRotatedPillarBase
     /**
      * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
      */
+    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         int i = 4;
@@ -47,6 +50,7 @@ public abstract class BlockBaseLog extends BlockRotatedPillarBase
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
+    @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getStateFromMeta(meta).withProperty(LOG_AXIS, BlockBaseLog.EnumAxis.fromFacingAxis(facing.getAxis()));
@@ -56,6 +60,7 @@ public abstract class BlockBaseLog extends BlockRotatedPillarBase
      * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
      * blockstate.
      */
+    @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
         switch (rot)

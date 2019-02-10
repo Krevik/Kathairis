@@ -60,6 +60,7 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
     /**
      * Called when a Block is right-clicked with this Item
      */
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);
@@ -86,12 +87,14 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
     /**
      * allows items to add custom lines of information to the mouseover description
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
         tooltip.add(Title);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public String getRecordNameLocal()
     {
@@ -101,6 +104,7 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
     /**
      * Return an item rarity from EnumRarity
      */
+    @Override
     public EnumRarity getRarity(ItemStack stack)
     {
         return EnumRarity.RARE;
@@ -113,6 +117,7 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
         return RECORDS.get(soundIn);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public SoundEvent getSound()
     {

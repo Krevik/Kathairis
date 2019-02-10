@@ -58,7 +58,8 @@ public class ItemMysticPickaxe extends MysticTool
     /**
      * Check whether this Item can harvest the given Block
      */
-    public boolean canHarvestBlock(IBlockState blockIn)
+    @Override
+	public boolean canHarvestBlock(IBlockState blockIn)
     {
         Block block = blockIn.getBlock();
 
@@ -125,6 +126,7 @@ public class ItemMysticPickaxe extends MysticTool
     }
 
 
+	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
 	{
 		boolean done=false;
@@ -381,7 +383,8 @@ public class ItemMysticPickaxe extends MysticTool
 		}
 	}
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    @Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
     	ItemStack stack = playerIn.getHeldItem(handIn);
     	if(stack.getItem().equals(KCore.CrystalPickaxe)){
@@ -403,6 +406,7 @@ public class ItemMysticPickaxe extends MysticTool
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }
 
+	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		if(stack.getItem().equals(KCore.CrystalPickaxe)) {
@@ -416,7 +420,8 @@ public class ItemMysticPickaxe extends MysticTool
 		}
 	}
 
-    public float getDestroySpeed(ItemStack stack, IBlockState state)
+    @Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
 		if(stack.getItem().equals(KCore.CrystalPickaxe)&&mode==0){
 			if(player!=null){
@@ -515,7 +520,8 @@ public class ItemMysticPickaxe extends MysticTool
         return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getDestroySpeed(stack, state) : this.efficiencyOnProperMaterial;
     }
     
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
     	tooltip.add("Durability: " + (this.getMaxDamage()-this.getDamage(stack)));

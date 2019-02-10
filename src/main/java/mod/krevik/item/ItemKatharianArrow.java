@@ -29,6 +29,7 @@ public class ItemKatharianArrow extends ItemArrow {
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
+    @Override
     public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter)
     {
         EntityKatharianArrow entitytippedarrow = new EntityKatharianArrow(worldIn, shooter);
@@ -36,6 +37,7 @@ public class ItemKatharianArrow extends ItemArrow {
         return entitytippedarrow;
     }
 
+    @Override
     public boolean isInfinite(ItemStack stack, ItemStack bow, net.minecraft.entity.player.EntityPlayer player)
     {
         int enchant = net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.INFINITY, bow);

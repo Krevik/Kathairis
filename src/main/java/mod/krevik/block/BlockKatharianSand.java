@@ -41,6 +41,7 @@ public class BlockKatharianSand extends BaseBlock
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
@@ -48,10 +49,12 @@ public class BlockKatharianSand extends BaseBlock
     }
 
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
     }
 
+    @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
     }
@@ -62,6 +65,7 @@ public class BlockKatharianSand extends BaseBlock
             return FULL_BLOCK_AABB;
     }
 
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
@@ -142,6 +146,7 @@ public class BlockKatharianSand extends BaseBlock
         return block == Blocks.FIRE || material == Material.AIR || material == Material.WATER || material == Material.LAVA;
     }
 
+    @Override
     public String getLocalizedName()
     {
         return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
@@ -152,6 +157,7 @@ public class BlockKatharianSand extends BaseBlock
             return Item.getItemFromBlock(this);
     }
 
+    @Override
     public int quantityDropped(Random random)
     {
         return 1;

@@ -18,6 +18,7 @@ public class BlockCursedFlower extends BlockMysticBush{
         super(Name, false);
     }
 
+    @Override
     protected boolean canSustainBush(IBlockState state)
     {
         boolean can=false;
@@ -27,6 +28,7 @@ public class BlockCursedFlower extends BlockMysticBush{
         return can;
     }
 
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
             if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
@@ -46,6 +48,7 @@ public class BlockCursedFlower extends BlockMysticBush{
         return can;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {

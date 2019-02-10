@@ -55,7 +55,8 @@ public class BaseBlock extends Block
         KCore.instance.regHelper.blocksList.add(this);
     }
     
-    protected boolean canSilkHarvest()
+    @Override
+	protected boolean canSilkHarvest()
     {
     	boolean can=false;
         if(this==KCore.MythicStone||this==KCore.Solis_Crystals||this==KCore.Refined_Cloud_Blue||this==KCore.Refined_Cloud_Yellow||
@@ -71,7 +72,8 @@ public class BaseBlock extends Block
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
     
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    @Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
     	if(this==KCore.Solis_Crystals) {
     		return worldIn.getBlockState(pos.down()).isFullCube();
@@ -80,7 +82,8 @@ public class BaseBlock extends Block
     	}
     }
     
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
     	if(this==KCore.Mystic_Gem_Block&&worldIn.isAirBlock(pos.up())) {
@@ -99,7 +102,8 @@ public class BaseBlock extends Block
     
     boolean ignoreSimilarity=false;
 
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    @Override
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
     	if((this==KCore.MovingSand||this==KCore.MudBlock)&& !(entityIn instanceof EntityPoisonousScorpion)) {
     		entityIn.setInWeb();
@@ -112,7 +116,8 @@ public class BaseBlock extends Block
     	}
     }
     
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
+    @Override
+	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
     	if(this==KCore.Magnethium) {
     		if(entityIn instanceof EntityLivingBase) {
@@ -121,7 +126,9 @@ public class BaseBlock extends Block
     		}
     	}
     }
-    @Nullable
+
+    @Override
+	@Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
     	if(this==KCore.MovingSand){
@@ -137,12 +144,14 @@ public class BaseBlock extends Block
     	}
     }
     
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    @Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    @Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!worldIn.isRemote)
         {
@@ -227,12 +236,14 @@ public class BaseBlock extends Block
         return block == Blocks.FIRE || material == Material.AIR || material == Material.WATER || material == Material.LAVA;
     }
     
-    public String getLocalizedName()
+    @Override
+	public String getLocalizedName()
     {
         return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
     }
 
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    @Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
     	if(this==KCore.KatharianGrass) {
     		return Item.getItemFromBlock(KCore.KatharianDirt);
@@ -284,7 +295,8 @@ public class BaseBlock extends Block
     	}
     }
     
-    public int quantityDropped(Random random)
+    @Override
+	public int quantityDropped(Random random)
     {
     	if(this==KCore.Solis_Crystals) {
     		return 1+random.nextInt(5);
@@ -295,7 +307,8 @@ public class BaseBlock extends Block
          return 1;
     }
     
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
     	if(this==KCore.BlueCloudBricks) {
@@ -318,10 +331,11 @@ public class BaseBlock extends Block
             return BlockRenderLayer.SOLID;
     	}
     }
-    
 
-    
-    public boolean isFullCube(IBlockState state)
+
+
+    @Override
+	public boolean isFullCube(IBlockState state)
     {
     	if(this==KCore.BlueCloudBricks||this==KCore.YellowCloudBlock||this==KCore.Solis_Crystals) {
     		return false;
@@ -330,7 +344,8 @@ public class BaseBlock extends Block
     	}
     }
     
-    public boolean isOpaqueCube(IBlockState state)
+    @Override
+	public boolean isOpaqueCube(IBlockState state)
     {
     	if(this==KCore.BlueCloudBricks||this==KCore.YellowCloudBlock||this==KCore.Solis_Crystals||this==KCore.Refined_Cloud_Yellow||this==KCore.Refined_Cloud_Blue) {
     		return false;
@@ -338,7 +353,9 @@ public class BaseBlock extends Block
         return true;
     	}
     }
-    @SideOnly(Side.CLIENT)
+
+    @Override
+	@SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
         if(this==KCore.BlueCloudBricks||this==KCore.YellowCloudBlock||this==KCore.Refined_Cloud_Yellow||this==KCore.Refined_Cloud_Blue) {

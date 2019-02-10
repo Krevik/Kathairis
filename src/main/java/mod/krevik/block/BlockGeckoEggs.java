@@ -63,6 +63,7 @@ public class BlockGeckoEggs extends BaseBlock{
     	}
     }
     
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -72,6 +73,7 @@ public class BlockGeckoEggs extends BaseBlock{
         return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 	
+    @Override
     public int quantityDropped(Random random)
     {
         return 0;
@@ -87,6 +89,7 @@ public class BlockGeckoEggs extends BaseBlock{
         return false;
     }
 
+    @Override
     protected boolean canSilkHarvest()
     {
         return true;

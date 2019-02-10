@@ -27,6 +27,7 @@ public class BlockSucculent extends BlockMysticBush {
                 KCore.MovingSand,KCore.WeatheredRock,Blocks.SAND,KCore.Succulent);
     }
 
+    @Override
     protected boolean canSustainBush(IBlockState state)
     {
         boolean can=false;
@@ -76,11 +77,13 @@ public class BlockSucculent extends BlockMysticBush {
             }
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
             entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
     }
 
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
             for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
@@ -97,6 +100,7 @@ public class BlockSucculent extends BlockMysticBush {
             return this.canSustainPlantRemake(state, worldIn, pos.down(), EnumFacing.UP, this) && !worldIn.getBlockState(pos.up()).getMaterial().isLiquid();
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) { }
 

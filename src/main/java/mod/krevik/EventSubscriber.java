@@ -1,7 +1,6 @@
 package mod.krevik;
 
 import com.google.common.base.Preconditions;
-import mod.krevik.client.gui.GuiEnteringKathairis;
 import mod.krevik.item.ItemMysticArmor;
 import mod.krevik.item.ItemSand;
 import mod.krevik.block.BlockChristmasGift;
@@ -12,8 +11,6 @@ import mod.krevik.network.packets.PacketUpdateFogOnClient;
 import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -31,7 +28,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -42,9 +38,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -222,7 +215,8 @@ public class EventSubscriber {
 				KCore.bison_Stars,
 				KCore.christmas_gift,
 				KCore.baurble,
-				KCore.snowdrop_Cyprepedium
+				KCore.snowdrop_Cyprepedium,
+				KCore.glowvines
 				//KCore.Hell_Plant
 				//KCore.Butterfly_Analysing_Table
 
@@ -360,7 +354,8 @@ public class EventSubscriber {
 				new ItemBlock(KCore.bison_Stars),
 				new ItemBlock(KCore.christmas_gift),
 				new ItemBlock(KCore.baurble),
-				new ItemBlock(KCore.snowdrop_Cyprepedium)
+				new ItemBlock(KCore.snowdrop_Cyprepedium),
+				new ItemBlock(KCore.glowvines)
 				//new ItemBlock(KCore.Hell_Plant)
 				//new ItemBlock(KCore.Butterfly_Analysing_Table)
 		};
@@ -706,7 +701,6 @@ public class EventSubscriber {
 	/*@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void doButterflyCatcherHandling(){
-
 	}*/
 
 

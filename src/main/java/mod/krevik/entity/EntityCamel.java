@@ -2,7 +2,7 @@ package mod.krevik.entity;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.entity.ai.EntityAIAvoidMovingSands;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
 
@@ -38,7 +38,7 @@ public class EntityCamel extends AbstractHorse
     protected void initEntityAI()
     {
     	super.initEntityAI();
-        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
     }
     
     protected void entityInit()

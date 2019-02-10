@@ -46,6 +46,7 @@ public class BlockMysticFungus extends BlockMysticBush
         return Block.EnumOffsetType.XZ;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
@@ -75,6 +76,7 @@ public class BlockMysticFungus extends BlockMysticBush
         this.checkAndDropBlock(worldIn, pos, state);
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
 
 

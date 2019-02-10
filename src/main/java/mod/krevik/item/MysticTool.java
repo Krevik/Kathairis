@@ -74,6 +74,7 @@ public class MysticTool extends ItemTool
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
     
+    @Override
     public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
     	float tmp=0;
@@ -85,6 +86,7 @@ public class MysticTool extends ItemTool
         tmp=this.effectiveBlocks.contains(state.getBlock()) ? this.efficiencyOnProperMaterial : 1.0F;
     	return tmp;
     }
+    @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
 
@@ -94,6 +96,7 @@ public class MysticTool extends ItemTool
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
+    @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
         stack.damageItem(2, attacker);
@@ -103,6 +106,7 @@ public class MysticTool extends ItemTool
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
+    @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
     {
         if (!worldIn.isRemote && (double)state.getBlockHardness(worldIn, pos) != 0.0D)
@@ -116,6 +120,7 @@ public class MysticTool extends ItemTool
     /**
      * Returns True is the item is renderer in full 3D when hold.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean isFull3D()
     {
@@ -125,6 +130,7 @@ public class MysticTool extends ItemTool
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
+    @Override
     public int getItemEnchantability()
     {
         return this.toolMaterial.getEnchantability();
@@ -133,6 +139,7 @@ public class MysticTool extends ItemTool
     /**
      * Return the name for this tool's material.
      */
+    @Override
     public String getToolMaterialName()
     {
         return this.toolMaterial.toString();
@@ -141,6 +148,7 @@ public class MysticTool extends ItemTool
     /**
      * Return whether this item is repairable in an anvil.
      */
+    @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
         ItemStack mat = this.toolMaterial.getRepairItemStack();
@@ -152,6 +160,7 @@ public class MysticTool extends ItemTool
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
+    @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);

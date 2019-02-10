@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mod.krevik.KCore;
 
+import mod.krevik.block.BlockMysticLeaf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -129,7 +130,6 @@ public class WorldGenNewTree extends WorldGenAbstractBasicMysticTree{
     					setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z), KCore.MysticLeaves.getDefaultState());
     					setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()+x,pos.getY()-y,pos.getZ()-z), KCore.MysticLeaves.getDefaultState());
     					setBlockAndNotifyAdequately(world,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()-z), KCore.MysticLeaves.getDefaultState());
-
     				}
     			}
     		}

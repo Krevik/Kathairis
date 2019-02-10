@@ -1,9 +1,6 @@
 package mod.krevik.biome;
 
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.GenLayerSmooth;
-import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
-import net.minecraft.world.gen.layer.GenLayerZoom;
+import net.minecraft.world.gen.layer.*;
 
 public abstract class GenLayerMysticMain extends GenLayer
 {
@@ -20,7 +17,9 @@ public abstract class GenLayerMysticMain extends GenLayer
 		biomes = new GenLayerZoom(1002L, biomes);
 		biomes = new GenLayerZoom(1003L, biomes);
 		biomes = new GenLayerZoom(1004L, biomes);
-		biomes = new GenLayerSmooth(1005L, biomes);
+
+
+		biomes = new GenLayerSmooth(1007L, biomes);
 		
 
 		GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, biomes);
