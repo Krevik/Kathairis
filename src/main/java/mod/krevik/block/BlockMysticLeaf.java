@@ -117,18 +117,6 @@ public class BlockMysticLeaf extends BlockLeaves
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-    	if(this==KCore.ShinyLeaves && worldIn.isAirBlock(pos.up())) {
-            for (int i = 0; i < 4; ++i)
-            {
-                double d0 = (double)((float)pos.getX() + rand.nextFloat());
-                double d1 = (double)((float)pos.getY() + 1);
-                double d2 = (double)((float)pos.getZ() + rand.nextFloat());
-                double d3 = 0;
-                double d4 = 0.35;
-                double d5 = 0;
-                worldIn.spawnParticle(EnumParticleTypes.SPELL, d0, d1, d2, d3, d4, d5);
-            }
-    	}
     	if(this==KCore.SoulLeaves&&worldIn.isAirBlock(pos.down())) {
     		if(rand.nextInt(10)==0) {
                 double d0 = (double)((float)pos.getX() + rand.nextFloat());
