@@ -42,6 +42,7 @@ public class BlockBaurble extends BaseBlock {
         return worldIn.getBlockState(pos.up()).isFullBlock();
     }
 
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         if (!this.canBlockStay(worldIn, pos, state))

@@ -3,16 +3,14 @@ package mod.krevik.biome;
 import java.awt.*;
 import java.util.Random;
 
+import mod.krevik.world.gen.*;
 import mod.krevik.world.gen.forest.WorldGenBasicMysticTree;
 import mod.krevik.world.gen.forest.WorldGenCustomTree2;
 import mod.krevik.world.gen.forest.WorldGenFlippedHeartTree;
 import mod.krevik.world.gen.forest.WorldGenHugeKathairisTree;
 import mod.krevik.world.gen.structureloader.CreateTreeFromStructure;
+import mod.krevik.world.gen.structureloader.Structure;
 import mod.krevik.world.gen.structureloader.StructureList;
-import mod.krevik.world.gen.WorldGenMiniTallGrass;
-import mod.krevik.world.gen.WorldGenMysticMultiGrass;
-import mod.krevik.world.gen.WorldGenNewTree;
-import mod.krevik.world.gen.WorldGenMysticUniversal;
 import mod.krevik.KCore;
 
 import mod.krevik.entity.EntityCactiSpore;
@@ -23,6 +21,7 @@ import mod.krevik.entity.EntityLivingFlower;
 import mod.krevik.entity.EntityMysticBird;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -41,7 +40,6 @@ public class BiomeMysticForest extends KetherBiome
     protected static WorldGenMysticUniversal SINGLEGEN = new WorldGenMysticUniversal();
     protected static WorldGenMysticUniversal SINGLEGEN2 = new WorldGenMysticUniversal(3);
     protected static WorldGenMysticMultiGrass GrassGen = new WorldGenMysticMultiGrass(KCore.SteppedSucculent);
-    protected static WorldGenAbstractTree CUSTOMTREE4 = new WorldGenHugeKathairisTree();
 
     public BiomeMysticForest(Biome.BiomeProperties properties)
     {
@@ -50,8 +48,8 @@ public class BiomeMysticForest extends KetherBiome
         this.decorator.extraTreeChance = 0.9F; //5
         this.decorator.flowersPerChunk = 0;
         this.decorator.grassPerChunk = 3;  //2
-        this.topBlock=KCore.CorruptedGrass.getDefaultState();
-        this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
+        this.topBlock=KCore.KatharianGrass.getDefaultState();
+        this.fillerBlock=KCore.KatharianDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Forest");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 12, 1, 2));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityGecko.class, 4, 1, 1));
@@ -60,11 +58,6 @@ public class BiomeMysticForest extends KetherBiome
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityFungite.class, 2, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCactiSpore.class, 4, 1, 1));
         baseGrassColor=new Color(21,178,102);
-    }
-
-    public void decorate(World worldIn, Random random, BlockPos pos)
-    {
-        super.decorate(worldIn,random,pos);
     }
 
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
@@ -99,7 +92,7 @@ public class BiomeMysticForest extends KetherBiome
             return CUSTOMTREE2;
         }
         else if(k==16||k==17){
-            return CUSTOMTREE4;
+            return new WorldGenHugeKathairisTree();
         }
         else if(k==18||k==19){
             return TREE_FEATURE2;
@@ -162,6 +155,7 @@ public class BiomeMysticForest extends KetherBiome
     	}
     	return worldgen;
     }
+
 
     @Override
     public void addDefaultFlowers(){

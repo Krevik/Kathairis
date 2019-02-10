@@ -30,6 +30,7 @@ public class ItemGlassJar extends BaseItem{
      ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
  }
  
+ @Override
  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
  {
 	 if(this==KCore.GlassJar) {

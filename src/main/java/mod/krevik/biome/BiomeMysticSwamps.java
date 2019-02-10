@@ -40,8 +40,8 @@ public class BiomeMysticSwamps extends KetherBiome
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;
         this.decorator.grassPerChunk = 11; //11
-        this.topBlock=KCore.CorruptedGrass.getDefaultState();
-        this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
+        this.topBlock=KCore.KatharianGrass.getDefaultState();
+        this.fillerBlock=KCore.KatharianDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Swamps");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 5, 1, 3));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityPhasm.class, 2, 1, 1));

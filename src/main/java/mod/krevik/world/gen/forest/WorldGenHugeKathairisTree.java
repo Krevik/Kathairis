@@ -2,7 +2,9 @@ package mod.krevik.world.gen.forest;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockLuminescentGnarl;
+import mod.krevik.block.BlockMysticLeaf;
+import mod.krevik.block.plants.BlockGlowVines;
+import mod.krevik.block.plants.BlockLuminescentGnarl;
 import mod.krevik.block.BlockMysticLog;
 import mod.krevik.KCore;
 
@@ -27,7 +29,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
     	int posX=pos.getX();
     	int posZ=pos.getZ();
     	int posY=pos.getY();
-    	if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!= KCore.CorruptedGrass.getDefaultState()||
+    	if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!= KCore.KatharianGrass.getDefaultState()||
     			worldIn.getBlockState(pos.down())==KCore.MysticLeaves.getDefaultState()) {
     		return false;
     	}else {
@@ -69,7 +71,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 			}
 	}
 	
-	private void generateTree(World worldIn, Random rand, BlockPos position) {
+	private void generateTree(World worldIn, Random random, BlockPos position) {
 		IBlockState logState = KCore.MysticLog.getDefaultState();
 		IBlockState leavesState = KCore.MysticLeaves.getDefaultState();
 		int Y=position.getY();
@@ -77,7 +79,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 		int Z=position.getZ();
 		//rots start
 		for(int rootsNumber=0;rootsNumber<4;rootsNumber++) {
-			int length=2+rand.nextInt(4);
+			int length=2+random.nextInt(4);
 			BlockPos root=new BlockPos(position.getX(),position.getY(),position.getZ());
 			if(rootsNumber==0) {
 				outerloop: for(int shift=1;shift<=length;shift++) {
@@ -128,7 +130,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 		
 		//base trunk start
 		for(int k=0;k<4;k++) {
-			for(int y=0;y<=baseTreeHeight;y++) {
+			for(int y=0;y<=baseTreeHeight+1;y++) {
 				if(k==0) {
 					this.setBlock(worldIn, logState, new BlockPos(X,Y+y,Z));
 					if(random.nextInt(45)==0) {placeGnalr(worldIn,new BlockPos(X-1,Y+y,Z),-1,1);}
@@ -147,18 +149,24 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 				}
 			}
 		}
+		if(random.nextInt(5)==0)tryToGenerateVinesAtBlockPos(worldIn, new BlockPos(X, Y + baseTreeHeight, Z), random, true);
+		if(random.nextInt(5)==0)tryToGenerateVinesAtBlockPos(worldIn, new BlockPos(X, Y + baseTreeHeight, Z + 1), random, true);
+		if(random.nextInt(5)==0)tryToGenerateVinesAtBlockPos(worldIn, new BlockPos(X + 1, Y + baseTreeHeight, Z + 1), random, true);
+		if(random.nextInt(5)==0)tryToGenerateVinesAtBlockPos(worldIn, new BlockPos(X + 1, Y + baseTreeHeight, Z), random, true);
+
 		//base trunk end
 		
 		//branch start
+		int branchHeight=5+random.nextInt(5);
 		for(int k=0;k<4;k++) {
-			int branchHeight=5+random.nextInt(5);
+			branchHeight=5+random.nextInt(5);
 			for(int y=1;y<=branchHeight;y++) {
 				if(k==0) {
 					if(y==1||y==2) {
 						this.setBlock(worldIn, logState, new BlockPos(X-y,Y+baseTreeHeight+y,Z-y));
 					}else if(y==branchHeight){
 						this.setBlock(worldIn, logState, new BlockPos(X-2,Y+baseTreeHeight+y,Z-2));
-						doCrown(worldIn,leavesState,3+random.nextInt(4), new BlockPos(X-2,Y+baseTreeHeight+y,Z-2));
+						doCrown(worldIn,leavesState,3+random.nextInt(4), new BlockPos(X-2,Y+baseTreeHeight+y,Z-2),random);
 					}else {
 						this.setBlock(worldIn, logState, new BlockPos(X-2,Y+baseTreeHeight+y,Z-2));
 					}
@@ -168,7 +176,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 						this.setBlock(worldIn, logState, new BlockPos(X-y,Y+baseTreeHeight+y,Z+1+y));
 					}else if(y==branchHeight){
 						this.setBlock(worldIn, logState, new BlockPos(X-2,Y+baseTreeHeight+y,Z+3));
-						doCrown(worldIn,leavesState,3+random.nextInt(4),new BlockPos(X-2,Y+baseTreeHeight+y,Z+3));
+						doCrown(worldIn,leavesState,3+random.nextInt(4),new BlockPos(X-2,Y+baseTreeHeight+y,Z+3),random);
 					}else {
 						this.setBlock(worldIn, logState, new BlockPos(X-2,Y+baseTreeHeight+y,Z+3));
 					}
@@ -178,7 +186,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 						this.setBlock(worldIn, logState, new BlockPos(X+1+y,Y+baseTreeHeight+y,Z+1+y));
 					}else if(y==branchHeight){
 						this.setBlock(worldIn, logState, new BlockPos(X+3,Y+baseTreeHeight+y,Z+3));
-						doCrown(worldIn,leavesState,3+random.nextInt(4),new BlockPos(X+3,Y+baseTreeHeight+y,Z+3));
+						doCrown(worldIn,leavesState,3+random.nextInt(4),new BlockPos(X+3,Y+baseTreeHeight+y,Z+3),random);
 					}else {
 						this.setBlock(worldIn, logState, new BlockPos(X+3,Y+baseTreeHeight+y,Z+3));
 					}
@@ -188,7 +196,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 						this.setBlock(worldIn, logState, new BlockPos(X+1+y,Y+baseTreeHeight+y,Z-y));
 					}else if(y==branchHeight){
 						this.setBlock(worldIn, logState, new BlockPos(X+3,Y+baseTreeHeight+y,Z-2));
-						doCrown(worldIn,leavesState,3+random.nextInt(4),new BlockPos(X+3,Y+baseTreeHeight+y,Z-2));
+						doCrown(worldIn,leavesState,3+random.nextInt(4),new BlockPos(X+3,Y+baseTreeHeight+y,Z-2),random);
 					}else {
 						this.setBlock(worldIn, logState, new BlockPos(X+3,Y+baseTreeHeight+y,Z-2));
 					}
@@ -199,7 +207,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 		
 	}
 	
-	private void doCrown(World worldIn,IBlockState leavesState,int radius,BlockPos pos) {
+	private void doCrown(World worldIn,IBlockState leavesState,int radius,BlockPos pos,Random random) {
 		IBlockState logState = KCore.MysticLog.getDefaultState();
     	for(int x=0;x<=(radius+1);x++) {
     		for(int z=0;z<=(radius+1);z++) {
@@ -239,15 +247,97 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
     	}
     	//placeVines(worldIn,radius,pos);
 	}
-	
-	void placeVines(World worldIn, int radius, BlockPos pos) {
-    	for(int x=0;x<=(radius+2);x++) {
-    		for(int z=0;z<=(radius+2);z++) {
-    			for(int y=0;y<=(radius-2)/2;y++) {
-    				
-    			}
-    		}
-    	}
+
+	private void tryToGenerateVinesAtBlockPos(World world,BlockPos pos,Random random,boolean grow){
+		for(int x=-1;x<=1;x++) {
+			for (int z = -1; z <= 1; z++) {
+					BlockPos blockPos1 = new BlockPos(pos.getX()+x,pos.getY(),pos.getZ()+z);
+					BlockPos blockPos2 = new BlockPos(pos.getX()-x,pos.getY(),pos.getZ()+z);
+					BlockPos blockPos3 = new BlockPos(pos.getX()+x,pos.getY(),pos.getZ()-z);
+					BlockPos blockPos4 = new BlockPos(pos.getX()-x,pos.getY(),pos.getZ()-z);
+					tryToPutVines(world,blockPos1,random,grow);
+					tryToPutVines(world,blockPos2,random,grow);
+					tryToPutVines(world,blockPos3,random,grow);
+					tryToPutVines(world,blockPos4,random,grow);
+			}
+		}
+	}
+
+	boolean canVinesStayAtPos(World worldIn, BlockPos pos){
+		boolean can=false;
+		if(!worldIn.isAirBlock(pos.east())&&worldIn.getBlockState(pos.east()).isFullBlock()){
+			can=true;
+		}
+		if(!worldIn.isAirBlock(pos.west())&&worldIn.getBlockState(pos.west()).isFullBlock()){
+			can=true;
+		}
+		if(!worldIn.isAirBlock(pos.south())&&worldIn.getBlockState(pos.south()).isFullBlock()){
+			can=true;
+		}
+		if(!worldIn.isAirBlock(pos.north())&&worldIn.getBlockState(pos.north()).isFullBlock()){
+			can=true;
+		}
+		if(!worldIn.isAirBlock(pos.up())) {
+			if (worldIn.getBlockState(pos.up()).getBlock() instanceof BlockGlowVines) {
+				BlockGlowVines.EnumType upperVariant = worldIn.getBlockState(pos.up()).getValue(BlockGlowVines.VARIANT);
+				if(upperVariant== BlockGlowVines.EnumType.BOTTOM){
+					can=false;
+				}else{
+					can=true;
+				}
+			}
+		}
+		return can;
+	}
+	void tryToPutVines(World world,BlockPos pos,Random random,boolean grow){
+		if(world.isAirBlock(pos)&&canVinesStayAtPos(world,pos)){
+			world.setBlockState(pos, KCore.glowvines.getDefaultState());
+			if(grow){
+				for(int y=0;y>=-random.nextInt(10);y--){
+					BlockPos pos1 = pos.down(-y);
+					if(world.isAirBlock(pos1)&&canVinesStayAtPos(world,pos1)){
+						world.setBlockState(pos1,KCore.glowvines.getDefaultState());
+						world.getBlockState(pos1).getBlock().updateTick(world,pos1,world.getBlockState(pos1),random);
+					}
+				}
+			}
+		}
+		if(world.isAirBlock(pos)&&canVinesStayAtPos(world,pos)){
+			world.setBlockState(pos, KCore.glowvines.getDefaultState());
+			if(grow){
+				for(int y=0;y>=-random.nextInt(10);y--){
+					BlockPos pos1 = pos.down(-y);
+					if(world.isAirBlock(pos1)&&canVinesStayAtPos(world,pos1)){
+						world.setBlockState(pos1,KCore.glowvines.getDefaultState());
+						world.getBlockState(pos1).getBlock().updateTick(world,pos1,world.getBlockState(pos1),random);
+					}
+				}
+			}
+		}
+		if(world.isAirBlock(pos)&&canVinesStayAtPos(world,pos)){
+			world.setBlockState(pos, KCore.glowvines.getDefaultState());
+			if(grow){
+				for(int y=0;y>=-random.nextInt(10);y--){
+					BlockPos pos1 = pos.down(-y);
+					if(world.isAirBlock(pos1)&&canVinesStayAtPos(world,pos1)){
+						world.setBlockState(pos1,KCore.glowvines.getDefaultState());
+						world.getBlockState(pos1).getBlock().updateTick(world,pos1,world.getBlockState(pos1),random);
+					}
+				}
+			}
+		}
+		if(world.isAirBlock(pos)&&canVinesStayAtPos(world,pos)){
+			world.setBlockState(pos, KCore.glowvines.getDefaultState());
+			if(grow){
+				for(int y=0;y>=-random.nextInt(10);y--){
+					BlockPos pos1 = pos.down(-y);
+					if(world.isAirBlock(pos1)&&canVinesStayAtPos(world,pos1)){
+						world.setBlockState(pos1,KCore.glowvines.getDefaultState());
+						world.getBlockState(pos1).getBlock().updateTick(world,pos1,world.getBlockState(pos1),random);
+					}
+				}
+			}
+		}
 	}
 	
 	void setBlock(World worldIn,BlockPos pos,IBlockState state) {

@@ -2,7 +2,7 @@ package mod.krevik.world.gen.forest;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.block.BlockMysticLeaf;
 import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import mod.krevik.KCore;

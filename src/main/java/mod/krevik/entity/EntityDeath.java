@@ -4,11 +4,11 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.enchantment.KathairisEnchantments;
 import mod.krevik.KCore;
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.PacketDeathHandlerServer;
+import mod.krevik.network.KathairisPacketHandler;
+import mod.krevik.network.packets.PacketDeathHandlerServer;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -165,11 +165,11 @@ public class EntityDeath extends EntityMob
     }
 
     int mode=0;
-    KetherDataStorage data;
+    KathairisDataStorage data;
     public void onUpdate() {
     	super.onUpdate();
 	    	if(data==null) {
-	    		data=KetherDataStorage.getDataInstance(world);
+	    		data= KathairisDataStorage.getDataInstance(world);
 	    	}
     	if(data!=null) {
     	    isFighting=data.getIsDeathFighting();
@@ -314,7 +314,7 @@ public class EntityDeath extends EntityMob
         isFighting=false;
         defeated=true;
         PacketDeathHandlerServer message = new PacketDeathHandlerServer(true,false,true);
-        KetherPacketHandler.CHANNEL.sendToServer(message);
+        KathairisPacketHandler.CHANNEL.sendToServer(message);
         super.onKillEntity(entityLivingIn);
 
     }

@@ -64,8 +64,8 @@ public class WorldGenFloatingIslands extends WorldGenerator{
     }
     private void generateLayer(World world,Random rand,BlockPos pos,int forz,int width,int maxWidth) {
     	IBlockState stoneState = KCore.MythicStone.getDefaultState();
-    	IBlockState grassState = KCore.CorruptedGrass.getDefaultState();
-    	IBlockState dirtState = KCore.CorruptedDirt.getDefaultState();
+    	IBlockState grassState = KCore.KatharianGrass.getDefaultState();
+    	IBlockState dirtState = KCore.KatharianDirt.getDefaultState();
     	BlockPos tmp;
     	int chance=5;
     	for(int c=0;c<=forz;c++) {
@@ -198,7 +198,7 @@ public class WorldGenFloatingIslands extends WorldGenerator{
     private void generateDetails(World worldIn,Random rand,BlockPos pos,int radius) {
     	BlockPos startPos=getDetailStartPos(pos,radius,rand);
     	BlockPos tmp;
-    	IBlockState fillerState = KCore.CorruptedGrass.getDefaultState();
+    	IBlockState fillerState = KCore.KatharianGrass.getDefaultState();
     	int newRadius=1+rand.nextInt(radius);
     	for(int x=0;x<=newRadius;x++) {
     		for(int z=0;z<=newRadius;z++) {
@@ -243,8 +243,8 @@ public class WorldGenFloatingIslands extends WorldGenerator{
     	int radius=6+rand.nextInt(12);
     	BlockPos tmp = new BlockPos(0,0,0);
 		IBlockState stoneState = KCore.MythicStone.getDefaultState();
-		IBlockState grassState = KCore.CorruptedGrass.getDefaultState();
-		IBlockState dirtState = KCore.CorruptedDirt.getDefaultState();
+		IBlockState grassState = KCore.KatharianGrass.getDefaultState();
+		IBlockState dirtState = KCore.KatharianDirt.getDefaultState();
 		IBlockState magnethiumState = KCore.Magnethium.getDefaultState();
 		int randomik = 0;				
 		int[] addx = new int [4];		
@@ -321,8 +321,8 @@ public class WorldGenFloatingIslands extends WorldGenerator{
     	int radius2=6+rand.nextInt(12);
 		BlockPos tmp = new BlockPos(0,0,0);
 		IBlockState stoneState = KCore.MythicStone.getDefaultState();
-		IBlockState grassState = KCore.CorruptedGrass.getDefaultState();
-		IBlockState dirtState = KCore.CorruptedDirt.getDefaultState();
+		IBlockState grassState = KCore.KatharianGrass.getDefaultState();
+		IBlockState dirtState = KCore.KatharianDirt.getDefaultState();
 		IBlockState magnethiumState = KCore.Magnethium.getDefaultState();
 		
     	for(int x=0;x<=radius1;x++) {
@@ -382,8 +382,8 @@ public class WorldGenFloatingIslands extends WorldGenerator{
     	int radius=6+rand.nextInt(12);
 		BlockPos tmp = new BlockPos(0,0,0);
 		IBlockState stoneState = KCore.MythicStone.getDefaultState();
-		IBlockState grassState = KCore.CorruptedGrass.getDefaultState();
-		IBlockState dirtState = KCore.CorruptedDirt.getDefaultState();
+		IBlockState grassState = KCore.KatharianGrass.getDefaultState();
+		IBlockState dirtState = KCore.KatharianDirt.getDefaultState();
 		int width=6+rand.nextInt(60);
 		int legth=6+rand.nextInt(60);
     	for(int x=0;x<=radius;x++) {

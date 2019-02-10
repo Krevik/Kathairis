@@ -166,7 +166,7 @@ public class WorldGenCustomTree extends WorldGenerator{
 	}
 	
 	private boolean isValidBlockToSpawn(World world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock()==KCore.CorruptedDirt||world.getBlockState(pos).getBlock()==KCore.CorruptedGrass) {
+		if(world.getBlockState(pos).getBlock()==KCore.KatharianDirt ||world.getBlockState(pos).getBlock()==KCore.KatharianGrass) {
 			return true;
 		}else {
 			return false;
@@ -176,8 +176,8 @@ public class WorldGenCustomTree extends WorldGenerator{
     private BlockPos getTopGrassBlock(World worldIn,BlockPos position){
     	int top=0;
         	for(top=0;top<256;top++){
-        		if((worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))==KCore.CorruptedDirt.getDefaultState()
-        				||worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))==KCore.CorruptedGrass.getDefaultState())&&worldIn.canBlockSeeSky(new BlockPos(position.getX(),top+1,position.getZ()))){
+        		if((worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))==KCore.KatharianDirt.getDefaultState()
+        				||worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))==KCore.KatharianGrass.getDefaultState())&&worldIn.canBlockSeeSky(new BlockPos(position.getX(),top+1,position.getZ()))){
         			break;
         		}
         	}

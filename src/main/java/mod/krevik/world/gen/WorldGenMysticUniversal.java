@@ -2,7 +2,7 @@ package mod.krevik.world.gen;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.KCore;
 
 import net.minecraft.block.state.IBlockState;
@@ -69,16 +69,16 @@ public class WorldGenMysticUniversal extends WorldGenerator
         	if(Y>250) {
         		return false;
         	}else {
-        	   	if(worldIn.getBlockState(new BlockPos(X,Y,Z))==KCore.CorruptedGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y+1,Z))){
+        	   	if(worldIn.getBlockState(new BlockPos(X,Y,Z))==KCore.KatharianGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y+1,Z))){
             		setBlockAndNotifyAdequately(worldIn,new BlockPos(X,Y+1,Z), KCore.GooseberryBlock.getDefaultState());
             	}
-            	if(worldIn.getBlockState(new BlockPos(X,Y-1,Z))==KCore.CorruptedGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y,Z))){
+            	if(worldIn.getBlockState(new BlockPos(X,Y-1,Z))==KCore.KatharianGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y,Z))){
             		setBlockAndNotifyAdequately(worldIn,new BlockPos(X,Y,Z), KCore.GooseberryBlock.getDefaultState());
             	}
-            	if(worldIn.getBlockState(new BlockPos(X,Y-2,Z))==KCore.CorruptedGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y-1,Z))){
+            	if(worldIn.getBlockState(new BlockPos(X,Y-2,Z))==KCore.KatharianGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y-1,Z))){
             		setBlockAndNotifyAdequately(worldIn,new BlockPos(X,Y-1,Z), KCore.GooseberryBlock.getDefaultState());
             	}
-            	if(worldIn.getBlockState(new BlockPos(X,Y+1,Z))==KCore.CorruptedGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y+2,Z))){
+            	if(worldIn.getBlockState(new BlockPos(X,Y+1,Z))==KCore.KatharianGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y+2,Z))){
             		setBlockAndNotifyAdequately(worldIn,new BlockPos(X,Y+2,Z), KCore.GooseberryBlock.getDefaultState());
             	}
         	}

@@ -3,14 +3,8 @@ package mod.krevik.world.dimension;
 import java.util.List;
 import java.util.Random;
 
-import mod.krevik.world.gen.MapGenKetherCaves;
-import mod.krevik.world.gen.WorldGenCloudTemple;
-import mod.krevik.world.gen.WorldGenClouds;
-import mod.krevik.world.gen.WorldGenCrystalChamber;
-import mod.krevik.world.gen.WorldGenFloatingIslands;
-import mod.krevik.world.gen.WorldGenFloatingTree;
+import mod.krevik.world.gen.mapgens.MapGenKetherCaves;
 import mod.krevik.world.gen.WorldGenMysticLakes;
-import mod.krevik.world.gen.WorldGenMysticUniversal;
 import mod.krevik.KCore;
 
 import net.minecraft.block.BlockFalling;
@@ -498,9 +492,9 @@ public class ChunkGeneratorMystic implements IChunkGenerator
                         			 if(iblockstate!=Blocks.AIR.getDefaultState()) {
 	                        			 int cc=2+rand.nextInt(3);
 	                        			 for(int c=0;c<=cc;c++) {
-	                                		 primer.setBlockState(k2, l2+upperScale+c, i3, KCore.CorruptedDirt.getDefaultState());
+	                                		 primer.setBlockState(k2, l2+upperScale+c, i3, KCore.KatharianDirt.getDefaultState());
 	                        			 }
-	                            		 primer.setBlockState(k2, l2+upperScale+cc+1, i3, KCore.CorruptedGrass.getDefaultState());
+	                            		 primer.setBlockState(k2, l2+upperScale+cc+1, i3, KCore.KatharianGrass.getDefaultState());
                         			 }
                         		 }
                         			 /*if(primer.getBlockState(k2,l2+upperScale,i3)!=Blocks.AIR.getDefaultState()) {

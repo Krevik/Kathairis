@@ -2,6 +2,8 @@ package mod.krevik.world.dimension;
 
 import mod.krevik.KCore;
 
+import mod.krevik.client.gui.GuiEnteringKathairis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,6 +15,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Arrays;
 
@@ -141,6 +145,7 @@ public class TileEntityKether extends TileEntity
 			}
 		}
 	}
+
 
 	// doesn't take worlds that have been generated but aren't in memory (only on disk)
 	private static boolean dimensionKathairisHasBeenLoadedBefore() {

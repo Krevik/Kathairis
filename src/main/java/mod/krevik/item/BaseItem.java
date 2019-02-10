@@ -24,20 +24,21 @@ public class BaseItem extends Item{
  
  protected String name;
  
- public BaseItem(String name, CreativeTabs tab) {
- this.name = name;
- setUnlocalizedName(name);
- setRegistryName(name);
- this.setCreativeTab(tab);
- KCore.instance.regHelper.itemList.add(this);
- EventSubscriber.itemList.add(this);
- }
+	 public BaseItem(String name, CreativeTabs tab) {
+		 this.name = name;
+		 setUnlocalizedName(name);
+		 setRegistryName(name);
+		 this.setCreativeTab(tab);
+		 KCore.instance.regHelper.itemList.add(this);
+		 EventSubscriber.itemList.add(this);
+	 }
  
  @SideOnly(Side.CLIENT)
  public void initModel() {
      ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
  }
  
+ @Override
  public EnumRarity getRarity(ItemStack stack)
  {
 	 if(stack.getItem().equals(KCore.MysticGem)||stack.getItem().equals(KCore.CloudEssence)||stack.getItem().equals(KCore.Ritual_Blade) ||stack.getItem().equals(KCore.skyray_feather)){
@@ -57,6 +58,7 @@ public class BaseItem extends Item{
 	}
 	
  
+ @Override
  @SideOnly(Side.CLIENT)
  public boolean hasEffect(ItemStack stack)
  {
@@ -74,6 +76,7 @@ public class BaseItem extends Item{
 
 
  
+ @Override
  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
  {
 	 if(this==KCore.MysticGem){

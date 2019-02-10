@@ -9,10 +9,7 @@ import mod.krevik.entity.EntityPoisonousScorpion;
 import mod.krevik.world.gen.WorldGenMovingSand;
 import mod.krevik.world.gen.WorldGenMysticDesertCactus;
 import mod.krevik.world.gen.WorldGenMysticUniversal;
-import mod.krevik.world.gen.desert.WorldGenBigRockMushroom;
-import mod.krevik.world.gen.desert.WorldGenOldLibrary;
-import mod.krevik.world.gen.desert.WorldGenRockMushroom;
-import mod.krevik.world.gen.desert.WorldGenWeatheredCaveCustom;
+import mod.krevik.world.gen.desert.*;
 import mod.krevik.KCore;
 
 import net.minecraft.block.material.Material;
@@ -29,11 +26,12 @@ public class BiomeMysticDesert extends KetherBiome
 
     protected static WorldGenMovingSand MOVINGSANDGEN = new WorldGenMovingSand();
     protected static WorldGenRockMushroom RockMushroom = new WorldGenRockMushroom();
-    protected static WorldGenWeatheredCaveCustom CAVE = new WorldGenWeatheredCaveCustom();
     protected static WorldGenBigRockMushroom BIGROCKMUSHROOM = new WorldGenBigRockMushroom();
     protected static WorldGenOldLibrary OLDLIBRARY = new WorldGenOldLibrary();
     protected static WorldGenMysticDesertCactus CACTUS = new WorldGenMysticDesertCactus();
     protected static WorldGenMysticUniversal SINGLEGENDESERT = new WorldGenMysticUniversal(1);
+    protected static WorldGenShinyHole SHINYHOLE = new WorldGenShinyHole();
+
     //protected static WorldGenRedwoodTree REDWOODTREE = new WorldGenRedwoodTree();
 
     public BiomeMysticDesert(Biome.BiomeProperties properties)
@@ -95,11 +93,13 @@ public class BiomeMysticDesert extends KetherBiome
             RockMushroom.generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
         	}
         }
-        if(random.nextInt(35)==20){
-			int rx = pos.getX() + random.nextInt(16) + 8;
-			int rz = pos.getZ() + random.nextInt(16) + 8;
-            CAVE.generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
+
+        if(random.nextInt(20)==0){
+            int rx = pos.getX() + random.nextInt(16) + 8;
+            int rz = pos.getZ() + random.nextInt(16) + 8;
+            SHINYHOLE.generate(world, random, world.getHeight(new BlockPos(rx, 0, rz)));
         }
+
         if(random.nextInt(400)==0){
 			int rx = pos.getX() + random.nextInt(16) + 8;
 			int rz = pos.getZ() + random.nextInt(16) + 8;

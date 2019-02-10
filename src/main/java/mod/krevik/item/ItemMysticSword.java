@@ -65,6 +65,7 @@ public class ItemMysticSword extends ItemSword
     {
         return this.material.getAttackDamage();
     }
+    @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
     	
@@ -83,6 +84,7 @@ public class ItemMysticSword extends ItemSword
             return material != Material.PLANTS && material != Material.VINE && material != Material.CORAL && material != Material.LEAVES && material != Material.GOURD ? 1.0F : 1.5F;
         }
     }
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
@@ -93,6 +95,7 @@ public class ItemMysticSword extends ItemSword
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
+    @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
         stack.damageItem(1, attacker);
@@ -111,6 +114,7 @@ public class ItemMysticSword extends ItemSword
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
+    @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
     {
         if ((double)state.getBlockHardness(worldIn, pos) != 0.0D)
@@ -125,6 +129,7 @@ public class ItemMysticSword extends ItemSword
     /**
      * Check whether this Item can harvest the given Block
      */
+    @Override
     public boolean canHarvestBlock(IBlockState blockIn)
     {
         return blockIn.getBlock() == Blocks.WEB;
@@ -133,6 +138,7 @@ public class ItemMysticSword extends ItemSword
     /**
      * Returns True is the item is renderer in full 3D when hold.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean isFull3D()
     {
@@ -142,6 +148,7 @@ public class ItemMysticSword extends ItemSword
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
+    @Override
     public int getItemEnchantability()
     {
         return this.material.getEnchantability();
@@ -150,6 +157,7 @@ public class ItemMysticSword extends ItemSword
     /**
      * Return the name for this tool's material.
      */
+    @Override
     public String getToolMaterialName()
     {
         return this.material.toString();
@@ -158,6 +166,7 @@ public class ItemMysticSword extends ItemSword
     /**
      * Return whether this item is repairable in an anvil.
      */
+    @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
         ItemStack mat = this.material.getRepairItemStack();
@@ -168,6 +177,7 @@ public class ItemMysticSword extends ItemSword
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
+    @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);

@@ -90,6 +90,7 @@ public class BlockMysticDoors extends BaseBlock
     /**
      * Gets the localized name of this block. Used for the statistics page.
      */
+    @Override
     public String getLocalizedName()
     {
         return I18n.translateToLocal((this.getUnlocalizedName() + ".name").replaceAll("tile", "item"));
@@ -173,6 +174,7 @@ public class BlockMysticDoors extends BaseBlock
      * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
      * block, etc.
      */
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         if (state.getValue(HALF) == BlockMysticDoors.EnumDoorHalf.UPPER)
@@ -249,6 +251,7 @@ public class BlockMysticDoors extends BaseBlock
     /**
      * Checks if this block can be placed exactly at the given position.
      */
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         if (pos.getY() >= worldIn.getHeight() - 1)

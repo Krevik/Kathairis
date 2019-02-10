@@ -118,10 +118,10 @@ public class WorldGenSwampLakes extends WorldGenerator
                         {
                             BlockPos blockpos = position.add(i2, j4 - 1, j3);
 
-                            if (worldIn.getBlockState(blockpos).getBlock() == KCore.CorruptedDirt && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
+                            if (worldIn.getBlockState(blockpos).getBlock() == KCore.KatharianDirt && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
                             {
                                 Biome biome = worldIn.getBiome(blockpos);
-                                    worldIn.setBlockState(blockpos, KCore.CorruptedGrass.getDefaultState(), 2);
+                                    worldIn.setBlockState(blockpos, KCore.KatharianGrass.getDefaultState(), 2);
                             }
                         }
                     }

@@ -47,6 +47,7 @@ public class ItemRitualBlade extends BaseItem
     {
         return this.attackDamage;
     }
+    @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
 
@@ -65,6 +66,7 @@ public class ItemRitualBlade extends BaseItem
             return material != Material.PLANTS && material != Material.VINE && material != Material.CORAL && material != Material.LEAVES && material != Material.GOURD ? 1.0F : 1.5F;
         }
     }
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
@@ -75,6 +77,7 @@ public class ItemRitualBlade extends BaseItem
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
+    @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
         stack.damageItem(1, attacker);
@@ -85,6 +88,7 @@ public class ItemRitualBlade extends BaseItem
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
+    @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
     {
         if ((double)state.getBlockHardness(worldIn, pos) != 0.0D)
@@ -99,6 +103,7 @@ public class ItemRitualBlade extends BaseItem
     /**
      * Check whether this Item can harvest the given Block
      */
+    @Override
     public boolean canHarvestBlock(IBlockState blockIn)
     {
         return blockIn.getBlock() == Blocks.WEB;
@@ -107,6 +112,7 @@ public class ItemRitualBlade extends BaseItem
     /**
      * Returns True is the item is renderer in full 3D when hold.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean isFull3D()
     {
@@ -116,6 +122,7 @@ public class ItemRitualBlade extends BaseItem
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
+    @Override
     public int getItemEnchantability()
     {
         return 15;
@@ -126,6 +133,7 @@ public class ItemRitualBlade extends BaseItem
     /**
      * Return whether this item is repairable in an anvil.
      */
+    @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
     	return false;
@@ -134,6 +142,7 @@ public class ItemRitualBlade extends BaseItem
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
+    @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
@@ -147,6 +156,7 @@ public class ItemRitualBlade extends BaseItem
         return multimap;
     }
     
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
    	 if(this==KCore.Ritual_Blade){

@@ -5,21 +5,24 @@ import javax.annotation.Nullable;
 import mod.krevik.client.ClientProxy;
 import mod.krevik.KCore;
 
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import java.util.Calendar;
 
 public class WorldProviderMystic extends WorldProviderSurface
 {
-
     public void init()
     {
         this.setDimension(KCore.DIMENSION_ID);
@@ -36,8 +39,6 @@ public class WorldProviderMystic extends WorldProviderSurface
     {
         return WorldSleepResult.ALLOW;
     }
-
-
     
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -140,11 +141,28 @@ public class WorldProviderMystic extends WorldProviderSurface
         f1 = f1 * (f * 0.94F + 0.06F);
         f2 = f2 * (f * 0.94F + 0.06F);
         f3 = f3 * (f * 0.91F + 0.09F);
-        float poraDnia= (float) ((float)((time*Math.PI)/12000)+Math.PI/12);
+        float poraDnia = (float) ((float)((time*Math.PI)/12000)+Math.PI/12);
         f1=f1*MathHelper.clamp(MathHelper.sin(poraDnia),0,100);
         f2=f2*MathHelper.clamp(MathHelper.sin(poraDnia),0,100);
         f3=f3*MathHelper.clamp(MathHelper.sin(poraDnia),0,100);
-
+        int steps=1000;
+        int actualStep=0;
+        /*if(fogTimer>0){
+            if(!startedFog){
+                fogMultiplier=0.01f;
+                startedFog=true;
+            }
+            actualStep++;
+            if(actualStep>steps){actualStep=steps;}
+            fogMultiplier=MathHelper.clamp(fogMultiplier*1.0005f,0.01f,1f);
+            float f1new=234*fogMultiplier*0.00005f/(steps-actualStep)+f1/actualStep;
+            float f2new=240*fogMultiplier*0.00005f/(steps-actualStep)+f1/actualStep;
+            float f3new=249*fogMultiplier*0.00005f/(steps-actualStep)+f1/actualStep;
+            return new Vec3d((double)f1new, (double)f2new, (double)f3new);
+        }else{
+            startedFog=false;
+            fogMultiplier=0.00000f;
+        }*/
         return new Vec3d((double)f1, (double)f2, (double)f3);
     }
 
@@ -166,7 +184,7 @@ public class WorldProviderMystic extends WorldProviderSurface
         }
         else
         {
-            return this.world.getGroundAboveSeaLevel(blockpos).getBlock() == KCore.CorruptedGrass;
+            return this.world.getGroundAboveSeaLevel(blockpos).getBlock() == KCore.KatharianGrass;
         }
     }
     
@@ -221,5 +239,6 @@ public class WorldProviderMystic extends WorldProviderSurface
     {
         return true;
     }
-    
+
+
 }

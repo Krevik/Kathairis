@@ -29,7 +29,7 @@ public class WorldGenMysticSwampsWater extends WorldGenerator
         for (int i = 0; i < 128; ++i)
         {
             BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
-            if(worldIn.getBlockState(blockpos.down())== KCore.CorruptedGrass.getDefaultState()) {
+            if(worldIn.getBlockState(blockpos.down())== KCore.KatharianGrass.getDefaultState()) {
             	worldIn.setBlockState(blockpos.down(), this.tallGrassState,3);
 				worldIn.neighborChanged(blockpos.down(), worldIn.getBlockState(blockpos.down()).getBlock(), blockpos);
             }

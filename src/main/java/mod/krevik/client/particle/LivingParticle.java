@@ -1,6 +1,6 @@
 package mod.krevik.client.particle;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.client.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;

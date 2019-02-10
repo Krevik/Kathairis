@@ -62,7 +62,7 @@ public class WorldGenFloatingTree extends WorldGenerator{
 		int zSize=3+rand.nextInt(6);
 		int ySize=2+rand.nextInt(7);
 		IBlockState cloudState=rand.nextInt(2)==2?KCore.BlueCloud.getDefaultState():KCore.YellowCloud.getDefaultState();
-		IBlockState grassState=KCore.CorruptedGrass.getDefaultState();
+		IBlockState grassState=KCore.KatharianGrass.getDefaultState();
 		IBlockState condensedCloudState=rand.nextInt(2)==2?KCore.BlueCondensedCloud.getDefaultState():KCore.YellowCondensedCloud.getDefaultState();
 		boolean isTreeGenerated=false;
 		for(int x=-xSize;x<=xSize;x++) {

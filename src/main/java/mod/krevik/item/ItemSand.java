@@ -29,6 +29,7 @@ public class ItemSand extends ItemBlock
     /**
      * Called when a Block is right-clicked with this Item
      */
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         ItemStack itemstack = player.getHeldItem(hand);
@@ -83,11 +84,13 @@ public class ItemSand extends ItemBlock
      * Converts the given ItemStack damage value into a metadata value to be placed in the world when this Item is
      * placed as a Block (mostly used with ItemBlocks).
      */
+    @Override
     public int getMetadata(int damage)
     {
         return damage;
     }
 
+    @Override
     public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
     {
         IBlockState state = world.getBlockState(pos);

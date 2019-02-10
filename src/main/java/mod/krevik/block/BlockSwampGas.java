@@ -46,6 +46,7 @@ public class BlockSwampGas extends BlockMysticCloud{
     {
         return null;
     }
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     { 
     	if(entityIn instanceof EntityPlayerMP) {
@@ -53,11 +54,13 @@ public class BlockSwampGas extends BlockMysticCloud{
     		ep.addPotionEffect(new PotionEffect(Potion.getPotionById(9),100));
     	}
     }
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+
+    @Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         if(isFireNearby(worldIn,pos)) {
-        	worldIn.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 4, true,true);
+			explodeBlock(worldIn,pos,state);
         }
         
     }
@@ -96,7 +99,8 @@ public class BlockSwampGas extends BlockMysticCloud{
     }
     
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
     	for(int x=0;x<=1+rand.nextInt(8);x++) {
@@ -122,9 +126,7 @@ public class BlockSwampGas extends BlockMysticCloud{
     {
    	 ItemStack itemstack = playerIn.getHeldItem(hand);
    	 if(itemstack.getItem()==Items.FLINT_AND_STEEL) {
-   		 if(!worldIn.isRemote) {
-         	worldIn.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 4, true,true);
-   		 }
+   	 	explodeBlock(worldIn,pos,state);
    		 return true;
    	 }else {
         return false;
@@ -132,27 +134,38 @@ public class BlockSwampGas extends BlockMysticCloud{
     }
     
     public void explodeBlock(World world, BlockPos pos, IBlockState state) {
-    	if(!world.isRemote) {
-    	world.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 4, true,true);
-    	}
+		/*if(world.isRemote) {
+			PacketSwampGasExplosionServer message = new PacketSwampGasExplosionServer(pos.getX(), pos.getY(), pos.getZ(), 4);
+			KathairisPacketHandler.CHANNEL.sendToServer(message);
+		}*/
+
+		if(!world.isRemote){
+			world.getMinecraftServer().addScheduledTask(new Runnable() {
+					@Override
+					public void run() {
+						world.createExplosion(null,pos.getX(), pos.getY(), pos.getZ(), 4,true);
+						//PacketSwampGasExplosionClient messageNew = new PacketSwampGasExplosionClient(message.posX,message.posY
+						// ,message.posZ,message.size,ctx.getServerHandler().player.dimension);
+						//KathairisPacketHandler.CHANNEL.sendToAll(messageNew);
+					}
+
+				});
+		}
     }
-    
+
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
     {
-    	if(!worldIn.isRemote) {
 	    	int radius=2;
 	    	for(int x=-radius;x<=radius;x++) {
 	        	for(int y=-radius;y<=radius;y++) {
 	            	for(int z=-radius;z<=radius;z++) {
 	            		BlockPos tmp = new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z);
 	            		if(worldIn.getBlockState(tmp).getBlock()==KCore.SwampGas) {
-	            	    	worldIn.newExplosion(null, tmp.getX(), tmp.getY(), tmp.getZ(), 4, true,true);
-	
+							explodeBlock(worldIn,pos,worldIn.getBlockState(pos));
 	            		}
 	            	}
 	        	}
 	    	}
-    	}
     }
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
     {

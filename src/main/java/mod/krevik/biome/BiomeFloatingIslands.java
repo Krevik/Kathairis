@@ -49,8 +49,8 @@ public class BiomeFloatingIslands extends KetherBiome
         this.decorator.extraTreeChance = 0.4F; //1
         this.decorator.flowersPerChunk = 0;
         this.decorator.grassPerChunk = 6; //6
-        this.topBlock=KCore.CorruptedGrass.getDefaultState();
-        this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
+        this.topBlock=KCore.KatharianGrass.getDefaultState();
+        this.fillerBlock=KCore.KatharianDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Floating Islands");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCloudOister.class, 6, 1, 1));
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityCloudySlime.class, 8, 1, 1));
@@ -65,11 +65,13 @@ public class BiomeFloatingIslands extends KetherBiome
         }
     }
 
+    @Override
     public float getSpawningChance()
     {
         return 0.1F;
     }
 
+    @Override
     public void decorate(World worldIn, Random random, BlockPos pos)
     {
         super.decorate(worldIn,random,pos);
@@ -145,6 +147,7 @@ public class BiomeFloatingIslands extends KetherBiome
  			}
      }
     
+    @Override
     public WorldGenerator getRandomWorldGenForGrass(Random rand) {
         if (rand.nextInt(3) == 0) {
             int k = rand.nextInt(3);
@@ -162,6 +165,7 @@ public class BiomeFloatingIslands extends KetherBiome
         }
     }
     
+    @Override
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
     	return TREE_FEATURE1;
@@ -171,6 +175,7 @@ public class BiomeFloatingIslands extends KetherBiome
     public void addDefaultFlowers(){
     }
     
+    @Override
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
         this.generateBiomeTerrainMysticForest(worldIn, rand, chunkPrimerIn, x, z, noiseVal);

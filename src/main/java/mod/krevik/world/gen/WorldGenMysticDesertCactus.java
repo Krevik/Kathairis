@@ -2,7 +2,7 @@ package mod.krevik.world.gen;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.KCore;
 
 import net.minecraft.block.state.IBlockState;

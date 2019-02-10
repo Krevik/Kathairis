@@ -2,7 +2,7 @@ package mod.krevik.world.gen;
 
 import java.util.Random;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.KCore;
 
 import net.minecraft.block.state.IBlockState;
@@ -31,7 +31,7 @@ public class WorldGenMysticMultiGrass extends WorldGenerator
     	int X=position.getX();
     	int Z=position.getZ();
     	int height=random.nextInt(10)+1;
-	   	if(worldIn.getBlockState(new BlockPos(X,Y-1,Z))==KCore.CorruptedGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y,Z))){
+	   	if(worldIn.getBlockState(new BlockPos(X,Y-1,Z))==KCore.KatharianGrass.getDefaultState()&&worldIn.isAirBlock(new BlockPos(X,Y,Z))){
 	    	for(int c=0;c<height;c++) {
 	    		BlockPos target=new BlockPos(X,Y+c,Z);
 	    		setBlockAndNotifyAdequately(worldIn,target, grassToGen.getDefaultState());

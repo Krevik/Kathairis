@@ -35,7 +35,7 @@ public class WorldGenMudPaddle extends WorldGenerator
         for (int i = 0; i < 128; ++i)
         {
             BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
-            if(worldIn.getBlockState(blockpos.down())==KCore.CorruptedGrass.getDefaultState()) {
+            if(worldIn.getBlockState(blockpos.down())==KCore.KatharianGrass.getDefaultState()) {
             	setBlockAndNotifyAdequately(worldIn,blockpos.down(), this.tallGrassState);
             }
         }

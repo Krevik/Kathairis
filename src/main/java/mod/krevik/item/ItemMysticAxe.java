@@ -41,6 +41,7 @@ public class ItemMysticAxe extends MysticTool
         super(Name,tab,1F,1F,material, EFFECTIVE_ON);
     }
 
+    @Override
     public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
         Material material = state.getMaterial();
@@ -49,6 +50,7 @@ public class ItemMysticAxe extends MysticTool
     
 
     
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {

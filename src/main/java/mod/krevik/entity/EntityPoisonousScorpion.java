@@ -2,7 +2,7 @@ package mod.krevik.entity;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.entity.ai.EntityAIAvoidMovingSands;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.util.MysticLootTables;
 
 import net.minecraft.block.Block;
@@ -44,7 +44,7 @@ public class EntityPoisonousScorpion extends EntityMob
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.tasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.2D, false));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
     }
     
     public int getMaxSpawnedInChunk()

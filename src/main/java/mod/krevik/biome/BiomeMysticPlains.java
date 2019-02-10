@@ -38,8 +38,8 @@ public class BiomeMysticPlains extends KetherBiome
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;
         this.decorator.grassPerChunk = 8; //8
-        this.topBlock=KCore.CorruptedGrass.getDefaultState();
-        this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
+        this.topBlock=KCore.KatharianGrass.getDefaultState();
+        this.fillerBlock=KCore.KatharianDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Mystic Plains");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntityMysticBird.class, 12, 1, 3));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityJellyFish.class, 10, 1, 1));

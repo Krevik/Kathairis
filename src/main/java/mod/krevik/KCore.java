@@ -1,6 +1,9 @@
 package mod.krevik;
 
+import mod.krevik.block.*;
+import mod.krevik.block.plants.*;
 import mod.krevik.capability.CapabilityHandler;
+import mod.krevik.item.*;
 import mod.krevik.potion.DissolutionPotion;
 import mod.krevik.potion.StunPotion;
 import mod.krevik.biome.BiomeFloatingIslands;
@@ -9,75 +12,11 @@ import mod.krevik.biome.BiomeMysticDesert;
 import mod.krevik.biome.BiomeMysticForest;
 import mod.krevik.biome.BiomeMysticPlains;
 import mod.krevik.biome.BiomeMysticSwamps;
-import mod.krevik.block.BaseBlock;
-import mod.krevik.block.BlockBaurble;
-import mod.krevik.block.BlockBisonStars;
-import mod.krevik.block.BlockBlueFruitPlant;
-import mod.krevik.block.BlockButterflyFlower;
-import mod.krevik.block.BlockCharger;
-import mod.krevik.block.BlockChristmasGift;
-import mod.krevik.block.BlockCloudParticleEmitter;
-import mod.krevik.block.BlockCorruptedGrass;
-import mod.krevik.block.BlockCrystal;
-import mod.krevik.block.BlockEasterEgg;
-import mod.krevik.block.BlockEnergyShard;
-import mod.krevik.block.BlockGeckoEggs;
-import mod.krevik.block.BlockGooseberry;
-import mod.krevik.block.BlockJadeVines;
-import mod.krevik.block.BlockKatharianSand;
-import mod.krevik.block.BlockLayeredSand;
-import mod.krevik.block.BlockLuminescentGnarl;
-import mod.krevik.block.BlockMagicBeans;
-import mod.krevik.block.BlockMysticBush;
-import mod.krevik.block.BlockMysticCloud;
-import mod.krevik.block.BlockMysticDeadGrass;
-import mod.krevik.block.BlockMysticDoors;
-import mod.krevik.block.BlockMysticFence;
-import mod.krevik.block.BlockMysticFenceGate;
-import mod.krevik.block.BlockMysticFungus;
-import mod.krevik.block.BlockMysticLeaf;
-import mod.krevik.block.BlockMysticLeafWithChristmas;
-import mod.krevik.block.BlockMysticLog;
-import mod.krevik.block.BlockMysticMiniGrass;
-import mod.krevik.block.BlockMysticOre;
-import mod.krevik.block.BlockMysticPlanks;
-import mod.krevik.block.BlockMysticPortal;
-import mod.krevik.block.BlockMysticSapling;
-import mod.krevik.block.BlockMysticSlabBase;
-import mod.krevik.block.BlockMysticStairs;
-import mod.krevik.block.BlockMysticTallGrass;
-import mod.krevik.block.BlockMysticWall;
-import mod.krevik.block.BlockMysticWoodTrapdoor;
-import mod.krevik.block.BlockMythicStoneBricks;
-import mod.krevik.block.BlockMythicStonePillar;
-import mod.krevik.block.BlockMythicStoneStandingSign;
-import mod.krevik.block.BlockMythicStoneWallSign;
-import mod.krevik.block.BlockRedwoodLog;
-import mod.krevik.block.BlockRefinedCloud;
-import mod.krevik.block.BlockSnowdropCyprepedium;
-import mod.krevik.block.BlockSwampGas;
-import mod.krevik.block.BlockTurtleShellPlate;
+import mod.krevik.block.BlockKatharianGrass;
 import mod.krevik.command.SandstormCommand;
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.world.dimension.WorldProviderMystic;
-import mod.krevik.item.BaseItem;
-import mod.krevik.item.BaseWand;
-import mod.krevik.item.ItemBasicKathairisMusicDisc;
-import mod.krevik.item.ItemButterflyCatcher;
-import mod.krevik.item.ItemGlassJar;
-import mod.krevik.item.ItemKatharianArrow;
-import mod.krevik.item.ItemMysticArmor;
-import mod.krevik.item.ItemMysticAxe;
-import mod.krevik.item.ItemMysticDoor;
-import mod.krevik.item.ItemMysticFood;
-import mod.krevik.item.ItemMysticHoe;
-import mod.krevik.item.ItemMysticPickaxe;
-import mod.krevik.item.ItemMysticSeedFood;
-import mod.krevik.item.ItemMysticShovel;
-import mod.krevik.item.ItemMysticSword;
-import mod.krevik.item.ItemMythicStoneSign;
-import mod.krevik.item.ItemRitualBlade;
-import mod.krevik.network.KetherPacketHandler;
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.recipe.ChargerRecipes;
 import mod.krevik.recipe.RecipeHandler;
 import mod.krevik.util.CreativeTabsMystic;
@@ -85,6 +24,7 @@ import mod.krevik.util.FunctionHelper;
 import mod.krevik.util.IProxy;
 import mod.krevik.util.RegistryHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -100,10 +40,8 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -138,15 +76,15 @@ public class KCore {
     public static int updateRendererCount=0;
 
 	public static Item.ToolMaterial TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 1000, 7F, 2.5F, 12).setRepairItem(new ItemStack(KCore.TitaniumIngot));
-	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", KCore.MODID+"kathairis:titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
+	public static ItemArmor.ArmorMaterial TITANIUMARMOR = EnumHelper.addArmorMaterial("titanium", KCore.MODID+":titanium", 22, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1F).setRepairItem(new ItemStack(KCore.TitaniumIngot));
 	
-	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("kathairis", 3, 2000, 12F, 3.5F, 12).setRepairItem(new ItemStack(KCore.MysticGem));
-	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("kathairis", KCore.MODID+"kathairis:kathairis", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.MysticGem));
+	public static Item.ToolMaterial MYSTIC = EnumHelper.addToolMaterial("mystic", 3, 2000, 12F, 3.5F, 12).setRepairItem(new ItemStack(KCore.MysticGem));
+	public static ItemArmor.ArmorMaterial MYSTICARMOR = EnumHelper.addArmorMaterial("mystic", KCore.MODID+":mystic", 30, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.MysticGem));
 	
-	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", KCore.MODID+"kathairis:cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(KCore.CloudPearl));
+	public static ItemArmor.ArmorMaterial CLOUDARMOR = EnumHelper.addArmorMaterial("cloud", KCore.MODID+":cloud", 5, new int[]{1, 2, 3, 1}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(KCore.CloudPearl));
 
 	public static Item.ToolMaterial REVENUM = EnumHelper.addToolMaterial("revenum", 3, 800, 7F, 3F, 18).setRepairItem(new ItemStack(KCore.RevenumIngot));
-	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", KCore.MODID+"kathairis:revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
+	public static ItemArmor.ArmorMaterial REVENUMARMOR = EnumHelper.addArmorMaterial("revenum", KCore.MODID+":revenum", 15, new int[]{3, 5, 7, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2F).setRepairItem(new ItemStack(KCore.RevenumIngot));
 	
 	public static Item.ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("crystal", 3, 1000, 2F, 4F, 22).setRepairItem(new ItemStack(KCore.CrystalsCluster));
 	public static Item.ToolMaterial DARKNESS = EnumHelper.addToolMaterial("darkness", 3, 100, 1F, 3.5F, 21).setRepairItem(new ItemStack(KCore.DarknessEssence));
@@ -157,11 +95,11 @@ public class KCore {
 	@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticPortal)
     public static final BlockMysticPortal MysticPortal = (BlockMysticPortal) new BlockMysticPortal(Ref.MysticPortal, null,-1f,-1f, SoundType.GLASS).setLightLevel(1F);
     
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CorruptedDirt)
-    public static final BaseBlock CorruptedDirt = new BaseBlock(Ref.CorruptedDirt, Material.GROUND, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.GROUND);
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.KatharianDirt)
+    public static final BaseBlock KatharianDirt = new BaseBlock(Ref.KatharianDirt, Material.GROUND, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.GROUND);
    
-    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CorruptedGrass)
-    public static final BlockCorruptedGrass CorruptedGrass = new BlockCorruptedGrass();
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.KatharianGrass)
+    public static final BlockKatharianGrass KatharianGrass = new BlockKatharianGrass();
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MythicStone)
     public static final BaseBlock MythicStone = new BaseBlock(Ref.MythicStone, Material.ROCK, CreativeTabsMystic.buildingBlocks, 2.5F, 2.5F, SoundType.STONE);
@@ -182,16 +120,16 @@ public class KCore {
     public static final BlockMysticFungus MysticFungus = (BlockMysticFungus) new BlockMysticFungus(Ref.MysticFungus).setLightLevel(0.9F);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticMiniGrass)
-    public static final BlockMysticMiniGrass MysticMiniGrass= new BlockMysticMiniGrass(Ref.MysticMiniGrass,true);
+    public static final BlockMysticMiniGrass MysticMiniGrass= new BlockMysticMiniGrass(Ref.MysticMiniGrass);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticTallGrass)
-    public static final BlockMysticTallGrass MysticTallGrass= new BlockMysticTallGrass(Ref.MysticTallGrass,false,true);
+    public static final BlockMysticTallGrass MysticTallGrass= new BlockMysticTallGrass(Ref.MysticTallGrass,true);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticFlower)
-    public static final BlockMysticBush MysticFlower = (BlockMysticBush) new BlockMysticBush(Ref.MysticFlower,false,false).setLightLevels(0.9F);
+    public static final BlockMysticFlower MysticFlower = (BlockMysticFlower) new BlockMysticFlower(Ref.MysticFlower).setLightLevels(0.9F);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticNightFlower)
-    public static final BlockMysticBush MysticNightFlower = (BlockMysticBush) new BlockMysticBush(Ref.MysticNightFlower,false,false);
+    public static final BlockMysticNightFlower MysticNightFlower = new BlockMysticNightFlower(Ref.MysticNightFlower);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.TitaniumOre)
     public static final BlockMysticOre TitaniumOre = new BlockMysticOre(Ref.TitaniumOre,5F,15F,1,1,0,0);
@@ -200,7 +138,7 @@ public class KCore {
     public static final BaseBlock TitaniumBlock = new BaseBlock(Ref.TitaniumBlock,Material.IRON,CreativeTabsMystic.buildingBlocks,7F,20F,SoundType.METAL);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticMultiGrass)
-    public static final BlockMysticTallGrass MysticMultiGrass= new BlockMysticTallGrass(Ref.MysticMultiGrass,true,false);
+    public static final BlockMysticMultiGrass MysticMultiGrass= new BlockMysticMultiGrass(Ref.MysticMultiGrass,false);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MythicStoneTiles)
     public static final BaseBlock MythicStoneTiles = new BaseBlock(Ref.MythicStoneTiles, Material.ROCK, CreativeTabsMystic.buildingBlocks, 2.5F, 2.5F, SoundType.STONE);
@@ -233,7 +171,7 @@ public class KCore {
     public static final BaseBlock WeatheredRockBricks = new BaseBlock(Ref.WeatheredRockBricks, Material.ROCK, CreativeTabsMystic.buildingBlocks, 2.5F, 2.5F, SoundType.STONE);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MysticDeadGrass)
-    public static final BlockMysticDeadGrass MysticDeadGrass= new BlockMysticDeadGrass(Ref.MysticDeadGrass,true);
+    public static final BlockMysticDeadGrass MysticDeadGrass = new BlockMysticDeadGrass(Ref.MysticDeadGrass,true);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.GemsOre)
     public static final BlockMysticOre GemsOre = new BlockMysticOre(Ref.GemsOre,5F,15F,1,1,5,10);
@@ -260,7 +198,7 @@ public class KCore {
     public static final BlockBlueFruitPlant BlueFruitPlant = (BlockBlueFruitPlant) new BlockBlueFruitPlant(Ref.BlueFruitPlant).setLightOpacity(0);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.EyePlant)
-    public static final BlockMysticBush EyePlant = new BlockMysticBush(Ref.EyePlant,false,false);
+    public static final BlockEyePlant EyePlant = new BlockEyePlant(Ref.EyePlant);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MagicBeans)
     public static final BlockMagicBeans MagicBeans = (BlockMagicBeans) new BlockMagicBeans(Ref.MagicBeans).setLightOpacity(0);
@@ -320,7 +258,7 @@ public class KCore {
     public static final BaseBlock MudBricks = new BaseBlock(Ref.MudBricks, Material.ROCK, CreativeTabsMystic.buildingBlocks, 2F, 2F, SoundType.STONE);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.ButterflyFlower)
-    public static final BlockButterflyFlower ButterflyFlower = new BlockButterflyFlower(Ref.ButterflyFlower, false,false);
+    public static final BlockButterflyFlower ButterflyFlower = new BlockButterflyFlower(Ref.ButterflyFlower,false);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.BlueCloudBricks)
     public static final BaseBlock BlueCloudBricks = new BaseBlock(Ref.BlueCloudBricks, Material.CLOTH, CreativeTabsMystic.buildingBlocks, 1F, 1F, SoundType.CLOTH);
@@ -341,7 +279,7 @@ public class KCore {
     public static final BlockCloudParticleEmitter CloudParticleEmitter = new BlockCloudParticleEmitter(Ref.CloudParticleEmitter);
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Succulent)
-    public static final BlockMysticBush Succulent = new BlockMysticBush(Ref.Succulent,false,false);
+    public static final BlockSucculent Succulent = new BlockSucculent(Ref.Succulent);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.GooseberryBlock)
     public static final BlockGooseberry GooseberryBlock = new BlockGooseberry(Ref.GooseberryBlock);
@@ -389,13 +327,13 @@ public class KCore {
     public static final BaseBlock SoulStoneBricksWithBones = new BaseBlock(Ref.SoulStoneBricksWithBones, Material.ROCK, CreativeTabsMystic.buildingBlocks, 1F, 1F, SoundType.STONE);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.DeadLichen)
-    public static final BlockMysticBush DeadLichen = new BlockMysticBush(Ref.DeadLichen,false,false);
+    public static final BlockDeadLichen DeadLichen = new BlockDeadLichen(Ref.DeadLichen);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CursedFlower)
-    public static final BlockMysticBush CursedFlower = new BlockMysticBush(Ref.CursedFlower,false,false);
+    public static final BlockCursedFlower CursedFlower = new BlockCursedFlower(Ref.CursedFlower);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.SteppedSucculent)
-    public static final BlockMysticBush SteppedSucculent = new BlockMysticBush(Ref.SteppedSucculent,true,false);
+    public static final BlockSteppedSucculent SteppedSucculent = new BlockSteppedSucculent(Ref.SteppedSucculent);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MythicStoneStandingSign)
     public static final BlockMythicStoneStandingSign MythicStoneStandingSign = new BlockMythicStoneStandingSign(Ref.MythicStoneStandingSign);
@@ -473,10 +411,10 @@ public class KCore {
     public static final BlockMysticDoors Soul_Wood_Door = new BlockMysticDoors(Ref.Soul_Wood_Door,Material.WOOD,null,4F,4F,SoundType.WOOD);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Plant_Blue_Cloud)
-    public static final BlockMysticBush Plant_Blue_Cloud = new BlockMysticBush(Ref.Plant_Blue_Cloud,false,false);
+    public static final BlockCloudPlant Plant_Blue_Cloud = new BlockCloudPlant(Ref.Plant_Blue_Cloud);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Plant_Yellow_Cloud)
-    public static final BlockMysticBush Plant_Yellow_Cloud = new BlockMysticBush(Ref.Plant_Yellow_Cloud,false,false);
+    public static final BlockCloudPlant Plant_Yellow_Cloud = new BlockCloudPlant(Ref.Plant_Yellow_Cloud);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Solis_Crystals)
     public static final BaseBlock Solis_Crystals = (BaseBlock) new BaseBlock(Ref.Solis_Crystals, Material.GLASS, CreativeTabsMystic.buildingBlocks, 5F, 5F, SoundType.GLASS).setLightLevel(0.5F).setLightOpacity(0);
@@ -488,7 +426,7 @@ public class KCore {
     public static final BlockRefinedCloud Refined_Cloud_Yellow = (BlockRefinedCloud) new BlockRefinedCloud(Ref.Refined_Cloud_Yellow).setLightOpacity(50);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Block_Iron_Gold)
-    public static final BaseBlock Block_Iron_Gold = (BaseBlock) new BaseBlock(Ref.Block_Iron_Gold, Material.IRON, CreativeTabsMystic.buildingBlocks, 5F, 5F, SoundType.METAL);
+    public static final BaseBlock Block_Iron_Gold = new BaseBlock(Ref.Block_Iron_Gold, Material.IRON, CreativeTabsMystic.buildingBlocks, 5F, 5F, SoundType.METAL);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Gecko_Eggs)
     public static final BlockGeckoEggs Gecko_Eggs = new BlockGeckoEggs(Ref.Gecko_Eggs);
@@ -534,10 +472,12 @@ public class KCore {
 
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.snowdrop_cyprepedium)
     public static final BlockSnowdropCyprepedium snowdrop_Cyprepedium = new BlockSnowdropCyprepedium(Ref.snowdrop_cyprepedium);
-    //@GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Hell_Plant)
-   //public static final BlockMysticBush Hell_Plant = (BlockMysticBush) new BlockMysticBush(Ref.Hell_Plant,true,false).setLightLevel(0.5F);
-    
-   // @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Butterfly_Analysing_Table)
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.glowvines)
+    public static final BlockGlowVines glowvines = (BlockGlowVines) new BlockGlowVines(Ref.glowvines,true).setLightLevel(0.6f);
+
+
+    // @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.Butterfly_Analysing_Table)
     //public static final BlockButterflyAnalysingTable Butterfly_Analysing_Table = new BlockButterflyAnalysingTable(Ref.Butterfly_Analysing_Table);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ "MysticForest")
@@ -674,7 +614,7 @@ public class KCore {
     public static final ItemMysticFood CottonCandy = new ItemMysticFood(Ref.CottonCandy, CreativeTabsMystic.food, 4, 0.6F, false);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.BlueFruit)
-    public static final ItemMysticSeedFood BlueFruit = new ItemMysticSeedFood(Ref.BlueFruit, 3,0.4F,KCore.BlueFruitPlant,KCore.CorruptedGrass);
+    public static final ItemMysticSeedFood BlueFruit = new ItemMysticSeedFood(Ref.BlueFruit, 3,0.4F,KCore.BlueFruitPlant,KCore.KatharianGrass);
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.CrystalsCluster)
 	public static final BaseItem CrystalsCluster = new BaseItem(Ref.CrystalsCluster, CreativeTabsMystic.miscellaneous);
@@ -689,7 +629,7 @@ public class KCore {
 	public static final BaseItem TurtleShell = new BaseItem(Ref.TurtleShell, CreativeTabsMystic.miscellaneous);
 	
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.MagicBeansItem)
-    public static final ItemMysticSeedFood MagicBeansItem = (ItemMysticSeedFood) new ItemMysticSeedFood(Ref.MagicBeansItem, 0,0.1F,KCore.MagicBeans,KCore.CorruptedGrass).setAlwaysEdible();
+    public static final ItemMysticSeedFood MagicBeansItem = (ItemMysticSeedFood) new ItemMysticSeedFood(Ref.MagicBeansItem, 0,0.1F,KCore.MagicBeans,KCore.KatharianGrass).setAlwaysEdible();
     
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.BisonMeat)
     public static final ItemMysticFood BisonMeat = new ItemMysticFood(Ref.BisonMeat,CreativeTabsMystic.food, 6,0.9F,false);
@@ -829,6 +769,20 @@ public class KCore {
     @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_catcher)
     public static final ItemButterflyCatcher butterfly_catcher = new ItemButterflyCatcher(Ref.butterfly_catcher);
 
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_common_1)
+    public static final ItemButterfly butterfly_common_1= new ItemButterfly(Ref.butterfly_common_1,CreativeTabsMystic.miscellaneous, EnumRarity.COMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_common_2)
+    public static final ItemButterfly butterfly_common_2= new ItemButterfly(Ref.butterfly_common_2,CreativeTabsMystic.miscellaneous, EnumRarity.COMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_common_moth)
+    public static final ItemButterfly butterfly_common_moth= new ItemButterfly(Ref.butterfly_common_moth,CreativeTabsMystic.miscellaneous, EnumRarity.COMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_illukini)
+    public static final ItemButterfly butterfly_illukini= new ItemButterfly(Ref.butterfly_illukini,CreativeTabsMystic.miscellaneous, EnumRarity.UNCOMMON);
+
+    @GameRegistry.ObjectHolder(KCore.MODID +":"+ Ref.butterfly_cloud_shimmer)
+    public static final ItemButterfly butterfly_cloud_shimmer= new ItemButterfly(Ref.butterfly_cloud_shimmer,CreativeTabsMystic.miscellaneous, EnumRarity.RARE);
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
@@ -840,13 +794,13 @@ public class KCore {
         new RecipeHandler().addRecipes();
     }
 
-    public static KetherDataStorage data = KetherDataStorage.initialise();
+    public static KathairisDataStorage data = KathairisDataStorage.initialise();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         CapabilityHandler.registerCapabilities();
     	WorldServer.MAX_ENTITY_RADIUS=12D;
-    	KetherPacketHandler.init();
+    	KathairisPacketHandler.init();
 
     	KCore.instance.dimRegistry();
         proxy.preInit(event);
@@ -920,8 +874,8 @@ public class KCore {
         public static final String Gooseberry = "gooseberry";
         public static final String CloudEssence = "cloudessence";
         public static final String MysticPortal = "mysticportal";
-        public static final String CorruptedDirt = "corrupteddirt";
-        public static final String CorruptedGrass = "corruptedgrass";
+        public static final String KatharianDirt = "corrupteddirt";
+        public static final String KatharianGrass = "corruptedgrass";
         public static final String MythicStone = "mythicstone";
         public static final String MysticPlanks = "mysticplanks";
         public static final String MysticLog = "mysticlog";
@@ -1089,6 +1043,14 @@ public class KCore {
         public static final String baurble="baurble";
         public static final String butterfly_catcher="butterfly_catcher";
         public static final String snowdrop_cyprepedium="snowdrop_cyprepedium";
+
+        public static final String butterfly_common_1="butterfly_common_1";
+        public static final String butterfly_common_2="butterfly_common_2";
+        public static final String butterfly_illukini="butterfly_illukini";
+        public static final String butterfly_common_moth="butterfly_common_moth";
+        public static final String butterfly_cloud_shimmer="butterfly_cloud_shimmer";
+
+        public static final String glowvines="glowvines";
     }
     
 

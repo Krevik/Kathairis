@@ -5,9 +5,9 @@ import javax.annotation.Nullable;
 import mod.krevik.block.BlockMysticCloud;
 import mod.krevik.entity.ai.EntityAIPanicNew;
 import mod.krevik.KCore;
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.util.MysticLootTables;
-import mod.krevik.network.KetherPacketHandler;
-import mod.krevik.network.PacketCloudOisterClient;
+import mod.krevik.network.packets.PacketCloudOisterClient;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -125,7 +125,7 @@ public class EntityCloudOister extends EntityAmbientCreature
 	        			jumpTimer=0;
 	        			motionY+=0.5;
 	        			IMessage message = new PacketCloudOisterClient((float)posX,(float)posY,(float)posZ);
-	        			KetherPacketHandler.CHANNEL.sendToAll(message);
+	        			KathairisPacketHandler.CHANNEL.sendToAll(message);
 	        		}
 	        		if(!this.onGround) {
 	        			if(this.getRNG().nextInt(100)==0) {
@@ -203,14 +203,14 @@ public class EntityCloudOister extends EntityAmbientCreature
         boolean flag = super.attackEntityAsMob(entityIn);
     	this.motionY=0.5;
 		IMessage message = new PacketCloudOisterClient((int)posX,(int)posY,(int)posZ);
-		KetherPacketHandler.CHANNEL.sendToAll(message);
+		KathairisPacketHandler.CHANNEL.sendToAll(message);
         return flag;
     }
     
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
 		IMessage message = new PacketCloudOisterClient((int)posX,(int)posY,(int)posZ);
-		KetherPacketHandler.CHANNEL.sendToAll(message);
+		KathairisPacketHandler.CHANNEL.sendToAll(message);
     	return super.attackEntityFrom(source, amount);
     }
     /**

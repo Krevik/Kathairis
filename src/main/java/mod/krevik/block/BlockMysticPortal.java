@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import mod.krevik.ModConfig;
 import mod.krevik.world.dimension.TileEntityKether;
 import mod.krevik.entity.EntityStrangeWanderer;
 import mod.krevik.KCore;
@@ -47,6 +48,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -115,9 +117,11 @@ public class BlockMysticPortal extends BlockPortal
             	}
             }
         }
-        	for(int x=0;x<1+rand.nextInt(4);x++) {
-        		updateBlocksAroundPortal(worldIn, pos, state, rand);
-        	}
+        if(ModConfig.shouldBlocksSpreadAroundPortal) {
+            for (int x = 0; x < 1 + rand.nextInt(4); x++) {
+                updateBlocksAroundPortal(worldIn, pos, state, rand);
+            }
+        }
 
     }
     
@@ -160,10 +164,10 @@ public class BlockMysticPortal extends BlockPortal
     			if((MathHelper.abs(randomX-pos.getX())*MathHelper.abs(randomX-pos.getX()))+
     					(MathHelper.abs(randomZ-pos.getZ())*MathHelper.abs(randomZ-pos.getZ()))<=radius*radius) {
     			BlockPos tmp = new BlockPos(randomX,randomY,randomZ);
-    			if(worldIn.getBlockState(tmp)==KCore.CorruptedGrass.getDefaultState()) {
+    			if(worldIn.getBlockState(tmp)==KCore.KatharianGrass.getDefaultState()) {
     				worldIn.setBlockState(tmp, Blocks.GRASS.getDefaultState(),2);
     			}
-    			if(worldIn.getBlockState(tmp)==KCore.CorruptedDirt.getDefaultState()) {
+    			if(worldIn.getBlockState(tmp)==KCore.KatharianDirt.getDefaultState()) {
     				worldIn.setBlockState(tmp, Blocks.DIRT.getDefaultState(),2);
     			}
     			if(worldIn.getBlockState(tmp)==KCore.MythicStone.getDefaultState()) {
@@ -190,10 +194,10 @@ public class BlockMysticPortal extends BlockPortal
     				
 
     			if(worldIn.getBlockState(tmp)==Blocks.GRASS.getDefaultState()) {
-    				worldIn.setBlockState(tmp, KCore.CorruptedGrass.getDefaultState(),2);
+    				worldIn.setBlockState(tmp, KCore.KatharianGrass.getDefaultState(),2);
     			}
     			if(worldIn.getBlockState(tmp)==Blocks.DIRT.getDefaultState()) {
-    				worldIn.setBlockState(tmp, KCore.CorruptedDirt.getDefaultState(),2);
+    				worldIn.setBlockState(tmp, KCore.KatharianDirt.getDefaultState(),2);
     			}
     			if(worldIn.getBlockState(tmp)==Blocks.STONE.getDefaultState()) {
     				worldIn.setBlockState(tmp, KCore.MythicStone.getDefaultState(),2);
@@ -201,7 +205,7 @@ public class BlockMysticPortal extends BlockPortal
     			if(worldIn.getBlockState(tmp)==Blocks.SAND.getDefaultState()) {
     				worldIn.setBlockState(tmp, KCore.ForgottenSand.getDefaultState(),2);
     			}
-    			if(worldIn.getBlockState(tmp)==KCore.CorruptedGrass.getDefaultState()&&worldIn.getBlockState(tmp.up())==Blocks.AIR.getDefaultState()) {
+    			if(worldIn.getBlockState(tmp)==KCore.KatharianGrass.getDefaultState()&&worldIn.getBlockState(tmp.up())==Blocks.AIR.getDefaultState()) {
     				worldIn.setBlockState(tmp.up(), pickUpRandomFlowerStateForKether(rand),2);
     			}
     			}

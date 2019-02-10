@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "kathairis:blocks/easter_egg_3",
+		"particle": "kathairis:blocks/easter_egg_3"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 10, 12],
+			"faces": {
+				"north": {"uv": [0, 11, 4, 16], "texture": "#0"},
+				"east": {"uv": [0, 11, 4, 16], "texture": "#0"},
+				"south": {"uv": [0, 11, 4, 16], "texture": "#0"},
+				"west": {"uv": [0, 11, 4, 16], "texture": "#0"},
+				"up": {"uv": [0, 7, 4, 11], "texture": "#0"},
+				"down": {"uv": [0, 3, 4, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 2, 3],
+			"to": [13, 8, 13],
+			"faces": {
+				"north": {"uv": [4, 13, 9, 16], "texture": "#0"},
+				"east": {"uv": [4, 13, 9, 16], "texture": "#0"},
+				"south": {"uv": [4, 13, 9, 16], "texture": "#0"},
+				"west": {"uv": [4, 13, 9, 16], "texture": "#0"},
+				"up": {"uv": [4, 8, 9, 13], "texture": "#0"},
+				"down": {"uv": [9, 8, 4, 13], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 10, 5],
+			"to": [11, 12, 11],
+			"faces": {
+				"north": {"uv": [9, 15, 12, 16], "texture": "#0"},
+				"east": {"uv": [9, 15, 12, 16], "texture": "#0"},
+				"south": {"uv": [9, 15, 12, 16], "texture": "#0"},
+				"west": {"uv": [9, 15, 12, 16], "texture": "#0"},
+				"up": {"uv": [9, 12, 12, 15], "texture": "#0"},
+				"down": {"uv": [0, 0, 6, 6], "texture": "#missing"}
+			}
+		}
+	]
+}

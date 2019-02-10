@@ -68,6 +68,7 @@ public class ItemMysticFood extends ItemFood
      * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
      * the Item before the action is complete.
      */
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
     {
         if (entityLiving instanceof EntityPlayer)
@@ -102,6 +103,7 @@ public class ItemMysticFood extends ItemFood
         return stack;
     }
     
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack)
     {
@@ -109,6 +111,7 @@ public class ItemMysticFood extends ItemFood
    	 else return false;
     }
 
+    @Override
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
     {
         if (!worldIn.isRemote && this.potionId != null && worldIn.rand.nextFloat() < this.potionEffectProbability)
@@ -120,6 +123,7 @@ public class ItemMysticFood extends ItemFood
     /**
      * How long it takes to use or consume an item
      */
+    @Override
     public int getMaxItemUseDuration(ItemStack stack)
     {
         return 32;
@@ -128,6 +132,7 @@ public class ItemMysticFood extends ItemFood
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
+    @Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
         return EnumAction.EAT;
@@ -136,6 +141,7 @@ public class ItemMysticFood extends ItemFood
     /**
      * Called when the equipped item is right clicked.
      */
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -151,11 +157,13 @@ public class ItemMysticFood extends ItemFood
         }
     }
 
+    @Override
     public int getHealAmount(ItemStack stack)
     {
         return this.healAmount;
     }
 
+    @Override
     public float getSaturationModifier(ItemStack stack)
     {
         return this.saturationModifier;
@@ -164,11 +172,13 @@ public class ItemMysticFood extends ItemFood
     /**
      * Whether wolves like this food (true for raw and cooked porkchop).
      */
+    @Override
     public boolean isWolfsFavoriteMeat()
     {
         return this.isWolfsFavoriteMeat;
     }
 
+    @Override
     public ItemFood setPotionEffect(PotionEffect effect, float probability)
     {
         this.potionId = effect;
@@ -179,6 +189,7 @@ public class ItemMysticFood extends ItemFood
     /**
      * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
      */
+    @Override
     public ItemFood setAlwaysEdible()
     {
         this.alwaysEdible = true;

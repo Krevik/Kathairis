@@ -70,7 +70,6 @@ public class EntityPhasm extends EntityFlying implements IMob {
     int ticker=100;
     FunctionHelper helper = KCore.instance.functionHelper;
 
-    @SideOnly(Side.CLIENT)
     public void onUpdate()
     {
         super.onUpdate();
@@ -108,11 +107,15 @@ public class EntityPhasm extends EntityFlying implements IMob {
         }
         if(ticker>2) {ticker=0;}
         ticker++;
-        if(world.isRemote){
-            if(ticker>=1) {
-                double d0 = (double) ((float) posX + (getEntityBoundingBox().maxX-getEntityBoundingBox().minX)/2)-0.5;
-                double d1 = (double) ((float) posY + (getEntityBoundingBox().maxY-getEntityBoundingBox().minY)/2);
-                double d2 = (double) ((float) posZ + (getEntityBoundingBox().maxZ-getEntityBoundingBox().minZ)/2)-0.5;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void onLivingUpdate(){
+        super.onLivingUpdate();
+            if (ticker >= 1) {
+                double d0 = (double) ((float) posX + (getEntityBoundingBox().maxX - getEntityBoundingBox().minX) / 2) - 0.5;
+                double d1 = (double) ((float) posY + (getEntityBoundingBox().maxY - getEntityBoundingBox().minY) / 2);
+                double d2 = (double) ((float) posZ + (getEntityBoundingBox().maxZ - getEntityBoundingBox().minZ) / 2) - 0.5;
                 Particle theParticle = new DynamicParticle(
                         ParticlesFactory.TWINKLINGPARTICLE,
                         world,
@@ -126,8 +129,6 @@ public class EntityPhasm extends EntityFlying implements IMob {
                         .setFinalAlpha(0.1F).setEnableDepth(true);
                 Minecraft.getMinecraft().effectRenderer.addEffect(theParticle);
             }
-        }
-
     }
 
     public boolean attackEntityAsMob(Entity entityIn,float damage)

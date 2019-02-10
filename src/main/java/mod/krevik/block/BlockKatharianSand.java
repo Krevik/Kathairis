@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.KCore;
 
 import net.minecraft.block.Block;
@@ -41,6 +41,7 @@ public class BlockKatharianSand extends BaseBlock
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
@@ -48,10 +49,12 @@ public class BlockKatharianSand extends BaseBlock
     }
 
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
     }
 
+    @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
     }
@@ -62,6 +65,7 @@ public class BlockKatharianSand extends BaseBlock
             return FULL_BLOCK_AABB;
     }
 
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
@@ -72,21 +76,22 @@ public class BlockKatharianSand extends BaseBlock
         if (!worldIn.isRemote)
         {
             this.checkFallable(worldIn, pos);
-        }
-        KetherDataStorage data = KCore.data.getDataInstance(worldIn);
-        if(data!=null){
-            if(data.getIsSandstorm()){
-                if(worldIn.getBiome(pos)==KCore.MysticDesert){
-                    if(worldIn.isAirBlock(pos.up())){
-                        if(worldIn.canBlockSeeSky(pos.up())){
-                            if(rand.nextInt(15)==0){
-                                worldIn.setBlockState(pos.up(), KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,1),2);
+            KathairisDataStorage data = KCore.data.getDataInstance(worldIn);
+            if(data!=null){
+                if(data.getSandstormTime()>-1){
+                    if(worldIn.getBiome(pos)==KCore.MysticDesert){
+                        if(worldIn.isAirBlock(pos.up())){
+                            if(worldIn.canBlockSeeSky(pos.up())){
+                                if(rand.nextInt(15)==0){
+                                    worldIn.setBlockState(pos.up(), KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,1),2);
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
     }
 
     @Override
@@ -141,6 +146,7 @@ public class BlockKatharianSand extends BaseBlock
         return block == Blocks.FIRE || material == Material.AIR || material == Material.WATER || material == Material.LAVA;
     }
 
+    @Override
     public String getLocalizedName()
     {
         return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
@@ -151,6 +157,7 @@ public class BlockKatharianSand extends BaseBlock
             return Item.getItemFromBlock(this);
     }
 
+    @Override
     public int quantityDropped(Random random)
     {
         return 1;

@@ -34,15 +34,18 @@ public class BlockMythicStoneBricks extends BaseBlock
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return true;
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
     }
 
+    @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
     }
@@ -60,6 +63,7 @@ public class BlockMythicStoneBricks extends BaseBlock
 
     }
 
+    @Override
     public String getLocalizedName()
     {
         return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
@@ -70,6 +74,7 @@ public class BlockMythicStoneBricks extends BaseBlock
             return Item.getItemFromBlock(this);
     }
 
+    @Override
     public int quantityDropped(Random random)
     {
         return 1;

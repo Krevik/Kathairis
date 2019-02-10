@@ -2,7 +2,7 @@ package mod.krevik.client.particle;
 
 import java.awt.Color;
 
-import mod.krevik.block.BlockMysticBush;
+import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.BlockBush;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;

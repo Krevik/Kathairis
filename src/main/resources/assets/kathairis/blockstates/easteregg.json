@@ -1,5 +1,7 @@
 {
-	"variants": {
-		"normal": { "model": "kathairis:easteregg" }
-	}
+    "variants": {
+		"normal": [ { "model": "kathairis:easter_egg_1" },
+		{ "model": "kathairis:easter_egg_2" },
+		{ "model": "kathairis:easter_egg_3" }]
+    }
 }

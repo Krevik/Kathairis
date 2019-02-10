@@ -50,6 +50,7 @@ public class BlockChristmasGift extends BaseBlock {
         return this.getDefaultState().withProperty(VARIANT, BlockChristmasGift.EnumType.byMetadata(meta));
     }
 
+    @Override
     protected boolean canSilkHarvest()
     {
         return true;
@@ -79,6 +80,7 @@ public class BlockChristmasGift extends BaseBlock {
         return new BlockStateContainer(this, new IProperty[] {VARIANT});
     }
 
+    @Override
     public int quantityDropped(Random random)
     {
         return 0;

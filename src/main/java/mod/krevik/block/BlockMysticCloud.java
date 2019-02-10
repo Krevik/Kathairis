@@ -76,6 +76,7 @@ public class BlockMysticCloud extends BaseBlock
         return false;
     }
     
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -90,6 +91,7 @@ public class BlockMysticCloud extends BaseBlock
             return null;
     }
     
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     { 
     	entityIn.motionY=-0.0000001;

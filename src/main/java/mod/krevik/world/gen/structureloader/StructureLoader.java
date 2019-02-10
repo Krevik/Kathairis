@@ -2,6 +2,7 @@ package mod.krevik.world.gen.structureloader;
 
 import mod.krevik.KCore;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
@@ -31,6 +32,7 @@ public class StructureLoader extends WorldGenerator {
 
     public boolean generate(World world, Random rand, BlockPos pos, Structure structure) {
         BlockPos correctedPos = new BlockPos(pos.getX()+structure.getCenterPosCorrection().getX(),pos.getY()+structure.getCenterPosCorrection().getY(),pos.getZ()+structure.getCenterPosCorrection().getZ());
+        world.getChunkProvider().provideChunk(correctedPos.getX(), correctedPos.getZ());
 
         if (KCore.instance.functionHelper.isAvailableBlockToGenOn(world, correctedPos.down())) {
             Template template = getStructureTemplate(world,structure.getStructureLocation());
@@ -40,25 +42,13 @@ public class StructureLoader extends WorldGenerator {
                 int xSize = size.getX();
                 int ySize = size.getY();
                 int zSize = size.getZ();
-                ArrayList<BlockPos> corners = new ArrayList<BlockPos>();
-                corners.add(new BlockPos(correctedPos.getX()+xSize,correctedPos.getY(),correctedPos.getZ()));
-                corners.add(new BlockPos(correctedPos.getX(),correctedPos.getY(),correctedPos.getZ()+zSize));
-                corners.add(new BlockPos(correctedPos.getX()+xSize,correctedPos.getY(),correctedPos.getZ()+zSize));
-                corners.add(new BlockPos(correctedPos.getX()+xSize,correctedPos.getY()+ySize,correctedPos.getZ()+zSize));
-                corners.add(new BlockPos(correctedPos.getX(),correctedPos.getY()+ySize,correctedPos.getZ()+zSize));
-                corners.add(new BlockPos(correctedPos.getX()+xSize,correctedPos.getY()+ySize,correctedPos.getZ()));
-                corners.add(new BlockPos(correctedPos.getX(),correctedPos.getY()+ySize,correctedPos.getZ()));
-                for(BlockPos corner:corners){
-                    if(!world.isAirBlock(corner)){
-                        canGenerate=false;
-                        break;
-                    }
-                }
                 if(canGenerate){
+                    IBlockState iblockstate = world.getBlockState(correctedPos);
+                    world.notifyBlockUpdate(correctedPos, iblockstate, iblockstate, 3);
                     PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-                            .setRotation(Rotation.NONE).setIgnoreEntities(true).setChunk((ChunkPos) null)
-                            .setReplacedBlock((Block) null).setIgnoreStructureBlock(true);
-                    template.addBlocksToWorld(world, new BlockPos(correctedPos.getX()+structure.getCenterPosCorrection().getX(),correctedPos.getY()+structure.getCenterPosCorrection().getY(),correctedPos.getZ()+structure.getCenterPosCorrection().getZ()), placementsettings);
+                            .setRotation(Rotation.NONE).setIgnoreEntities(true)
+                            .setIgnoreStructureBlock(true);
+                    template.addBlocksToWorld(world, correctedPos, placementsettings);
                 }
             }
             return true;
@@ -68,9 +58,8 @@ public class StructureLoader extends WorldGenerator {
     }
 
     private Template getStructureTemplate(World world, ResourceLocation location) {
-        WorldServer worldserver = (WorldServer) world;
         MinecraftServer minecraftserver = world.getMinecraftServer();
-        TemplateManager templatemanager = worldserver.getStructureTemplateManager();
+        TemplateManager templatemanager = ((WorldServer) world).getStructureTemplateManager();
         //Template template = templatemanager.getTemplate(minecraftserver, new ResourceLocation(KCore.MODID+":stonetemple"));
         Template template = templatemanager.getTemplate(minecraftserver, location);
         return template;

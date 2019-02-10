@@ -1,6 +1,6 @@
 package mod.krevik.block;
 
-import mod.krevik.world.dimension.KetherDataStorage;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.KCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -76,6 +76,7 @@ public class BlockLayeredSand extends BaseBlock {
         return false;
     }
 
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos.down());
@@ -92,6 +93,7 @@ public class BlockLayeredSand extends BaseBlock {
         }
     }
 
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         this.checkAndDropBlock(worldIn, pos, state);
@@ -121,6 +123,7 @@ public class BlockLayeredSand extends BaseBlock {
         return Item.getItemFromBlock(KCore.Layered_Sand.getDefaultState().getBlock());
     }
 
+    @Override
     public int quantityDropped(Random random)
     {
         return 1;
@@ -132,19 +135,20 @@ public class BlockLayeredSand extends BaseBlock {
         {
             worldIn.setBlockToAir(pos);
         }*/
-        KetherDataStorage data = KCore.data.getDataInstance(worldIn);
-        if(data!=null){
-            if(data.getIsSandstorm()){
-                if(rand.nextInt(10)==0){
-                    int actualLayers=getLayers(state);
-                    if(actualLayers<8){
-                        worldIn.setBlockState(pos,KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,actualLayers+1),2);
+
+        if(!worldIn.isRemote) {
+            giveSandToNeighboursNew(state, worldIn, pos);
+            KathairisDataStorage data = KCore.data.getDataInstance(worldIn);
+            if(data!=null){
+                if(data.getSandstormTime()>-1){
+                    if(rand.nextInt(10)==0){
+                        int actualLayers=getLayers(state);
+                        if(actualLayers<8){
+                            worldIn.setBlockState(pos,KCore.Layered_Sand.getDefaultState().withProperty(BlockLayeredSand.LAYERS,actualLayers+1),2);
+                        }
                     }
                 }
             }
-        }
-        if(!worldIn.isRemote) {
-            giveSandToNeighboursNew(state, worldIn, pos);
         }
 
     }
@@ -245,6 +249,7 @@ public class BlockLayeredSand extends BaseBlock {
     }
 
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {

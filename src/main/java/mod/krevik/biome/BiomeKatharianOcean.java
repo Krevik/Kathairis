@@ -26,8 +26,8 @@ public class BiomeKatharianOcean extends KetherBiome
         this.decorator.extraTreeChance = 0F;
         this.decorator.flowersPerChunk = 0;
         this.decorator.grassPerChunk = 0;
-        this.topBlock=KCore.CorruptedGrass.getDefaultState();
-        this.fillerBlock=KCore.CorruptedDirt.getDefaultState();
+        this.topBlock=KCore.KatharianGrass.getDefaultState();
+        this.fillerBlock=KCore.KatharianDirt.getDefaultState();
         this.setRegistryName(KCore.MODID, "Katharian Ocean");
         this.spawnableCreatureList.add(new Biome.SpawnListEntry(EntitySquid.class, 6, 1, 6));
     }

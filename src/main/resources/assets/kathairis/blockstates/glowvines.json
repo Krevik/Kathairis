@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "facing=east,variant=top":  { "model": "kathairis:glowvines_top" },
+        "facing=south,variant=top": { "model": "kathairis:glowvines_top", "y": 90 },
+        "facing=west,variant=top":  { "model": "kathairis:glowvines_top", "y": 180 },
+        "facing=north,variant=top": { "model": "kathairis:glowvines_top", "y": 270 },
+        "facing=east,variant=mid":  { "model": "kathairis:glowvines_mid" },
+        "facing=south,variant=mid": { "model": "kathairis:glowvines_mid", "y": 90 },
+        "facing=west,variant=mid":  { "model": "kathairis:glowvines_mid", "y": 180 },
+        "facing=north,variant=mid": { "model": "kathairis:glowvines_mid", "y": 270 },
+        "facing=east,variant=bottom":  { "model": "kathairis:glowvines_bottom", "y": 90 },
+        "facing=south,variant=bottom": { "model": "kathairis:glowvines_bottom", "y": 180 },
+        "facing=west,variant=bottom":  { "model": "kathairis:glowvines_bottom", "y": 270 },
+        "facing=north,variant=bottom": { "model": "kathairis:glowvines_bottom" }
+    }
+}

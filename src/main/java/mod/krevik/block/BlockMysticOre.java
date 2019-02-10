@@ -32,6 +32,7 @@ public class BlockMysticOre extends BaseBlock
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random random)
     {
         return MathHelper.getInt(random, minDrop1, maxDrop1);

@@ -178,7 +178,7 @@ public class WorldGenCustomCaveSecond {
     private BlockPos getTopGrassBlock(World worldIn,BlockPos position){
     	int top=0;
         	for(top=50;top<256;top++){
-        		if(worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))==KCore.CorruptedGrass.getDefaultState()){
+        		if(worldIn.getBlockState(new BlockPos(position.getX(),top,position.getZ()))==KCore.KatharianGrass.getDefaultState()){
         			break;
         		}
         	}

@@ -2,7 +2,7 @@ package mod.krevik.entity;
 
 import javax.annotation.Nullable;
 
-import mod.krevik.entity.ai.EntityAIAvoidMovingSands;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.entity.ai.EntityAIHowlerAttackStun;
 import mod.krevik.entity.ai.EntityAITargetSpecified;
 import mod.krevik.KCore;
@@ -25,13 +25,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 public class EntityHowler extends EntityMob
 {
     private static final DataParameter<Float> animTimer = EntityDataManager.<Float>createKey(EntityHowler.class, DataSerializers.FLOAT);
-    private static final DataParameter<Boolean> shouldAnimTail = EntityDataManager.<Boolean>createKey(EntityHowler.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Float> animTimerTail = EntityDataManager.<Float>createKey(EntityHowler.class, DataSerializers.FLOAT);
+    private static final DataParameter<Boolean> shouldAnimJaw = EntityDataManager.<Boolean>createKey(EntityHowler.class, DataSerializers.BOOLEAN);
 
 
     public EntityHowler(World worldIn)
@@ -47,7 +49,7 @@ public class EntityHowler extends EntityMob
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSands(this,1.2D));
+        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
         this.tasks.addTask(4, new EntityAIHowlerAttackStun(this, 1.0D, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.targetTasks.addTask(2, new EntityAITargetSpecified<>(this, EntityAnimal.class, false, new Predicate<Entity>()
@@ -90,17 +92,9 @@ public class EntityHowler extends EntityMob
     {
         super.entityInit();
         this.dataManager.register(animTimer, Float.valueOf(0));
-        this.dataManager.register(shouldAnimTail, Boolean.valueOf(false));
-    }
+        this.dataManager.register(animTimerTail, Float.valueOf(0));
+        this.dataManager.register(shouldAnimJaw, Boolean.valueOf(false));
 
-    public boolean getShouldAnimTail()
-    {
-        return (this.dataManager.get(shouldAnimTail));
-    }
-
-    public void setShouldAnimTail(boolean value)
-    {
-        this.dataManager.set(shouldAnimTail,value);
     }
 
     public void setAnimTimer(float time){
@@ -109,6 +103,22 @@ public class EntityHowler extends EntityMob
 
     public float getAnimTimer(){
         return this.dataManager.get(animTimer);
+    }
+
+    public void setAnimTimerTail(float time){
+        this.dataManager.set(animTimerTail,time);
+    }
+
+    public float getAnimTimerTail(){
+        return this.dataManager.get(animTimerTail);
+    }
+
+    public void setShouldAnimJaw(boolean should){
+        this.dataManager.set(shouldAnimJaw,should);
+    }
+
+    public boolean getShouldAnimJaw(){
+        return this.dataManager.get(shouldAnimJaw);
     }
     /**
      * Get the experience points the entity currently has.
@@ -149,32 +159,36 @@ public class EntityHowler extends EntityMob
         return flag;
     }
 
-    public int shouldAnimEars=0;
+    int someTimer=0;
     public void onUpdate() {
     	super.onUpdate();
-        if(!getShouldAnimTail()) {
-            if(getRNG().nextInt(1000)==0) {
-                setShouldAnimTail(true);
+    	if(getShouldAnimJaw()==false){
+    	    if(rand.nextInt(500)==0){
+    	        setShouldAnimJaw(true);
+            }
+        }else{
+    	    someTimer++;
+    	    if(someTimer>300){
+    	        someTimer=0;
+    	        setShouldAnimJaw(false);
             }
         }
-        if(getShouldAnimTail()) {
-            setAnimTimer(getAnimTimer()+2);
-            if(getAnimTimer()>200) {
+
+            setAnimTimer(getAnimTimer() + MathHelper.clamp(limbSwingAmount*limbSwing*10*movedDistance,0,25));
+            if (getAnimTimer() > 300) {
                 setAnimTimer(0);
-                setShouldAnimTail(false);
             }
-        }
-        if(shouldAnimEars==0){
-            if(getRNG().nextInt(1000)==0){
-                shouldAnimEars=1;
+
+            if(getAnimTimerTail()==0){
+                if(rand.nextInt(500)==0){
+                    setAnimTimerTail(getAnimTimerTail()+30);
+                }
+            }else{
+                setAnimTimerTail(getAnimTimerTail()+20);
+                if(getAnimTimerTail()>300){
+                    setAnimTimerTail(0);
+                }
             }
-        }
-        if(shouldAnimEars==1){
-            if(getRNG().nextInt(100)==0){
-                shouldAnimEars=0;
-            }
-        }
- 
     }
 
     protected SoundEvent getAmbientSound()
@@ -227,7 +241,6 @@ public class EntityHowler extends EntityMob
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setBoolean("shouldAnimTail",getShouldAnimTail());
         compound.setFloat("animTimer",getAnimTimer());
     }
 
@@ -237,7 +250,6 @@ public class EntityHowler extends EntityMob
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-        setShouldAnimTail(compound.getBoolean("shouldAnimTail"));
         setAnimTimer(compound.getFloat("animTimer"));
     }
 

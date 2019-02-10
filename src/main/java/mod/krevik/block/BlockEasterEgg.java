@@ -31,6 +31,7 @@ public class BlockEasterEgg extends BaseBlock
         this.setTickRandomly(false);
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
 
@@ -68,6 +69,12 @@ public class BlockEasterEgg extends BaseBlock
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
     	return FULL_BLOCK_AABB;
+    }
+
+    @Override
+    protected boolean canSilkHarvest()
+    {
+        return true;
     }
 
     /**

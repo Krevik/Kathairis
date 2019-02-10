@@ -36,6 +36,7 @@ public class ItemMysticSeedFood extends ItemMysticFood implements net.minecraftf
         this.soilId = soil;
     }
     
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
     {
         if (entityLiving instanceof EntityPlayer)
@@ -70,6 +71,7 @@ public class ItemMysticSeedFood extends ItemMysticFood implements net.minecraftf
     /**
      * Called when a Block is right-clicked with this Item
      */
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         ItemStack itemstack = player.getHeldItem(hand);
