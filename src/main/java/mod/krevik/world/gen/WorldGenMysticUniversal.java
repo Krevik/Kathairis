@@ -2,6 +2,7 @@ package mod.krevik.world.gen;
 
 import java.util.Random;
 
+import mod.krevik.block.BlockKatharianGrass;
 import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.KCore;
 
@@ -162,6 +163,19 @@ public class WorldGenMysticUniversal extends WorldGenerator
         		}
         	}
     	}
+    	if(mode==6){
+			int x=position.getX();
+			int z=position.getZ();
+			int y=worldIn.getHeight(new BlockPos(x,position.getY(),z)).getY();
+			if(y>120){
+				BlockPos pos = new BlockPos(x,y,z);
+				if(worldIn.isAirBlock(pos)){
+					if(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockKatharianGrass){
+						worldIn.setBlockState(pos,KCore.snowdrop_Cyprepedium.getDefaultState());
+					}
+				}
+			}
+		}
     	
         return true;
     }

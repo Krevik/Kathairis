@@ -9,6 +9,7 @@ import mod.krevik.EventSubscriber;
 import mod.krevik.entity.butterfly.EntityIllukini;
 import mod.krevik.entity.butterfly.EntityRubySile;
 import mod.krevik.entity.butterfly.EntitySkylight;
+import mod.krevik.world.gen.WorldGenMysticUniversal;
 import mod.krevik.world.gen.structureloader.StructureLoader;
 import mod.krevik.world.gen.WorldGenMysticOre;
 import mod.krevik.KCore;
@@ -32,6 +33,7 @@ public abstract class KetherBiome extends Biome
     private static final int TitaniumPerChunk = 9;
     private static final int RevenumPerChunk = 15;
     private StructureLoader structureLoader = new StructureLoader();
+    private WorldGenMysticUniversal SNOWDROP = new WorldGenMysticUniversal(6);
 
     public KetherBiome(Biome.BiomeProperties properties)
     {
@@ -146,6 +148,13 @@ public abstract class KetherBiome extends Biome
 			int rz = pos.getZ() + rand.nextInt(16);
 			int ry = 5 + rand.nextInt(128);
 			normalStone.generate(worldIn, rand, new BlockPos(rx,ry,rz));
+        }
+
+        for(int x=0;x<=2+rand.nextInt(2);x++){
+            int rx = pos.getX() + rand.nextInt(16);
+            int rz = pos.getZ() + rand.nextInt(16);
+            int ry = 5 + rand.nextInt(128);
+            SNOWDROP.generate(worldIn, rand, new BlockPos(rx,ry,rz));
         }
 
         for(int c=0;c<this.TitaniumPerChunk;c++){
