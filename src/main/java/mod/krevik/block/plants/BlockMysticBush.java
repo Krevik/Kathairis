@@ -192,6 +192,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
         return state;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
