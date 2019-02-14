@@ -1,12 +1,9 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
+import mod.krevik.KCore;
 import mod.krevik.entity.ai.EntityAIAttackMeleeBison;
 import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
-import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
@@ -28,14 +25,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntityBison extends EntityAnimal
 {
-    private static final DataParameter<Float> animTimer = EntityDataManager.<Float>createKey(EntityBison.class, DataSerializers.FLOAT);
-    private static final DataParameter<Boolean> shouldAnimTail = EntityDataManager.<Boolean>createKey(EntityBison.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Float> hapiness = EntityDataManager.<Float>createKey(EntityBison.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> animTimer = EntityDataManager.createKey(EntityBison.class, DataSerializers.FLOAT);
+    private static final DataParameter<Boolean> shouldAnimTail = EntityDataManager.createKey(EntityBison.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Float> hapiness = EntityDataManager.createKey(EntityBison.class, DataSerializers.FLOAT);
 
     public EntityBison(World worldIn)
     {
@@ -177,11 +175,11 @@ public class EntityBison extends EntityAnimal
                         setHapiness(0);
                         dropItem(KCore.functionHelper.getRandomMusicDisc(),0);
                         EntityItem item = new EntityItem(world,posX+0.5f,posY+0.5f,posZ+0.5f);
-                        item.setItem(new ItemStack(KCore.instance.functionHelper.getRandomMusicDisc(),1));
+                        item.setItem(new ItemStack(KCore.functionHelper.getRandomMusicDisc(),1));
                         world.spawnEntity(item);
                     }
                 }
-                KCore.instance.functionHelper.playTameEffect(world,getRNG(),this,true);
+                KCore.functionHelper.playTameEffect(world,getRNG(),this,true);
 
                 return true;
             }

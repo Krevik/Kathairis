@@ -1,19 +1,17 @@
 package mod.krevik.world.gen.forest;
 
-import java.util.Random;
-
-import mod.krevik.block.BlockMysticLeaf;
+import mod.krevik.KCore;
+import mod.krevik.block.BlockMysticLog;
 import mod.krevik.block.plants.BlockGlowVines;
 import mod.krevik.block.plants.BlockLuminescentGnarl;
-import mod.krevik.block.BlockMysticLog;
-import mod.krevik.KCore;
-
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
+import java.util.Random;
 
 public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 	
@@ -280,11 +278,7 @@ public class WorldGenHugeKathairisTree extends WorldGenAbstractTree{
 		if(!worldIn.isAirBlock(pos.up())) {
 			if (worldIn.getBlockState(pos.up()).getBlock() instanceof BlockGlowVines) {
 				BlockGlowVines.EnumType upperVariant = worldIn.getBlockState(pos.up()).getValue(BlockGlowVines.VARIANT);
-				if(upperVariant== BlockGlowVines.EnumType.BOTTOM){
-					can=false;
-				}else{
-					can=true;
-				}
+                can = upperVariant != BlockGlowVines.EnumType.BOTTOM;
 			}
 		}
 		return can;

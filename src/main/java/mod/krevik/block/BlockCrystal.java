@@ -1,12 +1,10 @@
 package mod.krevik.block;
 
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
-
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -14,11 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -43,31 +37,29 @@ public class BlockCrystal extends BaseBlock
     
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+
+    @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+
+    @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
-        return state.withProperty(FACING, mirrorIn.mirror((EnumFacing)state.getValue(FACING)));
+        return state.withProperty(FACING, mirrorIn.mirror(state.getValue(FACING)));
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        switch (((EnumFacing)state.getValue(FACING)).getAxis())
+        switch (state.getValue(FACING).getAxis())
         {
             case X:
             default:
@@ -80,7 +72,7 @@ public class BlockCrystal extends BaseBlock
     }
     
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {   
     	if(!worldIn.isRemote) {
     		entityIn.attackEntityFrom(DamageSource.MAGIC, 1);
@@ -94,10 +86,11 @@ public class BlockCrystal extends BaseBlock
             entityIn.attackEntityFrom(DamageSource.MAGIC, 1);
         }
     }
-    
+
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        switch (((EnumFacing)state.getValue(FACING)).getAxis())
+        switch (state.getValue(FACING).getAxis())
         {
             case X:
             default:
@@ -110,35 +103,26 @@ public class BlockCrystal extends BaseBlock
     }
 
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
-    /**
-     * Checks if this block can be placed exactly at the given position.
-     */
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-    	if(worldIn.getBlockState(pos.down())==KCore.VioletCrystal.getDefaultState()||worldIn.getBlockState(pos.down())==KCore.YellowCrystal.getDefaultState()||worldIn.getBlockState(pos.down())==KCore.BlueCrystal.getDefaultState()) {
-    		return false;
-    	}else {
-            return true;
-    	}
+        return worldIn.getBlockState(pos.down()) != KCore.VioletCrystal.getDefaultState() && worldIn.getBlockState(pos.down()) != KCore.YellowCrystal.getDefaultState() && worldIn.getBlockState(pos.down()) != KCore.BlueCrystal.getDefaultState();
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
+    @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos.offset(facing.getOpposite()));
 
         if (iblockstate.getBlock() == KCore.VioletCrystal)
         {
-            EnumFacing enumfacing = (EnumFacing)iblockstate.getValue(FACING);
+            EnumFacing enumfacing = iblockstate.getValue(FACING);
 
             if (enumfacing == facing)
             {
@@ -147,7 +131,7 @@ public class BlockCrystal extends BaseBlock
         }
         if (iblockstate.getBlock() == KCore.YellowCrystal)
         {
-            EnumFacing enumfacing = (EnumFacing)iblockstate.getValue(FACING);
+            EnumFacing enumfacing = iblockstate.getValue(FACING);
 
             if (enumfacing == facing)
             {
@@ -156,7 +140,7 @@ public class BlockCrystal extends BaseBlock
         }
         if (iblockstate.getBlock() == KCore.BlueCrystal)
         {
-            EnumFacing enumfacing = (EnumFacing)iblockstate.getValue(FACING);
+            EnumFacing enumfacing = iblockstate.getValue(FACING);
 
             if (enumfacing == facing)
             {
@@ -167,47 +151,40 @@ public class BlockCrystal extends BaseBlock
         return this.getDefaultState().withProperty(FACING, facing);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         IBlockState iblockstate = this.getDefaultState();
-        iblockstate = iblockstate.withProperty(FACING, EnumFacing.getFront(meta));
+        iblockstate = iblockstate.withProperty(FACING, EnumFacing.byIndex(meta));
         return iblockstate;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+
+    @Override
     public int getMetaFromState(IBlockState state)
     {
-        return ((EnumFacing)state.getValue(FACING)).getIndex();
+        return state.getValue(FACING).getIndex();
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
+        return new BlockStateContainer(this, FACING);
     }
 
-    public EnumPushReaction getMobilityFlag(IBlockState state)
+    @Override
+    public EnumPushReaction getPushReaction(IBlockState state)
     {
         return EnumPushReaction.NORMAL;
     }
 
-    /**
-     * Get the geometry of the queried face at the given position and state. This is used to decide whether things like
-     * buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
-     * <p>
-     * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that
-     * does not fit the other descriptions and will generally cause other things not to connect to the face.
-     * 
-     * @return an approximation of the form of the given face
-     */
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
         return BlockFaceShape.UNDEFINED;
     }
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;

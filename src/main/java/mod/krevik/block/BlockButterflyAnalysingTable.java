@@ -138,7 +138,7 @@ public class BlockButterflyAnalysingTable extends BlockContainer
     }
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }

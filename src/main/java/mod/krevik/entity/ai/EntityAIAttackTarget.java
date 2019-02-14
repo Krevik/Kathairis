@@ -3,7 +3,6 @@ package mod.krevik.entity.ai;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
-
 import net.minecraft.util.math.AxisAlignedBB;
 
 public class EntityAIAttackTarget<T extends EntityLivingBase> extends EntityAITarget

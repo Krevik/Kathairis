@@ -1,17 +1,12 @@
 package mod.krevik.util;
 
-import java.util.ArrayList;
-
+import mod.krevik.KCore;
 import mod.krevik.block.BaseBlock;
 import mod.krevik.block.BlockMysticLeaf;
 import mod.krevik.block.BlockMysticSlabBase;
-import mod.krevik.item.BaseItem;
-import mod.krevik.item.ItemBasicKathairisMusicDisc;
-import mod.krevik.item.ItemMysticArmor;
-import mod.krevik.item.ItemMysticFood;
-import mod.krevik.item.ItemMysticSword;
-import mod.krevik.item.MysticTool;
-import mod.krevik.KCore;
+import mod.krevik.item.*;
+
+import java.util.ArrayList;
 
 public class RegistryHelper {
 	

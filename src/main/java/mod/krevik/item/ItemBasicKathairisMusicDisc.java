@@ -1,9 +1,9 @@
 package mod.krevik.item;
 
-import mod.krevik.EventSubscriber;
-import mod.krevik.util.CreativeTabsMystic;
-import mod.krevik.KCore;
 import com.google.common.collect.Maps;
+import mod.krevik.EventSubscriber;
+import mod.krevik.KCore;
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.BlockJukebox;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
 {
-    private static final Map<SoundEvent, net.minecraft.item.ItemRecord> RECORDS = Maps.<SoundEvent, net.minecraft.item.ItemRecord>newHashMap();
+    private static final Map<SoundEvent, net.minecraft.item.ItemRecord> RECORDS = Maps.newHashMap();
     private final SoundEvent sound;
     protected String name;
     protected String Title;
@@ -44,10 +44,10 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
         this.maxStackSize = 1;
         this.setCreativeTab(CreativeTabs.MISC);
         RECORDS.put(this.sound, this);
-        setUnlocalizedName(name);
         setRegistryName(name);
+        setTranslationKey(name);
         this.setCreativeTab(CreativeTabsMystic.miscellaneous);
-        KCore.instance.regHelper.recordsList.add(this);
+        KCore.regHelper.recordsList.add(this);
         EventSubscriber.itemList.add(this);
         Title=Title1;
     }
@@ -57,21 +57,18 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);
 
-        if (iblockstate.getBlock() == Blocks.JUKEBOX && !((Boolean)iblockstate.getValue(BlockJukebox.HAS_RECORD)).booleanValue())
+        if (iblockstate.getBlock() == Blocks.JUKEBOX && !iblockstate.getValue(BlockJukebox.HAS_RECORD).booleanValue())
         {
             if (!worldIn.isRemote)
             {
                 ItemStack itemstack = player.getHeldItem(hand);
                 ((BlockJukebox)Blocks.JUKEBOX).insertRecord(worldIn, pos, iblockstate, itemstack);
-                worldIn.playEvent((EntityPlayer)null, 1010, pos, Item.getIdFromItem(this));
+                worldIn.playEvent(null, 1010, pos, Item.getIdFromItem(this));
                 itemstack.shrink(1);
                 player.addStat(StatList.RECORD_PLAYED);
             }
@@ -84,9 +81,6 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
         }
     }
 
-    /**
-     * allows items to add custom lines of information to the mouseover description
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
@@ -101,9 +95,6 @@ public class ItemBasicKathairisMusicDisc extends net.minecraft.item.ItemRecord
         return name;
     }
 
-    /**
-     * Return an item rarity from EnumRarity
-     */
     @Override
     public EnumRarity getRarity(ItemStack stack)
     {

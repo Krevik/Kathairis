@@ -1,15 +1,14 @@
 package mod.krevik.world.gen.forest;
 
-import java.util.Random;
-
-import mod.krevik.block.plants.BlockLuminescentGnarl;
 import mod.krevik.KCore;
-
+import mod.krevik.block.plants.BlockLuminescentGnarl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
+import java.util.Random;
 
 public class WorldGenSoulTree extends WorldGenAbstractTree{
 
@@ -19,7 +18,7 @@ public class WorldGenSoulTree extends WorldGenAbstractTree{
 
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {
-		if(KCore.instance.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())) {
+		if(KCore.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())) {
 		int height=0;
 		height=6+rand.nextInt(8);
 		int shiftX=0;
@@ -41,7 +40,7 @@ public class WorldGenSoulTree extends WorldGenAbstractTree{
 				shiftZ++;
 			}
 			this.setBlockAndNotifyAdequately(worldIn, new BlockPos(position.getX()+shiftX,position.getY()+c,position.getZ()+shiftZ), KCore.SoulLog.getDefaultState());
-			if(rand.nextInt((int)(height/2)+1)==0) {
+			if(rand.nextInt((height/2) +1)==0) {
 				int k=rand.nextInt(4);
 				if(k==0) {
 					this.setBlockAndNotifyAdequately(worldIn, new BlockPos(position.getX()+shiftX+1,position.getY()+c,position.getZ()+shiftZ), KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.EAST));

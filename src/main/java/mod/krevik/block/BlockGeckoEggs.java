@@ -1,12 +1,7 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.entity.EntityGecko;
 import mod.krevik.util.CreativeTabsMystic;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,14 +20,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockGeckoEggs extends BaseBlock{
 	
     protected static final AxisAlignedBB EGGS_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.3D, 0.7D);
+
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return EGGS_AABB;
     }
+
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
     	return EGGS_AABB;
@@ -44,6 +46,8 @@ public class BlockGeckoEggs extends BaseBlock{
 		this.setTickRandomly(true);
 	}
 	int timer=0;
+
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
     	super.updateTick(worldIn, pos, state, rand);
@@ -70,7 +74,7 @@ public class BlockGeckoEggs extends BaseBlock{
         IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
         Block block = iblockstate.getBlock();
 
-        return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        return (this.ignoreSimilarity || block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 	
     @Override
@@ -78,12 +82,14 @@ public class BlockGeckoEggs extends BaseBlock{
     {
         return 0;
     }
-    
+
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
     	return null;
     }
-    
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -96,17 +102,19 @@ public class BlockGeckoEggs extends BaseBlock{
     }
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
-    
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
-    
-    
+
+    @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
     {
     	return new ItemStack(this);

@@ -1,13 +1,12 @@
 package mod.krevik.world.gen.desert;
 
-import java.util.Random;
-
-import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import mod.krevik.KCore;
-
+import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WorldGenRedwoodTree extends WorldGenAbstractBasicMysticTree {
 
@@ -20,7 +19,7 @@ public class WorldGenRedwoodTree extends WorldGenAbstractBasicMysticTree {
 		//do Trunk
 		Random random = new Random();
 		int basicTreeSize = 6+random.nextInt(12);
-		if(KCore.instance.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())) {
+		if(KCore.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())) {
 			int actualBranchesNumber=0;
 			int branchChanceModifier=1+actualBranchesNumber+basicTreeSize/3;
 			BlockPos tmp;

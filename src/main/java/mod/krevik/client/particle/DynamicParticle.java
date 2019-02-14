@@ -1,7 +1,5 @@
 package mod.krevik.client.particle;
 
-import java.awt.Color;
-
 import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.BlockBush;
 import net.minecraft.client.Minecraft;
@@ -19,6 +17,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class DynamicParticle extends Particle {

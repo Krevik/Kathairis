@@ -1,13 +1,14 @@
 package mod.krevik.client.renderer;
 
+import mod.krevik.client.model.ModelLivingFlower;
 import mod.krevik.entity.EntityLivingFlower;
 import mod.krevik.util.EntityAndRenderRegistry;
-import mod.krevik.client.model.ModelLivingFlower;
-
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;

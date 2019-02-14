@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -29,18 +28,21 @@ public class BlockMysticFungus extends BlockMysticBush
         ,KCore.Mythic_Cobblestone,Blocks.STONE,Blocks.COBBLESTONE,KCore.WeatheredRock);
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return super.getBoundingBox(state, source, pos).offset(state.getOffset(source, pos));
         		
     }
-    
+
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return Fungus_AABB.offset(blockState.getOffset(worldIn, pos));
     }
 
- 
+
+    @Override
     public Block.EnumOffsetType getOffsetType()
     {
         return Block.EnumOffsetType.XZ;
@@ -71,13 +73,14 @@ public class BlockMysticFungus extends BlockMysticBush
         }
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         this.checkAndDropBlock(worldIn, pos, state);
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
 
 
 }

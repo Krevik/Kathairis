@@ -1,9 +1,6 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -12,6 +9,8 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenCloudTemple extends WorldGenerator
 {
@@ -172,7 +171,7 @@ Random random = new Random();
 			TileEntity te=world.getTileEntity(new BlockPos(i+3,j+4,k+13));
 			if(te!=null) {
 			if(te instanceof TileEntityChest) {
-				te=(TileEntityChest)world.getTileEntity(new BlockPos(i+3,j+4,k+13));
+				te= world.getTileEntity(new BlockPos(i+3,j+4,k+13));
 				for(int c=0;c<=rand.nextInt(10);c++) {
 					ItemStack is=KCore.functionHelper.getCloudTempleReward();
 					((TileEntityChest) te).setInventorySlotContents(1+rand.nextInt(9), is);
@@ -477,7 +476,7 @@ Random random = new Random();
 		te=world.getTileEntity(new BlockPos(i+7,j+4,k+5));
 		if(te!=null) {
 		if(te instanceof TileEntityChest) {
-			te=(TileEntityChest)world.getTileEntity(new BlockPos(i+7,j+4,k+5));
+			te= world.getTileEntity(new BlockPos(i+7,j+4,k+5));
 			for(int c=0;c<=rand.nextInt(10);c++) {
 				ItemStack is=KCore.functionHelper.getCloudTempleReward();
 				((TileEntityChest) te).setInventorySlotContents(1+rand.nextInt(9), is);
@@ -844,7 +843,7 @@ Random random = new Random();
 		te=world.getTileEntity(new BlockPos(i+12,j+4,k+10));
 		if(te!=null) {
 		if(te instanceof TileEntityChest) {
-			te=(TileEntityChest)world.getTileEntity(new BlockPos(i+12,j+4,k+10));
+			te= world.getTileEntity(new BlockPos(i+12,j+4,k+10));
 			for(int c=0;c<=rand.nextInt(10);c++) {
 				ItemStack is=KCore.functionHelper.getCloudTempleReward();
 				((TileEntityChest) te).setInventorySlotContents(1+rand.nextInt(9), is);

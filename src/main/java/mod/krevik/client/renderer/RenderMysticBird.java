@@ -1,11 +1,8 @@
 package mod.krevik.client.renderer;
 
-import javax.annotation.Nullable;
-
+import mod.krevik.client.model.ModelMysticBird;
 import mod.krevik.entity.EntityMysticBird;
 import mod.krevik.util.EntityAndRenderRegistry;
-import mod.krevik.client.model.ModelMysticBird;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -15,6 +12,8 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import scala.util.Random;
+
+import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class RenderMysticBird extends RenderLiving<EntityMysticBird>

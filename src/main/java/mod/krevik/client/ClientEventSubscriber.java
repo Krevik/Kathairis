@@ -1,14 +1,10 @@
 package mod.krevik.client;
 
 /**you can also import constants directly*/
-import static mod.krevik.KCore.MODID;
-import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 
 import mod.krevik.KCore;
 import mod.krevik.biome.BiomeMysticDesert;
 import mod.krevik.client.gui.GuiEnteringKathairis;
-import mod.krevik.client.particle.DynamicParticle;
-import mod.krevik.client.particle.ParticlesFactory;
 import mod.krevik.client.renderer.tileentity.TileEntityMythicStoneSignRenderer;
 import mod.krevik.tileentity.TileEntityMythicStoneSign;
 import mod.krevik.util.EntityAndRenderRegistry;
@@ -17,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiDownloadTerrain;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -28,7 +23,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -47,8 +41,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IRegistryDelegate;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
 import java.util.Map;
+
+import static mod.krevik.KCore.MODID;
+import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 
 @Mod.EventBusSubscriber(modid = MODID, value = CLIENT)
 public final class ClientEventSubscriber {
@@ -200,10 +196,10 @@ public final class ClientEventSubscriber {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(player!=null) {
 			if (player.dimension == KCore.DIMENSION_ID) {
-				KathairisDataStorage data = KCore.data.getDataInstance(player.world);
+				KathairisDataStorage data = KathairisDataStorage.getDataInstance(player.world);
 				if(data!=null) {
-					if (data.getFogTime() > 0) {
-						float f = 1 + MathHelper.abs(data.getLastFogTime() + 1 - (data.getFogTime()) / 2) / 20000;
+					if (KathairisDataStorage.getFogTime() > 0) {
+						float f = 1 + MathHelper.abs(KathairisDataStorage.getLastFogTime() + 1 - (KathairisDataStorage.getFogTime()) / 2) / 20000;
 						float r = event.getRed() / f;
 						float g = event.getGreen() / f;
 						float b = event.getBlue() / f;
@@ -221,10 +217,10 @@ public final class ClientEventSubscriber {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(player!=null) {
 			if (player.dimension == KCore.DIMENSION_ID) {
-				KathairisDataStorage data = KCore.data.getDataInstance(player.world);
+				KathairisDataStorage data = KathairisDataStorage.getDataInstance(player.world);
 				if(data!=null) {
-					if (data.getFogTime() > 0) {
-						float f = MathHelper.sin((float) ((data.getFogTime() * Math.PI) / (data.getLastFogTime())));
+					if (KathairisDataStorage.getFogTime() > 0) {
+						float f = MathHelper.sin((float) ((KathairisDataStorage.getFogTime() * Math.PI) / (KathairisDataStorage.getLastFogTime())));
 						GL11.glFogf(GL11.GL_FOG_START, 140f - 139.5f * f);
 						GL11.glFogf(GL11.GL_FOG_END, 180f - 10f * f);
 					}else{
@@ -232,7 +228,7 @@ public final class ClientEventSubscriber {
 						GL11.glFogf(GL11.GL_FOG_END, 180f);
 					}
 					if(player.world.getBiome(player.getPosition()) instanceof BiomeMysticDesert) {
-							if (data.getShouldAddSandstormFog()) {
+							if (KathairisDataStorage.getShouldAddSandstormFog()) {
 								if(player.world.canBlockSeeSky(player.getPosition().up(6))) {
 									GL11.glFogf(GL11.GL_FOG_START, 1F);
 									GL11.glFogf(GL11.GL_FOG_END, 10F);
@@ -258,8 +254,8 @@ public final class ClientEventSubscriber {
 			//fog
 			if (player.dimension == KCore.DIMENSION_ID) {
 				if(data!=null) {
-					if (data.getFogTime() > -1) {
-						data.setFogTime(data.getFogTime() - 1);
+					if (KathairisDataStorage.getFogTime() > -1) {
+						KathairisDataStorage.setFogTime(KathairisDataStorage.getFogTime() - 1);
 					}
 				}
 			}
@@ -267,9 +263,8 @@ public final class ClientEventSubscriber {
 
 			//sandstorm
 			if(data!=null){
-				if(data.getSandstormTime() > -1){
-					data.setSandstormTime(data.getSandstormTime()-1);
-								//TODO blind player
+				if(KathairisDataStorage.getSandstormTime() > -1){
+					data.setSandstormTime(KathairisDataStorage.getSandstormTime()-1);
 				}else{
 					data.setSandstormZ(0);
 					data.setSandstormX(0);

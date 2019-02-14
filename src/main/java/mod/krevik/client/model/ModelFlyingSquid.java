@@ -1,8 +1,7 @@
 package mod.krevik.client.model;
 
-import mod.krevik.entity.EntityFlyingSquid;
 import mod.krevik.KCore;
-
+import mod.krevik.entity.EntityFlyingSquid;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -217,7 +216,7 @@ public class ModelFlyingSquid extends ModelBase {
     }
     
     private float degToRad(float deg) {
-    	return KCore.instance.functionHelper.degToRad(deg);
+    	return KCore.functionHelper.degToRad(deg);
     }
     
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5, Entity entity)

@@ -1,14 +1,13 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenCustomTree extends WorldGenerator{
 	private Random random = new Random();
@@ -166,11 +165,7 @@ public class WorldGenCustomTree extends WorldGenerator{
 	}
 	
 	private boolean isValidBlockToSpawn(World world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock()==KCore.KatharianDirt ||world.getBlockState(pos).getBlock()==KCore.KatharianGrass) {
-			return true;
-		}else {
-			return false;
-		}
+        return world.getBlockState(pos).getBlock() == KCore.KatharianDirt || world.getBlockState(pos).getBlock() == KCore.KatharianGrass;
 	}
 	
     private BlockPos getTopGrassBlock(World worldIn,BlockPos position){

@@ -1,9 +1,8 @@
 package mod.krevik.block;
 
+import mod.krevik.KCore;
 import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.util.CreativeTabsMystic;
-import mod.krevik.KCore;
-
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -33,67 +32,58 @@ public class BlockEnergyShard extends BaseBlock
     
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return AABB_ENERGYSHARD;
     }
     
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {   
     	if(!worldIn.isRemote) {
     		entityIn.attackEntityFrom(DamageSource.MAGIC, 1);
     	}
     }
-    
+
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return AABB_ENERGYSHARD;
     }
 
-
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
-    /**
-     * Checks if this block can be placed exactly at the given position.
-     */
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-    	if(worldIn.getBlockState(pos.down())==KCore.VioletCrystal.getDefaultState()||worldIn.getBlockState(pos.down())==KCore.YellowCrystal.getDefaultState()||worldIn.getBlockState(pos.down())==KCore.BlueCrystal.getDefaultState()||
-    			worldIn.getBlockState(pos.down())==KCore.EnergyShard.getDefaultState()||worldIn.getBlockState(pos.down()).getBlock() instanceof BlockMysticBush || worldIn.getBlockState(pos.down()).getBlock() instanceof BlockBush || !worldIn.getBlockState(pos.down()).getBlock().isFullBlock(worldIn.getBlockState(pos.down()))) {
-    		return false;
-    	}else {
-            return true;
-    	}
+        return worldIn.getBlockState(pos.down()) != KCore.VioletCrystal.getDefaultState() && worldIn.getBlockState(pos.down()) != KCore.YellowCrystal.getDefaultState() && worldIn.getBlockState(pos.down()) != KCore.BlueCrystal.getDefaultState() &&
+                worldIn.getBlockState(pos.down()) != KCore.EnergyShard.getDefaultState() && !(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockMysticBush) && !(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockBush) && worldIn.getBlockState(pos.down()).getBlock().isFullBlock(worldIn.getBlockState(pos.down()));
     }
 
-    public EnumPushReaction getMobilityFlag(IBlockState state)
+    @Override
+    public EnumPushReaction getPushReaction(IBlockState state)
     {
         return EnumPushReaction.NORMAL;
     }
 
-    /**
-     * Get the geometry of the queried face at the given position and state. This is used to decide whether things like
-     * buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
-     * <p>
-     * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that
-     * does not fit the other descriptions and will generally cause other things not to connect to the face.
-     * 
-     * @return an approximation of the form of the given face
-     */
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
         return BlockFaceShape.UNDEFINED;
     }
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;

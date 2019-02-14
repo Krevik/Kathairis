@@ -1,12 +1,8 @@
 package mod.krevik.client.gui;
 
-import java.util.List;
-
+import mod.krevik.KCore;
 import mod.krevik.container.ContainerCharger;
 import mod.krevik.entity.EntityDeath;
-import mod.krevik.entity.EntityStrangeWanderer;
-import mod.krevik.KCore;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
@@ -14,6 +10,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+
+import java.util.List;
 
 public class GuiHandler implements IGuiHandler
 {

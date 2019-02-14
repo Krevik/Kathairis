@@ -1,8 +1,7 @@
 package mod.krevik.network.packets;
 
-import mod.krevik.world.dimension.KathairisDataStorage;
-
 import io.netty.buffer.ByteBuf;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

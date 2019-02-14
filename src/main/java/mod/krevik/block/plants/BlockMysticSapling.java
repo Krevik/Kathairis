@@ -1,18 +1,9 @@
 package mod.krevik.block.plants;
 
-import java.util.Random;
-
-import mod.krevik.block.plants.BlockMysticBush;
-import mod.krevik.world.gen.WorldGenNewTree;
-import mod.krevik.world.gen.forest.WorldGenBasicMysticTree;
-import mod.krevik.world.gen.forest.WorldGenCustomTree2;
-import mod.krevik.world.gen.forest.WorldGenFlippedHeartTree;
-import mod.krevik.world.gen.forest.WorldGenHugeKathairisTree;
-import mod.krevik.world.gen.forest.WorldGenSoulTree;
 import mod.krevik.KCore;
-
+import mod.krevik.world.gen.WorldGenNewTree;
+import mod.krevik.world.gen.forest.*;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class BlockMysticSapling extends BlockMysticBush implements IGrowable
 {
@@ -35,11 +28,13 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
         addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND,KCore.KatharianGrass,KCore.KatharianDirt);
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return SAPLING_AABB;
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!worldIn.isRemote)
@@ -55,7 +50,7 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
 
     public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        if (((Integer)state.getValue(STAGE)).intValue() == 0)
+        if (state.getValue(STAGE).intValue() == 0)
         {
             worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
         }
@@ -72,10 +67,11 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
         }
     }
 
+
     public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
-        WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenBasicMysticTree(true,6,false));
+        WorldGenerator worldgenerator = (new WorldGenBasicMysticTree(true,6,false));
         if(rand.nextInt(5)==0){
             worldgenerator = new WorldGenNewTree();
         }
@@ -123,7 +119,7 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
     {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
         //WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenShinyTree(true,6,false));
-        WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenFlippedHeartTree(7,3+rand.nextInt(7)));
+        WorldGenerator worldgenerator = (new WorldGenFlippedHeartTree(7,3+rand.nextInt(7)));
         int i = 0;
         int j = 0;
         boolean flag = false;
@@ -161,7 +157,7 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
     public void generateSoulTree(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
-        WorldGenerator worldgenerator = (WorldGenerator)(new WorldGenSoulTree(true));
+        WorldGenerator worldgenerator = (new WorldGenSoulTree(true));
         int i = 0;
         int j = 0;
         boolean flag = false;
@@ -196,44 +192,41 @@ public class BlockMysticSapling extends BlockMysticBush implements IGrowable
         }
     }
 
-    /**
-     * Whether this IGrowable can grow
-     */
+    @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {
         return true;
     }
 
+    @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
         return (double)worldIn.rand.nextFloat() < 0.45D;
     }
 
+    @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
         this.grow(worldIn, pos, state, rand);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
-        i = i | ((Integer)state.getValue(STAGE)).intValue() << 3;
+        i = i | state.getValue(STAGE).intValue() << 3;
         return i;
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {STAGE});
+        return new BlockStateContainer(this, STAGE);
     }
 }

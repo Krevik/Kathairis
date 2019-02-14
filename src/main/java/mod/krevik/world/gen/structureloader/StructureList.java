@@ -4,8 +4,6 @@ import mod.krevik.KCore;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.ArrayList;
-
 public class StructureList {
     //forest
     public static Structure fauyn_Bush_1 = new Structure("fauyn_Bush_1",new ResourceLocation(KCore.MODID,"fauynbush_01"),new BlockPos(-1,0,-2));

@@ -1,17 +1,12 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -19,6 +14,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+
+import java.util.Random;
 
 public class WorldGenFloatingIslands extends WorldGenerator{
 	int weight=1;
@@ -69,7 +66,7 @@ public class WorldGenFloatingIslands extends WorldGenerator{
     	BlockPos tmp;
     	int chance=5;
     	for(int c=0;c<=forz;c++) {
-    		int height = (int) ((int) ((int) 1+rand.nextInt(3)+(MathHelper.sqrt(maxWidth*forz)))-MathHelper.sqrt(width*c));
+    		int height = (int) ((int) (1 +rand.nextInt(3)+(MathHelper.sqrt(maxWidth*forz)))-MathHelper.sqrt(width*c));
     		for(int y=0;y<=height;y++) {
     			int dirtHeight=1+rand.nextInt(4);
     			if(y==0) {
@@ -142,8 +139,8 @@ public class WorldGenFloatingIslands extends WorldGenerator{
 				IBlockState iblockstate = world.getBlockState(position);
 				world.notifyBlockUpdate(position, iblockstate, iblockstate, 3);
 				PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
-						.setRotation(Rotation.NONE).setIgnoreEntities(true).setChunk((ChunkPos) null)
-						.setReplacedBlock((Block) null).setIgnoreStructureBlock(true);
+						.setRotation(Rotation.NONE).setIgnoreEntities(true).setChunk(null)
+						.setReplacedBlock(null).setIgnoreStructureBlock(true);
 				template.addBlocksToWorld(world, position, placementsettings);
 			}
     }

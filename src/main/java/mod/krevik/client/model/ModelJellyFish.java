@@ -1,11 +1,11 @@
 package mod.krevik.client.model;
 
-import java.util.Random;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+
+import java.util.Random;
 
 public class ModelJellyFish extends ModelBase
 {

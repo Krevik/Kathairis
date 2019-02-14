@@ -1,26 +1,15 @@
 package mod.krevik.entity;
 
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.enchantment.KathairisEnchantments;
 import mod.krevik.KCore;
+import mod.krevik.enchantment.KathairisEnchantments;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,6 +22,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Map;
 
 public class EntitySteveGhost extends EntityMob
 {
@@ -134,17 +126,17 @@ public class EntitySteveGhost extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.instance.proxy.ghost_living;
+        return KCore.proxy.ghost_living;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
-        return KCore.instance.proxy.ghost_attack;
+        return KCore.proxy.ghost_attack;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return KCore.instance.proxy.ghost_dead;
+        return KCore.proxy.ghost_dead;
     }
 
     /**

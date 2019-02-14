@@ -179,8 +179,8 @@ public class ModelMysticBird extends ModelBase {
 		timer=0;
 	}
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    Wing3.rotateAngleZ=(float)(-MathHelper.sin(timer))*f1*2;
-    Wing4.rotateAngleZ=(float)(MathHelper.sin(timer))*f1*2;
+    Wing3.rotateAngleZ= -MathHelper.sin(timer) *f1*2;
+    Wing4.rotateAngleZ= MathHelper.sin(timer) *f1*2;
 
   }
 

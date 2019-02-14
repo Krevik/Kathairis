@@ -1,11 +1,6 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
-
 import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -23,6 +18,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
 {
 	private boolean replacable;
@@ -36,6 +34,7 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
         replacable=repl;
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
      {
     	if(!replacable){
@@ -51,31 +50,25 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
         return super.canBlockStay(worldIn, pos, state);
     }
 
-    /**
-     * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
-     */
     @Override
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
     {
         return replacable;
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return null;
     }
 
-    /**
-     * Get the quantity dropped based on the given fortune level
-     */
+    @Override
     public int quantityDroppedWithBonus(int fortune, Random random)
     {
         return 1 + random.nextInt(fortune * 2 + 1);
     }
 
+    @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
     {
         if (!worldIn.isRemote && stack.getItem() == Items.SHEARS)
@@ -100,6 +93,7 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
         return can;
     }
 
+    @Override
     public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
     {
         boolean can=false;
@@ -110,22 +104,25 @@ public class BlockMysticTallGrass extends BlockMysticBush implements IGrowable
         return can;
     }
 
+    @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {
         return true;
     }
 
+    @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
         return true;
     }
 
+    @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
     	//TODO
     }
 
-
+    @Override
     public Block.EnumOffsetType getOffsetType()
     {
         return Block.EnumOffsetType.XYZ;

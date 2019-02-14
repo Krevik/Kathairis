@@ -1,17 +1,16 @@
 package mod.krevik.biome;
 
-import java.awt.*;
-import java.util.Random;
-
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityBigTurtle;
 import mod.krevik.entity.EntityCamel;
 import mod.krevik.entity.EntityPoisonousScorpion;
 import mod.krevik.world.gen.WorldGenMovingSand;
 import mod.krevik.world.gen.WorldGenMysticDesertCactus;
 import mod.krevik.world.gen.WorldGenMysticUniversal;
-import mod.krevik.world.gen.desert.*;
-import mod.krevik.KCore;
-
+import mod.krevik.world.gen.desert.WorldGenBigRockMushroom;
+import mod.krevik.world.gen.desert.WorldGenOldLibrary;
+import mod.krevik.world.gen.desert.WorldGenRockMushroom;
+import mod.krevik.world.gen.desert.WorldGenShinyHole;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +19,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.awt.*;
+import java.util.Random;
 
 public class BiomeMysticDesert extends KetherBiome
 {

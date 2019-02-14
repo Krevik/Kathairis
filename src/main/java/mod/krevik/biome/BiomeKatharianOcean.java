@@ -1,9 +1,6 @@
 package mod.krevik.biome;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntitySquid;
@@ -11,6 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
+
+import java.util.Random;
 
 public class BiomeKatharianOcean extends KetherBiome
 {

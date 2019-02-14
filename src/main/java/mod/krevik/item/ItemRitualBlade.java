@@ -1,18 +1,12 @@
 package mod.krevik.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.KCore;
 import com.google.common.collect.Multimap;
-
+import mod.krevik.KCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -28,6 +22,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class ItemRitualBlade extends BaseItem
 {
     private float attackDamage;
@@ -40,19 +37,8 @@ public class ItemRitualBlade extends BaseItem
         this.attackDamage = 3.0F;
     }
 
-    /**
-     * Returns the amount of damage this item will deal. One heart of damage is equal to 2 damage points.
-     */
-    public float getDamageVsEntity()
-    {
-        return this.attackDamage;
-    }
     @Override
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-    {
-
-    }
-    public float getStrVsBlock(ItemStack stack, IBlockState state)
+    public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
         Block block = state.getBlock();
 
@@ -66,6 +52,7 @@ public class ItemRitualBlade extends BaseItem
             return material != Material.PLANTS && material != Material.VINE && material != Material.CORAL && material != Material.LEAVES && material != Material.GOURD ? 1.0F : 1.5F;
         }
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
@@ -73,10 +60,6 @@ public class ItemRitualBlade extends BaseItem
     	tooltip.add("Durability: " + (this.getMaxDamage()-this.getDamage(stack)));
     }
 
-    /**
-     * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
-     * the damage on the stack.
-     */
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
@@ -85,9 +68,6 @@ public class ItemRitualBlade extends BaseItem
         return true;
     }
 
-    /**
-     * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
-     */
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
     {
@@ -100,18 +80,12 @@ public class ItemRitualBlade extends BaseItem
     }
 
 
-    /**
-     * Check whether this Item can harvest the given Block
-     */
     @Override
     public boolean canHarvestBlock(IBlockState blockIn)
     {
         return blockIn.getBlock() == Blocks.WEB;
     }
 
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isFull3D()
@@ -119,29 +93,18 @@ public class ItemRitualBlade extends BaseItem
         return true;
     }
 
-    /**
-     * Return the enchantability factor of the item, most of the time is based on material.
-     */
     @Override
     public int getItemEnchantability()
     {
         return 15;
     }
 
-
-
-    /**
-     * Return whether this item is repairable in an anvil.
-     */
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
     	return false;
     }
 
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {

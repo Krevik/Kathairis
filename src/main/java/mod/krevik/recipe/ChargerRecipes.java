@@ -1,10 +1,9 @@
 package mod.krevik.recipe;
 
-import java.util.ArrayList;
-
 import mod.krevik.KCore;
-
 import net.minecraft.item.Item;
+
+import java.util.ArrayList;
 
 public class ChargerRecipes {
 

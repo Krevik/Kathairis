@@ -39,6 +39,7 @@ public class BlockCursedFlower extends BlockMysticBush{
             return this.canSustainBush(worldIn.getBlockState(pos.down()));
     }
 
+    @Override
     public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
     {
         boolean can=false;
@@ -54,10 +55,11 @@ public class BlockCursedFlower extends BlockMysticBush{
     {
         if (rand.nextInt(1000) == 0)
         {
-                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, KCore.instance.proxy.scary_flower, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, KCore.proxy.scary_flower, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
         }
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
             return BUSH_AABB;

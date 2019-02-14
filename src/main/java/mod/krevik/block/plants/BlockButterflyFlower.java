@@ -1,13 +1,8 @@
 package mod.krevik.block.plants;
 
-import java.util.List;
-import java.util.Random;
-
+import mod.krevik.KCore;
 import mod.krevik.entity.butterfly.EntityButterfly;
 import mod.krevik.entity.butterfly.EntityButterfly1;
-import mod.krevik.KCore;
-
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -20,9 +15,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.List;
+import java.util.Random;
+
 public class BlockButterflyFlower extends BlockMysticBush {
 
-    public static final PropertyEnum<BlockButterflyFlower.EnumType> VARIANT = PropertyEnum.<BlockButterflyFlower.EnumType>create("variant", BlockButterflyFlower.EnumType.class);
+    public static final PropertyEnum<BlockButterflyFlower.EnumType> VARIANT = PropertyEnum.create("variant", BlockButterflyFlower.EnumType.class);
     protected static final AxisAlignedBB BUTTERFLYFLOWER_AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.9D, 1D);
 
 	public BlockButterflyFlower(String Name, boolean replacable1) {
@@ -30,11 +28,14 @@ public class BlockButterflyFlower extends BlockMysticBush {
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockButterflyFlower.EnumType.WITHOUT));
         addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND,KCore.KatharianDirt,KCore.KatharianGrass);
 	}
+
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(KCore.ButterflyFlower.getDefaultState().getBlock());
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
             return BUTTERFLYFLOWER_AABB;
@@ -43,11 +44,13 @@ public class BlockButterflyFlower extends BlockMysticBush {
     /**
      * Convert the given metadata into a BlockState for this Block
      */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(VARIANT, BlockButterflyFlower.EnumType.byMetadata(meta));
     }
-    
+
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
@@ -76,7 +79,8 @@ public class BlockButterflyFlower extends BlockMysticBush {
             }
         }
     }
-    
+
+    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
     	super.breakBlock(worldIn, pos, state);
@@ -88,17 +92,19 @@ public class BlockButterflyFlower extends BlockMysticBush {
     /**
      * Convert the BlockState into the correct metadata value
      */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
-        return ((BlockButterflyFlower.EnumType)state.getValue(VARIANT)).getMetadata();
+        return state.getValue(VARIANT).getMetadata();
     }
-    
+
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT});
+        return new BlockStateContainer(this, VARIANT);
     }
     
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         WITHOUT(0,"without"),
         WITH(1,"with");
@@ -107,7 +113,7 @@ public class BlockButterflyFlower extends BlockMysticBush {
         private final int meta;
         private final String name;
 
-        private EnumType(int p_i46384_3_,String Name)
+        EnumType(int p_i46384_3_, String Name)
         {
             this.meta = p_i46384_3_;
             name=Name;

@@ -1,7 +1,6 @@
 package mod.krevik.slot;
 
 import mod.krevik.KCore;
-
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -28,12 +27,7 @@ public class SlotChargerOutput extends Slot
     {
     	if(stack.getItem()==KCore.ShockWand) {
     		return true;
-    	}else if(stack.getItem()==KCore.DeathWand) {
-    		return true;
-    	}
-    		else {
-            return false;
-    	}
+    	}else return stack.getItem() == KCore.DeathWand;
     }
 
     /**

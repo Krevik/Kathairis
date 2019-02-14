@@ -1,11 +1,8 @@
 package mod.krevik.block;
 
 
-import java.util.Random;
-
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
-
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class BlockMysticCloud extends BaseBlock
 {
 	
@@ -34,13 +33,14 @@ public class BlockMysticCloud extends BaseBlock
         this.setDefaultState(this.blockState.getBaseState());
         this.setLightOpacity(1);
     }
-    
-    
+
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
     	return null;
     }
-    
+
+    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         EntityPlayer ep = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10, true);
@@ -62,15 +62,19 @@ public class BlockMysticCloud extends BaseBlock
     }
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
-    
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
@@ -83,41 +87,34 @@ public class BlockMysticCloud extends BaseBlock
         IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
         Block block = iblockstate.getBlock();
 
-        return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        return (this.ignoreSimilarity || block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
-    
+
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
             return null;
     }
     
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     { 
     	entityIn.motionY=-0.0000001;
     }
 
-
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
+    @Override
     public int damageDropped(IBlockState state)
     {
         return 0;
     }
-    
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState();
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         return 0;

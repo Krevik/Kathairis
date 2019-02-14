@@ -1,14 +1,13 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
-import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.KCore;
-
+import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenMysticDesertCactus extends WorldGenerator
 {
@@ -26,7 +25,7 @@ public class WorldGenMysticDesertCactus extends WorldGenerator
     	int X=position.getX();
     	int Z=position.getZ();
     	int height=random.nextInt(6)+1;
-    	if(KCore.instance.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())&&grassToGen.canBlockStay(worldIn, position, grassToGen.getDefaultState())) {
+    	if(KCore.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())&&grassToGen.canBlockStay(worldIn, position, grassToGen.getDefaultState())) {
 	    	for(int c=0;c<height;c++) {
 	    		BlockPos target=new BlockPos(X,Y+c,Z);
 	    		if(worldIn.isAirBlock(target)) {

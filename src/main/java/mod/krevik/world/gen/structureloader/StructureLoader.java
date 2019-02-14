@@ -1,14 +1,12 @@
 package mod.krevik.world.gen.structureloader;
 
 import mod.krevik.KCore;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -16,7 +14,6 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class StructureLoader extends WorldGenerator {
@@ -34,7 +31,7 @@ public class StructureLoader extends WorldGenerator {
         BlockPos correctedPos = new BlockPos(pos.getX()+structure.getCenterPosCorrection().getX(),pos.getY()+structure.getCenterPosCorrection().getY(),pos.getZ()+structure.getCenterPosCorrection().getZ());
         world.getChunkProvider().provideChunk(correctedPos.getX(), correctedPos.getZ());
 
-        if (KCore.instance.functionHelper.isAvailableBlockToGenOn(world, correctedPos.down())) {
+        if (KCore.functionHelper.isAvailableBlockToGenOn(world, correctedPos.down())) {
             Template template = getStructureTemplate(world,structure.getStructureLocation());
             if(template!=null){
                 boolean canGenerate=true;

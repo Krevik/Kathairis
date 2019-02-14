@@ -3,7 +3,6 @@ package mod.krevik.block;
 import mod.krevik.KCore;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,26 +24,30 @@ import java.util.Random;
 
 public class BlockChristmasGift extends BaseBlock {
 
-    public static final PropertyEnum<BlockChristmasGift.EnumType> VARIANT = PropertyEnum.<BlockChristmasGift.EnumType>create("color", BlockChristmasGift.EnumType.class);
+    public static final PropertyEnum<BlockChristmasGift.EnumType> VARIANT = PropertyEnum.create("color", BlockChristmasGift.EnumType.class);
 
     public BlockChristmasGift(String Name){
         super(Name, Material.CLOTH, null,0,0, SoundType.CLOTH);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.RED));
     }
 
+    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-        int k=KCore.instance.functionHelper.random.nextInt(3);
+        int k= KCore.functionHelper.random.nextInt(3);
         if(k==0){worldIn.setBlockState(pos,state.withProperty(VARIANT,EnumType.RED));}
         if(k==1){worldIn.setBlockState(pos,state.withProperty(VARIANT,EnumType.YELLOW));}
         if(k==2){worldIn.setBlockState(pos,state.withProperty(VARIANT,EnumType.VIOLET));}
 
     }
 
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(KCore.christmas_gift);
     }
+
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(VARIANT, BlockChristmasGift.EnumType.byMetadata(meta));
@@ -60,8 +63,8 @@ public class BlockChristmasGift extends BaseBlock {
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         if(!worldIn.isRemote){
-            for(int x=1;x<=2+KCore.instance.functionHelper.random.nextInt(4);x++){
-                ItemStack reward = KCore.instance.functionHelper.getChristmasGiftDrop();
+            for(int x = 1; x<=2+ KCore.functionHelper.random.nextInt(4); x++){
+                ItemStack reward = KCore.functionHelper.getChristmasGiftDrop();
                 EntityItem item = new EntityItem(worldIn,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5);
                 item.setItem(reward);
                 worldIn.spawnEntity(item);
@@ -70,14 +73,16 @@ public class BlockChristmasGift extends BaseBlock {
         super.breakBlock(worldIn, pos, state);
     }
 
+    @Override
     public int getMetaFromState(IBlockState state)
     {
-        return ((BlockChristmasGift.EnumType)state.getValue(VARIANT)).getMetadata();
+        return state.getValue(VARIANT).getMetadata();
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT});
+        return new BlockStateContainer(this, VARIANT);
     }
 
     @Override
@@ -86,10 +91,13 @@ public class BlockChristmasGift extends BaseBlock {
         return 0;
     }
 
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -98,17 +106,19 @@ public class BlockChristmasGift extends BaseBlock {
 
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
     {
         return BlockFaceShape.UNDEFINED;
     }
 
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         YELLOW(0,"yellow"),
         RED(1,"red"),
@@ -118,7 +128,7 @@ public class BlockChristmasGift extends BaseBlock {
         private final int meta;
         private final String name;
 
-        private EnumType(int p_i46384_3_,String Name)
+        EnumType(int p_i46384_3_, String Name)
         {
             this.meta = p_i46384_3_;
             name=Name;

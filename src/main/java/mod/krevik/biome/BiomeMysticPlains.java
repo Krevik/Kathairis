@@ -1,19 +1,16 @@
 package mod.krevik.biome;
 
-import java.util.Random;
-
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityBison;
 import mod.krevik.entity.EntityJellyFish;
 import mod.krevik.entity.EntityMysticBird;
 import mod.krevik.entity.butterfly.EntityButterfly;
 import mod.krevik.entity.butterfly.EntityButterfly1;
-import mod.krevik.world.gen.structureloader.CreateTreeFromStructure;
-import mod.krevik.world.gen.structureloader.StructureList;
 import mod.krevik.world.gen.WorldGenMiniTallGrass;
 import mod.krevik.world.gen.WorldGenMysticMultiGrass;
 import mod.krevik.world.gen.WorldGenMysticUniversal;
-import mod.krevik.KCore;
-
+import mod.krevik.world.gen.structureloader.CreateTreeFromStructure;
+import mod.krevik.world.gen.structureloader.StructureList;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class BiomeMysticPlains extends KetherBiome
 {

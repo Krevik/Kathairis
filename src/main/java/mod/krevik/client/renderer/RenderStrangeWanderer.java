@@ -1,9 +1,8 @@
 package mod.krevik.client.renderer;
 
+import mod.krevik.client.model.ModelStrangeWanderer;
 import mod.krevik.entity.EntityStrangeWanderer;
 import mod.krevik.util.EntityAndRenderRegistry;
-import mod.krevik.client.model.ModelStrangeWanderer;
-
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

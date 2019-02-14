@@ -1,13 +1,12 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
-import mod.krevik.block.BlockCrystal;
 import mod.krevik.KCore;
-
+import mod.krevik.block.BlockCrystal;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WorldGenCustomCaveSecond {
     public WorldGenCustomCaveSecond(){
@@ -101,14 +100,14 @@ public class WorldGenCustomCaveSecond {
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()+y+1,pos.getZ()+z))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.DOWN));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.DOWN));
         					}
     				}
     			}
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()+y-1,pos.getZ()+z))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.UP));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.UP));
         					}
     				}
     			}
@@ -116,14 +115,14 @@ public class WorldGenCustomCaveSecond {
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()-z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()+y+1,pos.getZ()-z))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.DOWN));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.DOWN));
         					}
     				}
     			}
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()-z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()+y-1,pos.getZ()-z))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.UP));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.UP));
         					}
     				}
     			}
@@ -131,14 +130,14 @@ public class WorldGenCustomCaveSecond {
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z+1))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.NORTH));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.NORTH));
         					}
     				}
     			}
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z-1))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.SOUTH));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.SOUTH));
         					}
     				}
     			}
@@ -146,14 +145,14 @@ public class WorldGenCustomCaveSecond {
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z+1))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.NORTH));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.NORTH));
         					}
     				}
     			}
     			if(random.nextInt(3)==1) {
     				if(world.isAirBlock(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z))) {
         					if(world.getBlockState(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z-1))==KCore.MythicStone.getDefaultState()) {
-        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.SOUTH));
+        						world.setBlockState(new BlockPos(pos.getX(),pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.SOUTH));
         					}
     				}
     			}

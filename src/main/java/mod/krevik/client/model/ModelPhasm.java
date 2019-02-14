@@ -1,8 +1,8 @@
 package mod.krevik.client.model;
 
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityPhasm;
 import mod.krevik.util.FunctionHelper;
-import mod.krevik.KCore;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -76,7 +76,7 @@ public class ModelPhasm extends ModelBase {
         modelRenderer.rotateAngleZ = z;
     }
 
-    FunctionHelper helper = KCore.instance.functionHelper;
+    FunctionHelper helper = KCore.functionHelper;
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, f2, f3, f4, f5, entity);
         setRotateAngle(LeftArm,0+MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(23.48f)-MathHelper.sin(f2*0.05f)*0.1f);

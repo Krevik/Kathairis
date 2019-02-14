@@ -1,14 +1,7 @@
 package mod.krevik.block.plants;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
-
-import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +19,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockMysticMiniGrass extends BlockMysticBush
 {
@@ -51,7 +47,7 @@ public class BlockMysticMiniGrass extends BlockMysticBush
     
     protected int getAge(IBlockState state)
     {
-        return ((Integer)state.getValue(this.getAgeProperty())).intValue();
+        return state.getValue(this.getAgeProperty()).intValue();
     }
 
     public IBlockState withAge(int age)
@@ -61,43 +57,49 @@ public class BlockMysticMiniGrass extends BlockMysticBush
 
     public boolean isMaxAge(IBlockState state)
     {
-        return ((Integer)state.getValue(this.getAgeProperty())).intValue() >= this.getMaxAge();
+        return state.getValue(this.getAgeProperty()).intValue() >= this.getMaxAge();
     }
-    
+
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return NULL_AABB;
     }
- 
+
+    @Override
     public Block.EnumOffsetType getOffsetType()
     {
         return Block.EnumOffsetType.XZ;
     }
-    
-    
+
+
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return null;
     }
 
+    @Override
     public int quantityDroppedWithBonus(int fortune, Random random)
     {
         return 1 + random.nextInt(fortune * 2 + 1);
     }
-    
-    
+
+    @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
     {
 
         return state.isOpaqueCube();
     }
-    
+
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
 
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
             return MYSTICMINIGRASS_AABB;
@@ -116,6 +118,7 @@ public class BlockMysticMiniGrass extends BlockMysticBush
             }
     }
 
+    @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
     {
         if (!worldIn.isRemote && stack.getItem() == Items.SHEARS)
@@ -130,7 +133,8 @@ public class BlockMysticMiniGrass extends BlockMysticBush
             super.harvestBlock(worldIn, player, pos, state, te, stack);
         }
     }
-    
+
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.withAge(meta);
@@ -139,14 +143,16 @@ public class BlockMysticMiniGrass extends BlockMysticBush
     /**
      * Convert the BlockState into the correct metadata value
      */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         return this.getAge(state);
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {AGE});
+        return new BlockStateContainer(this, AGE);
     }
     
 

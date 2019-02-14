@@ -1,15 +1,9 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -17,9 +11,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockMythicStoneBricks extends BaseBlock
 {
@@ -29,28 +25,15 @@ public class BlockMythicStoneBricks extends BaseBlock
         super(Name,material,tab,hardness1,resistance,soundType);
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-    }
-
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return true;
     }
 
-    @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
-    }
-
-    @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
-    {
-    }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
             return FULL_BLOCK_AABB;
@@ -66,9 +49,10 @@ public class BlockMythicStoneBricks extends BaseBlock
     @Override
     public String getLocalizedName()
     {
-        return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
+        return I18n.translateToLocal(this.getTranslationKey() + "." + ".name");
     }
 
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
             return Item.getItemFromBlock(this);
@@ -81,11 +65,13 @@ public class BlockMythicStoneBricks extends BaseBlock
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
             return BlockRenderLayer.SOLID;
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return true;

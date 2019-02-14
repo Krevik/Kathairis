@@ -1,14 +1,12 @@
 package mod.krevik.client.model;
 
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityHowler;
 import mod.krevik.util.FunctionHelper;
-import mod.krevik.KCore;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -191,7 +189,7 @@ public class ModelHowler extends ModelBase {
 
   //walking animation key frames
   //
-  FunctionHelper helper = KCore.instance.functionHelper;
+  FunctionHelper helper = KCore.functionHelper;
   float[] FrontRightLeg3R = {0,helper.degToRad(23.48f),0,0};
   float[] FrontRightLeg1R = {0,helper.degToRad(-49.57f),0,0};
   float[] BehindLeftLeg1R = {0,helper.degToRad(52.17f),0,0};

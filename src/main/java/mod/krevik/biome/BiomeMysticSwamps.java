@@ -1,19 +1,11 @@
 package mod.krevik.biome;
 
-import java.awt.*;
-import java.util.Random;
-
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityMysticBird;
 import mod.krevik.entity.EntityPhasm;
 import mod.krevik.world.gen.WorldGenMiniTallGrass;
 import mod.krevik.world.gen.WorldGenMysticUniversal;
-import mod.krevik.world.gen.swamp.WorldGenMudPaddle;
-import mod.krevik.world.gen.swamp.WorldGenMysticSwampsTree;
-import mod.krevik.world.gen.swamp.WorldGenMysticSwampsWater;
-import mod.krevik.world.gen.swamp.WorldGenOldTrunk;
-import mod.krevik.world.gen.swamp.WorldGenSwampLakes;
-import mod.krevik.KCore;
-
+import mod.krevik.world.gen.swamp.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -23,6 +15,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.awt.*;
+import java.util.Random;
 
 public class BiomeMysticSwamps extends KetherBiome
 {
@@ -71,7 +66,7 @@ public class BiomeMysticSwamps extends KetherBiome
     
     public WorldGenAbstractTree getRandomTreeFeature(Random rand)
     {
-    		return (WorldGenAbstractTree)TREE_FEATURE3SWAMPS;
+    		return TREE_FEATURE3SWAMPS;
     }
     
 

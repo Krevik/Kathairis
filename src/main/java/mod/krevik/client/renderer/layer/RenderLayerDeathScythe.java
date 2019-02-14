@@ -1,7 +1,7 @@
 package mod.krevik.client.renderer.layer;
 
-import mod.krevik.entity.EntityDeath;
 import mod.krevik.client.model.ModelDeath;
+import mod.krevik.entity.EntityDeath;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;

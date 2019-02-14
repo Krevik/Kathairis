@@ -1,10 +1,9 @@
 package mod.krevik.client.renderer;
 
+import mod.krevik.client.model.ModelDeath;
+import mod.krevik.client.renderer.layer.RenderLayerDeathScythe;
 import mod.krevik.entity.EntityDeath;
 import mod.krevik.util.EntityAndRenderRegistry;
-import mod.krevik.client.model.ModelDeath;
-
-import mod.krevik.client.renderer.layer.RenderLayerDeathScythe;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

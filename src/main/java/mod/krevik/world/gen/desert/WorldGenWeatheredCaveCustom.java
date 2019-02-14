@@ -1,12 +1,11 @@
 package mod.krevik.world.gen.desert;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WorldGenWeatheredCaveCustom {
     public WorldGenWeatheredCaveCustom(){

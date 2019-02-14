@@ -1,21 +1,13 @@
 package mod.krevik.block.plants;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.block.BaseBlock;
-import mod.krevik.block.BlockMysticCloud;
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
-
+import mod.krevik.block.BaseBlock;
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -25,6 +17,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Random;
 
 
 public class BlockMysticBush extends BaseBlock implements net.minecraftforge.common.IPlantable
@@ -67,9 +63,6 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
     }
     
 
-    /**
-     * Return true if the block can sustain a Bush
-     */
     protected boolean canSustainBush(IBlockState state)
     {
     	/*boolean can=false;
@@ -161,6 +154,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
     }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
             return NULL_AABB;
@@ -194,7 +188,7 @@ public class BlockMysticBush extends BaseBlock implements net.minecraftforge.com
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }

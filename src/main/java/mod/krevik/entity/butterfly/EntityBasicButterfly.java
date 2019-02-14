@@ -1,17 +1,12 @@
 package mod.krevik.entity.butterfly;
 
-import javax.annotation.Nullable;
-
 import mod.krevik.block.plants.BlockMysticBush;
-import mod.krevik.entity.EntityCloudySlime;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -25,11 +20,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class EntityBasicButterfly extends EntityAmbientCreature
 {
-    private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityBasicButterfly.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityBasicButterfly.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Byte> SITTING = EntityDataManager.<Byte>createKey(EntityIllukini.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> SITTING = EntityDataManager.createKey(EntityIllukini.class, DataSerializers.BYTE);
     /** Coordinates of where the bat spawned. */
     private BlockPos spawnPosition;
 
@@ -101,12 +98,12 @@ public class EntityBasicButterfly extends EntityAmbientCreature
 
     public boolean getIsBirdSitting()
     {
-        return (((Byte)this.dataManager.get(SITTING)).byteValue() & 1) != 0;
+        return (this.dataManager.get(SITTING).byteValue() & 1) != 0;
     }
 
     public void setIsBirdSitting(boolean isHanging)
     {
-        byte b0 = ((Byte)this.dataManager.get(SITTING)).byteValue();
+        byte b0 = this.dataManager.get(SITTING).byteValue();
 
         if (isHanging)
         {
@@ -156,14 +153,14 @@ public class EntityBasicButterfly extends EntityAmbientCreature
                 {
                     if(!this.world.getNearestPlayerNotCreative(this, 4.0D).isSneaking()) {
                         this.setIsBirdSitting(false);
-                        this.world.playEvent((EntityPlayer) null, 1025, blockpos, 0);
+                        this.world.playEvent(null, 1025, blockpos, 0);
                     }
                 }
             }
             else
             {
                 this.setIsBirdSitting(false);
-                this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+                this.world.playEvent(null, 1025, blockpos, 0);
             }
         }
         else
@@ -248,7 +245,7 @@ public class EntityBasicButterfly extends EntityAmbientCreature
 
     public int getVariant()
     {
-        return MathHelper.clamp(((Integer)this.dataManager.get(VARIANT)).intValue(), 0, ButterflyType.META_LOOKUP.length);
+        return MathHelper.clamp(this.dataManager.get(VARIANT).intValue(), 0, ButterflyType.META_LOOKUP.length);
     }
 
     protected void entityInit()
@@ -275,7 +272,7 @@ public class EntityBasicButterfly extends EntityAmbientCreature
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setByte("BatFlags", ((Byte)this.dataManager.get(SITTING)).byteValue());
+        compound.setByte("BatFlags", this.dataManager.get(SITTING).byteValue());
         compound.setInteger("Variant", this.getVariant());
 
     }
@@ -291,7 +288,7 @@ public class EntityBasicButterfly extends EntityAmbientCreature
         return MysticLootTables.LOOT_BUTTERFLY;
     }
 
-    public static enum ButterflyType implements IStringSerializable
+    public enum ButterflyType implements IStringSerializable
     {
         BASIC1(0,"basic1"),
         BASIC2(1,"basic2"),
@@ -304,7 +301,7 @@ public class EntityBasicButterfly extends EntityAmbientCreature
         private final int meta;
         private final String name;
 
-        private ButterflyType(int p_i46384_3_,String Name)
+        ButterflyType(int p_i46384_3_, String Name)
         {
             this.meta = p_i46384_3_;
             name=Name;

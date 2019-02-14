@@ -1,22 +1,18 @@
 package mod.krevik.network.packets;
 
+import io.netty.buffer.ByteBuf;
+import mod.krevik.KCore;
 import mod.krevik.client.particle.DynamicParticle;
 import mod.krevik.client.particle.ParticlesFactory;
 import mod.krevik.world.dimension.KathairisDataStorage;
-import mod.krevik.KCore;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 
@@ -55,17 +51,17 @@ public class PacketSandstormClient implements IMessage {
                     if (Minecraft.getMinecraft().player.dimension == KCore.DIMENSION_ID) {
                         if (Minecraft.getMinecraft().player.world.getBiome(Minecraft.getMinecraft().player.getPosition()) == KCore.MysticDesert) {
                             if (Minecraft.getMinecraft().player.getRNG().nextInt(350) == 0) {
-                                Minecraft.getMinecraft().player.playSound(KCore.instance.proxy.sandstorm, 1, 1);
+                                Minecraft.getMinecraft().player.playSound(KCore.proxy.sandstorm, 1, 1);
                             }
                         }
 
                         KathairisDataStorage data = KathairisDataStorage.getDataInstance(Minecraft.getMinecraft().player.world);
-                        data.setShouldAddSandstormFog(true);
+                        KathairisDataStorage.setShouldAddSandstormFog(true);
                         if(message.timeLeft<2){
-                            data.setShouldAddSandstormFog(false);
+                            KathairisDataStorage.setShouldAddSandstormFog(false);
                         }
                         if (Minecraft.getMinecraft().player != null) {
-                            if (Minecraft.getMinecraft().player.dimension == KCore.instance.DIMENSION_ID) {
+                            if (Minecraft.getMinecraft().player.dimension == KCore.DIMENSION_ID) {
                                 ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
                                 positions.add(Minecraft.getMinecraft().player.getPosition());
 
@@ -94,13 +90,13 @@ public class PacketSandstormClient implements IMessage {
                                 for (int x = 0; x < positions.size() - 1; x++) {
                                     if (Minecraft.getMinecraft().player.world.isAirBlock(positions.get(x))) {
                                         if (Minecraft.getMinecraft().player.getRNG().nextInt(50) == 0) {
-                                            if (Minecraft.getMinecraft().player.world.getBiome(positions.get(x)) == KCore.instance.MysticDesert && Minecraft.getMinecraft().player.posY > 63 && Minecraft.getMinecraft().player.posY < 84) {
+                                            if (Minecraft.getMinecraft().player.world.getBiome(positions.get(x)) == KCore.MysticDesert && Minecraft.getMinecraft().player.posY > 63 && Minecraft.getMinecraft().player.posY < 84) {
                                                 double d0 = positions.get(x).getX() + 0.5 + (Minecraft.getMinecraft().player.getRNG().nextFloat() - Minecraft.getMinecraft().player.getRNG().nextFloat()) * 0.5;
                                                 double d1 = positions.get(x).getY() + 0.5 + (Minecraft.getMinecraft().player.getRNG().nextFloat() - Minecraft.getMinecraft().player.getRNG().nextFloat()) * 0.5;
                                                 double d2 = positions.get(x).getZ() + 0.5 + (Minecraft.getMinecraft().player.getRNG().nextFloat() - Minecraft.getMinecraft().player.getRNG().nextFloat()) * 0.5;
-                                                double d3 = data.getSandstormX();
+                                                double d3 = KathairisDataStorage.getSandstormX();
                                                 double d4 = (Minecraft.getMinecraft().player.getRNG().nextFloat() - Minecraft.getMinecraft().player.getRNG().nextFloat()) * 0.3;
-                                                double d5 = data.getSandstormZ();
+                                                double d5 = KathairisDataStorage.getSandstormZ();
                                                 if (Minecraft.getMinecraft().player.world.isRemote&&
                                                 Minecraft.getMinecraft().player.getRNG().nextInt(7)==0) {
                                                     spawnSandParticle(d0, d1, d2, d3, d4, d5);

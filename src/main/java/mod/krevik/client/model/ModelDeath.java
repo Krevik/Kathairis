@@ -1,8 +1,8 @@
 package mod.krevik.client.model;
 
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityDeath;
 import mod.krevik.util.FunctionHelper;
-import mod.krevik.KCore;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -198,7 +198,7 @@ public class ModelDeath extends ModelBase {
     }
 
 
-    FunctionHelper helper = KCore.instance.functionHelper;
+    FunctionHelper helper = KCore.functionHelper;
     float[] basicPositionRightArm2 = {helper.degToRad(20),helper.degToRad(5),helper.degToRad(0)};
     float[] basicPositionRightArm1 = {helper.degToRad(-25),helper.degToRad(-5),helper.degToRad(0)};
     float[] basicPositionLeftArm2 = {helper.degToRad(60),helper.degToRad(22),helper.degToRad(0)};

@@ -1,15 +1,7 @@
 package mod.krevik.item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.KCore;
 import com.google.common.collect.Sets;
-
+import mod.krevik.KCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -25,11 +17,20 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ItemMysticPickaxe extends MysticTool
 {
@@ -55,9 +56,6 @@ public class ItemMysticPickaxe extends MysticTool
         mode=0;
     }
 
-    /**
-     * Check whether this Item can harvest the given Block
-     */
     @Override
 	public boolean canHarvestBlock(IBlockState blockIn)
     {
@@ -392,13 +390,13 @@ public class ItemMysticPickaxe extends MysticTool
 					mode=1;
 				if(worldIn.isRemote) {
 					playerIn.sendMessage(new TextComponentString("Mythical power is OFF"));
-					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.proxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
+					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.proxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
 				}
 			}else{
 					mode = 0;
 				if(worldIn.isRemote) {
 					playerIn.sendMessage(new TextComponentString("Mythical power is ON"));
-					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.instance.proxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
+					worldIn.playSound(playerIn, playerIn.getPosition(), KCore.proxy.pickaxe_turn, SoundCategory.PLAYERS, 1F, 1F);
 				}
 			}
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));

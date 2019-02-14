@@ -1,23 +1,14 @@
 package mod.krevik.biome;
 
-import java.util.Calendar;
-import java.util.Random;
-
+import mod.krevik.KCore;
+import mod.krevik.entity.*;
 import mod.krevik.entity.butterfly.EntityCloudShimmer;
-import mod.krevik.world.gen.structureloader.CreateWorldGenFromStructure;
-import mod.krevik.world.gen.structureloader.StructureList;
 import mod.krevik.world.gen.WorldGenClouds;
 import mod.krevik.world.gen.WorldGenHugeSoulTree;
 import mod.krevik.world.gen.WorldGenMiniTallGrass;
 import mod.krevik.world.gen.WorldGenSolisCrystals;
-import mod.krevik.KCore;
-
-import mod.krevik.entity.EntityCloudOister;
-import mod.krevik.entity.EntityCloudySlime;
-import mod.krevik.entity.EntityFlyingSquid;
-import mod.krevik.entity.EntityGaznowel;
-import mod.krevik.entity.EntitySkyray;
-import net.minecraft.block.Block;
+import mod.krevik.world.gen.structureloader.CreateWorldGenFromStructure;
+import mod.krevik.world.gen.structureloader.StructureList;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -26,7 +17,6 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
@@ -36,6 +26,9 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+
+import java.util.Calendar;
+import java.util.Random;
 
 public class BiomeFloatingIslands extends KetherBiome
 {
@@ -141,8 +134,8 @@ public class BiomeFloatingIslands extends KetherBiome
  				IBlockState iblockstate = world.getBlockState(position);
  				world.notifyBlockUpdate(position, iblockstate, iblockstate, 3);
  				PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
- 						.setRotation(Rotation.NONE).setIgnoreEntities(true).setChunk((ChunkPos) null)
- 						.setReplacedBlock((Block) null).setIgnoreStructureBlock(true);
+ 						.setRotation(Rotation.NONE).setIgnoreEntities(true).setChunk(null)
+ 						.setReplacedBlock(null).setIgnoreStructureBlock(true);
  				template.addBlocksToWorld(world, position, placementsettings);
  			}
      }

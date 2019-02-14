@@ -19,6 +19,7 @@ public class BlockSnowdropCyprepedium extends BlockMysticBush {
                 Blocks.STONE,Blocks.COBBLESTONE,KCore.Mythic_Cobblestone,KCore.MythicStone);
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn,pos,state,rand);

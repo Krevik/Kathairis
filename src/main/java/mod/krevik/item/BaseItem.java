@@ -1,9 +1,8 @@
 package mod.krevik.item;
 
 import mod.krevik.EventSubscriber;
-import mod.krevik.entity.EntityLivingFlower;
 import mod.krevik.KCore;
-
+import mod.krevik.entity.EntityLivingFlower;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,10 +25,10 @@ public class BaseItem extends Item{
  
 	 public BaseItem(String name, CreativeTabs tab) {
 		 this.name = name;
-		 setUnlocalizedName(name);
 		 setRegistryName(name);
 		 this.setCreativeTab(tab);
-		 KCore.instance.regHelper.itemList.add(this);
+		 setTranslationKey(name);
+		 KCore.regHelper.itemList.add(this);
 		 EventSubscriber.itemList.add(this);
 	 }
  
@@ -62,9 +61,8 @@ public class BaseItem extends Item{
  @SideOnly(Side.CLIENT)
  public boolean hasEffect(ItemStack stack)
  {
-	 if(this==KCore.MysticGem||this==KCore.CloudEssence||this==KCore.DarknessEssence||
-			 this==KCore.Ritual_Blade||stack.getItem().equals(KCore.skyray_feather)) return true;
-	 else return false;
+	 return this == KCore.MysticGem || this == KCore.CloudEssence || this == KCore.DarknessEssence ||
+			 this == KCore.Ritual_Blade || stack.getItem().equals(KCore.skyray_feather);
  }
  
  @Override

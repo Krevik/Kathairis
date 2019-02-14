@@ -1,9 +1,6 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -24,14 +21,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public class EntityFlyingSquid extends EntityFlying
 {
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
-    private static final DataParameter<Boolean> isDiving = EntityDataManager.<Boolean>createKey(EntityFlyingSquid.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> isHoldingPlayer = EntityDataManager.<Boolean>createKey(EntityFlyingSquid.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> canHoldPlayer = EntityDataManager.<Boolean>createKey(EntityFlyingSquid.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> isDiving = EntityDataManager.createKey(EntityFlyingSquid.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> isHoldingPlayer = EntityDataManager.createKey(EntityFlyingSquid.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> canHoldPlayer = EntityDataManager.createKey(EntityFlyingSquid.class, DataSerializers.BOOLEAN);
 
     public EntityFlyingSquid(World worldIn)
     {
@@ -53,21 +52,21 @@ public class EntityFlyingSquid extends EntityFlying
     }
     
     public boolean isDiving() {
-        return ((Boolean)this.dataManager.get(isDiving)).booleanValue();
+        return this.dataManager.get(isDiving).booleanValue();
     }
     public void setDiving(boolean truorfalse) {
         this.dataManager.set(isDiving, Boolean.valueOf(truorfalse));
     }
     
     public boolean isHoldingPlayer() {
-        return ((Boolean)this.dataManager.get(isHoldingPlayer)).booleanValue();
+        return this.dataManager.get(isHoldingPlayer).booleanValue();
     }
     public void setIsHoldingPlayer(boolean truorfalse) {
         this.dataManager.set(isHoldingPlayer, Boolean.valueOf(truorfalse));
     }
     
     public boolean canHoldPlayer() {
-        return ((Boolean)this.dataManager.get(canHoldPlayer)).booleanValue();
+        return this.dataManager.get(canHoldPlayer).booleanValue();
     }
     public void setCanHoldPlayer(boolean truorfalse) {
         this.dataManager.set(canHoldPlayer, Boolean.valueOf(truorfalse));
@@ -313,7 +312,7 @@ public class EntityFlyingSquid extends EntityFlying
 				                	}else {
 				                		this.squid.setIsHoldingPlayer(false);
 				                	}
-				                	if((int)this.squid.getPosition().getX()!=(int)ep.posX||(int)this.squid.getPosition().getZ()!=(int)ep.posZ) {
+				                	if(this.squid.getPosition().getX() !=(int)ep.posX|| this.squid.getPosition().getZ() !=(int)ep.posZ) {
 					                	float f1=(float) (ep.posX-this.squid.posX);
 					                	float f3=(float) (ep.posZ-this.squid.posZ);
 					                	float f2=0;

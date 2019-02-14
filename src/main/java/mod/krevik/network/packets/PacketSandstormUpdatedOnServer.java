@@ -1,9 +1,8 @@
 package mod.krevik.network.packets;
 
+import io.netty.buffer.ByteBuf;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.world.dimension.KathairisDataStorage;
-import mod.krevik.KCore;
-import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -44,7 +43,7 @@ public class PacketSandstormUpdatedOnServer implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(new Runnable() {
                 @Override
                 public void run() {
-                    KathairisDataStorage data = KCore.data.getDataInstance(ctx.getServerHandler().player.world);
+                    KathairisDataStorage data = KathairisDataStorage.getDataInstance(ctx.getServerHandler().player.world);
                     data.setSandstormX(message.mX);
                     data.setSandstormTime((int) message.sandstormTime);
                     data.setSandstormZ(message.mZ);

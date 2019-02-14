@@ -1,16 +1,15 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
-import mod.krevik.block.BlockCrystal;
 import mod.krevik.KCore;
-
+import mod.krevik.block.BlockCrystal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenCrystalChamber extends WorldGenerator{
 
@@ -62,42 +61,42 @@ public class WorldGenCrystalChamber extends WorldGenerator{
     						BlockCrystal crystal = pickRandomCrystalBlock(rand);
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()+x,pos.getY()+y+1,pos.getZ()+z))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.DOWN));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.DOWN));
     								}
     							}
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()+x,pos.getY()+y-1,pos.getZ()+z))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.UP));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.UP));
     								}
     							}
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()-z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()-x,pos.getY()+y+1,pos.getZ()-z))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.DOWN));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.DOWN));
     								}
     							}
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()-z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()-x,pos.getY()+y-1,pos.getZ()-z))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.UP));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()+y,pos.getZ()-z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.UP));
     								}
     							}
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z+1))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.NORTH));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.NORTH));
     								}
     							}
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z-1))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.SOUTH));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.SOUTH));
     								}
     							}
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z+1))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.NORTH));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.NORTH));
     								}
     							}
     							if(worldIn.isAirBlock(new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z))) {
     								if(worldIn.getBlockState(new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z-1))==KCore.MythicStone.getDefaultState()) {
-    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(crystal.FACING, EnumFacing.SOUTH));
+    									setBlockAndNotifyAdequately(worldIn,new BlockPos(pos.getX()-x,pos.getY()-y,pos.getZ()+z), crystal.getDefaultState().withProperty(BlockCrystal.FACING, EnumFacing.SOUTH));
     							}
     						}
     					}

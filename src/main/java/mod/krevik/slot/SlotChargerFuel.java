@@ -1,7 +1,6 @@
 package mod.krevik.slot;
 
-import mod.krevik.KCore;
-
+import mod.krevik.util.FunctionHelper;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -19,7 +18,7 @@ public class SlotChargerFuel extends Slot
      */
     public boolean isItemValid(ItemStack stack)
     {
-        return KCore.functionHelper.isItemFuel(stack) || isBucket(stack);
+        return FunctionHelper.isItemFuel(stack) || isBucket(stack);
     }
 
     public int getItemStackLimit(ItemStack stack)

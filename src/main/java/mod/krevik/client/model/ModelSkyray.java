@@ -1,7 +1,6 @@
 package mod.krevik.client.model;
 
 import mod.krevik.KCore;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -162,19 +161,19 @@ public class ModelSkyray extends ModelBase {
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5, Entity entity)
     {
     	super.setRotationAngles(limbSwing, limbSwingAmount, age, f3, f4, f5, entity);
-        Wing11.rotateAngleZ=MathHelper.sin((float)(age/10))*0.2f;
-        Wing21.rotateAngleZ=MathHelper.sin((float)(age/10))*0.2f;
+        Wing11.rotateAngleZ=MathHelper.sin((age/10))*0.2f;
+        Wing21.rotateAngleZ=MathHelper.sin((age/10))*0.2f;
         
-        Wing11.rotateAngleY=KCore.instance.functionHelper.degToRad(106.9f)+MathHelper.sin((float)(age/10))*0.2f;
-        Wing21.rotateAngleY=-KCore.instance.functionHelper.degToRad(106.9f)-MathHelper.sin((float)(age/10))*0.2f;
+        Wing11.rotateAngleY= KCore.functionHelper.degToRad(106.9f)+MathHelper.sin((age/10))*0.2f;
+        Wing21.rotateAngleY=-KCore.functionHelper.degToRad(106.9f)-MathHelper.sin((age/10))*0.2f;
         
-        Tail2.rotateAngleY=MathHelper.sin((float)(age/10)*0.8f)*0.13f;
-        Tail3.rotateAngleY=MathHelper.sin((float)(age/10)*0.8f)*0.14f;
-        Tail4.rotateAngleY=MathHelper.sin((float)(age/10)*0.8f)*0.18f;
+        Tail2.rotateAngleY=MathHelper.sin((age/10) *0.8f)*0.13f;
+        Tail3.rotateAngleY=MathHelper.sin((age/10) *0.8f)*0.14f;
+        Tail4.rotateAngleY=MathHelper.sin((age/10) *0.8f)*0.18f;
         
-        Tail5.rotateAngleX=-MathHelper.sin((float)(age/10)*0.8f)*1f;
+        Tail5.rotateAngleX=-MathHelper.sin((age/10) *0.8f)*1f;
         
-        Tail4.rotateAngleZ=MathHelper.sin((float)(age/10)*1.6f)*0.2f;
+        Tail4.rotateAngleZ=MathHelper.sin((age/10) *1.6f)*0.2f;
 
 
 

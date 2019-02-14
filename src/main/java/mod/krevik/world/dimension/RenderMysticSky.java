@@ -1,14 +1,8 @@
 package mod.krevik.world.dimension;
 
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import javax.vecmath.Vector4d;
-
-import mod.krevik.util.FunctionHelper;
 import mod.krevik.KCore;
-
+import mod.krevik.util.FunctionHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -23,6 +17,10 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+
+import javax.vecmath.Vector4d;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class RenderMysticSky extends IRenderHandler {
 

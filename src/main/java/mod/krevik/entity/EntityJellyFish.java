@@ -1,14 +1,8 @@
 package mod.krevik.entity;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.entity.ai.EntityAIAttackTarget;
 import mod.krevik.KCore;
+import mod.krevik.entity.ai.EntityAIAttackTarget;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -26,6 +20,10 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class EntityJellyFish extends EntityMob
 {   

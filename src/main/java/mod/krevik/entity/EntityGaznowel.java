@@ -2,7 +2,10 @@ package mod.krevik.entity;
 
 import mod.krevik.util.MysticLootTables;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +33,7 @@ import javax.vecmath.Vector3d;
 
 public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IMob {
 
-    private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(EntityGaznowel.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.createKey(EntityGaznowel.class, DataSerializers.BOOLEAN);
     private boolean hasMovementVector=false;
     private Vector3d movementVector=new Vector3d(0,0,0);
     public EntityGaznowel(World worldIn)
@@ -71,7 +74,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - entityarrow.posY;
         double d2 = target.posZ - this.posZ;
         double d3 = (double)MathHelper.sqrt(d0 * d0 + d2 * d2);
-        entityarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float)(14 - this.world.getDifficulty().getDifficultyId() * 4));
+        entityarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
         this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.world.spawnEntity(entityarrow);
     }
@@ -367,7 +370,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
                 EntityLivingBase entitylivingbase = entity.getAttackTarget();
 
                 if (entitylivingbase != null) {
-                    gaznowel.getDataManager().set(gaznowel.SWINGING_ARMS, true);
+                    gaznowel.getDataManager().set(SWINGING_ARMS, true);
                     double d0 = entity.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ);
                     boolean flag = entity.getEntitySenses().canSee(entitylivingbase);
                     boolean flag1 = this.seeTime > 0;

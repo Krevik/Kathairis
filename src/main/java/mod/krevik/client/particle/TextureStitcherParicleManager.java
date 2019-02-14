@@ -1,7 +1,6 @@
 package mod.krevik.client.particle;
 
 import mod.krevik.client.ClientProxy;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

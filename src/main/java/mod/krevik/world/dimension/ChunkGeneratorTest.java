@@ -1,8 +1,5 @@
 package mod.krevik.world.dimension;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,6 +9,9 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
+
+import java.util.List;
+import java.util.Random;
 
 public class ChunkGeneratorTest implements IChunkGenerator{
 	private static final double zScale = 684.41200000000003D;

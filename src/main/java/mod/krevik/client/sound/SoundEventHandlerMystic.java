@@ -2,7 +2,6 @@ package mod.krevik.client.sound;
 
 
 import mod.krevik.KCore;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;

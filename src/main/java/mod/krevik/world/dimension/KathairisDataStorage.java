@@ -1,13 +1,12 @@
 package mod.krevik.world.dimension;
 
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
+
+import javax.annotation.Nullable;
 
 public class KathairisDataStorage extends WorldSavedData
 {
@@ -89,18 +88,18 @@ public class KathairisDataStorage extends WorldSavedData
 	
 	public void setSandstormX(double c)
 	{
-		this.sandstormX=c;
+		sandstormX=c;
 		markDirty();
 	}
 	public void setSandstormZ(double c)
 	{
-		this.sandstormZ=c;
+		sandstormZ=c;
 		markDirty();
 	}
 	
 	public void setSandstormTime(int c)
 	{
-		this.sandstormTime=c;
+		sandstormTime=c;
 		markDirty();
 	}
 
@@ -165,12 +164,12 @@ public class KathairisDataStorage extends WorldSavedData
 		this.isDeathSpawned=nbt.getBoolean("is");
 		this.isDeathFighting=nbt.getBoolean("fighting");
 		this.isDeathDefeated=nbt.getBoolean("defeated");
-		this.sandstormTime=nbt.getInteger("sandstormtime");
-		this.sandstormX=nbt.getDouble("sandstormx");
-		this.sandstormZ=nbt.getDouble("sandstormz");
-		this.fogTime=nbt.getFloat("fogTime");
-		this.lastFogTime=nbt.getFloat("lastFogTime");
-		this.shouldAddSandstormFog=nbt.getBoolean("shouldAddSandstormFog");
+		sandstormTime=nbt.getInteger("sandstormtime");
+		sandstormX=nbt.getDouble("sandstormx");
+		sandstormZ=nbt.getDouble("sandstormz");
+		fogTime=nbt.getFloat("fogTime");
+		lastFogTime=nbt.getFloat("lastFogTime");
+		shouldAddSandstormFog=nbt.getBoolean("shouldAddSandstormFog");
 
 	}
 

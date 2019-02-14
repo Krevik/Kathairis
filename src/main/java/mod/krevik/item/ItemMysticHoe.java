@@ -1,7 +1,6 @@
 package mod.krevik.item;
 
 import com.google.common.collect.Multimap;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
@@ -39,9 +38,6 @@ public class ItemMysticHoe extends BaseItem
     }
 
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     @Override
     @SuppressWarnings("incomplete-switch")
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
@@ -70,7 +66,7 @@ public class ItemMysticHoe extends BaseItem
 
                 if (block == Blocks.DIRT)
                 {
-                    switch ((BlockDirt.DirtType)iblockstate.getValue(BlockDirt.VARIANT))
+                    switch (iblockstate.getValue(BlockDirt.VARIANT))
                     {
                         case DIRT:
                             this.setBlock(itemstack, player, worldIn, pos, Blocks.FARMLAND.getDefaultState());
@@ -86,10 +82,6 @@ public class ItemMysticHoe extends BaseItem
         }
     }
 
-    /**
-     * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
-     * the damage on the stack.
-     */
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
@@ -108,9 +100,6 @@ public class ItemMysticHoe extends BaseItem
         }
     }
 
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isFull3D()
@@ -118,18 +107,6 @@ public class ItemMysticHoe extends BaseItem
         return true;
     }
 
-    /**
-     * Returns the name of the material this tool is made from as it is declared in EnumToolMaterial (meaning diamond
-     * would return "EMERALD")
-     */
-    public String getMaterialName()
-    {
-        return this.toolMaterial.toString();
-    }
-
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {

@@ -1,12 +1,11 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WorldGenHugeSoulTree extends WorldGenAbstractBasicMysticTree{
 	
@@ -51,7 +50,7 @@ public class WorldGenHugeSoulTree extends WorldGenAbstractBasicMysticTree{
 	private void generateBranchPiece(World world, int length,BlockPos pos) {
 		int shiftX=0;
 		int shiftZ=0;
-		int direction=KCore.instance.functionHelper.random.nextInt(3);
+		int direction= KCore.functionHelper.random.nextInt(3);
 		for(int y=0;y<=length;y++) {
 			if(direction==0)shiftX++;
 			if(direction==1)shiftX--;
@@ -59,7 +58,7 @@ public class WorldGenHugeSoulTree extends WorldGenAbstractBasicMysticTree{
 			if(direction==3)shiftZ--;
 			BlockPos tmp=new BlockPos(pos.getX()+shiftX,pos.getY()+y,pos.getZ()+shiftZ);
 			world.setBlockState(tmp, logState, 2);
-				plantLeaves(world,tmp,KCore.instance.functionHelper.random.nextInt(2));
+				plantLeaves(world,tmp, KCore.functionHelper.random.nextInt(2));
 		}
 	}
 	

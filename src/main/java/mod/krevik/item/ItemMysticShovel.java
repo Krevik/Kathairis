@@ -1,13 +1,7 @@
 package mod.krevik.item;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.KCore;
 import com.google.common.collect.Sets;
-
+import mod.krevik.KCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +23,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Set;
 
 public class ItemMysticShovel extends MysticTool
 {
@@ -57,9 +55,6 @@ public class ItemMysticShovel extends MysticTool
     	return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
     }
 
-    /**
-     * Check whether this Item can harvest the given Block
-     */
     @Override
     public boolean canHarvestBlock(IBlockState blockIn)
     {
@@ -74,6 +69,7 @@ public class ItemMysticShovel extends MysticTool
             return block == Blocks.SNOW;
         }
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
@@ -81,9 +77,6 @@ public class ItemMysticShovel extends MysticTool
     	tooltip.add("Durability: " + (this.getMaxDamage()-this.getDamage(stack)));
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {

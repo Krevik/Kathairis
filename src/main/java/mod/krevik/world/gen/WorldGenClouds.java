@@ -1,13 +1,12 @@
 package mod.krevik.world.gen;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenClouds extends WorldGenerator{
 	
@@ -63,10 +62,10 @@ public class WorldGenClouds extends WorldGenerator{
                 int dy = (int) (Math.sqrt((radius_z * radius_z) * (1.0 - (double) (x * x) / (double) (radius_x * radius_x))));
                 for (int y = -dy; y <= dy; y++) {
                 	setBlock(world,pos.add(x, 0, y), block_state);
-                	if(world.getBlockState(pos.add(x, 0, y))==KCore.BlueCloud.getDefaultState()&&world.isAirBlock(pos.add(x, 1, y))&&KCore.instance.functionHelper.random.nextInt(20)==0) {
+                	if(world.getBlockState(pos.add(x, 0, y))==KCore.BlueCloud.getDefaultState()&&world.isAirBlock(pos.add(x, 1, y))&& KCore.functionHelper.random.nextInt(20)==0) {
                 		setBlock(world,pos.add(x, 1, y), KCore.Plant_Blue_Cloud.getDefaultState());
                 	}
-                	if(world.getBlockState(pos.add(x, 0, y))==KCore.YellowCloud.getDefaultState()&&world.isAirBlock(pos.add(x, 1, y))&&KCore.instance.functionHelper.random.nextInt(20)==0) {
+                	if(world.getBlockState(pos.add(x, 0, y))==KCore.YellowCloud.getDefaultState()&&world.isAirBlock(pos.add(x, 1, y))&& KCore.functionHelper.random.nextInt(20)==0) {
                 		setBlock(world,pos.add(x, 1, y), KCore.Plant_Yellow_Cloud.getDefaultState());
                 	}
                 }

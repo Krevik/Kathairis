@@ -1,17 +1,15 @@
 package mod.krevik.entity.ai;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
-
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class EntityAIAvoidMovingSandsAndCactus extends EntityAIBase
 {

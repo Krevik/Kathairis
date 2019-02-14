@@ -2,9 +2,9 @@ package mod.krevik.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.client.renderer.GlStateManager;
 
 /**
  * slimebasse! - Hugo
@@ -178,7 +178,7 @@ public class ModelFungite extends ModelBase {
         //this.arm_7.rotateAngleZ=(float)-30+(MathHelper.sin((float)(f2*0.1))*0.05f);
         this.arm_6.rotateAngleZ=(float)-90+(MathHelper.sin((float)(f2*0.1))*0.1f);
         this.arm_1.rotateAngleY=(float)-3.1067+(MathHelper.sin((float)(f2*0.1))*0.1f);
-        this.arm_2.rotateAngleZ=(float)+(MathHelper.sin((float)(f2*0.1))*0.1f);
+        this.arm_2.rotateAngleZ= +(MathHelper.sin((float)(f2*0.1))*0.1f);
         this.arm_8.rotateAngleY=(float)0.045553093477052+(MathHelper.sin((float)(f2*0.1))*0.1f);
         this.arm_4.rotateAngleZ=(float)-0.5009094953223726+(MathHelper.sin((float)(f2*0.1))*0.1f);
         

@@ -1,13 +1,11 @@
 package mod.krevik.block;
 
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
-
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -26,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockMythicStonePillar extends BaseBlock
 {
 
-    public static final PropertyEnum<BlockMythicStonePillar.EnumType> VARIANT = PropertyEnum.<BlockMythicStonePillar.EnumType>create("variant", BlockMythicStonePillar.EnumType.class);    
+    public static final PropertyEnum<BlockMythicStonePillar.EnumType> VARIANT = PropertyEnum.create("variant", BlockMythicStonePillar.EnumType.class);
     
     public BlockMythicStonePillar(String Name)
     {
@@ -36,32 +34,31 @@ public class BlockMythicStonePillar extends BaseBlock
     
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.SOLID;
     }
 
-
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return FULL_BLOCK_AABB;
 
     }
-    
+
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return FULL_BLOCK_AABB;
     }
 
-
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
-    
-    /**
-     * Checks if this block can be placed exactly at the given position.
-     */
+
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
@@ -130,10 +127,7 @@ public class BlockMythicStonePillar extends BaseBlock
 	        
 	   }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
+    @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
     	IBlockState result = this.getDefaultState();
@@ -224,51 +218,43 @@ public class BlockMythicStonePillar extends BaseBlock
         return result;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(VARIANT, BlockMythicStonePillar.EnumType.byMetadata(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
-        return ((BlockMythicStonePillar.EnumType)state.getValue(VARIANT)).getMetadata();
-    }
-    
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT});
+        return state.getValue(VARIANT).getMetadata();
     }
 
-    public EnumPushReaction getMobilityFlag(IBlockState state)
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, VARIANT);
+    }
+
+    @Override
+    public EnumPushReaction getPushReaction(IBlockState state)
     {
         return EnumPushReaction.NORMAL;
     }
 
-    /**
-     * Get the geometry of the queried face at the given position and state. This is used to decide whether things like
-     * buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
-     * <p>
-     * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that
-     * does not fit the other descriptions and will generally cause other things not to connect to the face.
-     * 
-     * @return an approximation of the form of the given face
-     */
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
         return BlockFaceShape.UNDEFINED;
     }
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
     
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         NOCONNECTION(0,"noconnection"),
         CORNERWS(1,"cornerws"),
@@ -287,7 +273,7 @@ public class BlockMythicStonePillar extends BaseBlock
         private final int meta;
         private final String name;
 
-        private EnumType(int p_i46384_3_,String Name)
+        EnumType(int p_i46384_3_, String Name)
         {
             this.meta = p_i46384_3_;
             name=Name;

@@ -1,18 +1,11 @@
 package mod.krevik.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -23,116 +16,42 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 public class BlockMysticStairs extends BaseBlock
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    public static final PropertyEnum<BlockMysticStairs.EnumHalf> HALF = PropertyEnum.<BlockMysticStairs.EnumHalf>create("half", BlockMysticStairs.EnumHalf.class);
-    public static final PropertyEnum<BlockMysticStairs.EnumShape> SHAPE = PropertyEnum.<BlockMysticStairs.EnumShape>create("shape", BlockMysticStairs.EnumShape.class);
-    /**
-     * B: .. T: xx
-     * B: .. T: xx
-     */
+    public static final PropertyEnum<BlockMysticStairs.EnumHalf> HALF = PropertyEnum.create("half", BlockMysticStairs.EnumHalf.class);
+    public static final PropertyEnum<BlockMysticStairs.EnumShape> SHAPE = PropertyEnum.create("shape", BlockMysticStairs.EnumShape.class);
     protected static final AxisAlignedBB AABB_SLAB_TOP = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
-    /**
-     * B: .. T: x.
-     * B: .. T: x.
-     */
     protected static final AxisAlignedBB AABB_QTR_TOP_WEST = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 0.5D, 1.0D, 1.0D);
-    /**
-     * B: .. T: .x
-     * B: .. T: .x
-     */
     protected static final AxisAlignedBB AABB_QTR_TOP_EAST = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
-    /**
-     * B: .. T: xx
-     * B: .. T: ..
-     */
     protected static final AxisAlignedBB AABB_QTR_TOP_NORTH = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 0.5D);
-    /**
-     * B: .. T: ..
-     * B: .. T: xx
-     */
     protected static final AxisAlignedBB AABB_QTR_TOP_SOUTH = new AxisAlignedBB(0.0D, 0.5D, 0.5D, 1.0D, 1.0D, 1.0D);
-    /**
-     * B: .. T: x.
-     * B: .. T: ..
-     */
     protected static final AxisAlignedBB AABB_OCT_TOP_NW = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 0.5D, 1.0D, 0.5D);
-    /**
-     * B: .. T: .x
-     * B: .. T: ..
-     */
     protected static final AxisAlignedBB AABB_OCT_TOP_NE = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D, 1.0D, 0.5D);
-    /**
-     * B: .. T: ..
-     * B: .. T: x.
-     */
     protected static final AxisAlignedBB AABB_OCT_TOP_SW = new AxisAlignedBB(0.0D, 0.5D, 0.5D, 0.5D, 1.0D, 1.0D);
-    /**
-     * B: .. T: ..
-     * B: .. T: .x
-     */
     protected static final AxisAlignedBB AABB_OCT_TOP_SE = new AxisAlignedBB(0.5D, 0.5D, 0.5D, 1.0D, 1.0D, 1.0D);
-    /**
-     * B: xx T: ..
-     * B: xx T: ..
-     */
     protected static final AxisAlignedBB AABB_SLAB_BOTTOM = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
-    /**
-     * B: x. T: ..
-     * B: x. T: ..
-     */
     protected static final AxisAlignedBB AABB_QTR_BOT_WEST = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5D, 0.5D, 1.0D);
-    /**
-     * B: .x T: ..
-     * B: .x T: ..
-     */
     protected static final AxisAlignedBB AABB_QTR_BOT_EAST = new AxisAlignedBB(0.5D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
-    /**
-     * B: xx T: ..
-     * B: .. T: ..
-     */
     protected static final AxisAlignedBB AABB_QTR_BOT_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 0.5D);
-    /**
-     * B: .. T: ..
-     * B: xx T: ..
-     */
     protected static final AxisAlignedBB AABB_QTR_BOT_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.5D, 1.0D, 0.5D, 1.0D);
-    /**
-     * B: x. T: ..
-     * B: .. T: ..
-     */
     protected static final AxisAlignedBB AABB_OCT_BOT_NW = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5D, 0.5D, 0.5D);
-    /**
-     * B: .x T: ..
-     * B: .. T: ..
-     */
     protected static final AxisAlignedBB AABB_OCT_BOT_NE = new AxisAlignedBB(0.5D, 0.0D, 0.0D, 1.0D, 0.5D, 0.5D);
-    /**
-     * B: .. T: ..
-     * B: x. T: ..
-     */
     protected static final AxisAlignedBB AABB_OCT_BOT_SW = new AxisAlignedBB(0.0D, 0.0D, 0.5D, 0.5D, 0.5D, 1.0D);
-    /**
-     * B: .. T: ..
-     * B: .x T: ..
-     */
     protected static final AxisAlignedBB AABB_OCT_BOT_SE = new AxisAlignedBB(0.5D, 0.0D, 0.5D, 1.0D, 0.5D, 1.0D);
     private final Block modelBlock;
     private final IBlockState modelState;
@@ -146,6 +65,7 @@ public class BlockMysticStairs extends BaseBlock
         this.setLightOpacity(0);
     }
 
+    @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState)
     {
         if (!isActualState)
@@ -161,10 +81,10 @@ public class BlockMysticStairs extends BaseBlock
 
     private static List<AxisAlignedBB> getCollisionBoxList(IBlockState bstate)
     {
-        List<AxisAlignedBB> list = Lists.<AxisAlignedBB>newArrayList();
+        List<AxisAlignedBB> list = Lists.newArrayList();
         boolean flag = bstate.getValue(HALF) == BlockMysticStairs.EnumHalf.TOP;
         list.add(flag ? AABB_SLAB_TOP : AABB_SLAB_BOTTOM);
-        BlockMysticStairs.EnumShape blockstairs$enumshape = (BlockMysticStairs.EnumShape)bstate.getValue(SHAPE);
+        BlockMysticStairs.EnumShape blockstairs$enumshape = bstate.getValue(SHAPE);
 
         if (blockstairs$enumshape == BlockMysticStairs.EnumShape.STRAIGHT || blockstairs$enumshape == BlockMysticStairs.EnumShape.INNER_LEFT || blockstairs$enumshape == BlockMysticStairs.EnumShape.INNER_RIGHT)
         {
@@ -179,15 +99,11 @@ public class BlockMysticStairs extends BaseBlock
         return list;
     }
 
-    /**
-     * Returns a bounding box representing a quarter of a block (two eight-size cubes back to back).
-     * Used in all stair shapes except OUTER.
-     */
     private static AxisAlignedBB getCollQuarterBlock(IBlockState bstate)
     {
         boolean flag = bstate.getValue(HALF) == BlockMysticStairs.EnumHalf.TOP;
 
-        switch ((EnumFacing)bstate.getValue(FACING))
+        switch (bstate.getValue(FACING))
         {
             case NORTH:
             default:
@@ -201,17 +117,12 @@ public class BlockMysticStairs extends BaseBlock
         }
     }
 
-    /**
-     * Returns a bounding box representing an eighth of a block (a block whose three dimensions are halved).
-     * Used in all stair shapes except STRAIGHT (gets added alone in the case of OUTER; alone with a quarter block in
-     * case of INSIDE).
-     */
     private static AxisAlignedBB getCollEighthBlock(IBlockState bstate)
     {
-        EnumFacing enumfacing = (EnumFacing)bstate.getValue(FACING);
+        EnumFacing enumfacing = bstate.getValue(FACING);
         EnumFacing enumfacing1;
 
-        switch ((BlockMysticStairs.EnumShape)bstate.getValue(SHAPE))
+        switch (bstate.getValue(SHAPE))
         {
             case OUTER_LEFT:
             default:
@@ -243,15 +154,7 @@ public class BlockMysticStairs extends BaseBlock
         }
     }
 
-    /**
-     * Get the geometry of the queried face at the given position and state. This is used to decide whether things like
-     * buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
-     * <p>
-     * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that
-     * does not fit the other descriptions and will generally cause other things not to connect to the face.
-     * 
-     * @return an approximation of the form of the given face
-     */
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
         state = this.getActualState(state, worldIn, pos);
@@ -262,11 +165,11 @@ public class BlockMysticStairs extends BaseBlock
         }
         else
         {
-            BlockMysticStairs.EnumShape blockstairs$enumshape = (BlockMysticStairs.EnumShape)state.getValue(SHAPE);
+            BlockMysticStairs.EnumShape blockstairs$enumshape = state.getValue(SHAPE);
 
             if (blockstairs$enumshape != BlockMysticStairs.EnumShape.OUTER_LEFT && blockstairs$enumshape != BlockMysticStairs.EnumShape.OUTER_RIGHT)
             {
-                EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+                EnumFacing enumfacing = state.getValue(FACING);
 
                 switch (blockstairs$enumshape)
                 {
@@ -287,14 +190,13 @@ public class BlockMysticStairs extends BaseBlock
         }
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -307,151 +209,119 @@ public class BlockMysticStairs extends BaseBlock
         this.modelBlock.randomDisplayTick(stateIn, worldIn, pos, rand);
     }
 
+    @Override
     public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
     {
         this.modelBlock.onBlockClicked(worldIn, pos, playerIn);
     }
 
-    /**
-     * Called after a player destroys this Block - the posiiton pos may no longer hold the state indicated.
-     */
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
+    @Override
+    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state)
     {
-        this.modelBlock.onBlockDestroyedByPlayer(worldIn, pos, state);
+        this.modelBlock.onPlayerDestroy(worldIn, pos, state);
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public int getPackedLightmapCoords(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return this.modelState.getPackedLightmapCoords(source, pos);
     }
 
-    /**
-     * Returns how much this block can resist explosions from the passed in entity.
-     */
+    @Override
     public float getExplosionResistance(Entity exploder)
     {
         return this.modelBlock.getExplosionResistance(exploder);
     }
 
-    /**
-     * How many world ticks before ticking
-     */
+    @Override
     public int tickRate(World worldIn)
     {
         return this.modelBlock.tickRate(worldIn);
     }
 
+    @Override
     public Vec3d modifyAcceleration(World worldIn, BlockPos pos, Entity entityIn, Vec3d motion)
     {
         return this.modelBlock.modifyAcceleration(worldIn, pos, entityIn, motion);
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
-        return this.modelBlock.getBlockLayer();
+        return this.modelBlock.getRenderLayer();
     }
 
-    /**
-     * Return an AABB (in world coords!) that should be highlighted when the player is targeting this Block
-     */
+    @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
     {
         return this.modelState.getSelectedBoundingBox(worldIn, pos);
     }
 
-    /**
-     * Returns if this block is collidable. Only used by fire, although stairs return that of the block that the stair
-     * is made of (though nobody's going to make fire stairs, right?)
-     */
+    @Override
     public boolean isCollidable()
     {
         return this.modelBlock.isCollidable();
     }
 
+    @Override
     public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid)
     {
         return this.modelBlock.canCollideCheck(state, hitIfLiquid);
     }
 
-    /**
-     * Checks if this block can be placed exactly at the given position.
-     */
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return this.modelBlock.canPlaceBlockAt(worldIn, pos);
     }
 
-    /**
-     * Called after the block is set in the Chunk data, but before the Tile Entity is set
-     */
+    @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         this.modelState.neighborChanged(worldIn, pos, Blocks.AIR, pos);
         this.modelBlock.onBlockAdded(worldIn, pos, this.modelState);
     }
 
-    /**
-     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
-     */
+    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         this.modelBlock.breakBlock(worldIn, pos, this.modelState);
     }
 
-    /**
-     * Called when the given entity walks on this Block
-     */
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
         this.modelBlock.onEntityWalk(worldIn, pos, entityIn);
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         this.modelBlock.updateTick(worldIn, pos, state, rand);
     }
 
-    /**
-     * Called when the block is right clicked by a player.
-     */
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         return this.modelBlock.onBlockActivated(worldIn, pos, this.modelState, playerIn, hand, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F);
     }
 
-    /**
-     * Called when this Block is destroyed by an Explosion
-     */
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
-    {
-        this.modelBlock.onBlockDestroyedByExplosion(worldIn, pos, explosionIn);
-    }
-
-    /**
-     * Determines if the block is solid enough on the top side to support other blocks, like redstone components.
-     */
+    @Override
     public boolean isTopSolid(IBlockState state)
     {
         return state.getValue(HALF) == BlockMysticStairs.EnumHalf.TOP;
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
+    @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         return this.modelBlock.getMapColor(this.modelState, worldIn, pos);
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
+    @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         IBlockState iblockstate = super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
@@ -459,13 +329,11 @@ public class BlockMysticStairs extends BaseBlock
         return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate.withProperty(HALF, BlockMysticStairs.EnumHalf.BOTTOM) : iblockstate.withProperty(HALF, BlockMysticStairs.EnumHalf.TOP);
     }
 
-    /**
-     * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit.
-     */
+    @Override
     @Nullable
     public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end)
     {
-        List<RayTraceResult> list = Lists.<RayTraceResult>newArrayList();
+        List<RayTraceResult> list = Lists.newArrayList();
 
         for (AxisAlignedBB axisalignedbb : getCollisionBoxList(this.getActualState(blockState, worldIn, pos)))
         {
@@ -492,19 +360,15 @@ public class BlockMysticStairs extends BaseBlock
         return raytraceresult1;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         IBlockState iblockstate = this.getDefaultState().withProperty(HALF, (meta & 4) > 0 ? BlockMysticStairs.EnumHalf.TOP : BlockMysticStairs.EnumHalf.BOTTOM);
-        iblockstate = iblockstate.withProperty(FACING, EnumFacing.getFront(5 - (meta & 3)));
+        iblockstate = iblockstate.withProperty(FACING, EnumFacing.byIndex(5 - (meta & 3)));
         return iblockstate;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
@@ -514,14 +378,11 @@ public class BlockMysticStairs extends BaseBlock
             i |= 4;
         }
 
-        i = i | 5 - ((EnumFacing)state.getValue(FACING)).getIndex();
+        i = i | 5 - state.getValue(FACING).getIndex();
         return i;
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
+    @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         return state.withProperty(SHAPE, getStairsShape(state, worldIn, pos));
@@ -529,14 +390,14 @@ public class BlockMysticStairs extends BaseBlock
 
     private static BlockMysticStairs.EnumShape getStairsShape(IBlockState p_185706_0_, IBlockAccess p_185706_1_, BlockPos p_185706_2_)
     {
-        EnumFacing enumfacing = (EnumFacing)p_185706_0_.getValue(FACING);
+        EnumFacing enumfacing = p_185706_0_.getValue(FACING);
         IBlockState iblockstate = p_185706_1_.getBlockState(p_185706_2_.offset(enumfacing));
 
         if (isBlockStairs(iblockstate) && p_185706_0_.getValue(HALF) == iblockstate.getValue(HALF))
         {
-            EnumFacing enumfacing1 = (EnumFacing)iblockstate.getValue(FACING);
+            EnumFacing enumfacing1 = iblockstate.getValue(FACING);
 
-            if (enumfacing1.getAxis() != ((EnumFacing)p_185706_0_.getValue(FACING)).getAxis() && isDifferentStairs(p_185706_0_, p_185706_1_, p_185706_2_, enumfacing1.getOpposite()))
+            if (enumfacing1.getAxis() != p_185706_0_.getValue(FACING).getAxis() && isDifferentStairs(p_185706_0_, p_185706_1_, p_185706_2_, enumfacing1.getOpposite()))
             {
                 if (enumfacing1 == enumfacing.rotateYCCW())
                 {
@@ -551,9 +412,9 @@ public class BlockMysticStairs extends BaseBlock
 
         if (isBlockStairs(iblockstate1) && p_185706_0_.getValue(HALF) == iblockstate1.getValue(HALF))
         {
-            EnumFacing enumfacing2 = (EnumFacing)iblockstate1.getValue(FACING);
+            EnumFacing enumfacing2 = iblockstate1.getValue(FACING);
 
-            if (enumfacing2.getAxis() != ((EnumFacing)p_185706_0_.getValue(FACING)).getAxis() && isDifferentStairs(p_185706_0_, p_185706_1_, p_185706_2_, enumfacing2))
+            if (enumfacing2.getAxis() != p_185706_0_.getValue(FACING).getAxis() && isDifferentStairs(p_185706_0_, p_185706_1_, p_185706_2_, enumfacing2))
             {
                 if (enumfacing2 == enumfacing.rotateYCCW())
                 {
@@ -578,24 +439,17 @@ public class BlockMysticStairs extends BaseBlock
         return state.getBlock() instanceof BlockMysticStairs;
     }
 
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+    @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
-    @SuppressWarnings("incomplete-switch")
+    @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
-        BlockMysticStairs.EnumShape blockstairs$enumshape = (BlockMysticStairs.EnumShape)state.getValue(SHAPE);
+        EnumFacing enumfacing = state.getValue(FACING);
+        BlockMysticStairs.EnumShape blockstairs$enumshape = state.getValue(SHAPE);
 
         switch (mirrorIn)
         {
@@ -642,9 +496,10 @@ public class BlockMysticStairs extends BaseBlock
         return super.withMirror(state, mirrorIn);
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {FACING, HALF, SHAPE});
+        return new BlockStateContainer(this, FACING, HALF, SHAPE);
     }
 
     @Override
@@ -666,18 +521,17 @@ public class BlockMysticStairs extends BaseBlock
         if (shape == EnumShape.OUTER_LEFT || shape == EnumShape.OUTER_RIGHT) return false;
         if (face == side) return true;
         if (shape == EnumShape.INNER_LEFT && face.rotateY() == side) return true;
-        if (shape == EnumShape.INNER_RIGHT && face.rotateYCCW() == side) return true;
-        return false;
+        return shape == EnumShape.INNER_RIGHT && face.rotateYCCW() == side;
     }
 
-    public static enum EnumHalf implements IStringSerializable
+    public enum EnumHalf implements IStringSerializable
     {
         TOP("top"),
         BOTTOM("bottom");
 
         private final String name;
 
-        private EnumHalf(String name)
+        EnumHalf(String name)
         {
             this.name = name;
         }
@@ -693,7 +547,7 @@ public class BlockMysticStairs extends BaseBlock
         }
     }
 
-    public static enum EnumShape implements IStringSerializable
+    public enum EnumShape implements IStringSerializable
     {
         STRAIGHT("straight"),
         INNER_LEFT("inner_left"),
@@ -703,7 +557,7 @@ public class BlockMysticStairs extends BaseBlock
 
         private final String name;
 
-        private EnumShape(String name)
+        EnumShape(String name)
         {
             this.name = name;
         }

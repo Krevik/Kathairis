@@ -1,10 +1,9 @@
 package mod.krevik.item;
 
+import mod.krevik.KCore;
 import mod.krevik.block.BlockMythicStoneStandingSign;
 import mod.krevik.block.BlockMythicStoneWallSign;
-import mod.krevik.KCore;
 import mod.krevik.tileentity.TileEntityMythicStoneSign;
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,9 +28,6 @@ public class ItemMythicStoneSign extends BaseItem
         this.setCreativeTab(tab);
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {

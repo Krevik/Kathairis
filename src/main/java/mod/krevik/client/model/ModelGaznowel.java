@@ -1,18 +1,18 @@
 package mod.krevik.client.model;
 
-import mod.krevik.util.FunctionHelper;
 import mod.krevik.KCore;
+import mod.krevik.util.FunctionHelper;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * ModelGaznowel - Undefined
  * Created using Tabula 7.0.0
  */
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.EnumHandSide;
-import net.minecraft.util.math.MathHelper;
 
 /**
  * ModelGaznowel - Undefined

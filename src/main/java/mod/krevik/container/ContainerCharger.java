@@ -1,9 +1,8 @@
 package mod.krevik.container;
 
-import mod.krevik.KCore;
 import mod.krevik.slot.SlotChargerFuel;
 import mod.krevik.slot.SlotChargerOutput;
-
+import mod.krevik.util.FunctionHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -130,7 +129,7 @@ public class ContainerCharger extends Container
                     {
                         return ItemStack.EMPTY;
                     }
-                else if (KCore.functionHelper.isItemFuel(itemstack1))
+                else if (FunctionHelper.isItemFuel(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {

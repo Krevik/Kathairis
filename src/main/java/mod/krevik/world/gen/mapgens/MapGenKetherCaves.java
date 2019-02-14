@@ -1,10 +1,7 @@
 package mod.krevik.world.gen.mapgens;
 
-import java.util.Random;
-
-import mod.krevik.KCore;
 import com.google.common.base.MoreObjects;
-
+import mod.krevik.KCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +10,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
+
+import java.util.Random;
 
 public class MapGenKetherCaves extends MapGenBase
 {
@@ -179,7 +178,7 @@ public class MapGenKetherCaves extends MapGenBase
                                         if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
                                         {
                                             IBlockState iblockstate1 = p_180702_5_.getBlockState(j3, j2, i2);
-                                            IBlockState iblockstate2 = (IBlockState)MoreObjects.firstNonNull(p_180702_5_.getBlockState(j3, j2 + 1, i2), BLK_AIR);
+                                            IBlockState iblockstate2 = MoreObjects.firstNonNull(p_180702_5_.getBlockState(j3, j2 + 1, i2), BLK_AIR);
 
                                             if (isTopBlock(p_180702_5_, j3, j2, i2, p_180702_3_, p_180702_4_))
                                             {
@@ -289,8 +288,7 @@ public class MapGenKetherCaves extends MapGenBase
     //Exception biomes to make sure we generate like vanilla
     private boolean isExceptionBiome(net.minecraft.world.biome.Biome biome)
     {
-        if (biome == KCore.MysticDesert) return true;
-        return false;
+        return biome == KCore.MysticDesert;
     }
 
     //Determine if the block at the specified location is the top block for the biome, we take into account
@@ -309,7 +307,6 @@ public class MapGenKetherCaves extends MapGenBase
      * tries to make the floor the biome's top block
      *
      * @param data Block data array
-     * @param index Pre-calculated index into block data
      * @param x local X position
      * @param y local Y position
      * @param z local Z position

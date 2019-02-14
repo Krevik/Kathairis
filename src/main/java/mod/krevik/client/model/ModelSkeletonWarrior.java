@@ -197,11 +197,11 @@ public class ModelSkeletonWarrior extends ModelBiped {
     }
 
     @SideOnly(Side.CLIENT)
-    public static enum ArmPose
+    public enum ArmPose
     {
         EMPTY,
         ITEM,
         BLOCK,
-        BOW_AND_ARROW;
+        BOW_AND_ARROW
     }
 }

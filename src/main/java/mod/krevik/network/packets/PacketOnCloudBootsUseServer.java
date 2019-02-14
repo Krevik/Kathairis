@@ -1,15 +1,14 @@
 package mod.krevik.network.packets;
 
-import java.util.Random;
-
-import mod.krevik.item.ItemMysticArmor;
-
 import io.netty.buffer.ByteBuf;
+import mod.krevik.item.ItemMysticArmor;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import java.util.Random;
 
 public class PacketOnCloudBootsUseServer implements IMessage {
 

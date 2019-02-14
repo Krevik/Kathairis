@@ -82,12 +82,8 @@ public class KathairisTreeBase extends WorldGenAbstractBasicMysticTree {
     public boolean canGenerate(World worldIn, BlockPos pos)
     {
         int posY=pos.getY();
-        if(posY>200||!worldIn.isAirBlock(pos)||worldIn.getBlockState(pos.down())!=KCore.KatharianGrass.getDefaultState()||
-                worldIn.getBlockState(pos.down())==KCore.MysticLeaves.getDefaultState()) {
-            return false;
-        }else {
-            return true;
-        }
+        return posY <= 200 && worldIn.isAirBlock(pos) && worldIn.getBlockState(pos.down()) == KCore.KatharianGrass.getDefaultState() &&
+                worldIn.getBlockState(pos.down()) != KCore.MysticLeaves.getDefaultState();
 
     }
 }

@@ -1,15 +1,9 @@
 //WITH TWILIGHT FOREST HELP
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import mod.krevik.client.ClientEventSubscriber;
-import mod.krevik.client.ClientProxy;
-import mod.krevik.KCore;
-
 import mcp.MethodsReturnNonnullByDefault;
+import mod.krevik.KCore;
+import mod.krevik.client.ClientEventSubscriber;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,6 +24,9 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlockMysticSlabBase extends BlockSlab {
@@ -38,6 +35,7 @@ public class BlockMysticSlabBase extends BlockSlab {
 
 	
 	private final boolean isDouble;
+	private String Name;
 
 	public BlockMysticSlabBase(boolean isDouble1,String Name, Material material, CreativeTabs tab, SoundType soundType,float hardness,float resistance) {
 		super(material);
@@ -46,16 +44,17 @@ public class BlockMysticSlabBase extends BlockSlab {
         this.setResistance(resistance);
         this.setSoundType(soundType);
         this.setRegistryName(Name);
-        this.setUnlocalizedName(Name);
+        this.setTranslationKey(Name);
 		this.isDouble = isDouble1;
 		this.setLightOpacity(isDouble ? 255 : 0);
+		this.Name=Name;
 
 		IBlockState state = this.blockState.getBaseState().withProperty(VARIANT, MysticSlabVariant.MYSTIC);
 
 		if (!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
 
 		this.setDefaultState(state);
-        KCore.instance.regHelper.slabList.add(this);
+        KCore.regHelper.slabList.add(this);
 	}
 
 	@Override
@@ -63,9 +62,10 @@ public class BlockMysticSlabBase extends BlockSlab {
 		return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, VARIANT, HALF);
 	}
 
+
 	@Override
-	public String getUnlocalizedName(int meta) {
-		return super.getUnlocalizedName();
+	public String getTranslationKey(int meta) {
+		return getTranslationKey();
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class BlockMysticSlabBase extends BlockSlab {
 		}
 	}
 
-    public static enum MysticSlabVariant implements IStringSerializable
+    public enum MysticSlabVariant implements IStringSerializable
     {
         MYSTIC(0,"mystic");
 
@@ -156,7 +156,7 @@ public class BlockMysticSlabBase extends BlockSlab {
         private final int meta;
         private final String name;
 
-        private MysticSlabVariant(int p_i46384_3_,String Name)
+        MysticSlabVariant(int p_i46384_3_, String Name)
         {
             this.meta = p_i46384_3_;
             name=Name;

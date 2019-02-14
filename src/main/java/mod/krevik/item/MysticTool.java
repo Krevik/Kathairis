@@ -1,12 +1,9 @@
 package mod.krevik.item;
 
 
-import java.util.Set;
-
+import com.google.common.collect.Multimap;
 import mod.krevik.EventSubscriber;
 import mod.krevik.KCore;
-import com.google.common.collect.Multimap;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -25,14 +22,14 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Set;
+
 public class MysticTool extends ItemTool
 {
     public final Set<Block> effectiveBlocks;
     protected float efficiencyOnProperMaterial;
-    /** Damage versus entities. */
     protected float damageVsEntity;
     protected float attackSpeed;
-    /** The material this tool is made from. */
     protected Item.ToolMaterial toolMaterial;
     protected String name;
 
@@ -40,8 +37,8 @@ public class MysticTool extends ItemTool
     {
     	super(attackSpeedIn, attackSpeedIn, materialIn, effectiveBlocksIn);
     	 this.name = Name;
-    	 setUnlocalizedName(Name);
     	 setRegistryName(Name);
+    	 setTranslationKey(Name);
     	 this.setCreativeTab(tab);
     	 this.toolMaterial = materialIn;
     	 this.effectiveBlocks = effectiveBlocksIn;
@@ -63,7 +60,7 @@ public class MysticTool extends ItemTool
         {
             toolClass = "shovel";
         }
-        KCore.instance.regHelper.toolList.add(this);
+        KCore.regHelper.toolList.add(this);
         EventSubscriber.itemList.add(this);
 
         
@@ -86,16 +83,13 @@ public class MysticTool extends ItemTool
         tmp=this.effectiveBlocks.contains(state.getBlock()) ? this.efficiencyOnProperMaterial : 1.0F;
     	return tmp;
     }
+
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
 
     }
 
-    /**
-     * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
-     * the damage on the stack.
-     */
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
@@ -103,9 +97,6 @@ public class MysticTool extends ItemTool
         return true;
     }
 
-    /**
-     * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
-     */
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
     {
@@ -117,9 +108,6 @@ public class MysticTool extends ItemTool
         return true;
     }
 
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isFull3D()
@@ -127,27 +115,18 @@ public class MysticTool extends ItemTool
         return true;
     }
 
-    /**
-     * Return the enchantability factor of the item, most of the time is based on material.
-     */
     @Override
     public int getItemEnchantability()
     {
         return this.toolMaterial.getEnchantability();
     }
 
-    /**
-     * Return the name for this tool's material.
-     */
     @Override
     public String getToolMaterialName()
     {
         return this.toolMaterial.toString();
     }
 
-    /**
-     * Return whether this item is repairable in an anvil.
-     */
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
@@ -156,10 +135,6 @@ public class MysticTool extends ItemTool
         return super.getIsRepairable(toRepair, repair);
     }
 
-
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
@@ -174,7 +149,6 @@ public class MysticTool extends ItemTool
         return multimap;
     }
 
-    /*===================================== FORGE START =================================*/
     @javax.annotation.Nullable
     private String toolClass;
     @Override
@@ -196,5 +170,4 @@ public class MysticTool extends ItemTool
     {
         return toolClass != null ? com.google.common.collect.ImmutableSet.of(toolClass) : super.getToolClasses(stack);
     }
-    /*===================================== FORGE END =================================*/
 }

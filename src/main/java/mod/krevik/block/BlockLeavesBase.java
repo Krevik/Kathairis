@@ -1,7 +1,5 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,6 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public abstract class BlockLeavesBase extends BaseBlock implements net.minecraftforge.common.IShearable
 {
     public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
@@ -33,11 +33,9 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
         this.setLightOpacity(1);
         this.setSoundType(SoundType.PLANT);
     }
-    
 
-    /**
-     * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
-     */
+
+    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         int k = pos.getX();
@@ -65,11 +63,12 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
         }
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!worldIn.isRemote)
         {
-            if (((Boolean)state.getValue(CHECK_DECAY)).booleanValue() && ((Boolean)state.getValue(DECAYABLE)).booleanValue())
+            if (state.getValue(CHECK_DECAY).booleanValue() && state.getValue(DECAYABLE).booleanValue())
             {
                 int j = 5;
                 int k = pos.getX();
@@ -177,7 +176,6 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
         }
     }
 
-
     private void destroy(World worldIn, BlockPos pos)
     {
         this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
@@ -197,23 +195,13 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
         }
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     @Override
     public int quantityDropped(Random random)
     {
         return random.nextInt(20) == 0 ? 1 : 0;
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
-
-
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
+    @Override
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
@@ -228,23 +216,27 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
         return 20;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
+
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
+    @Override
     public boolean causesSuffocation(IBlockState state)
     {
         return false;
@@ -256,7 +248,7 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
     @Override
     public void beginLeavesDecay(IBlockState state, World world, BlockPos pos)
     {
-        if (!(Boolean)state.getValue(CHECK_DECAY))
+        if (!state.getValue(CHECK_DECAY))
         {
             world.setBlockState(pos, state.withProperty(CHECK_DECAY, true), 4);
         }
@@ -299,6 +291,6 @@ public abstract class BlockLeavesBase extends BaseBlock implements net.minecraft
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
-        return !this.leavesFancy && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        return (this.leavesFancy || blockAccess.getBlockState(pos.offset(side)).getBlock() != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 }

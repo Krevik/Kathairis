@@ -1,11 +1,6 @@
 package mod.krevik.block.plants;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -22,6 +17,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockMysticDeadGrass extends BlockMysticBush
 {
     protected static final AxisAlignedBB MYSTICDEADGRASS_AABB = new AxisAlignedBB(0.20000001192092896D, 0.0D, 0.20000001192092896D, 0.699999988079071D, 0.7D, 0.799999988079071D);
@@ -32,32 +30,38 @@ public class BlockMysticDeadGrass extends BlockMysticBush
     }
 
 
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return NULL_AABB;
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return MYSTICDEADGRASS_AABB;
     }
- 
+
+    @Override
     public Block.EnumOffsetType getOffsetType()
     {
         return Block.EnumOffsetType.XZ;
     }
-    
-    
+
+
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return null;
     }
 
+    @Override
     public int quantityDroppedWithBonus(int fortune, Random random)
     {
         return 1 + random.nextInt(fortune * 2 + 1);
     }
 
+    @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
     {
         if (!worldIn.isRemote && stack.getItem() == Items.SHEARS)
@@ -73,6 +77,7 @@ public class BlockMysticDeadGrass extends BlockMysticBush
         }
     }
 
+    @Override
     public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
     {
         boolean can=false;
@@ -95,8 +100,9 @@ public class BlockMysticDeadGrass extends BlockMysticBush
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {}
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         this.checkAndDropBlock(worldIn, pos, state);

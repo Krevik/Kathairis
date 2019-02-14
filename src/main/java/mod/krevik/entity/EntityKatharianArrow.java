@@ -1,10 +1,7 @@
 package mod.krevik.entity;
 
-import mod.krevik.KCore;
 import com.google.common.collect.Sets;
-import java.util.Collection;
-import java.util.Set;
-
+import mod.krevik.KCore;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Items;
@@ -19,16 +16,18 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Collection;
+import java.util.Set;
+
 public class EntityKatharianArrow extends EntityTippedArrow
 {
-    private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(net.minecraft.entity.projectile.EntityTippedArrow.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(net.minecraft.entity.projectile.EntityTippedArrow.class, DataSerializers.VARINT);
     private PotionType potion = PotionTypes.EMPTY;
-    private final Set<PotionEffect> customPotionEffects = Sets.<PotionEffect>newHashSet();
+    private final Set<PotionEffect> customPotionEffects = Sets.newHashSet();
     private boolean fixedColor;
 
     public EntityKatharianArrow(World worldIn)
@@ -137,7 +136,7 @@ public class EntityKatharianArrow extends EntityTippedArrow
 
     public int getColor()
     {
-        return ((Integer)this.dataManager.get(COLOR)).intValue();
+        return this.dataManager.get(COLOR).intValue();
     }
 
     private void setFixedColor(int p_191507_1_)
@@ -155,7 +154,7 @@ public class EntityKatharianArrow extends EntityTippedArrow
 
         if (this.potion != PotionTypes.EMPTY && this.potion != null)
         {
-            compound.setString("Potion", ((ResourceLocation)PotionType.REGISTRY.getNameForObject(this.potion)).toString());
+            compound.setString("Potion", PotionType.REGISTRY.getNameForObject(this.potion).toString());
         }
 
         if (this.fixedColor)

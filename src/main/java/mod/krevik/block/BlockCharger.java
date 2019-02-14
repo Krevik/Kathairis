@@ -1,13 +1,8 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
 import mod.krevik.tileentity.TileEntityCharger;
-
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,10 +24,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockCharger extends BlockContainer
 {
 	
-    private static boolean hasTileEntity;
     protected static final AxisAlignedBB CHARGER_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1D, 0.7D);
 
     public BlockCharger(String Name)
@@ -41,20 +38,22 @@ public class BlockCharger extends BlockContainer
         lightOpacity = 0;
         setTickRandomly(false);
         useNeighborBrightness = false;
-    
         this.setCreativeTab(CreativeTabsMystic.miscellaneous);
         this.setHardness(3F);
         this.setResistance(3F);
         this.setSoundType(SoundType.STONE);
         this.setRegistryName(Name);
-        this.setUnlocalizedName(Name);
-
+        setTranslationKey(Name);
     }
+
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return CHARGER_AABB;
     }
+
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
     	return CHARGER_AABB;
@@ -64,10 +63,13 @@ public class BlockCharger extends BlockContainer
     public void initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
+
+    @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
         return EnumBlockRenderType.MODEL;
     }
+
     @Override
     public Item getItemDropped(
           IBlockState state, 
@@ -144,15 +146,19 @@ public class BlockCharger extends BlockContainer
     }
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
-    
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;

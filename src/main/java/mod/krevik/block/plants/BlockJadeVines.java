@@ -1,14 +1,9 @@
 package mod.krevik.block.plants;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
 import mod.krevik.block.BaseBlock;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.network.packets.PacketJadeVinesServer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockShulkerBox;
 import net.minecraft.block.SoundType;
@@ -34,6 +29,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockJadeVines extends BaseBlock implements net.minecraftforge.common.IShearable
 {
     protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.0D, 0.9375D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -45,11 +43,13 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
     }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return NULL_AABB;
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return FULL_BLOCK_AABB;
@@ -59,20 +59,12 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         IBlockState soil = worldIn.getBlockState(pos.up());
-        if(!worldIn.isAirBlock(pos.up())) {
-        	return true;
-        }else {
-        	return false;
-        }
+        return !worldIn.isAirBlock(pos.up());
     }
 
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
-    	if(!worldIn.isAirBlock(pos.up())) {
-    		return true;
-    	}else {
-    		return false;
-    	}
+        return !worldIn.isAirBlock(pos.up());
     }
 
     /**
@@ -101,11 +93,7 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
 
     public boolean canAttachTo(World world, BlockPos pos, EnumFacing p_193395_3_)
     {
-    	if(!world.isAirBlock(pos.up())) {
-    		return true;
-    	}else {
-    		return false;
-    	}
+        return !world.isAirBlock(pos.up());
     }
 
     private boolean isAcceptableNeighbor(World world, BlockPos pos, EnumFacing p_193396_3_)
@@ -120,18 +108,10 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
 	        //	return false;
 	        //}
     	if(this==KCore.JadeVine_empty||this==KCore.JadeVine_top||this==KCore.JadeVine_mid) {
-    		if(world.getBlockState(pos.up()).getBlock().isFullBlock(world.getBlockState(pos.up()))||world.getBlockState(pos.up())==KCore.JadeVine_empty.getDefaultState()||
-    				world.getBlockState(pos.up())==KCore.JadeVine_top.getDefaultState()||world.getBlockState(pos.up())==KCore.JadeVine_mid.getDefaultState()) {
-    			return true;
-    		}else {
-    			return false;
-    		}
+            return world.getBlockState(pos.up()).getBlock().isFullBlock(world.getBlockState(pos.up())) || world.getBlockState(pos.up()) == KCore.JadeVine_empty.getDefaultState() ||
+                    world.getBlockState(pos.up()) == KCore.JadeVine_top.getDefaultState() || world.getBlockState(pos.up()) == KCore.JadeVine_mid.getDefaultState();
     	}else if(this==KCore.JadeVine_bottom) {
-    		if(world.getBlockState(pos.up())==KCore.JadeVine_mid.getDefaultState()) {
-    			return true;
-    		}else {
-    			return false;
-    		}
+            return world.getBlockState(pos.up()) == KCore.JadeVine_mid.getDefaultState();
     	}else {
     		return false;
     	}
@@ -187,7 +167,7 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
     }
     
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
     	if(worldIn.isRemote) {
     		if(Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown()) {
@@ -195,7 +175,7 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
     		}
     	}
     }
-    
+
     public void grow(World worldIn, BlockPos pos) {
 		if(worldIn.isAirBlock(pos.down())) {
     		if(this==KCore.JadeVine_empty) {
@@ -248,14 +228,16 @@ public class BlockJadeVines extends BaseBlock implements net.minecraftforge.comm
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT;
     }
 
     /*************************FORGE START***********************************/
     @Override public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity){ return true; }
+
     @Override public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos){ return true; }
+
     @Override
     public java.util.List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
     {

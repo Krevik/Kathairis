@@ -1,13 +1,8 @@
 package mod.krevik.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityShockingBall;
 import mod.krevik.util.FunctionHelper;
-import mod.krevik.KCore;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,15 +13,14 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BaseWand extends BaseItem{
 
@@ -59,7 +53,7 @@ public class BaseWand extends BaseItem{
     {
         ItemStack itemstack = player.getHeldItem(handIn);
 
-		FunctionHelper helper = KCore.instance.functionHelper;
+		FunctionHelper helper = KCore.functionHelper;
 		if(itemstack.getItem()==KCore.ShockWand) {
 			if(this.getMaxDamage()-this.getDamage(itemstack)>1) {
 
@@ -144,6 +138,7 @@ public class BaseWand extends BaseItem{
 		 }
 			 return EnumRarity.UNCOMMON;
 	 }
+
 	 @Override
 	 @SideOnly(Side.CLIENT)
 	 public boolean hasEffect(ItemStack stack)
@@ -157,6 +152,7 @@ public class BaseWand extends BaseItem{
 	    {
 	    	tooltip.add("Durability: " + (this.getMaxDamage()-this.getDamage(stack))+ " /1000");
 	    }
+
 	    @Override
 		public boolean isEnchantable(ItemStack stack)
 	    {

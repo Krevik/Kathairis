@@ -1,22 +1,12 @@
 package mod.krevik.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIFollow;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityFlyHelper;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,11 +27,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
 public class EntitySkyray extends EntityFlying
 {
-    private static final DataParameter<Integer> timeUntilNextFeather = EntityDataManager.<Integer>createKey(EntitySkyray.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> timeUntilNextFeather = EntityDataManager.createKey(EntitySkyray.class, DataSerializers.VARINT);
     public int timeUntilNextFeather() {
-        return ((Integer)this.dataManager.get(timeUntilNextFeather)).intValue();
+        return this.dataManager.get(timeUntilNextFeather).intValue();
     }
 
     public void setTimeUntilNextFeather(int x) {
@@ -52,7 +46,7 @@ public class EntitySkyray extends EntityFlying
     private float randomMotionVecY;
     private float randomMotionVecZ;
     private EntitySkyray parent=null;
-    private static final DataParameter<Integer> ADULT = EntityDataManager.<Integer>createKey(EntitySkyray.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> ADULT = EntityDataManager.createKey(EntitySkyray.class, DataSerializers.VARINT);
 
     public EntitySkyray(World worldIn)
     {
@@ -115,7 +109,7 @@ public class EntitySkyray extends EntityFlying
     
     public int getAdult()
     {
-        return MathHelper.clamp(((Integer)this.dataManager.get(ADULT)).intValue(), 0, 4);
+        return MathHelper.clamp(this.dataManager.get(ADULT).intValue(), 0, 4);
     }
 
     public void setAdult(int p_191997_1_)
@@ -209,12 +203,12 @@ public class EntitySkyray extends EntityFlying
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.instance.proxy.skyray_ambient;
+        return KCore.proxy.skyray_ambient;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
-        return KCore.instance.proxy.skyray_hurt;
+        return KCore.proxy.skyray_hurt;
     }
 
     protected SoundEvent getDeathSound()

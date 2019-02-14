@@ -1,7 +1,6 @@
 package mod.krevik.client.model.butterfly;
 
 import mod.krevik.KCore;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -75,8 +74,8 @@ public class ModelIllukini extends ModelBase {
         	Wing4.rotateAngleZ=MathHelper.sin(f2*0.6f);
         	Wing4_1.rotateAngleZ=-MathHelper.sin(f2*0.6f);	
     	}else {
-        	Wing4.rotateAngleZ=-KCore.instance.functionHelper.degToRad(70)-MathHelper.sin(f2*0.05f)*0.05f;
-        	Wing4_1.rotateAngleZ=KCore.instance.functionHelper.degToRad(70)+MathHelper.sin(f2*0.05f)*0.05f;	
+        	Wing4.rotateAngleZ=-KCore.functionHelper.degToRad(70)-MathHelper.sin(f2*0.05f)*0.05f;
+        	Wing4_1.rotateAngleZ= KCore.functionHelper.degToRad(70)+MathHelper.sin(f2*0.05f)*0.05f;
     	}
     }
 }

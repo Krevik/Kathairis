@@ -3,7 +3,6 @@ package mod.krevik.entity.ai;
 import mod.krevik.entity.EntityCloudOister;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.network.packets.PacketCloudOisterClient;
-
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -28,14 +27,7 @@ public class EntityAIPanicNew extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        if (this.creature.getRevengeTarget() == null && !this.creature.isBurning())
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return this.creature.getRevengeTarget() != null || this.creature.isBurning();
     }
     /**
      * Execute a one shot task or start executing a continuous task

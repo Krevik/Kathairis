@@ -1,11 +1,8 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
-import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.KCore;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
@@ -25,6 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntityCamel extends AbstractHorse
 {
@@ -93,7 +92,7 @@ public class EntityCamel extends AbstractHorse
 
         if (this.rand.nextInt(10) == 0)
         {
-            this.playSound(KCore.instance.proxy.camel_breath, p_190680_1_.getVolume() * 0.6F, p_190680_1_.getPitch());
+            this.playSound(KCore.proxy.camel_breath, p_190680_1_.getVolume() * 0.6F, p_190680_1_.getPitch());
         }
     }
 
@@ -121,19 +120,19 @@ public class EntityCamel extends AbstractHorse
     protected SoundEvent getAmbientSound()
     {
         super.getAmbientSound();
-        return KCore.instance.proxy.camel_ambient;
+        return KCore.proxy.camel_ambient;
     }
 
     protected SoundEvent getDeathSound()
     {
         super.getDeathSound();
-        return KCore.instance.proxy.camel_dead;
+        return KCore.proxy.camel_dead;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
         super.getHurtSound(damageSourceIn);
-        return KCore.instance.proxy.camel_hurt;
+        return KCore.proxy.camel_hurt;
     }
 
     protected SoundEvent getAngrySound()

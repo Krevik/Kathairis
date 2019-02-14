@@ -1,8 +1,7 @@
 package mod.krevik.client.renderer;
 
-import mod.krevik.entity.EntityShockingBall;
 import mod.krevik.client.ClientProxy;
-
+import mod.krevik.entity.EntityShockingBall;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

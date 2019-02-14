@@ -1,15 +1,10 @@
 package mod.krevik.entity;
 
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.world.dimension.KathairisDataStorage;
-import mod.krevik.enchantment.KathairisEnchantments;
 import mod.krevik.KCore;
+import mod.krevik.enchantment.KathairisEnchantments;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.network.packets.PacketDeathHandlerServer;
-
+import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,7 +12,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -36,14 +31,17 @@ import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Map;
+
 public class EntityDeath extends EntityMob
 {
 	private boolean defeated;
 	public boolean isFighting;
     private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
-    private static final DataParameter<Integer> scytheAttackTimer = EntityDataManager.<Integer>createKey(EntityDeath.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> isUsingSomeAttack = EntityDataManager.<Boolean>createKey(EntityDeath.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> dissolutionAttackTimer = EntityDataManager.<Integer>createKey(EntityDeath.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> scytheAttackTimer = EntityDataManager.createKey(EntityDeath.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> isUsingSomeAttack = EntityDataManager.createKey(EntityDeath.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> dissolutionAttackTimer = EntityDataManager.createKey(EntityDeath.class, DataSerializers.VARINT);
 
     public EntityDeath(World worldIn)
     {
@@ -189,10 +187,10 @@ public class EntityDeath extends EntityMob
             }
         }
         if(dataManager.get(scytheAttackTimer)>=0){
-            dataManager.set(scytheAttackTimer,(Integer)dataManager.get(scytheAttackTimer)-1);
+            dataManager.set(scytheAttackTimer, dataManager.get(scytheAttackTimer) -1);
         }
         if(dataManager.get(dissolutionAttackTimer)>=0){
-            dataManager.set(dissolutionAttackTimer,(Integer)dataManager.get(dissolutionAttackTimer)-1);
+            dataManager.set(dissolutionAttackTimer, dataManager.get(dissolutionAttackTimer) -1);
         }
 
         if((dataManager.get(scytheAttackTimer)!=-1||dataManager.get(dissolutionAttackTimer)!=-1)){
@@ -229,7 +227,7 @@ public class EntityDeath extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.instance.proxy.death_living;
+        return KCore.proxy.death_living;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)

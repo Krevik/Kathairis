@@ -1,25 +1,17 @@
 package mod.krevik.block;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.ModConfig;
-import mod.krevik.world.dimension.TileEntityKether;
-import mod.krevik.entity.EntityStrangeWanderer;
+import com.google.common.cache.LoadingCache;
 import mod.krevik.KCore;
+import mod.krevik.ModConfig;
 import mod.krevik.client.particle.DynamicParticle;
 import mod.krevik.client.particle.ParticlesFactory;
-import com.google.common.cache.LoadingCache;
-
+import mod.krevik.entity.EntityStrangeWanderer;
+import mod.krevik.world.dimension.TileEntityKether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.BlockWorldState;
@@ -48,9 +40,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockMysticPortal extends BlockPortal
 {
@@ -64,7 +60,6 @@ public class BlockMysticPortal extends BlockPortal
         this.setResistance(resistance);
         this.setSoundType(soundType);
         this.setRegistryName(Name);
-        this.setUnlocalizedName(Name);
     }
 
     @SideOnly(Side.CLIENT)
@@ -72,20 +67,18 @@ public class BlockMysticPortal extends BlockPortal
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
-
-
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
 
-        if (worldIn.provider.isSurfaceWorld() && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId())
+        if (worldIn.provider.isSurfaceWorld() && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getId())
         {
             int i = pos.getY();
             BlockPos blockpos;
 
             for (blockpos = pos; !worldIn.getBlockState(blockpos).isTopSolid() && blockpos.getY() > 0; blockpos = blockpos.down())
             {
-                ;
             }
 
             if (i > 0 && !worldIn.getBlockState(blockpos.up()).isNormalCube())
@@ -148,7 +141,7 @@ public class BlockMysticPortal extends BlockPortal
         for(int x=0;x<=10;x++) {
         	flowers.add(Blocks.TALLGRASS.getDefaultState());
         }
-    	return flowers.get(this.RANDOM.nextInt(flowers.size()));
+    	return flowers.get(RANDOM.nextInt(flowers.size()));
     }
     
     
@@ -213,6 +206,7 @@ public class BlockMysticPortal extends BlockPortal
     }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return NULL_AABB;
@@ -230,11 +224,13 @@ public class BlockMysticPortal extends BlockPortal
         }
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
+    @Override
     public boolean trySpawnPortal(World worldIn, BlockPos pos)
     {
         BlockMysticPortal.Size blockportal$size = new BlockMysticPortal.Size(worldIn, pos, EnumFacing.Axis.X);
@@ -260,14 +256,10 @@ public class BlockMysticPortal extends BlockPortal
         }
     }
 
-    /**
-     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor
-     * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
-     * block, etc.
-     */
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
-        EnumFacing.Axis enumfacing$axis = (EnumFacing.Axis)state.getValue(AXIS);
+        EnumFacing.Axis enumfacing$axis = state.getValue(AXIS);
 
         if (enumfacing$axis == EnumFacing.Axis.X)
         {
@@ -290,6 +282,7 @@ public class BlockMysticPortal extends BlockPortal
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
         pos = pos.offset(side);
@@ -297,7 +290,7 @@ public class BlockMysticPortal extends BlockPortal
 
         if (blockState.getBlock() == this)
         {
-            enumfacing$axis = (EnumFacing.Axis)blockState.getValue(AXIS);
+            enumfacing$axis = blockState.getValue(AXIS);
 
             if (enumfacing$axis == null)
             {
@@ -340,18 +333,14 @@ public class BlockMysticPortal extends BlockPortal
         }
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
+    @Override
     public int quantityDropped(Random random)
     {
         return 0;
     }
 
-    /**
-     * Called When an Entity Collided with the Block
-     */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    @Override
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
         /*if(entityIn instanceof EntityPlayer){
             TileEntityKether.tele((EntityPlayer) entityIn);
@@ -379,27 +368,28 @@ public class BlockMysticPortal extends BlockPortal
 
 
     }
-    
+
+    @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
         return ItemStack.EMPTY;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(AXIS, (meta & 3) == 2 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
         if (rand.nextInt(100) == 0)
@@ -478,18 +468,13 @@ public class BlockMysticPortal extends BlockPortal
             }
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
-        return getMetaForAxis((EnumFacing.Axis)state.getValue(AXIS));
+        return getMetaForAxis(state.getValue(AXIS));
     }
 
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+    @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
         switch (rot)
@@ -497,7 +482,7 @@ public class BlockMysticPortal extends BlockPortal
             case COUNTERCLOCKWISE_90:
             case CLOCKWISE_90:
 
-                switch ((EnumFacing.Axis)state.getValue(AXIS))
+                switch (state.getValue(AXIS))
                 {
                     case X:
                         return state.withProperty(AXIS, EnumFacing.Axis.Z);
@@ -512,11 +497,13 @@ public class BlockMysticPortal extends BlockPortal
         }
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {AXIS});
+        return new BlockStateContainer(this, AXIS);
     }
 
+    @Override
     public BlockPattern.PatternHelper createPatternHelper(World worldIn, BlockPos p_181089_2_)
     {
         EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
@@ -571,6 +558,7 @@ public class BlockMysticPortal extends BlockPortal
         }
     }
 
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
     {
         return BlockFaceShape.UNDEFINED;
@@ -605,7 +593,6 @@ public class BlockMysticPortal extends BlockPortal
 
                 for (BlockPos blockpos = p_i45694_2_; p_i45694_2_.getY() > blockpos.getY() - 21 && p_i45694_2_.getY() > 0 && this.isEmptyBlock(worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down())
                 {
-                    ;
                 }
 
                 int i = this.getDistanceUntilEdge(p_i45694_2_, this.leftDir) - 1;

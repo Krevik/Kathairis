@@ -1,8 +1,8 @@
 package mod.krevik.block.plants;
 
 import mod.krevik.KCore;
-import net.minecraft.block.*;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class BlockGlowVines extends BlockMysticBush {
 
-    public static final PropertyEnum<BlockGlowVines.EnumType> VARIANT = PropertyEnum.<BlockGlowVines.EnumType>create("variant", BlockGlowVines.EnumType.class);
+    public static final PropertyEnum<BlockGlowVines.EnumType> VARIANT = PropertyEnum.create("variant", BlockGlowVines.EnumType.class);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockGlowVines(String Name, boolean replacable1) {
@@ -38,12 +38,14 @@ public class BlockGlowVines extends BlockMysticBush {
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.TOP).withProperty(FACING,EnumFacing.EAST));
     }
 
+    @Override
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return NULL_AABB;
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return FULL_BLOCK_AABB;
@@ -106,7 +108,7 @@ public class BlockGlowVines extends BlockMysticBush {
 
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
     }
 
@@ -205,16 +207,13 @@ public class BlockGlowVines extends BlockMysticBush {
         if(!worldIn.isAirBlock(pos.up())) {
             if (worldIn.getBlockState(pos.up()).getBlock() instanceof BlockGlowVines) {
                 EnumType upperVariant = worldIn.getBlockState(pos.up()).getValue(VARIANT);
-                if(upperVariant==EnumType.BOTTOM){
-                    can=false;
-                }else{
-                    can=true;
-                }
+                can = upperVariant != EnumType.BOTTOM;
             }
         }
         return can;
     }
 
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
         return canPlaceBlockAt(worldIn, pos);
@@ -260,7 +259,7 @@ public class BlockGlowVines extends BlockMysticBush {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
@@ -276,7 +275,7 @@ public class BlockGlowVines extends BlockMysticBush {
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT,FACING});
+        return new BlockStateContainer(this, VARIANT,FACING);
     }
 
     /*@Override
@@ -292,6 +291,7 @@ public class BlockGlowVines extends BlockMysticBush {
     }*/
 
 
+    @Override
     public IBlockState getStateFromMeta(int i)
     {
         EnumType variant = EnumType.BOTTOM;
@@ -321,7 +321,7 @@ public class BlockGlowVines extends BlockMysticBush {
         return state;
     }
 
-    @SuppressWarnings("incomplete-switch")
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int a=0;
@@ -342,7 +342,7 @@ public class BlockGlowVines extends BlockMysticBush {
         return i;
     }
 
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         TOP(0,"top"),
         MID(1,"mid"),
@@ -352,7 +352,7 @@ public class BlockGlowVines extends BlockMysticBush {
         private final int meta;
         private final String name;
 
-        private EnumType(int p_i46384_3_,String Name)
+        EnumType(int p_i46384_3_, String Name)
         {
             this.meta = p_i46384_3_;
             name=Name;

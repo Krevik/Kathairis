@@ -1,10 +1,7 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
-
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,11 +17,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class BlockRefinedCloud extends BaseBlock{
 
     boolean ignoreSimilarity=true;
 	public BlockRefinedCloud(String Name) {
-		super(Name, Material.GLASS, CreativeTabsMystic.buildingBlocks, 2F, 2F, KCore.instance.proxy.CLOUDGLASS);
+		super(Name, Material.GLASS, CreativeTabsMystic.buildingBlocks, 2F, 2F, KCore.proxy.CLOUDGLASS);
 	}
 	
     
@@ -35,7 +34,7 @@ public class BlockRefinedCloud extends BaseBlock{
         IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
         Block block = iblockstate.getBlock();
 
-        return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        return (this.ignoreSimilarity || block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 	
     @Override
@@ -43,12 +42,14 @@ public class BlockRefinedCloud extends BaseBlock{
     {
         return 0;
     }
-    
+
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
     	return null;
     }
-    
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -61,17 +62,19 @@ public class BlockRefinedCloud extends BaseBlock{
     }
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }
-    
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
-    
-    
+
+    @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
     {
     	return new ItemStack(this);

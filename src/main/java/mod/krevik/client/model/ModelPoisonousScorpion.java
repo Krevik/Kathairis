@@ -234,14 +234,14 @@ public class ModelPoisonousScorpion extends ModelBase {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
       super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-      Leg61.rotateAngleZ= KCore.instance.functionHelper.degToRad(-5.22f) +MathHelper.cos(f+0.4f)+0.01f*0.01f;
-      Leg2_1.rotateAngleZ= KCore.instance.functionHelper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
-      Leg61_2.rotateAngleZ= KCore.instance.functionHelper.degToRad(-5.22f) + MathHelper.cos(f+0.4f)+0.01f*0.01f;
-      Leg2_3.rotateAngleZ= KCore.instance.functionHelper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
+      Leg61.rotateAngleZ= KCore.functionHelper.degToRad(-5.22f) +MathHelper.cos(f+0.4f)+0.01f*0.01f;
+      Leg2_1.rotateAngleZ= KCore.functionHelper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
+      Leg61_2.rotateAngleZ= KCore.functionHelper.degToRad(-5.22f) + MathHelper.cos(f+0.4f)+0.01f*0.01f;
+      Leg2_3.rotateAngleZ= KCore.functionHelper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
 
-        Leg2.rotateAngleZ= KCore.instance.functionHelper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
-        Leg2_2.rotateAngleZ= KCore.instance.functionHelper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
-        Leg61_1.rotateAngleZ= KCore.instance.functionHelper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
-        Leg61_3.rotateAngleZ= KCore.instance.functionHelper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
+        Leg2.rotateAngleZ= KCore.functionHelper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
+        Leg2_2.rotateAngleZ= KCore.functionHelper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
+        Leg61_1.rotateAngleZ= KCore.functionHelper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
+        Leg61_3.rotateAngleZ= KCore.functionHelper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
     }
 }

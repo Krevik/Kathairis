@@ -1,15 +1,11 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -22,12 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -37,13 +28,15 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class BlockMysticDoors extends BaseBlock
 {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool OPEN = PropertyBool.create("open");
-    public static final PropertyEnum<BlockMysticDoors.EnumHingePosition> HINGE = PropertyEnum.<BlockMysticDoors.EnumHingePosition>create("hinge", BlockMysticDoors.EnumHingePosition.class);
+    public static final PropertyEnum<BlockMysticDoors.EnumHingePosition> HINGE = PropertyEnum.create("hinge", BlockMysticDoors.EnumHingePosition.class);
     public static final PropertyBool POWERED = PropertyBool.create("powered");
-    public static final PropertyEnum<BlockMysticDoors.EnumDoorHalf> HALF = PropertyEnum.<BlockMysticDoors.EnumDoorHalf>create("half", BlockMysticDoors.EnumDoorHalf.class);
+    public static final PropertyEnum<BlockMysticDoors.EnumDoorHalf> HALF = PropertyEnum.create("half", BlockMysticDoors.EnumDoorHalf.class);
     protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.1875D);
     protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.8125D, 1.0D, 1.0D, 1.0D);
     protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.8125D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -54,7 +47,8 @@ public class BlockMysticDoors extends BaseBlock
         super(Name,material,tab,hardness1,resistance,soundType);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, Boolean.valueOf(false)).withProperty(HINGE, BlockMysticDoors.EnumHingePosition.LEFT).withProperty(POWERED, Boolean.valueOf(false)).withProperty(HALF, BlockMysticDoors.EnumDoorHalf.LOWER));
     }
-    
+
+    @Override
 	@SideOnly(Side.CLIENT)
 	public void initModel() {
 			ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(POWERED).build());
@@ -69,8 +63,8 @@ public class BlockMysticDoors extends BaseBlock
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         state = state.getActualState(source, pos);
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
-        boolean flag = !((Boolean)state.getValue(OPEN)).booleanValue();
+        EnumFacing enumfacing = state.getValue(FACING);
+        boolean flag = !state.getValue(OPEN).booleanValue();
         boolean flag1 = state.getValue(HINGE) == BlockMysticDoors.EnumHingePosition.RIGHT;
 
         switch (enumfacing)
@@ -87,31 +81,25 @@ public class BlockMysticDoors extends BaseBlock
         }
     }
 
-    /**
-     * Gets the localized name of this block. Used for the statistics page.
-     */
     @Override
     public String getLocalizedName()
     {
-        return I18n.translateToLocal((this.getUnlocalizedName() + ".name").replaceAll("tile", "item"));
+        return I18n.translateToLocal((this.getTranslationKey() + ".name").replaceAll("tile", "item"));
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
-    /**
-     * Determines if an entity can path through this block
-     */
+    @Override
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
     {
         return isOpen(combineMetadata(worldIn, pos));
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -119,19 +107,16 @@ public class BlockMysticDoors extends BaseBlock
 
     private int getCloseSound()
     {
-        return this.blockMaterial == Material.IRON ? 1011 : 1012;
+        return this.material == Material.IRON ? 1011 : 1012;
     }
 
     private int getOpenSound()
     {
-        return this.blockMaterial == Material.IRON ? 1005 : 1006;
+        return this.material == Material.IRON ? 1005 : 1006;
     }
 
-   
 
-    /**
-     * Called when the block is right clicked by a player.
-     */
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
             BlockPos blockpos = state.getValue(HALF) == BlockMysticDoors.EnumDoorHalf.LOWER ? pos : pos.down();
@@ -146,7 +131,7 @@ public class BlockMysticDoors extends BaseBlock
                 state = iblockstate.cycleProperty(OPEN);
                 worldIn.setBlockState(blockpos, state, 10);
                 worldIn.markBlockRangeForRenderUpdate(blockpos, pos);
-                worldIn.playEvent(playerIn, ((Boolean)state.getValue(OPEN)).booleanValue() ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+                worldIn.playEvent(playerIn, state.getValue(OPEN).booleanValue() ? this.getOpenSound() : this.getCloseSound(), pos, 0);
                 return true;
             }
     }
@@ -160,20 +145,15 @@ public class BlockMysticDoors extends BaseBlock
             BlockPos blockpos = iblockstate.getValue(HALF) == BlockMysticDoors.EnumDoorHalf.LOWER ? pos : pos.down();
             IBlockState iblockstate1 = pos == blockpos ? iblockstate : worldIn.getBlockState(blockpos);
 
-            if (iblockstate1.getBlock() == this && ((Boolean)iblockstate1.getValue(OPEN)).booleanValue() != open)
+            if (iblockstate1.getBlock() == this && iblockstate1.getValue(OPEN).booleanValue() != open)
             {
                 worldIn.setBlockState(blockpos, iblockstate1.withProperty(OPEN, Boolean.valueOf(open)), 10);
                 worldIn.markBlockRangeForRenderUpdate(blockpos, pos);
-                worldIn.playEvent((EntityPlayer)null, open ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+                worldIn.playEvent(null, open ? this.getOpenSound() : this.getCloseSound(), pos, 0);
             }
         }
     }
 
-    /**
-     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor
-     * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
-     * block, etc.
-     */
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
@@ -225,32 +205,27 @@ public class BlockMysticDoors extends BaseBlock
             {
                 boolean flag = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(blockpos1);
 
-                if (blockIn != this && (flag || blockIn.getDefaultState().canProvidePower()) && flag != ((Boolean)iblockstate1.getValue(POWERED)).booleanValue())
+                if (blockIn != this && (flag || blockIn.getDefaultState().canProvidePower()) && flag != iblockstate1.getValue(POWERED).booleanValue())
                 {
                     worldIn.setBlockState(blockpos1, iblockstate1.withProperty(POWERED, Boolean.valueOf(flag)), 2);
 
-                    if (flag != ((Boolean)state.getValue(OPEN)).booleanValue())
+                    if (flag != state.getValue(OPEN).booleanValue())
                     {
                         worldIn.setBlockState(pos, state.withProperty(OPEN, Boolean.valueOf(flag)), 2);
                         worldIn.markBlockRangeForRenderUpdate(pos, pos);
-                        worldIn.playEvent((EntityPlayer)null, flag ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+                        worldIn.playEvent(null, flag ? this.getOpenSound() : this.getCloseSound(), pos, 0);
                     }
                 }
             }
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return state.getValue(HALF) == BlockMysticDoors.EnumDoorHalf.UPPER ? Items.AIR : this.getItem();
     }
 
-    /**
-     * Checks if this block can be placed exactly at the given position.
-     */
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
@@ -265,7 +240,8 @@ public class BlockMysticDoors extends BaseBlock
         }
     }
 
-    public EnumPushReaction getMobilityFlag(IBlockState state)
+    @Override
+    public EnumPushReaction getPushReaction(IBlockState state)
     {
         return EnumPushReaction.DESTROY;
     }
@@ -286,6 +262,7 @@ public class BlockMysticDoors extends BaseBlock
         return removeHalfBit(k) | (flag ? 8 : 0) | (flag1 ? 16 : 0) | (flag2 ? 32 : 0);
     }
 
+    @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
         return new ItemStack(this.getItem());
@@ -304,10 +281,7 @@ public class BlockMysticDoors extends BaseBlock
     	}
     }
 
-    /**
-     * Called before the Block is set to air in the world. Called regardless of if the player's tool can actually
-     * collect this block
-     */
+    @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
     {
         BlockPos blockpos = pos.down();
@@ -330,15 +304,13 @@ public class BlockMysticDoors extends BaseBlock
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT;
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
+    @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         if (state.getValue(HALF) == BlockMysticDoors.EnumDoorHalf.LOWER)
@@ -363,35 +335,25 @@ public class BlockMysticDoors extends BaseBlock
         return state;
     }
 
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+    @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
-        return state.getValue(HALF) != BlockMysticDoors.EnumDoorHalf.LOWER ? state : state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+        return state.getValue(HALF) != BlockMysticDoors.EnumDoorHalf.LOWER ? state : state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+    @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
-        return mirrorIn == Mirror.NONE ? state : state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING))).cycleProperty(HINGE);
+        return mirrorIn == Mirror.NONE ? state : state.withRotation(mirrorIn.toRotation(state.getValue(FACING))).cycleProperty(HINGE);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        return (meta & 8) > 0 ? this.getDefaultState().withProperty(HALF, BlockMysticDoors.EnumDoorHalf.UPPER).withProperty(HINGE, (meta & 1) > 0 ? BlockMysticDoors.EnumHingePosition.RIGHT : BlockMysticDoors.EnumHingePosition.LEFT).withProperty(POWERED, Boolean.valueOf((meta & 2) > 0)) : this.getDefaultState().withProperty(HALF, BlockMysticDoors.EnumDoorHalf.LOWER).withProperty(FACING, EnumFacing.getHorizontal(meta & 3).rotateYCCW()).withProperty(OPEN, Boolean.valueOf((meta & 4) > 0));
+        return (meta & 8) > 0 ? this.getDefaultState().withProperty(HALF, BlockMysticDoors.EnumDoorHalf.UPPER).withProperty(HINGE, (meta & 1) > 0 ? BlockMysticDoors.EnumHingePosition.RIGHT : BlockMysticDoors.EnumHingePosition.LEFT).withProperty(POWERED, Boolean.valueOf((meta & 2) > 0)) : this.getDefaultState().withProperty(HALF, BlockMysticDoors.EnumDoorHalf.LOWER).withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3).rotateYCCW()).withProperty(OPEN, Boolean.valueOf((meta & 4) > 0));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
@@ -405,16 +367,16 @@ public class BlockMysticDoors extends BaseBlock
                 i |= 1;
             }
 
-            if (((Boolean)state.getValue(POWERED)).booleanValue())
+            if (state.getValue(POWERED).booleanValue())
             {
                 i |= 2;
             }
         }
         else
         {
-            i = i | ((EnumFacing)state.getValue(FACING)).rotateY().getHorizontalIndex();
+            i = i | state.getValue(FACING).rotateY().getHorizontalIndex();
 
-            if (((Boolean)state.getValue(OPEN)).booleanValue())
+            if (state.getValue(OPEN).booleanValue())
             {
                 i |= 4;
             }
@@ -433,6 +395,7 @@ public class BlockMysticDoors extends BaseBlock
         return isOpen(combineMetadata(worldIn, pos));
     }
 
+
     public static EnumFacing getFacing(IBlockAccess worldIn, BlockPos pos)
     {
         return getFacing(combineMetadata(worldIn, pos));
@@ -440,7 +403,7 @@ public class BlockMysticDoors extends BaseBlock
 
     public static EnumFacing getFacing(int combinedMeta)
     {
-        return EnumFacing.getHorizontal(combinedMeta & 3).rotateYCCW();
+        return EnumFacing.byHorizontalIndex(combinedMeta & 3).rotateYCCW();
     }
 
     protected static boolean isOpen(int combinedMeta)
@@ -453,26 +416,19 @@ public class BlockMysticDoors extends BaseBlock
         return (meta & 8) != 0;
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {HALF, FACING, OPEN, HINGE, POWERED});
+        return new BlockStateContainer(this, HALF, FACING, OPEN, HINGE, POWERED);
     }
 
-    /**
-     * Get the geometry of the queried face at the given position and state. This is used to decide whether things like
-     * buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
-     * <p>
-     * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that
-     * does not fit the other descriptions and will generally cause other things not to connect to the face.
-     * 
-     * @return an approximation of the form of the given face
-     */
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
         return BlockFaceShape.UNDEFINED;
     }
 
-    public static enum EnumDoorHalf implements IStringSerializable
+    public enum EnumDoorHalf implements IStringSerializable
     {
         UPPER,
         LOWER;
@@ -488,7 +444,7 @@ public class BlockMysticDoors extends BaseBlock
         }
     }
 
-    public static enum EnumHingePosition implements IStringSerializable
+    public enum EnumHingePosition implements IStringSerializable
     {
         LEFT,
         RIGHT;

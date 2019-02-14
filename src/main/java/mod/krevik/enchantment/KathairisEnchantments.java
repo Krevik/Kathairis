@@ -1,12 +1,12 @@
 package mod.krevik.enchantment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class KathairisEnchantments {

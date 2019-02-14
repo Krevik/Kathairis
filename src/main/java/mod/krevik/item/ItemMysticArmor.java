@@ -1,17 +1,12 @@
 package mod.krevik.item;
 
 
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
+import com.google.common.base.Predicates;
+import com.google.common.collect.Multimap;
 import mod.krevik.EventSubscriber;
 import mod.krevik.KCore;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.network.packets.PacketOnCloudBootsUseServer;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Multimap;
-
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -29,18 +24,17 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 public class ItemMysticArmor extends ItemArmor
 {
@@ -74,8 +68,8 @@ public class ItemMysticArmor extends ItemArmor
 
     public static ItemStack dispenseArmor(IBlockSource blockSource, ItemStack stack)
     {
-        BlockPos blockpos = blockSource.getBlockPos().offset((EnumFacing)blockSource.getBlockState().getValue(BlockDispenser.FACING));
-        List<EntityLivingBase> list = blockSource.getWorld().<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(blockpos), Predicates.and(EntitySelectors.NOT_SPECTATING, new EntitySelectors.ArmoredMob(stack)));
+        BlockPos blockpos = blockSource.getBlockPos().offset(blockSource.getBlockState().getValue(BlockDispenser.FACING));
+        List<EntityLivingBase> list = blockSource.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(blockpos), Predicates.and(EntitySelectors.NOT_SPECTATING, new EntitySelectors.ArmoredMob(stack)));
 
         if (list.isEmpty())
         {
@@ -98,6 +92,7 @@ public class ItemMysticArmor extends ItemArmor
     }
     
     public boolean wereCloudBootsUsed=false;
+
     @SideOnly(Side.CLIENT)
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
@@ -160,9 +155,9 @@ public class ItemMysticArmor extends ItemArmor
     {
     	super(materialIn, renderIndexIn, equipmentSlotIn);
     	 this.name = name;
-    	 setUnlocalizedName(name);
     	 setRegistryName(name);
     	 this.setCreativeTab(tab);
+    	 setTranslationKey(name);
         this.material = materialIn;
         this.armorType = equipmentSlotIn;
         this.renderIndex = renderIndexIn;
@@ -171,7 +166,7 @@ public class ItemMysticArmor extends ItemArmor
         this.toughness = materialIn.getToughness();
         this.maxStackSize = 1;
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DISPENSER_BEHAVIOR);
-        KCore.instance.regHelper.armorList.add(this);
+        KCore.regHelper.armorList.add(this);
         EventSubscriber.itemList.add(this);
 
     }
@@ -182,10 +177,6 @@ public class ItemMysticArmor extends ItemArmor
     }
     
 
-
-    /**
-     * Gets the equipment slot of this armor piece (formerly known as armor type)
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public EntityEquipmentSlot getEquipmentSlot()
@@ -193,28 +184,18 @@ public class ItemMysticArmor extends ItemArmor
         return this.armorType;
     }
 
-    /**
-     * Return the enchantability factor of the item, most of the time is based on material.
-     */
     @Override
     public int getItemEnchantability()
     {
         return this.material.getEnchantability();
     }
 
-    /**
-     * Return the armor material for this armor item.
-     */
     @Override
     public ItemArmor.ArmorMaterial getArmorMaterial()
     {
         return this.material;
     }
 
-
-    /**
-     * Return whether this item is repairable in an anvil.
-     */
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
@@ -223,9 +204,6 @@ public class ItemMysticArmor extends ItemArmor
         return super.getIsRepairable(toRepair, repair);
     }
 
-    /**
-     * Called when the equipped item is right clicked.
-     */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
@@ -245,9 +223,6 @@ public class ItemMysticArmor extends ItemArmor
         }
     }
 
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
@@ -262,14 +237,6 @@ public class ItemMysticArmor extends ItemArmor
         return multimap;
     }
 
-    /**
-     * Determines if this armor will be rendered with the secondary 'overlay' texture.
-     * If this is true, the first texture will be rendered using a tint of the color
-     * specified by getColor(ItemStack)
-     *
-     * @param stack The stack
-     * @return true/false
-     */
     @Override
     public boolean hasOverlay(ItemStack stack)
     {

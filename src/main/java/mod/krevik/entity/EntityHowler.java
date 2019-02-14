@@ -1,14 +1,11 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
+import com.google.common.base.Predicate;
+import mod.krevik.KCore;
 import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import mod.krevik.entity.ai.EntityAIHowlerAttackStun;
 import mod.krevik.entity.ai.EntityAITargetSpecified;
-import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
-
-import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -29,11 +26,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class EntityHowler extends EntityMob
 {
-    private static final DataParameter<Float> animTimer = EntityDataManager.<Float>createKey(EntityHowler.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> animTimerTail = EntityDataManager.<Float>createKey(EntityHowler.class, DataSerializers.FLOAT);
-    private static final DataParameter<Boolean> shouldAnimJaw = EntityDataManager.<Boolean>createKey(EntityHowler.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Float> animTimer = EntityDataManager.createKey(EntityHowler.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> animTimerTail = EntityDataManager.createKey(EntityHowler.class, DataSerializers.FLOAT);
+    private static final DataParameter<Boolean> shouldAnimJaw = EntityDataManager.createKey(EntityHowler.class, DataSerializers.BOOLEAN);
 
 
     public EntityHowler(World worldIn)

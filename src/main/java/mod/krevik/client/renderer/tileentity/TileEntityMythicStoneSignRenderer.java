@@ -1,13 +1,7 @@
 package mod.krevik.client.renderer.tileentity;
 
-import java.nio.FloatBuffer;
-import java.util.List;
-
-import mod.krevik.tileentity.TileEntityMythicStoneSign;
-import org.lwjgl.BufferUtils;
-
 import mod.krevik.KCore;
-
+import mod.krevik.tileentity.TileEntityMythicStoneSign;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiUtilRenderComponents;
@@ -18,6 +12,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.BufferUtils;
+
+import java.nio.FloatBuffer;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityMythicStoneSignRenderer extends TileEntitySpecialRenderer<TileEntityMythicStoneSign>
@@ -104,7 +102,7 @@ public class TileEntityMythicStoneSignRenderer extends TileEntitySpecialRenderer
                 {
                     ITextComponent itextcomponent = te.signText[j];
                     List<ITextComponent> list = GuiUtilRenderComponents.splitText(itextcomponent, 90, fontrenderer, false, true);
-                    String s = list != null && !list.isEmpty() ? ((ITextComponent)list.get(0)).getFormattedText() : "";
+                    String s = list != null && !list.isEmpty() ? list.get(0).getFormattedText() : "";
 
                     if (j == te.lineBeingEdited)
                     {

@@ -1,6 +1,5 @@
 package mod.krevik.block;
 
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -16,7 +15,7 @@ import net.minecraft.world.World;
 public abstract class BlockBaseLog extends BlockRotatedPillarBase
 {
 
-    public static final PropertyEnum<BlockBaseLog.EnumAxis> LOG_AXIS = PropertyEnum.<BlockBaseLog.EnumAxis>create("axis", BlockBaseLog.EnumAxis.class);
+    public static final PropertyEnum<BlockBaseLog.EnumAxis> LOG_AXIS = PropertyEnum.create("axis", BlockBaseLog.EnumAxis.class);
 
     public BlockBaseLog(String Name, Material material, CreativeTabs tab, float hardness1, float resistance, SoundType soundType)
     {
@@ -46,20 +45,12 @@ public abstract class BlockBaseLog extends BlockRotatedPillarBase
         }
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getStateFromMeta(meta).withProperty(LOG_AXIS, BlockBaseLog.EnumAxis.fromFacingAxis(facing.getAxis()));
     }
 
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
@@ -68,7 +59,7 @@ public abstract class BlockBaseLog extends BlockRotatedPillarBase
             case COUNTERCLOCKWISE_90:
             case CLOCKWISE_90:
 
-                switch ((BlockBaseLog.EnumAxis)state.getValue(LOG_AXIS))
+                switch (state.getValue(LOG_AXIS))
                 {
                     case X:
                         return state.withProperty(LOG_AXIS, BlockBaseLog.EnumAxis.Z);
@@ -84,9 +75,10 @@ public abstract class BlockBaseLog extends BlockRotatedPillarBase
     }
 
     @Override public boolean canSustainLeaves(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
+
     @Override public boolean isWood(net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
 
-    public static enum EnumAxis implements IStringSerializable
+    public enum EnumAxis implements IStringSerializable
     {
         X("x"),
         Y("y"),
@@ -95,7 +87,7 @@ public abstract class BlockBaseLog extends BlockRotatedPillarBase
 
         private final String name;
 
-        private EnumAxis(String name)
+        EnumAxis(String name)
         {
             this.name = name;
         }

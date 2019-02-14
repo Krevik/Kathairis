@@ -2,7 +2,6 @@ package mod.krevik.item;
 
 import mod.krevik.EventSubscriber;
 import mod.krevik.KCore;
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,18 +28,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMysticFood extends ItemFood
 {
 	 protected String name;
-    /** Number of ticks to run while 'EnumAction'ing until result. */
     public final int itemUseDuration;
-    /** The amount this food item heals the player. */
     private final int healAmount;
     private final float saturationModifier;
-    /** Whether wolves like this food (true for raw and cooked porkchop). */
     private final boolean isWolfsFavoriteMeat;
-    /** If this field is true, the food can be consumed even if the player don't need to eat. */
     private boolean alwaysEdible;
-    /** represents the potion effect that will occurr upon eating this food. Set by setPotionEffect */
     private PotionEffect potionId;
-    /** probably of the set potion effect occurring */
     private float potionEffectProbability;
 
     public ItemMysticFood(String name, CreativeTabs tab,int amount, float saturation, boolean isWolfFood)
@@ -51,10 +44,10 @@ public class ItemMysticFood extends ItemFood
         this.isWolfsFavoriteMeat = isWolfFood;
         this.saturationModifier = saturation;
         this.name = name;
-        setUnlocalizedName(name);
         setRegistryName(name);
+        setTranslationKey(name);
         this.setCreativeTab(tab);
-        KCore.instance.regHelper.foodList.add(this);
+        KCore.regHelper.foodList.add(this);
         EventSubscriber.itemList.add(this);
 
     }
@@ -64,10 +57,6 @@ public class ItemMysticFood extends ItemFood
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
-    /**
-     * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
-     * the Item before the action is complete.
-     */
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
     {
@@ -75,7 +64,7 @@ public class ItemMysticFood extends ItemFood
         {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             entityplayer.getFoodStats().addStats(this, stack);
-            worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
             this.onFoodEaten(stack, worldIn, entityplayer);
             entityplayer.addStat(StatList.getObjectUseStats(this));
 
@@ -107,8 +96,7 @@ public class ItemMysticFood extends ItemFood
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack)
     {
-   	 if(this==KCore.Heart||this==KCore.MagicBeansItem) return true;
-   	 else return false;
+        return this == KCore.Heart || this == KCore.MagicBeansItem;
     }
 
     @Override
@@ -120,27 +108,18 @@ public class ItemMysticFood extends ItemFood
         }
     }
 
-    /**
-     * How long it takes to use or consume an item
-     */
     @Override
     public int getMaxItemUseDuration(ItemStack stack)
     {
         return 32;
     }
 
-    /**
-     * returns the action that specifies what animation to play when the items is being used
-     */
     @Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
         return EnumAction.EAT;
     }
 
-    /**
-     * Called when the equipped item is right clicked.
-     */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
@@ -169,9 +148,6 @@ public class ItemMysticFood extends ItemFood
         return this.saturationModifier;
     }
 
-    /**
-     * Whether wolves like this food (true for raw and cooked porkchop).
-     */
     @Override
     public boolean isWolfsFavoriteMeat()
     {
@@ -186,9 +162,6 @@ public class ItemMysticFood extends ItemFood
         return this;
     }
 
-    /**
-     * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
-     */
     @Override
     public ItemFood setAlwaysEdible()
     {

@@ -1,14 +1,11 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
+import mod.krevik.KCore;
 import mod.krevik.block.BlockMysticCloud;
 import mod.krevik.entity.ai.EntityAIPanicNew;
-import mod.krevik.KCore;
 import mod.krevik.network.KathairisPacketHandler;
-import mod.krevik.util.MysticLootTables;
 import mod.krevik.network.packets.PacketCloudOisterClient;
-
+import mod.krevik.util.MysticLootTables;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -33,20 +30,22 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
+import javax.annotation.Nullable;
+
 public class EntityCloudOister extends EntityAmbientCreature
 {
-    private static final DataParameter<Integer> timeUntilNextPearl = EntityDataManager.<Integer>createKey(EntityCloudOister.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> panic = EntityDataManager.<Boolean>createKey(EntityCloudOister.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> timeUntilNextPearl = EntityDataManager.createKey(EntityCloudOister.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> panic = EntityDataManager.createKey(EntityCloudOister.class, DataSerializers.BOOLEAN);
     
     public int timeUntilNextPearl() {
-    	return ((Integer)this.dataManager.get(timeUntilNextPearl)).intValue();
+    	return this.dataManager.get(timeUntilNextPearl).intValue();
     }
     public void setTimeUntilNextPearl(int x) {
     	this.dataManager.set(timeUntilNextPearl, Integer.valueOf(x));
     }
     
     public boolean panic() {
-    	return (Boolean)this.dataManager.get(panic).booleanValue();
+    	return this.dataManager.get(panic).booleanValue();
     }
     
     public void setPanic(boolean trueorfalse) {

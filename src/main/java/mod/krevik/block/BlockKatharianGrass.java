@@ -1,12 +1,11 @@
 package mod.krevik.block;
 
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -35,15 +34,13 @@ public class BlockKatharianGrass extends BaseBlock implements IGrowable
             this.setDefaultState(this.blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)).withProperty(FLOWER, Boolean.valueOf(false)));
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
+    @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
         return state.withProperty(SNOWY, shouldBeSnowed(state)).withProperty(FLOWER, state.getValue(FLOWER));
     }
+
     private boolean shouldBeSnowed(IBlockState state){
         boolean result=false;
         if(month==11){
@@ -52,6 +49,7 @@ public class BlockKatharianGrass extends BaseBlock implements IGrowable
         return state.getValue(SNOWY);
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!worldIn.isRemote)
@@ -138,20 +136,20 @@ public class BlockKatharianGrass extends BaseBlock implements IGrowable
             return KCore.christmas_gift.getDefaultState().withProperty(BlockChristmasGift.VARIANT,BlockChristmasGift.EnumType.VIOLET);
         }
     }
-    
-    /**
-     * Whether this IGrowable can grow
-     */
+
+    @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {
         return true;
     }
 
+    @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
         return true;
     }
 
+    @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
 
@@ -208,22 +206,22 @@ public class BlockKatharianGrass extends BaseBlock implements IGrowable
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         return 0;
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {FLOWER,SNOWY});
+        return new BlockStateContainer(this, FLOWER,SNOWY);
     }
 
 

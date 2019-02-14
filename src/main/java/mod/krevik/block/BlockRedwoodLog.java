@@ -1,12 +1,10 @@
 package mod.krevik.block;
 
+import mod.krevik.KCore;
 import mod.krevik.item.ItemMysticAxe;
 import mod.krevik.util.CreativeTabsMystic;
-import mod.krevik.KCore;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -55,14 +53,16 @@ public class BlockRedwoodLog extends BlockBaseLog
     		new AxisAlignedBB(0D, 0.375D, 0.375D, 1D, 0.625D, 0.625D),
     		new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1D, 0.625D),
     		new AxisAlignedBB(0.375D, 0.375D, 0D, 0.625D, 0.625D, 1D)};
-    
 
-    
+
+
+	@Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return getBoundingBox(state,source,pos);
     }
-    
+
+	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
     	boolean result=false;
@@ -124,12 +124,13 @@ public class BlockRedwoodLog extends BlockBaseLog
 	       	
     	return result;
     }
-	
+
+	@Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
 		if(state.getBlock()==KCore.Redwood_log_full) return FULL_SIZES_AABB[0];
 		else if(state.getBlock()==KCore.Redwood_log_size_6) {
-	        switch ((BlockRedwoodLog.EnumAxis)state.getValue(LOG_AXIS))
+	        switch (state.getValue(LOG_AXIS))
 	        {
 	            case X:
 	            	default:
@@ -140,7 +141,7 @@ public class BlockRedwoodLog extends BlockBaseLog
 	                return SIZES_6_AABB[1];
 	        }
 		}else if(state.getBlock()==KCore.Redwood_log_size_5) {
-	        switch ((BlockRedwoodLog.EnumAxis)state.getValue(LOG_AXIS))
+	        switch (state.getValue(LOG_AXIS))
 	        {
 	            case X:
 	            	default:
@@ -151,7 +152,7 @@ public class BlockRedwoodLog extends BlockBaseLog
 	                return SIZES_5_AABB[1];
 	        }
 		}else if(state.getBlock()==KCore.Redwood_log_size_4) {
-	        switch ((BlockRedwoodLog.EnumAxis)state.getValue(LOG_AXIS))
+	        switch (state.getValue(LOG_AXIS))
 	        {
 	            case X:
 	            	default:
@@ -162,7 +163,7 @@ public class BlockRedwoodLog extends BlockBaseLog
 	                return SIZES_4_AABB[1];
 	        }
 		}else if(state.getBlock()==KCore.Redwood_log_size_3) {
-	        switch ((BlockRedwoodLog.EnumAxis)state.getValue(LOG_AXIS))
+	        switch (state.getValue(LOG_AXIS))
 	        {
 	            case X:
 	            	default:
@@ -173,7 +174,7 @@ public class BlockRedwoodLog extends BlockBaseLog
 	                return SIZES_3_AABB[1];
 	        }
 		}else if(state.getBlock()==KCore.Redwood_log_size_2) {
-	        switch ((BlockRedwoodLog.EnumAxis)state.getValue(LOG_AXIS))
+	        switch (state.getValue(LOG_AXIS))
 	        {
 	            case X:
 	            	default:
@@ -184,7 +185,7 @@ public class BlockRedwoodLog extends BlockBaseLog
 	                return SIZES_2_AABB[1];
 	        }
 		}else if(state.getBlock()==KCore.Redwood_log_size_1) {
-	        switch ((BlockRedwoodLog.EnumAxis)state.getValue(LOG_AXIS))
+	        switch (state.getValue(LOG_AXIS))
 	        {
 	            case X:
 	            	default:
@@ -199,25 +200,25 @@ public class BlockRedwoodLog extends BlockBaseLog
 		}
     }
 
+	@Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {LOG_AXIS});
+        return new BlockStateContainer(this, LOG_AXIS);
     }
-    
+
+	@Override
     public boolean isFullCube(IBlockState state)
     {
-    	if(this==KCore.Redwood_log_full) {
-    		return true;
-    	}else {
-    		return false;
-    	}
+		return this == KCore.Redwood_log_full;
     }
-    
+
+	@Override
     public boolean isOpaqueCube(IBlockState state)
     {
     	return isFullCube(state);
     }
-    
+
+	@Override
     public IBlockState getStateFromMeta(int meta)
     {
         IBlockState iblockstate = this.getDefaultState();
@@ -240,15 +241,12 @@ public class BlockRedwoodLog extends BlockBaseLog
         return iblockstate;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
-    @SuppressWarnings("incomplete-switch")
+	@Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
 
-        switch ((BlockRedwoodLog.EnumAxis)state.getValue(LOG_AXIS))
+        switch (state.getValue(LOG_AXIS))
         {
             case X:
                 i |= 4;
@@ -268,10 +266,8 @@ public class BlockRedwoodLog extends BlockBaseLog
     {
         return true;
     }
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
+
+	@Override
     public int damageDropped(IBlockState state)
     {
         return 0;

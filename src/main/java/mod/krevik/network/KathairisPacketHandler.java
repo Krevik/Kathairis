@@ -1,7 +1,6 @@
 package mod.krevik.network;
 
 import mod.krevik.KCore;
-
 import mod.krevik.network.packets.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;

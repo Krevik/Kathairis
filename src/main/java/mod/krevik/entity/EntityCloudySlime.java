@@ -1,31 +1,12 @@
 package mod.krevik.entity;
 
-import java.util.Random;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.entity.ai.EntityAIAttackTarget;
-import mod.krevik.KCore;
-import mod.krevik.util.MysticLootTables;
 import com.google.common.collect.Sets;
-
+import mod.krevik.KCore;
+import mod.krevik.entity.ai.EntityAIAttackTarget;
+import mod.krevik.util.MysticLootTables;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFollow;
-import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISit;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityFlyHelper;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityTameable;
@@ -38,19 +19,19 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateFlying;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+import java.util.Set;
 public class EntityCloudySlime extends EntityTameable implements EntityFlying
 {
-    private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityCloudySlime.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityCloudySlime.class, DataSerializers.VARINT);
     private static final Set<Item> TAME_ITEMS = Sets.newHashSet(KCore.CloudEssence);
 
     public EntityCloudySlime(World worldIn)
@@ -319,7 +300,7 @@ public class EntityCloudySlime extends EntityTameable implements EntityFlying
 
     public int getVariant()
     {
-        return MathHelper.clamp(((Integer)this.dataManager.get(VARIANT)).intValue(), 0, 4);
+        return MathHelper.clamp(this.dataManager.get(VARIANT).intValue(), 0, 4);
     }
 
     public void setVariant(int p_191997_1_)

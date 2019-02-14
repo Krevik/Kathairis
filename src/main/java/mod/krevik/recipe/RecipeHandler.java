@@ -1,7 +1,6 @@
 package mod.krevik.recipe;
 
 import mod.krevik.KCore;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

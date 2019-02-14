@@ -1,8 +1,8 @@
 package mod.krevik.client.model;
 
+import mod.krevik.KCore;
 import mod.krevik.entity.EntityCactiSpore;
 import mod.krevik.util.FunctionHelper;
-import mod.krevik.KCore;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -158,7 +158,7 @@ public class ModelCactiSpore extends ModelBase {
         modelRenderer.rotateAngleZ = z;
     }
 
-    FunctionHelper helper = KCore.instance.functionHelper;
+    FunctionHelper helper = KCore.functionHelper;
     public void setRotationAngles(float f, float f1, float age, float f3, float f4, float f5, Entity entity)
     {
         super.setRotationAngles(f, f1, age, f3, f4, f5, entity);

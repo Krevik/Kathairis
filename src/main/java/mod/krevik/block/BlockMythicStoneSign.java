@@ -1,12 +1,7 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
 import mod.krevik.tileentity.TileEntityMythicStoneSign;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,6 +21,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockMythicStoneSign extends BlockContainer
 {
     protected static final AxisAlignedBB SIGN_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
@@ -37,86 +35,78 @@ public class BlockMythicStoneSign extends BlockContainer
         this.setCreativeTab(null);
         this.setSoundType(SoundType.STONE);
         this.setRegistryName(Name);
-        this.setUnlocalizedName(Name);
-
+        this.setTranslationKey(Name);
     }
-    
+
+    @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
         return EnumBlockRenderType.INVISIBLE;
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return SIGN_AABB;
     }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return NULL_AABB;
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public boolean hasCustomBreakingProgress(IBlockState state)
     {
         return true;
     }
 
-    /**
-     * Determines if an entity can path through this block
-     */
+    @Override
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
     {
         return true;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
-    
 
-    /**
-     * Return true if an entity can be spawned inside the block (used to get the player's bed spawn location)
-     */
+    @Override
     public boolean canSpawnInBlock()
     {
         return true;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
+    @Override
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityMythicStoneSign();
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return KCore.MythicStoneSign;
     }
 
+    @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
         return new ItemStack(KCore.MythicStoneSign);
     }
 
-    /**
-     * Called when the block is right clicked by a player.
-     */
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         if (worldIn.isRemote)
@@ -126,27 +116,17 @@ public class BlockMythicStoneSign extends BlockContainer
         else
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            return tileentity instanceof TileEntityMythicStoneSign ? ((TileEntityMythicStoneSign)tileentity).executeCommand(playerIn) : false;
+            return tileentity instanceof TileEntityMythicStoneSign && ((TileEntityMythicStoneSign) tileentity).executeCommand(playerIn);
         }
     }
 
-    /**
-     * Checks if this block can be placed exactly at the given position.
-     */
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return !this.hasInvalidNeighbor(worldIn, pos) && super.canPlaceBlockAt(worldIn, pos);
     }
 
-    /**
-     * Get the geometry of the queried face at the given position and state. This is used to decide whether things like
-     * buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
-     * <p>
-     * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that
-     * does not fit the other descriptions and will generally cause other things not to connect to the face.
-     * 
-     * @return an approximation of the form of the given face
-     */
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
         return BlockFaceShape.UNDEFINED;

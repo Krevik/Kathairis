@@ -1,11 +1,9 @@
 package mod.krevik.tileentity;
 
-import java.util.Random;
-
-import mod.krevik.container.ContainerCharger;
 import mod.krevik.KCore;
+import mod.krevik.container.ContainerCharger;
 import mod.krevik.recipe.ChargerRecipe;
-
+import mod.krevik.util.FunctionHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -28,13 +26,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class TileEntityCharger extends TileEntityLockable implements ITickable, ISidedInventory
 {
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {2, 1};
     private static final int[] SLOTS_SIDES = new int[] {1};
     /** The ItemStacks that hold the items currently being used in the furnace */
-    private NonNullList<ItemStack> furnaceItemStacks = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
+    private NonNullList<ItemStack> furnaceItemStacks = NonNullList.withSize(3, ItemStack.EMPTY);
     /** The number of ticks that the furnace will keep burning */
     private int furnaceBurnTime;
     /** The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for */
@@ -133,18 +133,18 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
 
     public static void registerFixesFurnace(DataFixer fixer)
     {
-        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntityCharger.class, new String[] {"Items"}));
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntityCharger.class, "Items"));
     }
 
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
-        this.furnaceItemStacks = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+        this.furnaceItemStacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, this.furnaceItemStacks);
         this.furnaceBurnTime = compound.getInteger("BurnTime");
         this.cookTime = compound.getInteger("CookTime");
         this.totalCookTime = compound.getInteger("CookTimeTotal");
-        this.currentItemBurnTime = KCore.functionHelper.getItemBurnTime(this.furnaceItemStacks.get(1));
+        this.currentItemBurnTime = FunctionHelper.getItemBurnTime(this.furnaceItemStacks.get(1));
 
         if (compound.hasKey("CustomName", 8))
         {
@@ -233,11 +233,11 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
         {
             itemstack = this.furnaceItemStacks.get(1);
 
-            if (this.isBurning() || !itemstack.isEmpty() && !((ItemStack)this.furnaceItemStacks.get(0)).isEmpty())
+            if (this.isBurning() || !itemstack.isEmpty() && !this.furnaceItemStacks.get(0).isEmpty())
             {
                 if (!this.isBurning() && this.canSmelt())
                 {
-                    this.furnaceBurnTime = KCore.functionHelper.getItemBurnTime(itemstack);
+                    this.furnaceBurnTime = FunctionHelper.getItemBurnTime(itemstack);
                     this.currentItemBurnTime = this.furnaceBurnTime;
 
                     if (this.isBurning())
@@ -311,9 +311,9 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
     		if(itemToBeConsumed!=null) {
     			if(itemStackToUpgrade.getItem()!=null) {
     				if(itemToBeConsumed.getItem()!=null) {
-    	    			int recipeID = KCore.instance.chargerRecipes.getRecipe(itemStackToUpgrade.getItem());
+    	    			int recipeID = KCore.chargerRecipes.getRecipe(itemStackToUpgrade.getItem());
     	    			if(recipeID!=-1) {
-    	    				ChargerRecipe recipe = KCore.instance.chargerRecipes.recipeList.get(recipeID);
+    	    				ChargerRecipe recipe = KCore.chargerRecipes.recipeList.get(recipeID);
     	    				if(itemStackToUpgrade.getItem()==recipe.getItemToUpgrade()) {
     	    					if(itemToBeConsumed.getItem()==recipe.getItemToBeConsumed()) {
     	    						can=true;
@@ -417,11 +417,7 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
     {
         if (index == 2)
         {
-        	if(stack.getItem()==KCore.ShockWand||stack.getItem()==KCore.DeathWand) {
-        		return true;
-        	}else {
-                return false;
-        	}
+            return stack.getItem() == KCore.ShockWand || stack.getItem() == KCore.DeathWand;
         }
         else if (index != 1)
         {
@@ -430,7 +426,7 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
         else
         {
             ItemStack itemstack = this.furnaceItemStacks.get(1);
-            return KCore.functionHelper.isItemFuel(stack) && itemstack.getItem() != Items.BUCKET;
+            return FunctionHelper.isItemFuel(stack) && itemstack.getItem() != Items.BUCKET;
         }
     }
 
@@ -463,10 +459,7 @@ public class TileEntityCharger extends TileEntityLockable implements ITickable, 
         {
             Item item = stack.getItem();
 
-            if (item != Items.WATER_BUCKET && item != Items.BUCKET)
-            {
-                return false;
-            }
+            return item == Items.WATER_BUCKET || item == Items.BUCKET;
         }
 
         return true;

@@ -1,15 +1,14 @@
 package mod.krevik.network.packets;
 
-import java.util.Random;
-
-import mod.krevik.world.gen.WorldGenDeathsTower;
-
 import io.netty.buffer.ByteBuf;
+import mod.krevik.world.gen.WorldGenDeathsTower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import java.util.Random;
 
 public class PacketSpawnDeathServer implements IMessage {
 

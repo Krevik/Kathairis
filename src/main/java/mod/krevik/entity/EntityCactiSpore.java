@@ -1,9 +1,6 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -23,10 +20,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class EntityCactiSpore extends EntityMob
 {
-    private static final DataParameter<Boolean> canDespawn = EntityDataManager.<Boolean>createKey(EntityCactiSpore.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> spikeTimer = EntityDataManager.<Integer>createKey(EntityCactiSpore.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> canDespawn = EntityDataManager.createKey(EntityCactiSpore.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> spikeTimer = EntityDataManager.createKey(EntityCactiSpore.class, DataSerializers.VARINT);
 
     public EntityCactiSpore(World worldIn)
     {

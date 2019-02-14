@@ -1,14 +1,9 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
 import mod.krevik.client.particle.DynamicParticle;
-
 import mod.krevik.client.particle.ParticlesFactory;
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -33,6 +28,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockSwampGas extends BlockMysticCloud{
 
 
@@ -42,12 +40,14 @@ public class BlockSwampGas extends BlockMysticCloud{
         this.setHardness(-1F);
         this.setCreativeTab(CreativeTabsMystic.miscellaneous);
 	}
+	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return null;
     }
+
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     { 
     	if(entityIn instanceof EntityPlayerMP) {
     		EntityPlayerMP ep = (EntityPlayerMP) entityIn;
@@ -76,23 +76,23 @@ public class BlockSwampGas extends BlockMysticCloud{
     		return true;
     	}else if(world.getBlockState(pos.east()).getBlock()==Blocks.FIRE){
     		return true;
-    	}else if(world.getBlockState(pos.west()).getBlock()==Blocks.FIRE){
-    		return true;
-    	}else {
-    		return false;
-    	}
+    	}else return world.getBlockState(pos.west()).getBlock() == Blocks.FIRE;
     }
+
+	@Override
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
     		return NULL_AABB;
     }
-    
+
+	@Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
     }
 
+	@Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
     	super.breakBlock(worldIn, pos, state);
@@ -122,6 +122,8 @@ public class BlockSwampGas extends BlockMysticCloud{
         	//worldIn.spawnParticle(type, d0, d1, d2, d3, d4, d5,0);
     	}
     }
+
+	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
    	 ItemStack itemstack = playerIn.getHeldItem(hand);
@@ -132,7 +134,7 @@ public class BlockSwampGas extends BlockMysticCloud{
         return false;
    	 }
     }
-    
+
     public void explodeBlock(World world, BlockPos pos, IBlockState state) {
 		/*if(world.isRemote) {
 			PacketSwampGasExplosionServer message = new PacketSwampGasExplosionServer(pos.getX(), pos.getY(), pos.getZ(), 4);
@@ -153,7 +155,8 @@ public class BlockSwampGas extends BlockMysticCloud{
 		}
     }
 
-    public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
+	@Override
+    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn)
     {
 	    	int radius=2;
 	    	for(int x=-radius;x<=radius;x++) {
@@ -167,11 +170,14 @@ public class BlockSwampGas extends BlockMysticCloud{
 	        	}
 	    	}
     }
+
+	@Override
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
     {
         return true;
     }
-    
+
+	@Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
     {
     	return new ItemStack(KCore.JarWithSwampGas,1);

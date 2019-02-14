@@ -1,12 +1,9 @@
 package mod.krevik.client.gui;
 
 import mod.krevik.KCore;
-import mod.krevik.network.KathairisPacketHandler;
-import org.lwjgl.opengl.GL11;
-
 import mod.krevik.entity.EntityDeath;
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.network.packets.PacketDeathHandlerServer;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
@@ -19,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 public class GuiDeath extends GuiScreen {
 

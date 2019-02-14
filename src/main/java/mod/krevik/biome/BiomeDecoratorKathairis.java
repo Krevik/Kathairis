@@ -1,18 +1,11 @@
 package mod.krevik.biome;
 
 import mod.krevik.world.gen.*;
-import mod.krevik.world.gen.desert.AncientLabirynth.WorldGenCrystalMaze;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockStone;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
-import net.minecraft.world.gen.feature.*;
-import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.Random;
 

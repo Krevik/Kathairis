@@ -20,8 +20,8 @@ public class ItemKatharianArrow extends ItemArrow {
     {
         this.setCreativeTab(CreativeTabsMystic.weapons);
         name=name1;
-        setUnlocalizedName(name);
         setRegistryName(name);
+        setTranslationKey(name);
     }
 
     @SideOnly(Side.CLIENT)
@@ -41,6 +41,6 @@ public class ItemKatharianArrow extends ItemArrow {
     public boolean isInfinite(ItemStack stack, ItemStack bow, net.minecraft.entity.player.EntityPlayer player)
     {
         int enchant = net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.INFINITY, bow);
-        return enchant <= 0 ? false : this.getClass() == ItemKatharianArrow.class;
+        return enchant > 0 && this.getClass() == ItemKatharianArrow.class;
     }
 }

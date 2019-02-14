@@ -1,13 +1,9 @@
 package mod.krevik.block.plants;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-import mod.krevik.block.plants.BlockMysticBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +16,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockMysticCrops extends BlockMysticBush implements IGrowable
 {
@@ -49,9 +47,10 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
         addBlocksThatPlantCanStayOn(Blocks.GRASS,Blocks.DIRT,Blocks.FARMLAND, KCore.KatharianGrass,KCore.KatharianDirt);
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return CROPS_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
+        return CROPS_AABB[state.getValue(this.getAgeProperty()).intValue()];
     }
 
     protected PropertyInteger getAgeProperty()
@@ -66,7 +65,7 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
 
     protected int getAge(IBlockState state)
     {
-        return ((Integer)state.getValue(this.getAgeProperty())).intValue();
+        return state.getValue(this.getAgeProperty()).intValue();
     }
 
     public IBlockState withAge(int age)
@@ -76,9 +75,10 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
 
     public boolean isMaxAge(IBlockState state)
     {
-        return ((Integer)state.getValue(this.getAgeProperty())).intValue() >= this.getMaxAge();
+        return state.getValue(this.getAgeProperty()).intValue() >= this.getMaxAge();
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         super.updateTick(worldIn, pos, state, rand);
@@ -207,6 +207,7 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
     /**
      * Spawns this Block's drops into the World as EntityItems.
      */
+    @Override
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, 0);
@@ -215,11 +216,13 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
     /**
      * Get the Item that this Block should drop when harvested.
      */
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return this.isMaxAge(state) ? this.getCrop() : this.getSeed();
     }
 
+    @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
         return new ItemStack(this.getSeed());
@@ -228,16 +231,19 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
     /**
      * Whether this IGrowable can grow
      */
+    @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {
         return !this.isMaxAge(state);
     }
 
+    @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
         return true;
     }
 
+    @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
         this.grow(worldIn, pos, state);
@@ -246,6 +252,7 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
     /**
      * Convert the given metadata into a BlockState for this Block
      */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.withAge(meta);
@@ -254,13 +261,15 @@ public class BlockMysticCrops extends BlockMysticBush implements IGrowable
     /**
      * Convert the BlockState into the correct metadata value
      */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         return this.getAge(state);
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {AGE});
+        return new BlockStateContainer(this, AGE);
     }
 }

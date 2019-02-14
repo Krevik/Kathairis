@@ -1,9 +1,6 @@
 package mod.krevik.world.dimension;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -18,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
+
+import java.util.Random;
 
 public class RenderWeatherRenderer extends IRenderHandler {
 
@@ -102,7 +101,7 @@ public class RenderWeatherRenderer extends IRenderHandler {
 	            }
 
 	            int j1 = -1;
-	            float f1 = (float)KCore.instance.updateRendererCount + partialTicks;
+	            float f1 = (float) KCore.updateRendererCount + partialTicks;
 	            bufferbuilder.setTranslation(-d0, -d1, -d2);
 	            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
@@ -160,7 +159,7 @@ public class RenderWeatherRenderer extends IRenderHandler {
 	                                    bufferbuilder.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 	                                }
 
-	                                double d5 = -((double)(KCore.instance.updateRendererCount + l1 * l1 * 3121 + l1 * 45238971 + k1 * k1 * 418711 + k1 * 13761 & 31) + (double)partialTicks) / 32.0D * (3.0D + this.random.nextDouble());
+	                                double d5 = -((double)(KCore.updateRendererCount + l1 * l1 * 3121 + l1 * 45238971 + k1 * k1 * 418711 + k1 * 13761 & 31) + (double)partialTicks) / 32.0D * (3.0D + this.random.nextDouble());
 	                                double d6 = (double)((float)l1 + 0.5F) - entity.posX;
 	                                double d7 = (double)((float)k1 + 0.5F) - entity.posZ;
 	                                float f3 = MathHelper.sqrt(d6 * d6 + d7 * d7) / (float)i1;
@@ -188,7 +187,7 @@ public class RenderWeatherRenderer extends IRenderHandler {
 	                                    bufferbuilder.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 	                                }
 
-	                                double d8 = (double)(-((float)(KCore.instance.updateRendererCount & 511) + partialTicks) / 512.0F);
+	                                double d8 = (double)(-((float)(KCore.updateRendererCount & 511) + partialTicks) / 512.0F);
 	                                double d9 = this.random.nextDouble() + (double)f1 * 0.01D * (double)((float)this.random.nextGaussian());
 	                                double d10 = this.random.nextDouble() + (double)(f1 * (float)this.random.nextGaussian()) * 0.001D;
 	                                double d11 = (double)((float)l1 + 0.5F) - entity.posX;

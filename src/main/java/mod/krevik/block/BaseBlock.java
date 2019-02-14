@@ -1,15 +1,9 @@
 package mod.krevik.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.entity.EntityPoisonousScorpion;
-import mod.krevik.client.ClientProxy;
 import mod.krevik.KCore;
+import mod.krevik.client.ClientProxy;
 import mod.krevik.client.particle.ParticleMysticGemBlock;
-
+import mod.krevik.entity.EntityPoisonousScorpion;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -37,6 +31,10 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 public class BaseBlock extends Block
 {
 	
@@ -51,8 +49,8 @@ public class BaseBlock extends Block
         this.setResistance(resistance);
         this.setSoundType(soundType);
         this.setRegistryName(Name);
-        this.setUnlocalizedName(Name);
-        KCore.instance.regHelper.blocksList.add(this);
+        this.setTranslationKey(Name);
+        KCore.regHelper.blocksList.add(this);
     }
     
     @Override
@@ -103,7 +101,7 @@ public class BaseBlock extends Block
     boolean ignoreSimilarity=false;
 
     @Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
     	if((this==KCore.MovingSand||this==KCore.MudBlock)&& !(entityIn instanceof EntityPoisonousScorpion)) {
     		entityIn.setInWeb();
@@ -166,7 +164,7 @@ public class BaseBlock extends Block
           IBlockState state)
     {
     	if(this==KCore.Magnethium) {
-    			Random random = KCore.instance.functionHelper.random;
+    			Random random = KCore.functionHelper.random;
     	    	for(int c=0;c<(1+random.nextInt(4));c++) {
     	    		EntityItem is = new EntityItem(worldIn);
     	    		is.setItem(new ItemStack(KCore.Magnethium_Shard,1));
@@ -216,8 +214,7 @@ public class BaseBlock extends Block
 
     	                for (blockpos = pos.down(); (worldIn.isAirBlock(blockpos) || canFallThrough(worldIn.getBlockState(blockpos))) && blockpos.getY() > 0; blockpos = blockpos.down())
     	                {
-    	                    ;
-    	                }
+						}
 
     	                if (blockpos.getY() > 0)
     	                {
@@ -239,7 +236,7 @@ public class BaseBlock extends Block
     @Override
 	public String getLocalizedName()
     {
-        return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
+        return I18n.translateToLocal(this.getTranslationKey() + "." + ".name");
     }
 
     @Override
@@ -309,7 +306,7 @@ public class BaseBlock extends Block
     
     @Override
 	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
     	if(this==KCore.BlueCloudBricks) {
     		return BlockRenderLayer.TRANSLUCENT;
@@ -337,21 +334,13 @@ public class BaseBlock extends Block
     @Override
 	public boolean isFullCube(IBlockState state)
     {
-    	if(this==KCore.BlueCloudBricks||this==KCore.YellowCloudBlock||this==KCore.Solis_Crystals) {
-    		return false;
-    	}else {
-        return true;
-    	}
+		return this != KCore.BlueCloudBricks && this != KCore.YellowCloudBlock && this != KCore.Solis_Crystals;
     }
     
     @Override
 	public boolean isOpaqueCube(IBlockState state)
     {
-    	if(this==KCore.BlueCloudBricks||this==KCore.YellowCloudBlock||this==KCore.Solis_Crystals||this==KCore.Refined_Cloud_Yellow||this==KCore.Refined_Cloud_Blue) {
-    		return false;
-    	}else {
-        return true;
-    	}
+		return this != KCore.BlueCloudBricks && this != KCore.YellowCloudBlock && this != KCore.Solis_Crystals && this != KCore.Refined_Cloud_Yellow && this != KCore.Refined_Cloud_Blue;
     }
 
     @Override
@@ -362,7 +351,7 @@ public class BaseBlock extends Block
             IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
             Block block = iblockstate.getBlock();
 
-            return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+            return (this.ignoreSimilarity || block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
         }else if(this==KCore.Solis_Crystals) {
         	return true;
         }

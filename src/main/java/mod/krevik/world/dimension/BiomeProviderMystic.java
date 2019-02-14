@@ -1,14 +1,8 @@
 package mod.krevik.world.dimension;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.biome.GenLayerMysticMain;
-import mod.krevik.KCore;
 import com.google.common.collect.Lists;
-
+import mod.krevik.KCore;
+import mod.krevik.biome.GenLayerMysticMain;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.init.Biomes;
@@ -22,6 +16,10 @@ import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraft.world.storage.WorldInfo;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BiomeProviderMystic extends BiomeProvider
 {
@@ -70,7 +68,7 @@ public class BiomeProviderMystic extends BiomeProvider
      */
     public Biome getBiome(BlockPos pos)
     {
-        return this.getBiome(pos, (Biome)null);
+        return this.getBiome(pos, null);
     }
 
     public Biome getBiome(BlockPos pos, Biome defaultBiome)

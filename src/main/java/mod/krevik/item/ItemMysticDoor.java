@@ -1,7 +1,6 @@
 package mod.krevik.item;
 
 import mod.krevik.block.BlockMysticDoors;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -25,9 +24,6 @@ public class ItemMysticDoor extends BaseItem
         this.block = block;
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
@@ -50,8 +46,8 @@ public class ItemMysticDoor extends BaseItem
             if (player.canPlayerEdit(pos, facing, itemstack) && this.block.canPlaceBlockAt(worldIn, pos))
             {
                 EnumFacing enumfacing = EnumFacing.fromAngle((double)player.rotationYaw);
-                int i = enumfacing.getFrontOffsetX();
-                int j = enumfacing.getFrontOffsetZ();
+                int i = enumfacing.getXOffset();
+                int j = enumfacing.getZOffset();
                 boolean flag = i < 0 && hitZ < 0.5F || i > 0 && hitZ > 0.5F || j < 0 && hitX > 0.5F || j > 0 && hitX < 0.5F;
                 placeDoor(worldIn, pos, enumfacing, this.block, flag);
                 SoundType soundtype = worldIn.getBlockState(pos).getBlock().getSoundType(worldIn.getBlockState(pos), worldIn, pos, player);

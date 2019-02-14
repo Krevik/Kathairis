@@ -1,9 +1,6 @@
 package mod.krevik.world.gen.desert;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +10,8 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenOldLibrary extends WorldGenerator
 {
@@ -663,7 +662,7 @@ public class WorldGenOldLibrary extends WorldGenerator
 			TileEntity te=world.getTileEntity(new BlockPos(i+3,j+4,k+3));
 			if(te!=null) {
 			if(te instanceof TileEntityChest) {
-				te=(TileEntityChest)world.getTileEntity(new BlockPos(i+3,j+4,k+3));
+				te= world.getTileEntity(new BlockPos(i+3,j+4,k+3));
 				for(int c=0;c<=rand.nextInt(10);c++) {
 					ItemStack is=KCore.functionHelper.getRandomReward1();
 					((TileEntityChest) te).setInventorySlotContents(1+rand.nextInt(9), is);
@@ -805,7 +804,7 @@ public class WorldGenOldLibrary extends WorldGenerator
 		TileEntity te=world.getTileEntity(new BlockPos(i+4,j+1,k+7));
 		if(te!=null) {
 		if(te instanceof TileEntityChest) {
-			te=(TileEntityChest)world.getTileEntity(new BlockPos(i+4,j+1,k+7));
+			te= world.getTileEntity(new BlockPos(i+4,j+1,k+7));
 			for(int c=0;c<=rand.nextInt(10);c++) {
 				ItemStack is=KCore.functionHelper.getRandomReward1();
 				((TileEntityChest) te).setInventorySlotContents(1+rand.nextInt(9), is);
@@ -2086,7 +2085,7 @@ public class WorldGenOldLibrary extends WorldGenerator
 		TileEntity te=world.getTileEntity(new BlockPos(i+11,j+1,k+7));
 		if(te!=null) {
 		if(te instanceof TileEntityChest) {
-			te=(TileEntityChest)world.getTileEntity(new BlockPos(i+11,j+1,k+7));
+			te= world.getTileEntity(new BlockPos(i+11,j+1,k+7));
 			for(int c=0;c<=rand.nextInt(10);c++) {
 				
 				ItemStack is=KCore.functionHelper.getRandomReward1();
@@ -2329,7 +2328,7 @@ public class WorldGenOldLibrary extends WorldGenerator
 		TileEntity te=world.getTileEntity(new BlockPos(i+12,j+4,k+3));
 		if(te!=null) {
 		if(te instanceof TileEntityChest) {
-			te=(TileEntityChest)world.getTileEntity(new BlockPos(i+12,j+4,k+3));
+			te= world.getTileEntity(new BlockPos(i+12,j+4,k+3));
 			for(int c=0;c<=rand.nextInt(10);c++) {
 				ItemStack is=KCore.functionHelper.getRandomReward1();
 

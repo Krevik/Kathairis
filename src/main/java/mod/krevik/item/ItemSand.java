@@ -1,7 +1,7 @@
 package mod.krevik.item;
 
-import mod.krevik.block.BlockLayeredSand;
 import mod.krevik.KCore;
+import mod.krevik.block.BlockLayeredSand;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -26,9 +26,6 @@ public class ItemSand extends ItemBlock
         this.setMaxDamage(0);
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
@@ -49,7 +46,7 @@ public class ItemSand extends ItemBlock
 
             if (block == this.block)
             {
-                int i = ((Integer)iblockstate.getValue(BlockLayeredSand.LAYERS)).intValue();
+                int i = iblockstate.getValue(BlockLayeredSand.LAYERS).intValue();
 
                 if (i < 8)
                 {
@@ -80,10 +77,6 @@ public class ItemSand extends ItemBlock
         }
     }
 
-    /**
-     * Converts the given ItemStack damage value into a metadata value to be placed in the world when this Item is
-     * placed as a Block (mostly used with ItemBlocks).
-     */
     @Override
     public int getMetadata(int damage)
     {
@@ -94,6 +87,6 @@ public class ItemSand extends ItemBlock
     public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
     {
         IBlockState state = world.getBlockState(pos);
-        return (state.getBlock() != KCore.Layered_Sand || ((Integer)state.getValue(BlockLayeredSand.LAYERS)) > 7) ? super.canPlaceBlockOnSide(world, pos, side, player, stack) : true;
+        return (state.getBlock() == KCore.Layered_Sand && state.getValue(BlockLayeredSand.LAYERS) <= 7) || super.canPlaceBlockOnSide(world, pos, side, player, stack);
     }
 }

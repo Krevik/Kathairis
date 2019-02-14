@@ -1,14 +1,13 @@
 package mod.krevik.world.gen.desert;
 
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenBigRockMushroom extends WorldGenerator
 {
@@ -24,7 +23,7 @@ public class WorldGenBigRockMushroom extends WorldGenerator
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-    	if(KCore.instance.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())) {
+    	if(KCore.functionHelper.isAvailableBlockToGenOn(worldIn, position.down())) {
     	int radius = 2+rand.nextInt(5);
     	int mushroomHeight = 4+rand.nextInt(radius)+rand.nextInt(4);
 

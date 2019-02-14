@@ -1,33 +1,28 @@
 package mod.krevik.biome;
 
-import java.awt.*;
-import java.util.Random;
-
-import mod.krevik.world.gen.*;
+import mod.krevik.KCore;
+import mod.krevik.entity.*;
+import mod.krevik.world.gen.WorldGenMiniTallGrass;
+import mod.krevik.world.gen.WorldGenMysticMultiGrass;
+import mod.krevik.world.gen.WorldGenMysticUniversal;
+import mod.krevik.world.gen.WorldGenNewTree;
 import mod.krevik.world.gen.forest.WorldGenBasicMysticTree;
 import mod.krevik.world.gen.forest.WorldGenCustomTree2;
 import mod.krevik.world.gen.forest.WorldGenFlippedHeartTree;
 import mod.krevik.world.gen.forest.WorldGenHugeKathairisTree;
 import mod.krevik.world.gen.structureloader.CreateTreeFromStructure;
-import mod.krevik.world.gen.structureloader.Structure;
 import mod.krevik.world.gen.structureloader.StructureList;
-import mod.krevik.KCore;
-
-import mod.krevik.entity.EntityCactiSpore;
-import mod.krevik.entity.EntityFungite;
-import mod.krevik.entity.EntityGecko;
-import mod.krevik.entity.EntityHowler;
-import mod.krevik.entity.EntityLivingFlower;
-import mod.krevik.entity.EntityMysticBird;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.awt.*;
+import java.util.Random;
 
 public class BiomeMysticForest extends KetherBiome
 {
@@ -65,9 +60,9 @@ public class BiomeMysticForest extends KetherBiome
         int k=rand.nextInt(20);
         if(k==0){
             if(rand.nextInt(3)==0){
-                return (WorldGenAbstractTree)new WorldGenFlippedHeartTree(5,3+rand.nextInt(7));
+                return new WorldGenFlippedHeartTree(5,3+rand.nextInt(7));
             }else{
-                return (WorldGenAbstractTree)TREE_FEATURE2;
+                return TREE_FEATURE2;
             }
         }
         else if(k==1|k==2||k==3){

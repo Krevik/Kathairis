@@ -1,26 +1,13 @@
 package mod.krevik.entity;
 
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
-import mod.krevik.KCore;
-import mod.krevik.util.MysticLootTables;
 import com.google.common.collect.Sets;
-
+import mod.krevik.KCore;
+import mod.krevik.entity.ai.EntityAIAvoidMovingSandsAndCactus;
+import mod.krevik.util.MysticLootTables;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -40,9 +27,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Set;
+
 public class EntityGecko extends EntityAnimal {
-    private static final DataParameter<Integer> climbingSide = EntityDataManager.<Integer>createKey(EntityGecko.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityGecko.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> climbingSide = EntityDataManager.createKey(EntityGecko.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityGecko.class, DataSerializers.VARINT);
 
     public EntityGecko(World worldIn) {
         super(worldIn);

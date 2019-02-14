@@ -1,9 +1,8 @@
 package mod.krevik.client.renderer.butterfly;
 
+import mod.krevik.client.model.butterfly.ModelIllukini;
 import mod.krevik.entity.butterfly.EntityIllukini;
 import mod.krevik.util.EntityAndRenderRegistry;
-import mod.krevik.client.model.butterfly.ModelIllukini;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;

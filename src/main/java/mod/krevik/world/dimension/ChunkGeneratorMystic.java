@@ -1,12 +1,8 @@
 package mod.krevik.world.dimension;
 
-import java.util.List;
-import java.util.Random;
-
-import mod.krevik.world.gen.mapgens.MapGenKetherCaves;
-import mod.krevik.world.gen.WorldGenMysticLakes;
 import mod.krevik.KCore;
-
+import mod.krevik.world.gen.WorldGenMysticLakes;
+import mod.krevik.world.gen.mapgens.MapGenKetherCaves;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -21,6 +17,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.*;
+
+import java.util.List;
+import java.util.Random;
 
 public class ChunkGeneratorMystic implements IChunkGenerator
 {
@@ -486,7 +485,7 @@ public class ChunkGeneratorMystic implements IChunkGenerator
                              
                         		 primer.setBlockState(k2, l2+upperScale, i3, iblockstate);
                         		 if(iblockstate != Blocks.AIR.getDefaultState()) {
-                        			  this.biomesForGeneration[k2 + i3 * 16] = KCore.instance.FloatingIslands; //i am not shure about the coordinates it could be i3 + k2*16 instead
+                        			  this.biomesForGeneration[k2 + i3 * 16] = KCore.FloatingIslands; //i am not shure about the coordinates it could be i3 + k2*16 instead
                         		}
                         		 if(l1==3&&k1==31) {
                         			 if(iblockstate!=Blocks.AIR.getDefaultState()) {

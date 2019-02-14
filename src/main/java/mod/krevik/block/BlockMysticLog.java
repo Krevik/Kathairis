@@ -1,12 +1,10 @@
 package mod.krevik.block;
 
+import mod.krevik.KCore;
 import mod.krevik.item.ItemMysticAxe;
 import mod.krevik.util.CreativeTabsMystic;
-import mod.krevik.KCore;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,11 +24,9 @@ public class BlockMysticLog extends BlockBaseLog
     	super(Name,Material.WOOD,CreativeTabsMystic.buildingBlocks,3F,3F,SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockMysticLog.EnumAxis.Y));
     }
-    
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         IBlockState iblockstate = this.getDefaultState();
@@ -53,15 +49,12 @@ public class BlockMysticLog extends BlockBaseLog
         return iblockstate;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
-    @SuppressWarnings("incomplete-switch")
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
 
-        switch ((BlockMysticLog.EnumAxis)state.getValue(LOG_AXIS))
+        switch (state.getValue(LOG_AXIS))
         {
             case X:
                 i |= 4;
@@ -75,7 +68,8 @@ public class BlockMysticLog extends BlockBaseLog
 
         return i;
     }
-    
+
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         	ItemStack stack = playerIn.getHeldItem(hand);
@@ -106,9 +100,10 @@ public class BlockMysticLog extends BlockBaseLog
     	return false;
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {LOG_AXIS});
+        return new BlockStateContainer(this, LOG_AXIS);
     }
     
     @Override
@@ -116,10 +111,8 @@ public class BlockMysticLog extends BlockBaseLog
     {
         return true;
     }
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
+
+    @Override
     public int damageDropped(IBlockState state)
     {
         return 0;

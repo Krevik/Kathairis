@@ -1,12 +1,9 @@
 package mod.krevik.world.gen.forest;
 
-import java.util.Random;
-
-import mod.krevik.block.plants.BlockMysticBush;
-import mod.krevik.block.BlockMysticLeaf;
-import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import mod.krevik.KCore;
-
+import mod.krevik.block.BlockMysticLeaf;
+import mod.krevik.block.plants.BlockMysticBush;
+import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +11,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WorldGenFlippedHeartTree extends WorldGenAbstractBasicMysticTree
 {
@@ -30,7 +29,7 @@ public class WorldGenFlippedHeartTree extends WorldGenAbstractBasicMysticTree
 
     public boolean generate(World worldIn, Random rand, BlockPos pos)
     {
-        if(KCore.instance.functionHelper.isAvailableBlockToGenOn(worldIn, pos.down())) {
+        if(KCore.functionHelper.isAvailableBlockToGenOn(worldIn, pos.down())) {
             int TreeHeight = minTreeHeight + rand.nextInt(1 + crownRadius / 2);
             int Y = worldIn.getHeight(pos).getY();
             for (int c = 0; c <= TreeHeight+1; c++) {

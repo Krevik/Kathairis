@@ -1,20 +1,14 @@
 package mod.krevik.biome;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import com.google.common.collect.Lists;
 import mod.krevik.EventSubscriber;
+import mod.krevik.KCore;
 import mod.krevik.entity.butterfly.EntityIllukini;
 import mod.krevik.entity.butterfly.EntityRubySile;
 import mod.krevik.entity.butterfly.EntitySkylight;
+import mod.krevik.world.gen.WorldGenMysticOre;
 import mod.krevik.world.gen.WorldGenMysticUniversal;
 import mod.krevik.world.gen.structureloader.StructureLoader;
-import mod.krevik.world.gen.WorldGenMysticOre;
-import mod.krevik.KCore;
-
-import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -26,6 +20,11 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public abstract class KetherBiome extends Biome
 {
@@ -157,14 +156,14 @@ public abstract class KetherBiome extends Biome
             SNOWDROP.generate(worldIn, rand, new BlockPos(rx,ry,rz));
         }
 
-        for(int c=0;c<this.TitaniumPerChunk;c++){
+        for(int c = 0; c< TitaniumPerChunk; c++){
             int rx = pos.getX() + rand.nextInt(16);
             int rz = pos.getZ() + rand.nextInt(16);
             int ry = 5 + rand.nextInt(80);
                 BlockPos blockposnew = new BlockPos(rx,ry,rz);
                 new WorldGenMysticOre(KCore.TitaniumOre.getDefaultState(), 2+rand.nextInt(6)).generate(worldIn, rand, blockposnew);
         }
-        for(int c=0;c<this.RevenumPerChunk;c++){
+        for(int c = 0; c< RevenumPerChunk; c++){
             int rx = pos.getX() + rand.nextInt(16);
             int rz = pos.getZ() + rand.nextInt(16);
             int ry = 5 + rand.nextInt(128);

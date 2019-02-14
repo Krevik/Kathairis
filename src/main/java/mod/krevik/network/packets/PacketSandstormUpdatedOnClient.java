@@ -1,8 +1,8 @@
 package mod.krevik.network.packets;
 
-import mod.krevik.world.dimension.KathairisDataStorage;
-import mod.krevik.KCore;
 import io.netty.buffer.ByteBuf;
+import mod.krevik.KCore;
+import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -48,9 +48,9 @@ public class PacketSandstormUpdatedOnClient implements IMessage {
                     storage.setSandstormTime((int) message.sandstormTime);
                     storage.setSandstormZ(message.mZ);
                     if(message.sandstormTime>5) {
-                        storage.setShouldAddSandstormFog(true);
+                        KathairisDataStorage.setShouldAddSandstormFog(true);
                     }else{
-                        storage.setShouldAddSandstormFog(false);
+                        KathairisDataStorage.setShouldAddSandstormFog(false);
                     }
                 }
             }

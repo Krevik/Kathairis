@@ -1,9 +1,9 @@
 package mod.krevik;
 
 import com.google.common.base.Preconditions;
+import mod.krevik.block.BlockChristmasGift;
 import mod.krevik.item.ItemMysticArmor;
 import mod.krevik.item.ItemSand;
-import mod.krevik.block.BlockChristmasGift;
 import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.network.packets.PacketSandstormClient;
 import mod.krevik.network.packets.PacketSandstormUpdatedOnClient;
@@ -17,11 +17,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemSlab;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
@@ -56,12 +52,12 @@ public class EventSubscriber {
 		for (int x = 0; x < biomeList.size(); x++) {
 			registry.register(biomeList.get(x));
 		}
-		BiomeDictionary.addTypes(KCore.instance.MysticForest, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE);
-		BiomeDictionary.addTypes(KCore.instance.MysticPlains, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DENSE);
-		BiomeDictionary.addTypes(KCore.instance.MysticDesert, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.HOT);
-		BiomeDictionary.addTypes(KCore.instance.MysticSwamps, BiomeDictionary.Type.DRY);
-		BiomeDictionary.addTypes(KCore.instance.FloatingIslands, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.OCEAN);
-		BiomeDictionary.addTypes(KCore.instance.KatharianOcean, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.OCEAN);
+		BiomeDictionary.addTypes(KCore.MysticForest, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(KCore.MysticPlains, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(KCore.MysticDesert, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.HOT);
+		BiomeDictionary.addTypes(KCore.MysticSwamps, BiomeDictionary.Type.DRY);
+		BiomeDictionary.addTypes(KCore.FloatingIslands, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.OCEAN);
+		BiomeDictionary.addTypes(KCore.KatharianOcean, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.OCEAN);
 
 	}
 
@@ -409,7 +405,7 @@ public class EventSubscriber {
 	@SubscribeEvent
 	public static void onEvent1(TickEvent.WorldTickEvent event)
 	{
-		KCore.instance.updateRendererCount++;
+		KCore.updateRendererCount++;
 		//operating fog mechanism
 		if(!event.world.isRemote) {
 			if (fogTime == -1) {
@@ -438,9 +434,9 @@ public class EventSubscriber {
 
 		//opearting sandstorm mechanism
 		if(!event.world.isRemote) {
-			KathairisDataStorage data = KCore.instance.data.getDataInstance(event.world);
+			KathairisDataStorage data = KathairisDataStorage.getDataInstance(event.world);
 				if (data != null){
-					if (data.getSandstormTime() == -1) {
+					if (KathairisDataStorage.getSandstormTime() == -1) {
 						sentMessageSandstorm = false;
 						data.setSandstormX(0);
 						data.setSandstormZ(0);
@@ -451,10 +447,10 @@ public class EventSubscriber {
 							data.setSandstormZ(KCore.functionHelper.random.nextFloat() - 0.5f);
 						}
 					} else {
-						PacketSandstormClient message1 = new PacketSandstormClient(data.getSandstormTime());
+						PacketSandstormClient message1 = new PacketSandstormClient(KathairisDataStorage.getSandstormTime());
 						KathairisPacketHandler.CHANNEL.sendToAll(message1);
 						if (!sentMessageSandstorm) {
-							PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getSandstormX(), data.getSandstormTime(), data.getSandstormZ());
+							PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(KathairisDataStorage.getSandstormX(), KathairisDataStorage.getSandstormTime(), KathairisDataStorage.getSandstormZ());
 							KathairisPacketHandler.CHANNEL.sendToAll(message);
 							sentMessageSandstorm = true;
 						}
@@ -462,19 +458,19 @@ public class EventSubscriber {
 							if(player!=null) {
 								if (event.world.getBiome(player.getPosition()) == KCore.MysticDesert) {
 									if (player.motionY == 0D) {
-										player.motionX += data.getSandstormX() * 0.080;
-										player.motionZ += data.getSandstormZ() * 0.080;
+										player.motionX += KathairisDataStorage.getSandstormX() * 0.080;
+										player.motionZ += KathairisDataStorage.getSandstormZ() * 0.080;
 										player.velocityChanged = true;
 									} else {
-										player.motionX += data.getSandstormX() * 0.017;
-										player.motionZ += data.getSandstormZ() * 0.017;
+										player.motionX += KathairisDataStorage.getSandstormX() * 0.017;
+										player.motionZ += KathairisDataStorage.getSandstormZ() * 0.017;
 										player.velocityChanged = true;
 									}
 
 								}
 							}
 						}
-						data.setSandstormTime(data.getSandstormTime()-1);
+						data.setSandstormTime(KathairisDataStorage.getSandstormTime()-1);
 					}
 			}
 		}
@@ -502,7 +498,7 @@ public class EventSubscriber {
 		if(event.player!=null){
 			if(KCore.functionHelper.random.nextInt(400000)==0){
 				if(month==11){
-					BlockPos tmp = new BlockPos(event.player.posX-16+KCore.functionHelper.random.nextInt(32),event.player.posY,event.player.posZ-16+KCore.instance.functionHelper.random.nextInt(32));
+					BlockPos tmp = new BlockPos(event.player.posX-16+KCore.functionHelper.random.nextInt(32),event.player.posY,event.player.posZ-16+ KCore.functionHelper.random.nextInt(32));
 					BlockPos ground = event.player.world.getHeight(tmp);
 					if(event.player.dimension==KCore.DIMENSION_ID) {
 						if (event.player.world.isAirBlock(ground) && event.player.world.isBlockFullCube(ground.down())) {
@@ -591,7 +587,7 @@ public class EventSubscriber {
 							itemstack.shrink(1);
 						}
 					}
-					KCore.instance.functionHelper.playTameEffect(event.getEntityPlayer().world,KCore.instance.functionHelper.random,animal,true);
+					KCore.functionHelper.playTameEffect(event.getEntityPlayer().world, KCore.functionHelper.random,animal,true);
 				}
 			}
 		}
@@ -601,11 +597,11 @@ public class EventSubscriber {
 	public static void handlePlayerJoiningGame(PlayerEvent.PlayerLoggedInEvent event){
 		if(event.player!=null){
 			if(event.player.dimension==KCore.DIMENSION_ID){
-				KathairisDataStorage data = KCore.instance.data.getDataInstance(event.player.world);
+				KathairisDataStorage data = KathairisDataStorage.getDataInstance(event.player.world);
 				if(data!=null){
 					if(event.player instanceof EntityPlayerMP){
 						EntityPlayerMP player = (EntityPlayerMP) event.player;
-						PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getSandstormX(),data.getSandstormTime(),data.getSandstormZ());
+						PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(KathairisDataStorage.getSandstormX(), KathairisDataStorage.getSandstormTime(), KathairisDataStorage.getSandstormZ());
 						KathairisPacketHandler.CHANNEL.sendTo(message, player);
 					}
 				}
@@ -633,13 +629,13 @@ public class EventSubscriber {
 						}
 					}
 				}
-				KathairisDataStorage data = KCore.instance.data.getDataInstance(event.player.world);
+				KathairisDataStorage data = KathairisDataStorage.getDataInstance(event.player.world);
 					if (data != null){
-						if (data.getSandstormTime() > 0) {
+						if (KathairisDataStorage.getSandstormTime() > 0) {
 							if (event.player instanceof EntityPlayerMP) {
 								if (event.toDim == KCore.DIMENSION_ID) {
 									EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
-									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(data.getSandstormX(), data.getSandstormTime(), data.getSandstormZ());
+									PacketSandstormUpdatedOnClient message = new PacketSandstormUpdatedOnClient(KathairisDataStorage.getSandstormX(), KathairisDataStorage.getSandstormTime(), KathairisDataStorage.getSandstormZ());
 									KathairisPacketHandler.CHANNEL.sendTo(message, playerMP);
 								}
 							}

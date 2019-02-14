@@ -1,14 +1,9 @@
 package mod.krevik.block;
 
-import java.util.Calendar;
-import java.util.Random;
-
 import mod.krevik.KCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -19,6 +14,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+import java.util.Calendar;
+import java.util.Random;
+
 public class BlockMysticLeafWithChristmas extends BlockMysticLeaf
 {
     public static final PropertyBool SNOWY = PropertyBool.create("snowy");
@@ -28,33 +26,34 @@ public class BlockMysticLeafWithChristmas extends BlockMysticLeaf
     {
         super(Name,material,tab);
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)).withProperty(SNOWY,month==11?Boolean.valueOf(true):Boolean.valueOf(false)));
-        KCore.instance.regHelper.leavesBlocksList.add(this);
+        KCore.regHelper.leavesBlocksList.add(this);
         this.leavesFancy=true;
     }
 
+    @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
-        return state.withProperty(SNOWY, month==11?true:false).withProperty(CHECK_DECAY, state.getValue(CHECK_DECAY)).withProperty(DECAYABLE,state.getValue(DECAYABLE));
+        return state.withProperty(SNOWY, month == 11).withProperty(CHECK_DECAY, state.getValue(CHECK_DECAY)).withProperty(DECAYABLE,state.getValue(DECAYABLE));
     }
 
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0)).withProperty(SNOWY,month==11?Boolean.valueOf(true):Boolean.valueOf(false));
     }
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
 
-        if (!((Boolean)state.getValue(DECAYABLE)).booleanValue())
+        if (!state.getValue(DECAYABLE).booleanValue())
         {
             i |= 4;
         }
 
-        if (((Boolean)state.getValue(CHECK_DECAY)).booleanValue())
+        if (state.getValue(CHECK_DECAY).booleanValue())
         {
             i |= 8;
         }
@@ -62,25 +61,25 @@ public class BlockMysticLeafWithChristmas extends BlockMysticLeaf
         return i;
     }
 
+    @Override
     public BlockPlanks.EnumType getWoodType(int meta)
     {
         return BlockPlanks.EnumType.byMetadata((meta & 3) % 4);
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE,SNOWY});
+        return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE,SNOWY);
     }
 
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
+    @Override
     public int damageDropped(IBlockState state)
     {
         return 0;
     }
 
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
             return Item.getItemFromBlock(KCore.MysticSapling);

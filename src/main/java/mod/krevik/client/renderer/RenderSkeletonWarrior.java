@@ -1,9 +1,8 @@
 package mod.krevik.client.renderer;
 
+import mod.krevik.client.model.ModelSkeletonWarrior;
 import mod.krevik.entity.EntitySkeletonWarrior;
 import mod.krevik.util.EntityAndRenderRegistry;
-import mod.krevik.client.model.ModelSkeletonWarrior;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderBiped;

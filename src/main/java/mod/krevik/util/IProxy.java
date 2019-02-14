@@ -1,11 +1,11 @@
 package mod.krevik.util;
 
-import mod.krevik.world.dimension.TileEntityKether;
 import mod.krevik.KCore;
 import mod.krevik.client.gui.GuiHandler;
 import mod.krevik.client.sound.SoundHelper;
 import mod.krevik.tileentity.TileEntityCharger;
 import mod.krevik.tileentity.TileEntityMythicStoneSign;
+import mod.krevik.world.dimension.TileEntityKether;
 import net.minecraft.block.SoundType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -35,45 +35,45 @@ public interface IProxy {
 
 	Side getPhysicalSide();
 
-	public static SoundHelper bird = new SoundHelper("bird", "bird");
-	public static SoundHelper Howler_living = new SoundHelper("howler", "living");
-	public static SoundHelper Howler_dead = new SoundHelper("howler", "dead");
-	public static SoundHelper Howler_hurt = new SoundHelper("howler", "hurt");
-	public static SoundHelper jellyfish_living = new SoundHelper("jellyfish", "living");
-	public static SoundHelper jellyfish_dead = new SoundHelper("jellyfish", "dead");
-	public static SoundHelper jellyfish_hurt = new SoundHelper("jellyfish", "hurt");
-	public static SoundHelper turtle_dead = new SoundHelper("turtle", "dead");
-	public static SoundHelper bison_dead = new SoundHelper("bison", "dead");
-	public static SoundHelper bison_hurt = new SoundHelper("bison", "hurt");
-	public static SoundHelper bison_living = new SoundHelper("bison", "living");
-	public static SoundEvent ketherMusicDaySound = new SoundHelper("music.day");
-	public static SoundEvent ketherMusicNightSound = new SoundHelper("music.night");
-	public static SoundHelper ghost_living = new SoundHelper("ghost", "living");
-	public static SoundHelper ghost_attack = new SoundHelper("ghost", "attack");
-	public static SoundHelper ghost_dead = new SoundHelper("ghost", "dead");
-	public static SoundHelper death_living = new SoundHelper("death", "living");
-	public static SoundHelper scary_flower = new SoundHelper("scary", "flower");
-	public static SoundHelper camel_dead = new SoundHelper("camel", "dead");
-	public static SoundHelper camel_hurt = new SoundHelper("camel", "hurt");
-	public static SoundHelper camel_breath = new SoundHelper("camel", "breath");
-	public static SoundHelper camel_ambient = new SoundHelper("camel", "ambient");
-	public static SoundHelper oldman_ambient = new SoundHelper("oldman", "ambient");
-	public static SoundHelper skyray_ambient = new SoundHelper("skyray", "ambient");
-	public static SoundHelper skyray_hurt = new SoundHelper("skyray", "hurt");
-	public static SoundHelper cloud_glass_break = new SoundHelper("cloudglass.break");
-	public static SoundHelper sandstorm = new SoundHelper("sandstorm");
-	public static SoundHelper pickaxe_turn = new SoundHelper("pickaxe_turn");
-	public static SoundEvent ketherMusicChristmasSound = new SoundHelper("music.xmas");
+	SoundHelper bird = new SoundHelper("bird", "bird");
+	SoundHelper Howler_living = new SoundHelper("howler", "living");
+	SoundHelper Howler_dead = new SoundHelper("howler", "dead");
+	SoundHelper Howler_hurt = new SoundHelper("howler", "hurt");
+	SoundHelper jellyfish_living = new SoundHelper("jellyfish", "living");
+	SoundHelper jellyfish_dead = new SoundHelper("jellyfish", "dead");
+	SoundHelper jellyfish_hurt = new SoundHelper("jellyfish", "hurt");
+	SoundHelper turtle_dead = new SoundHelper("turtle", "dead");
+	SoundHelper bison_dead = new SoundHelper("bison", "dead");
+	SoundHelper bison_hurt = new SoundHelper("bison", "hurt");
+	SoundHelper bison_living = new SoundHelper("bison", "living");
+	SoundEvent ketherMusicDaySound = new SoundHelper("music.day");
+	SoundEvent ketherMusicNightSound = new SoundHelper("music.night");
+	SoundHelper ghost_living = new SoundHelper("ghost", "living");
+	SoundHelper ghost_attack = new SoundHelper("ghost", "attack");
+	SoundHelper ghost_dead = new SoundHelper("ghost", "dead");
+	SoundHelper death_living = new SoundHelper("death", "living");
+	SoundHelper scary_flower = new SoundHelper("scary", "flower");
+	SoundHelper camel_dead = new SoundHelper("camel", "dead");
+	SoundHelper camel_hurt = new SoundHelper("camel", "hurt");
+	SoundHelper camel_breath = new SoundHelper("camel", "breath");
+	SoundHelper camel_ambient = new SoundHelper("camel", "ambient");
+	SoundHelper oldman_ambient = new SoundHelper("oldman", "ambient");
+	SoundHelper skyray_ambient = new SoundHelper("skyray", "ambient");
+	SoundHelper skyray_hurt = new SoundHelper("skyray", "hurt");
+	SoundHelper cloud_glass_break = new SoundHelper("cloudglass.break");
+	SoundHelper sandstorm = new SoundHelper("sandstorm");
+	SoundHelper pickaxe_turn = new SoundHelper("pickaxe_turn");
+	SoundEvent ketherMusicChristmasSound = new SoundHelper("music.xmas");
 
-	public static SoundEvent music_disc_jazzy = new SoundHelper("music_disc.jazzy");
-	public static SoundEvent music_disc_8bit = new SoundHelper("music_disc.8bit");
+	SoundEvent music_disc_jazzy = new SoundHelper("music_disc.jazzy");
+	SoundEvent music_disc_8bit = new SoundHelper("music_disc.8bit");
 
-	public static final SoundType CLOUDGLASS = new SoundType(1.0F, 1.0F, cloud_glass_break, SoundEvents.BLOCK_GLASS_STEP, SoundEvents.BLOCK_GLASS_PLACE, SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
+	SoundType CLOUDGLASS = new SoundType(1.0F, 1.0F, cloud_glass_break, SoundEvents.BLOCK_GLASS_STEP, SoundEvents.BLOCK_GLASS_PLACE, SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
 
-	public default void preInit(FMLPreInitializationEvent e) {
+	default void preInit(FMLPreInitializationEvent e) {
 	}
 
-	public default void init(FMLInitializationEvent e) {
+	default void init(FMLInitializationEvent e) {
 		EntityAndRenderRegistry.registerEntitiesAndEggs();
 		GameRegistry.registerTileEntity(TileEntityCharger.class, new ResourceLocation(KCore.MODID, "charger").toString());
 		GameRegistry.registerTileEntity(TileEntityKether.class, new ResourceLocation(KCore.MODID, "entityDimKether"));
@@ -84,11 +84,11 @@ public interface IProxy {
 
 	}
 
-	public default void postInit(FMLPostInitializationEvent e) {
+	default void postInit(FMLPostInitializationEvent e) {
 
 	}
 
-	public default void initFlamables() {
+	default void initFlamables() {
 		Blocks.FIRE.setFireInfo(KCore.MysticPlanks, 5, 20);
 		Blocks.FIRE.setFireInfo(KCore.ShinyPlanks, 5, 20);
 		Blocks.FIRE.setFireInfo(KCore.SoulPlanks, 5, 20);

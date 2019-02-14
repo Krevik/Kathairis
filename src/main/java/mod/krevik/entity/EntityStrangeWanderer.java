@@ -1,10 +1,7 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
-import mod.krevik.enchantment.KathairisEnchantments;
 import mod.krevik.KCore;
-
+import mod.krevik.enchantment.KathairisEnchantments;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLiving;
@@ -24,6 +21,7 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -98,7 +96,7 @@ public class EntityStrangeWanderer extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return KCore.instance.proxy.oldman_ambient;
+        return KCore.proxy.oldman_ambient;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)

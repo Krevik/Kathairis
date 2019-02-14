@@ -1,12 +1,9 @@
 package mod.krevik.client.renderer;
 
-import java.util.Random;
-
-import mod.krevik.entity.EntityFungite;
-import mod.krevik.util.EntityAndRenderRegistry;
 import mod.krevik.KCore;
 import mod.krevik.client.model.ModelFungite;
-
+import mod.krevik.entity.EntityFungite;
+import mod.krevik.util.EntityAndRenderRegistry;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -15,6 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class RenderFungite extends RenderLiving<EntityFungite>
@@ -48,7 +47,7 @@ public class RenderFungite extends RenderLiving<EntityFungite>
         }
 
     }
-    Random random = KCore.instance.functionHelper.random;
+    Random random = KCore.functionHelper.random;
     protected void applyRotations(EntityFungite entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
     	GlStateManager.scale(0.8, 0.8, 0.8);

@@ -1,23 +1,16 @@
 package mod.krevik.entity.butterfly;
 
-import javax.annotation.Nullable;
-
+import mod.krevik.KCore;
 import mod.krevik.block.plants.BlockButterflyFlower;
 import mod.krevik.block.plants.BlockMysticBush;
-import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -26,6 +19,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntityButterfly1 extends EntityBasicButterfly
 {
@@ -170,13 +165,13 @@ public class EntityButterfly1 extends EntityBasicButterfly
                 if (this.world.getNearestPlayerNotCreative(this, 4.0D) != null)
                 {
                     this.setIsBirdSitting(false);
-                    this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+                    this.world.playEvent(null, 1025, blockpos, 0);
                 }
             }
             else
             {
                 this.setIsBirdSitting(false);
-                this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+                this.world.playEvent(null, 1025, blockpos, 0);
             }
         }
         else

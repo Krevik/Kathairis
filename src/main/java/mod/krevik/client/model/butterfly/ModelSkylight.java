@@ -1,7 +1,6 @@
 package mod.krevik.client.model.butterfly;
 
 import mod.krevik.KCore;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -158,8 +157,8 @@ public class ModelSkylight extends ModelBase {
 	        	Wing4.rotateAngleZ=MathHelper.sin(f2*0.6f);
 	        	Wing3.rotateAngleZ=-MathHelper.sin(f2*0.6f);	
 	    	}else {
-	        	Wing4.rotateAngleZ=KCore.instance.functionHelper.degToRad(70)-MathHelper.sin(f2*0.05f)*0.05f;
-	        	Wing3.rotateAngleZ=-KCore.instance.functionHelper.degToRad(70)+MathHelper.sin(f2*0.05f)*0.05f;	
+	        	Wing4.rotateAngleZ= KCore.functionHelper.degToRad(70)-MathHelper.sin(f2*0.05f)*0.05f;
+	        	Wing3.rotateAngleZ=-KCore.functionHelper.degToRad(70)+MathHelper.sin(f2*0.05f)*0.05f;
 	    	}
     }
 }

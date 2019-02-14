@@ -1,10 +1,7 @@
 package mod.krevik.entity;
 
-import java.util.Random;
-
 import mod.krevik.client.ClientProxy;
 import mod.krevik.client.particle.ParticleShocking;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.potion.Potion;
@@ -15,6 +12,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class EntityShockingBall extends EntityThrowable
 {

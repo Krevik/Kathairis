@@ -1,19 +1,13 @@
 package mod.krevik.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.world.dimension.KathairisDataStorage;
 import mod.krevik.KCore;
-
+import mod.krevik.world.dimension.KathairisDataStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -27,6 +21,9 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockKatharianSand extends BaseBlock
 {
 
@@ -37,29 +34,14 @@ public class BlockKatharianSand extends BaseBlock
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public void initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
-    {
-
-    }
-
-
-    @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
-    }
-
-    @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
-    {
-    }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
             return FULL_BLOCK_AABB;
@@ -71,14 +53,15 @@ public class BlockKatharianSand extends BaseBlock
         worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!worldIn.isRemote)
         {
             this.checkFallable(worldIn, pos);
-            KathairisDataStorage data = KCore.data.getDataInstance(worldIn);
+            KathairisDataStorage data = KathairisDataStorage.getDataInstance(worldIn);
             if(data!=null){
-                if(data.getSandstormTime()>-1){
+                if(KathairisDataStorage.getSandstormTime()>-1){
                     if(worldIn.getBiome(pos)==KCore.MysticDesert){
                         if(worldIn.isAirBlock(pos.up())){
                             if(worldIn.canBlockSeeSky(pos.up())){
@@ -93,18 +76,6 @@ public class BlockKatharianSand extends BaseBlock
         }
 
     }
-
-    @Override
-    public void breakBlock(
-            World worldIn,
-            BlockPos pos,
-            IBlockState state)
-    {
-        super.breakBlock(worldIn, pos, state);
-
-    }
-
-
 
     private void checkFallable(World worldIn, BlockPos pos)
     {
@@ -128,7 +99,6 @@ public class BlockKatharianSand extends BaseBlock
 
                     for (blockpos = pos.down(); (worldIn.isAirBlock(blockpos) || canFallThrough(worldIn.getBlockState(blockpos))) && blockpos.getY() > 0; blockpos = blockpos.down())
                     {
-                        ;
                     }
 
                     if (blockpos.getY() > 0)
@@ -149,9 +119,10 @@ public class BlockKatharianSand extends BaseBlock
     @Override
     public String getLocalizedName()
     {
-        return I18n.translateToLocal(this.getUnlocalizedName() + "." + ".name");
+        return I18n.translateToLocal(this.getTranslationKey() + "." + ".name");
     }
 
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
             return Item.getItemFromBlock(this);
@@ -164,13 +135,13 @@ public class BlockKatharianSand extends BaseBlock
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.SOLID;
     }
 
-
-
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return true;

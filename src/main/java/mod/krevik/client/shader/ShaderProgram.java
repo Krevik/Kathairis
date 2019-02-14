@@ -1,18 +1,18 @@
 package mod.krevik.client.shader;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.FloatBuffer;
-
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.FloatBuffer;
+import java.nio.charset.StandardCharsets;
 
 public abstract class ShaderProgram {
 
@@ -94,7 +94,7 @@ public abstract class ShaderProgram {
         InputStream stream = ShaderProgram.class.getResourceAsStream(file);
 
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
 			String line;
 			while((line=reader.readLine())!=null) {
 				shaderSource.append(line).append("\n");

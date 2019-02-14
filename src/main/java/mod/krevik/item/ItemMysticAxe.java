@@ -1,13 +1,7 @@
 package mod.krevik.item;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import mod.krevik.KCore;
 import com.google.common.collect.Sets;
-
+import mod.krevik.KCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -19,6 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Set;
 
 public class ItemMysticAxe extends MysticTool
 {

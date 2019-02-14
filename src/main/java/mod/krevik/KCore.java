@@ -1,48 +1,39 @@
 package mod.krevik;
 
+import mod.krevik.biome.*;
 import mod.krevik.block.*;
 import mod.krevik.block.plants.*;
 import mod.krevik.capability.CapabilityHandler;
+import mod.krevik.command.SandstormCommand;
 import mod.krevik.item.*;
+import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.potion.DissolutionPotion;
 import mod.krevik.potion.StunPotion;
-import mod.krevik.biome.BiomeFloatingIslands;
-import mod.krevik.biome.BiomeKatharianOcean;
-import mod.krevik.biome.BiomeMysticDesert;
-import mod.krevik.biome.BiomeMysticForest;
-import mod.krevik.biome.BiomeMysticPlains;
-import mod.krevik.biome.BiomeMysticSwamps;
-import mod.krevik.block.BlockKatharianGrass;
-import mod.krevik.command.SandstormCommand;
-import mod.krevik.world.dimension.KathairisDataStorage;
-import mod.krevik.world.dimension.WorldProviderMystic;
-import mod.krevik.network.KathairisPacketHandler;
 import mod.krevik.recipe.ChargerRecipes;
 import mod.krevik.recipe.RecipeHandler;
 import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.util.FunctionHelper;
 import mod.krevik.util.IProxy;
 import mod.krevik.util.RegistryHelper;
+import mod.krevik.world.dimension.KathairisDataStorage;
+import mod.krevik.world.dimension.WorldProviderMystic;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.event.RegistryEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -52,6 +43,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = KCore.MODID, name = KCore.NAME, version = KCore.VERSION, acceptedMinecraftVersions = "[1.12]")
 public class KCore {
@@ -802,7 +795,7 @@ public class KCore {
     	WorldServer.MAX_ENTITY_RADIUS=12D;
     	KathairisPacketHandler.init();
 
-    	KCore.instance.dimRegistry();
+    	dimRegistry();
         proxy.preInit(event);
 
         //logger = (Logger)event.getModLog();
@@ -810,7 +803,7 @@ public class KCore {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
-		KCore.instance.registerRecipes();
+		registerRecipes();
         proxy.init(e);
     }
 

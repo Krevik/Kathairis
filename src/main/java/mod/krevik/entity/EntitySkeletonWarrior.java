@@ -1,10 +1,7 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,6 +21,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntitySkeletonWarrior extends AbstractSkeleton
 {

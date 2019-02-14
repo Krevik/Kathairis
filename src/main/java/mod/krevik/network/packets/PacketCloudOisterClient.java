@@ -1,8 +1,7 @@
 package mod.krevik.network.packets;
 
-import mod.krevik.KCore;
-
 import io.netty.buffer.ByteBuf;
+import mod.krevik.KCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -44,9 +43,9 @@ public class PacketCloudOisterClient implements IMessage {
 		public IMessage onMessage(PacketCloudOisterClient message, MessageContext ctx) {
 		        for (int i = 0; i < 24; ++i)
 		        {
-		            double d0 = message.posX + KCore.instance.functionHelper.random.nextDouble() - KCore.instance.functionHelper.random.nextDouble();
+		            double d0 = message.posX + KCore.functionHelper.random.nextDouble() - KCore.functionHelper.random.nextDouble();
 		            double d1 = message.posY;
-		            double d2 = message.posZ + KCore.instance.functionHelper.random.nextDouble() - KCore.instance.functionHelper.random.nextDouble();
+		            double d2 = message.posZ + KCore.functionHelper.random.nextDouble() - KCore.functionHelper.random.nextDouble();
 		            double d3 = 0;
 		            double d4 = -0.5;
 		            double d5 = 0;

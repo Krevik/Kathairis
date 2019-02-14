@@ -1,18 +1,14 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
 import mod.krevik.block.plants.BlockMysticBush;
 import mod.krevik.client.ClientProxy;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -26,10 +22,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class EntityMysticBird extends EntityAmbientCreature
 {
-    private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityMysticBird.class, DataSerializers.VARINT);
-    private static final DataParameter<Byte> SITTING = EntityDataManager.<Byte>createKey(EntityMysticBird.class, DataSerializers.BYTE);
+    private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityMysticBird.class, DataSerializers.VARINT);
+    private static final DataParameter<Byte> SITTING = EntityDataManager.createKey(EntityMysticBird.class, DataSerializers.BYTE);
     /** Coordinates of where the bat spawned. */
     private BlockPos spawnPosition;
 
@@ -53,7 +51,7 @@ public class EntityMysticBird extends EntityAmbientCreature
     }
     public int getVariant()
     {
-        return MathHelper.clamp(((Integer)this.dataManager.get(VARIANT)).intValue(), 0, 4);
+        return MathHelper.clamp(this.dataManager.get(VARIANT).intValue(), 0, 4);
     }
 
     public void setVariant(int p_191997_1_)
@@ -128,12 +126,12 @@ public class EntityMysticBird extends EntityAmbientCreature
 
     public boolean getIsBirdSitting()
     {
-        return (((Byte)this.dataManager.get(SITTING)).byteValue() & 1) != 0;
+        return (this.dataManager.get(SITTING).byteValue() & 1) != 0;
     }
 
     public void setIsBirdSitting(boolean isHanging)
     {
-        byte b0 = ((Byte)this.dataManager.get(SITTING)).byteValue();
+        byte b0 = this.dataManager.get(SITTING).byteValue();
 
         if (isHanging)
         {
@@ -180,13 +178,13 @@ public class EntityMysticBird extends EntityAmbientCreature
                 if (this.world.getNearestPlayerNotCreative(this, 4.0D) != null)
                 {
                     this.setIsBirdSitting(false);
-                    this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+                    this.world.playEvent(null, 1025, blockpos, 0);
                 }
             }
             else
             {
                 this.setIsBirdSitting(false);
-                this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+                this.world.playEvent(null, 1025, blockpos, 0);
             }
         }
         else
@@ -275,7 +273,7 @@ public class EntityMysticBird extends EntityAmbientCreature
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setByte("BatFlags", ((Byte)this.dataManager.get(SITTING)).byteValue());
+        compound.setByte("BatFlags", this.dataManager.get(SITTING).byteValue());
         compound.setInteger("Variant", this.getVariant());
 
     }

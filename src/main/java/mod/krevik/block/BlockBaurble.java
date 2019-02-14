@@ -29,6 +29,7 @@ public class BlockBaurble extends BaseBlock {
         setTickRandomly(true);
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!this.canBlockStay(worldIn, pos, state))
@@ -41,6 +42,7 @@ public class BlockBaurble extends BaseBlock {
     {
         return worldIn.getBlockState(pos.up()).isFullBlock();
     }
+
 
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
@@ -57,34 +59,40 @@ public class BlockBaurble extends BaseBlock {
         this.dropBlockAsItem(worldIn, pos, state, 0);
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return BAURBLE_AABB;
     }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
         return null;
     }
 
+    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         this.updateTick(worldIn, pos, state, RANDOM);
     }
 
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }

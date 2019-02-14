@@ -1,10 +1,7 @@
 package mod.krevik.world.gen.forest;
 
-import java.util.Random;
-
-import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import mod.krevik.KCore;
-
+import mod.krevik.world.gen.WorldGenAbstractBasicMysticTree;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.material.Material;
@@ -14,6 +11,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WorldGenBasicMysticTree extends WorldGenAbstractBasicMysticTree
 {
@@ -203,7 +202,7 @@ public class WorldGenBasicMysticTree extends WorldGenAbstractBasicMysticTree
                                     if (rand.nextInt(4 - l3) == 0)
                                     {
                                         EnumFacing enumfacing1 = enumfacing.getOpposite();
-                                        this.placeCocoa(worldIn, rand.nextInt(3), position.add(enumfacing1.getFrontOffsetX(), i - 5 + l3, enumfacing1.getFrontOffsetZ()), enumfacing);
+                                        this.placeCocoa(worldIn, rand.nextInt(3), position.add(enumfacing1.getXOffset(), i - 5 + l3, enumfacing1.getZOffset()), enumfacing);
                                     }
                                 }
                             }

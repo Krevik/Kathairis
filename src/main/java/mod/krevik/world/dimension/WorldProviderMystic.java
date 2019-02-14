@@ -1,24 +1,18 @@
 package mod.krevik.world.dimension;
 
-import javax.annotation.Nullable;
-
-import mod.krevik.client.ClientProxy;
 import mod.krevik.KCore;
-
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.init.MobEffects;
+import mod.krevik.client.ClientProxy;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nullable;
 import java.util.Calendar;
 
 public class WorldProviderMystic extends WorldProviderSurface

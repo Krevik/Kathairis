@@ -1,17 +1,19 @@
 package mod.krevik.entity;
 
-import mod.krevik.enchantment.KathairisEnchantments;
-import mod.krevik.util.FunctionHelper;
 import mod.krevik.KCore;
-import mod.krevik.util.MysticLootTables;
 import mod.krevik.client.particle.DynamicParticle;
 import mod.krevik.client.particle.ParticlesFactory;
+import mod.krevik.enchantment.KathairisEnchantments;
+import mod.krevik.util.FunctionHelper;
+import mod.krevik.util.MysticLootTables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,7 +21,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -34,7 +39,7 @@ import java.util.Map;
 
 public class EntityPhasm extends EntityFlying implements IMob {
 
-    private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.<Boolean>createKey(EntityPhasm.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.createKey(EntityPhasm.class, DataSerializers.BOOLEAN);
     public EntityPhasm(World worldIn)
     {
         super(worldIn);
@@ -68,7 +73,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
 
     int timer=0;
     int ticker=100;
-    FunctionHelper helper = KCore.instance.functionHelper;
+    FunctionHelper helper = KCore.functionHelper;
 
     public void onUpdate()
     {
@@ -113,9 +118,9 @@ public class EntityPhasm extends EntityFlying implements IMob {
     public void onLivingUpdate(){
         super.onLivingUpdate();
             if (ticker >= 1) {
-                double d0 = (double) ((float) posX + (getEntityBoundingBox().maxX - getEntityBoundingBox().minX) / 2) - 0.5;
-                double d1 = (double) ((float) posY + (getEntityBoundingBox().maxY - getEntityBoundingBox().minY) / 2);
-                double d2 = (double) ((float) posZ + (getEntityBoundingBox().maxZ - getEntityBoundingBox().minZ) / 2) - 0.5;
+                double d0 = ((float) posX + (getEntityBoundingBox().maxX - getEntityBoundingBox().minX) / 2) - 0.5;
+                double d1 = ((float) posY + (getEntityBoundingBox().maxY - getEntityBoundingBox().minY) / 2);
+                double d2 = ((float) posZ + (getEntityBoundingBox().maxZ - getEntityBoundingBox().minZ) / 2) - 0.5;
                 Particle theParticle = new DynamicParticle(
                         ParticlesFactory.TWINKLINGPARTICLE,
                         world,

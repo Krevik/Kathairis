@@ -1,9 +1,6 @@
 package mod.krevik.client.particle;
 
-import java.util.Random;
-
 import mod.krevik.client.ClientProxy;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
@@ -13,6 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class ParticleMysticGemBlock extends Particle

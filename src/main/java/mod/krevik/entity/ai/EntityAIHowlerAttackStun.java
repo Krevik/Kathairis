@@ -130,7 +130,7 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
 
         if (entitylivingbase instanceof EntityPlayer && (((EntityPlayer)entitylivingbase).isSpectator() || ((EntityPlayer)entitylivingbase).isCreative()))
         {
-            this.attacker.setAttackTarget((EntityLivingBase)null);
+            this.attacker.setAttackTarget(null);
         }
 
         this.attacker.getNavigator().clearPath();

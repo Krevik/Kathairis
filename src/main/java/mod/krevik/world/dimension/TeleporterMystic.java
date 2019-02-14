@@ -1,13 +1,10 @@
 package mod.krevik.world.dimension;
 
-import java.util.Random;
-
-import mod.krevik.block.BlockMysticPortal;
-import mod.krevik.KCore;
-
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import mod.krevik.KCore;
+import mod.krevik.block.BlockMysticPortal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
@@ -19,6 +16,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TeleporterMystic extends Teleporter
 {
@@ -89,7 +88,7 @@ public class TeleporterMystic extends Teleporter
 
         if (this.destinationCoordinateCache.containsKey(l))
         {
-            TeleporterMystic.PortalPosition teleporter$portalposition = (TeleporterMystic.PortalPosition)this.destinationCoordinateCache.get(l);
+            TeleporterMystic.PortalPosition teleporter$portalposition = this.destinationCoordinateCache.get(l);
             d0 = 0.0D;
             blockpos = teleporter$portalposition;
             teleporter$portalposition.lastUpdateTime = this.world.getTotalWorldTime();
@@ -501,7 +500,7 @@ public class TeleporterMystic extends Teleporter
 
             while (objectiterator.hasNext())
             {
-                TeleporterMystic.PortalPosition teleporter$portalposition = (TeleporterMystic.PortalPosition)objectiterator.next();
+                TeleporterMystic.PortalPosition teleporter$portalposition = objectiterator.next();
 
                 if (teleporter$portalposition == null || teleporter$portalposition.lastUpdateTime < i)
                 {

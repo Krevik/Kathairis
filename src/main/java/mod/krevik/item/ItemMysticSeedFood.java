@@ -1,10 +1,7 @@
 package mod.krevik.item;
 
-import java.util.Random;
-
-import mod.krevik.util.CreativeTabsMystic;
 import mod.krevik.KCore;
-
+import mod.krevik.util.CreativeTabsMystic;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,10 +19,11 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class ItemMysticSeedFood extends ItemMysticFood implements net.minecraftforge.common.IPlantable
 {
     private final Block crops;
-    /** Block ID of the soil this seed food should be planted on. */
     private final Block soilId;
     private Random random = new Random();
 
@@ -43,7 +41,7 @@ public class ItemMysticSeedFood extends ItemMysticFood implements net.minecraftf
         {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             entityplayer.getFoodStats().addStats(this, stack);
-            worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
             this.onFoodEaten(stack, worldIn, entityplayer);
             entityplayer.addStat(StatList.getObjectUseStats(this));
 
@@ -68,9 +66,7 @@ public class ItemMysticSeedFood extends ItemMysticFood implements net.minecraftf
     	int[] allowedPotionIds = {1,3,4,5,6,8,10,11,12,13,14,16,21,22,23,24,25,26};
     	ep.addPotionEffect(new PotionEffect(Potion.getPotionById(allowedPotionIds[random.nextInt(allowedPotionIds.length)]),300+random.nextInt(2000),random.nextInt(5)));
     }
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
+
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {

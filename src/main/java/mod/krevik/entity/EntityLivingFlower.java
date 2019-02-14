@@ -1,11 +1,8 @@
 package mod.krevik.entity;
 
-import javax.annotation.Nullable;
-
-import mod.krevik.entity.ai.EntityAIHealTargets;
 import mod.krevik.KCore;
+import mod.krevik.entity.ai.EntityAIHealTargets;
 import mod.krevik.util.MysticLootTables;
-
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -18,17 +15,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class EntityLivingFlower extends EntityAnimal
 {
-    private static final DataParameter<Boolean> canDespawn = EntityDataManager.<Boolean>createKey(EntityLivingFlower.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> canDespawn = EntityDataManager.createKey(EntityLivingFlower.class, DataSerializers.BOOLEAN);
     public EntityLivingFlower(World worldIn)
     {
         super(worldIn);

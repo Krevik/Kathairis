@@ -40,6 +40,7 @@ public class BlockSucculent extends BlockMysticBush {
         return can;
     }
 
+    @Override
     public boolean canSustainPlantRemake(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable)
     {
         boolean can=false;
@@ -51,6 +52,7 @@ public class BlockSucculent extends BlockMysticBush {
         return can;
     }
 
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         this.checkAndDropBlock(worldIn, pos, state);
@@ -63,7 +65,6 @@ public class BlockSucculent extends BlockMysticBush {
 
                     for (i = 1; worldIn.getBlockState(pos.down(i)).getBlock() == this; ++i)
                     {
-                        ;
                     }
 
                     if (i < 3)
@@ -79,7 +80,7 @@ public class BlockSucculent extends BlockMysticBush {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
             entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
     }
@@ -105,12 +106,14 @@ public class BlockSucculent extends BlockMysticBush {
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) { }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
             return SUCCULENT_AABB;
     }
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
             return SUCCULENT_AABB;
@@ -118,7 +121,7 @@ public class BlockSucculent extends BlockMysticBush {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT;
     }

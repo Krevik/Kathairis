@@ -42,10 +42,10 @@ public class PacketUpdateFogOnClient implements IMessage {
             if(ctx.side.isClient()) {
                 if (Minecraft.getMinecraft().player != null) {
                     if (Minecraft.getMinecraft().player.dimension == KCore.DIMENSION_ID) {
-                        KathairisDataStorage data = KCore.data.getDataInstance(Minecraft.getMinecraft().player.world);
+                        KathairisDataStorage data = KathairisDataStorage.getDataInstance(Minecraft.getMinecraft().player.world);
                         if (data != null) {
-                            data.setFogTime(message.fogTime);
-                            data.setLastFogTime(message.lastFogTime);
+                            KathairisDataStorage.setFogTime(message.fogTime);
+                            KathairisDataStorage.setLastFogTime(message.lastFogTime);
                         }
                     }
                 }

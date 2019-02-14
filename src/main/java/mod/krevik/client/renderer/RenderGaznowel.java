@@ -1,9 +1,9 @@
 package mod.krevik.client.renderer;
 
-import mod.krevik.entity.EntityGaznowel;
-import mod.krevik.util.EntityAndRenderRegistry;
 import mod.krevik.client.model.ModelGaznowel;
 import mod.krevik.client.renderer.layer.RenderLayerHeldItem;
+import mod.krevik.entity.EntityGaznowel;
+import mod.krevik.util.EntityAndRenderRegistry;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

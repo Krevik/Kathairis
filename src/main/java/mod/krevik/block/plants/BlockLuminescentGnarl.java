@@ -1,11 +1,6 @@
 package mod.krevik.block.plants;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import mod.krevik.KCore;
-
 import mod.krevik.block.BaseBlock;
 import mod.krevik.client.particle.DynamicParticle;
 import mod.krevik.client.particle.ParticlesFactory;
@@ -13,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -23,13 +17,19 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockLuminescentGnarl extends BaseBlock {
 	
@@ -42,7 +42,8 @@ public class BlockLuminescentGnarl extends BaseBlock {
         this.setTickRandomly(true);
 
 	}
-	
+
+    @Override
 	   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	    {
 	        if (!this.canBlockStay(worldIn, pos, state))
@@ -50,7 +51,7 @@ public class BlockLuminescentGnarl extends BaseBlock {
 	            this.dropBlock(worldIn, pos, state);
 	        }
 	    }
-	   
+
 	   public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	    {
 		   if(worldIn.isBlockFullCube(pos.north())&&worldIn.getBlockState(pos)==
@@ -65,12 +66,8 @@ public class BlockLuminescentGnarl extends BaseBlock {
 				   KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.WEST)) {
 			   return true;
 		   }
-		   else if(worldIn.isBlockFullCube(pos.west())&&worldIn.getBlockState(pos)==
-				   KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.EAST)) {
-			   return true;
-		   }else {
-			   return false;
-		   }
+		   else return worldIn.isBlockFullCube(pos.west()) && worldIn.getBlockState(pos) ==
+                       KCore.LuminescentGnarl.getDefaultState().withProperty(BlockLuminescentGnarl.FACING, EnumFacing.EAST);
 	    }
 	   
 	   @Override
@@ -87,14 +84,15 @@ public class BlockLuminescentGnarl extends BaseBlock {
 	        worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 	        this.dropBlockAsItem(worldIn, pos, state, 0);
 	    }
-	
+
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     		return FULL_BLOCK_AABB;
     }
-    
-    
-    
+
+
+    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         EnumFacing enumfacing = EnumFacing.fromAngle((double)placer.rotationYaw).getOpposite();
@@ -104,33 +102,36 @@ public class BlockLuminescentGnarl extends BaseBlock {
     
 
     @Nullable
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
     	return null;
     }
-	
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
-    
-    
 
+
+
+    @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
     }
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+        EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
         if (enumfacing.getAxis() == EnumFacing.Axis.Y)
         {
@@ -140,40 +141,39 @@ public class BlockLuminescentGnarl extends BaseBlock {
         return this.getDefaultState().withProperty(FACING, enumfacing);
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+
+    @Override
     public int getMetaFromState(IBlockState state)
     {
-        return ((EnumFacing)state.getValue(FACING)).getIndex();
+        return state.getValue(FACING).getIndex();
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    @Override
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+
+    @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+
+    @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
-        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
+        return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
     }
+
+    @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
+        return new BlockStateContainer(this, FACING);
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
