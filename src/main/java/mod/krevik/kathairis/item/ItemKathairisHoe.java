@@ -3,6 +3,7 @@ package mod.krevik.kathairis.item;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import mod.krevik.kathairis.init.ModItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,7 +14,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTiered;
 import net.minecraft.item.ItemUseContext;
@@ -27,13 +27,13 @@ import java.util.Map;
 
 public class ItemKathairisHoe extends ItemTiered {
 
+	//TODO Krevik wtf
 	protected static final Map<Block, IBlockState> field_195973_b = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
 	private final float speed;
 
-	public ItemKathairisHoe(String Name, IItemTier tier, ItemGroup group) {
-		super(tier, new Properties().group(group).maxStackSize(1));
+	public ItemKathairisHoe(IItemTier tier) {
+		super(tier, new Properties().group(ModItemGroups.TOOLS).maxStackSize(1));
 		this.speed = 1;
-		setRegistryName(Name);
 	}
 
 	public EnumActionResult onItemUse(ItemUseContext p_195939_1_) {

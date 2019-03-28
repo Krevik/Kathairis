@@ -32,7 +32,7 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 	protected int mode;
 
 	public ItemCrystalPickaxe(IItemTier tier, ItemGroup group) {
-		super(tier, group);
+		super(tier);
 		mode = 0;
 	}
 

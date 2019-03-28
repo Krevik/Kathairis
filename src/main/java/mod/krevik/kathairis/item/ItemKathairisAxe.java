@@ -2,6 +2,7 @@ package mod.krevik.kathairis.item;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
+import mod.krevik.kathairis.init.ModItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.EnumActionResult;
@@ -115,8 +115,8 @@ public class ItemKathairisAxe extends ItemKathairisTool {
 			MYSTIC_LOG, MYSTIC_PLANKS, SHINY_LOG, SHINY_PLANKS, MYSTIC_WOOD_STAIRS, SHINY_WOOD_STAIRS, MYSTIC_WOOD_STAIRS, SHINY_WOOD_FENCE, MYSTIC_WOOD_FENCE_GATE, SHINY_WOOD_FENCE_GATE, SOUL_LOG, SOUL_PLANKS, SOUL_WOOD_STAIRS, MYSTIC_WOOD_SLAB, SHINY_WOOD_SLAB, SOUL_WOOD_SLAB, MYSTIC_LOG_STRIPPED, SHINY_LOG_STRIPPED, SOUL_LOG_STRIPPED, MYSTIC_WOOD_TRAPDOOR, SHINY_WOOD_TRAPDOOR, SOUL_WOOD_TRAPDOOR, MYSTIC_WOOD_DOORS, SHINY_WOOD_DOORS, SOUL_WOOD_DOORS
 	);
 
-	public ItemKathairisAxe(IItemTier tier, ItemGroup group) {
-		super(tier, EFFECTIVE_ON, new Item.Properties().group(group).addToolType(net.minecraftforge.common.ToolType.AXE, tier.getHarvestLevel()).maxStackSize(1));
+	public ItemKathairisAxe(IItemTier tier) {
+		super(tier, EFFECTIVE_ON, new Item.Properties().group(ModItemGroups.TOOLS).addToolType(net.minecraftforge.common.ToolType.AXE, tier.getHarvestLevel()).maxStackSize(1));
 	}
 
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {

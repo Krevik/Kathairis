@@ -1,12 +1,12 @@
 package mod.krevik.kathairis.item;
 
 import com.google.common.collect.Sets;
+import mod.krevik.kathairis.init.ModItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ToolType;
 
@@ -101,8 +101,8 @@ public class ItemKathairisPickaxe extends ItemKathairisTool {
 			KATHARIAN_STONE, TITANIUM_ORE, TITANIUM_BLOCK, KATHARIAN_STONE_TILES, WEATHERED_ROCK, HARDENED_WEATHERED_ROCK, HARDENED_WEATHERED_ROCK_TILES, HARDENED_WEATHERED_ROCK_BRICKS, SHINY_ROCK, REVENUM_ORE, YELLOW_CRYSTAL, BLUE_CRYSTAL, VIOLET_CRYSTAL, HARDENED_WEATHERED_ROCK_STAIRS, KATHARIAN_STONE_STAIRS, KATHARIAN_STONE_WALL, HARDENED_WEATHERED_ROCK_WALL, BLUE_CLOUD_BRICKS, YELLOW_CLOUD_BLOCK, MAGNETHIUM, HARDENED_WEATHERED_ROCK_BRICKS_STAIRS, MYSTIC_GEM_BLOCK, KATHARIAN_COBBLESTONE, IRON_GOLD_BLOCK, YELLOW_CLOUD_REFINED, BLUE_CLOUD_REFINED, KATHARIAN_SANDSTONE, MUD_BRICKS, MUD_BRICKS_SLAB, MUD_BRICKS_STAIRS, MUD_BRICKS_WALL
 	);
 
-	public ItemKathairisPickaxe(IItemTier tier, ItemGroup group) {
-		super(tier, EFFECTIVE_ON, new Item.Properties().group(group).addToolType(ToolType.PICKAXE, tier.getHarvestLevel()).maxStackSize(1));
+	public ItemKathairisPickaxe(IItemTier tier) {
+		super(tier, EFFECTIVE_ON, new Item.Properties().group(ModItemGroups.TOOLS).addToolType(ToolType.PICKAXE, tier.getHarvestLevel()).maxStackSize(1));
 	}
 
 	/**

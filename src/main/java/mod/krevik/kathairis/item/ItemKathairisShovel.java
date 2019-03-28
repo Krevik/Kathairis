@@ -3,13 +3,13 @@ package mod.krevik.kathairis.item;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import mod.krevik.kathairis.init.ModItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -71,8 +71,8 @@ public class ItemKathairisShovel extends ItemKathairisTool {
 			KATHARIAN_SAND, SOFT_SAND, KATHARIAN_DIRT, KATHARIAN_GRASS, MUD_BLOCK, BLUE_CLOUD, BLUE_CLOUD_CONDENSED, YELLOW_CLOUD, YELLOW_CLOUD_CONDENSED, LAYERED_SAND
 	);
 
-	public ItemKathairisShovel(IItemTier tier, ItemGroup group) {
-		super(tier, EFFECTIVE_ON, new Item.Properties().group(group).addToolType(net.minecraftforge.common.ToolType.SHOVEL, tier.getHarvestLevel()).maxStackSize(1));
+	public ItemKathairisShovel(IItemTier tier) {
+		super(tier, EFFECTIVE_ON, new Item.Properties().group(ModItemGroups.TOOLS).addToolType(net.minecraftforge.common.ToolType.SHOVEL, tier.getHarvestLevel()).maxStackSize(1));
 	}
 
 	public EnumActionResult onItemUse(ItemUseContext p_195939_1_) {

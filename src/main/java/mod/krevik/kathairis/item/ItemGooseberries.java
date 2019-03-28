@@ -15,23 +15,25 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
+import javax.annotation.Nonnull;
+
 public class ItemGooseberries extends ItemSeedFood {
 
-	//TODO fix names
-	IBlockState field_195972_b;
+	private final IBlockState crop;
 
-	public ItemGooseberries(int p_i48473_1_, float p_i48473_2_, Block p_i48473_3_) {
-		super(p_i48473_1_, p_i48473_2_, p_i48473_3_, new Properties().group(ModItemGroups.FOOD));
-		field_195972_b = p_i48473_3_.getDefaultState();
+	public ItemGooseberries(int healAmountIn, float saturation, Block crop) {
+		super(healAmountIn, saturation, crop, new Properties().group(ModItemGroups.FOOD));
+		this.crop = crop.getDefaultState();
 	}
 
+	@Nonnull
 	@Override
-	public EnumActionResult onItemUse(ItemUseContext context) {
+	public EnumActionResult onItemUse(@Nonnull final ItemUseContext context) {
 		IWorld iworld = context.getWorld();
 		BlockPos blockpos = context.getPos().up();
 		boolean canPlaceHere = ModBlocks.GOOSEBERRY_BUSH.isValidPosition(iworld.getBlockState(blockpos), iworld, blockpos);
 		if (context.getFace() == EnumFacing.UP && iworld.isAirBlock(blockpos) && canPlaceHere) {
-			iworld.setBlockState(blockpos, this.field_195972_b, 11);
+			iworld.setBlockState(blockpos, this.crop, 11);
 			EntityPlayer entityplayer = context.getPlayer();
 			ItemStack itemstack = context.getItem();
 			if (entityplayer instanceof EntityPlayerMP) {

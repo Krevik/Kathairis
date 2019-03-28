@@ -30,25 +30,16 @@ public class BlockBaurble extends Block {
 		super(Block.Properties.create(Material.GLASS).tickRandomly().hardnessAndResistance(0f).sound(SoundType.GLASS).lightValue(10));
 	}
 
-	@Override
-	public void tick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
-		dropIfNotValidPosition(state, worldIn, pos);
-	}
-
 	private void dropIfNotValidPosition(final IBlockState state, final World worldIn, final BlockPos pos) {
-		if (!this.canBlockStay(worldIn, pos, state)) {
+		if (!worldIn.getBlockState(pos.up()).isFullCube()) {
 			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 1 | 2);
 			spawnAsEntity(worldIn, pos, new ItemStack(this));
 		}
 	}
 
-	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-		return worldIn.getBlockState(pos.up()).isFullCube();
-	}
-
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		dropIfNotValidPosition(state, worldIn, pos);
+	public boolean isFullCube(IBlockState state) {
+		return false;
 	}
 
 	@Override
@@ -57,19 +48,24 @@ public class BlockBaurble extends Block {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	public void tick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
 		dropIfNotValidPosition(state, worldIn, pos);
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		dropIfNotValidPosition(state, worldIn, pos);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		dropIfNotValidPosition(state, worldIn, pos);
 	}
 
 }

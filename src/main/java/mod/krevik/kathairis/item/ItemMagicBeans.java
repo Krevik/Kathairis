@@ -24,7 +24,7 @@ public class ItemMagicBeans extends ItemSeedFood {
 	//TODO fix names
 	IBlockState field_195972_b;
 
-	public ItemMagicBeans(String Name, int p_i48473_1_, float p_i48473_2_, Block p_i48473_3_) {
+	public ItemMagicBeans(int p_i48473_1_, float p_i48473_2_, Block p_i48473_3_) {
 		super(p_i48473_1_, p_i48473_2_, p_i48473_3_, new Properties().group(ModItemGroups.FOOD));
 		setAlwaysEdible();
 		field_195972_b = p_i48473_3_.getDefaultState();

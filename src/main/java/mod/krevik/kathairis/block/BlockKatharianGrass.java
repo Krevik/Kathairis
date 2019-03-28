@@ -35,22 +35,6 @@ public class BlockKatharianGrass extends Block implements IGrowable {
 		this.setDefaultState(this.stateContainer.getBaseState().with(SNOWY, Boolean.FALSE).with(FLOWER, Boolean.FALSE));
 	}
 
-	public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return stateIn.with(SNOWY, shouldBeSnowed(stateIn)).with(FLOWER, stateIn.get(FLOWER));
-	}
-
-	public IBlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState();
-	}
-
-	private boolean shouldBeSnowed(IBlockState state) {
-		boolean result = false;
-		if (month == 11) {
-			return true;
-		}
-		return state.get(SNOWY);
-	}
-
 	private static boolean func_196383_a(IWorldReaderBase p_196383_0_, BlockPos p_196383_1_) {
 		BlockPos blockpos = p_196383_1_.up();
 		return p_196383_0_.getLight(blockpos) >= 4 || p_196383_0_.getBlockState(blockpos).getOpacity(p_196383_0_, blockpos) < p_196383_0_.getMaxLightLevel();
@@ -59,6 +43,15 @@ public class BlockKatharianGrass extends Block implements IGrowable {
 	private static boolean func_196384_b(IWorldReaderBase p_196384_0_, BlockPos p_196384_1_) {
 		BlockPos blockpos = p_196384_1_.up();
 		return p_196384_0_.getLight(blockpos) >= 4 && p_196384_0_.getBlockState(blockpos).getOpacity(p_196384_0_, blockpos) < p_196384_0_.getMaxLightLevel() && !p_196384_0_.getFluidState(blockpos).isTagged(FluidTags.WATER);
+	}
+
+	public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return stateIn.with(SNOWY, shouldBeSnowed(stateIn)).with(FLOWER, stateIn.get(FLOWER));
+	}
+
+	@Override
+	public boolean isSolid(IBlockState p_200124_1_) {
+		return true;
 	}
 
 	public void tick(IBlockState state, World worldIn, BlockPos pos, Random random) {
@@ -115,6 +108,12 @@ public class BlockKatharianGrass extends Block implements IGrowable {
         }*/
 	}
 
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
     /*private IBlockState getRandomGiftState(Random random){
         int k=random.nextInt(3);
         if(k==0){
@@ -130,19 +129,21 @@ public class BlockKatharianGrass extends Block implements IGrowable {
         }
     }*/
 
-	@Override
-	public boolean canGrow(IBlockReader p_176473_1_, BlockPos p_176473_2_, IBlockState p_176473_3_, boolean p_176473_4_) {
-		return p_176473_1_.getBlockState(p_176473_2_.up()).isAir();
+	public IBlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getDefaultState();
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return true;
+	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+		builder.add(FLOWER).add(SNOWY);
 	}
 
-	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		//TODO
+	private boolean shouldBeSnowed(IBlockState state) {
+		boolean result = false;
+		if (month == 11) {
+			return true;
+		}
+		return state.get(SNOWY);
 	}
 
     /*@Override
@@ -201,20 +202,19 @@ public class BlockKatharianGrass extends Block implements IGrowable {
         }
     }*/
 
-	@OnlyIn(Dist.CLIENT)
 	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
+	public boolean canGrow(IBlockReader p_176473_1_, BlockPos p_176473_2_, IBlockState p_176473_3_, boolean p_176473_4_) {
+		return p_176473_1_.getBlockState(p_176473_2_.up()).isAir();
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
-		builder.add(FLOWER).add(SNOWY);
-	}
-
-	@Override
-	public boolean isSolid(IBlockState p_200124_1_) {
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		return true;
+	}
+
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		//TODO
 	}
 
 }

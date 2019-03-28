@@ -8,15 +8,17 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 public class ItemMagnethiumSword extends ItemKathairisSword {
-    public ItemMagnethiumSword(IItemTier tier, ItemGroup group) {
-        super(tier, group);
-    }
 
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase entityLivingBase) {
-        stack.damageItem(1, entityLivingBase);
-        // FIXME TODO STOPSHIP: 2019-03-27 DON'T use hardcoded IDs
-        target.addPotionEffect(new PotionEffect(Potion.getPotionById(25),25,1));
-        return true;
-    }
+	public ItemMagnethiumSword(IItemTier tier, ItemGroup group) {
+		super(tier);
+	}
+
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase entityLivingBase) {
+		stack.damageItem(1, entityLivingBase);
+		// FIXME TODO STOPSHIP: 2019-03-27 DON'T use hardcoded IDs
+		target.addPotionEffect(new PotionEffect(Potion.getPotionById(25), 25, 1));
+		return true;
+	}
+
 }
