@@ -59,7 +59,6 @@ import io.github.krevik.kathairis.item.ItemKathairisShovel;
 import io.github.krevik.kathairis.item.ItemKathairisSword;
 import io.github.krevik.kathairis.item.ItemMagicBeans;
 import io.github.krevik.kathairis.item.ItemMysticGem;
-import io.github.krevik.kathairis.util.ModReference;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -70,6 +69,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static net.minecraft.inventory.EntityEquipmentSlot.CHEST;
 import static net.minecraft.inventory.EntityEquipmentSlot.FEET;
 import static net.minecraft.inventory.EntityEquipmentSlot.HEAD;
@@ -78,11 +78,12 @@ import static net.minecraft.item.EnumRarity.COMMON;
 import static net.minecraft.item.EnumRarity.EPIC;
 import static net.minecraft.item.EnumRarity.RARE;
 import static net.minecraft.item.EnumRarity.UNCOMMON;
+import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 /**
  * @author Cadiboo
  */
-@EventBusSubscriber(modid = ModReference.MOD_ID)
+@EventBusSubscriber(modid = MOD_ID, bus = MOD)
 public final class EventSubscriber {
 
 	@SubscribeEvent
@@ -321,7 +322,7 @@ public final class EventSubscriber {
 	}
 
 	public static <T extends IForgeRegistryEntry> T setup(final T entry, final String name) {
-		entry.setRegistryName(new ResourceLocation(ModReference.MOD_ID, name));
+		entry.setRegistryName(new ResourceLocation(MOD_ID, name));
 		return entry;
 	}
 
