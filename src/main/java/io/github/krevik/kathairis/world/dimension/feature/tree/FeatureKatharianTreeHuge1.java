@@ -204,7 +204,7 @@ public class FeatureKatharianTreeHuge1 extends AbstractKatharianTreeFeature {
 			BlockPos tmp = new BlockPos(pos.getX() + shiftX, pos.getY() + shiftY, pos.getZ() + shiftZ);
 			setBlocks(changedBlocks, world, tmp, MYSTIC_LOG.getDefaultState());
 			if (counter == branchLength) {
-				generateTopCrown(world, tmp, (int) (branchLength), rand);
+				generateTopCrown(world, tmp, (branchLength), rand);
 			}
 		}
 	}

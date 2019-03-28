@@ -25,14 +25,14 @@ public class FeatureKatharianTallTree3 extends AbstractKatharianTreeFeature {
 	public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position) {
 		if (canGrowInto(worldIn, position) || canGrowInto(worldIn, position.down())) {
 			int mainTrunkHeight = 10 + rand.nextInt(8);
-			int branches = (int) (mainTrunkHeight / 3);
+			int branches = (mainTrunkHeight / 3);
 			int posX = position.getX();
 			int posY = position.getY();
 			int posZ = position.getZ();
 			for (int c = 0; c <= mainTrunkHeight; c++) {
 				setBlocks(changedBlocks, worldIn, new BlockPos(posX, posY + c, posZ), SHINY_LOG.getDefaultState());
 			}
-			int branchesHeights[] = new int[branches];
+			int[] branchesHeights = new int[branches];
 			for (int count = 0; count < branches; count++) {
 				branchesHeights[count] = 2 + ((mainTrunkHeight - 2) / branches) + count + count;
 			}

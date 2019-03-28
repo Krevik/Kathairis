@@ -15,6 +15,7 @@ public class GenLayerKatharianBiome implements IC0Transformer {
 	private final OverworldGenSettings settings;
 	@SuppressWarnings("unchecked")
 	private java.util.List<BiomeManager.BiomeEntry>[] biomes = new ArrayList[BiomeManager.BiomeType.values().length];
+
 	public GenLayerKatharianBiome(OverworldGenSettings p_i48641_2_) {
 		for (BiomeManager.BiomeType type : BiomeManager.BiomeType.values()) {
 			ImmutableList<BiomeManager.BiomeEntry> biomesToAdd = getBiomesToGeneration();
@@ -56,7 +57,7 @@ public class GenLayerKatharianBiome implements IC0Transformer {
 		java.util.List<BiomeManager.BiomeEntry> biomeList = getBiomesToGeneration();
 		int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
 		int weight = BiomeManager.isTypeListModded(type) ? context.random(totalWeight) : context.random(totalWeight / 10) * 10;
-		return (BiomeManager.BiomeEntry) net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
+		return net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
 	}
 
 }
