@@ -13,6 +13,6 @@ import static io.github.krevik.kathairis.util.ModUtil._null;
 public final class ModDimensions {
 
 	//TODO
-	public static final DimensionType KATHAIRIS = _null();
+//	public static final DimensionType KATHAIRIS = _null();
 
 }
