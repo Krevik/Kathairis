@@ -1,0 +1,293 @@
+{
+    "mob.bird":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:bird/bird1",
+			"kathairis:bird/bird2",
+			"kathairis:bird/bird3",
+			"kathairis:bird/bird4"
+        ]
+    },
+	"mob.howler.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:howler/living"
+        ]
+    },
+	"mob.howler.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:howler/dead"
+        ]
+    },
+	"mob.howler.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:howler/hurt_1",
+			"kathairis:howler/hurt_2"
+        ]
+    },
+	"mob.jellyfish.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:jellyfish/dead"
+        ]
+    },
+	"mob.jellyfish.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:jellyfish/hurt"
+        ]
+    },
+	"mob.jellyfish.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:jellyfish/living1",
+			"kathairis:jellyfish/living2",
+			"kathairis:jellyfish/living3"
+        ]
+    },
+	"mob.turtle.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:turtle/turtle_dead"
+        ]
+    },
+	"mob.bison.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:bison/dead"
+        ]
+    },
+	"mob.bison.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:bison/hurt"
+        ]
+    },
+	"mob.bison.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:bison/1",
+			"kathairis:bison/2",
+			"kathairis:bison/3",
+			"kathairis:bison/4",
+			"kathairis:bison/5",
+			"kathairis:bison/6",
+			"kathairis:bison/7"
+        ]
+    },
+	"kathairis.music.night":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "kathairis:kathairis/kathairis_night", "stream": true},
+			{"name": "kathairis:kathairis/kathairis_night2", "stream": true},
+			{"name": "kathairis:kathairis/kathairis_night3", "stream": true}
+        ]
+    },
+	"kathairis.music.day":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "kathairis:kathairis/kathairis_day", "stream": true},
+			{"name": "kathairis:kathairis/kathairis_day1", "stream": true},
+			{"name": "kathairis:kathairis/kathairis_day2", "stream": true}
+        ]
+    },
+	"mob.ghost.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:ghost/ghost1",
+			"kathairis:ghost/ghost2",
+			"kathairis:ghost/ghost3",
+			"kathairis:ghost/ghost4"
+        ]
+    },
+	"mob.ghost.attack":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:ghost/ghost_attack"
+        ]
+    },
+	"mob.ghost.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:ghost/ghost_dead"
+        ]
+    },
+	"mob.death.living":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:death/death1",
+			"kathairis:death/death2",
+			"kathairis:death/death3",
+			"kathairis:death/death4",
+			"kathairis:death/death5",
+			"kathairis:death/death6",
+			"kathairis:death/death7",
+			"kathairis:death/death8",
+			"kathairis:death/death9",
+			"kathairis:death/death10"
+        ]
+    },
+	"scary.flower":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:scary/scary1",
+			"kathairis:scary/scary2",
+			"kathairis:scary/scary3",
+			"kathairis:scary/scary4",
+			"kathairis:scary/scary5"
+        ]
+    },
+	"mob.camel.ambient":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:camel/camel_ambient1",
+			"kathairis:camel/camel_ambient2",
+			"kathairis:camel/camel_ambient3",
+			"kathairis:camel/camel_ambient4",
+			"kathairis:camel/camel_ambient5"
+        ]
+    },
+	"mob.camel.breath":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:camel/camel_breath"
+        ]
+    },
+	"mob.camel.dead":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:camel/camel_dead"
+        ]
+    },
+	"mob.camel.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:camel/camel_hurt"
+        ]
+    },
+	"mob.oldman.ambient":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:oldman/ambient"
+        ]
+    },
+	"mob.skyray.ambient":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:skyray/skyray1",
+			"kathairis:skyray/skyray2",
+            "kathairis:skyray/skyray3"
+        ]
+    },
+	"mob.skyray.hurt":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:skyray/skyray_hurt"
+        ]
+    },
+	"cloudglass.break":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:blocks/cloud_glass/cloudglass1",
+			"kathairis:blocks/cloud_glass/cloudglass2"
+        ]
+    },
+	"sandstorm":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:sandstorm/sandstorm1",
+			"kathairis:sandstorm/sandstorm2",
+			"kathairis:sandstorm/sandstorm3"
+        ]
+    },
+	"music_disc.jazzy":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "kathairis:music_disc/jazzy", "stream": true}
+        ]
+    },
+	"music_disc.8bit":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "kathairis:music_disc/8bit", "stream": true}
+        ]
+    },
+	"pickaxe.turn":
+    {
+        "category": "weather",
+		"sounds":
+        [
+            "kathairis:misc/pickaxe_turn"
+        ]
+    },
+	"kathairis.music.xmas":
+    {
+        "category": "music",
+		"sounds":
+        [
+            {"name": "kathairis:kathairis/xmas1", "stream": true},
+			{"name": "kathairis:kathairis/xmas2", "stream": true},
+			{"name": "kathairis:kathairis/xmas3", "stream": true}
+        ]
+    }
+}
