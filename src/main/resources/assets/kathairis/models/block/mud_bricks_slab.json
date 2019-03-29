@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "kathairis:block/mud_bricks",
+        "top": "kathairis:block/mud_bricks",
+        "side": "kathairis:block/mud_bricks"
+    }
+}

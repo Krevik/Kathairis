@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "kathairis:block/soul_planks",
+        "top": "kathairis:block/soul_planks",
+        "side": "kathairis:block/soul_planks"
+    }
+}

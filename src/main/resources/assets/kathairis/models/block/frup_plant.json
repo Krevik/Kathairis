@@ -1,0 +1,6 @@
+{
+	"parent": "block/crop",
+	"textures": {
+		"crop": "kathairis:block/frup_plant_3"
+	}
+}

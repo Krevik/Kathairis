@@ -1,0 +1,10 @@
+{
+    "parent": "kathairis:block/katharian_grass_model",
+    "textures": {
+        "particle": "kathairis:block/katharian_dirt",
+        "bottom": "kathairis:block/katharian_dirt",
+        "top": "kathairis:block/katharian_grass_top_flower",
+        "side": "kathairis:block/katharian_grass_side",
+        "overlay": "kathairis:block/katharian_grass_side_overlay"
+    }
+}

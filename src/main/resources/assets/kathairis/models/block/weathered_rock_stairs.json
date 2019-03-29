@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "kathairis:block/weathered_rock",
+        "top": "kathairis:block/weathered_rock",
+        "side": "kathairis:block/weathered_rock"
+    }
+}

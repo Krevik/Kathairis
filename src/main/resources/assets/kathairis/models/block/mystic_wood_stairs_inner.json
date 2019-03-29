@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "kathairis:block/mystic_planks",
+        "top": "kathairis:block/mystic_planks",
+        "side": "kathairis:block/mystic_planks"
+    }
+}
