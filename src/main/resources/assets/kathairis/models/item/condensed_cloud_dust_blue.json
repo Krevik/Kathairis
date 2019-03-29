@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "kathairis:item/condensed_cloud_dust_blue"
+    }
+}
