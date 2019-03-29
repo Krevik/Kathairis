@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIS_PORTAL;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_PORTAL;
 
 public class BlockKathairisPortal extends BlockPortal {
 
@@ -474,7 +474,7 @@ public class BlockKathairisPortal extends BlockPortal {
 					}
 
 					Block block = iblockstate.getBlock();
-					if (block == KATHARIS_PORTAL) {
+					if (block == KATHAIRIS_PORTAL) {
 						++this.portalBlockCount;
 					}
 
@@ -511,7 +511,7 @@ public class BlockKathairisPortal extends BlockPortal {
 
 		protected boolean func_196900_a(IBlockState state) {
 			Block blockIn = state.getBlock();
-			return blockIn.getMaterial(blockIn.getDefaultState()) == Material.AIR || blockIn == Blocks.FIRE || blockIn == KATHARIS_PORTAL;
+			return blockIn.getMaterial(blockIn.getDefaultState()) == Material.AIR || blockIn == Blocks.FIRE || blockIn == KATHAIRIS_PORTAL;
 		}
 
 		public boolean isValid() {
@@ -523,7 +523,7 @@ public class BlockKathairisPortal extends BlockPortal {
 				BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i);
 
 				for (int j = 0; j < this.height; ++j) {
-					this.world.setBlockState(blockpos.up(j), KATHARIS_PORTAL.getDefaultState().with(BlockPortal.AXIS, this.axis), 18);
+					this.world.setBlockState(blockpos.up(j), KATHAIRIS_PORTAL.getDefaultState().with(BlockPortal.AXIS, this.axis), 18);
 				}
 			}
 

@@ -186,7 +186,7 @@ public final class ModEventSubscriber {
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
 
 			//TODO find better way, maybe make all blocks provide their creative tab and if they have an itemblock?
-			if (block == ModBlocks.MAGIC_BEANS) {
+			if (block == ModBlocks.MAGIC_BEANS || block==ModBlocks.KATHAIRIS_PORTAL) {
 				return;
 			}
 			registry.register(setup(new ItemBlock(block, new Item.Properties().group(BUILDING_BLOCKS)), block.getRegistryName()));
@@ -211,7 +211,7 @@ public final class ModEventSubscriber {
 		//TODO clean up the order of these, move them all into categories. Yes my minecraft OCD is acting up
 		event.getRegistry().registerAll(
 				setup(katharianStone = new BlockKatharianStone(), "katharian_stone"),
-				setup(new BlockKathairisPortal(), "katharis_portal"),
+				setup(new BlockKathairisPortal(), "kathairis_portal"),
 				setup(new BlockKatharianDirt(), "katharian_dirt"),
 				setup(new BlockKatharianGrass(), "katharian_grass"),
 				//TODO turn this into a class?

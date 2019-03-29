@@ -21,7 +21,7 @@ import net.minecraft.world.dimension.DimensionType;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIS_PORTAL;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_PORTAL;
 
 public class TeleporterKathairis extends Teleporter {
 
@@ -89,8 +89,8 @@ public class TeleporterKathairis extends Teleporter {
 				for (int j1 = -128; j1 <= 128; ++j1) {
 					for (BlockPos blockpos1 = blockpos3.add(i1, this.world.getActualHeight() - 1 - blockpos3.getY(), j1); blockpos1.getY() >= 0; blockpos1 = blockpos2) {
 						blockpos2 = blockpos1.down();
-						if (this.world.getBlockState(blockpos1).getBlock() == KATHARIS_PORTAL) {
-							for (blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == KATHARIS_PORTAL; blockpos2 = blockpos2.down()) {
+						if (this.world.getBlockState(blockpos1).getBlock() == KATHAIRIS_PORTAL) {
+							for (blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == KATHAIRIS_PORTAL; blockpos2 = blockpos2.down()) {
 								blockpos1 = blockpos2;
 							}
 
@@ -112,7 +112,7 @@ public class TeleporterKathairis extends Teleporter {
 
 			double d5 = (double) blockpos.getX() + 0.5D;
 			double d7 = (double) blockpos.getZ() + 0.5D;
-			BlockPattern.PatternHelper blockpattern$patternhelper = KATHARIS_PORTAL.createPatternHelper(this.world, blockpos);
+			BlockPattern.PatternHelper blockpattern$patternhelper = KATHAIRIS_PORTAL.createPatternHelper(this.world, blockpos);
 			boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
 			double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
 			double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().y * (double) blockpattern$patternhelper.getHeight();
@@ -308,7 +308,7 @@ public class TeleporterKathairis extends Teleporter {
 			}
 		}
 
-		IBlockState iblockstate = KATHARIS_PORTAL.getDefaultState().with(BlockKathairisPortal.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
+		IBlockState iblockstate = KATHAIRIS_PORTAL.getDefaultState().with(BlockKathairisPortal.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
 
 		for (int k8 = 0; k8 < 2; ++k8) {
 			for (int j9 = 0; j9 < 3; ++j9) {

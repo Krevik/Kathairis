@@ -20,7 +20,7 @@ public class ItemMysticGem extends Item {
 	@Override
 	public EnumActionResult onItemUse(@Nonnull final ItemUseContext context) {
 		if (!context.getWorld().isRemote) {
-			if (ModBlocks.KATHARIS_PORTAL.trySpawnPortal(context.getWorld(), context.getPos().up())) {
+			if (ModBlocks.KATHAIRIS_PORTAL.trySpawnPortal(context.getWorld(), context.getPos().up())) {
 				ItemStack itemstack = context.getItem();
 				itemstack.shrink(1);
 			}

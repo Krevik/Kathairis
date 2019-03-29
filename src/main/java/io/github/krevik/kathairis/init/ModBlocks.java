@@ -14,7 +14,7 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 public final class ModBlocks {
 
 	public static final Block KATHARIAN_STONE = ModUtil._null();
-	public static final BlockKathairisPortal KATHARIS_PORTAL = ModUtil._null();
+	public static final BlockKathairisPortal KATHAIRIS_PORTAL = ModUtil._null();
 	public static final Block KATHARIAN_DIRT = ModUtil._null();
 	public static final Block KATHARIAN_GRASS = ModUtil._null();
 	public static final Block TITANIUM_BLOCK = ModUtil._null();
