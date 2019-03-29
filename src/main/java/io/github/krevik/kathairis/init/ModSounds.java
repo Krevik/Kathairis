@@ -37,8 +37,8 @@ public final class ModSounds {
 
 	public static final SoundEvent SCARY_FLOWER = _null();
 	public static final SoundEvent KATHAIRIS_MUSIC_DAY = _null();
-	public static final SoundEvent KATHAIRIS_MUSIC_NIGHT= _null();
-	public static final SoundEvent KATHAIRIS_MUSIC_XMAS= _null();
+	public static final SoundEvent KATHAIRIS_MUSIC_NIGHT = _null();
+	public static final SoundEvent KATHAIRIS_MUSIC_XMAS = _null();
 	public static final SoundEvent MUSIC_DISC_JAZZY = _null();
 	public static final SoundEvent MUSIC_DISC_8BIT = _null();
 	public static final SoundEvent CLOUDGLASS_BREAK = _null();
