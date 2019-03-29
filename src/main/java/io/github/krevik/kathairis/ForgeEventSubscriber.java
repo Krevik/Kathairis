@@ -59,7 +59,9 @@ public final class ForgeEventSubscriber {
 			final String blockstate = "" +
 					"{\n" +
 					"\t\"variants\": {\n" +
-					"\t\t\"\": { \"model\": \"kathairis:block/" + name + "\" }\n" +
+					"\t\t\"\": {\n" +
+					"\t\t\t\"model\": \"kathairis:block/" + name + "\"\n" +
+					"\t\t}\n" +
 					"\t}\n" +
 					"}\n";
 
