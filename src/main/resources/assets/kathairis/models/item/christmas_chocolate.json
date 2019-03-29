@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/christmas_chocolate"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/christmas_chocolate"
+	}
 }

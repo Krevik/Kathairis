@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/cotton_candy"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/cotton_candy"
+	}
 }

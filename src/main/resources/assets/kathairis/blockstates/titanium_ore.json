@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/titanium_ore" }
+		"": {
+			"model": "kathairis:block/titanium_ore"
+		}
 	}
 }

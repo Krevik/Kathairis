@@ -1,8 +1,8 @@
 {
-    "parent": "block/slab",
-    "textures": {
-        "bottom": "kathairis:block/shiny_planks",
-        "top": "kathairis:block/shiny_planks",
-        "side": "kathairis:block/shiny_planks"
-    }
+	"parent": "block/slab",
+	"textures": {
+		"bottom": "kathairis:block/shiny_planks",
+		"top": "kathairis:block/shiny_planks",
+		"side": "kathairis:block/shiny_planks"
+	}
 }

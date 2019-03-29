@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/cooked_bison_meat"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/cooked_bison_meat"
+	}
 }

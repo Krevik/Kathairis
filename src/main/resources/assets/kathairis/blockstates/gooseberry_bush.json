@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/gooseberry_bush" }
+		"": {
+			"model": "kathairis:block/gooseberry_bush"
+		}
 	}
 }

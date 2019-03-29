@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/frup_plant" }
+		"": {
+			"model": "kathairis:block/frup_plant"
+		}
 	}
 }

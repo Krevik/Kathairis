@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/jade_vines" }
+		"": {
+			"model": "kathairis:block/jade_vines"
+		}
 	}
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "kathairis:item/jar_with_swamp_gas"
-    }
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "kathairis:item/jar_with_swamp_gas"
+	}
 }

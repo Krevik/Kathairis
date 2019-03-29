@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/glowvines" }
+		"": {
+			"model": "kathairis:block/glowvines"
+		}
 	}
 }

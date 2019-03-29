@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/soul_wood_slab" }
+		"": {
+			"model": "kathairis:block/soul_wood_slab"
+		}
 	}
 }

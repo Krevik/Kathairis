@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/titanium_leggings"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/titanium_leggings"
+	}
 }

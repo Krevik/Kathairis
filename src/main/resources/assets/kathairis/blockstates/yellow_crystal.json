@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/yellow_crystal" }
+		"": {
+			"model": "kathairis:block/yellow_crystal"
+		}
 	}
 }

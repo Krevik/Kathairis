@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/yellow_cloud_condensed" }
+		"": {
+			"model": "kathairis:block/yellow_cloud_condensed"
+		}
 	}
 }

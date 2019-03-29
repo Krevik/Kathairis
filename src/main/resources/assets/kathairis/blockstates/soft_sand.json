@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/soft_sand" }
+		"": {
+			"model": "kathairis:block/soft_sand"
+		}
 	}
 }

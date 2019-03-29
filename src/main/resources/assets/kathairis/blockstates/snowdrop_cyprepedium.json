@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/snowdrop_cyprepedium" }
+		"": {
+			"model": "kathairis:block/snowdrop_cyprepedium"
+		}
 	}
 }

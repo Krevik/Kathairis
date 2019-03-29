@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/katharian_night_flower" }
+		"": {
+			"model": "kathairis:block/katharian_night_flower"
+		}
 	}
 }

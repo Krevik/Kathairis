@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "kathairis:item/cloud_dust_blue"
-    }
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "kathairis:item/cloud_dust_blue"
+	}
 }

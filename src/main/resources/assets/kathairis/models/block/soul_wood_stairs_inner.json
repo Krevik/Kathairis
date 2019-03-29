@@ -1,8 +1,8 @@
 {
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "kathairis:block/soul_planks",
-        "top": "kathairis:block/soul_planks",
-        "side": "kathairis:block/soul_planks"
-    }
+	"parent": "block/inner_stairs",
+	"textures": {
+		"bottom": "kathairis:block/soul_planks",
+		"top": "kathairis:block/soul_planks",
+		"side": "kathairis:block/soul_planks"
+	}
 }

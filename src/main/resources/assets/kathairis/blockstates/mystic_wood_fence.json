@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/mystic_wood_fence" }
+		"": {
+			"model": "kathairis:block/mystic_wood_fence"
+		}
 	}
 }

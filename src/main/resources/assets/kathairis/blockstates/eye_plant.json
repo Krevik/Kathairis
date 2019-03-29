@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/eye_plant" }
+		"": {
+			"model": "kathairis:block/eye_plant"
+		}
 	}
 }

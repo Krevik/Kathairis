@@ -1,6 +1,6 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "kathairis:block/shiny_rock"
-  }
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "kathairis:block/shiny_rock"
+	}
 }

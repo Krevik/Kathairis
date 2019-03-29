@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/soul_wood_trapdoor" }
+		"": {
+			"model": "kathairis:block/soul_wood_trapdoor"
+		}
 	}
 }

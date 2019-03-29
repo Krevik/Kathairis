@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/iron_gold_block" }
+		"": {
+			"model": "kathairis:block/iron_gold_block"
+		}
 	}
 }

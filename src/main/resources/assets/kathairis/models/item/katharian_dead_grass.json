@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/katharian_dead_grass"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/katharian_dead_grass"
+	}
 }

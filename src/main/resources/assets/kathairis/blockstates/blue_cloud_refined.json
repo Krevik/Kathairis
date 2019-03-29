@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/blue_cloud_refined" }
+		"": {
+			"model": "kathairis:block/blue_cloud_refined"
+		}
 	}
 }

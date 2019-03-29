@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/shiny_wood_stairs" }
+		"": {
+			"model": "kathairis:block/shiny_wood_stairs"
+		}
 	}
 }

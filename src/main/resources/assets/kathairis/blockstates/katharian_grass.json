@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/katharian_grass" }
+		"": {
+			"model": "kathairis:block/katharian_grass"
+		}
 	}
 }

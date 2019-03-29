@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/yellow_cloud_flower"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/yellow_cloud_flower"
+	}
 }

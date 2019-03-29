@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/mud_bricks_slab" }
+		"": {
+			"model": "kathairis:block/mud_bricks_slab"
+		}
 	}
 }

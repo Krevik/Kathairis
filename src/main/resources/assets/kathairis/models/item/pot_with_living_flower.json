@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/pot_with_living_flower"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/pot_with_living_flower"
+	}
 }

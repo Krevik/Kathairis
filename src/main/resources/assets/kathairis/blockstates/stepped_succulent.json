@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/stepped_succulent" }
+		"": {
+			"model": "kathairis:block/stepped_succulent"
+		}
 	}
 }

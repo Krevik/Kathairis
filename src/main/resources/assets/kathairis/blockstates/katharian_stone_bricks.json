@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/katharian_stone_bricks" }
+		"": {
+			"model": "kathairis:block/katharian_stone_bricks"
+		}
 	}
 }

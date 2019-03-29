@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/mystic_wood_doors" }
+		"": {
+			"model": "kathairis:block/mystic_wood_doors"
+		}
 	}
 }

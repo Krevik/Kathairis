@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/soul_planks" }
+		"": {
+			"model": "kathairis:block/soul_planks"
+		}
 	}
 }

@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/hardened_weathered_rock" }
+		"": {
+			"model": "kathairis:block/hardened_weathered_rock"
+		}
 	}
 }

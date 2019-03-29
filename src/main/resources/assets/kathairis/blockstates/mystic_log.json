@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/mystic_log" }
+		"": {
+			"model": "kathairis:block/mystic_log"
+		}
 	}
 }

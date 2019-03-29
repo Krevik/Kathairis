@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/katharian_sand" }
+		"": {
+			"model": "kathairis:block/katharian_sand"
+		}
 	}
 }

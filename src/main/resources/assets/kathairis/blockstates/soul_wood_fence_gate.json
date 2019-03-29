@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/soul_wood_fence_gate" }
+		"": {
+			"model": "kathairis:block/soul_wood_fence_gate"
+		}
 	}
 }

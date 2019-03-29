@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/soul_log_stripped" }
+		"": {
+			"model": "kathairis:block/soul_log_stripped"
+		}
 	}
 }

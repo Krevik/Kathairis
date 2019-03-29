@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/solis_crystals" }
+		"": {
+			"model": "kathairis:block/solis_crystals"
+		}
 	}
 }

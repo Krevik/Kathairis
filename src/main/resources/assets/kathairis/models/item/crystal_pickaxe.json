@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "kathairis:item/crystal_pickaxe"
-    }
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "kathairis:item/crystal_pickaxe"
+	}
 }

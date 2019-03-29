@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/magnethium" }
+		"": {
+			"model": "kathairis:block/magnethium"
+		}
 	}
 }

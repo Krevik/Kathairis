@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/bison_stars" }
+		"": {
+			"model": "kathairis:block/bison_stars"
+		}
 	}
 }

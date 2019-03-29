@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/fluo_fungi" }
+		"": {
+			"model": "kathairis:block/fluo_fungi"
+		}
 	}
 }

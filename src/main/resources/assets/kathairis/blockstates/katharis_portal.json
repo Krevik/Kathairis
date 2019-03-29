@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/katharis_portal" }
+		"": {
+			"model": "kathairis:block/katharis_portal"
+		}
 	}
 }

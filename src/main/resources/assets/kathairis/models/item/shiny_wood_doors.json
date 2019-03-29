@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/shiny_wood_doors"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/shiny_wood_doors"
+	}
 }

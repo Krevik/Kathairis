@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/katharian_succulent" }
+		"": {
+			"model": "kathairis:block/katharian_succulent"
+		}
 	}
 }

@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/elderwillow_log" }
+		"": {
+			"model": "kathairis:block/elderwillow_log"
+		}
 	}
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "kathairis:item/titanium_rod"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kathairis:item/titanium_rod"
+	}
 }

@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/layered_sand" }
+		"": {
+			"model": "kathairis:block/layered_sand"
+		}
 	}
 }

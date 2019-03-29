@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/forest_candle" }
+		"": {
+			"model": "kathairis:block/forest_candle"
+		}
 	}
 }

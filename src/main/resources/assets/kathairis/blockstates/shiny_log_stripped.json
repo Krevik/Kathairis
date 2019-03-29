@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/shiny_log_stripped" }
+		"": {
+			"model": "kathairis:block/shiny_log_stripped"
+		}
 	}
 }

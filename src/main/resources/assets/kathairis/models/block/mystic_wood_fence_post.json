@@ -1,6 +1,6 @@
 {
-    "parent": "block/fence_post",
-    "textures": {
-        "texture": "kathairis:block/mystic_planks"
-    }
+	"parent": "block/fence_post",
+	"textures": {
+		"texture": "kathairis:block/mystic_planks"
+	}
 }

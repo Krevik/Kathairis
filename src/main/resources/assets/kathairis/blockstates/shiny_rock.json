@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/shiny_rock" }
+		"": {
+			"model": "kathairis:block/shiny_rock"
+		}
 	}
 }

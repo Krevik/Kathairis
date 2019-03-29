@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/weathered_rock_stairs" }
+		"": {
+			"model": "kathairis:block/weathered_rock_stairs"
+		}
 	}
 }

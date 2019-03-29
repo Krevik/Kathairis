@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"": { "model": "kathairis:block/elderwillow_leaves" }
+		"": {
+			"model": "kathairis:block/elderwillow_leaves"
+		}
 	}
 }

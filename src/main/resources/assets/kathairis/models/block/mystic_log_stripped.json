@@ -1,7 +1,7 @@
 {
-    "parent": "block/cube_column",
-    "textures": {
-        "end": "kathairis:block/mystic_log_stripped_top",
-        "side": "kathairis:block/mystic_log_stripped"
-    }
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "kathairis:block/mystic_log_stripped_top",
+		"side": "kathairis:block/mystic_log_stripped"
+	}
 }
