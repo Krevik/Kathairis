@@ -59,20 +59,25 @@ import io.github.krevik.kathairis.item.ItemKathairisShovel;
 import io.github.krevik.kathairis.item.ItemKathairisSword;
 import io.github.krevik.kathairis.item.ItemMagicBeans;
 import io.github.krevik.kathairis.item.ItemMysticGem;
+import io.github.krevik.kathairis.util.ModUtil;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
+import static io.github.krevik.kathairis.init.ModItemGroups.BUILDING_BLOCKS;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static net.minecraft.inventory.EntityEquipmentSlot.CHEST;
 import static net.minecraft.inventory.EntityEquipmentSlot.FEET;
@@ -88,11 +93,12 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
  * @author Cadiboo
  */
 @EventBusSubscriber(modid = MOD_ID, bus = MOD)
-public final class EventSubscriber {
+public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(
+		final IForgeRegistry<Item> registry = event.getRegistry();
+		registry.registerAll(
 				setup(new ItemMysticGem(), "mystic_gem"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS)), "titanium_ingot"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS)), "titanium_rod"),
@@ -176,6 +182,10 @@ public final class EventSubscriber {
 				setup(new ItemFrup(3, 0.4f, ModBlocks.FRUP_PLANT), "frup"),
 				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans")
 		);
+
+		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
+			registry.register(setup(new ItemBlock(block, new Item.Properties().group(BUILDING_BLOCKS)), block.getRegistryName()));
+		}
 
 	}
 
@@ -381,7 +391,6 @@ public final class EventSubscriber {
 
 		);
 
-
 	}
 
 	private static SoundEvent setupSound(@Nonnull final String... nameParts) {
@@ -391,7 +400,11 @@ public final class EventSubscriber {
 	}
 
 	public static <T extends IForgeRegistryEntry> T setup(final T entry, final String name) {
-		entry.setRegistryName(new ResourceLocation(MOD_ID, name));
+		return setup(entry, new ResourceLocation(MOD_ID, name));
+	}
+
+	public static <T extends IForgeRegistryEntry> T setup(final T entry, final ResourceLocation registryName) {
+		entry.setRegistryName(registryName);
 		return entry;
 	}
 
