@@ -59,15 +59,19 @@ import io.github.krevik.kathairis.item.ItemKathairisShovel;
 import io.github.krevik.kathairis.item.ItemKathairisSword;
 import io.github.krevik.kathairis.item.ItemMagicBeans;
 import io.github.krevik.kathairis.item.ItemMysticGem;
+import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import javax.annotation.Nonnull;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static net.minecraft.inventory.EntityEquipmentSlot.CHEST;
@@ -319,6 +323,71 @@ public final class EventSubscriber {
 				setup(new BlockKatharianLeaves(), "elderwillow_leaves")
 		);
 
+	}
+
+	@SubscribeEvent
+	public static void onRegisterSounds(final RegistryEvent.Register<SoundEvent> event) {
+
+		event.getRegistry().registerAll(
+				setupSound("mob", "bird"),
+
+				setupSound("mob", "howler", "living"),
+				setupSound("mob", "howler", "hurt"),
+				setupSound("mob", "howler", "dead"),
+
+				setupSound("mob", "jellyfish", "living"),
+				setupSound("mob", "jellyfish", "hurt"),
+				setupSound("mob", "jellyfish", "dead"),
+
+				setupSound("mob", "turtle", "dead"),
+
+				setupSound("mob", "bison", "living"),
+				setupSound("mob", "bison", "hurt"),
+				setupSound("mob", "bison", "dead"),
+
+				setupSound("mob", "ghost", "living"),
+				setupSound("mob", "ghost", "attack"),
+				setupSound("mob", "ghost", "dead"),
+
+				setupSound("mob", "death", "living"),
+
+				setupSound("mob", "camel", "ambient"),
+				setupSound("mob", "camel", "breath"),
+				setupSound("mob", "camel", "hurt"),
+				setupSound("mob", "camel", "dead"),
+
+				setupSound("mob", "oldman", "ambient"),
+
+				setupSound("mob", "skyray", "ambient"),
+				setupSound("mob", "skyray", "hurt"),
+
+				//
+
+				setupSound("scary", "flower"),
+
+				//Hardcoding "kathairis" because its referring to the dimension not the mod
+				setupSound("kathairis", "music", "day"),
+				setupSound("kathairis", "music", "night"),
+				setupSound("kathairis", "music", "xmas"),
+
+				setupSound("music_disc", "jazzy"),
+				setupSound("music_disc", "8bit"),
+
+				setupSound("cloudglass", "break"),
+
+				setupSound("pickaxe", "turn"),
+
+				setupSound("sandstorm")
+
+		);
+
+
+	}
+
+	private static SoundEvent setupSound(@Nonnull final String... nameParts) {
+		final ResourceLocation name = new ResourceLocation(MOD_ID, Strings.join(nameParts, "."));
+		final String registryName = Strings.join(nameParts, "_");
+		return setup(new SoundEvent(name), registryName);
 	}
 
 	public static <T extends IForgeRegistryEntry> T setup(final T entry, final String name) {

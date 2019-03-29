@@ -1,13 +1,10 @@
 package io.github.krevik.kathairis.init;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
+import static io.github.krevik.kathairis.util.ModUtil._null;
 
 /**
  * @author Cadiboo
@@ -15,64 +12,39 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 @ObjectHolder(MOD_ID)
 public final class ModSounds {
 
-	public static SoundHelper BIRD = new SoundHelper("bird", "bird");
-	public static SoundHelper HOWLER_LIVING = new SoundHelper("howler", "living");
-	public static SoundHelper HOWLER_DEAD = new SoundHelper("howler", "dead");
-	public static SoundHelper HOWLER_HURT = new SoundHelper("howler", "hurt");
-	public static SoundHelper JELLYFISH_LIVING = new SoundHelper("jellyfish", "living");
-	public static SoundHelper JELLYFISH_DEAD = new SoundHelper("jellyfish", "dead");
-	public static SoundHelper JELLYFISH_HURT = new SoundHelper("jellyfish", "hurt");
-	public static SoundHelper TURTLE_DEAD = new SoundHelper("turtle", "dead");
-	public static SoundHelper BISON_DEAD = new SoundHelper("bison", "dead");
-	public static SoundHelper BISON_HURT = new SoundHelper("bison", "hurt");
-	public static SoundHelper BISON_LIVING = new SoundHelper("bison", "living");
-	public static SoundEvent KATHAIRIS_MUSIC_DAY = new SoundHelper("music.day");
-	public static SoundEvent KATHAIRIS_MUSIC_NIGHT = new SoundHelper("music.night");
-	public static SoundHelper GHOST_LIVING = new SoundHelper("ghost", "living");
-	public static SoundHelper GHOST_ATTACK = new SoundHelper("ghost", "attack");
-	public static SoundHelper GHOST_DEAD = new SoundHelper("ghost", "dead");
-	public static SoundHelper DEATH_LIVING = new SoundHelper("death", "living");
-	public static SoundHelper SCARY_FLOWER = new SoundHelper("scary", "flower");
-	public static SoundHelper CAMEL_DEAD = new SoundHelper("camel", "dead");
-	public static SoundHelper CAMEL_HURT = new SoundHelper("camel", "hurt");
-	public static SoundHelper CAMEL_BREATH = new SoundHelper("camel", "breath");
-	public static SoundHelper CAMEL_AMBIENT = new SoundHelper("camel", "ambient");
-	public static SoundHelper OLDMAN_AMBIENT = new SoundHelper("oldman", "ambient");
-	public static SoundHelper SKYRAY_AMBIENT = new SoundHelper("skyray", "ambient");
-	public static SoundHelper SKYRAY_HURT = new SoundHelper("skyray", "hurt");
-	public static SoundHelper CLOUD_GLASS_BREAK = new SoundHelper("cloudglass.break");
-	public static SoundHelper SANDSTORM = new SoundHelper("sandstorm");
-	public static SoundHelper PICKAXE_TURN = new SoundHelper("pickaxe_turn");
-	public static SoundEvent KATHAIRIS_MUSIC_CHRISTMAS = new SoundHelper("music.xmas");
-	public static SoundType CLOUD_GLASS = new SoundType(1.0F, 1.0F, CLOUD_GLASS_BREAK, SoundEvents.BLOCK_GLASS_STEP, SoundEvents.BLOCK_GLASS_PLACE, SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
-	SoundEvent MUSIC_DISC_JAZZY = new SoundHelper("music_disc.jazzy");
-	SoundEvent MUSIC_DISC_8BIT = new SoundHelper("music_disc.8bit");
+	public static final SoundEvent MOB_BIRD = _null();
+	public static final SoundEvent MOB_HOWLER_LIVING = _null();
+	public static final SoundEvent MOB_HOWLER_DEAD = _null();
+	public static final SoundEvent MOB_HOWLER_HURT = _null();
+	public static final SoundEvent MOB_JELLYFISH_LIVING = _null();
+	public static final SoundEvent MOB_JELLYFISH_DEAD = _null();
+	public static final SoundEvent MOB_JELLYFISH_HURT = _null();
+	public static final SoundEvent MOB_TURTLE_DEAD = _null();
+	public static final SoundEvent MOB_BISON_DEAD = _null();
+	public static final SoundEvent MOB_BISON_HURT = _null();
+	public static final SoundEvent MOB_BISON_LIVING = _null();
+	public static final SoundEvent MOB_GHOST_LIVING = _null();
+	public static final SoundEvent MOB_GHOST_ATTACK = _null();
+	public static final SoundEvent MOB_GHOST_DEAD = _null();
+	public static final SoundEvent MOB_DEATH_LIVING = _null();
+	public static final SoundEvent MOB_CAMEL_DEAD = _null();
+	public static final SoundEvent MOB_CAMEL_HURT = _null();
+	public static final SoundEvent MOB_CAMEL_BREATH = _null();
+	public static final SoundEvent MOB_CAMEL_AMBIENT = _null();
+	public static final SoundEvent MOB_OLDMAN_AMBIENT = _null();
+	public static final SoundEvent MOB_SKYRAY_AMBIENT = _null();
+	public static final SoundEvent MOB_SKYRAY_HURT = _null();
 
-	private static final class SoundHelper extends SoundHandlerBase {
-
-		public SoundHelper(String mob, String subset) {
-			super("mob." + mob + "." + subset);
-			register();
-		}
-
-		public SoundHelper(String Name) {
-			super("kathairis." + Name);
-			register();
-		}
-
-	}
-
-	private static class SoundHandlerBase extends SoundEvent {
-
-		SoundHandlerBase(String name) {
-			super(new ResourceLocation(MOD_ID, name));
-			setRegistryName(MOD_ID, name);
-		}
-
-		public void register() {
-			GameRegistry.findRegistry(SoundEvent.class).register(this);
-		}
-
-	}
+	public static final SoundEvent SCARY_FLOWER = _null();
+	public static final SoundEvent KATHAIRIS_MUSIC_DAY = _null();
+	public static final SoundEvent KATHAIRIS_MUSIC_NIGHT= _null();
+	public static final SoundEvent KATHAIRIS_MUSIC_XMAS= _null();
+	public static final SoundEvent MUSIC_DISC_JAZZY = _null();
+	public static final SoundEvent MUSIC_DISC_8BIT = _null();
+	public static final SoundEvent CLOUDGLASS_BREAK = _null();
+	public static final SoundEvent PICKAXE_TURN = _null();
+	public static final SoundEvent SANDSTORM = _null();
+	//TODO
+//	public static final SoundEvent CLOUD_GLASS = _null();
 
 }
