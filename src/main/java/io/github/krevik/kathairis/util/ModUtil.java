@@ -13,7 +13,7 @@ public final class ModUtil {
 	 * @return null
 	 */
 	@Nonnull
-	public static <T extends Object> T _null() {
+	public static <T> T _null() {
 		return null;
 	}
 
