@@ -1,7 +1,7 @@
 package io.github.krevik.kathairis.block;
 
 import com.google.common.cache.LoadingCache;
-import io.github.krevik.kathairis.world.dimension.KathairisTeleportManager;
+import io.github.krevik.kathairis.world.dimension.TileEntityKathairisTeleportManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.SoundType;
@@ -31,6 +31,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_PORTAL;
 
+/**
+ * @author Krevik
+ */
 public class BlockKathairisPortal extends BlockPortal {
 
 	public static final EnumProperty<EnumFacing.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
@@ -210,9 +213,9 @@ public class BlockKathairisPortal extends BlockPortal {
 	public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn != null) {
 			if (entityIn instanceof EntityPlayerMP) {
-				KathairisTeleportManager.tele((EntityPlayerMP) entityIn);
+				TileEntityKathairisTeleportManager.tele((EntityPlayerMP) entityIn);
 			} else {
-				KathairisTeleportManager.teleEntity(entityIn);
+				TileEntityKathairisTeleportManager.teleEntity(entityIn);
 			}
 		}
            /* if(!worldIn.isRemote) {

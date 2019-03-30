@@ -9,6 +9,9 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 import java.util.Random;
 
+/**
+ * @author Krevik
+ */
 public class KatharianSwampSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig> {
 
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, IBlockState defaultBlock, IBlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {

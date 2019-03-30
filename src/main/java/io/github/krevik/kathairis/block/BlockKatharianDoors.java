@@ -7,6 +7,9 @@ import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.EnumFacing;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianDoors extends BlockDoor {
 
 	public BlockKatharianDoors(Material material, SoundType soundType, float hardnessAndResistance) {

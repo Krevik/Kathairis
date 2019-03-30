@@ -10,6 +10,9 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianOre extends Block {
 
 	private final int maxXp;

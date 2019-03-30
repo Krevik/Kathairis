@@ -44,6 +44,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianStairs extends BlockStairs implements IBucketPickupHandler, ILiquidContainer {
 
 	public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;

@@ -35,7 +35,10 @@ import static io.github.krevik.kathairis.init.ModBlocks.REVENUM_ORE;
 import static io.github.krevik.kathairis.init.ModBlocks.TITANIUM_ORE;
 import static io.github.krevik.kathairis.init.ModBlocks.VILYRIA;
 
-public final class BiomeKatharianForest extends BiomeKatharianBiomeBase {
+/**
+ * @author Krevik
+ */
+public class BiomeKatharianForest extends BiomeKatharianBiomeBase {
 
 	public static final SurfaceBuilderConfig KATHARIAN_GRASS_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(KATHARIAN_GRASS.getDefaultState(), KATHARIAN_DIRT.getDefaultState(), GRAVEL);
 

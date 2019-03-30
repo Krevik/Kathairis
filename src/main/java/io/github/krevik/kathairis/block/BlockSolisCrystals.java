@@ -22,6 +22,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class BlockSolisCrystals extends Block {
 
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;

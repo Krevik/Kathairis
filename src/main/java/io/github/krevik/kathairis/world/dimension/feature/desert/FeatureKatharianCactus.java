@@ -11,6 +11,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_SUCCULENT;
 
+/**
+ * @author Krevik
+ */
 public class FeatureKatharianCactus extends Feature<NoFeatureConfig> {
 
 	public FeatureKatharianCactus() {

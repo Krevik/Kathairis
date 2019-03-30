@@ -19,6 +19,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class ItemMagicBeans extends ItemSeedFood {
 
 	//TODO fix names

@@ -22,6 +22,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianWall extends BlockWall {
 
 	public static final BooleanProperty UP = BlockStateProperties.UP;

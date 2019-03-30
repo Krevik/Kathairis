@@ -26,6 +26,9 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * @author Krevik
+ */
 public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 
 	//TODO should this be in the itemstack? Items are singletons

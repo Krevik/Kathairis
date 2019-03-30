@@ -9,6 +9,9 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 
+/**
+ * @author Krevik
+ */
 public class FeatureDesertSandLayers extends Feature<NoFeatureConfig> {
 
 	@Override

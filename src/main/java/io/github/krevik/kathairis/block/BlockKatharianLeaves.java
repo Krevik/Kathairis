@@ -24,6 +24,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.SHINY_LOG;
 import static io.github.krevik.kathairis.init.ModBlocks.SOUL_LEAVES;
 import static io.github.krevik.kathairis.init.ModBlocks.SOUL_LOG;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianLeaves extends BlockLeaves {
 
 	public BlockKatharianLeaves() {

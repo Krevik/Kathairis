@@ -4,6 +4,9 @@ import io.github.krevik.kathairis.world.dimension.KatharianGenSettings;
 import net.minecraft.world.biome.provider.OverworldBiomeProviderSettings;
 import net.minecraft.world.storage.WorldInfo;
 
+/**
+ * @author Krevik
+ */
 public class KatharianBiomeProviderSettings extends OverworldBiomeProviderSettings {
 
 	private WorldInfo worldInfo;

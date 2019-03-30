@@ -10,6 +10,9 @@ import net.minecraft.util.EnumActionResult;
 
 import javax.annotation.Nonnull;
 
+/**
+ * @author Krevik
+ */
 public class ItemMysticGem extends Item {
 
 	public ItemMysticGem() {

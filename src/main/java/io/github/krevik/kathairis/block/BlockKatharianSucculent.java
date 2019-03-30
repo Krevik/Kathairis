@@ -18,6 +18,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_SUCCULENT;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianSucculent extends BlockKatharianPlant {
 
 	public BlockKatharianSucculent() {

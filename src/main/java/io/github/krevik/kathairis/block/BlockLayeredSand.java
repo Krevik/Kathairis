@@ -31,6 +31,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.LAYERED_SAND;
 
+/**
+ * @author Krevik
+ */
 public class BlockLayeredSand extends Block {
 
 	public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS_1_8;

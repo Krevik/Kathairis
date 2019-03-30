@@ -13,6 +13,9 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class ItemFungalDrug extends ItemKathairisFood {
 
 	public ItemFungalDrug(String Name, int healAmountIn, float saturation, boolean meat, ItemGroup group) {

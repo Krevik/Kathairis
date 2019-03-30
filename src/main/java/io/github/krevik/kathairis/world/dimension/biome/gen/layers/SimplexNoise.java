@@ -1,4 +1,4 @@
-package io.github.krevik.kathairis.world.dimension.biome.gen_layers;
+package io.github.krevik.kathairis.world.dimension.biome.gen.layers;
 
 /**
  * A speed-improved simplex noise algorithm for 2D in Java.

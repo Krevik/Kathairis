@@ -1,4 +1,4 @@
-package io.github.krevik.kathairis.world.dimension.biome.gen_layers;
+package io.github.krevik.kathairis.world.dimension.biome.gen.layers;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.util.registry.IRegistry;
@@ -10,6 +10,9 @@ import net.minecraftforge.common.BiomeManager;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
+/**
+ * @author Krevik
+ */
 public class GenLayerKatharianBiome implements IC0Transformer {
 
 	private final OverworldGenSettings settings;

@@ -27,6 +27,9 @@
 //
 //import java.util.function.LongFunction;
 //
+///**
+// * @author Krevik
+// */
 //public class KatharianLayerUtil {
 //
 //	protected static final int WARM_OCEAN = IRegistry.BIOME.getId(Biomes.WARM_OCEAN);

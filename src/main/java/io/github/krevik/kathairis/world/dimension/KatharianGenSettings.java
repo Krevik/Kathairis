@@ -2,6 +2,9 @@ package io.github.krevik.kathairis.world.dimension;
 
 import net.minecraft.world.gen.OverworldGenSettings;
 
+/**
+ * @author Krevik
+ */
 public class KatharianGenSettings extends OverworldGenSettings {
 
 	private final int field_202212_j = 4;

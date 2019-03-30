@@ -14,6 +14,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 
+/**
+ * @author Krevik
+ */
 public class FeaturePlainFields extends Feature<NoFeatureConfig> {
 
 	@Override

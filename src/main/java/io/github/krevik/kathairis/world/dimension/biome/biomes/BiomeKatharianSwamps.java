@@ -22,12 +22,15 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_FUNGI;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 import static io.github.krevik.kathairis.init.ModBlocks.MUD_BLOCK;
 
+/**
+ * @author Krevik
+ */
 public class BiomeKatharianSwamps extends BiomeKatharianBiomeBase {
 
 	public static final SurfaceBuilderConfig GRASS_WATER_SURFACE = new SurfaceBuilderConfig(KATHARIAN_GRASS.getDefaultState(), KATHARIAN_DIRT.getDefaultState(), Blocks.WATER.getDefaultState());
 
 	public BiomeKatharianSwamps() {
-		super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder(KatharianFeatureList.KATHARIAN_SWAMP_SURFACE_BUILDER, GRASS_WATER_SURFACE)).precipitation(RainType.RAIN).category(Category.SWAMP).depth(-0.1F).scale(0.0000005F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent(null));
+		super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(KatharianFeatureList.KATHARIAN_SWAMP_SURFACE_BUILDER, GRASS_WATER_SURFACE)).precipitation(RainType.RAIN).category(Category.SWAMP).depth(-0.1F).scale(0.0000005F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent(null));
 		//this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, createCompositeFeature(KatharianFeatureList.SWAMP_FLATENER, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(6, 0, 0, 128)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.LAKES, new LakesConfig(MUD_BLOCK), LAVA_LAKE, new LakeChanceConfig(25)));
 		this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(Feature.LAKES, new LakesConfig(Blocks.CLAY), LAVA_LAKE, new LakeChanceConfig(25)));

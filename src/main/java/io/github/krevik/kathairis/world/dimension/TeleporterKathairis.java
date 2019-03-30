@@ -23,6 +23,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_PORTAL;
 
+/**
+ * @author Krevik
+ */
 public class TeleporterKathairis extends Teleporter {
 
 	protected final WorldServer world;

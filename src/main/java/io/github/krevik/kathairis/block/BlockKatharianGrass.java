@@ -23,6 +23,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Calendar;
 import java.util.Random;
 
+/**
+ * @author Krevik
+ */
 //TODO cleanup
 public class BlockKatharianGrass extends Block implements IGrowable {
 

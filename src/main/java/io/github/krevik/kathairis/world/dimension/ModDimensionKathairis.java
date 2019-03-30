@@ -9,6 +9,9 @@
 //import javax.annotation.Nonnull;
 //import java.util.function.Function;
 //
+///**
+// * @author Krevik
+// */
 //public class ModDimensionKathairis extends ModDimension {
 //
 //    public ModDimensionKathairis(){

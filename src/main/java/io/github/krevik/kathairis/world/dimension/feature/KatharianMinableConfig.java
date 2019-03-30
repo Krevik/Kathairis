@@ -9,6 +9,9 @@ import java.util.function.Predicate;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_STONE;
 
+/**
+ * @author Krevik
+ */
 public class KatharianMinableConfig implements IFeatureConfig {
 
 	public static final Predicate<IBlockState> IS_ROCK = (p_210462_0_) -> {

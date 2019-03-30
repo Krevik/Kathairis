@@ -4,6 +4,9 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 
+/**
+ * @author Krevik
+ */
 public class ItemButterfly extends Item {
 
 	public ItemButterfly(ItemGroup group, EnumRarity rarity) {

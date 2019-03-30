@@ -6,6 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
+/**
+ * @author Krevik
+ */
 public class ItemButterflyCatcher extends Item {
 
 	public ItemButterflyCatcher(ItemGroup group) {

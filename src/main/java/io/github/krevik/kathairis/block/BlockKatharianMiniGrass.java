@@ -17,6 +17,9 @@ import javax.annotation.Nullable;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_MINI_GRASS;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianMiniGrass extends BlockKatharianPlant {
 
 	protected static final AxisAlignedBB MYSTICMINIGRASS_AABB = new AxisAlignedBB(0, 0.0D, 0, 1D, 0.4D, 1D);

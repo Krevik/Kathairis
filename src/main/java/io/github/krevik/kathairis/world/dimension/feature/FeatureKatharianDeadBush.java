@@ -13,6 +13,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DEAD_GRASS;
 
+/**
+ * @author Krevik
+ */
 public class FeatureKatharianDeadBush extends Feature<NoFeatureConfig> {
 
 	@Override

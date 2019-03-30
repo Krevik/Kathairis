@@ -11,6 +11,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianStone extends Block {
 
 	public BlockKatharianStone() {

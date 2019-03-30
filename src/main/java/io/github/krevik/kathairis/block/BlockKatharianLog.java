@@ -12,6 +12,9 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianLog extends BlockLog {
 
 	public static final EnumProperty<EnumFacing.Axis> AXIS = BlockStateProperties.AXIS;

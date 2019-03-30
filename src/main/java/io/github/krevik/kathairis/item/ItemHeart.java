@@ -11,6 +11,9 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class ItemHeart extends ItemKathairisFood {
 
 	public ItemHeart(int healAmountIn, float saturation, boolean meat, ItemGroup group) {

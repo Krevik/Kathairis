@@ -11,6 +11,9 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class ItemNectarBowl extends ItemKathairisFood {
 
 	public ItemNectarBowl(int healAmountIn, float saturation, boolean meat, ItemGroup group) {

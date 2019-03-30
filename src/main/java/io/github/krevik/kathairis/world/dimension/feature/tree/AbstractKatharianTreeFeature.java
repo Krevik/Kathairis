@@ -12,6 +12,9 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 
+/**
+ * @author Krevik
+ */
 public abstract class AbstractKatharianTreeFeature extends AbstractTreeFeature<NoFeatureConfig> {
 
 	public AbstractKatharianTreeFeature(boolean notify) {

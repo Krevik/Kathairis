@@ -7,6 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
+/**
+ * @author Krevik
+ */
 public class ItemMagnethiumSword extends ItemKathairisSword {
 
 	public ItemMagnethiumSword(IItemTier tier, ItemGroup group) {

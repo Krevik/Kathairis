@@ -10,6 +10,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**
+ * @author Krevik
+ */
 public class BiomeKatharianBiomeBase extends Biome {
 
 	public Color baseGrassColor = new Color(66, 244, 238);

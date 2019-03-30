@@ -26,6 +26,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.FLUO_FUNGI;
 
+/**
+ * @author Krevik
+ */
 public class BlockFluoFungi extends BlockKatharianPlant {
 
 	public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;

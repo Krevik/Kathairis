@@ -24,6 +24,9 @@ import java.util.function.Supplier;
 
 import static io.github.krevik.kathairis.init.ModItems.GLASS_JAR;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianCloud extends Block {
 
 	private Supplier<Item> pickedItem;

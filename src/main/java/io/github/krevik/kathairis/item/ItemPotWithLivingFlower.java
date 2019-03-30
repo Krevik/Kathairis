@@ -7,6 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.EnumActionResult;
 
+/**
+ * @author Krevik
+ */
 public class ItemPotWithLivingFlower extends Item {
 
 	public ItemPotWithLivingFlower(ItemGroup group) {

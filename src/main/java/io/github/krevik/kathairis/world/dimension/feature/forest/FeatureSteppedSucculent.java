@@ -11,6 +11,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.STEPPED_SUCCULENT;
 
+/**
+ * @author Krevik
+ */
 public class FeatureSteppedSucculent extends Feature<NoFeatureConfig> {
 
 	public FeatureSteppedSucculent() {

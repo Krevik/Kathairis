@@ -14,6 +14,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+/**
+ * @author Krevik
+ */
 public class BlockCondensedCloud extends Block {
 
 	public BlockCondensedCloud() {

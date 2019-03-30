@@ -24,6 +24,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
+/**
+ * @author Krevik
+ */
 public class BlockSoftSand extends Block {
 
 	public static boolean fallInstantly = false;

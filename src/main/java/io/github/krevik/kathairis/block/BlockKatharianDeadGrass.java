@@ -13,6 +13,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.WEATHERED_ROCK;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianDeadGrass extends BlockKatharianPlant {
 
 	public BlockKatharianDeadGrass() {

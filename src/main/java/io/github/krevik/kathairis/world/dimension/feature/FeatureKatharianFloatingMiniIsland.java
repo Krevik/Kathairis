@@ -20,6 +20,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_MINI_GRASS;
 import static io.github.krevik.kathairis.init.ModBlocks.YELLOW_CLOUD;
 
+/**
+ * @author Krevik
+ */
 public class FeatureKatharianFloatingMiniIsland extends Feature<NoFeatureConfig> {
 
 	@Override

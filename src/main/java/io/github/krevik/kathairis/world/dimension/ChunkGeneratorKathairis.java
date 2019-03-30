@@ -28,6 +28,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+/**
+ * @author Krevik
+ */
 public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGenSettings> {
 
 	private static final Logger LOGGER = LogManager.getLogger();

@@ -9,6 +9,10 @@ import net.minecraftforge.client.IRenderHandler;
 import javax.annotation.Nullable;
 
 //FIXME TODO
+
+/**
+ * @author Krevik
+ */
 public class DimensionKathairis extends OverworldDimension {
 //FIXME TODO
 //    public DimensionKathairis() {

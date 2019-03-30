@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.util;
 
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.ObjectHolder;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -16,7 +17,7 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 public final class ModUtil {
 
 	/**
-	 * Suppresses IDE warnings and suggestions about blocks being null
+	 * Suppresses IDE warnings and suggestions about objects that are going to be filled by @{@link ObjectHolder} being null
 	 *
 	 * @return null
 	 */

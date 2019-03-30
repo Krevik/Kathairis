@@ -4,6 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianNightFlower extends BlockKatharianPlant {
 
 	public BlockKatharianNightFlower() {

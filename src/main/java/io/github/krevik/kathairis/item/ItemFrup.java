@@ -15,6 +15,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
+/**
+ * @author Krevik
+ */
 public class ItemFrup extends ItemSeedFood {
 
 	public final IBlockState state;

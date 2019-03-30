@@ -4,6 +4,9 @@ import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
+/**
+ * @author Cadiboo
+ */
 public class BlockKatharianTrapdoor extends BlockTrapDoor {
 
 	public BlockKatharianTrapdoor(Material material, SoundType soundType, float hardnessAndResistance) {

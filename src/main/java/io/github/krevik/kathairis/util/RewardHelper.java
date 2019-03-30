@@ -21,6 +21,9 @@ import static io.github.krevik.kathairis.init.ModItems.MYSTIC_GEM;
 import static io.github.krevik.kathairis.init.ModItems.REVENUM_INGOT;
 import static io.github.krevik.kathairis.init.ModItems.TITANIUM_INGOT;
 
+/**
+ * @author Krevik
+ */
 public class RewardHelper {
 
 	private static ArrayList<ItemStack> floatingMiniIslandRewardsList = new ArrayList<>();

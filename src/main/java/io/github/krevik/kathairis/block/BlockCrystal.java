@@ -33,6 +33,9 @@ import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_BLUE;
 import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_VIOLET;
 import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_YELLOW;
 
+/**
+ * @author Krevik
+ */
 public class BlockCrystal extends Block {
 
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;

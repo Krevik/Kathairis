@@ -27,6 +27,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianFence extends BlockFence implements IBucketPickupHandler, ILiquidContainer {
 
 	private final VoxelShape[] field_199609_B;

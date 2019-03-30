@@ -28,6 +28,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 import static io.github.krevik.kathairis.init.ModItems.GOOSEBERRIES;
 
+/**
+ * @author Krevik
+ */
 public class BlockGooseberry extends Block {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);

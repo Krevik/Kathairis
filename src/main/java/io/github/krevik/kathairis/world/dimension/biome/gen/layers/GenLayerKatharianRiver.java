@@ -5,6 +5,9 @@
 //import net.minecraft.world.gen.IContext;
 //import net.minecraft.world.gen.layer.traits.ICastleTransformer;
 //
+///**
+// * @author Krevik
+// */
 //public enum GenLayerKatharianRiver implements ICastleTransformer {
 //	INSTANCE;
 //

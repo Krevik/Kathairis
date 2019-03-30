@@ -18,6 +18,9 @@
 //import java.util.Set;
 //
 ////TODO FIXME
+///**
+// * @author Krevik
+// */
 //public class KatharianBiomeProvider extends OverworldBiomeProvider {
 //
 //	private final BiomeCache cache = new BiomeCache(this);

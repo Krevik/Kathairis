@@ -23,6 +23,9 @@ import javax.annotation.Nonnull;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianPlant extends Block implements net.minecraftforge.common.IPlantable {
 
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);

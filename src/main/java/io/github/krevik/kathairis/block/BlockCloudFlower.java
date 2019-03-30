@@ -5,6 +5,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
+/**
+ * @author Krevik
+ */
 public class BlockCloudFlower extends BlockKatharianPlant {
 
 	public BlockCloudFlower() {

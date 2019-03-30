@@ -20,6 +20,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 import static io.github.krevik.kathairis.init.ModBlocks.MYSTIC_LEAVES;
 import static io.github.krevik.kathairis.init.ModBlocks.MYSTIC_LOG;
 
+/**
+ * @author Krevik
+ */
 public class KatharianTreeFeature extends AbstractKatharianTreeFeature {
 
 	/**

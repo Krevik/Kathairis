@@ -6,6 +6,9 @@ import net.minecraft.item.ItemTool;
 
 import java.util.Set;
 
+/**
+ * @author Krevik
+ */
 public class ItemKathairisTool extends ItemTool {
 
 	public ItemKathairisTool(IItemTier tier, Set<Block> effectiveBlocksIn, Properties properties) {

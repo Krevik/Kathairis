@@ -13,6 +13,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.MUD_BLOCK;
 
+/**
+ * @author Krevik
+ */
 public class FeatureBasicSwamp extends Feature<NoFeatureConfig> {
 
 	@Override

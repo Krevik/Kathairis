@@ -30,6 +30,9 @@ import net.minecraft.world.IWorld;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianSlab extends BlockSlab implements IBucketPickupHandler, ILiquidContainer {
 
 	public static final EnumProperty<SlabType> TYPE = BlockStateProperties.SLAB_TYPE;

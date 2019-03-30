@@ -14,6 +14,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.ROCKTUS;
 
+/**
+ * @author Krevik
+ */
 public class FeatureKatharianRocktus extends Feature<NoFeatureConfig> {
 
 	@Override

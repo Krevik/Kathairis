@@ -93,6 +93,9 @@ import static net.minecraft.init.Blocks.STONE_BUTTON;
 import static net.minecraft.init.Blocks.STONE_PRESSURE_PLATE;
 import static net.minecraft.init.Blocks.STONE_SLAB;
 
+/**
+ * @author Krevik
+ */
 public class ItemKathairisPickaxe extends ItemKathairisTool {
 
 	//TODO COPY SET EFFECTIVE_ON + ADD CRYSTAL PICKAXE OPTION

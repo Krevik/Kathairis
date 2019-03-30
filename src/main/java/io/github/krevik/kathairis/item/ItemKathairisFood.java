@@ -3,6 +3,9 @@ package io.github.krevik.kathairis.item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemGroup;
 
+/**
+ * @author Cadiboo
+ */
 public class ItemKathairisFood extends ItemFood {
 
 	//TODO COMPLETE

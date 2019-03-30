@@ -25,6 +25,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.REVENUM_ORE;
 import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.TITANIUM_ORE;
 
+/**
+ * @author Krevik
+ */
 public class BiomeKatharianDesert extends BiomeKatharianBiomeBase {
 
 	public static final SurfaceBuilderConfig SAND_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(KATHARIAN_SAND.getDefaultState(), KATHARIAN_SANDSTONE.getDefaultState(), SOFT_SAND.getDefaultState());

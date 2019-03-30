@@ -95,6 +95,9 @@ import static net.minecraft.init.Blocks.STRIPPED_OAK_WOOD;
 import static net.minecraft.init.Blocks.STRIPPED_SPRUCE_LOG;
 import static net.minecraft.init.Blocks.STRIPPED_SPRUCE_WOOD;
 
+/**
+ * @author Krevik
+ */
 public class ItemKathairisAxe extends ItemKathairisTool {
 
 	protected static final Map<Block, Block> BLOCK_STRIPPING_MAP = (new ImmutableMap.Builder<Block, Block>())

@@ -21,6 +21,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_SANDSTONE;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_STONE;
 import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
 
+/**
+ * @author Krevik
+ */
 public class KatharianWorldCaveCarver extends WorldCarver<ProbabilityConfig> {
 
 	public KatharianWorldCaveCarver() {

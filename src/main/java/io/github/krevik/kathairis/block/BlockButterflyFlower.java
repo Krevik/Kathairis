@@ -21,6 +21,9 @@ import java.util.Random;
 import static io.github.krevik.kathairis.init.ModBlocks.BUTTERFLY_FLOWER;
 import static io.github.krevik.kathairis.init.ModItems.BUTTERFLY_FLOWER_NECTAR;
 
+/**
+ * @author Krevik
+ */
 public class BlockButterflyFlower extends BlockKatharianPlant {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);

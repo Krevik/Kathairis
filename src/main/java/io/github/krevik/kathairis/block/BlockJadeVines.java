@@ -26,6 +26,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.JADE_VINES;
 
+/**
+ * @author Krevik
+ */
 public class BlockJadeVines extends BlockKatharianPlant {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);

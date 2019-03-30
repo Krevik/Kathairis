@@ -15,6 +15,9 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class BlockMagnethium extends Block {
 
 	protected static final AxisAlignedBB ALMOST_FULL_BLOCK_AABB = new AxisAlignedBB(0.01D, 0.01D, 0.01D, 0.99D, 0.99D, 0.99D);

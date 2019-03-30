@@ -24,6 +24,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianFenceGate extends BlockFenceGate {
 
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;

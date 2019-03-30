@@ -25,6 +25,9 @@ import net.minecraft.world.World;
 
 import java.util.Map;
 
+/**
+ * @author Krevik
+ */
 public class ItemKathairisHoe extends ItemTiered {
 
 	//TODO Krevik wtf

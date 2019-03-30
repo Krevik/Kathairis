@@ -17,6 +17,9 @@ import net.minecraft.world.IWorld;
 
 import javax.annotation.Nonnull;
 
+/**
+ * @author Krevik
+ */
 public class ItemGooseberries extends ItemSeedFood {
 
 	private final IBlockState crop;

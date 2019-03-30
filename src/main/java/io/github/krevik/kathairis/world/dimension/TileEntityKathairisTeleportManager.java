@@ -6,7 +6,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
-public class KathairisTeleportManager extends TileEntity {
+/**
+ * @author Krevik
+ */
+//TODO FIXME Krevik wtf is this?
+public class TileEntityKathairisTeleportManager extends TileEntity {
 
 	private static final String S_PLAYER_X = "PlayerPrevX";
 	private static final String S_PLAYER_Y = "PlayerPrevY";
@@ -25,7 +29,8 @@ public class KathairisTeleportManager extends TileEntity {
 	private static int offsetX;
 	private static int offsetZ;
 
-	public KathairisTeleportManager() {
+	//FIXME
+	public TileEntityKathairisTeleportManager() {
 		super(null);
 	}
 

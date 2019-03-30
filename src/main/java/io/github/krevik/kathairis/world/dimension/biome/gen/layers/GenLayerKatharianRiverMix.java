@@ -9,6 +9,9 @@
 //import net.minecraft.world.gen.layer.traits.IAreaTransformer2;
 //import net.minecraft.world.gen.layer.traits.IDimOffset0Transformer;
 //
+///**
+// * @author Krevik
+// */
 //public enum GenLayerKatharianRiverMix implements IAreaTransformer2, IDimOffset0Transformer {
 //	INSTANCE;
 //

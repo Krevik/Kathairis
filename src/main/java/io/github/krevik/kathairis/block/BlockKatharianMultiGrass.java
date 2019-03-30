@@ -16,6 +16,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_MULTI_GRASS;
 
+/**
+ * @author Krevik
+ */
 public class BlockKatharianMultiGrass extends BlockKatharianPlant {
 
 	public BlockKatharianMultiGrass() {

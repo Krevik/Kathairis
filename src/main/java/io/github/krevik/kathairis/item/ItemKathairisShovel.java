@@ -61,6 +61,9 @@ import static net.minecraft.init.Blocks.SOUL_SAND;
 import static net.minecraft.init.Blocks.WHITE_CONCRETE_POWDER;
 import static net.minecraft.init.Blocks.YELLOW_CONCRETE_POWDER;
 
+/**
+ * @author Krevik
+ */
 public class ItemKathairisShovel extends ItemKathairisTool {
 
 	protected static final Map<Block, IBlockState> field_195955_e = Maps.newHashMap(ImmutableMap.of(GRASS_BLOCK, GRASS_PATH.getDefaultState()));

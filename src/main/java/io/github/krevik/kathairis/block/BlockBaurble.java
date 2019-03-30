@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 
 /**
- * @author Cadiboo
+ * @author Krevik
  */
 public class BlockBaurble extends Block {
 
