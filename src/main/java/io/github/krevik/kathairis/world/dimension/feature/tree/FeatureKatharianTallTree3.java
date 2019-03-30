@@ -14,7 +14,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
 import static io.github.krevik.kathairis.init.ModBlocks.SHINY_LEAVES;
 import static io.github.krevik.kathairis.init.ModBlocks.SHINY_LOG;
-
+/**
+ * @author Krevik
+ */
 public class FeatureKatharianTallTree3 extends AbstractKatharianTreeFeature {
 
 	public FeatureKatharianTallTree3() {

@@ -13,7 +13,9 @@ import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CLOUD;
 import static io.github.krevik.kathairis.init.ModBlocks.YELLOW_CLOUD;
-
+/**
+ * @author Krevik
+ */
 public class FeatureKatharianCloud extends Feature<NoFeatureConfig> {
 
 	@Override

@@ -17,7 +17,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CRYSTAL;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_STONE;
 import static io.github.krevik.kathairis.init.ModBlocks.VIOLET_CRYSTAL;
 import static io.github.krevik.kathairis.init.ModBlocks.YELLOW_CRYSTAL;
-
+/**
+ * @author Krevik
+ */
 public class FeatureCrystalChamber extends Feature<NoFeatureConfig> {
 
 	@Override

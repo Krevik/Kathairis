@@ -13,7 +13,9 @@ import java.util.Random;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.WEATHERED_ROCK;
-
+/**
+ * @author Krevik
+ */
 public class FeatureRockMushrooms extends Feature<NoFeatureConfig> {
 
 	@Override

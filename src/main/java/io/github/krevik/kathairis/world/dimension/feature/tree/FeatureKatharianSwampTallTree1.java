@@ -15,7 +15,9 @@ import static io.github.krevik.kathairis.init.ModBlocks.ELDERWILLOW_LEAVES;
 import static io.github.krevik.kathairis.init.ModBlocks.ELDERWILLOW_LOG;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
-
+/**
+ * @author Krevik
+ */
 public class FeatureKatharianSwampTallTree1 extends AbstractKatharianTreeFeature {
 
 	public FeatureKatharianSwampTallTree1() {
