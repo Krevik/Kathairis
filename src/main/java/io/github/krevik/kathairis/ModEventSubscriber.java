@@ -61,6 +61,7 @@ import io.github.krevik.kathairis.item.ItemMagicBeans;
 import io.github.krevik.kathairis.item.ItemMysticGem;
 import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
+import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -409,9 +410,15 @@ public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterBiomes(final RegistryEvent.Register<Biome> event) {
-//		event.getRegistry().registerAll(
-//				new BiomeKathairisBiomeBase(),
-//		);
+		event.getRegistry().registerAll(
+				setup(new BiomeKatharianRiver(),"katharian_river"),
+				setup(new BiomeKatharianDesert(),"katharian_desert"),
+				setup(new BiomeKatharianDesertEdge(),"katharian_desert_edge"),
+				setup(new BiomeKatharianSoftSandLakes(),"soft_sand_lakes"),
+				setup(new BiomeKatharianForest(),"katharian_forest"),
+				setup(new BiomeKatharianPlainFields(),"plain_fields"),
+				setup(new BiomeKatharianSwamps(),"katharian_swamp")
+		);
 	}
 
 	public static SoundEvent setupSound(@Nonnull final String... nameParts) {

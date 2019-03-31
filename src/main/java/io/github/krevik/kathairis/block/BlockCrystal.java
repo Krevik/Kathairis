@@ -50,6 +50,28 @@ public class BlockCrystal extends Block {
 		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
+	public static boolean isValidPosition1(IBlockState state, IWorldReaderBase worldIn, BlockPos pos) {
+		EnumFacing facing = state.get(FACING);
+		if(facing == EnumFacing.UP) return isValidGround1(worldIn.getBlockState(pos.down()));
+		else if(facing == EnumFacing.DOWN) return isValidGround1(worldIn.getBlockState(pos.up()));
+		else if(facing == EnumFacing.EAST) return isValidGround1(worldIn.getBlockState(pos.west()));
+		else if(facing == EnumFacing.WEST) return isValidGround1(worldIn.getBlockState(pos.east()));
+		else if(facing == EnumFacing.SOUTH) return isValidGround1(worldIn.getBlockState(pos.north()));
+		else if(facing == EnumFacing.NORTH) return isValidGround1(worldIn.getBlockState(pos.south()));
+		else{
+			return false;
+		}
+	}
+
+	public static boolean isValidGround1(IBlockState state){
+		boolean is=false;
+		Block groundBlock = state.getBlock();
+		if(groundBlock.isFullCube(state) && groundBlock.isTopSolid(state)){
+			is=true;
+		}
+		return is;
+	}
+
 	@Override
 	public IBlockState rotate(IBlockState state, Rotation rot) {
 		return state.with(FACING, rot.rotate(state.get(FACING)));
