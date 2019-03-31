@@ -28,7 +28,7 @@ public final class ModItems {
 	public static final Item IRON_GOLD_INGOT = ModUtil._null();
 	public static final Item TITANIUM_HELMET = ModUtil._null();
 	public static final Item TITANIUM_CHESTPLATE = ModUtil._null();
-	public static final Item TITANIUM_LEGGINS = ModUtil._null();
+	public static final Item TITANIUM_LEGGINGS = ModUtil._null();
 	public static final Item TITANIUM_BOOTS = ModUtil._null();
 	public static final Item TITANIUM_SWORD = ModUtil._null();
 	public static final Item TITANIUM_HOE = ModUtil._null();
@@ -37,7 +37,7 @@ public final class ModItems {
 	public static final Item TITANIUM_SHOVEL = ModUtil._null();
 	public static final Item REVENUM_HELMET = ModUtil._null();
 	public static final Item REVENUM_CHESTPLATE = ModUtil._null();
-	public static final Item REVENUM_LEGGINS = ModUtil._null();
+	public static final Item REVENUM_LEGGINGS = ModUtil._null();
 	public static final Item REVENUM_BOOTS = ModUtil._null();
 	public static final Item REVENUM_SWORD = ModUtil._null();
 	public static final Item REVENUM_HOE = ModUtil._null();
@@ -48,7 +48,7 @@ public final class ModItems {
 	public static final Item SOLIS_CRYSTAL = ModUtil._null();
 	public static final Item MYSTIC_HELMET = ModUtil._null();
 	public static final Item MYSTIC_CHESTPLATE = ModUtil._null();
-	public static final Item MYSTIC_LEGGINS = ModUtil._null();
+	public static final Item MYSTIC_LEGGINGS = ModUtil._null();
 	public static final Item MYSTIC_BOOTS = ModUtil._null();
 	public static final Item MYSTIC_SWORD = ModUtil._null();
 	public static final Item MYSTIC_HOE = ModUtil._null();
