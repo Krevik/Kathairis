@@ -32,6 +32,10 @@ public final class ForgeEventSubscriber {
 	@SubscribeEvent
 	public static void writeAssets(final ModelBakeEvent ignored) {
 
+		if (true) {
+			return;
+		}
+
 		if (!ModUtil.isDeveloperEnvironment()) {
 			return;
 		}
