@@ -187,7 +187,7 @@ public final class ModEventSubscriber {
 
 			//TODO find better way, maybe make all blocks provide their creative tab and if they have an itemblock?
 			if (block == ModBlocks.MAGIC_BEANS || block == ModBlocks.KATHAIRIS_PORTAL) {
-				return;
+				continue;
 			}
 			registry.register(setup(new ItemBlock(block, new Item.Properties().group(BUILDING_BLOCKS)), block.getRegistryName()));
 		}
