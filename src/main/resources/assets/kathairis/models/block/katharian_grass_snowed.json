@@ -1,9 +1,0 @@
-{
-	"parent": "block/cube_bottom_top",
-	"textures": {
-		"particle": "kathairis:block/katharian_dirt",
-		"bottom": "kathairis:block/katharian_dirt",
-		"top": "kathairis:block/katharian_grass_top_snowed",
-		"side": "kathairis:block/katharian_grass_side_snowed"
-	}
-}

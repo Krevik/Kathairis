@@ -8,12 +8,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
 
 /**
  * @author Krevik
  */
-public class BlockSnowdropCyprepedium extends BlockKatharianPlant {
+public class BlockSnowdropCyprepedium extends BlockKathairisPlant {
 
 	public BlockSnowdropCyprepedium() {
 		super();
@@ -26,8 +26,8 @@ public class BlockSnowdropCyprepedium extends BlockKatharianPlant {
 		if (!worldIn.isRemote) {
 			for (int c = 0; c <= 1 + rand.nextInt(5); c++) {
 				BlockPos tmp = new BlockPos(pos.getX() - 6 + rand.nextInt(12), pos.getY() - 3 + rand.nextInt(6), pos.getZ() - 6 + rand.nextInt(12));
-				if (worldIn.getBlockState(tmp).getBlock() == KATHARIAN_GRASS) {
-					worldIn.setBlockState(tmp, KATHARIAN_GRASS.getDefaultState().with(BlockKatharianGrass.SNOWY, Boolean.valueOf(true)), 2);
+				if (worldIn.getBlockState(tmp).getBlock() == KATHAIRIS_GRASS) {
+					worldIn.setBlockState(tmp, KATHAIRIS_GRASS.getDefaultState().with(BlockKathairisGrass.SNOWY, Boolean.valueOf(true)), 2);
 				}
 				if (worldIn.getBlockState(tmp) == Blocks.GRASS.getDefaultState()) {
 					worldIn.setBlockState(tmp, Blocks.GRASS.getDefaultState().with(BlockGrass.SNOWY, Boolean.valueOf(true)));

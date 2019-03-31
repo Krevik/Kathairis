@@ -14,8 +14,8 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReaderBase;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
 import static io.github.krevik.kathairis.init.ModItems.MAGIC_BEANS;
 
 /**
@@ -40,8 +40,8 @@ public class BlockMagicBeans extends BlockCrops {
 
 	@Override
 	protected boolean isValidGround(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.getBlock() == Blocks.FARMLAND || state.getBlock() == KATHARIAN_DIRT ||
-				state.getBlock() == KATHARIAN_GRASS || state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT;
+		return state.getBlock() == Blocks.FARMLAND || state.getBlock() == KATHAIRIS_DIRT ||
+				state.getBlock() == KATHAIRIS_GRASS || state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT;
 	}
 
 	@Override

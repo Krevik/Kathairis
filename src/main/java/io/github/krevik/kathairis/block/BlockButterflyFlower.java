@@ -24,7 +24,7 @@ import static io.github.krevik.kathairis.init.ModItems.BUTTERFLY_FLOWER_NECTAR;
 /**
  * @author Krevik
  */
-public class BlockButterflyFlower extends BlockKatharianPlant {
+public class BlockButterflyFlower extends BlockKathairisPlant {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);
 	protected static final AxisAlignedBB BUTTERFLYFLOWER_AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.9D, 1D);

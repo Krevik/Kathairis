@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
 
 /**
  * @author Krevik
@@ -48,7 +48,7 @@ public class FeaturePlainFields extends Feature<NoFeatureConfig> {
 			if (world.isBlockLoaded(new BlockPos(posX, posY, posZ).down())) {
 				BlockPos tmp = world.getHeight(Heightmap.Type.MOTION_BLOCKING, new BlockPos(posX, posY, posZ)).down();
 				if (world.isBlockLoaded(tmp)) {
-					if (world.getBlockState(tmp).getBlock() == KATHARIAN_GRASS)
+					if (world.getBlockState(tmp).getBlock() == KATHAIRIS_GRASS)
 						world.setBlockState(tmp, Blocks.GRAVEL.getDefaultState(), 2);
 				}
 			} else {

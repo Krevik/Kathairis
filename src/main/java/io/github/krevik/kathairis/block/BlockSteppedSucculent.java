@@ -12,13 +12,13 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.STEPPED_SUCCULENT;
 
 /**
  * @author Krevik
  */
-public class BlockSteppedSucculent extends BlockKatharianPlant {
+public class BlockSteppedSucculent extends BlockKathairisPlant {
 
 	public BlockSteppedSucculent() {
 		super(Block.Properties.create(Material.PLANTS).tickRandomly().hardnessAndResistance(0.5f).sound(SoundType.PLANT));
@@ -33,7 +33,7 @@ public class BlockSteppedSucculent extends BlockKatharianPlant {
 	protected boolean isValidGround(IBlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
 		boolean can = false;
-		can = block instanceof BlockKatharianGrass || block == KATHARIAN_DIRT || block instanceof BlockGrass ||
+		can = block instanceof BlockKathairisGrass || block == KATHAIRIS_DIRT || block instanceof BlockGrass ||
 				block == STEPPED_SUCCULENT;
 		return can;
 	}
@@ -45,7 +45,7 @@ public class BlockSteppedSucculent extends BlockKatharianPlant {
 			int height = 0;
 			if (world.isAirBlock(pos.up())) {
 				for (int c = 1; c <= 10; c++) {
-					if (world.getBlockState(pos.down(c)).getBlock() instanceof BlockKatharianMultiGrass) {
+					if (world.getBlockState(pos.down(c)).getBlock() instanceof BlockKathairisMultiGrass) {
 						height++;
 					} else {
 						break;

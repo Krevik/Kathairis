@@ -89,10 +89,10 @@ public class BlockKathairisPortal extends BlockPortal {
             if((MathHelper.abs(randomX-pos.getX())*MathHelper.abs(randomX-pos.getX()))+
                     (MathHelper.abs(randomZ-pos.getZ())*MathHelper.abs(randomZ-pos.getZ()))<=radius*radius) {
                 BlockPos tmp = new BlockPos(randomX,randomY,randomZ);
-                if(worldIn.getBlockState(tmp)==KCore.KatharianGrass.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==KCore.KathairisGrass.getDefaultState()) {
                     worldIn.setBlockState(tmp, Blocks.GRASS.getDefaultState(),2);
                 }
-                if(worldIn.getBlockState(tmp)==KCore.KatharianDirt.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==KCore.KathairisDirt.getDefaultState()) {
                     worldIn.setBlockState(tmp, Blocks.DIRT.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==KCore.MythicStone.getDefaultState()) {
@@ -119,10 +119,10 @@ public class BlockKathairisPortal extends BlockPortal {
 
 
                 if(worldIn.getBlockState(tmp)==Blocks.GRASS.getDefaultState()) {
-                    worldIn.setBlockState(tmp, KCore.KatharianGrass.getDefaultState(),2);
+                    worldIn.setBlockState(tmp, KCore.KathairisGrass.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.DIRT.getDefaultState()) {
-                    worldIn.setBlockState(tmp, KCore.KatharianDirt.getDefaultState(),2);
+                    worldIn.setBlockState(tmp, KCore.KathairisDirt.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.STONE.getDefaultState()) {
                     worldIn.setBlockState(tmp, KCore.MythicStone.getDefaultState(),2);
@@ -130,7 +130,7 @@ public class BlockKathairisPortal extends BlockPortal {
                 if(worldIn.getBlockState(tmp)==Blocks.SAND.getDefaultState()) {
                     worldIn.setBlockState(tmp, KCore.ForgottenSand.getDefaultState(),2);
                 }
-                if(worldIn.getBlockState(tmp)==KCore.KatharianGrass.getDefaultState()&&worldIn.getBlockState(tmp.up())==Blocks.AIR.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==KCore.KathairisGrass.getDefaultState()&&worldIn.getBlockState(tmp.up())==Blocks.AIR.getDefaultState()) {
                     worldIn.setBlockState(tmp.up(), pickUpRandomFlowerStateForKether(rand),2);
                 }
             }

@@ -11,31 +11,31 @@ import io.github.krevik.kathairis.block.BlockFrupPlant;
 import io.github.krevik.kathairis.block.BlockGlowVines;
 import io.github.krevik.kathairis.block.BlockGooseberry;
 import io.github.krevik.kathairis.block.BlockJadeVines;
+import io.github.krevik.kathairis.block.BlockKathairisCloud;
+import io.github.krevik.kathairis.block.BlockKathairisDeadGrass;
+import io.github.krevik.kathairis.block.BlockKathairisDirt;
+import io.github.krevik.kathairis.block.BlockKathairisDoors;
+import io.github.krevik.kathairis.block.BlockKathairisFence;
+import io.github.krevik.kathairis.block.BlockKathairisFenceGate;
+import io.github.krevik.kathairis.block.BlockKathairisFungi;
+import io.github.krevik.kathairis.block.BlockKathairisGrass;
+import io.github.krevik.kathairis.block.BlockKathairisLeaves;
+import io.github.krevik.kathairis.block.BlockKathairisLog;
+import io.github.krevik.kathairis.block.BlockKathairisMiniGrass;
+import io.github.krevik.kathairis.block.BlockKathairisMultiGrass;
+import io.github.krevik.kathairis.block.BlockKathairisNightFlower;
+import io.github.krevik.kathairis.block.BlockKathairisOre;
+import io.github.krevik.kathairis.block.BlockKathairisPlant;
 import io.github.krevik.kathairis.block.BlockKathairisPortal;
-import io.github.krevik.kathairis.block.BlockKatharianCloud;
-import io.github.krevik.kathairis.block.BlockKatharianDeadGrass;
-import io.github.krevik.kathairis.block.BlockKatharianDirt;
-import io.github.krevik.kathairis.block.BlockKatharianDoors;
-import io.github.krevik.kathairis.block.BlockKatharianFence;
-import io.github.krevik.kathairis.block.BlockKatharianFenceGate;
-import io.github.krevik.kathairis.block.BlockKatharianFungi;
-import io.github.krevik.kathairis.block.BlockKatharianGrass;
-import io.github.krevik.kathairis.block.BlockKatharianLeaves;
-import io.github.krevik.kathairis.block.BlockKatharianLog;
-import io.github.krevik.kathairis.block.BlockKatharianMiniGrass;
-import io.github.krevik.kathairis.block.BlockKatharianMultiGrass;
-import io.github.krevik.kathairis.block.BlockKatharianNightFlower;
-import io.github.krevik.kathairis.block.BlockKatharianOre;
-import io.github.krevik.kathairis.block.BlockKatharianPlant;
-import io.github.krevik.kathairis.block.BlockKatharianRocktus;
-import io.github.krevik.kathairis.block.BlockKatharianSand;
-import io.github.krevik.kathairis.block.BlockKatharianSlab;
-import io.github.krevik.kathairis.block.BlockKatharianStairs;
-import io.github.krevik.kathairis.block.BlockKatharianStone;
-import io.github.krevik.kathairis.block.BlockKatharianSucculent;
-import io.github.krevik.kathairis.block.BlockKatharianTallGrass;
-import io.github.krevik.kathairis.block.BlockKatharianTrapdoor;
-import io.github.krevik.kathairis.block.BlockKatharianWall;
+import io.github.krevik.kathairis.block.BlockKathairisRocktus;
+import io.github.krevik.kathairis.block.BlockKathairisSand;
+import io.github.krevik.kathairis.block.BlockKathairisSlab;
+import io.github.krevik.kathairis.block.BlockKathairisStairs;
+import io.github.krevik.kathairis.block.BlockKathairisStone;
+import io.github.krevik.kathairis.block.BlockKathairisSucculent;
+import io.github.krevik.kathairis.block.BlockKathairisTallGrass;
+import io.github.krevik.kathairis.block.BlockKathairisTrapdoor;
+import io.github.krevik.kathairis.block.BlockKathairisWall;
 import io.github.krevik.kathairis.block.BlockLayeredSand;
 import io.github.krevik.kathairis.block.BlockMagicBeans;
 import io.github.krevik.kathairis.block.BlockMagnethium;
@@ -60,6 +60,7 @@ import io.github.krevik.kathairis.item.ItemKathairisSword;
 import io.github.krevik.kathairis.item.ItemMagicBeans;
 import io.github.krevik.kathairis.item.ItemMysticGem;
 import io.github.krevik.kathairis.util.ModUtil;
+import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -68,6 +69,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -94,6 +97,152 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
  */
 @EventBusSubscriber(modid = MOD_ID, bus = MOD)
 public final class ModEventSubscriber {
+
+	@SubscribeEvent
+	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
+
+		final Block mysticPlanks;
+		final Block shinyPlanks;
+		final Block soulPlanks;
+		final Block kathairisStone;
+		final Block kathairisCobblestone;
+		final Block weatheredRock;
+		final Block hardenedWeatheredRock;
+		final Block hardenedWeatheredRockBricks;
+		final Block mudBricks;
+		final Block kathairisStoneBricks;
+
+		//TODO clean up the order of these, move them all into categories. Yes my minecraft OCD is acting up
+		event.getRegistry().registerAll(
+				setup(kathairisStone = new BlockKathairisStone(), "kathairis_stone"),
+				setup(new BlockKathairisPortal(), "kathairis_portal"),
+				setup(new BlockKathairisDirt(), "kathairis_dirt"),
+				setup(new BlockKathairisGrass(), "kathairis_grass"),
+				//TODO turn this into a class?
+				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.METAL)), "titanium_block"),
+				setup(new BlockKathairisLog(), "mystic_log"),
+				setup(new BlockKathairisLog(), "mystic_leaves"),
+				setup(new BlockKathairisLog(), "shiny_log"),
+				setup(new BlockKathairisLeaves(), "shiny_leaves"),
+				setup(new BlockKathairisLeaves(), "soul_log"),
+				setup(new BlockKathairisLeaves(), "soul_leaves"),
+				setup(new BlockKathairisOre(1, 1, 3, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4f)), "revenum_ore"),
+				setup(new BlockKathairisOre(1, 2, 4, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(7f)), "titanium_ore"),
+				setup(new BlockKathairisSand(), "kathairis_sand"),
+				setup(new BlockSoftSand(), "soft_sand"),
+				setup(new BlockKathairisCloud(() -> ModItems.CLOUD_DUST_BLUE), "blue_cloud"),
+		 		setup(new BlockKathairisCloud(() -> ModItems.CLOUD_DUST_YELLOW), "yellow_cloud"),
+				setup(weatheredRock = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 1.5f).sound(SoundType.STONE)), "weathered_rock"),
+				setup(mysticPlanks = new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(3f, 3f).sound(SoundType.WOOD)), "mystic_planks"),
+				setup(shinyPlanks = new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(3f, 3f).sound(SoundType.WOOD)), "shiny_planks"),
+				setup(soulPlanks = new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(3f, 3f).sound(SoundType.WOOD)), "soul_planks"),
+				setup(kathairisCobblestone = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "kathairis_cobblestone"),
+				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "kathairis_stone_tiles"),
+				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3f).sound(SoundType.STONE).lightValue(12)), "shiny_rock"),
+				setup(kathairisStoneBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "kathairis_stone_bricks"),
+				setup(new Block(Block.Properties.create(Material.GROUND).hardnessAndResistance(1f, 1f).sound(SoundType.GROUND)), "mud_block"),
+				setup(mudBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "mud_bricks"),
+				setup(new BlockMagnethium(), "magnethium"),
+				setup(new Block(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4f, 4f).sound(SoundType.METAL)), "iron_gold_block"),
+				setup(hardenedWeatheredRock = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "hardened_weathered_rock"),
+				setup(hardenedWeatheredRockBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "hardened_weathered_rock_bricks"),
+				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "hardened_weathered_rock_tiles"),
+				setup(new BlockRefinedCloud(), "blue_cloud_refined"),
+				setup(new BlockRefinedCloud(), "yellow_cloud_refined"),
+				setup(new BlockCondensedCloud(), "blue_cloud_condensed"),
+				setup(new BlockCondensedCloud(), "yellow_cloud_condensed"),
+				setup(new BlockKathairisLog(), "mystic_log_stripped"),
+				setup(new BlockKathairisLog(), "shiny_log_stripped"),
+				setup(new BlockKathairisLog(), "soul_log_stripped"),
+
+				setup(new BlockKathairisFence(Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_fence"),
+				setup(new BlockKathairisFenceGate(Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_fence_gate"),
+				setup(new BlockKathairisFence(Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_fence"),
+				setup(new BlockKathairisFenceGate(Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_fence_gate"),
+				setup(new BlockKathairisFence(Material.WOOD, 3f, SoundType.WOOD), "soul_wood_fence"),
+				setup(new BlockKathairisFenceGate(Material.WOOD, 3f, SoundType.WOOD), "soul_wood_fence_gate"),
+
+				setup(new BlockKathairisWall(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_stone_wall"),
+				setup(new BlockKathairisWall(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_cobblestone_wall"),
+				setup(new BlockKathairisWall(Material.ROCK, 1.5f, SoundType.STONE), "weathered_rock_wall"),
+				setup(new BlockKathairisWall(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_wall"),
+				setup(new BlockKathairisWall(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_wall"),
+				setup(new BlockKathairisWall(Material.ROCK, 2f, SoundType.STONE), "mud_bricks_wall"),
+				setup(new BlockKathairisWall(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_stone_bricks_wall"),
+
+				setup(new BlockKathairisStairs(mysticPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_stairs"),
+				setup(new BlockKathairisStairs(shinyPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_stairs"),
+				setup(new BlockKathairisStairs(soulPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "soul_wood_stairs"),
+				setup(new BlockKathairisStairs(kathairisStone.getDefaultState(), Material.ROCK, 2.5f, SoundType.STONE), "kathairis_stone_stairs"),
+				setup(new BlockKathairisStairs(kathairisCobblestone.getDefaultState(), Material.ROCK, 2.5f, SoundType.STONE), "kathairis_cobblestone_stairs"),
+				setup(new BlockKathairisStairs(weatheredRock.getDefaultState(), Material.ROCK, 2.5f, SoundType.STONE), "weathered_rock_stairs"),
+				setup(new BlockKathairisStairs(hardenedWeatheredRock.getDefaultState(), Material.ROCK, 1.5f, SoundType.STONE), "hardened_weathered_rock_stairs"),
+				setup(new BlockKathairisStairs(hardenedWeatheredRockBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_stairs"),
+				setup(new BlockKathairisStairs(mudBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "mud_bricks_stairs"),
+				setup(new BlockKathairisStairs(kathairisStoneBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "kathairis_stone_bricks_stairs"),
+
+				setup(new BlockKathairisSlab(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_stone_slab"),
+				setup(new BlockKathairisSlab(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_cobblestone_slab"),
+				setup(new BlockKathairisSlab(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_stone_bricks_slab"),
+				setup(new BlockKathairisSlab(Material.ROCK, 2f, SoundType.STONE), "mud_bricks_slab"),
+				setup(new BlockKathairisSlab(Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_slab"),
+				setup(new BlockKathairisSlab(Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_slab"),
+				setup(new BlockKathairisSlab(Material.WOOD, 3f, SoundType.WOOD), "soul_wood_slab"),
+				setup(new BlockKathairisSlab(Material.ROCK, 1.5f, SoundType.STONE), "weathered_rock_slab"),
+				setup(new BlockKathairisSlab(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_slab"),
+				setup(new BlockKathairisSlab(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_slab"),
+
+				setup(new BlockCrystal(), "blue_crystal"),
+				setup(new BlockCrystal(), "violet_crystal"),
+				setup(new BlockCrystal(), "yellow_crystal"),
+
+				setup(new BlockBisonStars(), "bison_stars"),
+				setup(new BlockKathairisPlant(), "eye_plant"),
+				setup(new BlockKathairisMiniGrass(), "kathairis_mini_grass"),
+				setup(new BlockKathairisTallGrass(), "kathairis_tall_grass"),
+				setup(new BlockKathairisNightFlower(), "kathairis_night_flower"),
+				setup(new BlockKathairisMultiGrass(), "kathairis_multi_grass"),
+
+				setup(new BlockCondensedCloud(), "blue_cloud_bricks"),
+				setup(new BlockCondensedCloud(), "yellow_cloud_block"),
+
+				setup(new BlockFrupPlant(), "frup_plant"),
+
+				setup(new BlockKathairisDoors(Material.WOOD, SoundType.WOOD, 3f), "mystic_wood_doors"),
+				setup(new BlockKathairisDoors(Material.WOOD, SoundType.WOOD, 3f), "shiny_wood_doors"),
+				setup(new BlockKathairisDoors(Material.WOOD, SoundType.WOOD, 3f), "soul_wood_doors"),
+				setup(new BlockKathairisTrapdoor(Material.WOOD, SoundType.WOOD, 3f), "mystic_wood_trapdoor"),
+				setup(new BlockKathairisTrapdoor(Material.WOOD, SoundType.WOOD, 3f), "shiny_wood_trapdoor"),
+				setup(new BlockKathairisTrapdoor(Material.WOOD, SoundType.WOOD, 3f), "soul_wood_trapdoor"),
+
+				setup(new BlockKathairisFungi(), "kathairis_fungi"),
+				setup(new BlockGooseberry(Material.LEAVES, 1f, 1f, SoundType.PLANT), "gooseberry_bush"),
+				setup(new BlockKathairisSucculent(), "kathairis_succulent"),
+				setup(new BlockSteppedSucculent(), "stepped_succulent"),
+				setup(new BlockKathairisPlant(), "vilyria"),
+				setup(new BlockGlowVines(), "glowvines"),
+				setup(new BlockJadeVines(), "jade_vines"),
+				setup(new BlockKathairisDeadGrass(), "kathairis_dead_grass"),
+
+				setup(new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(4f, 4f).sound(SoundType.METAL)), "mystic_gem_block"),
+
+				setup(new BlockMagicBeans(), "magic_beans"),
+				setup(new BlockBaurble(), "baurble"),
+				setup(new BlockButterflyFlower(), "butterfly_flower"),
+				setup(new BlockSolisCrystals(), "solis_crystals"),
+				setup(new BlockCloudFlower(), "blue_cloud_flower"),
+				setup(new BlockCloudFlower(), "yellow_cloud_flower"),
+				setup(new BlockSnowdropCyprepedium(), "snowdrop_cyprepedium"),
+				setup(new BlockFluoFungi(), "fluo_fungi"),
+				setup(new BlockLayeredSand(), "layered_sand"),
+				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 1.5f).sound(SoundType.STONE)), "kathairis_sandstone"), //TODO: reorganise
+				setup(new BlockKathairisPlant(), "forest_candle"),
+				setup(new BlockKathairisRocktus(), "rocktus"),
+				setup(new BlockKathairisLog(), "elderwillow_log"),
+				setup(new BlockKathairisLeaves(), "elderwillow_leaves")
+		);
+
+	}
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
@@ -182,7 +331,6 @@ public final class ModEventSubscriber {
 				setup(new ItemFrup(3, 0.4f, ModBlocks.FRUP_PLANT), "frup"),
 				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans")
 		);
-
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
 
 			//TODO find better way, maybe make all blocks provide their creative tab and if they have an itemblock?
@@ -191,152 +339,6 @@ public final class ModEventSubscriber {
 			}
 			registry.register(setup(new ItemBlock(block, new Item.Properties().group(BUILDING_BLOCKS)), block.getRegistryName()));
 		}
-
-	}
-
-	@SubscribeEvent
-	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
-
-		final Block mysticPlanks;
-		final Block shinyPlanks;
-		final Block soulPlanks;
-		final Block katharianStone;
-		final Block katharianCobblestone;
-		final Block weatheredRock;
-		final Block hardenedWeatheredRock;
-		final Block hardenedWeatheredRockBricks;
-		final Block mudBricks;
-		final Block katharianStoneBricks;
-
-		//TODO clean up the order of these, move them all into categories. Yes my minecraft OCD is acting up
-		event.getRegistry().registerAll(
-				setup(katharianStone = new BlockKatharianStone(), "katharian_stone"),
-				setup(new BlockKathairisPortal(), "kathairis_portal"),
-				setup(new BlockKatharianDirt(), "katharian_dirt"),
-				setup(new BlockKatharianGrass(), "katharian_grass"),
-				//TODO turn this into a class?
-				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.METAL)), "titanium_block"),
-				setup(new BlockKatharianLog(), "mystic_log"),
-				setup(new BlockKatharianLog(), "mystic_leaves"),
-				setup(new BlockKatharianLog(), "shiny_log"),
-				setup(new BlockKatharianLeaves(), "shiny_leaves"),
-				setup(new BlockKatharianLeaves(), "soul_log"),
-				setup(new BlockKatharianLeaves(), "soul_leaves"),
-				setup(new BlockKatharianOre(1, 1, 3, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4f)), "revenum_ore"),
-				setup(new BlockKatharianOre(1, 2, 4, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(7f)), "titanium_ore"),
-				setup(new BlockKatharianSand(), "katharian_sand"),
-				setup(new BlockSoftSand(), "soft_sand"),
-				setup(new BlockKatharianCloud(() -> ModItems.CLOUD_DUST_BLUE), "blue_cloud"),
-				setup(new BlockKatharianCloud(() -> ModItems.CLOUD_DUST_YELLOW), "yellow_cloud"),
-				setup(weatheredRock = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 1.5f).sound(SoundType.STONE)), "weathered_rock"),
-				setup(mysticPlanks = new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(3f, 3f).sound(SoundType.WOOD)), "mystic_planks"),
-				setup(shinyPlanks = new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(3f, 3f).sound(SoundType.WOOD)), "shiny_planks"),
-				setup(soulPlanks = new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(3f, 3f).sound(SoundType.WOOD)), "soul_planks"),
-				setup(katharianCobblestone = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "katharian_cobblestone"),
-				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "katharian_stone_tiles"),
-				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3f).sound(SoundType.STONE).lightValue(12)), "shiny_rock"),
-				setup(katharianStoneBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "katharian_stone_bricks"),
-				setup(new Block(Block.Properties.create(Material.GROUND).hardnessAndResistance(1f, 1f).sound(SoundType.GROUND)), "mud_block"),
-				setup(mudBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "mud_bricks"),
-				setup(new BlockMagnethium(), "magnethium"),
-				setup(new Block(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4f, 4f).sound(SoundType.METAL)), "iron_gold_block"),
-				setup(hardenedWeatheredRock = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "hardened_weathered_rock"),
-				setup(hardenedWeatheredRockBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "hardened_weathered_rock_bricks"),
-				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "hardened_weathered_rock_tiles"),
-				setup(new BlockRefinedCloud(), "blue_cloud_refined"),
-				setup(new BlockRefinedCloud(), "yellow_cloud_refined"),
-				setup(new BlockCondensedCloud(), "blue_cloud_condensed"),
-				setup(new BlockCondensedCloud(), "yellow_cloud_condensed"),
-				setup(new BlockKatharianLog(), "mystic_log_stripped"),
-				setup(new BlockKatharianLog(), "shiny_log_stripped"),
-				setup(new BlockKatharianLog(), "soul_log_stripped"),
-
-				setup(new BlockKatharianFence(Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_fence"),
-				setup(new BlockKatharianFenceGate(Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_fence_gate"),
-				setup(new BlockKatharianFence(Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_fence"),
-				setup(new BlockKatharianFenceGate(Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_fence_gate"),
-				setup(new BlockKatharianFence(Material.WOOD, 3f, SoundType.WOOD), "soul_wood_fence"),
-				setup(new BlockKatharianFenceGate(Material.WOOD, 3f, SoundType.WOOD), "soul_wood_fence_gate"),
-
-				setup(new BlockKatharianWall(Material.ROCK, 2.5f, SoundType.STONE), "katharian_stone_wall"),
-				setup(new BlockKatharianWall(Material.ROCK, 2.5f, SoundType.STONE), "katharian_cobblestone_wall"),
-				setup(new BlockKatharianWall(Material.ROCK, 1.5f, SoundType.STONE), "weathered_rock_wall"),
-				setup(new BlockKatharianWall(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_wall"),
-				setup(new BlockKatharianWall(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_wall"),
-				setup(new BlockKatharianWall(Material.ROCK, 2f, SoundType.STONE), "mud_bricks_wall"),
-				setup(new BlockKatharianWall(Material.ROCK, 2.5f, SoundType.STONE), "katharian_stone_bricks_wall"),
-
-				setup(new BlockKatharianStairs(mysticPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_stairs"),
-				setup(new BlockKatharianStairs(shinyPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_stairs"),
-				setup(new BlockKatharianStairs(soulPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "soul_wood_stairs"),
-				setup(new BlockKatharianStairs(katharianStone.getDefaultState(), Material.ROCK, 2.5f, SoundType.STONE), "katharian_stone_stairs"),
-				setup(new BlockKatharianStairs(katharianCobblestone.getDefaultState(), Material.ROCK, 2.5f, SoundType.STONE), "katharian_cobblestone_stairs"),
-				setup(new BlockKatharianStairs(weatheredRock.getDefaultState(), Material.ROCK, 2.5f, SoundType.STONE), "weathered_rock_stairs"),
-				setup(new BlockKatharianStairs(hardenedWeatheredRock.getDefaultState(), Material.ROCK, 1.5f, SoundType.STONE), "hardened_weathered_rock_stairs"),
-				setup(new BlockKatharianStairs(hardenedWeatheredRockBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_stairs"),
-				setup(new BlockKatharianStairs(mudBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "mud_bricks_stairs"),
-				setup(new BlockKatharianStairs(katharianStoneBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "katharian_stone_bricks_stairs"),
-
-				setup(new BlockKatharianSlab(Material.ROCK, 2.5f, SoundType.STONE), "katharian_stone_slab"),
-				setup(new BlockKatharianSlab(Material.ROCK, 2.5f, SoundType.STONE), "katharian_cobblestone_slab"),
-				setup(new BlockKatharianSlab(Material.ROCK, 2.5f, SoundType.STONE), "katharian_stone_bricks_slab"),
-				setup(new BlockKatharianSlab(Material.ROCK, 2f, SoundType.STONE), "mud_bricks_slab"),
-				setup(new BlockKatharianSlab(Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_slab"),
-				setup(new BlockKatharianSlab(Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_slab"),
-				setup(new BlockKatharianSlab(Material.WOOD, 3f, SoundType.WOOD), "soul_wood_slab"),
-				setup(new BlockKatharianSlab(Material.ROCK, 1.5f, SoundType.STONE), "weathered_rock_slab"),
-				setup(new BlockKatharianSlab(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_slab"),
-				setup(new BlockKatharianSlab(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_slab"),
-
-				setup(new BlockCrystal(), "blue_crystal"),
-				setup(new BlockCrystal(), "violet_crystal"),
-				setup(new BlockCrystal(), "yellow_crystal"),
-
-				setup(new BlockBisonStars(), "bison_stars"),
-				setup(new BlockKatharianPlant(), "eye_plant"),
-				setup(new BlockKatharianMiniGrass(), "katharian_mini_grass"),
-				setup(new BlockKatharianTallGrass(), "katharian_tall_grass"),
-				setup(new BlockKatharianNightFlower(), "katharian_night_flower"),
-				setup(new BlockKatharianMultiGrass(), "katharian_multi_grass"),
-
-				setup(new BlockCondensedCloud(), "blue_cloud_bricks"),
-				setup(new BlockCondensedCloud(), "yellow_cloud_block"),
-
-				setup(new BlockFrupPlant(), "frup_plant"),
-
-				setup(new BlockKatharianDoors(Material.WOOD, SoundType.WOOD, 3f), "mystic_wood_doors"),
-				setup(new BlockKatharianDoors(Material.WOOD, SoundType.WOOD, 3f), "shiny_wood_doors"),
-				setup(new BlockKatharianDoors(Material.WOOD, SoundType.WOOD, 3f), "soul_wood_doors"),
-				setup(new BlockKatharianTrapdoor(Material.WOOD, SoundType.WOOD, 3f), "mystic_wood_trapdoor"),
-				setup(new BlockKatharianTrapdoor(Material.WOOD, SoundType.WOOD, 3f), "shiny_wood_trapdoor"),
-				setup(new BlockKatharianTrapdoor(Material.WOOD, SoundType.WOOD, 3f), "soul_wood_trapdoor"),
-
-				setup(new BlockKatharianFungi(), "katharian_fungi"),
-				setup(new BlockGooseberry(Material.LEAVES, 1f, 1f, SoundType.PLANT), "gooseberry_bush"),
-				setup(new BlockKatharianSucculent(), "katharian_succulent"),
-				setup(new BlockSteppedSucculent(), "stepped_succulent"),
-				setup(new BlockKatharianPlant(), "vilyria"),
-				setup(new BlockGlowVines(), "glowvines"),
-				setup(new BlockJadeVines(), "jade_vines"),
-				setup(new BlockKatharianDeadGrass(), "katharian_dead_grass"),
-
-				setup(new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(4f, 4f).sound(SoundType.METAL)), "mystic_gem_block"),
-
-				setup(new BlockMagicBeans(), "magic_beans"),
-				setup(new BlockBaurble(), "baurble"),
-				setup(new BlockButterflyFlower(), "butterfly_flower"),
-				setup(new BlockSolisCrystals(), "solis_crystals"),
-				setup(new BlockCloudFlower(), "blue_cloud_flower"),
-				setup(new BlockCloudFlower(), "yellow_cloud_flower"),
-				setup(new BlockSnowdropCyprepedium(), "snowdrop_cyprepedium"),
-				setup(new BlockFluoFungi(), "fluo_fungi"),
-				setup(new BlockLayeredSand(), "layered_sand"),
-				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 1.5f).sound(SoundType.STONE)), "katharian_sandstone"), //TODO: reorganise
-				setup(new BlockKatharianPlant(), "forest_candle"),
-				setup(new BlockKatharianRocktus(), "rocktus"),
-				setup(new BlockKatharianLog(), "elderwillow_log"),
-				setup(new BlockKatharianLeaves(), "elderwillow_leaves")
-		);
 
 	}
 
@@ -398,7 +400,21 @@ public final class ModEventSubscriber {
 
 	}
 
-	private static SoundEvent setupSound(@Nonnull final String... nameParts) {
+	@SubscribeEvent
+	public static void onRegisterModDimensions(final RegistryEvent.Register<ModDimension> event) {
+		event.getRegistry().registerAll(
+				new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"))
+		);
+	}
+
+	@SubscribeEvent
+	public static void onRegisterBiomes(final RegistryEvent.Register<Biome> event) {
+//		event.getRegistry().registerAll(
+//				new BiomeKathairisBiomeBase(),
+//		);
+	}
+
+	public static SoundEvent setupSound(@Nonnull final String... nameParts) {
 		final ResourceLocation name = new ResourceLocation(MOD_ID, Strings.join(nameParts, "."));
 		final String registryName = Strings.join(nameParts, "_");
 		return setup(new SoundEvent(name), registryName);

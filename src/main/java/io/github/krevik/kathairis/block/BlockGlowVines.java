@@ -31,7 +31,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.GLOWVINES;
 /**
  * @author Krevik
  */
-public class BlockGlowVines extends BlockKatharianPlant {
+public class BlockGlowVines extends BlockKathairisPlant {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);
 	public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;

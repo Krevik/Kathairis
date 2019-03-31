@@ -24,8 +24,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.GOOSEBERRY_BUSH;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
 import static io.github.krevik.kathairis.init.ModItems.GOOSEBERRIES;
 
 /**
@@ -109,8 +109,8 @@ public class BlockGooseberry extends Block {
 	}
 
 	protected boolean isValidGround(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.getBlock() == Blocks.FARMLAND || state.getBlock() == KATHARIAN_DIRT ||
-				state.getBlock() == KATHARIAN_GRASS || state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT;
+		return state.getBlock() == Blocks.FARMLAND || state.getBlock() == KATHAIRIS_DIRT ||
+				state.getBlock() == KATHAIRIS_GRASS || state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT;
 	}
 
 	//TODO REMOVE REMOVE REMOVE. GETTING RID OF THIS STUFF IS WHAT 1.13 WAS ALL ABOUT

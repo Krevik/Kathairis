@@ -14,7 +14,7 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CRYSTAL;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_STONE;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_STONE;
 import static io.github.krevik.kathairis.init.ModBlocks.VIOLET_CRYSTAL;
 import static io.github.krevik.kathairis.init.ModBlocks.YELLOW_CRYSTAL;
 
@@ -88,7 +88,7 @@ public class FeatureCrystalChamber extends Feature<NoFeatureConfig> {
 				for (int z = -1; z <= 1; z++) {
 					BlockPos tmp = new BlockPos(posX + x, posY + y, posZ + z);
 					if (world.isBlockLoaded(tmp)) {
-						if (world.getBlockState(tmp).getBlock() == KATHARIAN_STONE) {
+						if (world.getBlockState(tmp).getBlock() == KATHAIRIS_STONE) {
 							result = true;
 						}
 					}

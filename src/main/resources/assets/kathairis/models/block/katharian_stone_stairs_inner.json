@@ -1,8 +1,0 @@
-{
-	"parent": "block/inner_stairs",
-	"textures": {
-		"bottom": "kathairis:block/katharian_stone",
-		"top": "kathairis:block/katharian_stone",
-		"side": "kathairis:block/katharian_stone"
-	}
-}

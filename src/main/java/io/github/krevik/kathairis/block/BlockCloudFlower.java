@@ -8,7 +8,7 @@ import net.minecraft.world.IBlockReader;
 /**
  * @author Krevik
  */
-public class BlockCloudFlower extends BlockKatharianPlant {
+public class BlockCloudFlower extends BlockKathairisPlant {
 
 	public BlockCloudFlower() {
 		super();
@@ -17,7 +17,7 @@ public class BlockCloudFlower extends BlockKatharianPlant {
 	@Override
 	protected boolean isValidGround(IBlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
-		return block instanceof BlockKatharianCloud || block instanceof BlockRefinedCloud || block instanceof BlockCondensedCloud;
+		return block instanceof BlockKathairisCloud || block instanceof BlockRefinedCloud || block instanceof BlockCondensedCloud;
 	}
 
 }

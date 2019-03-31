@@ -1,6 +1,0 @@
-{
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "kathairis:block/katharian_stone_tiles"
-	}
-}

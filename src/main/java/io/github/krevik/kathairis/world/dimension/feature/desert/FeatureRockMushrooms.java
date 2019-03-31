@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_SAND;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.WEATHERED_ROCK;
 
@@ -21,7 +21,7 @@ public class FeatureRockMushrooms extends Feature<NoFeatureConfig> {
 
 	@Override
 	public boolean place(IWorld world, IChunkGenerator<? extends IChunkGenSettings> generator, Random random, BlockPos pos, NoFeatureConfig config) {
-		if (world.getBlockState(pos.down()).getBlock() == SOFT_SAND || world.getBlockState(pos.down()).getBlock() == KATHARIAN_SAND) {
+		if (world.getBlockState(pos.down()).getBlock() == SOFT_SAND || world.getBlockState(pos.down()).getBlock() == KATHAIRIS_SAND) {
 			int radius = 2 + random.nextInt(5);
 			int mushroomHeight = 4 + random.nextInt(radius) + random.nextInt(4);
 			//base

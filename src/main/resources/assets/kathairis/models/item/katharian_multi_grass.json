@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "kathairis:item/katharian_multi_grass"
-	}
-}

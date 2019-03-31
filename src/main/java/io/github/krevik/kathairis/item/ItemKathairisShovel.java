@@ -22,9 +22,9 @@ import java.util.Set;
 
 import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CLOUD;
 import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CLOUD_CONDENSED;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_DIRT;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_GRASS;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_SAND;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.LAYERED_SAND;
 import static io.github.krevik.kathairis.init.ModBlocks.MUD_BLOCK;
 import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
@@ -71,7 +71,7 @@ public class ItemKathairisShovel extends ItemKathairisTool {
 	//TODO COMPLETE
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(
 			CLAY, DIRT, COARSE_DIRT, PODZOL, FARMLAND, GRASS_BLOCK, GRAVEL, MYCELIUM, SAND, RED_SAND, SNOW_BLOCK, SNOW, SOUL_SAND, GRASS_PATH, WHITE_CONCRETE_POWDER, ORANGE_CONCRETE_POWDER, MAGENTA_CONCRETE_POWDER, LIGHT_BLUE_CONCRETE_POWDER, YELLOW_CONCRETE_POWDER, LIME_CONCRETE_POWDER, PINK_CONCRETE_POWDER, GRAY_CONCRETE_POWDER, LIGHT_GRAY_CONCRETE_POWDER, CYAN_CONCRETE_POWDER, PURPLE_CONCRETE_POWDER, BLUE_CONCRETE_POWDER, BROWN_CONCRETE_POWDER, GREEN_CONCRETE_POWDER, RED_CONCRETE_POWDER, BLACK_CONCRETE_POWDER,
-			KATHARIAN_SAND, SOFT_SAND, KATHARIAN_DIRT, KATHARIAN_GRASS, MUD_BLOCK, BLUE_CLOUD, BLUE_CLOUD_CONDENSED, YELLOW_CLOUD, YELLOW_CLOUD_CONDENSED, LAYERED_SAND
+			KATHAIRIS_SAND, SOFT_SAND, KATHAIRIS_DIRT, KATHAIRIS_GRASS, MUD_BLOCK, BLUE_CLOUD, BLUE_CLOUD_CONDENSED, YELLOW_CLOUD, YELLOW_CLOUD_CONDENSED, LAYERED_SAND
 	);
 
 	public ItemKathairisShovel(IItemTier tier) {

@@ -1,8 +1,0 @@
-{
-	"parent": "block/slab",
-	"textures": {
-		"bottom": "kathairis:block/katharian_cobblestone",
-		"top": "kathairis:block/katharian_cobblestone",
-		"side": "kathairis:block/katharian_cobblestone"
-	}
-}

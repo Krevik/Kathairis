@@ -29,7 +29,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.FLUO_FUNGI;
 /**
  * @author Krevik
  */
-public class BlockFluoFungi extends BlockKatharianPlant {
+public class BlockFluoFungi extends BlockKathairisPlant {
 
 	public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
 
@@ -76,7 +76,7 @@ public class BlockFluoFungi extends BlockKatharianPlant {
 			for (int z = -1; z <= 1; z++) {
 				BlockPos tmp = new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z);
 				if (worldIn.getBlockState(tmp).getBlock() instanceof BlockLog ||
-						worldIn.getBlockState(tmp).getBlock() instanceof BlockKatharianLog) {
+						worldIn.getBlockState(tmp).getBlock() instanceof BlockKathairisLog) {
 					is = true;
 				}
 			}
@@ -136,7 +136,7 @@ public class BlockFluoFungi extends BlockKatharianPlant {
 	}
 
 	private boolean isLog(Block block) {
-		return block instanceof BlockLog || block instanceof BlockKatharianLog;
+		return block instanceof BlockLog || block instanceof BlockKathairisLog;
 	}
 
    /* @Override

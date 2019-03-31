@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_MINI_GRASS;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHARIAN_STONE;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_MINI_GRASS;
+import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_STONE;
 import static io.github.krevik.kathairis.init.ModItems.BISON_MEAT;
 import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_CLUSTER;
 import static io.github.krevik.kathairis.init.ModItems.MYSTIC_CHESTPLATE;
@@ -21,8 +21,8 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
  */
 public final class ModItemGroups {
 
-	public static final ItemGroup BUILDING_BLOCKS = new ModItemGroup("building_blocks", () -> new ItemStack(KATHARIAN_STONE));
-	public static final ItemGroup PLANTS = new ModItemGroup("plants", () -> new ItemStack(KATHARIAN_MINI_GRASS));
+	public static final ItemGroup BUILDING_BLOCKS = new ModItemGroup("building_blocks", () -> new ItemStack(KATHAIRIS_STONE));
+	public static final ItemGroup PLANTS = new ModItemGroup("plants", () -> new ItemStack(KATHAIRIS_MINI_GRASS));
 	public static final ItemGroup FOOD = new ModItemGroup("food", () -> new ItemStack(BISON_MEAT));
 	public static final ItemGroup MATERIALS = new ModItemGroup("materials", () -> new ItemStack(MYSTIC_GEM));
 	public static final ItemGroup MISCELLANEOUS = new ModItemGroup("miscellaneous", () -> new ItemStack(CRYSTAL_CLUSTER));

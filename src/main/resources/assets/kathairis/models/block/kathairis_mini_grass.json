@@ -1,0 +1,6 @@
+{
+	"parent": "block/tinted_cross",
+	"textures": {
+		"cross": "kathairis:block/kathairis_mini_grass"
+	}
+}
