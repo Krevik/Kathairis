@@ -1,5 +1,8 @@
 {
 	"credit": "Made with Blockbench",
+	"textures": {
+		"missing": "minecraft:block/redstone_block"
+	},
 	"elements": [
 		{
 			"from": [
