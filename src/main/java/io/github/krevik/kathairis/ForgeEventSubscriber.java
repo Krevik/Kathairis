@@ -32,7 +32,7 @@ public final class ForgeEventSubscriber {
 	@SubscribeEvent
 	public static void writeAssets(final ModelBakeEvent ignored) {
 
-		if (false) {
+		if (true) {
 			return;
 		}
 
