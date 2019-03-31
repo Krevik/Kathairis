@@ -1,10 +1,17 @@
 package io.github.krevik.kathairis.world.dimension;
 
+import io.github.krevik.kathairis.init.ModDimensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.common.DimensionManager;
+import org.apache.commons.lang3.Validate;
 
 /**
  * @author Krevik
@@ -66,104 +73,102 @@ public class TileEntityKathairisTeleportManager extends TileEntity {
 				if (entity.timeUntilPortal > 0) {
 					entity.timeUntilPortal = 10;
 				}
-				//FIXME TODO
-//				else if (entity.dimension != Kathairis.kath_Dim_type) {
-//
-//					// notify everyone that Kathairis is loading (because it currently takes so long)
-//					// this can be removed when the world gen is fixed
-//                    /*if(!dimensionKathairisHasBeenLoadedBefore()) {
-//                        notifyAllPlayersThatKathairisIsLoading();
-//                    }*/
-//
-//					entity.timeUntilPortal = 10;
-//					if (prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0) {
-//						entity.timeUntilPortal = 10;
-//						setDme21();
-//						setOverworldXYZ(entity.posX, entity.posY, entity.posZ);
-//						//mcServer.getPlayerList().transferPlayerToDimension(entity, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
-//						entity.changeDimension(Kathairis.kath_Dim_type, new TeleporterKathairis(server.getWorld(Kathairis.kath_Dim_type)));
-//						setTestXYZ(entity.posX, entity.posY, entity.posZ);
-//						//tryToPutInPortal(entity);
-//					} else if (prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0) {
-//						entity.timeUntilPortal = 10;
-//						setDme22();
-//						setOverworldXYZ(entity.posX, entity.posY, entity.posZ);
-//						entity.changeDimension(Kathairis.kath_Dim_type, new TeleporterKathairis(server.getWorld(Kathairis.kath_Dim_type)));
-//						//tryToPutInPortal(entity);
-//					}
-//				} else if (entity.dimension == Kathairis.kath_Dim_type) {
-//					entity.timeUntilPortal = 10;
-//					setDme22();
-//					setTestXYZ(entity.posX, entity.posY, entity.posZ);
-//					entity.changeDimension(DimensionType.OVERWORLD, new TeleporterKathairis(server.getWorld(DimensionType.OVERWORLD)));
-//					//tryToPutInPortal(entity);
-//				}
+
+				else if (entity.dimension != ModDimensions.KATHAIRIS.dimensionType) {
+
+					// notify everyone that Kathairis is loading (because it currently takes so long)
+					// this can be removed when the world gen is fixed
+                    /*if(!dimensionKathairisHasBeenLoadedBefore()) {
+                        notifyAllPlayersThatKathairisIsLoading();
+                    }*/
+
+				entity.timeUntilPortal = 10;
+					if (prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0) {
+						entity.timeUntilPortal = 10;
+						setDme21();
+						setOverworldXYZ(entity.posX, entity.posY, entity.posZ);
+						//mcServer.getPlayerList().transferPlayerToDimension(entity, KCore.DIMENSION_ID, new TeleporterMystic(mcServer.getWorld(KCore.DIMENSION_ID)));
+						entity.changeDimension(ModDimensions.KATHAIRIS.dimensionType, new TeleporterKathairis(server.getWorld(ModDimensions.KATHAIRIS.dimensionType)));
+						setTestXYZ(entity.posX, entity.posY, entity.posZ);
+						//tryToPutInPortal(entity);
+					} else if (prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0) {
+						entity.timeUntilPortal = 10;
+						setDme22();
+						setOverworldXYZ(entity.posX, entity.posY, entity.posZ);
+						entity.changeDimension(ModDimensions.KATHAIRIS.dimensionType, new TeleporterKathairis(server.getWorld(ModDimensions.KATHAIRIS.dimensionType)));
+					//tryToPutInPortal(entity);
+					}
+				} else if (entity.dimension == ModDimensions.KATHAIRIS.dimensionType) {
+					entity.timeUntilPortal = 10;
+					setDme22();
+					setTestXYZ(entity.posX, entity.posY, entity.posZ);
+					entity.changeDimension(DimensionType.OVERWORLD, new TeleporterKathairis(server.getWorld(DimensionType.OVERWORLD)));
+					//tryToPutInPortal(entity);
+				}
 			}
 		}
 	}
 
 	//FIXME TODO
 	public static void tele(EntityPlayer player) {
-//		if (!player.world.isRemote) {
-//			if ((player.getRidingEntity() == null) && ((player instanceof EntityPlayerMP))) {
-//
-//				EntityPlayerMP player1 = (EntityPlayerMP) player;
-//				MinecraftServer mcServer = player1.getServer();
-//				Validate.notNull(mcServer, "mcServer is null ....");
-//				player1.setPortal(new BlockPos(player1.posX, player1.posY, player1.posZ));
-//
-//				if (player1.timeUntilPortal > 0) {
-//
-//					player1.timeUntilPortal = 10;
-//
-//				} else if (player1.dimension != DimensionManager.getRegistry().get(Kathairis.kath_DIM_ID)) {
-//
-//					// notify everyone that Kathairis is loading (because it currently takes so long)
-//					// this can be removed when the world gen is fixed
-//                    /*if(!dimensionKathairisHasBeenLoadedBefore()) {
-//                        notifyAllPlayersThatKathairisIsLoading();
-//                    }*/
-//
-//					player1.timeUntilPortal = 10;
-//
-//					if (prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0) {
-//						player1.timeUntilPortal = 10;
-//						setDme21();
-//
-//						WorldServer toWorld = mcServer.getWorld(DimensionManager.getRegistry().get(Kathairis.kath_DIM_ID));
-//						Validate.notNull(toWorld, "server kath must not be null");
-//						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
-//						//mcServer.getPlayerList().transferEntityToWorld(player1,Kathairis.kath_Dim_type,player1.getServerWorld(),toWorld,new TeleporterKathairis(toWorld));
-//						player.changeDimension(DimensionManager.getRegistry().get(Kathairis.kath_DIM_ID), new TeleporterKathairis(toWorld));
-//						//player.changeDimension(Kathairis.kath_Dim_type, new TeleporterKathairis(player1.getServerWorld()));
-//						setTestXYZ(player1.posX, player1.posY, player1.posZ);
-//
-//					} else if (prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0) {
-//						player1.timeUntilPortal = 10;
-//						setDme22();
-//						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
-//						WorldServer toWorld = mcServer.getWorld(DimensionManager.getRegistry().get(Kathairis.kath_DIM_ID));
-//						//mcServer.getPlayerList().transferEntityToWorld(player1,Kathairis.kath_Dim_type,player1.getServerWorld(),toWorld,new TeleporterKathairis(toWorld));
-//
-//						player.changeDimension(DimensionManager.getRegistry().get(Kathairis.kath_DIM_ID), new TeleporterKathairis(toWorld));
-//
-//					}
-//
-//				} else if (player1.dimension == DimensionManager.getRegistry().get(Kathairis.kath_DIM_ID)) {
-//
-//					player1.timeUntilPortal = 10;
-//					setDme22();
-//					setTestXYZ(player1.posX, player1.posY, player1.posZ);
-//					WorldServer toWorld = mcServer.getWorld(DimensionType.OVERWORLD);
-//
-//					//mcServer.getPlayerList().transferEntityToWorld(player1,DimensionType.OVERWORLD,player1.getServerWorld(),toWorld,new TeleporterKathairis(toWorld));
-//
-//					player.changeDimension(DimensionType.OVERWORLD, new TeleporterKathairis(toWorld));
-//
-//				}
-//
-//			}
-//		}
+		if (!player.world.isRemote) {
+			if ((player.getRidingEntity() == null) && ((player instanceof EntityPlayerMP))) {
+
+				EntityPlayerMP player1 = (EntityPlayerMP) player;
+				MinecraftServer mcServer = player1.getServer();
+				Validate.notNull(mcServer, "mcServer is null ....");
+				player1.setPortal(new BlockPos(player1.posX, player1.posY, player1.posZ));
+
+				if (player1.timeUntilPortal > 0) {
+
+					player1.timeUntilPortal = 10;
+
+				} else if (player1.dimension != ModDimensions.KATHAIRIS.dimensionType) {
+
+                    /*if(!dimensionKathairisHasBeenLoadedBefore()) {
+                        notifyAllPlayersThatKathairisIsLoading();
+                    }*/
+
+					player1.timeUntilPortal = 10;
+
+					if (prevX2 == 0.0 && prevY2 == 0.0 && prevZ2 == 0.0) {
+						player1.timeUntilPortal = 10;
+						setDme21();
+
+						WorldServer toWorld = mcServer.getWorld(ModDimensions.KATHAIRIS.dimensionType);
+						Validate.notNull(toWorld, "server kath must not be null");
+						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
+						mcServer.getPlayerList().transferEntityToWorld(player1,ModDimensions.KATHAIRIS.dimensionType,player1.getServerWorld(),toWorld,new TeleporterKathairis(toWorld));
+						player.changeDimension(ModDimensions.KATHAIRIS.dimensionType, new TeleporterKathairis(toWorld));
+						player.changeDimension(ModDimensions.KATHAIRIS.dimensionType, new TeleporterKathairis(player1.getServerWorld()));
+						setTestXYZ(player1.posX, player1.posY, player1.posZ);
+
+					} else if (prevX2 != 0.0 && prevY2 != 0.0 && prevZ2 != 0.0) {
+						player1.timeUntilPortal = 10;
+						setDme22();
+						setOverworldXYZ(player1.posX, player1.posY, player1.posZ);
+						WorldServer toWorld = mcServer.getWorld(ModDimensions.KATHAIRIS.dimensionType);
+						mcServer.getPlayerList().transferEntityToWorld(player1,ModDimensions.KATHAIRIS.dimensionType,player1.getServerWorld(),toWorld,new TeleporterKathairis(toWorld));
+
+						player.changeDimension(ModDimensions.KATHAIRIS.dimensionType, new TeleporterKathairis(toWorld));
+
+					}
+
+				} else if (player1.dimension == ModDimensions.KATHAIRIS.dimensionType) {
+
+					player1.timeUntilPortal = 10;
+					setDme22();
+					setTestXYZ(player1.posX, player1.posY, player1.posZ);
+					WorldServer toWorld = mcServer.getWorld(DimensionType.OVERWORLD);
+
+					mcServer.getPlayerList().transferEntityToWorld(player1,DimensionType.OVERWORLD,player1.getServerWorld(),toWorld,new TeleporterKathairis(toWorld));
+
+					player.changeDimension(DimensionType.OVERWORLD, new TeleporterKathairis(toWorld));
+
+				}
+
+			}
+		}
 	}
 
 	@Override

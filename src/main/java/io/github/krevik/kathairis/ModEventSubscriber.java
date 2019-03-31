@@ -44,11 +44,7 @@ import io.github.krevik.kathairis.block.BlockSnowdropCyprepedium;
 import io.github.krevik.kathairis.block.BlockSoftSand;
 import io.github.krevik.kathairis.block.BlockSolisCrystals;
 import io.github.krevik.kathairis.block.BlockSteppedSucculent;
-import io.github.krevik.kathairis.init.ModArmorMaterials;
-import io.github.krevik.kathairis.init.ModBlocks;
-import io.github.krevik.kathairis.init.ModItemGroups;
-import io.github.krevik.kathairis.init.ModItemTiers;
-import io.github.krevik.kathairis.init.ModItems;
+import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.item.ItemFrup;
 import io.github.krevik.kathairis.item.ItemGooseberries;
 import io.github.krevik.kathairis.item.ItemKathairisArmor;
@@ -60,7 +56,10 @@ import io.github.krevik.kathairis.item.ItemKathairisSword;
 import io.github.krevik.kathairis.item.ItemMagicBeans;
 import io.github.krevik.kathairis.item.ItemMysticGem;
 import io.github.krevik.kathairis.util.ModUtil;
+import io.github.krevik.kathairis.world.dimension.DimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
+import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
+import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
@@ -70,7 +69,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.provider.BiomeProvider;
+import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.provider.IBiomeProviderSettings;
+import net.minecraft.world.dimension.Dimension;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -408,10 +413,19 @@ public final class ModEventSubscriber {
 		);
 	}
 
+	/*@SubscribeEvent
+	public static void onRegisterDimensionTypes(final RegistryEvent.Register<DimensionType> event) {
+		event.getRegistry().registerAll(
+				new DimensionType(ModDimensions.KATH_DIM_ID, MOD_ID, MOD_ID, DimensionKathairis::new).setRegistryName(MOD_ID,"kath_dim_type")
+		);
+	}*/
+
+
+
 	@SubscribeEvent
 	public static void onRegisterBiomes(final RegistryEvent.Register<Biome> event) {
 		event.getRegistry().registerAll(
-				setup(new BiomeKatharianRiver(),"katharian_river"),
+				setup(new BiomeKatharianRiver(),"kathairis_river"),
 				setup(new BiomeKatharianDesert(),"katharian_desert"),
 				setup(new BiomeKatharianDesertEdge(),"katharian_desert_edge"),
 				setup(new BiomeKatharianSoftSandLakes(),"soft_sand_lakes"),
