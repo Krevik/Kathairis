@@ -1,7 +1,7 @@
 package io.github.krevik.kathairis.block;
 
 import com.google.common.cache.LoadingCache;
-import io.github.krevik.kathairis.world.dimension.TileEntityKathairisTeleportManager;
+import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.SoundType;
@@ -11,8 +11,6 @@ import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -213,7 +211,7 @@ public class BlockKathairisPortal extends BlockPortal {
 	@Override
 	public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn != null) {
-			TileEntityKathairisTeleportManager.tele(entityIn);
+			KathairisTeleportingManager.tele(entityIn);
 		}
            /* if(!worldIn.isRemote) {
                 if (!entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
