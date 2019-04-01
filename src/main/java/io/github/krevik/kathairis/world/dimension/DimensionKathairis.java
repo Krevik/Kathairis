@@ -7,11 +7,13 @@ import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModDimensions;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
+import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -30,15 +32,16 @@ import net.minecraftforge.common.DimensionManager;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
+import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
+
 public class DimensionKathairis extends OverworldDimension {
 
     public DimensionKathairis() {
-        super(ModDimensions.KATHAIRIS.dimensionType);
+        super(Kathairis.KATH_DIM_TYPE);
     }
 
-    @Override
-    public DimensionType getType() {
-        return ModDimensions.KATHAIRIS.dimensionType;
+    public DimensionKathairis(DimensionType dimensionType) {
+        super(dimensionType);
     }
 
     @Override

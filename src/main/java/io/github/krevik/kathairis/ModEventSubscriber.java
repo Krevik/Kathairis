@@ -61,12 +61,14 @@ import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
+import io.netty.buffer.Unpooled;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.IRegistry;
@@ -76,8 +78,10 @@ import net.minecraft.world.biome.provider.BiomeProviderType;
 import net.minecraft.world.biome.provider.IBiomeProviderSettings;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -408,18 +412,10 @@ public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterModDimensions(final RegistryEvent.Register<ModDimension> event) {
-		event.getRegistry().registerAll(
+				event.getRegistry().registerAll(
 				new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"))
 		);
 	}
-
-	/*@SubscribeEvent
-	public static void onRegisterDimensionTypes(final RegistryEvent.Register<DimensionType> event) {
-		event.getRegistry().registerAll(
-				new DimensionType(ModDimensions.KATH_DIM_ID, MOD_ID, MOD_ID, DimensionKathairis::new).setRegistryName(MOD_ID,"kath_dim_type")
-		);
-	}*/
-
 
 
 	@SubscribeEvent

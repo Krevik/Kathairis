@@ -4,6 +4,7 @@ import io.github.krevik.kathairis.world.dimension.DimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.provider.BiomeProviderType;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.storage.DimensionSavedDataManager;
@@ -20,6 +21,6 @@ import static io.github.krevik.kathairis.util.ModUtil._null;
 @ObjectHolder(MOD_ID)
 public final class ModDimensions {
 
-	public static final ModDimensionKathairis KATHAIRIS = _null();
+	public static final ModDimensionKathairis KATHAIRIS = new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"));
 
 }
