@@ -21,6 +21,5 @@ import static io.github.krevik.kathairis.util.ModUtil._null;
 @ObjectHolder(MOD_ID)
 public final class ModDimensions {
 
-	public static final ModDimensionKathairis KATHAIRIS = new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"));
-
+    public static final ModDimensionKathairis KATHAIRIS = _null();
 }

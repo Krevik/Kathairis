@@ -413,7 +413,7 @@ public final class ModEventSubscriber {
 	@SubscribeEvent
 	public static void onRegisterModDimensions(final RegistryEvent.Register<ModDimension> event) {
 				event.getRegistry().registerAll(
-				new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"))
+						new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"))
 		);
 	}
 

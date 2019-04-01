@@ -37,7 +37,7 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 public class DimensionKathairis extends OverworldDimension {
 
     public DimensionKathairis() {
-        super(Kathairis.KATH_DIM_TYPE);
+        super(DimensionType.getById(Kathairis.KATH_DIM_TYPE.getId()));
     }
 
     public DimensionKathairis(DimensionType dimensionType) {

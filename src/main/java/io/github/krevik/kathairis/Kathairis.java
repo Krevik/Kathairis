@@ -33,10 +33,8 @@ public final class Kathairis {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 	}
 
-
-
 	private void setup(final FMLCommonSetupEvent event) {
-		KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kathairis"), ModDimensions.KATHAIRIS, null);
+		KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
 	}
 
 	private void setupClient(final FMLClientSetupEvent event) {

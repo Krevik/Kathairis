@@ -11,6 +11,7 @@ import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.state.EnumProperty;
@@ -212,11 +213,7 @@ public class BlockKathairisPortal extends BlockPortal {
 	@Override
 	public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn != null) {
-			if (entityIn instanceof EntityPlayerMP) {
-				TileEntityKathairisTeleportManager.tele((EntityPlayerMP) entityIn);
-			} else {
-				TileEntityKathairisTeleportManager.teleEntity(entityIn);
-			}
+			TileEntityKathairisTeleportManager.tele(entityIn);
 		}
            /* if(!worldIn.isRemote) {
                 if (!entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
