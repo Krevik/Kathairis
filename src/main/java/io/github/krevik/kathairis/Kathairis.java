@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis;
 
+import io.github.krevik.kathairis.client.ClientEventSubscriber;
 import io.github.krevik.kathairis.init.ModDimensions;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
@@ -9,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,6 +33,7 @@ public final class Kathairis {
 	public Kathairis() {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
+		MinecraftForge.EVENT_BUS.register(ClientEventSubscriber.class);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
