@@ -84,7 +84,7 @@ public class DimensionKathairis extends OverworldDimension {
         }
         boolean isSwampNear=false;
         for(BlockPos pos:posesToCalculate){
-            if(player.world.getBiome(pos)== ModBiomes.KATHARIAN_SWAMP){
+            if(player.world.getBiome(pos)==ModBiomes.KATHARIAN_SWAMP){
                 isSwampNear=true;
             }
         }
@@ -147,6 +147,7 @@ public class DimensionKathairis extends OverworldDimension {
         result=new Vec3d(sumR/posesToCalculate.size(),sumG/posesToCalculate.size(),sumB/posesToCalculate.size());
         return result;
     }
+
 
     @Nullable
     @Override
