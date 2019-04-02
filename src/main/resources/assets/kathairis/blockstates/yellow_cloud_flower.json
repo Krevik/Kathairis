@@ -1,7 +1,12 @@
 {
-	"variants": {
-		"": {
-			"model": "kathairis:block/yellow_cloud_flower"
-		}
-	}
+    "variants": {
+		"": [ { "model": "kathairis:block/yellow_cloud_grass" },
+		{ "model": "kathairis:block/yellow_cloud_flower" },
+		{ "model": "kathairis:block/yellow_cloud_grass", "y": 90 },
+		{ "model": "kathairis:block/yellow_cloud_flower", "y": 90 },
+		{ "model": "kathairis:block/yellow_cloud_grass", "y": 180 },
+		{ "model": "kathairis:block/yellow_cloud_flower", "y": 180 },
+		{ "model": "kathairis:block/yellow_cloud_grass", "y": 270 },
+		{ "model": "kathairis:block/yellow_cloud_flower", "y": 270 } ]
+    }
 }

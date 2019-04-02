@@ -1,10 +1,6 @@
 {
 	"variants": {
-		"variant=with": {
-			"model": "kathairis:block/gooseberry_bush"
-		},
-		"variant=without": {
-			"model": "kathairis:block/gooseberry_bush_picked"
-		}
-	}
+        "variant=with":  { "model": "kathairis:block/gooseberry_bush" },
+        "variant=without":   { "model": "kathairis:block/gooseberry_bush_picked"}
+    }
 }

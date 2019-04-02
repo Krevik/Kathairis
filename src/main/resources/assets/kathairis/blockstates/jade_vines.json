@@ -1,16 +1,8 @@
 {
 	"variants": {
-		"variant=bottom": {
-			"model": "kathairis:block/jadevine_bottom"
-		},
-		"variant=mid": {
-			"model": "kathairis:block/jadevine_mid"
-		},
-		"variant=top": {
-			"model": "kathairis:block/jadevine_top"
-		},
-		"variant=empty": {
-			"model": "kathairis:block/jadevine_empty"
-		}
+		"variant=bottom": { "model": "kathairis:block/jadevine_bottom" },
+		"variant=mid": { "model": "kathairis:block/jadevine_mid" },
+		"variant=top": { "model": "kathairis:block/jadevine_top" },
+		"variant=empty": { "model": "kathairis:block/jadevine_empty" }
 	}
 }

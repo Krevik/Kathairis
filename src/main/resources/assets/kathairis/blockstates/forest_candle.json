@@ -1,7 +1,6 @@
 {
 	"variants": {
-		"": {
-			"model": "kathairis:block/forest_candle"
-		}
+		"variant=normal": { "model": "kathairis:block/forest_candle" },
+		"variant=air": { "model": "kathairis:block/air" }
 	}
 }
