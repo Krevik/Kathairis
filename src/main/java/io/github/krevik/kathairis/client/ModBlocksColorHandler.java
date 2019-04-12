@@ -1,6 +1,5 @@
 package io.github.krevik.kathairis.client;
 
-import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

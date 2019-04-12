@@ -17,12 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.MYSTIC_LEAVES;
-import static io.github.krevik.kathairis.init.ModBlocks.MYSTIC_LOG;
-import static io.github.krevik.kathairis.init.ModBlocks.SHINY_LEAVES;
-import static io.github.krevik.kathairis.init.ModBlocks.SHINY_LOG;
-import static io.github.krevik.kathairis.init.ModBlocks.SOUL_LEAVES;
-import static io.github.krevik.kathairis.init.ModBlocks.SOUL_LOG;
+import static io.github.krevik.kathairis.init.ModBlocks.*;
 
 /**
  * @author Krevik

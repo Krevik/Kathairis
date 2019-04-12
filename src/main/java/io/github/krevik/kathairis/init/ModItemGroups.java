@@ -8,12 +8,7 @@ import java.util.function.Supplier;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_MINI_GRASS;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_STONE;
-import static io.github.krevik.kathairis.init.ModItems.BISON_MEAT;
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_CLUSTER;
-import static io.github.krevik.kathairis.init.ModItems.MYSTIC_CHESTPLATE;
-import static io.github.krevik.kathairis.init.ModItems.MYSTIC_GEM;
-import static io.github.krevik.kathairis.init.ModItems.MYSTIC_PICKAXE;
-import static io.github.krevik.kathairis.init.ModItems.MYSTIC_SWORD;
+import static io.github.krevik.kathairis.init.ModItems.*;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 /**

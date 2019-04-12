@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.world.dimension;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -37,6 +38,8 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 	private NoiseGeneratorPerlin surfaceNoise;
 	private NoiseGeneratorOctaves scaleNoise;
 	private NoiseGeneratorOctaves depthNoise;
+	private NoiseGeneratorSimplex islandNoise;
+
 
 	public ChunkGeneratorKathairis(IWorld worldIn, BiomeProvider provider, OverworldGenSettings settingsIn) {
 		super(worldIn, provider);
@@ -49,6 +52,7 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 		this.scaleNoise = new NoiseGeneratorOctaves(sharedseedrandom, 10);
 		this.depthNoise = new NoiseGeneratorOctaves(sharedseedrandom, 16);
 		this.biomeWeights = new float[25];
+		this.islandNoise = new NoiseGeneratorSimplex(sharedseedrandom);
 
 		for (int i = -2; i <= 2; ++i) {
 			for (int j = -2; j <= 2; ++j) {
@@ -72,6 +76,7 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 		this.depthNoise = ctx.getDepth();
 	}
 
+
 	public void makeBase(IChunk chunkIn) {
 		ChunkPos chunkpos = chunkIn.getPos();
 		int i = chunkpos.x;
@@ -79,6 +84,7 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 		SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
 		sharedseedrandom.setBaseChunkSeed(i, j);
 		Biome[] abiome = this.biomeProvider.getBiomeBlock(i * 16, j * 16, 16, 16);
+		this.setBlocksInChunkIsland(i,j,chunkIn);
 		chunkIn.setBiomes(abiome);
 		this.setBlocksInChunk(i, j, chunkIn);
 		chunkIn.createHeightMap(Heightmap.Type.WORLD_SURFACE_WG, Heightmap.Type.OCEAN_FLOOR_WG);
@@ -183,9 +189,9 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 		double[] adouble = this.depthNoise.func_202646_a(x, z, 5, 5, this.settings.getDepthNoiseScaleX(), this.settings.getDepthNoiseScaleZ(), this.settings.getDepthNoiseScaleExponent());
 		float f = this.settings.getCoordinateScale();
 		float f1 = this.settings.getHeightScale();
-		double[] adouble1 = this.mainPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double) (f / this.settings.getMainNoiseScaleX()), (double) (f1 / this.settings.getMainNoiseScaleY()), (double) (f / this.settings.getMainNoiseScaleZ()));
-		double[] adouble2 = this.minLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double) f, (double) f1, (double) f);
-		double[] adouble3 = this.maxLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double) f, (double) f1, (double) f);
+		double[] adouble1 = this.minLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double) (f / this.settings.getMainNoiseScaleX()), (double) (f1 / this.settings.getMainNoiseScaleY()), (double) (f / this.settings.getMainNoiseScaleZ()));
+		double[] adouble2 = this.maxLimitPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double) f, (double) f1, (double) f);
+		double[] adouble3 = this.mainPerlinNoise.func_202647_a(x, y, z, 5, 33, 5, (double) f, (double) f1, (double) f);
 		int i = 0;
 		int j = 0;
 
@@ -271,8 +277,177 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 				}
 			}
 		}
+	}
+
+	public void setBlocksInChunkIsland(int p_202114_1_, int p_202114_2_, IChunk p_202114_3_) {
+		int i = 2;
+		int j = 3;
+		int k = 33;
+		int l = 3;
+		double[] adouble = this.func_202113_a(p_202114_1_ * 2, 0, p_202114_2_ * 2, 3, 33, 3);
+		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		int upperScale=130;
+		for(int i1 = 0; i1 < 2; ++i1) {
+			for(int j1 = 0; j1 < 2; ++j1) {
+				for(int k1 = 0; k1 < 32; ++k1) {
+					double d0 = 0.25D;
+					double d1 = adouble[((i1 + 0) * 3 + j1 + 0) * 33 + k1 + 0];
+					double d2 = adouble[((i1 + 0) * 3 + j1 + 1) * 33 + k1 + 0];
+					double d3 = adouble[((i1 + 1) * 3 + j1 + 0) * 33 + k1 + 0];
+					double d4 = adouble[((i1 + 1) * 3 + j1 + 1) * 33 + k1 + 0];
+					double d5 = (adouble[((i1 + 0) * 3 + j1 + 0) * 33 + k1 + 1] - d1) * 0.25D;
+					double d6 = (adouble[((i1 + 0) * 3 + j1 + 1) * 33 + k1 + 1] - d2) * 0.25D;
+					double d7 = (adouble[((i1 + 1) * 3 + j1 + 0) * 33 + k1 + 1] - d3) * 0.25D;
+					double d8 = (adouble[((i1 + 1) * 3 + j1 + 1) * 33 + k1 + 1] - d4) * 0.25D;
+
+					for(int l1 = 0; l1 < 4; ++l1) {
+						double d9 = 0.125D;
+						double d10 = d1;
+						double d11 = d2;
+						double d12 = (d3 - d1) * 0.125D;
+						double d13 = (d4 - d2) * 0.125D;
+
+						for(int i2 = 0; i2 < 8; ++i2) {
+							double d14 = 0.125D;
+							double d15 = d10;
+							double d16 = (d11 - d10) * 0.125D;
+
+							for(int j2 = 0; j2 < 8; ++j2) {
+								IBlockState iblockstate = Blocks.AIR.getDefaultState();
+								if (d15 > 0.0D) {
+									iblockstate = this.defaultBlock;
+								}
+
+								int k2 = i2 + i1 * 8;
+								int l2 = l1 + k1 * 4;
+								int i3 = j2 + j1 * 8;
+								p_202114_3_.setBlockState(blockpos$mutableblockpos.setPos(k2, l2+upperScale, i3), iblockstate, false);
+								if(iblockstate!=Blocks.AIR.getDefaultState()){
+
+								}
+								d15 += d16;
+							}
+
+							d10 += d12;
+							d11 += d13;
+						}
+
+						d1 += d5;
+						d2 += d6;
+						d3 += d7;
+						d4 += d8;
+					}
+				}
+			}
+		}
 
 	}
+
+	private double[] func_202113_a(int p_202113_1_, int p_202113_2_, int p_202113_3_, int p_202113_4_, int p_202113_5_, int p_202113_6_) {
+		double[] adouble = new double[p_202113_4_ * p_202113_5_ * p_202113_6_];
+		double d0 = 684.412D;
+		double d1 = 684.412D;
+		d0 = d0 * 2.0D;
+		double[] adouble1 = this.mainPerlinNoise.func_202647_a(p_202113_1_, p_202113_2_, p_202113_3_, p_202113_4_, p_202113_5_, p_202113_6_, d0 / 80.0D, 4.277575000000001D, d0 / 80.0D);
+		double[] adouble2 = this.minLimitPerlinNoise.func_202647_a(p_202113_1_, p_202113_2_, p_202113_3_, p_202113_4_, p_202113_5_, p_202113_6_, d0, 684.412D, d0);
+		double[] adouble3 = this.maxLimitPerlinNoise.func_202647_a(p_202113_1_, p_202113_2_, p_202113_3_, p_202113_4_, p_202113_5_, p_202113_6_, d0, 684.412D, d0);
+		int i = p_202113_1_ / 2;
+		int j = p_202113_3_ / 2;
+		int k = 0;
+
+		for(int l = 0; l < p_202113_4_; ++l) {
+			for(int i1 = 0; i1 < p_202113_6_; ++i1) {
+				float f = this.getIslandHeightValue(i, j, l, i1);
+
+				for(int j1 = 0; j1 < p_202113_5_; ++j1) {
+					double d2 = adouble2[k] / 512.0D;
+					double d3 = adouble3[k] / 512.0D;
+					double d5 = (adouble1[k] / 10.0D + 1.0D) / 2.0D;
+					double d4;
+					if (d5 < 0.0D) {
+						d4 = d2;
+					} else if (d5 > 1.0D) {
+						d4 = d3;
+					} else {
+						d4 = d2 + (d3 - d2) * d5;
+					}
+
+					d4 = d4 - 8.0D;
+					d4 = d4 + (double)f;
+					int k1 = 2;
+					if (j1 > p_202113_5_ / 2 - k1) {
+						double d6 = (double)((float)(j1 - (p_202113_5_ / 2 - k1)) / 64.0F);
+						d6 = MathHelper.clamp(d6, 0.0D, 1.0D);
+						d4 = d4 * (1.0D - d6) - 3000.0D * d6;
+					}
+
+					k1 = 8;
+					if (j1 < k1) {
+						double d7 = (double)((float)(k1 - j1) / ((float)k1 - 1.0F));
+						d4 = d4 * (1.0D - d7) - 30.0D * d7;
+					}
+
+					adouble[k] = d4;
+					++k;
+				}
+			}
+		}
+
+		return adouble;
+	}
+
+	private float getIslandHeightValue(int p_185960_1_, int p_185960_2_, int p_185960_3_, int p_185960_4_)
+	{
+		float f = (float)(p_185960_1_ * 2 + p_185960_3_);
+		float f1 = (float)(p_185960_2_ * 2 + p_185960_4_);
+		float f2 = 100.0F - MathHelper.sqrt(f * f + f1 * f1) * 8.0F;
+
+		if (f2 > 80.0F)
+		{
+			f2 = 80.0F;
+		}
+
+		if (f2 < -100.0F)
+		{
+			f2 = -100.0F;
+		}
+
+		for (int i = -12; i <= 12; ++i)
+		{
+			for (int j = -12; j <= 12; ++j)
+			{
+				long k = (long)(p_185960_1_ + i);
+				long l = (long)(p_185960_2_ + j);
+
+				if (k*k+l*l>1000L&&this.islandNoise.getValue((double)k, (double)l) < -0.9899999761581421D)
+				{
+					float f3 = (MathHelper.abs((float)k) * 3439.0F + MathHelper.abs((float)l) * 147.0F) % 13.0F + 9.0F;
+					f = (float)(p_185960_3_ - i * 2);
+					f1 = (float)(p_185960_4_ - j * 2);
+					float f4 = 100.0F - MathHelper.sqrt(f * f + f1 * f1) * f3;
+
+					if (f4 > 80.0F)
+					{
+						f4 = 80.0F;
+					}
+
+					if (f4 < -100.0F)
+					{
+						f4 = -100.0F;
+					}
+
+					if (f4 > f2)
+					{
+						f2 = f4;
+					}
+				}
+			}
+		}
+
+		return f2;
+	}
+
+
 
 	public OverworldGenSettings getSettings() {
 		return this.settings;

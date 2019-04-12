@@ -20,46 +20,8 @@ import net.minecraft.world.World;
 import java.util.Map;
 import java.util.Set;
 
-import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CLOUD;
-import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CLOUD_CONDENSED;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_SAND;
-import static io.github.krevik.kathairis.init.ModBlocks.LAYERED_SAND;
-import static io.github.krevik.kathairis.init.ModBlocks.MUD_BLOCK;
-import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
-import static io.github.krevik.kathairis.init.ModBlocks.YELLOW_CLOUD;
-import static io.github.krevik.kathairis.init.ModBlocks.YELLOW_CLOUD_CONDENSED;
-import static net.minecraft.init.Blocks.BLACK_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.BLUE_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.BROWN_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.CLAY;
-import static net.minecraft.init.Blocks.COARSE_DIRT;
-import static net.minecraft.init.Blocks.CYAN_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.DIRT;
-import static net.minecraft.init.Blocks.FARMLAND;
-import static net.minecraft.init.Blocks.GRASS_BLOCK;
-import static net.minecraft.init.Blocks.GRASS_PATH;
-import static net.minecraft.init.Blocks.GRAVEL;
-import static net.minecraft.init.Blocks.GRAY_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.GREEN_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.LIGHT_BLUE_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.LIGHT_GRAY_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.LIME_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.MAGENTA_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.MYCELIUM;
-import static net.minecraft.init.Blocks.ORANGE_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.PINK_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.PODZOL;
-import static net.minecraft.init.Blocks.PURPLE_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.RED_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.RED_SAND;
-import static net.minecraft.init.Blocks.SAND;
-import static net.minecraft.init.Blocks.SNOW;
-import static net.minecraft.init.Blocks.SNOW_BLOCK;
-import static net.minecraft.init.Blocks.SOUL_SAND;
-import static net.minecraft.init.Blocks.WHITE_CONCRETE_POWDER;
-import static net.minecraft.init.Blocks.YELLOW_CONCRETE_POWDER;
+import static io.github.krevik.kathairis.init.ModBlocks.*;
+import static net.minecraft.init.Blocks.*;
 
 /**
  * @author Krevik

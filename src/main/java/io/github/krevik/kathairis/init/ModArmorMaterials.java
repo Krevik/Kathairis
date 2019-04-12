@@ -11,10 +11,7 @@ import net.minecraft.util.SoundEvent;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static io.github.krevik.kathairis.init.ModItems.CLOUD_ESSENCE;
-import static io.github.krevik.kathairis.init.ModItems.MYSTIC_GEM;
-import static io.github.krevik.kathairis.init.ModItems.REVENUM_INGOT;
-import static io.github.krevik.kathairis.init.ModItems.TITANIUM_INGOT;
+import static io.github.krevik.kathairis.init.ModItems.*;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 /**

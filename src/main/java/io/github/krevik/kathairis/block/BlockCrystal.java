@@ -11,12 +11,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
@@ -26,12 +21,8 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.BLUE_CRYSTAL;
-import static io.github.krevik.kathairis.init.ModBlocks.VIOLET_CRYSTAL;
-import static io.github.krevik.kathairis.init.ModBlocks.YELLOW_CRYSTAL;
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_BLUE;
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_VIOLET;
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_YELLOW;
+import static io.github.krevik.kathairis.init.ModBlocks.*;
+import static io.github.krevik.kathairis.init.ModItems.*;
 
 /**
  * @author Krevik

@@ -6,20 +6,7 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModItems.BISON_MEAT;
-import static io.github.krevik.kathairis.init.ModItems.CLOUD_ESSENCE;
-import static io.github.krevik.kathairis.init.ModItems.CLOUD_PEARL;
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_BLUE;
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_VIOLET;
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_SHARD_YELLOW;
-import static io.github.krevik.kathairis.init.ModItems.FRUP;
-import static io.github.krevik.kathairis.init.ModItems.GOOSEBERRIES;
-import static io.github.krevik.kathairis.init.ModItems.HEART;
-import static io.github.krevik.kathairis.init.ModItems.MAGIC_BEANS;
-import static io.github.krevik.kathairis.init.ModItems.MAGNETHIUM_SHARD;
-import static io.github.krevik.kathairis.init.ModItems.MYSTIC_GEM;
-import static io.github.krevik.kathairis.init.ModItems.REVENUM_INGOT;
-import static io.github.krevik.kathairis.init.ModItems.TITANIUM_INGOT;
+import static io.github.krevik.kathairis.init.ModItems.*;
 
 /**
  * @author Krevik

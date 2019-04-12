@@ -7,11 +7,7 @@ import net.minecraft.util.LazyLoadBase;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import static io.github.krevik.kathairis.init.ModItems.CRYSTAL_CLUSTER;
-import static io.github.krevik.kathairis.init.ModItems.MAGNETHIUM_SHARD;
-import static io.github.krevik.kathairis.init.ModItems.MYSTIC_GEM;
-import static io.github.krevik.kathairis.init.ModItems.REVENUM_INGOT;
-import static io.github.krevik.kathairis.init.ModItems.TITANIUM_INGOT;
+import static io.github.krevik.kathairis.init.ModItems.*;
 
 /**
  * @author Cadiboo

@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.world.dimension.feature;
 
 import io.github.krevik.kathairis.world.dimension.feature.desert.*;
+import io.github.krevik.kathairis.world.dimension.feature.floating_islands.FeatureHugeFloatingIsland;
 import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureForestCandleBush;
 import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureSteppedSucculent;
 import io.github.krevik.kathairis.world.dimension.feature.plainfields.FeaturePlainFields;
@@ -37,6 +38,7 @@ public class KatharianFeatureList {
     public static final Feature<NoFeatureConfig> SMALL_ROCK = new FeatureDesertSmallRocks();
     public static final Feature<NoFeatureConfig> KATHARIAN_FOREST_BUSH = new FeatureKatharianForestBush();
     public static final Feature<BushConfig> KATHARIAN_FOREST_CANDLE_BUSH = new FeatureForestCandleBush();
+    public static final Feature<NoFeatureConfig> KATHARIAN_HUGE_FLOATING_ISLAND = new FeatureHugeFloatingIsland();
 
     public static final ISurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = new KathairisSwampSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_DESERT_EDGE_SURFACE_BUILDER = new KatharianDesertEdgeSurfaceBuilder();

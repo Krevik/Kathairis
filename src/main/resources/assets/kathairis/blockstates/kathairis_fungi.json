@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"": {
-			"model": "kathairis:block/kathairis_fungi"
+			"model": "kathairis:block/kathairis_fungi_1"
 		}
 	}
 }

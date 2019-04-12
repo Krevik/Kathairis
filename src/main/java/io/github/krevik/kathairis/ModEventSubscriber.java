@@ -1,87 +1,22 @@
 package io.github.krevik.kathairis;
 
-import io.github.krevik.kathairis.block.BlockBaurble;
-import io.github.krevik.kathairis.block.BlockBisonStars;
-import io.github.krevik.kathairis.block.BlockButterflyFlower;
-import io.github.krevik.kathairis.block.BlockCloudFlower;
-import io.github.krevik.kathairis.block.BlockCondensedCloud;
-import io.github.krevik.kathairis.block.BlockCrystal;
-import io.github.krevik.kathairis.block.BlockFluoFungi;
-import io.github.krevik.kathairis.block.BlockFrupPlant;
-import io.github.krevik.kathairis.block.BlockGlowVines;
-import io.github.krevik.kathairis.block.BlockGooseberry;
-import io.github.krevik.kathairis.block.BlockJadeVines;
-import io.github.krevik.kathairis.block.BlockKathairisCloud;
-import io.github.krevik.kathairis.block.BlockKathairisDeadGrass;
-import io.github.krevik.kathairis.block.BlockKathairisDirt;
-import io.github.krevik.kathairis.block.BlockKathairisDoors;
-import io.github.krevik.kathairis.block.BlockKathairisFence;
-import io.github.krevik.kathairis.block.BlockKathairisFenceGate;
-import io.github.krevik.kathairis.block.BlockKathairisFungi;
-import io.github.krevik.kathairis.block.BlockKathairisGrass;
-import io.github.krevik.kathairis.block.BlockKathairisLeaves;
-import io.github.krevik.kathairis.block.BlockKathairisLog;
-import io.github.krevik.kathairis.block.BlockKathairisMiniGrass;
-import io.github.krevik.kathairis.block.BlockKathairisMultiGrass;
-import io.github.krevik.kathairis.block.BlockKathairisNightFlower;
-import io.github.krevik.kathairis.block.BlockKathairisOre;
-import io.github.krevik.kathairis.block.BlockKathairisPlant;
-import io.github.krevik.kathairis.block.BlockKathairisPortal;
-import io.github.krevik.kathairis.block.BlockKathairisRocktus;
-import io.github.krevik.kathairis.block.BlockKathairisSand;
-import io.github.krevik.kathairis.block.BlockKathairisSlab;
-import io.github.krevik.kathairis.block.BlockKathairisStairs;
-import io.github.krevik.kathairis.block.BlockKathairisStone;
-import io.github.krevik.kathairis.block.BlockKathairisSucculent;
-import io.github.krevik.kathairis.block.BlockKathairisTallGrass;
-import io.github.krevik.kathairis.block.BlockKathairisTrapdoor;
-import io.github.krevik.kathairis.block.BlockKathairisWall;
-import io.github.krevik.kathairis.block.BlockLayeredSand;
-import io.github.krevik.kathairis.block.BlockMagicBeans;
-import io.github.krevik.kathairis.block.BlockMagnethium;
-import io.github.krevik.kathairis.block.BlockRefinedCloud;
-import io.github.krevik.kathairis.block.BlockSnowdropCyprepedium;
-import io.github.krevik.kathairis.block.BlockSoftSand;
-import io.github.krevik.kathairis.block.BlockSolisCrystals;
-import io.github.krevik.kathairis.block.BlockSteppedSucculent;
+import io.github.krevik.kathairis.block.*;
 import io.github.krevik.kathairis.init.*;
-import io.github.krevik.kathairis.item.ItemFrup;
-import io.github.krevik.kathairis.item.ItemGooseberries;
-import io.github.krevik.kathairis.item.ItemKathairisArmor;
-import io.github.krevik.kathairis.item.ItemKathairisAxe;
-import io.github.krevik.kathairis.item.ItemKathairisHoe;
-import io.github.krevik.kathairis.item.ItemKathairisPickaxe;
-import io.github.krevik.kathairis.item.ItemKathairisShovel;
-import io.github.krevik.kathairis.item.ItemKathairisSword;
-import io.github.krevik.kathairis.item.ItemMagicBeans;
-import io.github.krevik.kathairis.item.ItemMysticGem;
+import io.github.krevik.kathairis.item.*;
 import io.github.krevik.kathairis.util.ModUtil;
-import io.github.krevik.kathairis.world.dimension.DimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
-import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
-import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
-import io.netty.buffer.Unpooled;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.biome.provider.BiomeProviderType;
-import net.minecraft.world.biome.provider.IBiomeProviderSettings;
-import net.minecraft.world.dimension.Dimension;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -92,14 +27,8 @@ import javax.annotation.Nonnull;
 
 import static io.github.krevik.kathairis.init.ModItemGroups.BUILDING_BLOCKS;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
-import static net.minecraft.inventory.EntityEquipmentSlot.CHEST;
-import static net.minecraft.inventory.EntityEquipmentSlot.FEET;
-import static net.minecraft.inventory.EntityEquipmentSlot.HEAD;
-import static net.minecraft.inventory.EntityEquipmentSlot.LEGS;
-import static net.minecraft.item.EnumRarity.COMMON;
-import static net.minecraft.item.EnumRarity.EPIC;
-import static net.minecraft.item.EnumRarity.RARE;
-import static net.minecraft.item.EnumRarity.UNCOMMON;
+import static net.minecraft.inventory.EntityEquipmentSlot.*;
+import static net.minecraft.item.EnumRarity.*;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 /**
@@ -134,8 +63,8 @@ public final class ModEventSubscriber {
 				setup(new BlockKathairisLog(), "mystic_leaves"),
 				setup(new BlockKathairisLog(), "shiny_log"),
 				setup(new BlockKathairisLeaves(), "shiny_leaves"),
-				setup(new BlockKathairisLeaves(), "soul_log"),
-				setup(new BlockKathairisLeaves(), "soul_leaves"),
+				setup(new BlockKathairisLog(), "soul_log"),
+				setup(new BlockKathairisLog(), "soul_leaves"),
 				setup(new BlockKathairisOre(1, 1, 3, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4f)), "revenum_ore"),
 				setup(new BlockKathairisOre(1, 2, 4, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(7f)), "titanium_ore"),
 				setup(new BlockKathairisSand(), "kathairis_sand"),
@@ -249,7 +178,8 @@ public final class ModEventSubscriber {
 				setup(new BlockKathairisPlant(), "forest_candle"),
 				setup(new BlockKathairisRocktus(), "rocktus"),
 				setup(new BlockKathairisLog(), "elderwillow_log"),
-				setup(new BlockKathairisLeaves(), "elderwillow_leaves")
+				setup(new BlockKathairisLeaves(), "elderwillow_leaves"),
+				setup(new BlockPurplePalm(),"purple_palm")
 		);
 
 	}

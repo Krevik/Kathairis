@@ -15,6 +15,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import java.awt.*;
 
 public class BiomeKatharianSoftSandLakes extends BiomeKatharianBiomeBase{
+
     public static final SurfaceBuilderConfig SAND_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(ModBlocks.SOFT_SAND.getDefaultState(), ModBlocks.SOFT_SAND.getDefaultState(), ModBlocks.SOFT_SAND.getDefaultState());
 
     public BiomeKatharianSoftSandLakes() {

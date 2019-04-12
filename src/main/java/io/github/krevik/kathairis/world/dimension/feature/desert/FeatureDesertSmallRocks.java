@@ -1,6 +1,5 @@
 package io.github.krevik.kathairis.world.dimension.feature.desert;
 
-import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +22,7 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
                     world.setBlockState(pos.up(y),getRandomWeatheredRockState(random),18);
                 }
                 if(random.nextInt(6)==0) {
-                    //world.setBlockState(pos.up(mainHeight + 1), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
+                    world.setBlockState(pos.up(mainHeight + 1), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
                 }
                 if(mainHeight>2){
                     int surroundingHeight=random.nextInt(mainHeight-1);
@@ -38,16 +37,16 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
                         world.setBlockState(pos4,getRandomWeatheredRockState(random),18);
                         if(y==surroundingHeight){
                             if(random.nextInt(8)==0){
-                                //world.setBlockState(pos.up(y+1).east(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
+                                world.setBlockState(pos.up(y+1).east(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
                             }
                             if(random.nextInt(8)==0){
-                                //world.setBlockState(pos.up(y+1).west(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
+                                world.setBlockState(pos.up(y+1).west(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
                             }
                             if(random.nextInt(8)==0){
-                                //world.setBlockState(pos.up(y+1).south(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
+                                world.setBlockState(pos.up(y+1).south(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
                             }
                             if(random.nextInt(8)==0){
-                                //world.setBlockState(pos.up(y+1).north(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
+                                world.setBlockState(pos.up(y+1).north(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
                             }
                         }
                     }

@@ -7,11 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReaderBase;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_SAND;
-import static io.github.krevik.kathairis.init.ModBlocks.SOFT_SAND;
-import static io.github.krevik.kathairis.init.ModBlocks.WEATHERED_ROCK;
+import static io.github.krevik.kathairis.init.ModBlocks.*;
 
 /**
  * @author Krevik

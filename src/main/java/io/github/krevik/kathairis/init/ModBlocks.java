@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.block.BlockKathairisPortal;
-import io.github.krevik.kathairis.util.ModUtil;
 import net.minecraft.block.Block;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -127,5 +126,6 @@ public final class ModBlocks {
 	public static final Block ROCKTUS = _null();
 	public static final Block ELDERWILLOW_LOG = _null();
 	public static final Block ELDERWILLOW_LEAVES = _null();
+	public static final Block PURPLE_PALM = _null();
 
 }

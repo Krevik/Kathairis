@@ -4,16 +4,13 @@ package io.github.krevik.kathairis.world.dimension;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
-import io.github.krevik.kathairis.init.ModDimensions;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -23,16 +20,16 @@ import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.BiomeProviderType;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.OverworldDimension;
-import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.ChunkGeneratorType;
+import net.minecraft.world.gen.IChunkGenSettings;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IRenderHandler;
-import net.minecraftforge.common.DimensionManager;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-
-import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 public class DimensionKathairis extends OverworldDimension {
 
@@ -51,7 +48,7 @@ public class DimensionKathairis extends OverworldDimension {
         KatharianBiomeProviderSettings overworldbiomeprovidersettings1 = biomeprovidertype1.createSettings().setGeneratorSettings(new KathairisGenSettings()).setWorldInfo(this.world.getWorldInfo());
         BiomeProvider biomeprovider = biomeprovidertype1.create(overworldbiomeprovidersettings1);
 
-        ChunkGeneratorType<OverworldGenSettings, ChunkGeneratorOverworld> chunkgeneratortype4 = ChunkGeneratorType.SURFACE;
+        ChunkGeneratorType<OverworldGenSettings, ChunkGeneratorKathairis> chunkgeneratortype4 = new ChunkGeneratorType<>(ChunkGeneratorKathairis::new,true,KathairisGenSettings::new,new ResourceLocation("kathairis","kathairis_chunk_generator"));
         OverworldGenSettings overworldgensettings1 = chunkgeneratortype4.createSettings();
         overworldgensettings1.setDefautBlock(ModBlocks.KATHAIRIS_STONE.getDefaultState());
         overworldgensettings1.setDefaultFluid(Blocks.WATER.getDefaultState());

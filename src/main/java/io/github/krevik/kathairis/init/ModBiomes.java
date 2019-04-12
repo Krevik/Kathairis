@@ -23,5 +23,4 @@ public final class ModBiomes {
 	public static final Biome PLAIN_FIELDS = _null();
 	//swamp
 	public static final Biome KATHARIAN_SWAMP = _null();
-
 }

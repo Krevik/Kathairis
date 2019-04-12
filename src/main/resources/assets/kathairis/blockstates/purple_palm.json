@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=normal": { "model": "kathairis:block/purple_palm" },
+		"variant=air": { "model": "kathairis:block/air" }
+	}
+}
