@@ -1,6 +1,8 @@
 package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.block.*;
+import io.github.krevik.kathairis.entity.*;
+import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.item.*;
 import io.github.krevik.kathairis.util.ModUtil;
@@ -10,8 +12,11 @@ import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemSpawnEgg;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
@@ -270,6 +275,8 @@ public final class ModEventSubscriber {
 				setup(new ItemKathairisPickaxe(ModItemTiers.CRYSTAL), "crystal_pickaxe"),
 				setup(new ItemFrup(3, 0.4f, ModBlocks.FRUP_PLANT), "frup"),
 				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans")
+
+				//setup(makeSpawnEgg(ModEntities.BIG_TURTLE,0x000,0x000),"big_turtle")
 		);
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
 
@@ -360,6 +367,41 @@ public final class ModEventSubscriber {
 				setup(new BiomeKatharianSwamps(),"katharian_swamp")
 		);
 	}
+
+	@SubscribeEvent
+	public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
+		event.getRegistry().registerAll(
+			setup(EntityType.Builder.create(EntityBigTurtle.class, EntityBigTurtle::new).build("big_turtle"), "big_turtle"),
+				setup(EntityType.Builder.create(EntityButterfly.class, EntityButterfly::new).build("basic_butterfly1"), "basic_butterfly1"),
+				setup(EntityType.Builder.create(EntityButterfly1.class, EntityButterfly1::new).build("basic_butterfly2"), "basic_butterfly2"),
+				setup(EntityType.Builder.create(EntityCloudShimmer.class, EntityCloudShimmer::new).build("cloud_shimmer"), "cloud_shimmer"),
+				setup(EntityType.Builder.create(EntityIllukini.class, EntityIllukini::new).build("illukini"), "illukini"),
+				setup(EntityType.Builder.create(EntityRubySile.class, EntityRubySile::new).build("ruby_sile"), "ruby_sile"),
+				setup(EntityType.Builder.create(EntitySkylight.class, EntitySkylight::new).build("skylight"), "skylight"),
+				setup(EntityType.Builder.create(EntityBison.class, EntityBison::new).build("bison"), "bison"),
+				setup(EntityType.Builder.create(EntityCactiSpore.class, EntityCactiSpore::new).build("cacti_spore"), "cacti_spore"),
+				setup(EntityType.Builder.create(EntityCamel.class, EntityCamel::new).build("camel"), "camel"),
+				setup(EntityType.Builder.create(EntityCloudOister.class, EntityCloudOister::new).build("cloud_oister"), "cloud_oister"),
+				setup(EntityType.Builder.create(EntityCloudySlime.class, EntityCloudySlime::new).build("cloudy_slime"), "cloudy_slime"),
+				setup(EntityType.Builder.create(EntityFlyingSquid.class, EntityFlyingSquid::new).build("flying_squid"), "flying_squid"),
+				setup(EntityType.Builder.create(EntityFungite.class, EntityFungite::new).build("fungite"), "fungite"),
+				setup(EntityType.Builder.create(EntityGaznowel.class, EntityGaznowel::new).build("gaznowel"), "gaznowel"),
+				setup(EntityType.Builder.create(EntityGecko.class, EntityGecko::new).build("gecko"), "gecko"),
+				setup(EntityType.Builder.create(EntityHowler.class, EntityHowler::new).build("howler"), "howler"),
+				setup(EntityType.Builder.create(EntityJellyFish.class, EntityJellyFish::new).build("jelly_fish"), "jelly_fish"),
+				setup(EntityType.Builder.create(EntityLivingFlower.class, EntityLivingFlower::new).build("living_flower"), "living_flower"),
+				setup(EntityType.Builder.create(EntityMysticBird.class, EntityMysticBird::new).build("mystic_bird"), "mystic_bird"),
+				setup(EntityType.Builder.create(EntityPhasm.class, EntityPhasm::new).build("phasm"), "phasm"),
+				setup(EntityType.Builder.create(EntityPoisonousScorpion.class, EntityPoisonousScorpion::new).build("poisonous_scorpion"), "poisonous_scorpion"),
+				setup(EntityType.Builder.create(EntitySkyray.class, EntitySkyray::new).build("skyray"), "skyray"),
+				setup(EntityType.Builder.create(EntityStrangeWanderer.class, EntityStrangeWanderer::new).build("strange_wanderer"), "strange_wanderer")
+				);
+	}
+
+	private static Item makeSpawnEgg(EntityType<?> type, int color1, int color2){
+		return new ItemSpawnEgg(type,color1,color2,new Item.Properties().group(ItemGroup.SEARCH));
+	}
+
 
 	public static SoundEvent setupSound(@Nonnull final String... nameParts) {
 		final ResourceLocation name = new ResourceLocation(MOD_ID, Strings.join(nameParts, "."));

@@ -2,6 +2,7 @@ package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.client.ClientEventSubscriber;
 import io.github.krevik.kathairis.init.ModDimensions;
+import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.PacketBuffer;
@@ -41,4 +42,7 @@ public final class Kathairis {
 		OBJLoader.INSTANCE.addDomain(ModReference.MOD_ID);
 	}
 
+	public static FunctionHelper getHelper(){
+		return new FunctionHelper();
+	}
 }

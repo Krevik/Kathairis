@@ -1,5 +1,7 @@
 package io.github.krevik.kathairis.client;
 
+import io.github.krevik.kathairis.client.render.RenderBigTurtle;
+import io.github.krevik.kathairis.entity.EntityBigTurtle;
 import io.github.krevik.kathairis.init.ModBiomes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,7 +11,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.lwjgl.opengl.GL11;
 
@@ -25,9 +29,16 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = MOD)
 public class ClientEventSubscriber {
 
+
     @SubscribeEvent
     public static void registerBlockColors(FMLLoadCompleteEvent event){
         ModBlocksColorHandler.registerBlockColors();
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(FMLClientSetupEvent event){
+        RenderingRegistry.registerEntityRenderingHandler(EntityBigTurtle.class, new RenderBigTurtle.Factory());
+
     }
 
     static float swampFogDensity=0.005f;
