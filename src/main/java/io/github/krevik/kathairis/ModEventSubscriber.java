@@ -12,6 +12,8 @@ import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -274,9 +276,10 @@ public final class ModEventSubscriber {
 				setup(new ItemKathairisHoe(ModItemTiers.MAGNETHIUM), "magnethium_hoe"),
 				setup(new ItemKathairisPickaxe(ModItemTiers.CRYSTAL), "crystal_pickaxe"),
 				setup(new ItemFrup(3, 0.4f, ModBlocks.FRUP_PLANT), "frup"),
-				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans")
+				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans"),
 
-				//setup(makeSpawnEgg(ModEntities.BIG_TURTLE,0x000,0x000),"big_turtle")
+				setup(makeSpawnEgg(ModEntities.BIG_TURTLE,0xa87001, 0x21b6d),"big_turtle")
+				//setup(new ItemSpawnEgg(EntityType.getById("kathairis:big_turtle"),0x00,0x000, new Item.Properties().group(ItemGroup.SEARCH)),"big_turtle")
 		);
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
 
@@ -371,7 +374,7 @@ public final class ModEventSubscriber {
 	@SubscribeEvent
 	public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
 		event.getRegistry().registerAll(
-			setup(EntityType.Builder.create(EntityBigTurtle.class, EntityBigTurtle::new).build("big_turtle"), "big_turtle"),
+				setup(EntityType.Builder.create(EntityBigTurtle.class, EntityBigTurtle::new).build("big_turtle"),"big_turtle"),
 				setup(EntityType.Builder.create(EntityButterfly.class, EntityButterfly::new).build("basic_butterfly1"), "basic_butterfly1"),
 				setup(EntityType.Builder.create(EntityButterfly1.class, EntityButterfly1::new).build("basic_butterfly2"), "basic_butterfly2"),
 				setup(EntityType.Builder.create(EntityCloudShimmer.class, EntityCloudShimmer::new).build("cloud_shimmer"), "cloud_shimmer"),
@@ -396,7 +399,11 @@ public final class ModEventSubscriber {
 				setup(EntityType.Builder.create(EntitySkyray.class, EntitySkyray::new).build("skyray"), "skyray"),
 				setup(EntityType.Builder.create(EntityStrangeWanderer.class, EntityStrangeWanderer::new).build("strange_wanderer"), "strange_wanderer")
 				);
+
+
 	}
+
+
 
 	private static Item makeSpawnEgg(EntityType<?> type, int color1, int color2){
 		return new ItemSpawnEgg(type,color1,color2,new Item.Properties().group(ItemGroup.SEARCH));

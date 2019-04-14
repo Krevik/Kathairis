@@ -1,8 +1,10 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Fluids;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
@@ -40,7 +42,9 @@ public class BiomeKatharianDesertEdge extends BiomeKatharianBiomeBase{
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.LIQUIDS, new LiquidsConfig(Fluids.LAVA), HEIGHT_VERY_BIASED_RANGE, new CountRangeConfig(20, 8, 16, 256)));
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD_MINI_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
-
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.BIG_TURTLE, 12, 1, 1));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.POISONOUS_SCORPION, 3, 1, 1));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.CAMEL, 6, 1, 1));
         baseGrassColor= Color.ORANGE;
     }
 

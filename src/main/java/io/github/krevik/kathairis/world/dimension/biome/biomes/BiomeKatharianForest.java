@@ -1,8 +1,10 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Fluids;
 import net.minecraft.world.biome.Biome;
@@ -53,12 +55,12 @@ public final class BiomeKatharianForest extends BiomeKatharianBiomeBase {
 
         this.addFeature(Decoration.UNDERGROUND_DECORATION, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD_MINI_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(KatharianEntityTypes.MYSTIC_BIRD, 12, 1, 2));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(KatharianEntityTypes.GECKO, 4, 1, 1));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(KatharianEntityTypes.LIVING_FLOWER, 8, 1, 1));
-        //this.addSpawn(EnumCreatureType.MONSTER, new SpawnListEntry(KatharianEntityTypes.HOWLER, 5, 1, 1));
-        //this.addSpawn(EnumCreatureType.MONSTER, new SpawnListEntry(KatharianEntityTypes.FUNGITE, 2, 1, 1));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(KatharianEntityTypes.CACTI_SPORE, 4, 1, 1));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.MYSTIC_BIRD, 12, 1, 2));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.GECKO, 4, 1, 1));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.LIVING_FLOWER, 8, 1, 1));
+        //this.addSpawn(EnumCreatureType.MONSTER, new SpawnListEntry(ModEntities.HOWLER, 5, 1, 1));
+        //this.addSpawn(EnumCreatureType.MONSTER, new SpawnListEntry(ModEntities.FUNGITE, 2, 1, 1));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.CACTI_SPORE, 4, 1, 1));
     }
 
     /*@Override

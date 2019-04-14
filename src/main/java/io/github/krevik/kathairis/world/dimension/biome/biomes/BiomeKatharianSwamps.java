@@ -2,7 +2,9 @@ package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
@@ -31,5 +33,7 @@ public class BiomeKatharianSwamps extends BiomeKatharianBiomeBase {
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.RANDOM_FEATURE_LIST, new RandomDefaultFeatureListConfig(new Feature[]{KatharianFeatureList.BASIC_SWAMP_FEATURE}, new IFeatureConfig[]{IFeatureConfig.NO_FEATURE_CONFIG, IFeatureConfig.NO_FEATURE_CONFIG}, new float[]{0.2F, 0.1F}, KatharianFeatureList.BASIC_SWAMP_FEATURE, IFeatureConfig.NO_FEATURE_CONFIG), AT_SURFACE_WITH_EXTRA, new AtSurfaceWithExtraConfig(2, 0.5F, 1)));
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(ModBlocks.KATHAIRIS_FUNGI), TWICE_SURFACE_WITH_CHANCE, new ChanceConfig(2)));
         this.baseGrassColor=new Color(Color.YELLOW.getRed(),Color.YELLOW.getGreen(),Color.YELLOW.getBlue());
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.MYSTIC_BIRD, 5, 1, 3));
+        //this.addSpawn(EnumCreatureType.MONSTER, new SpawnListEntry(ModEntities.PHASM, 2, 1, 1));
     }
 }

@@ -1,8 +1,12 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.*;
@@ -46,11 +50,11 @@ public class BiomeKatharianPlainFields extends BiomeKatharianBiomeBase {
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.KATHARIAN_PLAIN_FIELDS, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(4, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD_MINI_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry((EntityType<? extends EntityLiving>) KatharianEntityTypes.MYSTIC_BIRD, 12, 1, 3));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry((EntityType<? extends EntityLiving>) KatharianEntityTypes.JELLY_FISH, 10, 1, 2));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry((EntityType<? extends EntityLiving>) KatharianEntityTypes.BISON, 8, 2, 4));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry((EntityType<? extends EntityLiving>) KatharianEntityTypes.BASIC_BUTTERFLY1, 10, 1, 1));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry((EntityType<? extends EntityLiving>) KatharianEntityTypes.BASIC_BUTTERFLY2, 10, 1, 1));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.MYSTIC_BIRD, 12, 1, 3));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.JELLY_FISH, 10, 1, 2));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.BISON, 8, 2, 4));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.BASIC_BUTTERFLY1, 10, 1, 1));
+        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.BASIC_BUTTERFLY2, 10, 1, 1));
 
     }
 }

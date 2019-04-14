@@ -2,8 +2,17 @@ package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemSpawnEgg;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
+
+import java.util.ArrayList;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static io.github.krevik.kathairis.util.ModUtil._null;
@@ -36,4 +45,35 @@ public class ModEntities {
     public static final EntityType<EntitySkyray> SKYRAY = _null();
     public static final EntityType<EntityStrangeWanderer> STRANGE_WANDERER = _null();
 
+    public static void registerPlacementType(EntityType<?> type,EntitySpawnPlacementRegistry.SpawnPlacementType spawnType){
+        EntitySpawnPlacementRegistry.register(type, spawnType, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, null);
+    }
+
+    private static void registerEntitySpawn(EntityType<? extends EntityLiving> type,EnumCreatureType creatureType, EntitySpawnPlacementRegistry.SpawnPlacementType spawnType,Biome[] biomes, int weight, int min, int max) {
+        registerPlacementType(type,spawnType);
+        for (Biome bgb : biomes) {
+            Biome biome = ForgeRegistries.BIOMES.getValue(bgb.getRegistryName());
+            if (biome != null) {
+                biome.getSpawns(creatureType).add(new Biome.SpawnListEntry(type, weight, min, max));
+            }
+        }
+    }
+
+    public static void registerEntitySpawns(){
+        EntitySpawnPlacementRegistry.SpawnPlacementType ON_GROUND = EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND;
+        registerEntitySpawn(ModEntities.MYSTIC_BIRD,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_SWAMP,ModBiomes.PLAIN_FIELDS},12,1,2);
+        registerEntitySpawn(ModEntities.BIG_TURTLE,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE,ModBiomes.SOFT_SAND_LAKES},12,1,1);
+        registerEntitySpawn(ModEntities.POISONOUS_SCORPION,EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE,ModBiomes.SOFT_SAND_LAKES},3,1,1);
+        registerEntitySpawn(ModEntities.CAMEL,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE,ModBiomes.SOFT_SAND_LAKES},6,1,1);
+        registerEntitySpawn(ModEntities.GECKO,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},4,1,1);
+        registerEntitySpawn(ModEntities.LIVING_FLOWER,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},8,1,1);
+        registerEntitySpawn(ModEntities.HOWLER,EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},5,1,1);
+        registerEntitySpawn(ModEntities.FUNGITE,EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},2,1,1);
+        registerEntitySpawn(ModEntities.CACTI_SPORE,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},4,1,1);
+        registerEntitySpawn(ModEntities.JELLY_FISH,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,2);
+        registerEntitySpawn(ModEntities.BISON,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},8,2,4);
+        registerEntitySpawn(ModEntities.BASIC_BUTTERFLY1,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
+        registerEntitySpawn(ModEntities.BASIC_BUTTERFLY2,EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
+        registerEntitySpawn(ModEntities.PHASM,EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_SWAMP},2,1,1);
+    }
 }
