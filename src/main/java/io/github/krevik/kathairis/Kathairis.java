@@ -45,19 +45,21 @@ public final class Kathairis {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverStarted);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverStarting);
 		MinecraftForge.EVENT_BUS.register(ClientEventSubscriber.class);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
 		KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
+		ModEntities.registerPlacementTypes();
 		ModEntities.registerEntitySpawns();
+		// ModEntities.registerEntitySpawns();
 	}
 
 	private void loadComplete(final FMLLoadCompleteEvent event){
 	}
 
-	private void serverStarted(final FMLServerStartingEvent event){
+	private void serverStarting(final FMLServerStartingEvent event){
 	}
 
 	private void setupClient(final FMLClientSetupEvent event) {
