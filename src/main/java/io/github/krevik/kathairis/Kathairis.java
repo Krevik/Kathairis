@@ -57,9 +57,11 @@ public final class Kathairis {
 	}
 
 	private void loadComplete(final FMLLoadCompleteEvent event){
+
 	}
 
 	private void serverStarting(final FMLServerStartingEvent event){
+
 	}
 
 	private void setupClient(final FMLClientSetupEvent event) {

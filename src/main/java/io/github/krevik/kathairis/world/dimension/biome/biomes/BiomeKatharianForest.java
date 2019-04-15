@@ -68,5 +68,8 @@ public final class BiomeKatharianForest extends BiomeKatharianBiomeBase {
         return 0x41f4c7;
     }*/
 
-
+    @Override
+    public float getSpawningChance() {
+        return 0.1f;
+    }
 }

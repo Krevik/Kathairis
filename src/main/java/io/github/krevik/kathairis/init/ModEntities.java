@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemSpawnEgg;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.PlainsBiome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -46,7 +47,7 @@ public class ModEntities {
     public static final EntityType<EntityStrangeWanderer> STRANGE_WANDERER = _null();
 
     public static void registerPlacementType(EntityType<?> type,EntitySpawnPlacementRegistry.SpawnPlacementType spawnType){
-        EntitySpawnPlacementRegistry.register(type, spawnType, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, null);
+        EntitySpawnPlacementRegistry.register(type, spawnType, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,null);
     }
 
     public static void registerPlacementTypes(){
@@ -74,7 +75,6 @@ public class ModEntities {
         registerPlacementType(EntityType.getById(ModEntities.POISONOUS_SCORPION.getRegistryName().toString()), EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
         registerPlacementType(EntityType.getById(ModEntities.SKYRAY.getRegistryName().toString()), EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
         registerPlacementType(EntityType.getById(ModEntities.STRANGE_WANDERER.getRegistryName().toString()), EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-
     }
 
     private static void registerEntitySpawn(EntityType<? extends EntityLiving> type,EnumCreatureType creatureType, EntitySpawnPlacementRegistry.SpawnPlacementType spawnType,Biome[] biomes, int weight, int min, int max) {
@@ -96,11 +96,11 @@ public class ModEntities {
         registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.LIVING_FLOWER.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},8,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.HOWLER.getRegistryName().toString()),EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},5,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.FUNGITE.getRegistryName().toString()),EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},2,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.CACTI_SPORE.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},4,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.JELLY_FISH.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,2);
-        registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.BISON.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},8,2,4);
-        registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.BASIC_BUTTERFLY1.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.BASIC_BUTTERFLY2.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.PHASM.getRegistryName().toString()),EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_SWAMP},2,1,1);
+        //registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.CACTI_SPORE.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_FOREST},4,1,1);
+        //registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.JELLY_FISH.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,2);
+        //registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.BISON.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},8,2,4);
+        //registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.BASIC_BUTTERFLY1.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
+        //registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.BASIC_BUTTERFLY2.getRegistryName().toString()),EnumCreatureType.CREATURE,ON_GROUND,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
+        //registerEntitySpawn((EntityType<? extends EntityLiving>) EntityType.getById(ModEntities.PHASM.getRegistryName().toString()),EnumCreatureType.MONSTER,ON_GROUND,new Biome[]{ModBiomes.KATHARIAN_SWAMP},2,1,1);
     }
 }
