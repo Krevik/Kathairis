@@ -67,11 +67,11 @@ public final class ModEventSubscriber {
 				//TODO turn this into a class?
 				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.METAL)), "titanium_block"),
 				setup(new BlockKathairisLog(), "mystic_log"),
-				setup(new BlockKathairisLog(), "mystic_leaves"),
+				setup(new BlockKathairisLeaves(), "mystic_leaves"),
 				setup(new BlockKathairisLog(), "shiny_log"),
 				setup(new BlockKathairisLeaves(), "shiny_leaves"),
 				setup(new BlockKathairisLog(), "soul_log"),
-				setup(new BlockKathairisLog(), "soul_leaves"),
+				setup(new BlockKathairisLeaves(), "soul_leaves"),
 				setup(new BlockKathairisOre(1, 1, 3, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4f)), "revenum_ore"),
 				setup(new BlockKathairisOre(1, 2, 4, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(7f)), "titanium_ore"),
 				setup(new BlockKathairisSand(), "kathairis_sand"),
@@ -276,11 +276,9 @@ public final class ModEventSubscriber {
 				setup(new ItemKathairisHoe(ModItemTiers.MAGNETHIUM), "magnethium_hoe"),
 				setup(new ItemKathairisPickaxe(ModItemTiers.CRYSTAL), "crystal_pickaxe"),
 				setup(new ItemFrup(3, 0.4f, ModBlocks.FRUP_PLANT), "frup"),
-				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans"),
-
-				setup(makeSpawnEgg(ModEntities.BIG_TURTLE,0xa87001, 0x21b6d),"big_turtle")
-				//setup(new ItemSpawnEgg(EntityType.getById("kathairis:big_turtle"),0x00,0x000, new Item.Properties().group(ItemGroup.SEARCH)),"big_turtle")
+				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans")
 		);
+		ModEntities.registerEggs(event);
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
 
 			//TODO find better way, maybe make all blocks provide their creative tab and if they have an itemblock?
@@ -373,40 +371,9 @@ public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
-		event.getRegistry().registerAll(
-				setup(EntityType.Builder.create(EntityBigTurtle.class, EntityBigTurtle::new).build("big_turtle"),"big_turtle"),
-				setup(EntityType.Builder.create(EntityButterfly.class, EntityButterfly::new).build("basic_butterfly1"), "basic_butterfly1"),
-				setup(EntityType.Builder.create(EntityButterfly1.class, EntityButterfly1::new).build("basic_butterfly2"), "basic_butterfly2"),
-				setup(EntityType.Builder.create(EntityCloudShimmer.class, EntityCloudShimmer::new).build("cloud_shimmer"), "cloud_shimmer"),
-				setup(EntityType.Builder.create(EntityIllukini.class, EntityIllukini::new).build("illukini"), "illukini"),
-				setup(EntityType.Builder.create(EntityRubySile.class, EntityRubySile::new).build("ruby_sile"), "ruby_sile"),
-				setup(EntityType.Builder.create(EntitySkylight.class, EntitySkylight::new).build("skylight"), "skylight"),
-				setup(EntityType.Builder.create(EntityBison.class, EntityBison::new).build("bison"), "bison"),
-				setup(EntityType.Builder.create(EntityCactiSpore.class, EntityCactiSpore::new).build("cacti_spore"), "cacti_spore"),
-				setup(EntityType.Builder.create(EntityCamel.class, EntityCamel::new).build("camel"), "camel"),
-				setup(EntityType.Builder.create(EntityCloudOister.class, EntityCloudOister::new).build("cloud_oister"), "cloud_oister"),
-				setup(EntityType.Builder.create(EntityCloudySlime.class, EntityCloudySlime::new).build("cloudy_slime"), "cloudy_slime"),
-				setup(EntityType.Builder.create(EntityFlyingSquid.class, EntityFlyingSquid::new).build("flying_squid"), "flying_squid"),
-				setup(EntityType.Builder.create(EntityFungite.class, EntityFungite::new).build("fungite"), "fungite"),
-				setup(EntityType.Builder.create(EntityGaznowel.class, EntityGaznowel::new).build("gaznowel"), "gaznowel"),
-				setup(EntityType.Builder.create(EntityGecko.class, EntityGecko::new).build("gecko"), "gecko"),
-				setup(EntityType.Builder.create(EntityHowler.class, EntityHowler::new).build("howler"), "howler"),
-				setup(EntityType.Builder.create(EntityJellyFish.class, EntityJellyFish::new).build("jelly_fish"), "jelly_fish"),
-				setup(EntityType.Builder.create(EntityLivingFlower.class, EntityLivingFlower::new).build("living_flower"), "living_flower"),
-				setup(EntityType.Builder.create(EntityMysticBird.class, EntityMysticBird::new).build("mystic_bird"), "mystic_bird"),
-				setup(EntityType.Builder.create(EntityPhasm.class, EntityPhasm::new).build("phasm"), "phasm"),
-				setup(EntityType.Builder.create(EntityPoisonousScorpion.class, EntityPoisonousScorpion::new).build("poisonous_scorpion"), "poisonous_scorpion"),
-				setup(EntityType.Builder.create(EntitySkyray.class, EntitySkyray::new).build("skyray"), "skyray"),
-				setup(EntityType.Builder.create(EntityStrangeWanderer.class, EntityStrangeWanderer::new).build("strange_wanderer"), "strange_wanderer")
-				);
-
-
-	}
-
-
-
-	private static Item makeSpawnEgg(EntityType<?> type, int color1, int color2){
-		return new ItemSpawnEgg(type,color1,color2,new Item.Properties().group(ItemGroup.SEARCH));
+		ModEntities.registerKathairisEntityTypes(event);
+		ModEntities.registerPlacementTypes();
+		ModEntities.registerEntitySpawns();
 	}
 
 

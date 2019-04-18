@@ -84,7 +84,7 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 		SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
 		sharedseedrandom.setBaseChunkSeed(i, j);
 		Biome[] abiome = this.biomeProvider.getBiomeBlock(i * 16, j * 16, 16, 16);
-		this.setBlocksInChunkIsland(i,j,chunkIn);
+		//this.setBlocksInChunkIsland(i,j,chunkIn);
 		chunkIn.setBiomes(abiome);
 		this.setBlocksInChunk(i, j, chunkIn);
 		chunkIn.createHeightMap(Heightmap.Type.WORLD_SURFACE_WG, Heightmap.Type.OCEAN_FLOOR_WG);
@@ -105,11 +105,7 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		Biome biome = this.world.getBiome(pos);
-		if (creatureType == EnumCreatureType.MONSTER && ((SwampHutStructure) Feature.SWAMP_HUT).func_202383_b(this.world, pos)) {
-			return Feature.SWAMP_HUT.getSpawnList();
-		} else {
-			return creatureType == EnumCreatureType.MONSTER && Feature.OCEAN_MONUMENT.isPositionInStructure(this.world, pos) ? Feature.OCEAN_MONUMENT.getSpawnList() : biome.getSpawns(creatureType);
-		}
+			return biome.getSpawns(creatureType);
 	}
 
 	public int spawnMobs(World worldIn, boolean spawnHostileMobs, boolean spawnPeacefulMobs) {

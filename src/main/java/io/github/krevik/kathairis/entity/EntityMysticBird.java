@@ -8,7 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityAmbientCreature;
+import net.minecraft.entity.passive.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -79,6 +79,8 @@ public class EntityMysticBird extends EntityAmbientCreature
     		return null;
     	}
     }
+
+
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)

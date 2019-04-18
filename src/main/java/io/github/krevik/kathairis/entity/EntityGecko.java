@@ -175,7 +175,6 @@ public class EntityGecko extends EntityAnimal {
     @Nullable
     @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata, @Nullable NBTTagCompound nbt) {
-        livingdata = super.onInitialSpawn(difficulty, livingdata,nbt);
         setVariant(rand.nextInt(4));
         return livingdata;
     }

@@ -27,6 +27,7 @@ public class BlockKathairisLeaves extends BlockLeaves {
 	public BlockKathairisLeaves() {
 		super(Properties.create(Material.PLANTS).hardnessAndResistance(0.2f).sound(SoundType.PLANT).tickRandomly());
 		this.setDefaultState(this.stateContainer.getBaseState().with(DISTANCE, Integer.valueOf(7)).with(PERSISTENT, Boolean.valueOf(false)));
+		this.setRenderTranslucent(true);
 	}
 
 	private static IBlockState updateDistance(IBlockState p_208493_0_, IWorld p_208493_1_, BlockPos p_208493_2_) {
