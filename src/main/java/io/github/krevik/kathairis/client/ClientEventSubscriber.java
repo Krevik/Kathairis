@@ -4,6 +4,7 @@ import io.github.krevik.kathairis.client.render.RenderBigTurtle;
 import io.github.krevik.kathairis.entity.EntityBigTurtle;
 import io.github.krevik.kathairis.init.ModBiomes;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -63,9 +64,9 @@ public class ClientEventSubscriber {
             }
         }
         if(isSwampNear){
-            GL11.glFogf(GL11.GL_FOG_START, getAverage(player.world,posesToCalculate,0f,4f));
-            GL11.glFogf(GL11.GL_FOG_END, getAverage(player.world,posesToCalculate,event.getFarPlaneDistance(),40f));
-            GL11.glFogf(GL11.GL_FOG_DENSITY,getAverage(player.world,posesToCalculate,0.5f,0.005f));
+            GlStateManager.fogStart(getAverage(player.world,posesToCalculate,0f,4f));
+            GlStateManager.fogEnd(getAverage(player.world,posesToCalculate,event.getFarPlaneDistance(),40f));
+            GlStateManager.fogDensity(getAverage(player.world,posesToCalculate,0.5f,0.005f));
         }
     }
 
