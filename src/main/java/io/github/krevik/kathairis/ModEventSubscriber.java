@@ -364,6 +364,7 @@ public final class ModEventSubscriber {
 				setup(new BiomeKatharianDesertEdge(),"katharian_desert_edge"),
 				setup(new BiomeKatharianSoftSandLakes(),"soft_sand_lakes"),
 				setup(new BiomeKatharianForest(),"katharian_forest"),
+				setup(new BiomeKatharianDenseForest(),"katharian_dense_forest"),
 				setup(new BiomeKatharianPlainFields(),"plain_fields"),
 				setup(new BiomeKatharianSwamps(),"katharian_swamp")
 		);

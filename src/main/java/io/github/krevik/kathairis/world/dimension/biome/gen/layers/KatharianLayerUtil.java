@@ -66,7 +66,7 @@ public class KatharianLayerUtil {
         lvt_7_1_ = repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, j, contextFactory);
         lvt_7_1_ = GenLayerKatharianRiver.INSTANCE.apply((IContextExtended)contextFactory.apply(1L), lvt_7_1_);
         lvt_7_1_ = GenLayerSmooth.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), lvt_7_1_);
-        lvt_8_1_ = GenLayerDesertBiomeVariants.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), lvt_8_1_);
+        lvt_8_1_ = GenLayerBiomeVariants.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), lvt_8_1_);
 
         for(int k = 0; k < i; ++k) {
             lvt_8_1_ = GenLayerZoom.NORMAL.apply((IContextExtended)contextFactory.apply((long)(1000 + k)), lvt_8_1_);
