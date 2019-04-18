@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +21,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-//TODO cannot place it O.o
 public class BlockPurplePalm extends BlockKathairisPlant {
     public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", BlockPurplePalm.EnumType.class);
     public BlockPurplePalm() {
@@ -37,12 +37,11 @@ public class BlockPurplePalm extends BlockKathairisPlant {
 
     @Override
     public boolean isValidPosition(IBlockState state, IWorldReaderBase worldIn, BlockPos pos) {
-        BlockPos blockpos = pos.down();
         if(state==ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR)){
-            return worldIn.getBlockState(blockpos)==ModBlocks.PURPLE_PALM.getDefaultState();
+            return worldIn.getBlockState(pos.down())==ModBlocks.PURPLE_PALM.getDefaultState();
         }else{
-            boolean b3 = this.isValidGround(worldIn.getBlockState(blockpos),worldIn,blockpos);
-            return b3&&(worldIn.isAirBlock(pos.up()));
+            boolean b3 = this.isValidGround(worldIn.getBlockState(pos.down()),worldIn,pos.down());
+            return b3&&(worldIn.isAirBlock(pos.up())||worldIn.getBlockState(pos.up())== ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, EnumType.AIR));
         }
     }
 
@@ -56,6 +55,14 @@ public class BlockPurplePalm extends BlockKathairisPlant {
                 world.removeBlock(pos.up());
             }
             world.removeBlock(pos);
+        }else{
+            if(world.getBlockState(pos.up())!=ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, EnumType.AIR)){
+                if(world.isAirBlock(pos.up())){
+                    world.setBlockState(pos.up(),ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, EnumType.AIR));
+                }else{
+                    world.removeBlock(pos);
+                }
+            }
         }
     }
 
