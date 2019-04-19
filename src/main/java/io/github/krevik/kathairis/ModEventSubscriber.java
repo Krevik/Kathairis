@@ -182,7 +182,7 @@ public final class ModEventSubscriber {
 				setup(new BlockFluoFungi(), "fluo_fungi"),
 				setup(new BlockLayeredSand(), "layered_sand"),
 				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 1.5f).sound(SoundType.STONE)), "kathairis_sandstone"), //TODO: reorganise
-				setup(new BlockKathairisPlant(), "forest_candle"),
+				setup(new BlockForestCandle(), "forest_candle"),
 				setup(new BlockKathairisRocktus(), "rocktus"),
 				setup(new BlockKathairisLog(), "elderwillow_log"),
 				setup(new BlockKathairisLeaves(), "elderwillow_leaves"),
