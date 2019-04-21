@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.block;
 
 import com.google.common.cache.LoadingCache;
+import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
@@ -12,18 +13,25 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Particles;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -213,85 +221,16 @@ public class BlockKathairisPortal extends BlockPortal {
 		if (entityIn != null) {
 			KathairisTeleportingManager.tele(entityIn);
 		}
-           /* if(!worldIn.isRemote) {
-                if (!entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss()) {
-                    entityIn.setPortal(pos);
-                    if (entityIn instanceof EntityPlayerMP) {
-                        EntityPlayerMP player = (EntityPlayerMP) entityIn;
-                        entityIn.timeUntilPortal = 10;
-                        if (player.dimension == Kathairis.kath_Dim_type) {
-
-                        } else if (player.dimension == DimensionType.OVERWORLD) {
-
-                            WorldServer server = player.getServer().getWorld(DimensionType.OVERWORLD);
-                            player.changeDimension(DimensionType.OVERWORLD, new TeleporterKathairis(server));
-                        }
-                    } else {
-                        entityIn.timeUntilPortal = 10;
-                        if (entityIn.dimension == Kathairis.kath_Dim_type) {
-                            entityIn.changeDimension(DimensionType.OVERWORLD, new TeleporterKathairis(entityIn.getServer().getWorld(DimensionType.OVERWORLD)));
-                        } else if (entityIn.dimension == DimensionType.OVERWORLD) {
-                            WorldServer server = worldIn.getServer().getWorld(DimensionType.OVERWORLD);
-                            Validate.notNull(server, "server is null!");
-
-                            entityIn.changeDimension(DimensionType.OVERWORLD, new TeleporterKathairis(server));
-                        }
-                    }
-                }
-            /*}
-        }
     }
 
+    @Override
     public ItemStack getItem(IBlockReader worldIn, BlockPos pos, IBlockState state) {
         return ItemStack.EMPTY;
     }
 
-
-    @Override
-    public boolean trySpawnPortal(IWorld worldIn, BlockPos pos) {
-        BlockKathairisPortal.Size blockportal$size = this.isPortal1(worldIn, pos);
-        if (blockportal$size != null) {
-            blockportal$size.placePortalBlocks();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    /*@Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-    {
-        if(entityIn instanceof EntityPlayer){
-            TileEntityKether.tele((EntityPlayer) entityIn);
-        }else {
-            TileEntityKether.teleEntity(entityIn);
-        }
-        if ((entityIn.getRidingEntity() == null))
-        {
-            if(((entityIn instanceof EntityPlayerMP))) {
-                EntityPlayerMP player1 = (EntityPlayerMP) entityIn;
-
-                TileEntityKether.tele(player1);
-            }else{
-                TileEntityKether.teleEntity(entityIn);
-            }
-
-        }
-
-        if ((entityIn.getRidingEntity() == null) && ((entityIn instanceof EntityPlayerMP)))
-		{
-			EntityPlayerMP player1 = (EntityPlayerMP)entityIn;
-
-			TileEntityKether.tele(player1);
-		}
-
-
-    }
-
     @OnlyIn(Dist.CLIENT)
     public void animateTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        /*if (rand.nextInt(100) == 0) {
+        if (rand.nextInt(100) == 0) {
             worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
         }
 
@@ -302,20 +241,8 @@ public class BlockKathairisPortal extends BlockPortal {
             double d3 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d4 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d5 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
-            Particle theParticle = new DynamicParticle(
-                    ParticlesFactory.PORTAL,
-                    worldIn,
-                    d0, d1, d2,
-                    d3, d4, d5)
-                    .setRotSpeed(((float) Math.random() - 0.5F) * 0.1F)
-                    .setLifeSpan(20 + rand.nextInt(20))
-                    .setGravity(0F)
-                    .setScale(2.0F)
-                    .setInitialAlpha(1.0F)
-                    .setFinalAlpha(0.5F)
-                    .setEnableDepth(true);
-            worldIn.spawnParticle(theParticle,d0,d1,d2,d3,d4,d5);
-        }*/
+			worldIn.addParticle((IParticleData) ModParticles.KATH_PORTAL_PARTICLE,d0,d1,d2,d3,d4,d5);
+        }
 	}
 
 	@Override

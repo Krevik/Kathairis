@@ -3,6 +3,8 @@ package io.github.krevik.kathairis.client;
 import io.github.krevik.kathairis.client.render.RenderBigTurtle;
 import io.github.krevik.kathairis.entity.EntityBigTurtle;
 import io.github.krevik.kathairis.init.ModBiomes;
+import io.github.krevik.kathairis.init.ModParticles;
+import io.github.krevik.kathairis.util.RenderersRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,12 +36,8 @@ public class ClientEventSubscriber {
     @SubscribeEvent
     public static void registerBlockColors(FMLLoadCompleteEvent event){
         ModBlocksColorHandler.registerBlockColors();
-    }
-
-    @SubscribeEvent
-    public static void registerRenderers(FMLClientSetupEvent event){
-        RenderingRegistry.registerEntityRenderingHandler(EntityBigTurtle.class, new RenderBigTurtle.Factory());
-
+        RenderersRegistry.registerRenders();
+        ModParticles.registerParticleRenderers();
     }
 
     static float swampFogDensity=0.005f;

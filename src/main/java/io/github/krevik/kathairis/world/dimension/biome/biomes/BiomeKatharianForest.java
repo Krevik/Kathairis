@@ -49,7 +49,6 @@ public final class BiomeKatharianForest extends BiomeKatharianBiomeBase {
         this.addFeature(Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(ModBlocks.KATHAIRIS_FUNGI), TWICE_SURFACE_WITH_CHANCE, new ChanceConfig(2)));
         this.addFeature(Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(ModBlocks.KATHAIRIS_NIGHT_FLOWER), TWICE_SURFACE_WITH_CHANCE, new ChanceConfig(2)));
         this.addFeature(Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.BUSH, new BushConfig(ModBlocks.VILYRIA), TWICE_SURFACE_WITH_CHANCE, new ChanceConfig(2)));
-        this.addFeature(Decoration.VEGETAL_DECORATION, createCompositeFeature(KatharianFeatureList.KATHARIAN_FOREST_CANDLE_BUSH, new BushConfig(ModBlocks.FOREST_CANDLE), AT_SURFACE_WITH_CHANCE, new ChanceConfig(20)));
         this.addFeature(Decoration.VEGETAL_DECORATION, createCompositeFeature(KatharianFeatureList.STEPPED_SUCCULENT, IFeatureConfig.NO_FEATURE_CONFIG, TWICE_SURFACE_WITH_CHANCE, new ChanceConfig(4)));
         this.addFeature(Decoration.VEGETAL_DECORATION, createCompositeFeature(KatharianFeatureList.KATHARIAN_FOREST_BUSH, IFeatureConfig.NO_FEATURE_CONFIG, AT_SURFACE, new FrequencyConfig(1)));
 

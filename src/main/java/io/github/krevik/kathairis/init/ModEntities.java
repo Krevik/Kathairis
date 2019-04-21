@@ -46,6 +46,7 @@ public class ModEntities {
     public static EntityType<? extends EntityLiving> POISONOUS_SCORPION = (EntityType<? extends EntityLiving>) EntityType.Builder.create(EntityPoisonousScorpion.class, EntityPoisonousScorpion::new).tracker(32, 1, true).build("poisonous_scorpion").setRegistryName(MOD_ID,"poisonous_scorpion");
     public static EntityType<? extends EntityLiving> SKYRAY = (EntityType<? extends EntityLiving>) EntityType.Builder.create(EntitySkyray.class, EntitySkyray::new).tracker(200, 1, true).build("skyray").setRegistryName(MOD_ID,"skyray");
     public static EntityType<? extends EntityLiving> STRANGE_WANDERER = (EntityType<? extends EntityLiving>) EntityType.Builder.create(EntityStrangeWanderer.class, EntityStrangeWanderer::new).tracker(200, 1, true).build("strange_wanderer").setRegistryName(MOD_ID,"strange_wanderer");
+    public static EntityType<?> MYSTIC_WAND_SHOOT = EntityType.Builder.create(EntityMysticWandShoot.class, EntityMysticWandShoot::new).tracker(200, 1, true).build("mystic_wand_shoot").setRegistryName(MOD_ID,"mystic_wand_shoot");
 
 
     public static void registerKathairisEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
@@ -73,7 +74,8 @@ public class ModEntities {
                 PHASM,
                 POISONOUS_SCORPION,
                 SKYRAY,
-                STRANGE_WANDERER
+                STRANGE_WANDERER,
+                MYSTIC_WAND_SHOOT
         );
     }
 

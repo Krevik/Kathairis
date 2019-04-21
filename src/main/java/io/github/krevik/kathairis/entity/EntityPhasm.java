@@ -123,7 +123,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
                         world,
                         d0, d1, d2,
                         0, 0, 0)
-                        .setRotSpeed(0F)
+                        .setRotationSpeed(0F)
                         .setLifeSpan(1)
                         .setGravity(0F)
                         .setScale(15F)

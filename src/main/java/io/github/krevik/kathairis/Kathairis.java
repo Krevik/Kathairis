@@ -2,10 +2,7 @@ package io.github.krevik.kathairis;
 
 import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.client.ClientEventSubscriber;
-import io.github.krevik.kathairis.init.ModBiomes;
-import io.github.krevik.kathairis.init.ModBlocks;
-import io.github.krevik.kathairis.init.ModDimensions;
-import io.github.krevik.kathairis.init.ModEntities;
+import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.RenderersRegistry;
@@ -54,6 +51,7 @@ public final class Kathairis {
 		//ModEntities.registerPlacementTypes();
 		//ModEntities.registerEntitySpawns();
 		// ModEntities.registerEntitySpawns();
+		ModParticles.registerParticles();
 	}
 
 	private void loadComplete(final FMLLoadCompleteEvent event){
@@ -66,7 +64,6 @@ public final class Kathairis {
 
 	private void setupClient(final FMLClientSetupEvent event) {
 		OBJLoader.INSTANCE.addDomain(ModReference.MOD_ID);
-		RenderersRegistry.registerRenders();
 	}
 
 	public static FunctionHelper getHelper(){

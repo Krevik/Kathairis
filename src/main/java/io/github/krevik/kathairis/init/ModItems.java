@@ -94,5 +94,6 @@ public final class ModItems {
 	public static final Item CRYSTAL_PICKAXE = _null();
 	public static final Item FRUP = _null();
 	public static final Item MAGIC_BEANS = _null();
+	public static final Item MYSTIC_WAND = _null();
 
 }

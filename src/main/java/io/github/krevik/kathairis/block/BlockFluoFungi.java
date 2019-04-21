@@ -151,7 +151,7 @@ public class BlockFluoFungi extends BlockKathairisPlant {
                     ParticlesFactory.HIGHRESPARTICLE,
                     worldIn,
                     d0, d1, d2,new BlockPos(d0,d1,d2))
-                    .setRotSpeed(((float) Math.random() - 0.5F) * 0.1F)
+                    .setRotationSpeed(((float) Math.random() - 0.5F) * 0.1F)
                     .setLifeSpan(400 + rand.nextInt(300))
                     .setGravity(0F)
                     .setScale(2.0F)

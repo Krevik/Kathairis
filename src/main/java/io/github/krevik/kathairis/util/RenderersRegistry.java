@@ -4,8 +4,12 @@ import io.github.krevik.kathairis.client.render.*;
 import io.github.krevik.kathairis.client.render.butterfly.*;
 import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
+import io.github.krevik.kathairis.init.ModParticles;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
+@OnlyIn(Dist.CLIENT)
 public class RenderersRegistry {
 
     public static void registerRenders() {
@@ -33,5 +37,10 @@ public class RenderersRegistry {
         RenderingRegistry.registerEntityRenderingHandler(EntityGaznowel.class, new RenderGaznowel.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityCactiSpore.class, new RenderCactiSpore.Factory());
         RenderingRegistry.registerEntityRenderingHandler(EntityPhasm.class, new RenderPhasm.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityMysticWandShoot.class, new RenderMysticWandShoot.Factory());
+    }
+
+    public static void registerParticleFactories(){
+        ModParticles.registerParticleRenderers();
     }
 }
