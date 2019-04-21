@@ -57,7 +57,7 @@ public class BasicKatharianParticle extends Particle {
     @Override
     public void tick() {
         updateTick();
-        updateGravityAndDeccell();
+        updateMotions();
         move(motionX, motionY, motionZ);
         updateAlphaColor();
         updateColors();
@@ -86,7 +86,7 @@ public class BasicKatharianParticle extends Particle {
         particleAngle += (float) Math.PI * rotSpeed * 2.0F;
     }
 
-    private void updateGravityAndDeccell() {
+    public void updateMotions() {
         motionY -= GRAVITY * particleGravity;
         motionX *= deccel;
         motionY *= deccel;

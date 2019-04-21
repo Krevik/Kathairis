@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.particle.BasicKatharianParticleType;
 import io.github.krevik.kathairis.particle.KatharianParticleTexture;
+import io.github.krevik.kathairis.particle.ParticleFast;
 import io.github.krevik.kathairis.particle.ParticleKatharianPortal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
@@ -15,14 +16,17 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 public class ModParticles {
     public static ParticleType<BasicKatharianParticleType> KATH_PORTAL_PARTICLE;
+    public static ParticleType<BasicKatharianParticleType> FAST_PARTICLE;
 
     public static void registerParticles(){
         KATH_PORTAL_PARTICLE = register("kath_portal_particle",false);
+        FAST_PARTICLE = register("fast_particle",false);
     }
 
 
     public static void registerParticleRenderers(){
         Minecraft.getInstance().particles.registerFactory(KATH_PORTAL_PARTICLE,new ParticleKatharianPortal.Factory(new KatharianParticleTexture("kath_portal_particle",true,31)));
+        Minecraft.getInstance().particles.registerFactory(FAST_PARTICLE,new ParticleFast.Factory(new KatharianParticleTexture("fast_particle",false, 1)));
     }
 
     private static <T extends ParticleType<?>> T register(String name, boolean alwaysShow) {

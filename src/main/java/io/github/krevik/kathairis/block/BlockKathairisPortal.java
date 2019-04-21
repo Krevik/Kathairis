@@ -241,7 +241,7 @@ public class BlockKathairisPortal extends BlockPortal {
             double d3 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d4 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d5 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
-			worldIn.addParticle((IParticleData) ModParticles.KATH_PORTAL_PARTICLE,d0,d1,d2,d3,d4,d5);
+			worldIn.addParticle((IParticleData) ModParticles.FAST_PARTICLE,d0,d1,d2,d3,d4,d5);
         }
 	}
 
