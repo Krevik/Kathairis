@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:titanium_rod"
+    },
+    "X": {
+      "item": "kathairis:revenum_ingot"
+    }
+  },
+  "result": {
+    "item": "kathairis:revenum_hoe"
+  }
+}

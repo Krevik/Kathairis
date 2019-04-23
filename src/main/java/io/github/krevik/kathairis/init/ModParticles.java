@@ -1,9 +1,6 @@
 package io.github.krevik.kathairis.init;
 
-import io.github.krevik.kathairis.particle.BasicKatharianParticleType;
-import io.github.krevik.kathairis.particle.KatharianParticleTexture;
-import io.github.krevik.kathairis.particle.ParticleFast;
-import io.github.krevik.kathairis.particle.ParticleKatharianPortal;
+import io.github.krevik.kathairis.particle.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.init.Particles;
@@ -17,16 +14,19 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 public class ModParticles {
     public static ParticleType<BasicKatharianParticleType> KATH_PORTAL_PARTICLE;
     public static ParticleType<BasicKatharianParticleType> FAST_PARTICLE;
+    public static ParticleType<BasicKatharianParticleType> MYSTIC_WAND_SHOOT;
 
     public static void registerParticles(){
         KATH_PORTAL_PARTICLE = register("kath_portal_particle",false);
         FAST_PARTICLE = register("fast_particle",false);
+        MYSTIC_WAND_SHOOT = register("mystic_wand_shoot",false);
     }
 
 
     public static void registerParticleRenderers(){
         Minecraft.getInstance().particles.registerFactory(KATH_PORTAL_PARTICLE,new ParticleKatharianPortal.Factory(new KatharianParticleTexture("kath_portal_particle",true,31)));
         Minecraft.getInstance().particles.registerFactory(FAST_PARTICLE,new ParticleFast.Factory(new KatharianParticleTexture("fast_particle",false, 1)));
+        Minecraft.getInstance().particles.registerFactory(MYSTIC_WAND_SHOOT,new ParticleMysticWandShoot.Factory(new KatharianParticleTexture("mystic_wand_shoot",true, 6)));
     }
 
     private static <T extends ParticleType<?>> T register(String name, boolean alwaysShow) {

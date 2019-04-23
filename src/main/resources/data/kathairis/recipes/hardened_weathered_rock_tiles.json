@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XX", "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:hardened_weathered_rock"
+    }
+  },
+  "result": {
+    "item": "kathairis:hardened_weathered_rock_tiles",
+	"count": 4
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XXX", "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:mud_bricks"
+    }
+  },
+  "result": {
+    "item": "kathairis:mud_bricks_wall",
+	"count": 6
+  }
+}

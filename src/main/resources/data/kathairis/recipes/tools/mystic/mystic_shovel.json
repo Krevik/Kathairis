@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:titanium_rod"
+    },
+    "X": {
+      "item": "kathairis:mystic_gem"
+    }
+  },
+  "result": {
+    "item": "kathairis:mystic_shovel"
+  }
+}

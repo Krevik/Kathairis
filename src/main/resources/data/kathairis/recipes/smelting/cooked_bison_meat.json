@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "kathairis:bison_meat"
+  },
+  "result": "kathairis:cooked_bison_meat",
+  "experience": 0.2,
+  "cookingtime": 200
+}

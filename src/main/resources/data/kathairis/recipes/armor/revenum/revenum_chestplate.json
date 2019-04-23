@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:revenum_ingot"
+    }
+  },
+  "result": {
+    "item": "kathairis:revenum_chestplate"
+  }
+}

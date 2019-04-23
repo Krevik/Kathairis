@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XXX","XXX","XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:cloud_dust_blue"
+    }
+  },
+  "result": {
+    "item": "kathairis:condensed_cloud_dust_blue",
+	"count": 2
+  }
+}

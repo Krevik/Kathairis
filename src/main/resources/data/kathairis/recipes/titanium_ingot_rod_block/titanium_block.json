@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:titanium_ingot"
+    }
+  },
+  "result": {
+    "item": "kathairis:titanium_block"
+  }
+}

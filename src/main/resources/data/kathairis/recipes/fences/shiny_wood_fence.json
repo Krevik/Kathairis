@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XZX", "XZX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:shiny_planks"
+    },
+	"Z": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "kathairis:shiny_wood_fence",
+	"count": 3
+  }
+}

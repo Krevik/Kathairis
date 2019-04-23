@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XXX", "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:hardened_weathered_rock_bricks"
+    }
+  },
+  "result": {
+    "item": "kathairis:hardened_weathered_rock_bricks_wall",
+	"count": 6
+  }
+}

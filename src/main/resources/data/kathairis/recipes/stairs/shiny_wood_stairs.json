@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:shiny_planks"
+    }
+  },
+  "result": {
+    "item": "kathairis:shiny_wood_stairs",
+	"count": 4
+  }
+}

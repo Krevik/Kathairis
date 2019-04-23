@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "kathairis:yellow_cloud"
+  },
+  "result": "kathairis:yellow_cloud_refined",
+  "experience": 0.5,
+  "cookingtime": 200
+}

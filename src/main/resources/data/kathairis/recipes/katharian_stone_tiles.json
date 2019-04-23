@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XX", "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:katharian_stone"
+    }
+  },
+  "result": {
+    "item": "kathairis:katharian_stone_tiles",
+	"count": 4
+  }
+}

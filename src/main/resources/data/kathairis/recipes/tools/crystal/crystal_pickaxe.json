@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:titanium_rod"
+    },
+    "X": {
+      "item": "kathairis:crystal_cluster"
+    }
+  },
+  "result": {
+    "item": "kathairis:crystal_pickaxe"
+  }
+}

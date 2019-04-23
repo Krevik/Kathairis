@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XXX", "YYY", "ZZZ"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:crystal_shard_blue",
+	  "item": "kathairis:crystal_shard_violet",
+	  "item": "kathairis:crystal_shard_yellow"
+    },
+    "Y": {
+      "item": "kathairis:crystal_shard_blue",
+	  "item": "kathairis:crystal_shard_violet",
+	  "item": "kathairis:crystal_shard_yellow"
+    },
+	"Z": {
+      "item": "kathairis:crystal_shard_blue",
+	  "item": "kathairis:crystal_shard_violet",
+	  "item": "kathairis:crystal_shard_yellow"
+    }
+  },
+  "result": {
+    "item": "kathairis:crystal_cluster",
+	"count": 1
+  }
+}

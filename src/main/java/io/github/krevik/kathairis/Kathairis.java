@@ -64,6 +64,7 @@ public final class Kathairis {
 
 	private void setupClient(final FMLClientSetupEvent event) {
 		OBJLoader.INSTANCE.addDomain(ModReference.MOD_ID);
+		RenderersRegistry.registerRenders();
 	}
 
 	public static FunctionHelper getHelper(){

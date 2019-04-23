@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "kathairis:weathered_rock"
+      }
+    ]
+  },
+  "result": {
+    "item": "kathairis:weathered_rock_slab",
+    "count": 6
+  }
+}

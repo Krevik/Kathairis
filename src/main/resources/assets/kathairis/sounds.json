@@ -244,6 +244,12 @@
 			"kathairis:misc/pickaxe_turn"
 		]
 	},
+	"magic_shoot": {
+		"category": "weather",
+		"sounds": [
+			"kathairis:misc/magic_shoot"
+		]
+	},
 	"kathairis.music.xmas": {
 		"category": "music",
 		"sounds": [

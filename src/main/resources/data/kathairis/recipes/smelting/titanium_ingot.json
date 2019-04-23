@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "kathairis:titanium_ore"
+  },
+  "result": "kathairis:titanium_ingot",
+  "experience": 2.0,
+  "cookingtime": 200
+}

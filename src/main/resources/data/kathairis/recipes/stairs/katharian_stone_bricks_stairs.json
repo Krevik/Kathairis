@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:katharian_stone_bricks"
+    }
+  },
+  "result": {
+    "item": "kathairis:katharian_stone_bricks_stairs",
+	"count": 4
+  }
+}

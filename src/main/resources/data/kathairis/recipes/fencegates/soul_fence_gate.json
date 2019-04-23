@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"ZXZ", "ZXZ"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:soul_planks"
+    },
+	"Z": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "kathairis:soul_wood_fence_gate",
+	"count": 1
+  }
+}

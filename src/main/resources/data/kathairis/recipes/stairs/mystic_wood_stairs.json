@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:mystic_planks"
+    }
+  },
+  "result": {
+    "item": "kathairis:mystic_wood_stairs",
+	"count": 4
+  }
+}

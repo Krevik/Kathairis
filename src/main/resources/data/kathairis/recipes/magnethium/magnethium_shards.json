@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"X"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:magnethium"
+    }
+  },
+  "result": {
+    "item": "kathairis:magnethium_shard",
+	"count": 9
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"ZXZ", "ZXZ"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:mystic_planks"
+    },
+	"Z": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "kathairis:mystic_wood_fence_gate",
+	"count": 1
+  }
+}

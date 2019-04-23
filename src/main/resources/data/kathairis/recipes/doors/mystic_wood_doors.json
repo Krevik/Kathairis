@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:mystic_planks"
+    }
+  },
+  "result": {
+    "item": "kathairis:mystic_wood_doors",
+    "count": 3
+  }
+}

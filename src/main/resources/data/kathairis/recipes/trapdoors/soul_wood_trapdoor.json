@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:soul_planks"
+    }
+  },
+  "result": {
+    "item": "kathairis:soul_wood_trapdoor",
+    "count": 2
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"X"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:mystic_log"
+    }
+  },
+  "result": {
+    "item": "kathairis:mystic_planks",
+	"count": 4
+  }
+}

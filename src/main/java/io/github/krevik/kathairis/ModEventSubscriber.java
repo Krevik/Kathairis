@@ -345,6 +345,7 @@ public final class ModEventSubscriber {
 				setupSound("cloudglass", "break"),
 
 				setupSound("pickaxe", "turn"),
+				setupSound("magic_shoot"),
 
 				setupSound("sandstorm")
 

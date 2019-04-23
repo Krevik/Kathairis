@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "mystic_gem",
+  "ingredients": [
+    {
+      "item": "kathairis:mystic_gem_block"
+    }
+  ],
+  "result": {
+    "item": "kathairis:mystic_gem",
+    "count": 9
+  }
+}

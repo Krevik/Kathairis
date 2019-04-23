@@ -44,6 +44,7 @@ public final class ModSounds {
 	public static final SoundEvent CLOUDGLASS_BREAK = _null();
 	public static final SoundEvent PICKAXE_TURN = _null();
 	public static final SoundEvent SANDSTORM = _null();
+	public static final SoundEvent MAGIC_SHOOT = _null();
 	//TODO
 //	public static final SoundEvent CLOUD_GLASS = _null();
 

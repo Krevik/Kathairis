@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XZX","XYX","XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:paper"
+    },
+    "Y": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "Z": {
+      "item": "kathairis:shiny_stick"
+    }
+  },
+  "result": {
+    "item": "kathairis:baurble"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"CX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:butterfly_flower_nectar"
+    },
+    "C": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "kathairis:nectar_bowl"
+  }
+}
