@@ -6,12 +6,12 @@
   "key": {
     "#": [
       {
-        "item": "kathairis:katharian_stone"
+        "item": "kathairis:kathairis_cobblestone"
       }
     ]
   },
   "result": {
-    "item": "kathairis:katharian_stone_slab",
+    "item": "kathairis:kathairis_cobblestone_slab",
     "count": 6
   }
 }

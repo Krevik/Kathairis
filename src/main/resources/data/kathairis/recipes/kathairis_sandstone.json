@@ -5,11 +5,10 @@
   ],
   "key": {
     "X": {
-      "item": "kathairis:katharian_stone"
+      "item": "kathairis:kathairis_stone"
     }
   },
   "result": {
-    "item": "kathairis:katharian_stone_tiles",
-	"count": 4
+    "item": "kathairis:kathairis_sandstone"
   }
 }

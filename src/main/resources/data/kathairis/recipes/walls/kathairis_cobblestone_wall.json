@@ -5,11 +5,11 @@
   ],
   "key": {
     "X": {
-      "item": "kathairis:katharian_stone_bricks"
+      "item": "kathairis:kathairis_cobblestone"
     }
   },
   "result": {
-    "item": "kathairis:katharian_stone_bricks_wall",
+    "item": "kathairis:kathairis_cobblestone_wall",
 	"count": 6
   }
 }
