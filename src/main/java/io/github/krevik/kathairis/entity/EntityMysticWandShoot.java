@@ -94,7 +94,7 @@ public class EntityMysticWandShoot extends Entity {
 
     protected void onImpact(RayTraceResult result){
         if(result.entity!=null&&result.entity.isAlive()){
-            result.entity.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.shootingEntity), 20.0F);
+            result.entity.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.shootingEntity), 10.0F);
         }else{
             remove();
         }
