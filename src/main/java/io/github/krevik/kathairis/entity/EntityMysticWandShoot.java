@@ -41,6 +41,7 @@ public class EntityMysticWandShoot extends Entity {
     private int ticksInAir;
 
     @OnlyIn(Dist.CLIENT)
+    @Override
     public boolean isInRangeToRenderDist(double distance) {
         double d0 = this.getBoundingBox().getAverageEdgeLength() * 8.0D;
         if (Double.isNaN(d0)) {
@@ -51,6 +52,7 @@ public class EntityMysticWandShoot extends Entity {
         return distance < d0 * d0;
     }
 
+    @Override
     public void tick() {
         if (this.world.isRemote || (this.shootingEntity == null || !this.shootingEntity.removed) && this.world.isBlockLoaded(new BlockPos(this)) && ticksInAir<10000) {
             super.tick();
@@ -94,17 +96,21 @@ public class EntityMysticWandShoot extends Entity {
 
     protected void onImpact(RayTraceResult result){
         if(result.entity!=null&&result.entity.isAlive()){
-            result.entity.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.shootingEntity), 10.0F);
+            if(!result.entity.isInvulnerableTo(DamageSource.MAGIC)) {
+                result.entity.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.shootingEntity), 10.0F);
+            }
         }else{
             remove();
         }
     }
 
+    @Override
     public void writeAdditional(NBTTagCompound compound) {
         compound.put("direction", this.newDoubleNBTList(new double[]{this.motionX, this.motionY, this.motionZ}));
         compound.putInt("life", this.ticksAlive);
     }
 
+    @Override
     public void readAdditional(NBTTagCompound compound) {
 
         this.ticksAlive = compound.getInt("life");
@@ -122,14 +128,17 @@ public class EntityMysticWandShoot extends Entity {
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
+    @Override
     public boolean canBeCollidedWith() {
         return true;
     }
 
+    @Override
     public float getCollisionBorderSize() {
         return 1.0F;
     }
 
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (this.isInvulnerableTo(source)) {
             return false;
@@ -154,11 +163,13 @@ public class EntityMysticWandShoot extends Entity {
         }
     }
 
+    @Override
     public float getBrightness() {
         return 0.0F;
     }
 
     @OnlyIn(Dist.CLIENT)
+    @Override
     public int getBrightnessForRender() {
         return 0;
     }

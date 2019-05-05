@@ -127,5 +127,6 @@ public final class ModBlocks {
 	public static final Block ELDERWILLOW_LOG = _null();
 	public static final Block ELDERWILLOW_LEAVES = _null();
 	public static final Block PURPLE_PALM = _null();
+	public static final Block ROTTEN_LOG = _null();
 
 }

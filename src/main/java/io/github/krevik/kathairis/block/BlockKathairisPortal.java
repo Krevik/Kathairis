@@ -1,6 +1,8 @@
 package io.github.krevik.kathairis.block;
 
 import com.google.common.cache.LoadingCache;
+import io.github.krevik.kathairis.Kathairis;
+import io.github.krevik.kathairis.entity.EntityStrangeWanderer;
 import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
 import net.minecraft.block.Block;
@@ -24,16 +26,19 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_PORTAL;
@@ -159,7 +164,7 @@ public class BlockKathairisPortal extends BlockPortal {
 	public void tick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 
-        /*if(worldIn.dimension.getDimension()==KCore.DIMENSION_ID) {
+        if(worldIn.dimension.getType() == DimensionType.getById(Kathairis.KATH_DIM_TYPE.getId())) {
             List<EntityStrangeWanderer> e = worldIn.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX()  + 15, pos.getY() + 15, pos.getZ() + 15));
             if(e.size()==0) {
                 if(!worldIn.isRemote) {
@@ -175,6 +180,7 @@ public class BlockKathairisPortal extends BlockPortal {
                 }
             }
         }
+        /*
         if(ModConfig.shouldBlocksSpreadAroundPortal) {
             for (int x = 0; x < 1 + rand.nextInt(4); x++) {
                 updateBlocksAroundPortal(worldIn, pos, state, rand);

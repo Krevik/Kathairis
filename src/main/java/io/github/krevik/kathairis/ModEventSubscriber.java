@@ -378,8 +378,8 @@ public final class ModEventSubscriber {
 	@SubscribeEvent
 	public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
 		ModEntities.registerKathairisEntityTypes(event);
-		ModEntities.registerPlacementTypes();
-		ModEntities.registerEntitySpawns();
+		//ModEntities.registerPlacementTypes();
+		//ModEntities.registerEntitySpawns();
 	}
 
 

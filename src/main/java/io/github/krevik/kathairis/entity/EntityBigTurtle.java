@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -14,13 +15,13 @@ import net.minecraft.world.World;
 
 public class EntityBigTurtle extends EntityAnimal
 {
-
     public EntityBigTurtle(World worldIn)
     {
         super(ModEntities.BIG_TURTLE,worldIn);
         this.setSize(0.9F, 1.2F);
         this.experienceValue=10;
     }
+
 
     @Override
     protected void initEntityAI()

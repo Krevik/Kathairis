@@ -1,7 +1,11 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.util.networking.PacketHandler;
+import io.github.krevik.kathairis.util.networking.packets.PacketServerPlayerUseJadeVine;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -159,7 +163,17 @@ public class BlockJadeVines extends BlockKathairisPlant {
 
 	}
 
-	//TODO IS LADDER WORKING?
+	@Override
+	public void onEntityCollision(IBlockState p_196262_1_, World world, BlockPos p_196262_3_, Entity entity) {
+		if(world.isRemote) {
+			if(Minecraft.getInstance().gameSettings.keyBindJump.isKeyDown()) {
+				PacketHandler.sendToServer(new PacketServerPlayerUseJadeVine());
+			}
+		}
+		if(entity instanceof EntityPlayer){
+			entity.fallDistance=0;
+		}
+	}
 
 	@Nullable
 	@Override
@@ -212,11 +226,6 @@ public class BlockJadeVines extends BlockKathairisPlant {
 			}
 			handleVariantsAndCanBlockBeHere(worldIn, pos.down(), worldIn.getBlockState(pos.down()));
 		}
-	}
-
-	@Override
-	public boolean isLadder(IBlockState state, IWorldReader world, BlockPos pos, EntityLivingBase entity) {
-		return true;
 	}
 
 	//TODO REMOVE REMOVE REMOVE. GETTING RID OF THIS STUFF IS WHAT 1.13 WAS ALL ABOUT

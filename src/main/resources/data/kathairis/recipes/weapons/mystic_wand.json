@@ -3,7 +3,7 @@
   "pattern": [
     "  X",
     " # ",
-    "#  "
+    "Y  "
   ],
   "key": {
     "#": {
@@ -11,6 +11,9 @@
     },
     "X": {
       "item": "kathairis:mystic_gem"
+    },
+	"Y": {
+      "item": "kathairis:howler_fur"
     }
   },
   "result": {

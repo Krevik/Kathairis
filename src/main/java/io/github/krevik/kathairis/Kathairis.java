@@ -6,6 +6,7 @@ import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.RenderersRegistry;
+import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
@@ -18,6 +19,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -48,10 +50,10 @@ public final class Kathairis {
 
 	private void setup(final FMLCommonSetupEvent event) {
 		KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
-		//ModEntities.registerPlacementTypes();
-		//ModEntities.registerEntitySpawns();
-		// ModEntities.registerEntitySpawns();
+		ModEntities.registerPlacementTypes();
+		ModEntities.registerEntitySpawns();
 		ModParticles.registerParticles();
+		PacketHandler.register();
 	}
 
 	private void loadComplete(final FMLLoadCompleteEvent event){
@@ -70,4 +72,5 @@ public final class Kathairis {
 	public static FunctionHelper getHelper(){
 		return new FunctionHelper();
 	}
+
 }
