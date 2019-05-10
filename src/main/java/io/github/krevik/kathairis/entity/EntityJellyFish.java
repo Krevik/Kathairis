@@ -81,8 +81,6 @@ public class EntityJellyFish extends EntityMob
         }
     }
     
-    
-    
     public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn)
     {
         this.randomMotionVecX = randomMotionVecXIn;

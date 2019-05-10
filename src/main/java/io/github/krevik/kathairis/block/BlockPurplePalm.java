@@ -10,16 +10,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.IWorldReaderBase;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockPurplePalm extends BlockKathairisPlant {
     public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", BlockPurplePalm.EnumType.class);
@@ -37,11 +36,11 @@ public class BlockPurplePalm extends BlockKathairisPlant {
 
     @Override
     public boolean isValidPosition(IBlockState state, IWorldReaderBase worldIn, BlockPos pos) {
-        if(state==ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR)){
+        if(state== ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR)){
             return worldIn.getBlockState(pos.down())==ModBlocks.PURPLE_PALM.getDefaultState();
         }else{
             boolean b3 = this.isValidGround(worldIn.getBlockState(pos.down()),worldIn,pos.down());
-            return b3&&(worldIn.isAirBlock(pos.up())||worldIn.getBlockState(pos.up())== ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, EnumType.AIR));
+            return b3&&(worldIn.isAirBlock(pos.up())||worldIn.getBlockState(pos.up())== ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR));
         }
     }
 
@@ -49,20 +48,24 @@ public class BlockPurplePalm extends BlockKathairisPlant {
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block p_189540_4_, BlockPos p_189540_5_) {
         if (!isValidPosition(state, world, pos)) {
             if(world.getBlockState(pos.down()).getBlock()==this){
-                world.destroyBlock(pos.down(),true);
+                world.destroyBlock(pos.down(),false);
+                world.destroyBlock(pos,false);
             }
             if(world.getBlockState(pos.up()).getBlock()==this){
                 world.removeBlock(pos.up());
+                world.destroyBlock(pos,false);
             }
-            world.removeBlock(pos);
         }else{
-            if(world.getBlockState(pos.up())!=ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, EnumType.AIR)){
-                if(world.isAirBlock(pos.up())){
-                    world.setBlockState(pos.up(),ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, EnumType.AIR));
-                }else{
+            if(state==ModBlocks.PURPLE_PALM.getDefaultState()){
+                if(world.getBlockState(pos.up())!=ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR)&&world.getBlockState(pos.up()).getBlock()!=Blocks.AIR){
+                    world.removeBlock(pos);
+                }
+            }else{
+                if(world.getBlockState(pos.down())!=ModBlocks.PURPLE_PALM.getDefaultState()){
                     world.removeBlock(pos);
                 }
             }
+
         }
     }
 
@@ -74,21 +77,52 @@ public class BlockPurplePalm extends BlockKathairisPlant {
     }
 
     @Override
+    public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld wo, BlockPos pos, BlockPos facingPos) {
+        if(stateIn==ModBlocks.PURPLE_PALM.getDefaultState()) {
+            if (wo.isAirBlock(pos.up())) {
+                wo.setBlockState(pos.up(), ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR), 2);
+            }
+        }
+        return super.updatePostPlacement(stateIn, facing, facingState, wo, pos, facingPos);
+    }
+
+    @Override
     public void onBlockPlacedBy(World wo, BlockPos pos, IBlockState state, @Nullable EntityLivingBase p_180633_4_, ItemStack p_180633_5_) {
-        if(wo.isAirBlock(pos.up())) {
-            wo.setBlockState(pos.up(), ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR));
+        if(state==ModBlocks.PURPLE_PALM.getDefaultState()) {
+            if (wo.isAirBlock(pos.up())) {
+                wo.setBlockState(pos.up(), ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR));
+            }
         }
         super.onBlockPlacedBy(wo, pos, state, p_180633_4_, p_180633_5_);
     }
 
     @Override
+    public void onBlockAdded(IBlockState p_196259_1_, World wo, BlockPos pos, IBlockState p_196259_4_) {
+        if(p_196259_1_==ModBlocks.PURPLE_PALM.getDefaultState()) {
+            if (wo.isAirBlock(pos.up())) {
+                wo.setBlockState(pos.up(), ModBlocks.PURPLE_PALM.getDefaultState().with(VARIANT, BlockPurplePalm.EnumType.AIR));
+            }
+        }
+        super.onBlockAdded(p_196259_1_, wo, pos, p_196259_4_);
+    }
+
+    @Override
     public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-        super.onBlockHarvested(world, pos, state, player);
         if(world.getBlockState(pos.down()).getBlock()==this){
             world.destroyBlock(pos.down(),true);
         }
         if(world.getBlockState(pos.up()).getBlock()==this){
-            world.removeBlock(pos.up());
+            world.destroyBlock(pos.up(),false);
+        }
+        super.onBlockHarvested(world,pos,state,player);
+    }
+
+    @Override
+    public int getItemsToDropCount(IBlockState state, int p_196251_2_, World p_196251_3_, BlockPos p_196251_4_, Random p_196251_5_) {
+        if(state==ModBlocks.PURPLE_PALM.getDefaultState()){
+            return 1;
+        }else{
+            return 0;
         }
     }
 

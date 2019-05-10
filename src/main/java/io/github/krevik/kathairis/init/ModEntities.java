@@ -104,7 +104,7 @@ public class ModEntities {
         registerEntitySpawn((EntityType<? extends EntityLiving>)LIVING_FLOWER,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},8,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>)HOWLER,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},5,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>)FUNGITE,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},2,1,1);
-        //registerEntitySpawn((EntityType<? extends EntityLiving>)CACTI_SPORE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},4,1,1);
+        registerEntitySpawn((EntityType<? extends EntityLiving>)CACTI_SPORE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},4,1,1);
         //registerEntitySpawn((EntityType<? extends EntityLiving>)JELLY_FISH,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,2);
         registerEntitySpawn((EntityType<? extends EntityLiving>)BISON,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},8,2,4);
         registerEntitySpawn((EntityType<? extends EntityLiving>)COMMON_BUTTERFLY1,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
@@ -113,7 +113,7 @@ public class ModEntities {
         registerEntitySpawn((EntityType<? extends EntityLiving>)RUBY_SILE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>)RUBY_SILE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>)CLOUD_SHIMMER,EnumCreatureType.AMBIENT,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)SKYLIGHT,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},2,1,1);
+        //registerEntitySpawn((EntityType<? extends EntityLiving>)SKYLIGHT,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},2,1,1);
 
     }
 
