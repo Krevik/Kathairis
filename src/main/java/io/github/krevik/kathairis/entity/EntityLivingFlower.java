@@ -1,9 +1,11 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.entity.ai.EntityAIHealTargets;
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -16,7 +18,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityLivingFlower extends EntityAnimal
+public class EntityLivingFlower extends EntityKatharianAnimal
 {
     private static final DataParameter<Boolean> canDespawn = EntityDataManager.createKey(EntityLivingFlower.class, DataSerializers.BOOLEAN);
     public EntityLivingFlower(World worldIn)
@@ -24,6 +26,7 @@ public class EntityLivingFlower extends EntityAnimal
         super(ModEntities.LIVING_FLOWER,worldIn);
         this.setSize(0.3F, 0.5F);
         this.experienceValue=10;
+        spawnableBlocks.add(ModBlocks.KATHAIRIS_GRASS);
     }
 
     public void deallowDespawning(){

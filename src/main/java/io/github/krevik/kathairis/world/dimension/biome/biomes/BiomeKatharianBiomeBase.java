@@ -1,7 +1,10 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -13,9 +16,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class BiomeKatharianBiomeBase extends Biome {
     public Color baseGrassColor =new Color(66,244,238);
+
     protected BiomeKatharianBiomeBase(BiomeBuilder p_i48975_1_) {
         super(p_i48975_1_);
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, WITH_CHANCE, new ChanceConfig(128)));
@@ -69,5 +75,9 @@ public class BiomeKatharianBiomeBase extends Biome {
         }
         hex = hex;
         return hex;
+    }
+
+    public void addSpawn(EnumCreatureType type, Biome.SpawnListEntry spawnListEntry) {
+        getSpawns(type).add(spawnListEntry);
     }
 }

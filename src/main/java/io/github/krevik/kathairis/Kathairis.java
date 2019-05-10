@@ -50,8 +50,6 @@ public final class Kathairis {
 
 	private void setup(final FMLCommonSetupEvent event) {
 		KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
-		ModEntities.registerPlacementTypes();
-		ModEntities.registerEntitySpawns();
 		ModParticles.registerParticles();
 		PacketHandler.register();
 	}

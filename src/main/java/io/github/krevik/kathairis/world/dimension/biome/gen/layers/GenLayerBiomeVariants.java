@@ -12,9 +12,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public enum GenLayerBiomeVariants implements IC1Transformer {
     INSTANCE;
 
-    private static final int KATHARIAN_FOREST_ID = IRegistry.BIOME.getId(ModBiomes.KATHARIAN_FOREST);
-    private static final int KATHARIAN_DENSE_FOREST_ID = IRegistry.BIOME.getId(ModBiomes.KATHARIAN_DENSE_FOREST);
-
     private GenLayerBiomeVariants() {
     }
 
@@ -28,7 +25,4 @@ public enum GenLayerBiomeVariants implements IC1Transformer {
         return centerBiomeID;
     }
 
-    private int getRandomVariantID(){
-        return KATHARIAN_DENSE_FOREST_ID;
-    }
 }

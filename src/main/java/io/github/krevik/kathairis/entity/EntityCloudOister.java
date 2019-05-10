@@ -1,21 +1,27 @@
 package io.github.krevik.kathairis.entity;
 
+import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.block.BlockKathairisCloud;
 import io.github.krevik.kathairis.entity.ai.EntityAIPanicNew;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.KatharianLootTables;
+import io.github.krevik.kathairis.util.networking.PacketHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Particles;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -110,8 +116,7 @@ public class EntityCloudOister extends EntityAmbientCreature
                 k=50+rand.nextInt(300);
                 jumpTimer=0;
                 motionY+=0.5;
-                //IMessage message = new PacketCloudOisterClient((float)posX,(float)posY,(float)posZ);
-                //KathairisPacketHandler.CHANNEL.sendToAll(message);
+                spawnJumpParticles();
             }
             if(!this.onGround) {
                 if(this.getRNG().nextInt(100)==0) {
@@ -133,6 +138,19 @@ public class EntityCloudOister extends EntityAmbientCreature
         }
     }
 
+    private void spawnJumpParticles(){
+        for (int i = 0; i < 24; ++i)
+        {
+            double d0 = posX + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();
+            double d1 = posY;
+            double d2 = posZ + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();
+            double d3 = 0;
+            double d4 = 0;
+            double d5 = 0;
+            Minecraft.getInstance().world.addParticle(Particles.CLOUD, d0, d1, d2, d3, d4, d5);
+        }
+    }
+
     /*public EnumCreatureAttribute getCreatureAttribute()
     {
         return EnumCreatureAttribute.UNDEFINED;
@@ -145,21 +163,21 @@ public class EntityCloudOister extends EntityAmbientCreature
         return KatharianLootTables.LOOT_CLOUDOISTER;
     }
 
-    /*public boolean attackEntityAsMob(Entity entityIn)
+    @Override
+    public boolean attackEntityAsMob(Entity entityIn)
     {
         boolean flag = super.attackEntityAsMob(entityIn);
     	this.motionY=0.5;
-		IMessage message = new PacketCloudOisterClient((int)posX,(int)posY,(int)posZ);
-		KathairisPacketHandler.CHANNEL.sendToAll(message);
+        spawnJumpParticles();
         return flag;
     }
-    
+
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
-		IMessage message = new PacketCloudOisterClient((int)posX,(int)posY,(int)posZ);
-		KathairisPacketHandler.CHANNEL.sendToAll(message);
+        spawnJumpParticles();
     	return super.attackEntityFrom(source, amount);
-    }*/
+    }
 
     @Override
     public void writeAdditional(NBTTagCompound compound)

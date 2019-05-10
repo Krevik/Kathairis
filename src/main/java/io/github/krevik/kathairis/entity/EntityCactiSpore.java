@@ -1,7 +1,9 @@
 package io.github.krevik.kathairis.entity;
 
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
+import net.minecraft.block.Block;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,21 +19,37 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class EntityCactiSpore extends EntityMob
 {
     private static final DataParameter<Boolean> canDespawn = EntityDataManager.createKey(EntityCactiSpore.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> spikeTimer = EntityDataManager.createKey(EntityCactiSpore.class, DataSerializers.VARINT);
+    private ArrayList<Block> spawnableBlocks;
 
     public EntityCactiSpore(World worldIn)
     {
         super(ModEntities.CACTI_SPORE,worldIn);
         this.setSize(1F, 1F);
         this.experienceValue=30;
+        spawnableBlocks= new ArrayList<>();
+        spawnableBlocks.add(ModBlocks.KATHAIRIS_GRASS);
+    }
+
+    @Override
+    public boolean canSpawn(IWorld p_205020_1_, boolean p_205020_2_) {
+        int lvt_3_1_ = MathHelper.floor(this.posX);
+        int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
+        int lvt_5_1_ = MathHelper.floor(this.posZ);
+        BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
+        return spawnableBlocks.contains(p_205020_1_.getBlockState(lvt_6_1_.down()).getBlock()) &&
+                this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), p_205020_1_) >= 0.0F && p_205020_1_.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
     }
 
     public void deallowDespawning(){

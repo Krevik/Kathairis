@@ -7,6 +7,7 @@ import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,12 +28,15 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityBison extends EntityAnimal
+public class EntityBison extends EntityKatharianAnimal
 {
     private static final DataParameter<Float> animTimer = EntityDataManager.createKey(EntityBison.class, DataSerializers.FLOAT);
     private static final DataParameter<Boolean> shouldAnimTail = EntityDataManager.createKey(EntityBison.class, DataSerializers.BOOLEAN);
@@ -43,7 +47,18 @@ public class EntityBison extends EntityAnimal
         super(ModEntities.BISON,worldIn);
         this.setSize(1.5F, 1.7F);
         this.experienceValue=30;
-        spawnableBlock= ModBlocks.KATHAIRIS_GRASS;
+        spawnableBlocks.add(ModBlocks.KATHAIRIS_GRASS);
+        spawnableBlocks.add(ModBlocks.KATHAIRIS_DIRT);
+    }
+
+    @Override
+    public boolean canSpawn(IWorld p_205020_1_, boolean p_205020_2_) {
+        int lvt_3_1_ = MathHelper.floor(this.posX);
+        int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
+        int lvt_5_1_ = MathHelper.floor(this.posZ);
+        BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
+        return spawnableBlocks.contains(p_205020_1_.getBlockState(lvt_6_1_.down()).getBlock()) && p_205020_1_.getLightSubtracted(lvt_6_1_, 0) > 8 &&
+                this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), p_205020_1_) >= 0.0F && p_205020_1_.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
     }
 
     @Override

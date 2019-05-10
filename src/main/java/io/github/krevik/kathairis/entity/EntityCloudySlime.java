@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.entity;
 
 import com.google.common.collect.Sets;
 import io.github.krevik.kathairis.entity.ai.EntityAIAttackTarget;
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.KatharianLootTables;
@@ -42,6 +43,7 @@ public class EntityCloudySlime extends EntityTameable
         this.setSize(1.4F, 1.4F);
         this.moveHelper = new EntityFlyHelper(this);
         this.setTamed(false);
+        this.spawnableBlock= ModBlocks.KATHAIRIS_GRASS;
     }
 
     @Override

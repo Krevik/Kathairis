@@ -39,10 +39,6 @@ public class ClientEventSubscriber {
         ModParticles.registerParticleRenderers();
     }
 
-    static float swampFogDensity=0.005f;
-    static float swampFogNearPlane=4f;
-    static float swampFogFarPlane=40f;
-
     @SubscribeEvent
     public static void fogThings(EntityViewRenderEvent.RenderFogEvent event){
         EntityPlayer player = Minecraft.getInstance().player;

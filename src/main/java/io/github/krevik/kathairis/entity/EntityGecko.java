@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.entity.ai.EntityAIAvoidMovingSandsAndCactus;
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.entity.EntityAgeable;
@@ -34,6 +35,7 @@ public class EntityGecko extends EntityAnimal {
         super(ModEntities.GECKO,worldIn);
         setSize(0.7F, 0.25F);
         experienceValue = 10;
+        this.spawnableBlock= ModBlocks.KATHAIRIS_GRASS;
     }
 
     @Override

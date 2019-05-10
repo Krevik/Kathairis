@@ -1,14 +1,17 @@
 package io.github.krevik.kathairis.util.networking;
 
-import io.github.krevik.kathairis.util.networking.packets.PacketServerPlayerUseJadeVine;
+import io.github.krevik.kathairis.util.networking.packets.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.item.Item;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.IndexedMessageCodec;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
@@ -45,6 +48,13 @@ public final class PacketHandler
         if (!(player instanceof FakePlayer))
         {
             HANDLER.sendTo(msg, player.connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+        }
+    }
+
+    public static void sendToAll(Object msg){
+        for (EntityPlayerMP player : ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayers())
+        {
+            sendTo(msg,player);
         }
     }
 }

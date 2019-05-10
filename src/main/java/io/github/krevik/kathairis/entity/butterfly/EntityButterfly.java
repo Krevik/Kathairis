@@ -26,7 +26,7 @@ public class EntityButterfly extends EntityBasicButterfly
 
     public EntityButterfly(World worldIn)
     {
-        super(worldIn, ModEntities.BASIC_BUTTERFLY1);
+        super(worldIn, ModEntities.COMMON_BUTTERFLY1);
         this.setSize(0.6F, 0.5F);
         this.setIsBirdSitting(true);
         this.experienceValue=1;

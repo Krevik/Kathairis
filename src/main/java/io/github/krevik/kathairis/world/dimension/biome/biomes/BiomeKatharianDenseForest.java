@@ -55,12 +55,6 @@ public class BiomeKatharianDenseForest extends BiomeKatharianBiomeBase{
 
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(KatharianFeatureList.KATHARIAN_CLOUD_MINI_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, COUNT_RANGE, new CountRangeConfig(1, 0, 0, 128)));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.MYSTIC_BIRD, 12, 1, 2));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.GECKO, 4, 1, 1));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.LIVING_FLOWER, 8, 1, 1));
-        //this.addSpawn(EnumCreatureType.MONSTER, new SpawnListEntry(ModEntities.HOWLER, 5, 1, 1));
-        //this.addSpawn(EnumCreatureType.MONSTER, new SpawnListEntry(ModEntities.FUNGITE, 2, 1, 1));
-        //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry(ModEntities.CACTI_SPORE, 4, 1, 1));
     }
 
     /*@Override

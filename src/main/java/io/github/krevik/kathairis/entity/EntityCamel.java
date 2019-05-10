@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.entity.ai.EntityAIAvoidMovingSandsAndCactus;
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
@@ -21,6 +22,7 @@ public class EntityCamel extends AbstractHorse
     {
         super(ModEntities.CAMEL,worldIn);
         this.setSize(1.6F, 1.5F);
+        this.spawnableBlock= ModBlocks.KATHAIRIS_SAND;
     }
 
     @Override

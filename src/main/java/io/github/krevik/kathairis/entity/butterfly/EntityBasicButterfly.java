@@ -25,7 +25,7 @@ public class EntityBasicButterfly extends EntityAmbientCreature
 {
     private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityBasicButterfly.class, DataSerializers.VARINT);
 
-    private static final DataParameter<Byte> SITTING = EntityDataManager.createKey(EntityIllukini.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> SITTING = EntityDataManager.createKey(EntityBasicButterfly.class, DataSerializers.BYTE);
     private BlockPos spawnPosition;
 
     public EntityBasicButterfly(World worldIn, EntityType type)

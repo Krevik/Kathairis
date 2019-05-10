@@ -29,6 +29,7 @@ import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -377,9 +378,35 @@ public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
-		ModEntities.registerKathairisEntityTypes(event);
-		//ModEntities.registerPlacementTypes();
-		//ModEntities.registerEntitySpawns();
+		event.getRegistry().registerAll(
+				setup(ModEntities.COMMON_BUTTERFLY1=EntityType.Builder.create(EntityButterfly.class, EntityButterfly::new).build("kathairis:common_butterfly1"),"common_butterfly1"),
+				setup(ModEntities.COMMON_BUTTERFLY2=EntityType.Builder.create(EntityButterfly1.class, EntityButterfly1::new).build("kathairis:common_butterfly2"),"common_butterfly2"),
+				setup(ModEntities.CLOUD_SHIMMER=EntityType.Builder.create(EntityCloudShimmer.class, EntityCloudShimmer::new).build("kathairis:cloud_shimmer"),"cloud_shimmer"),
+				setup(ModEntities.ILLUKINI=EntityType.Builder.create(EntityIllukini.class, EntityIllukini::new).tracker(200, 1, true).build("kathairis:illukini"),"illukini"),
+				setup(ModEntities.RUBY_SILE=EntityType.Builder.create(EntityRubySile.class, EntityRubySile::new).tracker(200, 1, true).build("kathairis:ruby_sile"),"ruby_sile"),
+				setup(ModEntities.SKYLIGHT=EntityType.Builder.create(EntitySkylight.class, EntitySkylight::new).tracker(200, 1, true).build("kathairis:skylight"),"skylight"),
+				setup(ModEntities.BIG_TURTLE=EntityType.Builder.create(EntityBigTurtle.class, EntityBigTurtle::new).tracker(200, 1, true).build("kathairis:big_turtle"),"big_turtle"),
+				setup(ModEntities.BISON=EntityType.Builder.create(EntityBison.class, EntityBison::new).tracker(32, 1, true).build("kathairis:bison"),"bison"),
+				setup(ModEntities.CACTI_SPORE=EntityType.Builder.create(EntityCactiSpore.class, EntityCactiSpore::new).tracker(32, 1, true).build("kathairis:cacti_spore"),"cacti_spore"),
+				setup(ModEntities.CAMEL=EntityType.Builder.create(EntityCamel.class, EntityCamel::new).tracker(32, 1, true).build("kathairis:camel"),"camel"),
+				setup(ModEntities.CLOUD_OISTER=EntityType.Builder.create(EntityCloudOister.class, EntityCloudOister::new).tracker(32, 1, true).build("kathairis:cloud_oister"),"cloud_oister"),
+				setup(ModEntities.CLOUDY_SLIME=EntityType.Builder.create(EntityCloudySlime.class, EntityCloudySlime::new).tracker(32, 1, true).build("kathairis:cloudy_slime"),"cloudy_slime"),
+				setup(ModEntities.FLYING_SQUID=EntityType.Builder.create(EntityFlyingSquid.class, EntityFlyingSquid::new).tracker(32, 1, true).build("kathairis:flying_squid"),"flying_squid"),
+				setup(ModEntities.FUNGITE=EntityType.Builder.create(EntityFungite.class, EntityFungite::new).tracker(32, 1, true).build("kathairis:fungite"),"fungite"),
+				setup(ModEntities.GAZNOWEL=EntityType.Builder.create(EntityGaznowel.class, EntityGaznowel::new).tracker(32, 1, true).build("kathairis:gaznowel"),"gaznowel"),
+				setup(ModEntities.GECKO=EntityType.Builder.create(EntityGecko.class, EntityGecko::new).tracker(32, 1, true).build("kathairis:gecko"),"gecko"),
+				setup(ModEntities.HOWLER=EntityType.Builder.create(EntityHowler.class, EntityHowler::new).tracker(32, 1, true).build("kathairis:howler"),"howler"),
+				setup(ModEntities.JELLY_FISH=EntityType.Builder.create(EntityJellyFish.class, EntityJellyFish::new).tracker(32, 1, true).build("kathairis:jelly_fish"),"jelly_fish"),
+				setup(ModEntities.LIVING_FLOWER=EntityType.Builder.create(EntityLivingFlower.class, EntityLivingFlower::new).tracker(32, 1, true).build("kathairis:living_flower"),"living_flower"),
+				setup(ModEntities.MYSTIC_BIRD=EntityType.Builder.create(EntityMysticBird.class, EntityMysticBird::new).tracker(32, 1, true).build("kathairis:mystic_bird"),"mystic_bird"),
+				setup(ModEntities.PHASM=EntityType.Builder.create(EntityPhasm.class, EntityPhasm::new).tracker(32, 1, true).build("kathairis:phasm"),"phasm"),
+				setup(ModEntities.POISONOUS_SCORPION=EntityType.Builder.create(EntityPoisonousScorpion.class, EntityPoisonousScorpion::new).tracker(32, 1, true).build("kathairis:poisonous_scorpion"),"poisonous_scorpion"),
+				setup(ModEntities.SKYRAY=EntityType.Builder.create(EntitySkyray.class, EntitySkyray::new).tracker(200, 1, true).build("kathairis:skyray"),"skyray"),
+				setup(ModEntities.STRANGE_WANDERER=EntityType.Builder.create(EntityStrangeWanderer.class, EntityStrangeWanderer::new).tracker(200, 1, true).build("kathairis:strange_wanderer"),"strange_wanderer"),
+				setup(ModEntities.MYSTIC_WAND_SHOOT=EntityType.Builder.create(EntityMysticWandShoot.class, EntityMysticWandShoot::new).tracker(200, 1, true).build("kathairis:mystic_wand_shoot"),"mystic_wand_shoot")
+		);
+		ModEntities.registerPlacementTypes();
+		ModEntities.registerEntitySpawns();
 	}
 
 
