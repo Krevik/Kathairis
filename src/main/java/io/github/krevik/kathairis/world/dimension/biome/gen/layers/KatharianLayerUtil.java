@@ -59,29 +59,30 @@ public class KatharianLayerUtil {
 
         i = 3;
 
-        IAreaFactory<T> lvt_7_1_ = repeat(1000L, GenLayerZoom.NORMAL, iareafactory, 0, contextFactory);
-        lvt_7_1_ = GenLayerRiverInit.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), lvt_7_1_);
-        IAreaFactory<T> lvt_8_1_ = getBiomeLayer(iareafactory, settings, contextFactory);
-        lvt_7_1_ = repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, 2, contextFactory);
-        lvt_7_1_ = repeat(1000L, GenLayerZoom.NORMAL, lvt_7_1_, j, contextFactory);
-        lvt_7_1_ = GenLayerKatharianRiver.INSTANCE.apply((IContextExtended)contextFactory.apply(1L), lvt_7_1_);
-        lvt_7_1_ = GenLayerSmooth.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), lvt_7_1_);
-        lvt_8_1_ = GenLayerBiomeVariants.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), lvt_8_1_);
+        IAreaFactory<T> layer1 = repeat(1000L, GenLayerZoom.NORMAL, iareafactory, 0, contextFactory);
+        layer1 = GenLayerRiverInit.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), layer1);
+        IAreaFactory<T> layer2 = getBiomeLayer(iareafactory, settings, contextFactory);
+        layer1 = repeat(1000L, GenLayerZoom.NORMAL, layer1, 2, contextFactory);
+        layer1 = repeat(1000L, GenLayerZoom.NORMAL, layer1, j, contextFactory);
+        layer1 = GenLayerKatharianRiver.INSTANCE.apply((IContextExtended)contextFactory.apply(1L), layer1);
+        layer1 = GenLayerSmooth.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer1);
+        layer2 = GenLayerBiomeVariants.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer2);
+        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), layer2);
 
         for(int k = 0; k < i; ++k) {
-            lvt_8_1_ = GenLayerZoom.NORMAL.apply((IContextExtended)contextFactory.apply((long)(1000 + k)), lvt_8_1_);
+            layer2 = GenLayerZoom.NORMAL.apply((IContextExtended)contextFactory.apply((long)(1000 + k)), layer2);
 
             if (k == 1 || i == 1) {
-                lvt_8_1_ = GenLayerKatharianBiomeEdge.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), lvt_8_1_);
-                lvt_8_1_ = GenLayerZoom.NORMAL.apply((IContextExtended)contextFactory.apply((long)(1000L)), lvt_8_1_);
+                layer2 = GenLayerKatharianBiomeEdge.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer2);
+                layer2 = GenLayerZoom.NORMAL.apply((IContextExtended)contextFactory.apply((long)(1000L)), layer2);
             }
         }
 
-        lvt_8_1_ = GenLayerSmooth.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), lvt_8_1_);
-        lvt_8_1_ = GenLayerKatharianRiverMix.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), lvt_8_1_, lvt_7_1_);
-        lvt_8_1_ = GenLayerDeleteRiverNearDesert.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), lvt_8_1_);
-        IAreaFactory<T> iareafactory5 = GenLayerVoronoiZoom.INSTANCE.apply(contextFactory.apply(10L), lvt_8_1_);
-        return ImmutableList.of(lvt_8_1_, iareafactory5, lvt_8_1_);
+        layer2 = GenLayerSmooth.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer2);
+        layer2 = GenLayerKatharianRiverMix.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), layer2, layer1);
+
+        IAreaFactory<T> iareafactory5 = GenLayerVoronoiZoom.INSTANCE.apply(contextFactory.apply(10L), layer2);
+        return ImmutableList.of(layer2, iareafactory5, layer2);
     }
 
 
