@@ -19,6 +19,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 
@@ -36,6 +37,11 @@ public class EntityMysticBird extends EntityAmbientCreature
         this.setSize(0.5F, 0.7F);
         this.setIsBirdSitting(true);
         this.experienceValue=5;
+    }
+
+    @Override
+    public boolean canSpawn(IWorld p_205020_1_, boolean p_205020_2_) {
+        return super.canSpawn(p_205020_1_, p_205020_2_);
     }
 
     @Nullable
