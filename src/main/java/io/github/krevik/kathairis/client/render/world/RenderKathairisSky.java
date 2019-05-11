@@ -35,9 +35,7 @@ public class RenderKathairisSky implements IRenderHandler {
     }
 
     private int[] constantLight = new int[3000];
-
     private ArrayList<FallingStar> fallingStarsList = new ArrayList();
-
     private FunctionHelper helper = Kathairis.getHelper();
 
     @Override
@@ -145,8 +143,6 @@ public class RenderKathairisSky implements IRenderHandler {
                 double d15 = Math.sin(d14);
                 double d16 = Math.cos(d14);
 
-                //for (int j = 0; j < 4; ++j)
-                //{
                 double d18 = (double) ((0 & 2) - 1) * d33;
                 double d19 = (double) ((1 + 1 & 2) - 1) * d33;
                 double d21 = d18 * d16 - d19 * d15;
@@ -157,10 +153,8 @@ public class RenderKathairisSky implements IRenderHandler {
                 double d26 = d22 * d9 + d24 * d10;
                 FallingStar star = new FallingStar(this.fallingStarsList.size(), d5 + d25, d6 + d23, d7 + d26, -0.5F + random.nextFloat(), -0.5F + random.nextFloat(), -0.5F + random.nextFloat(), new Random().nextLong());
                 this.fallingStarsList.add(star);
-                //bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color(244, 238, 66, 200).endVertex();
-                // }
-
             }
+
             //operate existing falling stars
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
             for (int x = 0; x < this.fallingStarsList.size(); x++) {
@@ -248,7 +242,6 @@ public class RenderKathairisSky implements IRenderHandler {
 
             bufferbuilder.begin(6, DefaultVertexFormats.POSITION_COLOR);
             bufferbuilder.pos(0.0D, 100.0D, 0.0D).color(f6, f7, f8, afloat[3]).endVertex();
-            int l1 = 16;
 
             for (int j2 = 0; j2 <= 16; ++j2)
             {
@@ -262,8 +255,6 @@ public class RenderKathairisSky implements IRenderHandler {
             GlStateManager.popMatrix();
             GlStateManager.shadeModel(7424);
         }
-
-
 
         GlStateManager.enableTexture2D();
         GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
@@ -283,17 +274,6 @@ public class RenderKathairisSky implements IRenderHandler {
         tessellator.draw();
         //sun end
 
-        /*int R=100;int G=100;int B=20;int Alpha=255;
-        for(int c=10;c<=30;c++){
-            Alpha=255-c*8;
-            Vector4d color = new Vector4d(R,G,B,Alpha);
-            DrawCircle(f17,-f17,c,100,color,tessellator);
-        }*/
-
-
-
-
-
         //moon start
         f17 = 20.0F;
         mc.getTextureManager().bindTexture(MOON_PHASES_TEXTURES);
@@ -311,12 +291,6 @@ public class RenderKathairisSky implements IRenderHandler {
         bufferbuilder.pos((double)(-f17), -100.0D, (double)(-f17)).tex((double)f24, (double)f23).endVertex();
         tessellator.draw();
         //moon end
-
-        f17 = 20.0F;
-
-
-
-
 
         GlStateManager.disableTexture2D();
         float f15 = world.getStarBrightness(partialTicks) * f16;
@@ -375,23 +349,6 @@ public class RenderKathairisSky implements IRenderHandler {
         GlStateManager.enableTexture2D();
         GlStateManager.depthMask(true);
 
-    }
-
-    void DrawCircle(float cx, float cy, float r, int num_segments, Vector4d color,Tessellator tessellator)
-    {
-        BufferBuilder builder=tessellator.getBuffer();
-        builder.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
-
-        for(int ii = 0; ii < num_segments; ii++)
-        {
-            float theta = 2.0f * 3.1415926f *(float)ii / (float)(num_segments);
-
-            float x = r * MathHelper.cos(theta);//calculate the x component
-            float y = r * MathHelper.sin(theta);//calculate the y component
-
-            builder.pos(x+cx,100D,y+cy).color((float)color.x,(float)color.y,(float)color.z,(float)color.w).endVertex();
-        }
-        tessellator.draw();
     }
 
 
