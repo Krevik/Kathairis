@@ -1,15 +1,21 @@
 package io.github.krevik.kathairis.client.gui;
 
 
+import io.github.krevik.kathairis.util.ModReference;
+import io.github.krevik.kathairis.util.ModUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IInteractionObject;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 @OnlyIn(Dist.CLIENT)
@@ -26,7 +32,18 @@ public class GuiOldMan extends GuiScreen {
     private GuiButton Power;
     private GuiButton Adventure;
     int margin=15;
-
+    private String guiTitle;
+    private String nextButtonTitle;
+    private String backButtonTitle;
+    private String knowledge_Button_Title;
+    private String power_Button_Title;
+    private String adventure_Button_Title;
+    private String hello_Player_Title;
+    private String asked_question;
+    private String[] main_page_lines=new String[8];
+    private String[] adventure_lines=new String[8];
+    private String[] power_lines=new String[8];
+    private String[] knowledge_lines=new String[8];
 
     public GuiOldMan(){
     }
@@ -37,16 +54,37 @@ public class GuiOldMan extends GuiScreen {
 
     @Override
     public void initGui() {
+        guiTitle=I18n.format("gui.old_man.title");
+        for(int i=0;i<=7;i++){
+            main_page_lines[i]=I18n.format("gui.old_man.main_page.line_"+i);
+        }
+        for(int i=0;i<=7;i++){
+            power_lines[i]=I18n.format("gui.old_man.power_line_"+i);
+        }
+        for(int i=0;i<=7;i++){
+            knowledge_lines[i]=I18n.format("gui.old_man.knowledge_line_"+i);
+        }
+        for(int i=0;i<=7;i++){
+            adventure_lines[i]=I18n.format("gui.old_man.adventure_line_"+i);
+        }
+        asked_question=I18n.format("gui.old_man.asked_question");
+        hello_Player_Title=I18n.format("gui.old_man.hello_player_title");
+        nextButtonTitle=I18n.format("gui.next_button_title");
+        backButtonTitle=I18n.format("gui.back_button_title");
+        knowledge_Button_Title=I18n.format("gui.old_man.button_title.knowledge");
+        power_Button_Title=I18n.format("gui.old_man.button_title.power");
+        adventure_Button_Title=I18n.format("gui.old_man.button_title.adventure");
+
         mode=0;
         buttons.clear();
-        this.addButton(Next = new GuiButton(1,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin), 80, 20, "Next"){
+        this.addButton(Next = new GuiButton(1,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin), 80, 20, nextButtonTitle){
             @Override
             public void onClick(double p_194829_1_, double p_194829_3_) {
                    GuiOldMan.this.setMode(1);
                 super.onClick(p_194829_1_, p_194829_3_);
             }
         });
-        this.addButton(Back = new GuiButton(2,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*3), 60, 20, "Back"){
+        this.addButton(Back = new GuiButton(2,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*9), 60, 20, backButtonTitle){
             @Override
             public void onClick(double p_194829_1_, double p_194829_3_) {
                 if(mode==0) {
@@ -61,21 +99,21 @@ public class GuiOldMan extends GuiScreen {
                 super.onClick(p_194829_1_, p_194829_3_);
             }
         });
-        this.addButton(Knowledge = new GuiButton(3,ImageWidth/2+margin*8, (height-ImageHeight/2-margin+margin), 80, 20, "Knowledge"){
+        this.addButton(Knowledge = new GuiButton(3,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*3), 80, 20, knowledge_Button_Title){
             @Override
             public void onClick(double p_194829_1_, double p_194829_3_) {
                 GuiOldMan.this.setMode(2);
                 super.onClick(p_194829_1_, p_194829_3_);
             }
         });
-        this.addButton(Power = new GuiButton(4,ImageWidth/2+margin*8, (height-ImageHeight/2-margin+margin*3), 60, 20, "Power"){
+        this.addButton(Power = new GuiButton(4,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*5), 60, 20, power_Button_Title){
             @Override
             public void onClick(double p_194829_1_, double p_194829_3_) {
                 GuiOldMan.this.setMode(3);
                 super.onClick(p_194829_1_, p_194829_3_);
             }
         });
-        this.addButton(Adventure = new GuiButton(5,ImageWidth/2+margin*8, (height-ImageHeight/2-margin+margin*5), 60, 20, "Adventure"){
+        this.addButton(Adventure = new GuiButton(5,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*7), 60, 20, adventure_Button_Title){
             @Override
             public void onClick(double p_194829_1_, double p_194829_3_) {
                 GuiOldMan.this.setMode(4);
@@ -142,39 +180,30 @@ public class GuiOldMan extends GuiScreen {
         this.mc.getTextureManager().bindTexture(GUITextures);
         int scale = Minecraft.getInstance().gameSettings.guiScale;
         drawModalRectWithCustomSizedTexture(margin, height-ImageHeight/2-margin, 0, 0, ImageWidth/2,ImageHeight/2,ImageWidth/2,ImageHeight/2);
-        this.drawString(fontRenderer, "Mysterious Stranger", (int)(margin*1.65), (int) (height -ImageHeight/2-margin*0.4), 0X191414);
+        this.drawString(fontRenderer, guiTitle, (int)(margin*1.65), (int) (height -ImageHeight/2-margin*0.4), 0X191414);
         if(mode==0){
-            this.drawString(fontRenderer, "Well hello there, "+ Minecraft.getInstance().player.getName().getFormattedText() +".", (int) (margin*1.75), height-ImageHeight/2+margin, 0X747474);
-            this.drawString(fontRenderer, "It has been a long time since someone has walked", (int) (margin*1.75), height -ImageHeight/2+margin*2, 0X747474);
-            this.drawString(fontRenderer, "through the gateway itself and walked this world.", (int) (margin*1.75), height -ImageHeight/2+margin*3, 0X747474);
-            this.drawString(fontRenderer, "I am sure you have many questions, ", (int) (margin*1.75), height -ImageHeight/2+margin*4, 0X747474);
-            this.drawString(fontRenderer, "but perhaps we should discuss more important matters.", (int) (margin*1.75), height -ImageHeight/2+margin*5, 0X747474);
+            this.drawString(fontRenderer, hello_Player_Title +", "+ Minecraft.getInstance().player.getName().getFormattedText() +".", (int) (margin*1.75), height-ImageHeight/2+margin, 0X747474);
+            for(int i=2;i<=9;i++){
+                this.drawString(fontRenderer, main_page_lines[i-2], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+            }
         }
         if(mode==1) {
-            this.drawString(fontRenderer, "What is it that you seek to find here?", (int) (margin*1.75), height -ImageHeight/2+margin, 0X747474);
+            this.drawString(fontRenderer, asked_question, (int) (margin*1.75), height -ImageHeight/2+margin, 0X747474);
         }
         if(mode==2) {
-            this.drawString(fontRenderer, "There is plenty knowledge to be found in Kathairis,", (int)(margin*1.75), height -ImageHeight/2+margin, 0X747474);
-            this.drawString(fontRenderer, "land of pure magic and rich histories.", (int)(margin*1.75), height -ImageHeight/2+margin*2, 0X747474);
-            this.drawString(fontRenderer, "Much of this you will find in your", (int)(margin*1.75), height -ImageHeight/2+margin*3, 0X747474);
-            this.drawString(fontRenderer, "travels through-out these lands.", (int)(margin*1.75), height -ImageHeight/2+margin*4, 0X747474);
-
+            for(int i=1;i<=8;i++){
+                this.drawString(fontRenderer, knowledge_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+            }
         }
         if(mode==3){
-            this.drawString(fontRenderer, "Dominance comes easily to those capable enough", (int)(margin*1.75), height -ImageHeight/2+margin, 0X747474);
-            this.drawString(fontRenderer, "to tame these wild lands. Much darkness has", (int)(margin*1.75), height -ImageHeight/2+margin*2, 0X747474);
-            this.drawString(fontRenderer, "erupted in past years, and there shall always ", (int)(margin*1.75), height -ImageHeight/2+margin*3, 0X747474);
-            this.drawString(fontRenderer, "be plenty of beasts to sate you thirst for", (int)(margin*1.75), height -ImageHeight/2+margin*4, 0X747474);
-            this.drawString(fontRenderer, "power and strength.", (int)(margin*1.75), height -ImageHeight/2+margin*5, 0X747474);
-
-
+            for(int i=1;i<=8;i++){
+                this.drawString(fontRenderer, power_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+            }
         }
         if(mode==4){
-            this.drawString(fontRenderer, "The lands you have entered are ones filled with", (int)(margin*1.75), height -ImageHeight/2+margin, 0X747474);
-            this.drawString(fontRenderer, "equal expanse as the land you hail from.", (int)(margin*1.75), height -ImageHeight/2+margin*2, 0X747474);
-            this.drawString(fontRenderer, "There will be many new discoveries", (int)(margin*1.75), height -ImageHeight/2+margin*3, 0X747474);
-            this.drawString(fontRenderer, "and trials that will lie before you,", (int)(margin*1.75), height -ImageHeight/2+margin*4, 0X747474);
-            this.drawString(fontRenderer, "and endless stories for you to write of your own adventures.", (int)(margin*1.75), height -ImageHeight/2+margin*5, 0X747474);
+            for(int i=1;i<=8;i++){
+                this.drawString(fontRenderer, adventure_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+            }
         }
 
         super.render(parWidth, parHeight, particle);
