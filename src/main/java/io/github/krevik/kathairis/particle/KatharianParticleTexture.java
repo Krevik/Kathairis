@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.particle;
 
 import net.minecraft.util.ResourceLocation;
+
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 /**
  * @author Krevik

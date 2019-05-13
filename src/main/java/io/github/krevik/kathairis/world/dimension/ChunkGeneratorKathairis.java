@@ -13,8 +13,6 @@ import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.SwampHutStructure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

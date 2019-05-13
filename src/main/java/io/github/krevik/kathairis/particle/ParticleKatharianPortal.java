@@ -2,19 +2,11 @@ package io.github.krevik.kathairis.particle;
 
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticlePortal;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
-
-import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 public class ParticleKatharianPortal extends BasicKatharianParticle {
 

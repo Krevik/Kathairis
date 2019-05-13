@@ -1,7 +1,5 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureType;
@@ -16,8 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class BiomeKatharianBiomeBase extends Biome {
     public Color baseGrassColor =new Color(66,244,238);

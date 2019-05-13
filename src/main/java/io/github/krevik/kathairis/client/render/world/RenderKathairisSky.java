@@ -15,7 +15,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IRenderHandler;
-import org.lwjgl.opengl.GL11;
 
 import javax.vecmath.Vector4d;
 import java.util.ArrayList;

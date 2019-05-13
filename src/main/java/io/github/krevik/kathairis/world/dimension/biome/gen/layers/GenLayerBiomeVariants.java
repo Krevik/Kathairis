@@ -1,10 +1,8 @@
 package io.github.krevik.kathairis.world.dimension.biome.gen.layers;
 
-import io.github.krevik.kathairis.init.ModBiomes;
 import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.gen.IContext;
 import net.minecraft.world.gen.layer.traits.IC1Transformer;
-import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * @author Krevik

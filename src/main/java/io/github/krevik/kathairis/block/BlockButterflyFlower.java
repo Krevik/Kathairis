@@ -1,5 +1,7 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
+import io.github.krevik.kathairis.entity.butterfly.EntityButterfly1;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +18,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.BUTTERFLY_FLOWER;
@@ -47,26 +50,26 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 				worldIn.setBlockState(pos, BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH));
 			}
 		}
-		//TODO
-//		if (state == BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH)) {
-//			List<EntityButterfly> e = worldIn.getEntitiesWithinAABB(EntityButterfly.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
-//			List<EntityButterfly1> e1 = worldIn.getEntitiesWithinAABB(EntityButterfly1.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
-//
-//			if (e != null) {
-//				if (e.size() > 0) {
-//					for (int c = 0; c < e.size(); c++) {
-//						e.get(c).butterflyFlowerPos = pos;
-//					}
-//				}
-//			}
-//			if (e1 != null) {
-//				if (e1.size() > 0) {
-//					for (int c = 0; c < e1.size(); c++) {
-//						e1.get(c).butterflyFlowerPos = pos;
-//					}
-//				}
-//			}
-//		}
+
+		if (state == BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH)) {
+			List<EntityButterfly> e = worldIn.getEntitiesWithinAABB(EntityButterfly.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
+			List<EntityButterfly1> e1 = worldIn.getEntitiesWithinAABB(EntityButterfly1.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
+
+			if (e != null) {
+				if (e.size() > 0) {
+					for (int c = 0; c < e.size(); c++) {
+						e.get(c).butterflyFlowerPos = pos;
+					}
+				}
+				if (e1 != null) {
+					if (e1.size() > 0) {
+						for (int c = 0; c < e1.size(); c++) {
+							e1.get(c).butterflyFlowerPos = pos;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	@Override

@@ -18,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;

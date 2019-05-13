@@ -1,31 +1,23 @@
 package io.github.krevik.kathairis.entity;
 
-import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.client.gui.GuiOldMan;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Calendar;
 import java.util.Map;
 
 public class EntityStrangeWanderer extends EntityMob

@@ -1,20 +1,16 @@
 package io.github.krevik.kathairis.client.gui;
 
 
-import io.github.krevik.kathairis.util.ModReference;
-import io.github.krevik.kathairis.util.ModUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.GuiFurnace;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IInteractionObject;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 

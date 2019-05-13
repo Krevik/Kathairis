@@ -1,10 +1,7 @@
 package io.github.krevik.kathairis.client;
 
-import io.github.krevik.kathairis.client.render.RenderBigTurtle;
-import io.github.krevik.kathairis.entity.EntityBigTurtle;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModParticles;
-import io.github.krevik.kathairis.util.RenderersRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,11 +11,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 

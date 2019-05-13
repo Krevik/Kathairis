@@ -2,13 +2,10 @@ package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.particle.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.init.Particles;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.IRegistry;
+
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 public class ModParticles {

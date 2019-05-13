@@ -1,22 +1,16 @@
 package io.github.krevik.kathairis.entity;
 
-import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.projectile.EntityFireball;
-import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Particles;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;

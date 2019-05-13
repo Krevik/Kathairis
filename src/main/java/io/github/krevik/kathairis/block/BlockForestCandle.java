@@ -2,8 +2,6 @@ package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,14 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.*;
-import net.minecraft.world.biome.SunflowerPlainsBiome;
 
 import javax.annotation.Nullable;
 import java.util.Random;

@@ -1,12 +1,8 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import io.github.krevik.kathairis.init.ModBlocks;
-import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Fluids;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;

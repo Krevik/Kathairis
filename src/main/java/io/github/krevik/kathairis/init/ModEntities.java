@@ -1,25 +1,17 @@
 package io.github.krevik.kathairis.init;
 
-import io.github.krevik.kathairis.entity.*;
-import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.BiomeKatharianBiomeBase;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemSpawnEgg;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.IRegistry;
-import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.PlainsBiome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
-
-import java.util.ArrayList;
-import java.util.function.Function;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static io.github.krevik.kathairis.util.ModUtil._null;

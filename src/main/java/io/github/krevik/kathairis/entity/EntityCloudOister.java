@@ -6,7 +6,6 @@ import io.github.krevik.kathairis.entity.ai.EntityAIPanicNew;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import io.github.krevik.kathairis.util.networking.PacketHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -38,6 +37,7 @@ public class EntityCloudOister extends EntityAmbientCreature
     public int timeUntilNextPearl() {
     	return this.getDataManager().get(timeUntilNextPearl).intValue();
     }
+
     public void setTimeUntilNextPearl(int x) {
     	this.getDataManager().set(timeUntilNextPearl, Integer.valueOf(x));
     }
@@ -138,7 +138,7 @@ public class EntityCloudOister extends EntityAmbientCreature
         }
     }
 
-    private void spawnJumpParticles(){
+    public void spawnJumpParticles(){
         for (int i = 0; i < 24; ++i)
         {
             double d0 = posX + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();

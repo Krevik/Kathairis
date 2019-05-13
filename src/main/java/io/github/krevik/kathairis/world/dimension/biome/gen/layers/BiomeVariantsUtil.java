@@ -4,7 +4,6 @@ import io.github.krevik.kathairis.init.ModBiomes;
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author Krevik

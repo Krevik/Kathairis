@@ -3,7 +3,6 @@ package io.github.krevik.kathairis.world.dimension.feature.forest;
 import io.github.krevik.kathairis.block.BlockForestCandle;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.IChunkGenSettings;

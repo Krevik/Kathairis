@@ -24,7 +24,7 @@ public class KatharianWorldCaveCarver extends WorldCarver<ProbabilityConfig> {
 
 
     @Override
-    public boolean func_212246_a(IBlockReader p_212246_1_, Random p_212246_2_, int p_212246_3_, int p_212246_4_, ProbabilityConfig p_212246_5_) {
+    public boolean shouldCarve(IBlockReader p_212246_1_, Random p_212246_2_, int p_212246_3_, int p_212246_4_, ProbabilityConfig p_212246_5_) {
         return p_212246_2_.nextFloat() <= p_212246_5_.probability;
     }
 
