@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.world.dimension.feature.desert;
 
+import io.github.krevik.kathairis.block.BlockPurplePalm;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +14,6 @@ import java.util.Random;
 
 public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
 
-    //TODO
     @Override
     public boolean place(IWorld world, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random random, BlockPos pos, NoFeatureConfig config) {
         if(world.getBlockState(pos.down()).getBlock()== ModBlocks.SOFT_SAND || world.getBlockState(pos.down()).getBlock()==ModBlocks.KATHAIRIS_SAND){
@@ -23,6 +23,7 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
                 }
                 if(random.nextInt(6)==0) {
                     world.setBlockState(pos.up(mainHeight + 1), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
+                    world.setBlockState(pos.up(mainHeight + 2), ModBlocks.PURPLE_PALM.getDefaultState().with(BlockPurplePalm.VARIANT,BlockPurplePalm.EnumType.AIR), 18);
                 }
                 if(mainHeight>2){
                     int surroundingHeight=random.nextInt(mainHeight-1);

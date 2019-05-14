@@ -19,25 +19,19 @@ public class EntityAIHealTargets extends EntityAIBase
         this.setMutexBits(3);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
+    @Override
     public boolean shouldExecute()
     {
         return world.getClosestPlayerToEntity(creature,5)!=null;
     }
 
-    /**
-     * Returns whether an in-progress EntityAIBase should continue executing
-     */
+    @Override
     public boolean shouldContinueExecuting()
     {
         return false;
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
+    @Override
     public void startExecuting()
     {
         EntityLivingBase entity = world.getNearestAttackablePlayer(creature,5,5);

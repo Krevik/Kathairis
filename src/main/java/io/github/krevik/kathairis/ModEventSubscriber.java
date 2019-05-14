@@ -275,7 +275,7 @@ public final class ModEventSubscriber {
 				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans"),
 				setup(new ItemMysticWand(ModItemGroups.WEAPONS),"mystic_wand")
 		);
-		ModEntities.registerEggs(event);
+		//ModEntities.registerEggs(event);
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
 
 			//TODO find better way, maybe make all blocks provide their creative tab and if they have an itemblock?

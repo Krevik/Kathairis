@@ -18,9 +18,7 @@ public class EntityAIAttackTarget<T extends EntityLivingBase> extends EntityAITa
     
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
+    @Override
     public boolean shouldExecute()
     {
     	this.targetEntity=this.taskOwner.getAttackTarget();
@@ -32,9 +30,7 @@ public class EntityAIAttackTarget<T extends EntityLivingBase> extends EntityAITa
         return this.taskOwner.getBoundingBox().grow(targetDistance, 4.0D, targetDistance);
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
+    @Override
     public void startExecuting()
     {
         this.taskOwner.setAttackTarget(this.targetEntity);

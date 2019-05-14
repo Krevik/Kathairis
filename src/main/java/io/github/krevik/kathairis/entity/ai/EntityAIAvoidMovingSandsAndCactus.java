@@ -29,9 +29,7 @@ public class EntityAIAvoidMovingSandsAndCactus extends EntityAIBase
         this.setMutexBits(1);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
+    @Override
     public boolean shouldExecute()
     {
     	boolean areMovingSandsNear=false;
@@ -69,17 +67,13 @@ public class EntityAIAvoidMovingSandsAndCactus extends EntityAIBase
     	}
     }
 
-    /**
-     * Returns whether an in-progress EntityAIBase should continue executing
-     */
+    @Override
     public boolean shouldContinueExecuting()
     {
         return !this.creature.getNavigator().noPath();
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
+    @Override
     public void startExecuting()
     {
         this.creature.getNavigator().tryMoveToXYZ(this.shelterX, this.shelterY, this.shelterZ, this.movementSpeed);

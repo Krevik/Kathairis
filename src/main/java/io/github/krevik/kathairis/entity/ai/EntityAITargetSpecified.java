@@ -15,9 +15,7 @@ public class EntityAITargetSpecified<T extends EntityLivingBase> extends EntityA
         this.tameable = entityIn;
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
+    @Override
     public boolean shouldExecute()
     {
         return super.shouldExecute();

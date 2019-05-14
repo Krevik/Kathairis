@@ -2,7 +2,7 @@ package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.block.BlockKathairisCloud;
-import io.github.krevik.kathairis.entity.ai.EntityAIPanicNew;
+import io.github.krevik.kathairis.entity.ai.EntityAICloudOisterPanic;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.KatharianLootTables;
@@ -65,7 +65,7 @@ public class EntityCloudOister extends EntityAmbientCreature
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(1, new EntityAIPanicNew(this,1D));
+        this.tasks.addTask(1, new EntityAICloudOisterPanic(this,1D));
 
     }
 

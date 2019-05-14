@@ -4,15 +4,12 @@ import io.github.krevik.kathairis.entity.EntityCloudOister;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 
-public class EntityAIPanicNew extends EntityAIBase
+public class EntityAICloudOisterPanic extends EntityAIBase
 {
     protected final EntityCloudOister creature;
     protected double speed;
-    protected double randPosX;
-    protected double randPosY;
-    protected double randPosZ;
 
-    public EntityAIPanicNew(EntityCloudOister creature, double speedIn)
+    public EntityAICloudOisterPanic(EntityCloudOister creature, double speedIn)
     {
         this.creature = creature;
         this.speed = speedIn;

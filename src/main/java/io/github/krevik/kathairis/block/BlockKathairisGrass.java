@@ -149,10 +149,9 @@ public class BlockKathairisGrass extends Block implements IGrowable {
 		return state.get(SNOWY);
 	}
 
-    /*@Override
+    @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
-
         BlockPos blockpos = pos.up();
 
         for (int i = 0; i < 128; ++i)
@@ -168,23 +167,23 @@ public class BlockKathairisGrass extends Block implements IGrowable {
                     {
                         if (rand.nextInt(100) == 6)
                         {
-                            IBlockState iblockstate0 = KCore.MysticFungus.getDefaultState();
-                            if(KCore.MysticFungus.canBlockStay(worldIn, blockpos1, iblockstate0)){
+                            IBlockState iblockstate0 = ModBlocks.KATHAIRIS_FUNGI.getDefaultState();
+                            if(ModBlocks.KATHAIRIS_FUNGI.isValidPosition(iblockstate0,worldIn,blockpos1)){
                                 worldIn.setBlockState(blockpos1, iblockstate0, 3);
                             }
                         }
                         else
                         {
-                            IBlockState iblockstate1 = KCore.MysticTallGrass.getDefaultState();
-                            IBlockState iblockstate11 = KCore.MysticMiniGrass.getDefaultState();
+                            IBlockState iblockstate1 = ModBlocks.KATHAIRIS_TALL_GRASS.getDefaultState();
+                            IBlockState iblockstate11 = ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState();
 
                             if(rand.nextInt(3)==1){
-                                if(KCore.MysticMiniGrass.canBlockStay(worldIn, blockpos1, iblockstate1)){
+                                if(ModBlocks.KATHAIRIS_MINI_GRASS.isValidPosition(iblockstate1,worldIn,blockpos1)){
                                     worldIn.setBlockState(blockpos1, iblockstate11, 3);
                                 }
                             }
                             else
-                            if(KCore.MysticTallGrass.canBlockStay(worldIn, blockpos1, iblockstate1))
+                            if(ModBlocks.KATHAIRIS_TALL_GRASS.isValidPosition(iblockstate1,worldIn,blockpos1))
                             {
                                 worldIn.setBlockState(blockpos1, iblockstate1, 3);
                             }
@@ -195,7 +194,7 @@ public class BlockKathairisGrass extends Block implements IGrowable {
                 }
 
                 blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-                if (worldIn.getBlockState(blockpos1.down()).getBlock() != KCore.KathairisGrass || worldIn.getBlockState(blockpos1).isNormalCube())
+                if (worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.KATHAIRIS_GRASS || worldIn.getBlockState(blockpos1).isNormalCube())
                 {
                     break;
                 }
@@ -203,7 +202,7 @@ public class BlockKathairisGrass extends Block implements IGrowable {
                 ++j;
             }
         }
-    }*/
+    }
 
 	@Override
 	public boolean canGrow(IBlockReader p_176473_1_, BlockPos p_176473_2_, IBlockState p_176473_3_, boolean p_176473_4_) {
@@ -213,11 +212,6 @@ public class BlockKathairisGrass extends Block implements IGrowable {
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		return true;
-	}
-
-	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		//TODO
 	}
 
 }
