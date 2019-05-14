@@ -5,15 +5,20 @@ import io.github.krevik.kathairis.world.dimension.feature.floating_islands.Featu
 import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureForestCandleBush;
 import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureSteppedSucculent;
 import io.github.krevik.kathairis.world.dimension.feature.plainfields.FeaturePlainFields;
+import io.github.krevik.kathairis.world.dimension.feature.strctures.CloudMiniTemple;
 import io.github.krevik.kathairis.world.dimension.feature.swamp.FeatureBasicSwamp;
 import io.github.krevik.kathairis.world.dimension.feature.tree.*;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KathairisSwampSurfaceBuilder;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class KatharianFeatureList {
+
+    public static final int mini_Cloud_Temple_Chance = 350;
 
     public static final WorldCarver<ProbabilityConfig> KATHARIAN_CAVE_WORLD_CARVER = new KatharianWorldCaveCarver();
 
@@ -39,6 +44,7 @@ public class KatharianFeatureList {
     public static final Feature<NoFeatureConfig> KATHARIAN_FOREST_BUSH = new FeatureKatharianForestBush();
     public static final Feature<BushConfig> KATHARIAN_FOREST_CANDLE_BUSH = new FeatureForestCandleBush();
     public static final Feature<NoFeatureConfig> KATHARIAN_HUGE_FLOATING_ISLAND = new FeatureHugeFloatingIsland();
+    public static final Feature<NoFeatureConfig> CLOUD_MINI_TEMPLE = new CloudMiniTemple();
 
     public static final ISurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = new KathairisSwampSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_DESERT_EDGE_SURFACE_BUILDER = new KatharianDesertEdgeSurfaceBuilder();

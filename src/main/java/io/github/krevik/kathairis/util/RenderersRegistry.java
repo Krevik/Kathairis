@@ -40,7 +40,4 @@ public class RenderersRegistry {
         RenderingRegistry.registerEntityRenderingHandler(EntityMysticWandShoot.class, new RenderMysticWandShoot.Factory());
     }
 
-    public static void registerParticleFactories(){
-        ModParticles.registerParticleRenderers();
-    }
 }

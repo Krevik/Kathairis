@@ -7,6 +7,7 @@ import net.minecraft.init.Fluids;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
@@ -50,6 +51,8 @@ public class BiomeKatharianSoftSandLakes extends BiomeKatharianBiomeBase{
         //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.BIG_TURTLE, 12, 1, 1));
         //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.POISONOUS_SCORPION, 3, 1, 1));
         //this.addSpawn(EnumCreatureType.CREATURE, new SpawnListEntry( ModEntities.CAMEL, 6, 1, 1));
+        this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.CLOUD_MINI_TEMPLE, IFeatureConfig.NO_FEATURE_CONFIG, WITH_CHANCE, new ChanceConfig(KatharianFeatureList.mini_Cloud_Temple_Chance)));
+
         baseGrassColor=Color.ORANGE;
     }
 

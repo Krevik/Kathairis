@@ -28,7 +28,7 @@ public class ClientEventSubscriber {
 
 
     @SubscribeEvent
-    public static void registerBlockColors(FMLLoadCompleteEvent event){
+    public static void registerHandlers(FMLLoadCompleteEvent event){
         ModBlocksColorHandler.registerBlockColors();
         ModParticles.registerParticleRenderers();
     }
