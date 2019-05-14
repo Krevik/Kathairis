@@ -46,6 +46,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 @Mod(modid = KCore.MODID, name = KCore.NAME, version = KCore.VERSION, acceptedMinecraftVersions = "[1.12]")
 public class KCore {
 
@@ -58,7 +59,7 @@ public class KCore {
 	
 	@Mod.Instance(MODID)
 	public static KCore instance;
-	
+
 	public static final Logger LOGGER = LogManager.getLogger(KCore.MODID);
 
     public static final RegistryHelper regHelper = new RegistryHelper();
