@@ -49,6 +49,10 @@ public class ModEntities {
         EntitySpawnPlacementRegistry.register(type, spawnType, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,null);
     }
 
+    public static void registerPlacementType(EntityType<?> type,EntitySpawnPlacementRegistry.SpawnPlacementType spawnType,Heightmap.Type heightType){
+        EntitySpawnPlacementRegistry.register(type, spawnType, heightType,null);
+    }
+
     public static void registerPlacementTypes(){
         registerPlacementType(COMMON_BUTTERFLY1, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
         registerPlacementType(COMMON_BUTTERFLY2, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
@@ -69,7 +73,7 @@ public class ModEntities {
         registerPlacementType(HOWLER, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
         registerPlacementType(JELLY_FISH, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
         registerPlacementType(LIVING_FLOWER, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(MYSTIC_BIRD, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
+        registerPlacementType(MYSTIC_BIRD, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING);
         registerPlacementType(PHASM, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
         registerPlacementType(POISONOUS_SCORPION, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
         registerPlacementType(SKYRAY, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);

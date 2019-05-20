@@ -197,6 +197,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
             /*if(map.containsKey(KathairisEnchantments.Ethereal)) {
                 //return super.attackEntityFrom(source,amount);
             }*/
+            return true;
         }
         return false;
     }

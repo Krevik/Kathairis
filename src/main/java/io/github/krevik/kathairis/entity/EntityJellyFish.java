@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+//TODO
 public class EntityJellyFish extends EntityMob
 {   
 	protected Random random = new Random();
@@ -99,6 +100,7 @@ public class EntityJellyFish extends EntityMob
     {
     	if(!this.world.isRemote) {
     		if(jellyfish!=null) {
+    		    //TODO
             	//KCore.functionHelper.JellyFishFlee(this);
     		}
     	}

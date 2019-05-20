@@ -335,8 +335,6 @@ public final class ModEventSubscriber {
 				setupSound("music_disc", "jazzy"),
 				setupSound("music_disc", "8bit"),
 
-				setupSound("cloudglass", "break"),
-
 				setupSound("pickaxe", "turn"),
 				setupSound("magic_shoot"),
 

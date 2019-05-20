@@ -18,12 +18,9 @@ public class RewardHelper {
 
 	private static void initFloatingMiniIslandRewardsList(Random random) {
 		floatingMiniIslandRewardsList.clear();
-		floatingMiniIslandRewardsList.add(new ItemStack(CLOUD_PEARL, 1 + random.nextInt(4)));
-		floatingMiniIslandRewardsList.add(new ItemStack(CLOUD_ESSENCE, 1 + random.nextInt(4)));
 		floatingMiniIslandRewardsList.add(new ItemStack(HEART, 1 + random.nextInt(4)));
 		floatingMiniIslandRewardsList.add(new ItemStack(REVENUM_INGOT, 6 + random.nextInt(16)));
 		floatingMiniIslandRewardsList.add(new ItemStack(MYSTIC_GEM, 2 + random.nextInt(16)));
-		floatingMiniIslandRewardsList.add(new ItemStack(TITANIUM_INGOT, 4 + random.nextInt(12)));
 		floatingMiniIslandRewardsList.add(new ItemStack(MAGIC_BEANS, 4 + random.nextInt(12)));
 		floatingMiniIslandRewardsList.add(new ItemStack(FRUP, 4 + random.nextInt(12)));
 		floatingMiniIslandRewardsList.add(new ItemStack(GOOSEBERRIES, 4 + random.nextInt(12)));
@@ -32,7 +29,6 @@ public class RewardHelper {
 		floatingMiniIslandRewardsList.add(new ItemStack(CRYSTAL_SHARD_YELLOW, 4 + random.nextInt(12)));
 		floatingMiniIslandRewardsList.add(new ItemStack(CRYSTAL_SHARD_VIOLET, 4 + random.nextInt(12)));
 		floatingMiniIslandRewardsList.add(new ItemStack(Items.DIAMOND, 4 + random.nextInt(12)));
-		floatingMiniIslandRewardsList.add(new ItemStack(MAGNETHIUM_SHARD, 4 + random.nextInt(12)));
 	}
 
 	private static void initCloudTempleMiniRewardsList(Random random) {
