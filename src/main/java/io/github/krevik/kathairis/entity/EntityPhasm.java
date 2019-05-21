@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.Kathairis;
+import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.KatharianLootTables;
@@ -194,10 +195,9 @@ public class EntityPhasm extends EntityFlying implements IMob {
         if(source.getTrueSource() instanceof EntityPlayer) {
             EntityPlayer attacker = (EntityPlayer) source.getTrueSource();
             Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(attacker.getHeldItemMainhand());
-            /*if(map.containsKey(KathairisEnchantments.Ethereal)) {
-                //return super.attackEntityFrom(source,amount);
-            }*/
-            return true;
+            if(map.containsKey(KathairisEnchantments.ENCHANTMENT_ETHEREAL)) {
+                return super.attackEntityFrom(source,amount);
+            }
         }
         return false;
     }

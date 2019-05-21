@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.block.*;
+import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.init.*;
@@ -12,6 +13,7 @@ import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -363,6 +365,13 @@ public final class ModEventSubscriber {
 				setup(new BiomeKatharianDenseForest(),"katharian_dense_forest"),
 				setup(new BiomeKatharianPlainFields(),"plain_fields"),
 				setup(new BiomeKatharianSwamps(),"katharian_swamp")
+		);
+	}
+
+	@SubscribeEvent
+	public static void onRegisterEnchantements(final RegistryEvent.Register<Enchantment> event){
+		event.getRegistry().registerAll(
+				setup(KathairisEnchantments.ENCHANTMENT_ETHEREAL,"ethereal")
 		);
 	}
 
