@@ -3,9 +3,11 @@ package io.github.krevik.kathairis.block;
 import com.google.common.cache.LoadingCache;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityStrangeWanderer;
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,6 +29,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
@@ -37,6 +40,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -61,35 +65,43 @@ public class BlockKathairisPortal extends BlockPortal {
 		return VoxelShapes.empty();
 	}
 
-    /*private IBlockState pickUpRandomFlowerStateForKether(Random random) {
-        IBlockState[] flowers = {KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticNightFlower.getDefaultState(),
-                KCore.ButterflyFlower.getDefaultState(),KCore.MysticFlower.getDefaultState(),KCore.MysticFungus.getDefaultState(),
-                KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),
-                KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),
-                KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),KCore.MysticMiniGrass.getDefaultState(),KCore.MysticTallGrass.getDefaultState(),
-                KCore.MysticSapling.getDefaultState(),KCore.EyePlant.getDefaultState(),KCore.MagicBeans.getDefaultState(),KCore.GooseberryBlock.getDefaultState(),
-                KCore.SteppedSucculent.getDefaultState()
+    private IBlockState pickUpRandomFlowerStateForKether(Random random) {
+        IBlockState[] flowers = {ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_TALL_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_NIGHT_FLOWER.getDefaultState(),
+                ModBlocks.BUTTERFLY_FLOWER.getDefaultState(),ModBlocks.KATHAIRIS_FUNGI.getDefaultState(),ModBlocks.STEPPED_SUCCULENT.getDefaultState(),
+                ModBlocks.EYE_PLANT.getDefaultState(),ModBlocks.MAGIC_BEANS.getDefaultState(),ModBlocks.BISON_STARS.getDefaultState(),ModBlocks.GOOSEBERRY_BUSH.getDefaultState(),
+				ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),
+				ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),
+				ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),
+				ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState(),
         };
         return flowers[random.nextInt(flowers.length)];
-    }*/
+    }
 
-   /* private IBlockState pickUpRandomFlowerState(Random random) {
-        ArrayList<IBlockState> flowers = new ArrayList<IBlockState>();
-        for (BlockFlower.EnumFlowerType type : BlockFlower.EnumFlowerType.values())
-        {
-            if (type.getBlockType() == BlockFlower.EnumFlowerColor.YELLOW) continue;
-            if (type == BlockFlower.EnumFlowerType.BLUE_ORCHID) type = BlockFlower.EnumFlowerType.POPPY;
-            flowers.add(net.minecraft.init.Blocks.RED_FLOWER.getDefaultState().withProperty(net.minecraft.init.Blocks.RED_FLOWER.getTypeProperty(), type));
-        }
-        for(int x=0;x<=10;x++) {
-            flowers.add(Blocks.TALLGRASS.getDefaultState());
-        }
-        return flowers.get(RANDOM.nextInt(flowers.size()));
-    }*/
+    private IBlockState pickUpRandomFlowerState(Random random){
+		ArrayList<Block> flowers_List = new ArrayList<>();
+		flowers_List.add(Blocks.SUNFLOWER);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.POPPY);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.DANDELION);
+		flowers_List.add(Blocks.BLUE_ORCHID);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.OAK_SAPLING);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.TALL_GRASS);
+		flowers_List.add(Blocks.TALL_GRASS);
+		return flowers_List.get(random.nextInt(flowers_List.size())).getDefaultState();
+	}
 
 
-    /*private void updateBlocksAroundPortal(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if(worldIn.provider.getDimension()==KCore.DIMENSION_ID) {
+    private void updateBlocksAroundPortal(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+		DimensionType type = DimensionType.getById(Kathairis.KATH_DIM_TYPE.getId());
+		if(worldIn.getDimension().getType()==type) {
             int radius=5;
             int shiftX=+rand.nextInt(radius+1)-rand.nextInt(radius+1);
             int shiftY=-rand.nextInt(radius+1)+rand.nextInt(radius+1);
@@ -100,16 +112,16 @@ public class BlockKathairisPortal extends BlockPortal {
             if((MathHelper.abs(randomX-pos.getX())*MathHelper.abs(randomX-pos.getX()))+
                     (MathHelper.abs(randomZ-pos.getZ())*MathHelper.abs(randomZ-pos.getZ()))<=radius*radius) {
                 BlockPos tmp = new BlockPos(randomX,randomY,randomZ);
-                if(worldIn.getBlockState(tmp)==KCore.KathairisGrass.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_GRASS.getDefaultState()) {
                     worldIn.setBlockState(tmp, Blocks.GRASS.getDefaultState(),2);
                 }
-                if(worldIn.getBlockState(tmp)==KCore.KathairisDirt.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_DIRT.getDefaultState()) {
                     worldIn.setBlockState(tmp, Blocks.DIRT.getDefaultState(),2);
                 }
-                if(worldIn.getBlockState(tmp)==KCore.MythicStone.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_STONE.getDefaultState()) {
                     worldIn.setBlockState(tmp, Blocks.STONE.getDefaultState(),2);
                 }
-                if(worldIn.getBlockState(tmp)==KCore.ForgottenSand.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_SAND.getDefaultState()) {
                     worldIn.setBlockState(tmp, Blocks.SAND.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.GRASS.getDefaultState()&&worldIn.getBlockState(tmp.up())==Blocks.AIR.getDefaultState()) {
@@ -130,23 +142,23 @@ public class BlockKathairisPortal extends BlockPortal {
 
 
                 if(worldIn.getBlockState(tmp)==Blocks.GRASS.getDefaultState()) {
-                    worldIn.setBlockState(tmp, KCore.KathairisGrass.getDefaultState(),2);
+                    worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_GRASS.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.DIRT.getDefaultState()) {
-                    worldIn.setBlockState(tmp, KCore.KathairisDirt.getDefaultState(),2);
+                    worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_DIRT.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.STONE.getDefaultState()) {
-                    worldIn.setBlockState(tmp, KCore.MythicStone.getDefaultState(),2);
+                    worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_STONE.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.SAND.getDefaultState()) {
-                    worldIn.setBlockState(tmp, KCore.ForgottenSand.getDefaultState(),2);
+                    worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_SAND.getDefaultState(),2);
                 }
-                if(worldIn.getBlockState(tmp)==KCore.KathairisGrass.getDefaultState()&&worldIn.getBlockState(tmp.up())==Blocks.AIR.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_GRASS.getDefaultState()&&worldIn.getBlockState(tmp.up())==Blocks.AIR.getDefaultState()) {
                     worldIn.setBlockState(tmp.up(), pickUpRandomFlowerStateForKether(rand),2);
                 }
             }
         }
-    }*/
+    }
 
 	@Override
 	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
@@ -179,12 +191,12 @@ public class BlockKathairisPortal extends BlockPortal {
                 }
             }
         }
-        /*
-        if(ModConfig.shouldBlocksSpreadAroundPortal) {
+
+        if(Kathairis.SHOULD_BLOCKS_SPREAD_AROUND_PORTAL) {
             for (int x = 0; x < 1 + rand.nextInt(4); x++) {
                 updateBlocksAroundPortal(worldIn, pos, state, rand);
             }
-        }*/
+        }
 
 	}
 
