@@ -20,9 +20,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -189,7 +191,7 @@ public class EntitySkyray extends EntityFlying
     @Override
     public int getMaxSpawnedInChunk()
     {
-        return 4;
+        return 5;
     }
     
     @Override
@@ -239,6 +241,12 @@ public class EntitySkyray extends EntityFlying
                 this.setMovementVector(rand.nextFloat()-rand.nextFloat(), rand.nextFloat()-rand.nextFloat(), rand.nextFloat()-rand.nextFloat());
             }
         }
+    }
+
+
+    @Override
+    public boolean canSpawn(IWorld p_205020_1_, boolean p_205020_2_) {
+        return true;
     }
 
     public void travel()

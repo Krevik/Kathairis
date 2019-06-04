@@ -6,6 +6,7 @@
   "kathairis.katharian_plain_fields": "Katharian Plain Fields",
   "kathairis.katharian_desert_edge": "Katharian Desert Edge",
   "kathairis.katharian_swamp": "Katharian Swamp",
+  "kathairis.huge_desert_mountains": "Huge Desert Mountains",
 
   "itemGroup.kathairis.building_blocks": "Building Blocks",
   "itemGroup.kathairis.food": "Food",
@@ -52,15 +53,15 @@
   "item.kathairis.iron_gold_ingot": "Iron Gold Ingot",
   "item.kathairis.shiny_stick": "Shiny Stick",
   "item.kathairis.titanium_helmet": "Titanium Helmet",
-  "item.kathairis.titanium_leggins": "Titanium Leggins",
+  "item.kathairis.titanium_leggings": "Titanium Leggins",
   "item.kathairis.titanium_chestplate": "Titanium Chestplate",
   "item.kathairis.titanium_boots": "Titanium Boots",
   "item.kathairis.revenum_helmet": "Revenum Helmet",
-  "item.kathairis.revenum_leggins": "Revenum Leggins",
+  "item.kathairis.revenum_leggings": "Revenum Leggins",
   "item.kathairis.revenum_chestplate": "Revenum Chestplate",
   "item.kathairis.revenum_boots": "Revenum Boots",
   "item.kathairis.mystic_helmet": "Mystic Helmet",
-  "item.kathairis.mystic_leggins": "Mystic Leggins",
+  "item.kathairis.mystic_leggings": "Mystic Leggins",
   "item.kathairis.mystic_chestplate": "Mystic Chestplate",
   "item.kathairis.mystic_boots": "Mystic Boots",
   "item.kathairis.titanium_sword": "Titanium Sword",
@@ -227,6 +228,7 @@
   "gui.old_man.button_title.knowledge": "Knowledge",
   "gui.old_man.button_title.power": "Power",
   "gui.old_man.button_title.adventure": "Adventure",
+  "gui.old_man.button_title.i_want_ethereal": "I want ethereal!",
   "gui.old_man.hello_player_title": "Well hello there",
   "gui.old_man.main_page.line_0": "It has been a long time since someone has walked",
   "gui.old_man.main_page.line_1": "through the gateway itself and walked this world.",
@@ -260,7 +262,15 @@
   "gui.old_man.knowledge_line_5": "",
   "gui.old_man.knowledge_line_6": "",
   "gui.old_man.knowledge_line_7": "",
-  "gui.old_man.asked_question": "What is it that you seek to find here?"
+  "gui.old_man.asked_question": "What is it that you seek to find here?",
+  "gui.old_man.i_want_ethereal_line_0": "Here you are.",
+  "gui.old_man.i_want_ethereal_line_1": "It should help you fighting with",
+  "gui.old_man.i_want_ethereal_line_2": "dead/ghost creatures around there.",
+  "gui.old_man.i_want_ethereal_line_3": "",
+  "gui.old_man.i_want_ethereal_line_4": "",
+  "gui.old_man.i_want_ethereal_line_5": "",
+  "gui.old_man.i_want_ethereal_line_6": "",
+  "gui.old_man.i_want_ethereal_line_7": ""
 
 
 }

@@ -1,9 +1,11 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.client.gui.GuiOldMan;
+import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiEventHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureAttribute;
@@ -15,6 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -35,10 +38,13 @@ public class EntityStrangeWanderer extends EntityMob
             if(source.getTrueSource() instanceof EntityPlayer) {
                 EntityPlayer attacker = (EntityPlayer) source.getTrueSource();
                 Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(attacker.getHeldItemMainhand());
-                /*if(map.containsKey(KathairisEnchantments.Ethereal)) {
+                if(map.containsKey(KathairisEnchantments.ENCHANTMENT_ETHEREAL)) {
                     this.damageEntity(source, 6);
                     return true;
-                }*/
+                }
+            }
+            if(source == DamageSource.IN_WALL || source == DamageSource.LAVA){
+                return true;
             }
         return false;
     }

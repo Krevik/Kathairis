@@ -115,7 +115,7 @@ public class KatharianLayerUtil {
 
     public static boolean isKatharianDesertBiome(int biomeID){
         Biome biome = IRegistry.BIOME.get(biomeID);
-        return biome== ModBiomes.KATHARIAN_DESERT_EDGE||biome==ModBiomes.SOFT_SAND_LAKES||biome==ModBiomes.KATHARIAN_DESERT;
+        return biome== ModBiomes.KATHARIAN_DESERT_EDGE||biome==ModBiomes.SOFT_SAND_LAKES||biome==ModBiomes.KATHARIAN_DESERT||biome==ModBiomes.HUGE_DESERT_MOUNTAINS;
     }
 
 

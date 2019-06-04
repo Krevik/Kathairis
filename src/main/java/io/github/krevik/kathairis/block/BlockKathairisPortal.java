@@ -4,6 +4,7 @@ import com.google.common.cache.LoadingCache;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityStrangeWanderer;
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModDimensions;
 import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
 import net.minecraft.block.Block;
@@ -100,7 +101,8 @@ public class BlockKathairisPortal extends BlockPortal {
 
 
     private void updateBlocksAroundPortal(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		DimensionType type = DimensionType.getById(Kathairis.KATH_DIM_TYPE.getId());
+		int type1 = ModDimensions.KATH_DIM_TYPE.getId();
+		DimensionType type = DimensionType.getById(type1);
 		if(worldIn.getDimension().getType()==type) {
             int radius=5;
             int shiftX=+rand.nextInt(radius+1)-rand.nextInt(radius+1);
@@ -175,7 +177,8 @@ public class BlockKathairisPortal extends BlockPortal {
 	public void tick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 
-        if(worldIn.dimension.getType() == DimensionType.getById(Kathairis.KATH_DIM_TYPE.getId())) {
+		int type1 = ModDimensions.KATH_DIM_TYPE.getId();
+        if(worldIn.dimension.getType() == DimensionType.getById(type1)) {
             List<EntityStrangeWanderer> e = worldIn.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX()  + 15, pos.getY() + 15, pos.getZ() + 15));
             if(e.size()==0) {
                 if(!worldIn.isRemote) {

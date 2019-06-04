@@ -1,12 +1,21 @@
 package io.github.krevik.kathairis;
 
 import com.google.common.collect.ImmutableList;
+import io.github.krevik.kathairis.client.ModBlocksColorHandler;
+import io.github.krevik.kathairis.init.ModBiomes;
+import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.util.ModUtil;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.IOException;
@@ -28,7 +37,7 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
  */
 @EventBusSubscriber(modid = MOD_ID, bus = FORGE)
 public final class ForgeEventSubscriber {
-
+/*
 	@SubscribeEvent
 	public static void writeAssets(final ModelBakeEvent ignored) {
 
@@ -114,5 +123,5 @@ public final class ForgeEventSubscriber {
 		});
 
 	}
-
+*/
 }

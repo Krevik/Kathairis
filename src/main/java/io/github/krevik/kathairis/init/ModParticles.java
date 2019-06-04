@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.IRegistry;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
@@ -19,12 +21,6 @@ public class ModParticles {
         MYSTIC_WAND_SHOOT = register("mystic_wand_shoot",false);
     }
 
-
-    public static void registerParticleRenderers(){
-        Minecraft.getInstance().particles.registerFactory(KATH_PORTAL_PARTICLE,new ParticleKatharianPortal.Factory(new KatharianParticleTexture("kath_portal_particle",true,31)));
-        Minecraft.getInstance().particles.registerFactory(FAST_PARTICLE,new ParticleFast.Factory(new KatharianParticleTexture("fast_particle",false, 1)));
-        Minecraft.getInstance().particles.registerFactory(MYSTIC_WAND_SHOOT,new ParticleMysticWandShoot.Factory(new KatharianParticleTexture("mystic_wand_shoot",true, 6)));
-    }
 
     private static <T extends ParticleType<?>> T register(String name, boolean alwaysShow) {
         IRegistry.PARTICLE_TYPE.put(new ResourceLocation(MOD_ID,name), new BasicKatharianParticleType(new ResourceLocation(MOD_ID,name), alwaysShow));

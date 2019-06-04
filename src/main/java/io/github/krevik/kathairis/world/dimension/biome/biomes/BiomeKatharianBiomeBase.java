@@ -31,6 +31,7 @@ public class BiomeKatharianBiomeBase extends Biome {
 
 
     @OnlyIn(Dist.CLIENT)
+    @Override
     public int getGrassColor(BlockPos pos)
     {
         World world = Minecraft.getInstance().world;

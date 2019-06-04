@@ -1,14 +1,19 @@
-package io.github.krevik.kathairis.client;
+package io.github.krevik.kathairis;
 
+import io.github.krevik.kathairis.client.ModBlocksColorHandler;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModParticles;
+import io.github.krevik.kathairis.particle.KatharianParticleTexture;
+import io.github.krevik.kathairis.particle.ParticleFast;
+import io.github.krevik.kathairis.particle.ParticleKatharianPortal;
+import io.github.krevik.kathairis.particle.ParticleMysticWandShoot;
+import io.github.krevik.kathairis.util.RenderersRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,25 +22,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import java.util.ArrayList;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
+import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
-/**
- * @author Krevik
- */
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = MOD_ID, bus = MOD)
-public class ClientEventSubscriber {
-
-
-    @SubscribeEvent
-    public static void registerHandlers(FMLLoadCompleteEvent event){
-        ModBlocksColorHandler.registerBlockColors();
-        ModParticles.registerParticleRenderers();
-    }
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = FORGE, value=Dist.CLIENT)
+public class ForgeEventSubscriberClient {
 
     @SubscribeEvent
     public static void fogThings(EntityViewRenderEvent.RenderFogEvent event){
-        EntityPlayer player = Minecraft.getInstance().player;
+        Entity player = event.getEntity();
         int radius=6;
         ArrayList<BlockPos> posesToCalculate = new ArrayList<>();
         for(int x=-radius;x<=radius;x++){

@@ -17,6 +17,7 @@ public final class ModBiomes {
 	public static final Biome KATHARIAN_DESERT = _null();
 	public static final Biome KATHARIAN_DESERT_EDGE = _null();
 	public static final Biome SOFT_SAND_LAKES = _null();
+	public static final Biome HUGE_DESERT_MOUNTAINS = _null();
 	//forest
 	public static final Biome KATHARIAN_FOREST = _null();
 	public static final Biome KATHARIAN_DENSE_FOREST = _null();

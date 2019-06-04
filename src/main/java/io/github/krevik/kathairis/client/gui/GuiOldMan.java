@@ -1,21 +1,33 @@
 package io.github.krevik.kathairis.client.gui;
 
 
+import io.github.krevik.kathairis.Kathairis;
+import io.github.krevik.kathairis.util.networking.PacketHandler;
+import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.IInteractionObject;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nullable;
+
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 @OnlyIn(Dist.CLIENT)
-public class GuiOldMan extends GuiScreen {
+public class GuiOldMan extends GuiScreen implements IInteractionObject {
 
 
     Minecraft mc = Minecraft.getInstance();
@@ -27,6 +39,7 @@ public class GuiOldMan extends GuiScreen {
     private GuiButton Knowledge;
     private GuiButton Power;
     private GuiButton Adventure;
+    private GuiButton I_Want_Ethereal;
     int margin=15;
     private String guiTitle;
     private String nextButtonTitle;
@@ -34,12 +47,14 @@ public class GuiOldMan extends GuiScreen {
     private String knowledge_Button_Title;
     private String power_Button_Title;
     private String adventure_Button_Title;
+    private String i_Want_Ethereal_Button_Title;
     private String hello_Player_Title;
     private String asked_question;
     private String[] main_page_lines=new String[8];
     private String[] adventure_lines=new String[8];
     private String[] power_lines=new String[8];
     private String[] knowledge_lines=new String[8];
+    private String[] i_want_ethereal_lines=new String[8];
 
     public GuiOldMan(){
     }
@@ -63,6 +78,9 @@ public class GuiOldMan extends GuiScreen {
         for(int i=0;i<=7;i++){
             adventure_lines[i]=I18n.format("gui.old_man.adventure_line_"+i);
         }
+        for(int i=0;i<=7;i++){
+            i_want_ethereal_lines[i]=I18n.format("gui.old_man.i_want_ethereal_line_"+i);
+        }
         asked_question=I18n.format("gui.old_man.asked_question");
         hello_Player_Title=I18n.format("gui.old_man.hello_player_title");
         nextButtonTitle=I18n.format("gui.next_button_title");
@@ -70,6 +88,7 @@ public class GuiOldMan extends GuiScreen {
         knowledge_Button_Title=I18n.format("gui.old_man.button_title.knowledge");
         power_Button_Title=I18n.format("gui.old_man.button_title.power");
         adventure_Button_Title=I18n.format("gui.old_man.button_title.adventure");
+        i_Want_Ethereal_Button_Title=I18n.format("gui.old_man.button_title.i_want_ethereal");
 
         mode=0;
         buttons.clear();
@@ -91,6 +110,9 @@ public class GuiOldMan extends GuiScreen {
                 }
                 if(mode==2||mode==3||mode==4){
                     GuiOldMan.this.setMode(1);
+                }
+                if(mode==5){
+                    Minecraft.getInstance().player.closeScreen();
                 }
                 super.onClick(p_194829_1_, p_194829_3_);
             }
@@ -116,7 +138,14 @@ public class GuiOldMan extends GuiScreen {
                 super.onClick(p_194829_1_, p_194829_3_);
             }
         });
-
+        this.addButton(I_Want_Ethereal = new GuiButton(6,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*5), 60, 20, i_Want_Ethereal_Button_Title){
+            @Override
+            public void onClick(double p_194829_1_, double p_194829_3_) {
+                GuiOldMan.this.setMode(5);
+                PacketHandler.sendToServer(new PacketServerGivePlayerEthereal());
+                super.onClick(p_194829_1_, p_194829_3_);
+            }
+        });
     }
 
     @Override
@@ -130,6 +159,8 @@ public class GuiOldMan extends GuiScreen {
         Power.enabled=false;
         Adventure.visible=false;
         Adventure.enabled=false;
+        I_Want_Ethereal.visible=false;
+        I_Want_Ethereal.enabled=false;
         //main Screen
         if(mode==0) {
             Next.visible = true;
@@ -156,7 +187,25 @@ public class GuiOldMan extends GuiScreen {
             Power.enabled=false;
             Adventure.visible=false;
             Adventure.enabled=false;
+            if(mode==3){
+                I_Want_Ethereal.visible=true;
+                I_Want_Ethereal.enabled=true;
+            }
         }
+
+        if(mode==5){
+            I_Want_Ethereal.visible=false;
+            I_Want_Ethereal.enabled=false;
+            Next.visible = false;
+            Next.enabled = false;
+            Knowledge.visible=false;
+            Knowledge.enabled=false;
+            Power.visible=false;
+            Power.enabled=false;
+            Adventure.visible=false;
+            Adventure.enabled=false;
+        }
+
 
     }
 
@@ -201,6 +250,11 @@ public class GuiOldMan extends GuiScreen {
                 this.drawString(fontRenderer, adventure_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
             }
         }
+        if(mode==5){
+            for(int i=1;i<=8;i++){
+                this.drawString(fontRenderer, i_want_ethereal_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+            }
+        }
 
         super.render(parWidth, parHeight, particle);
     }
@@ -216,4 +270,29 @@ public class GuiOldMan extends GuiScreen {
         return false;
     }
 
+    @Override
+    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
+        return null;
+    }
+
+    @Override
+    public String getGuiID() {
+        return "kathairis:old_man";
+    }
+
+    @Override
+    public ITextComponent getName() {
+        return new TextComponentString("kathairis:old_man");
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public ITextComponent getCustomName() {
+        return null;
+    }
 }

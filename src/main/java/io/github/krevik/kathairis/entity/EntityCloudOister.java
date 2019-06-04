@@ -116,7 +116,7 @@ public class EntityCloudOister extends EntityAmbientCreature
                 k=50+rand.nextInt(300);
                 jumpTimer=0;
                 motionY+=0.5;
-                spawnJumpParticles();
+                spawnJumpParticles(getEntityWorld());
             }
             if(!this.onGround) {
                 if(this.getRNG().nextInt(100)==0) {
@@ -138,7 +138,7 @@ public class EntityCloudOister extends EntityAmbientCreature
         }
     }
 
-    public void spawnJumpParticles(){
+    public void spawnJumpParticles(World world){
         for (int i = 0; i < 24; ++i)
         {
             double d0 = posX + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();
@@ -147,7 +147,8 @@ public class EntityCloudOister extends EntityAmbientCreature
             double d3 = 0;
             double d4 = 0;
             double d5 = 0;
-            Minecraft.getInstance().world.addParticle(Particles.CLOUD, d0, d1, d2, d3, d4, d5);
+
+            world.addParticle(Particles.CLOUD, d0, d1, d2, d3, d4, d5);
         }
     }
 
@@ -168,14 +169,14 @@ public class EntityCloudOister extends EntityAmbientCreature
     {
         boolean flag = super.attackEntityAsMob(entityIn);
     	this.motionY=0.5;
-        spawnJumpParticles();
+        spawnJumpParticles(getEntityWorld());
         return flag;
     }
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
-        spawnJumpParticles();
+        spawnJumpParticles(getEntityWorld());
     	return super.attackEntityFrom(source, amount);
     }
 

@@ -7,19 +7,27 @@ import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.item.*;
 import io.github.krevik.kathairis.util.ModUtil;
+import io.github.krevik.kathairis.world.dimension.DimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
+import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
+import io.netty.buffer.Unpooled;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -348,7 +356,7 @@ public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterModDimensions(final RegistryEvent.Register<ModDimension> event) {
-				event.getRegistry().registerAll(
+		event.getRegistry().registerAll(
 						new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"))
 		);
 	}
@@ -364,7 +372,8 @@ public final class ModEventSubscriber {
 				setup(new BiomeKatharianForest(),"katharian_forest"),
 				setup(new BiomeKatharianDenseForest(),"katharian_dense_forest"),
 				setup(new BiomeKatharianPlainFields(),"plain_fields"),
-				setup(new BiomeKatharianSwamps(),"katharian_swamp")
+				setup(new BiomeKatharianSwamps(),"katharian_swamp"),
+				setup(new BiomeKatharianHugeDesertMountains(),"huge_desert_mountains")
 		);
 	}
 

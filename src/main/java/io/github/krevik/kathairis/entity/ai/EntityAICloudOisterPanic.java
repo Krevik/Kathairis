@@ -42,7 +42,7 @@ public class EntityAICloudOisterPanic extends EntityAIBase
     	if(jumpTimer>12) {
     		jumpTimer=0;
 			creature.motionY+=0.5;
-            creature.spawnJumpParticles();
+            creature.spawnJumpParticles(creature.getEntityWorld());
 			double destPosX=creature.posX-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
 			double destPosZ=creature.posZ-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
 			creature.getNavigator().setPath(creature.getNavigator().getPathToPos(new BlockPos(destPosX,creature.posY,destPosZ)), 1);

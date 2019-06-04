@@ -111,6 +111,7 @@ public class ModEntities {
         registerEntitySpawn((EntityType<? extends EntityLiving>)RUBY_SILE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>)RUBY_SILE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
         registerEntitySpawn((EntityType<? extends EntityLiving>)CLOUD_SHIMMER,EnumCreatureType.AMBIENT,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
+        registerEntitySpawn((EntityType<? extends EntityLiving>)SKYRAY,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.HUGE_DESERT_MOUNTAINS},12,1,5);
         //registerEntitySpawn((EntityType<? extends EntityLiving>)SKYLIGHT,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},2,1,1);
 
     }

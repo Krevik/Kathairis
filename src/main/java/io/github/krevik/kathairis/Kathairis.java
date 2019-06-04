@@ -1,6 +1,6 @@
 package io.github.krevik.kathairis;
 
-import io.github.krevik.kathairis.client.ClientEventSubscriber;
+import io.github.krevik.kathairis.client.ModBlocksColorHandler;
 import io.github.krevik.kathairis.init.ModDimensions;
 import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.util.FunctionHelper;
@@ -11,7 +11,6 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -26,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
+import static io.github.krevik.kathairis.util.ModUtil._null;
 
 /**
  * @author Cadiboo
@@ -34,7 +34,6 @@ import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 public final class Kathairis {
 
 	public static final Logger KATHAIRIS_LOG = LogManager.getLogger(ModReference.MOD_ID);
-	public static DimensionType KATH_DIM_TYPE;
 	public static boolean SHOULD_BLOCKS_SPREAD_AROUND_PORTAL;
 
 	public Kathairis() {
@@ -43,13 +42,12 @@ public final class Kathairis {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverStarting);
-		MinecraftForge.EVENT_BUS.register(ClientEventSubscriber.class);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
-		KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
-		ModParticles.registerParticles();
+        ModParticles.registerParticles();
 		PacketHandler.register();
+		ModDimensions.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
 	}
 
 	private void loadComplete(final FMLLoadCompleteEvent event){
@@ -57,11 +55,13 @@ public final class Kathairis {
 	}
 
 	private void serverStarting(final FMLServerStartingEvent event){
-
+		if(ModDimensions.KATH_DIM_TYPE==null){
+			ModDimensions.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
+		}
 	}
 
+
 	private void setupClient(final FMLClientSetupEvent event) {
-		OBJLoader.INSTANCE.addDomain(ModReference.MOD_ID);
 		RenderersRegistry.registerRenders();
 	}
 

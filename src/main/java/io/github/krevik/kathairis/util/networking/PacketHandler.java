@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.util.networking;
 
+import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
 import io.github.krevik.kathairis.util.networking.packets.PacketServerPlayerUseJadeVine;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
@@ -27,6 +28,7 @@ public final class PacketHandler
     {
         int id = 0;
         HANDLER.registerMessage(id++, PacketServerPlayerUseJadeVine.class, PacketServerPlayerUseJadeVine::encode, PacketServerPlayerUseJadeVine::decode, PacketServerPlayerUseJadeVine.Handler::handle);
+        HANDLER.registerMessage(id++, PacketServerGivePlayerEthereal.class, PacketServerGivePlayerEthereal::encode, PacketServerGivePlayerEthereal::decode, PacketServerGivePlayerEthereal.Handler::handle);
     }
 
     public static void sendToServer(Object msg)
