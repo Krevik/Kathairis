@@ -90,9 +90,9 @@ public class EntityStrangeWanderer extends EntityMob
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
-    	if(world.isRemote) {
+    	/*if(world.isRemote) {
             Minecraft.getInstance().displayGuiScreen(new GuiOldMan());
-        }
+        }*/
         return super.processInteract(player, hand);
     }
 

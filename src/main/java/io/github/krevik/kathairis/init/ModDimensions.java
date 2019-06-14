@@ -15,5 +15,5 @@ import static io.github.krevik.kathairis.util.ModUtil._null;
 public final class ModDimensions {
 
     public static final ModDimensionKathairis KATHAIRIS = _null();
-    public static DimensionType KATH_DIM_TYPE = _null();
+
 }

@@ -7,6 +7,7 @@ import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.item.*;
 import io.github.krevik.kathairis.util.ModUtil;
+import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.world.dimension.DimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
@@ -27,11 +28,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.storage.DimensionSavedDataManager;
+import net.minecraft.world.storage.WorldSavedDataStorage;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -49,6 +55,8 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
  */
 @EventBusSubscriber(modid = MOD_ID, bus = MOD)
 public final class ModEventSubscriber {
+
+
 
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
@@ -361,6 +369,17 @@ public final class ModEventSubscriber {
 		);
 	}
 
+	@SubscribeEvent
+	public static void onFMLCommonSetup(final FMLCommonSetupEvent event){
+		ModParticles.registerParticles();
+		PacketHandler.register();
+		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
+	}
+
+	@SubscribeEvent
+	public static void onDimensionRegisterEvent(final RegisterDimensionsEvent event){
+		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
+	}
 
 	@SubscribeEvent
 	public static void onRegisterBiomes(final RegistryEvent.Register<Biome> event) {

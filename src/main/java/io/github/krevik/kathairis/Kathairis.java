@@ -35,6 +35,7 @@ public final class Kathairis {
 
 	public static final Logger KATHAIRIS_LOG = LogManager.getLogger(ModReference.MOD_ID);
 	public static boolean SHOULD_BLOCKS_SPREAD_AROUND_PORTAL;
+	public static DimensionType KATH_DIM_TYPE;
 
 	public Kathairis() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.CONFIG_SPEC);
@@ -45,9 +46,8 @@ public final class Kathairis {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
-        ModParticles.registerParticles();
-		PacketHandler.register();
-		ModDimensions.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
+
+		//ModDimensions.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
 	}
 
 	private void loadComplete(final FMLLoadCompleteEvent event){
@@ -55,9 +55,6 @@ public final class Kathairis {
 	}
 
 	private void serverStarting(final FMLServerStartingEvent event){
-		if(ModDimensions.KATH_DIM_TYPE==null){
-			ModDimensions.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
-		}
 	}
 
 

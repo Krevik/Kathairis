@@ -43,7 +43,7 @@ public class DimensionKathairis extends OverworldDimension {
 
 
     public DimensionKathairis() {
-        super(ModDimensions.KATH_DIM_TYPE);
+        super(Kathairis.KATH_DIM_TYPE);
     }
 
     public DimensionKathairis(DimensionType dimensionType) {
