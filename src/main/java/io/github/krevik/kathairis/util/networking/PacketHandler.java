@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.util.networking;
 
-import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
-import io.github.krevik.kathairis.util.networking.packets.PacketServerPlayerUseJadeVine;
+import io.github.krevik.kathairis.util.networking.packets.*;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.FakePlayer;
@@ -29,6 +28,8 @@ public final class PacketHandler
         int id = 0;
         HANDLER.registerMessage(id++, PacketServerPlayerUseJadeVine.class, PacketServerPlayerUseJadeVine::encode, PacketServerPlayerUseJadeVine::decode, PacketServerPlayerUseJadeVine.Handler::handle);
         HANDLER.registerMessage(id++, PacketServerGivePlayerEthereal.class, PacketServerGivePlayerEthereal::encode, PacketServerGivePlayerEthereal::decode, PacketServerGivePlayerEthereal.Handler::handle);
+        HANDLER.registerMessage(id++, PacketClientOpenGuiOldMan.class, PacketClientOpenGuiOldMan::encode, PacketClientOpenGuiOldMan::decode, PacketClientOpenGuiOldMan.Handler::handle);
+
     }
 
     public static void sendToServer(Object msg)

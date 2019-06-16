@@ -103,7 +103,7 @@ public class BlockKathairisPortal extends BlockPortal {
     private void updateBlocksAroundPortal(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		int type1 = Kathairis.KATH_DIM_TYPE.getId();
 		DimensionType type = DimensionType.getById(type1);
-		if(worldIn.getDimension().getType()==type) {
+		if(worldIn.getDimension().getType().getId()==type1) {
             int radius=5;
             int shiftX=+rand.nextInt(radius+1)-rand.nextInt(radius+1);
             int shiftY=-rand.nextInt(radius+1)+rand.nextInt(radius+1);
@@ -114,7 +114,7 @@ public class BlockKathairisPortal extends BlockPortal {
             if((MathHelper.abs(randomX-pos.getX())*MathHelper.abs(randomX-pos.getX()))+
                     (MathHelper.abs(randomZ-pos.getZ())*MathHelper.abs(randomZ-pos.getZ()))<=radius*radius) {
                 BlockPos tmp = new BlockPos(randomX,randomY,randomZ);
-                if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_GRASS.getDefaultState()) {
+                if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_GRASS.getDefaultState()&&worldIn.isAirBlock(tmp.up())) {
                     worldIn.setBlockState(tmp, Blocks.GRASS.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==ModBlocks.KATHAIRIS_DIRT.getDefaultState()) {
@@ -141,8 +141,6 @@ public class BlockKathairisPortal extends BlockPortal {
             BlockPos tmp = new BlockPos(randomX,randomY,randomZ);
             if((MathHelper.abs(randomX-pos.getX())*MathHelper.abs(randomX-pos.getX()))+
                     (MathHelper.abs(randomZ-pos.getZ())*MathHelper.abs(randomZ-pos.getZ()))<=radius*radius) {
-
-
                 if(worldIn.getBlockState(tmp)==Blocks.GRASS.getDefaultState()) {
                     worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_GRASS.getDefaultState(),2);
                 }
@@ -150,7 +148,7 @@ public class BlockKathairisPortal extends BlockPortal {
                     worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_DIRT.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.STONE.getDefaultState()) {
-                    worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_STONE.getDefaultState(),2);
+                    //worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_STONE.getDefaultState(),2);
                 }
                 if(worldIn.getBlockState(tmp)==Blocks.SAND.getDefaultState()) {
                     worldIn.setBlockState(tmp, ModBlocks.KATHAIRIS_SAND.getDefaultState(),2);
@@ -391,13 +389,13 @@ public class BlockKathairisPortal extends BlockPortal {
 			int i;
 			for (i = 0; i < 22; ++i) {
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
-				if (!world.isAirBlock(blockpos) || this.world.getBlockState(blockpos.down()).getBlock() != Blocks.STONE || this.world.getBlockState(blockpos.down()).getBlock() != ModBlocks.KATHAIRIS_STONE) {
+				if (!world.isAirBlock(blockpos) || this.world.getBlockState(blockpos.down()).getBlock() != Blocks.STONE ) {
 					break;
 				}
 			}
 
 			Block block = this.world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return (block == Blocks.STONE || block==ModBlocks.KATHAIRIS_STONE) ? i : 0;
+			return (block == Blocks.STONE) ? i : 0;
 		}
 
 		public int getHeight() {
@@ -425,12 +423,12 @@ public class BlockKathairisPortal extends BlockPortal {
 
 					if (i == 0) {
 						block = this.world.getBlockState(blockpos.offset(this.leftDir)).getBlock();
-						if ((block != Blocks.STONE && block!= ModBlocks.KATHAIRIS_STONE)) {
+						if ((block != Blocks.STONE)) {
 							break label56;
 						}
 					} else if (i == this.width - 1) {
 						block = this.world.getBlockState(blockpos.offset(this.rightDir)).getBlock();
-						if ((block != Blocks.STONE && block!= ModBlocks.KATHAIRIS_STONE)) {
+						if ((block != Blocks.STONE)) {
 							break label56;
 						}
 					}

@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.client.gui;
 
 
 import io.github.krevik.kathairis.Kathairis;
+import io.github.krevik.kathairis.init.ModGui;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -20,6 +22,7 @@ import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.FMLPlayMessages;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
@@ -27,7 +30,7 @@ import javax.annotation.Nullable;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 @OnlyIn(Dist.CLIENT)
-public class GuiOldMan extends GuiScreen implements IInteractionObject {
+public class GuiOldMan extends GuiScreen{
 
 
     Minecraft mc = Minecraft.getInstance();
@@ -57,6 +60,9 @@ public class GuiOldMan extends GuiScreen implements IInteractionObject {
     private String[] i_want_ethereal_lines=new String[8];
 
     public GuiOldMan(){
+    }
+
+    public GuiOldMan(FMLPlayMessages.OpenContainer openContainer) {
     }
 
     public void setMode(int mode1){
@@ -270,29 +276,5 @@ public class GuiOldMan extends GuiScreen implements IInteractionObject {
         return false;
     }
 
-    @Override
-    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
-        return null;
-    }
 
-    @Override
-    public String getGuiID() {
-        return "kathairis:old_man";
-    }
-
-    @Override
-    public ITextComponent getName() {
-        return new TextComponentString("kathairis:old_man");
-    }
-
-    @Override
-    public boolean hasCustomName() {
-        return false;
-    }
-
-    @Nullable
-    @Override
-    public ITextComponent getCustomName() {
-        return null;
-    }
 }
