@@ -8,11 +8,12 @@ import io.github.krevik.kathairis.world.dimension.feature.plainfields.FeaturePla
 import io.github.krevik.kathairis.world.dimension.feature.strctures.CloudMiniTemple;
 import io.github.krevik.kathairis.world.dimension.feature.swamp.FeatureBasicSwamp;
 import io.github.krevik.kathairis.world.dimension.feature.tree.*;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.CrystalLabirynthConfig;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.StructureCrystalLabirynth;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KathairisSwampSurfaceBuilder;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
@@ -49,5 +50,7 @@ public class KatharianFeatureList {
     public static final ISurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = new KathairisSwampSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_DESERT_EDGE_SURFACE_BUILDER = new KatharianDesertEdgeSurfaceBuilder();
     public static final ISurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SOFT_SAND_LAKES_SURFACE_BUILDER = new KatharianSoftSandLakesSurfaceBuilder();
+
+    public static final Structure<CrystalLabirynthConfig> CRYSTAL_LABIRYNTH = new StructureCrystalLabirynth();
 
 }

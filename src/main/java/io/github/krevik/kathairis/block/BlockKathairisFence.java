@@ -32,7 +32,7 @@ public class BlockKathairisFence extends BlockFence implements IBucketPickupHand
 	public BlockKathairisFence(Material material, float hardnessAndResistance, SoundType soundType) {
 		super(Properties.create(material).hardnessAndResistance(hardnessAndResistance).sound(soundType));
 		this.setDefaultState(this.stateContainer.getBaseState().with(NORTH, Boolean.valueOf(false)).with(EAST, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false)).with(WEST, Boolean.valueOf(false)).with(WATERLOGGED, Boolean.valueOf(false)));
-		this.field_199609_B = this.func_196408_a(2.0F, 1.0F, 16.0F, 6.0F, 15.0F);
+		this.field_199609_B = this.makeShapes(2.0F, 1.0F, 16.0F, 6.0F, 15.0F);
 	}
 
 	public static boolean isExcepBlockForAttachWithPiston(Block p_194142_0_) {

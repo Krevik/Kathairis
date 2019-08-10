@@ -200,8 +200,8 @@ public class ChunkGeneratorKathairis extends AbstractChunkGenerator<OverworldGen
 				for (int j1 = -2; j1 <= 2; ++j1) {
 					for (int k1 = -2; k1 <= 2; ++k1) {
 						Biome biome1 = p_202108_1_[k + j1 + 2 + (l + k1 + 2) * 10];
-						float f5 = this.settings.func_202203_v() + biome1.getDepth() * this.settings.func_202202_w();
-						float f6 = this.settings.func_202204_x() + biome1.getScale() * this.settings.func_202205_y();
+						float f5 = this.settings.getBaseBiomeDepth() + biome1.getDepth() * this.settings.getBiomeDepthMultiplier();
+						float f6 = this.settings.getBiomeBaseScale() + biome1.getScale() * this.settings.getBiomeScaleMuliplier();
 						if (this.terrainType == WorldType.AMPLIFIED && f5 > 0.0F) {
 							f5 = 1.0F + f5 * 2.0F;
 							f6 = 1.0F + f6 * 4.0F;

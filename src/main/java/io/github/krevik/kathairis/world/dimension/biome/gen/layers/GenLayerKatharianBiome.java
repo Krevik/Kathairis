@@ -5,6 +5,7 @@ import io.github.krevik.kathairis.init.ModBiomes;
 import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.gen.IContext;
 import net.minecraft.world.gen.OverworldGenSettings;
+import net.minecraft.world.gen.layer.GenLayerBiome;
 import net.minecraft.world.gen.layer.traits.IC0Transformer;
 import net.minecraftforge.common.BiomeManager;
 
@@ -46,9 +47,10 @@ public class GenLayerKatharianBiome implements IC0Transformer {
 
     }
 
+
     public int apply(IContext context, int value) {
-        if (this.settings != null && this.settings.func_202199_l() >= 0) {
-            return this.settings.func_202199_l();
+        if (this.settings != null && this.settings.getBiomeId() >= 0) {
+            return this.settings.getBiomeId();
         } else {
             return IRegistry.BIOME.getId(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL, context).biome);
         }

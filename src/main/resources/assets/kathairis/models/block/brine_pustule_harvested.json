@@ -1,0 +1,31 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "kathairis:block/brine_pustule",
+		"particle": "kathairis:block/brine_pustule"
+	},
+	"elements": [
+		{
+			"from": [1, 1, 15.75],
+			"to": [15, 15, 15.75],
+			"faces": {
+				"north": {"uv": [8.5, 8.5, 15.5, 15.5], "texture": "#0"},
+				"east": {"uv": [8.5, 8.5, 15.5, 15.5], "texture": "#0"},
+				"south": {"uv": [8.5, 8.5, 15.5, 15.5], "texture": "#0"},
+				"west": {"uv": [8.5, 8.5, 15.5, 15.5], "texture": "#0"},
+				"up": {"uv": [8.5, 8.5, 15.5, 15.5], "texture": "#0"},
+				"down": {"uv": [8.5, 8.5, 15.5, 15.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [180, -2, 0],
+			"translation": [1.25, 1.25, 5],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"variants": {
+		"facing=east,stage=0": { "model": "kathairis:block/brine_pustule_harvested", "y": 270 },
+		"facing=west,stage=0": { "model": "kathairis:block/brine_pustule_harvested", "y": 90 },
+		"facing=south,stage=0": { "model": "kathairis:block/brine_pustule_harvested", "z": 270 },
+		"facing=north,stage=0": { "model": "kathairis:block/brine_pustule_harvested", "y": 180 },
+		
+		"facing=east,stage=1": [ { "model": "kathairis:block/brine_pustule_1", "y": 270 }, 
+		{ "model": "kathairis:block/brine_pustule_2", "y": 270 }, 
+		{ "model": "kathairis:block/brine_pustule_3", "y": 270 }
+		],
+		"facing=west,stage=1": [ { "model": "kathairis:block/brine_pustule_1", "y": 90 }, 
+		{ "model": "kathairis:block/brine_pustule_2", "y": 90 }, 
+		{ "model": "kathairis:block/brine_pustule_3", "y": 90 } 
+		],
+		"facing=south,stage=1": [ { "model": "kathairis:block/brine_pustule_1", "z": 270 }, 
+		{ "model": "kathairis:block/brine_pustule_2", "z": 270 }, 
+		{ "model": "kathairis:block/brine_pustule_3", "z": 270 }
+		], 
+		"facing=north,stage=1": [ { "model": "kathairis:block/brine_pustule_1", "y": 180 },
+		{ "model": "kathairis:block/brine_pustule_2", "y": 180 },
+		{ "model": "kathairis:block/brine_pustule_3", "y": 180 }
+		]
+	}
+}

@@ -5,6 +5,7 @@ import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
 import net.minecraft.init.Fluids;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.PlainsBiome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -18,7 +19,6 @@ import java.awt.*;
 
 public class BiomeKatharianDesert extends BiomeKatharianBiomeBase{
     public static final SurfaceBuilderConfig SAND_SAND_SANDSTONE_SURFACE = new SurfaceBuilderConfig(ModBlocks.KATHAIRIS_SAND.getDefaultState(), ModBlocks.KATHAIRIS_SANDSTONE.getDefaultState(), ModBlocks.SOFT_SAND.getDefaultState());
-
     public BiomeKatharianDesert() {
 
         super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder(DEFAULT_SURFACE_BUILDER, SAND_SAND_SANDSTONE_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.DESERT).depth(0.2F).scale(0.1F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent((String)null));

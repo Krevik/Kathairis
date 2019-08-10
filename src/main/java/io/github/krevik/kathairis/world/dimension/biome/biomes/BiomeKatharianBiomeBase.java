@@ -2,16 +2,22 @@ package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.CrystalLabirynthConfig;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.StructureCrystalLabirynth;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.PlainsBiome;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.MinableConfig;
+import net.minecraft.world.gen.feature.structure.MineshaftConfig;
+import net.minecraft.world.gen.feature.structure.MineshaftStructure;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,10 +31,10 @@ public class BiomeKatharianBiomeBase extends Biome {
 
     protected BiomeKatharianBiomeBase(BiomeBuilder p_i48975_1_) {
         super(p_i48975_1_);
+        //this.addStructure(KatharianFeatureList.CRYSTAL_LABIRYNTH, new CrystalLabirynthConfig(0.1D));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, createCompositeFeature(Feature.MINABLE, new MinableConfig(KatharianMinableConfig.IS_ROCK, Blocks.STONE.getDefaultState(), 17), COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, WITH_CHANCE, new ChanceConfig(128)));
     }
-
 
 
 

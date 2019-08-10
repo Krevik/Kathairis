@@ -8,12 +8,16 @@ import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.RenderersRegistry;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.StructureCrystalLabirynthPieces;
 import io.netty.buffer.Unpooled;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.feature.structure.FortressStructure;
+import net.minecraft.world.gen.feature.structure.MineshaftStructure;
+import net.minecraft.world.gen.feature.structure.StructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +34,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.NetworkRegistry;
+import org.apache.commons.compress.archivers.zip.UnsupportedZipFeatureException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,7 +50,6 @@ import static io.github.krevik.kathairis.util.ModUtil._null;
 @Mod(ModReference.MOD_ID)
 public final class Kathairis {
 
-
 	public static final Logger KATHAIRIS_LOG = LogManager.getLogger(ModReference.MOD_ID);
 	public static boolean SHOULD_BLOCKS_SPREAD_AROUND_PORTAL;
 	public static DimensionType KATH_DIM_TYPE;
@@ -60,8 +64,10 @@ public final class Kathairis {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
+		//StructureCrystalLabirynthPieces.registerStructurePieces();
 		//ModDimensions.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
 	}
+
 
 	private void loadComplete(final FMLLoadCompleteEvent event){
 

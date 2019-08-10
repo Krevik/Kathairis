@@ -34,8 +34,8 @@ public class BlockKathairisWall extends BlockWall {
 	public BlockKathairisWall(Material material, float hardnessAndResistance, SoundType soundType) {
 		super(Properties.create(material).sound(soundType).hardnessAndResistance(hardnessAndResistance));
 		this.setDefaultState(this.stateContainer.getBaseState().with(UP, Boolean.valueOf(true)).with(NORTH, Boolean.valueOf(false)).with(EAST, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false)).with(WEST, Boolean.valueOf(false)).with(WATERLOGGED, Boolean.valueOf(false)));
-		this.field_196422_D = this.func_196408_a(4.0F, 3.0F, 16.0F, 0.0F, 14.0F);
-		this.field_196423_E = this.func_196408_a(4.0F, 3.0F, 24.0F, 0.0F, 24.0F);
+		this.field_196422_D = this.makeShapes(4.0F, 3.0F, 16.0F, 0.0F, 14.0F);
+		this.field_196423_E = this.makeShapes(4.0F, 3.0F, 24.0F, 0.0F, 24.0F);
 	}
 
 	public static boolean isExcepBlockForAttachWithPiston(Block p_194143_0_) {

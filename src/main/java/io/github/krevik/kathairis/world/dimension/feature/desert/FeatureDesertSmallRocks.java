@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.world.dimension.feature.desert;
 
+import io.github.krevik.kathairis.block.BlockBrinePustule;
 import io.github.krevik.kathairis.block.BlockPurplePalm;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -25,6 +26,7 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
                     world.setBlockState(pos.up(mainHeight + 1), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
                     world.setBlockState(pos.up(mainHeight + 2), ModBlocks.PURPLE_PALM.getDefaultState().with(BlockPurplePalm.VARIANT,BlockPurplePalm.EnumType.AIR), 18);
                 }
+
                 if(mainHeight>2){
                     int surroundingHeight=random.nextInt(mainHeight-1);
                     for(int y=0;y<=surroundingHeight;y++){
@@ -48,6 +50,20 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
                             }
                             if(random.nextInt(8)==0){
                                 world.setBlockState(pos.up(y+1).north(), ModBlocks.PURPLE_PALM.getDefaultState(), 18);
+                            }
+                        }
+                    }
+                }
+
+                //TODO CHECK IF IT IS WORKING
+                for(int x=-4;x<=4;x++){
+                    for(int y=0;y<=mainHeight;y++){
+                        for(int z=-4;z<=4;z++){
+                            if(random.nextInt(6)==0){
+                                BlockPos tmp = new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z);
+                                if(ModBlocks.BRINE_PUSTULE.isValidPosition(ModBlocks.BRINE_PUSTULE.getDefaultState(),world,tmp)){
+                                    world.setBlockState(tmp,ModBlocks.BRINE_PUSTULE.getDefaultState(),2);
+                                }
                             }
                         }
                     }

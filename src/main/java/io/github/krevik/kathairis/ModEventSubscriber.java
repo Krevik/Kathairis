@@ -200,7 +200,8 @@ public final class ModEventSubscriber {
 				setup(new BlockKathairisRocktus(), "rocktus"),
 				setup(new BlockKathairisLog(), "elderwillow_log"),
 				setup(new BlockKathairisLeaves(), "elderwillow_leaves"),
-				setup(new BlockPurplePalm(),"purple_palm")
+				setup(new BlockPurplePalm(),"purple_palm"),
+				setup(new BlockBrinePustule(), "brine_pustule")
 		);
 
 	}
@@ -291,7 +292,8 @@ public final class ModEventSubscriber {
 				setup(new ItemKathairisPickaxe(ModItemTiers.CRYSTAL), "crystal_pickaxe"),
 				setup(new ItemFrup(3, 0.4f, ModBlocks.FRUP_PLANT), "frup"),
 				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans"),
-				setup(new ItemMysticWand(ModItemGroups.WEAPONS),"mystic_wand")
+				setup(new ItemMysticWand(ModItemGroups.WEAPONS),"mystic_wand"),
+				setup(new ItemMineralFruit(2,0.1f,false,ModItemGroups.FOOD),"mineral_fruit")
 		);
 		//ModEntities.registerEggs(event);
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
