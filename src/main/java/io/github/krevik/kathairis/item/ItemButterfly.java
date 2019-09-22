@@ -1,16 +1,16 @@
 package io.github.krevik.kathairis.item;
 
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Rarity;
 
 /**
  * @author Krevik
  */
 public class ItemButterfly extends Item {
 
-	public ItemButterfly(ItemGroup group, EnumRarity rarity) {
-		super(new Item.Properties().group(group).rarity(rarity));
+	public ItemButterfly(ItemGroup group, Rarity rarity) {
+		super(new Properties().group(group).rarity(rarity));
 	}
 
    /* @Override

@@ -1,7 +1,10 @@
 package io.github.krevik.kathairis.particle;
 
+import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,7 +26,12 @@ public class ParticleFast extends BasicKatharianParticle {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    public IParticleRenderType getRenderType() {
+        return IParticleRenderType.CUSTOM;
+    }
+
+
+    /*@OnlyIn(Dist.CLIENT)
     public static class Factory implements IParticleFactory<BasicKatharianParticleType> {
         KatharianParticleTexture textureConfig;
         public Factory(KatharianParticleTexture textureDef){
@@ -31,6 +39,28 @@ public class ParticleFast extends BasicKatharianParticle {
         }
 
         public Particle makeParticle(BasicKatharianParticleType p_199234_1_, World p_199234_2_, double p_199234_3_, double p_199234_5_, double p_199234_7_, double p_199234_9_, double p_199234_11_, double p_199234_13_) {
+            return new ParticleFast(textureConfig,p_199234_2_, p_199234_3_, p_199234_5_, p_199234_7_, p_199234_9_, p_199234_11_, p_199234_13_)
+                    .setRotationSpeed(((float) Math.random() - 0.5F) * 0.1F)
+                    .setLifeSpan(5+new Random().nextInt(10))
+                    .setGravity(0F)
+                    .setScale(0.25F)
+                    .setInitialAlpha(1.0F)
+                    .setFinalAlpha(1.0F)
+                    .setEnableDepth(false);
+        }
+    }*/
+
+    @OnlyIn(Dist.CLIENT)
+    public static class Factory implements IParticleFactory<BasicParticleType> {
+        KatharianParticleTexture textureConfig = new KatharianParticleTexture("fast_particle",false, 1);
+
+        public Factory(IAnimatedSprite p_i50630_1_) {
+        }
+
+        public Factory() {
+        }
+
+        public Particle makeParticle(BasicParticleType p_199234_1_, World p_199234_2_, double p_199234_3_, double p_199234_5_, double p_199234_7_, double p_199234_9_, double p_199234_11_, double p_199234_13_) {
             return new ParticleFast(textureConfig,p_199234_2_, p_199234_3_, p_199234_5_, p_199234_7_, p_199234_9_, p_199234_11_, p_199234_13_)
                     .setRotationSpeed(((float) Math.random() - 0.5F) * 0.1F)
                     .setLifeSpan(5+new Random().nextInt(10))

@@ -1,11 +1,11 @@
 package io.github.krevik.kathairis.item;
 
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.ActionResultType;
 
 /**
  * @author Krevik
@@ -13,11 +13,11 @@ import net.minecraft.util.EnumActionResult;
 public class ItemPotWithLivingFlower extends Item {
 
 	public ItemPotWithLivingFlower(ItemGroup group) {
-		super(new Item.Properties().group(group));
+		super(new Properties().group(group));
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemUseContext context) {
+	public ActionResultType onItemUse(ItemUseContext context) {
 		//TODO REMEMBER ABOUT THIS ITEM USAGE!
 		if (!context.getWorld().isRemote) {
 			//EntityLivingFlower elv = new EntityLivingFlower(worldIn);
@@ -28,7 +28,7 @@ public class ItemPotWithLivingFlower extends Item {
 			itemstack.shrink(1);
 			context.getPlayer().addItemStackToInventory(new ItemStack(Blocks.FLOWER_POT, 1));
 		}
-		return EnumActionResult.SUCCESS;
+		return ActionResultType.SUCCESS;
 	}
 
 }

@@ -1,48 +1,36 @@
 package io.github.krevik.kathairis.client.gui;
 
 
-import io.github.krevik.kathairis.Kathairis;
-import io.github.krevik.kathairis.init.ModGui;
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.IInteractionObject;
-import net.minecraft.world.IWorld;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.FMLPlayMessages;
 import org.lwjgl.opengl.GL11;
-
-import javax.annotation.Nullable;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 @OnlyIn(Dist.CLIENT)
-public class GuiOldMan extends GuiScreen{
+public class GuiOldMan extends Screen {
 
 
     Minecraft mc = Minecraft.getInstance();
-    private final int ImageHeight = 340, ImageWidth = 704, ImageScale = 250;
+    private int shifter1 = 200, ImageWidth = 704, ImageScale = 250;
     private static final ResourceLocation GUITextures = new ResourceLocation(MOD_ID,"textures/gui/oldman.png");
     private static int mode=0;
-    private GuiButton Next;
-    private GuiButton Back;
-    private GuiButton Knowledge;
-    private GuiButton Power;
-    private GuiButton Adventure;
-    private GuiButton I_Want_Ethereal;
+    private Button Next;
+    private Button Back;
+    private Button Knowledge;
+    private Button Power;
+    private Button Adventure;
+    private Button I_Want_Ethereal;
     int margin=15;
     private String guiTitle;
     private String nextButtonTitle;
@@ -58,19 +46,17 @@ public class GuiOldMan extends GuiScreen{
     private String[] power_lines=new String[8];
     private String[] knowledge_lines=new String[8];
     private String[] i_want_ethereal_lines=new String[8];
+    private int guiScale;
 
     public GuiOldMan(){
-    }
+        super(new StringTextComponent("kathairis:gui_old_man"));
 
-    public GuiOldMan(FMLPlayMessages.OpenContainer openContainer) {
-    }
-
-    public void setMode(int mode1){
-        mode=mode1;
     }
 
     @Override
-    public void initGui() {
+    protected void init() {
+        super.init();
+        this.minecraft.keyboardListener.enableRepeatEvents(true);
         guiTitle=I18n.format("gui.old_man.title");
         for(int i=0;i<=7;i++){
             main_page_lines[i]=I18n.format("gui.old_man.main_page.line_"+i);
@@ -98,183 +84,176 @@ public class GuiOldMan extends GuiScreen{
 
         mode=0;
         buttons.clear();
-        this.addButton(Next = new GuiButton(1,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin), 80, 20, nextButtonTitle){
-            @Override
-            public void onClick(double p_194829_1_, double p_194829_3_) {
-                   GuiOldMan.this.setMode(1);
-                super.onClick(p_194829_1_, p_194829_3_);
+        this.Next = this.addButton(new Button(this.width / 2 - 100,280, 98, 20, nextButtonTitle, (p_214274_1_) -> {
+            this.setMode(1);
+        }));
+        this.Back = this.addButton(new Button(this.width / 2,280, 98, 20, backButtonTitle, (p_214274_1_) -> {
+            if(mode==0) {
+                Minecraft.getInstance().player.closeScreen();
             }
-        });
-        this.addButton(Back = new GuiButton(2,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*9), 60, 20, backButtonTitle){
-            @Override
-            public void onClick(double p_194829_1_, double p_194829_3_) {
-                if(mode==0) {
-                    Minecraft.getInstance().player.closeScreen();
-                }
-                if(mode==1){
-                    GuiOldMan.this.setMode(0);
-                }
-                if(mode==2||mode==3||mode==4){
-                    GuiOldMan.this.setMode(1);
-                }
-                if(mode==5){
-                    Minecraft.getInstance().player.closeScreen();
-                }
-                super.onClick(p_194829_1_, p_194829_3_);
+            if(mode==1){
+                GuiOldMan.this.setMode(0);
             }
-        });
-        this.addButton(Knowledge = new GuiButton(3,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*3), 80, 20, knowledge_Button_Title){
-            @Override
-            public void onClick(double p_194829_1_, double p_194829_3_) {
-                GuiOldMan.this.setMode(2);
-                super.onClick(p_194829_1_, p_194829_3_);
+            if(mode==2||mode==3||mode==4){
+                GuiOldMan.this.setMode(1);
             }
-        });
-        this.addButton(Power = new GuiButton(4,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*5), 60, 20, power_Button_Title){
-            @Override
-            public void onClick(double p_194829_1_, double p_194829_3_) {
-                GuiOldMan.this.setMode(3);
-                super.onClick(p_194829_1_, p_194829_3_);
+            if(mode==5){
+                Minecraft.getInstance().player.closeScreen();
             }
-        });
-        this.addButton(Adventure = new GuiButton(5,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*7), 60, 20, adventure_Button_Title){
-            @Override
-            public void onClick(double p_194829_1_, double p_194829_3_) {
-                GuiOldMan.this.setMode(4);
-                super.onClick(p_194829_1_, p_194829_3_);
-            }
-        });
-        this.addButton(I_Want_Ethereal = new GuiButton(6,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*5), 60, 20, i_Want_Ethereal_Button_Title){
-            @Override
-            public void onClick(double p_194829_1_, double p_194829_3_) {
-                GuiOldMan.this.setMode(5);
-                PacketHandler.sendToServer(new PacketServerGivePlayerEthereal());
-                super.onClick(p_194829_1_, p_194829_3_);
-            }
-        });
+        }));
+        this.Knowledge = this.addButton(new Button(this.width / 2 + 100,100, 98, 20, knowledge_Button_Title, (p_214274_1_) -> {
+            GuiOldMan.this.setMode(2);
+        }));
+        this.Power = this.addButton(new Button(this.width / 2 + 100,120, 98, 20,  power_Button_Title, (p_214274_1_) -> {
+            GuiOldMan.this.setMode(3);
+        }));
+        this.Adventure = this.addButton(new Button(this.width / 2 + 100,140, 98, 20,  adventure_Button_Title, (p_214274_1_) -> {
+            GuiOldMan.this.setMode(4);
+        }));
+        this.I_Want_Ethereal = this.addButton(new Button(this.width / 2 + 150,160, 98, 20, i_Want_Ethereal_Button_Title, (p_214274_1_) -> {
+            GuiOldMan.this.setMode(5);
+            PacketHandler.sendToServer(new PacketServerGivePlayerEthereal());
+        }));
+    }
+
+    public void setMode(int mode1){
+        mode=mode1;
     }
 
     @Override
     public void tick() {
+        guiScale=mc.gameSettings.guiScale;
+        if(guiScale==1){
+            shifter1=900;
+            Back.y=280;
+            Next.y=280;
+        }
+        if(guiScale==2){
+            shifter1=350;
+            Back.y=280;
+            Next.y=280;
+        }
+        if(guiScale==3){
+            shifter1=150;
+            Back.y=280;
+            Next.y=280;
+        }
+        if(guiScale==4){
+            shifter1=200;
+            Back.y=150;
+            Next.y=150;
+        }
         Back.visible=true;
-        Back.enabled=true;
-
+        Back.active=true;
         Knowledge.visible=false;
-        Knowledge.enabled=false;
+        Knowledge.active=false;
         Power.visible=false;
-        Power.enabled=false;
+        Power.active=false;
         Adventure.visible=false;
-        Adventure.enabled=false;
+        Adventure.active=false;
         I_Want_Ethereal.visible=false;
-        I_Want_Ethereal.enabled=false;
+        I_Want_Ethereal.active=false;
         //main Screen
         if(mode==0) {
             Next.visible = true;
-            Next.enabled = true;
+            Next.active = true;
         }
         //Lets_start screen
         if(mode==1) {
             Next.visible = false;
-            Next.enabled = false;
+            Next.active = false;
             Knowledge.visible=true;
-            Knowledge.enabled=true;
+            Knowledge.active=true;
             Power.visible=true;
-            Power.enabled=true;
+            Power.active=true;
             Adventure.visible=true;
-            Adventure.enabled=true;
+            Adventure.active=true;
         }
 
         if(mode==2||mode==3||mode==4) {
             Next.visible = false;
-            Next.enabled = false;
+            Next.active = false;
             Knowledge.visible=false;
-            Knowledge.enabled=false;
+            Knowledge.active=false;
             Power.visible=false;
-            Power.enabled=false;
+            Power.active=false;
             Adventure.visible=false;
-            Adventure.enabled=false;
+            Adventure.active=false;
             if(mode==3){
                 I_Want_Ethereal.visible=true;
-                I_Want_Ethereal.enabled=true;
+                I_Want_Ethereal.active=true;
             }
         }
 
         if(mode==5){
             I_Want_Ethereal.visible=false;
-            I_Want_Ethereal.enabled=false;
+            I_Want_Ethereal.active=false;
             Next.visible = false;
-            Next.enabled = false;
+            Next.active = false;
             Knowledge.visible=false;
-            Knowledge.enabled=false;
+            Knowledge.active=false;
             Power.visible=false;
-            Power.enabled=false;
+            Power.active=false;
             Adventure.visible=false;
-            Adventure.enabled=false;
+            Adventure.active=false;
         }
-
-
     }
 
+    @Override
     public void drawCenteredString(FontRenderer fontRendererIn, String text, int x, int y, int color)
     {
-        GlStateManager.scalef(0.8f,0.8f,0.8f);
-        fontRendererIn.drawString(text, (x - fontRendererIn.getStringWidth(text) / 2), y, color);
-        GlStateManager.scalef(1.25f,1.25f,1.25f);
+        fontRendererIn.drawString(text, (width/2-fontRendererIn.getStringWidth(text)/2), y, color);
     }
-
-
 
     @Override
     public void render(int parWidth, int parHeight, float particle) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableColorMaterial();
-        this.mc.getTextureManager().bindTexture(GUITextures);
-        int scale = Minecraft.getInstance().gameSettings.guiScale;
-        drawModalRectWithCustomSizedTexture(margin, height-ImageHeight/2-margin, 0, 0, ImageWidth/2,ImageHeight/2,ImageWidth/2,ImageHeight/2);
-        this.drawString(fontRenderer, guiTitle, (int)(margin*1.65), (int) (height -ImageHeight/2-margin*0.4), 0X191414);
+        //this.mc.getTextureManager().bindTexture(GUITextures);
+        this.renderBackground();
+        //TODO //drawModalRectWithCustomSizedTexture(margin, height-shifter1/2-margin, 0, 0, ImageWidth/2,shifter1/2,ImageWidth/2,shifter1/2);
+        this.drawCenteredString(this.font, guiTitle, (int)(0), (int) (height - shifter1 - margin*0.4), 0XFFFFFF);
         if(mode==0){
-            this.drawString(fontRenderer, hello_Player_Title +", "+ Minecraft.getInstance().player.getName().getFormattedText() +".", (int) (margin*1.75), height-ImageHeight/2+margin, 0X747474);
+            this.drawCenteredString(this.font, hello_Player_Title +", "+ Minecraft.getInstance().player.getName().getFormattedText() +".", (int) (0), height- shifter1 +margin, 0X747474);
             for(int i=2;i<=9;i++){
-                this.drawString(fontRenderer, main_page_lines[i-2], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, main_page_lines[i-2], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==1) {
-            this.drawString(fontRenderer, asked_question, (int) (margin*1.75), height -ImageHeight/2+margin, 0X747474);
+            this.drawCenteredString(this.font, asked_question, (int) (0), height - shifter1 +margin, 0X747474);
         }
         if(mode==2) {
             for(int i=1;i<=8;i++){
-                this.drawString(fontRenderer, knowledge_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, knowledge_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==3){
             for(int i=1;i<=8;i++){
-                this.drawString(fontRenderer, power_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, power_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==4){
             for(int i=1;i<=8;i++){
-                this.drawString(fontRenderer, adventure_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, adventure_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==5){
             for(int i=1;i<=8;i++){
-                this.drawString(fontRenderer, i_want_ethereal_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, i_want_ethereal_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
-
         super.render(parWidth, parHeight, particle);
     }
 
-
     @Override
-    public void onGuiClosed() {
+    public void onClose() {
         mode=0;
+        super.onClose();
     }
 
     @Override
-    public boolean doesGuiPauseGame() {
+    public boolean isPauseScreen() {
         return false;
     }
-
 
 }

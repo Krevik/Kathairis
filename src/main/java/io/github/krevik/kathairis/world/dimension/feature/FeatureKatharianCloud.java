@@ -1,30 +1,27 @@
 package io.github.krevik.kathairis.world.dimension.feature;
 
+import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
+import java.util.function.Function;
 
 public class FeatureKatharianCloud extends Feature<NoFeatureConfig> {
 
-    @Override
-    public boolean place(IWorld world, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random random, BlockPos pos, NoFeatureConfig config) {
-            if(random.nextInt(5)==0) {
-                IBlockState block = random.nextInt(2)==0 ? ModBlocks.BLUE_CLOUD.getDefaultState() : ModBlocks.YELLOW_CLOUD.getDefaultState();
-                int height = 100+random.nextInt(24)+random.nextInt(24)+random.nextInt(24)+random.nextInt(24)+random.nextInt(24);
-               generateCloud(world,new BlockPos(pos.getX(),height,pos.getZ()),2+random.nextInt(7),random,block,0);
-            }
-        return false;
+
+    public FeatureKatharianCloud(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49878_1_) {
+        super(p_i49878_1_);
     }
 
-    private void generateCloud(IWorld world, BlockPos pos, int radius, Random random, IBlockState state, int count) {
+    private void generateCloud(IWorld world, BlockPos pos, int radius, Random random, BlockState state, int count) {
         if(count<6) {
             for (int x = -radius / 2; x <= radius / 2; x++) {
                 for (int z = -radius / 2; z <= radius / 2; z++) {
@@ -47,5 +44,13 @@ public class FeatureKatharianCloud extends Feature<NoFeatureConfig> {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos pos, NoFeatureConfig config) {
+            BlockState block = random.nextInt(2)==0 ? ModBlocks.BLUE_CLOUD.getDefaultState() : ModBlocks.YELLOW_CLOUD.getDefaultState();
+            int height = 100+random.nextInt(24)+random.nextInt(24)+random.nextInt(24)+random.nextInt(24)+random.nextInt(24);
+            generateCloud(world,new BlockPos(pos.getX(),height,pos.getZ()),2+random.nextInt(7),random,block,0);
+        return false;
     }
 }

@@ -1,40 +1,50 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
+import com.google.common.collect.Lists;
+import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
-import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.CrystalLabirynthConfig;
-import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.StructureCrystalLabirynth;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.PlainsBiome;
-import net.minecraft.world.gen.ChunkGeneratorOverworld;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.MinableConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftStructure;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BiomeKatharianBiomeBase extends Biome {
     public Color baseGrassColor =new Color(66,244,238);
 
-    protected BiomeKatharianBiomeBase(BiomeBuilder p_i48975_1_) {
+    protected BiomeKatharianBiomeBase(Builder p_i48975_1_) {
         super(p_i48975_1_);
-        //this.addStructure(KatharianFeatureList.CRYSTAL_LABIRYNTH, new CrystalLabirynthConfig(0.1D));
-        this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, createCompositeFeature(Feature.MINABLE, new MinableConfig(KatharianMinableConfig.IS_ROCK, Blocks.STONE.getDefaultState(), 17), COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
-        this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createCompositeFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, WITH_CHANCE, new ChanceConfig(128)));
+        this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TITANIUM_ORE.getDefaultState(), 9), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 64)));
+        this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(), 18), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
+        this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));
     }
+
+
+    private static final int MONSTER_SPAWN_WEIGHT = 5;
+
+
+    @Override
+    public List<SpawnListEntry> getSpawns(EntityClassification p_76747_1_) {
+        if (p_76747_1_ == EntityClassification.MONSTER) {
+            FunctionHelper helper = new FunctionHelper();
+            return helper.getRandom().nextInt(MONSTER_SPAWN_WEIGHT) == 0 ? this.getSpawns(p_76747_1_) : Lists.newArrayList();
+        }
+        return super.getSpawns(p_76747_1_);
+    }
+
 
 
 
@@ -88,7 +98,7 @@ public class BiomeKatharianBiomeBase extends Biome {
         return hex;
     }
 
-    public void addSpawn(EnumCreatureType type, Biome.SpawnListEntry spawnListEntry) {
+    public void addSpawn(EntityClassification type, SpawnListEntry spawnListEntry) {
         getSpawns(type).add(spawnListEntry);
     }
 }

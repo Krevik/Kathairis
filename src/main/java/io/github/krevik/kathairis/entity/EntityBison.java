@@ -7,21 +7,18 @@ import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -42,37 +39,42 @@ public class EntityBison extends EntityKatharianAnimal
     public EntityBison(World worldIn)
     {
         super(ModEntities.BISON,worldIn);
-        this.setSize(1.5F, 1.7F);
         this.experienceValue=30;
-        spawnableBlocks.add(ModBlocks.KATHAIRIS_GRASS);
-        spawnableBlocks.add(ModBlocks.KATHAIRIS_DIRT);
     }
 
     @Override
-    public boolean canSpawn(IWorld p_205020_1_, boolean p_205020_2_) {
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_BISON;
+    }
+
+
+    public EntityBison(EntityType<EntityBison> entityBisonEntityType, World world) {
+        super(entityBisonEntityType, world);
+    }
+
+
+    @Override
+    public boolean canSpawn(IWorld world, SpawnReason sth) {
         int lvt_3_1_ = MathHelper.floor(this.posX);
         int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
         int lvt_5_1_ = MathHelper.floor(this.posZ);
         BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
-        return spawnableBlocks.contains(p_205020_1_.getBlockState(lvt_6_1_.down()).getBlock()) && p_205020_1_.getLightSubtracted(lvt_6_1_, 0) > 8 &&
-                this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), p_205020_1_) >= 0.0F && p_205020_1_.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this);
+        return spawnableBlocks.contains(world.getBlockState(lvt_6_1_.down()).getBlock()) && world.getLightSubtracted(lvt_6_1_, 0) > 8 &&
+                this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(world,getPosition(),ModEntities.BISON);
     }
 
     @Override
-    protected void initEntityAI()
-    {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
-        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Ingredient.fromItems(ModBlocks.BISON_STARS), false));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(1,new EntityAIAttackMeleeBison(this,1.2D,true));
-
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(0, new EntityAIAvoidMovingSandsAndCactus(this,1.0D));
+        this.goalSelector.addGoal(1, new PanicGoal(this,1.25D));
+        this.goalSelector.addGoal(2, new BreedGoal(this,1.0D));
+        this.goalSelector.addGoal(3, new FollowParentGoal(this,1.1D));
+        this.goalSelector.addGoal(4, new RandomWalkingGoal(this,1.0D));
+        this.goalSelector.addGoal(5, new TemptGoal(this,1.25D, Ingredient.fromItems(ModBlocks.BISON_STARS),false));
+        this.goalSelector.addGoal(6, new EntityAIAttackMeleeBison(this,1.2D,true));
+        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class,1.0F));
     }
 
     @Override
@@ -139,6 +141,7 @@ public class EntityBison extends EntityKatharianAnimal
 
 
     boolean shouldDeleteRevenegeTarget=false;
+
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
@@ -149,13 +152,13 @@ public class EntityBison extends EntityKatharianAnimal
         }
         else if(k>10&&k<50){
             //attack in hordes
-            if(source.getTrueSource() instanceof EntityLivingBase) {
+            if(source.getTrueSource() instanceof LivingEntity) {
                 List<EntityBison> bisons = new ArrayList<EntityBison>();
                 bisons=world.getEntitiesWithinAABB(EntityBison.class, new AxisAlignedBB(posX - 15, posY - 15, posZ - 15, posX  + 15, posY + 15, posZ + 15));
                 for(int x=0;x<bisons.size();x++) {
-                    bisons.get(x).setAttackTarget((EntityLivingBase) source.getTrueSource());
+                    bisons.get(x).setAttackTarget((LivingEntity) source.getTrueSource());
                 }
-                setAttackTarget((EntityLivingBase) source.getTrueSource());
+                setAttackTarget((LivingEntity) source.getTrueSource());
             }
             shouldDeleteRevenegeTarget=true;
         }
@@ -166,14 +169,9 @@ public class EntityBison extends EntityKatharianAnimal
         return super.attackEntityFrom(source, amount);
     }
 
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-    	return KatharianLootTables.LOOT_BISON;
-    }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(PlayerEntity player, Hand hand)
     {
         ItemStack itemstack = player.getHeldItem(hand);
         boolean c=super.processInteract(player, hand);
@@ -221,7 +219,7 @@ public class EntityBison extends EntityKatharianAnimal
     }
 
     @Override
-    public void writeAdditional(NBTTagCompound compound)
+    public void writeAdditional(CompoundNBT compound)
     {
         super.writeAdditional(compound);
         compound.putBoolean("shouldAnimTail",getShouldAnimTail());
@@ -231,7 +229,7 @@ public class EntityBison extends EntityKatharianAnimal
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound)
+    public void readAdditional(CompoundNBT compound)
     {
         super.readAdditional(compound);
         setShouldAnimTail(compound.getBoolean("shouldAnimTail"));
@@ -258,19 +256,13 @@ public class EntityBison extends EntityKatharianAnimal
     }
 
     @Override
-    public EntityBison createChild(EntityAgeable ageable)
+    public EntityBison createChild(AgeableEntity ageable)
     {
         EntityBison entitysheep = (EntityBison)ageable;
         EntityBison entitysheep1 = new EntityBison(this.world);
         return entitysheep1;
     }
 
-    @Override
-    public float getEyeHeight()
-    {
-        return 0.95F * this.height;
-    }
-    
     
 
 }

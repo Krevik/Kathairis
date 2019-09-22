@@ -1,35 +1,38 @@
 package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.block.*;
+import io.github.krevik.kathairis.block.TreesForSaplings.ElderwillowTree;
+import io.github.krevik.kathairis.block.TreesForSaplings.MysticTree;
+import io.github.krevik.kathairis.block.TreesForSaplings.ShinyTree;
+import io.github.krevik.kathairis.block.TreesForSaplings.SoulTree;
 import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.item.*;
+import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
-import io.github.krevik.kathairis.world.dimension.DimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
-import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.netty.buffer.Unpooled;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Rarity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.storage.DimensionSavedDataManager;
-import net.minecraft.world.storage.WorldSavedDataStorage;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
@@ -37,7 +40,6 @@ import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -46,8 +48,6 @@ import javax.annotation.Nonnull;
 
 import static io.github.krevik.kathairis.init.ModItemGroups.BUILDING_BLOCKS;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
-import static net.minecraft.inventory.EntityEquipmentSlot.*;
-import static net.minecraft.item.EnumRarity.*;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 /**
@@ -100,7 +100,7 @@ public final class ModEventSubscriber {
 				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "kathairis_stone_tiles"),
 				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3f).sound(SoundType.STONE).lightValue(12)), "shiny_rock"),
 				setup(kathairisStoneBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)), "kathairis_stone_bricks"),
-				setup(new Block(Block.Properties.create(Material.GROUND).hardnessAndResistance(1f, 1f).sound(SoundType.GROUND)), "mud_block"),
+				setup(new Block(Block.Properties.create(Material.GOURD).hardnessAndResistance(1f, 1f).sound(SoundType.GROUND)), "mud_block"),
 				setup(mudBricks = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2f, 2f).sound(SoundType.STONE)), "mud_bricks"),
 				setup(new BlockMagnethium(), "magnethium"),
 				setup(new Block(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4f, 4f).sound(SoundType.METAL)), "iron_gold_block"),
@@ -194,15 +194,21 @@ public final class ModEventSubscriber {
 				setup(new BlockCloudFlower(), "yellow_cloud_flower"),
 				setup(new BlockSnowdropCyprepedium(), "snowdrop_cyprepedium"),
 				setup(new BlockFluoFungi(), "fluo_fungi"),
-				setup(new BlockLayeredSand(), "layered_sand"),
+				setup(new BlockLayeredSand(), "layered_sand"), //TODO ADD LOOT TABLE
 				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 1.5f).sound(SoundType.STONE)), "kathairis_sandstone"), //TODO: reorganise
 				setup(new BlockForestCandle(), "forest_candle"),
 				setup(new BlockKathairisRocktus(), "rocktus"),
 				setup(new BlockKathairisLog(), "elderwillow_log"),
 				setup(new BlockKathairisLeaves(), "elderwillow_leaves"),
 				setup(new BlockPurplePalm(),"purple_palm"),
-				setup(new BlockBrinePustule(), "brine_pustule")
-		);
+				setup(new BlockBrinePustule(), "brine_pustule"),
+				setup(new BlockWillowVineMain(), "willow_vine_main"),
+				setup(new BlockWillowVineTip(), "willow_vine_tip"),
+				setup(new BlockKatharianSapling(new MysticTree()), "mystic_sapling"),
+				setup(new BlockKatharianSapling(new SoulTree()), "soul_sapling"),
+				setup(new BlockKatharianSapling(new ShinyTree()), "shiny_sapling"),
+				setup(new BlockKatharianSapling(new ElderwillowTree()), "elderwillow_sapling")
+				);
 
 	}
 
@@ -214,46 +220,46 @@ public final class ModEventSubscriber {
 				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS)), "titanium_ingot"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS)), "titanium_rod"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS)), "revenum_ingot"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(EPIC)), "cloud_essence"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(RARE)), "howler_fur"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS).rarity(RARE)), "crystal_cluster"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS).rarity(RARE)), "magnethium_shard"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.EPIC)), "cloud_essence"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.RARE)), "howler_fur"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS).rarity(Rarity.RARE)), "crystal_cluster"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS).rarity(Rarity.RARE)), "magnethium_shard"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "crystal_shard_yellow"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "crystal_shard_blue"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "crystal_shard_violet"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "tortoise_shell"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "butterfly_flower_nectar"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS)), "iron_gold_ingot"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, HEAD), "titanium_helmet"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, CHEST), "titanium_chestplate"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, LEGS), "titanium_leggings"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, FEET), "titanium_boots"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, EquipmentSlotType.HEAD), "titanium_helmet"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, EquipmentSlotType.CHEST), "titanium_chestplate"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, EquipmentSlotType.LEGS), "titanium_leggings"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.TITANIUM, EquipmentSlotType.FEET), "titanium_boots"),
 				setup(new ItemKathairisSword(ModItemTiers.TITANIUM), "titanium_sword"),
 				setup(new ItemKathairisHoe(ModItemTiers.TITANIUM), "titanium_hoe"),
 				setup(new ItemKathairisAxe(ModItemTiers.TITANIUM), "titanium_axe"),
 				setup(new ItemKathairisPickaxe(ModItemTiers.TITANIUM), "titanium_pickaxe"),
 				setup(new ItemKathairisShovel(ModItemTiers.TITANIUM), "titanium_shovel"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, HEAD), "revenum_helmet"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, CHEST), "revenum_chestplate"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, LEGS), "revenum_leggings"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, FEET), "revenum_boots"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, EquipmentSlotType.HEAD), "revenum_helmet"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, EquipmentSlotType.CHEST), "revenum_chestplate"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, EquipmentSlotType.LEGS), "revenum_leggings"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.REVENUM, EquipmentSlotType.FEET), "revenum_boots"),
 				setup(new ItemKathairisSword(ModItemTiers.REVENUM), "revenum_sword"),
 				setup(new ItemKathairisHoe(ModItemTiers.REVENUM), "revenum_hoe"),
 				setup(new ItemKathairisAxe(ModItemTiers.REVENUM), "revenum_axe"),
 				setup(new ItemKathairisPickaxe(ModItemTiers.REVENUM), "revenum_pickaxe"),
 				setup(new ItemKathairisShovel(ModItemTiers.REVENUM), "revenum_shovel"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(EPIC)), "skyray_feather"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(EPIC)), "solis_crystal"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, HEAD), "mystic_helmet"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, CHEST), "mystic_chestplate"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, LEGS), "mystic_leggings"),
-				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, FEET), "mystic_boots"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.EPIC)), "skyray_feather"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.EPIC)), "solis_crystal"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, EquipmentSlotType.HEAD), "mystic_helmet"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, EquipmentSlotType.CHEST), "mystic_chestplate"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, EquipmentSlotType.LEGS), "mystic_leggings"),
+				setup(new ItemKathairisArmor(ModArmorMaterials.MYSTIC, EquipmentSlotType.FEET), "mystic_boots"),
 				setup(new ItemKathairisSword(ModItemTiers.MYSTIC), "mystic_sword"),
 				setup(new ItemKathairisHoe(ModItemTiers.MYSTIC), "mystic_hoe"),
 				setup(new ItemKathairisAxe(ModItemTiers.MYSTIC), "mystic_axe"),
 				setup(new ItemKathairisPickaxe(ModItemTiers.MYSTIC), "mystic_pickaxe"),
 				setup(new ItemKathairisShovel(ModItemTiers.MYSTIC), "mystic_shovel"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(EPIC)), "cloud_pearl"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.EPIC)), "cloud_pearl"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MATERIALS)), "shiny_stick"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "cloud_dust_blue"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "cloud_dust_yellow"),
@@ -261,23 +267,23 @@ public final class ModEventSubscriber {
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "condensed_cloud_dust_yellow"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "jar_with_swamp_gas"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "crystal_blend"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "heart"),
+				setup(new Item(new Item.Properties().food(ModFoods.HEART).group(ModItemGroups.FOOD)), "heart"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "cotton_candy"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "bison_meat"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "cooked_bison_meat"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(RARE)), "jellyfish_tentacle"),
-				setup(new ItemGooseberries(2, 0.4f, ModBlocks.GOOSEBERRY_BUSH), "gooseberries"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.RARE)), "jellyfish_tentacle"),
+				setup(new BlockNamedItem(ModBlocks.GOOSEBERRY_BUSH, new Item.Properties().food(ModFoods.GOOSEBERRY).group(ModItemGroups.FOOD)), "gooseberries"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "venom_sac"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "glass_jar"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "nectar_bowl"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(COMMON)), "butterfly_common_1"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(COMMON)), "butterfly_common_2"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(COMMON)), "butterfly_common_moth"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(UNCOMMON)), "butterfly_illukini"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(RARE)), "butterfly_cloud_shimmer"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD).food(ModFoods.NECTAR_BOWL)), "nectar_bowl"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.COMMON)), "butterfly_common_1"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.COMMON)), "butterfly_common_2"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.COMMON)), "butterfly_common_moth"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.UNCOMMON)), "butterfly_illukini"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.RARE)), "butterfly_cloud_shimmer"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "butterfly_catcher"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "wings_piece"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "fungal_drug"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD).food(ModFoods.FUNGAL_DRUG)), "fungal_drug"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "bitten_cookie"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "candy_cane"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "christmas_chocolate"),
@@ -290,10 +296,10 @@ public final class ModEventSubscriber {
 				setup(new ItemKathairisSword(ModItemTiers.MAGNETHIUM), "magnethium_sword"),
 				setup(new ItemKathairisHoe(ModItemTiers.MAGNETHIUM), "magnethium_hoe"),
 				setup(new ItemKathairisPickaxe(ModItemTiers.CRYSTAL), "crystal_pickaxe"),
-				setup(new ItemFrup(3, 0.4f, ModBlocks.FRUP_PLANT), "frup"),
-				setup(new ItemMagicBeans(2, 0.4f, ModBlocks.MAGIC_BEANS), "magic_beans"),
+				setup(new BlockNamedItem(ModBlocks.FRUP_PLANT, new Item.Properties().food(ModFoods.FRUP).group(ModItemGroups.FOOD)), "frup"),
+				setup(new BlockNamedItem(ModBlocks.MAGIC_BEANS, new Item.Properties().food(ModFoods.MAGIC_BEANS).group(ModItemGroups.FOOD)), "magic_beans"),
 				setup(new ItemMysticWand(ModItemGroups.WEAPONS),"mystic_wand"),
-				setup(new ItemMineralFruit(2,0.1f,false,ModItemGroups.FOOD),"mineral_fruit")
+				setup(new BlockNamedItem(ModBlocks.BRINE_PUSTULE, new Item.Properties().food(ModFoods.MINERAL_FRUIT).group(ModItemGroups.FOOD)),"mineral_fruit")
 		);
 		//ModEntities.registerEggs(event);
 		for (final Block block : ModUtil.getModEntries(ForgeRegistries.BLOCKS)) {
@@ -302,7 +308,7 @@ public final class ModEventSubscriber {
 			if (block == ModBlocks.MAGIC_BEANS || block == ModBlocks.KATHAIRIS_PORTAL) {
 				continue;
 			}
-			registry.register(setup(new ItemBlock(block, new Item.Properties().group(BUILDING_BLOCKS)), block.getRegistryName()));
+			registry.register(setup(new BlockItem(block, new Item.Properties().group(BUILDING_BLOCKS)), block.getRegistryName()));
 		}
 
 	}
@@ -367,20 +373,20 @@ public final class ModEventSubscriber {
 	@SubscribeEvent
 	public static void onRegisterModDimensions(final RegistryEvent.Register<ModDimension> event) {
 		event.getRegistry().registerAll(
-						new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"))
+						new ModDimensionKathairis(ModReference.KATHAIRIS)
 		);
 	}
 
+
 	@SubscribeEvent
 	public static void onFMLCommonSetup(final FMLCommonSetupEvent event){
-		ModParticles.registerParticles();
 		PacketHandler.register();
-		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
+		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(ModReference.KATHAIRIS, ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)),true);
 	}
 
 	@SubscribeEvent
 	public static void onDimensionRegisterEvent(final RegisterDimensionsEvent event){
-		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
+		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(ModReference.KATHAIRIS, ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)),true);
 	}
 
 	@SubscribeEvent
@@ -406,33 +412,39 @@ public final class ModEventSubscriber {
 	}
 
 	@SubscribeEvent
+	public static void onRegisterParticleTypes(final RegistryEvent.Register<ParticleType<?>> event){
+		//ModParticles.registerParticles();
+	}
+
+
+	@SubscribeEvent
 	public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
 		event.getRegistry().registerAll(
-				setup(ModEntities.COMMON_BUTTERFLY1=EntityType.Builder.create(EntityButterfly.class, EntityButterfly::new).build("kathairis:common_butterfly1"),"common_butterfly1"),
-				setup(ModEntities.COMMON_BUTTERFLY2=EntityType.Builder.create(EntityButterfly1.class, EntityButterfly1::new).build("kathairis:common_butterfly2"),"common_butterfly2"),
-				setup(ModEntities.CLOUD_SHIMMER=EntityType.Builder.create(EntityCloudShimmer.class, EntityCloudShimmer::new).build("kathairis:cloud_shimmer"),"cloud_shimmer"),
-				setup(ModEntities.ILLUKINI=EntityType.Builder.create(EntityIllukini.class, EntityIllukini::new).tracker(200, 1, true).build("kathairis:illukini"),"illukini"),
-				setup(ModEntities.RUBY_SILE=EntityType.Builder.create(EntityRubySile.class, EntityRubySile::new).tracker(200, 1, true).build("kathairis:ruby_sile"),"ruby_sile"),
-				setup(ModEntities.SKYLIGHT=EntityType.Builder.create(EntitySkylight.class, EntitySkylight::new).tracker(200, 1, true).build("kathairis:skylight"),"skylight"),
-				setup(ModEntities.BIG_TURTLE=EntityType.Builder.create(EntityBigTurtle.class, EntityBigTurtle::new).tracker(200, 1, true).build("kathairis:big_turtle"),"big_turtle"),
-				setup(ModEntities.BISON=EntityType.Builder.create(EntityBison.class, EntityBison::new).tracker(32, 1, true).build("kathairis:bison"),"bison"),
-				setup(ModEntities.CACTI_SPORE=EntityType.Builder.create(EntityCactiSpore.class, EntityCactiSpore::new).tracker(32, 1, true).build("kathairis:cacti_spore"),"cacti_spore"),
-				setup(ModEntities.CAMEL=EntityType.Builder.create(EntityCamel.class, EntityCamel::new).tracker(32, 1, true).build("kathairis:camel"),"camel"),
-				setup(ModEntities.CLOUD_OISTER=EntityType.Builder.create(EntityCloudOister.class, EntityCloudOister::new).tracker(32, 1, true).build("kathairis:cloud_oister"),"cloud_oister"),
-				setup(ModEntities.CLOUDY_SLIME=EntityType.Builder.create(EntityCloudySlime.class, EntityCloudySlime::new).tracker(32, 1, true).build("kathairis:cloudy_slime"),"cloudy_slime"),
-				setup(ModEntities.FLYING_SQUID=EntityType.Builder.create(EntityFlyingSquid.class, EntityFlyingSquid::new).tracker(32, 1, true).build("kathairis:flying_squid"),"flying_squid"),
-				setup(ModEntities.FUNGITE=EntityType.Builder.create(EntityFungite.class, EntityFungite::new).tracker(32, 1, true).build("kathairis:fungite"),"fungite"),
-				setup(ModEntities.GAZNOWEL=EntityType.Builder.create(EntityGaznowel.class, EntityGaznowel::new).tracker(32, 1, true).build("kathairis:gaznowel"),"gaznowel"),
-				setup(ModEntities.GECKO=EntityType.Builder.create(EntityGecko.class, EntityGecko::new).tracker(32, 1, true).build("kathairis:gecko"),"gecko"),
-				setup(ModEntities.HOWLER=EntityType.Builder.create(EntityHowler.class, EntityHowler::new).tracker(32, 1, true).build("kathairis:howler"),"howler"),
-				setup(ModEntities.JELLY_FISH=EntityType.Builder.create(EntityJellyFish.class, EntityJellyFish::new).tracker(32, 1, true).build("kathairis:jelly_fish"),"jelly_fish"),
-				setup(ModEntities.LIVING_FLOWER=EntityType.Builder.create(EntityLivingFlower.class, EntityLivingFlower::new).tracker(32, 1, true).build("kathairis:living_flower"),"living_flower"),
-				setup(ModEntities.MYSTIC_BIRD=EntityType.Builder.create(EntityMysticBird.class, EntityMysticBird::new).tracker(32, 1, true).build("kathairis:mystic_bird"),"mystic_bird"),
-				setup(ModEntities.PHASM=EntityType.Builder.create(EntityPhasm.class, EntityPhasm::new).tracker(32, 1, true).build("kathairis:phasm"),"phasm"),
-				setup(ModEntities.POISONOUS_SCORPION=EntityType.Builder.create(EntityPoisonousScorpion.class, EntityPoisonousScorpion::new).tracker(32, 1, true).build("kathairis:poisonous_scorpion"),"poisonous_scorpion"),
-				setup(ModEntities.SKYRAY=EntityType.Builder.create(EntitySkyray.class, EntitySkyray::new).tracker(200, 1, true).build("kathairis:skyray"),"skyray"),
-				setup(ModEntities.STRANGE_WANDERER=EntityType.Builder.create(EntityStrangeWanderer.class, EntityStrangeWanderer::new).tracker(200, 1, true).build("kathairis:strange_wanderer"),"strange_wanderer"),
-				setup(ModEntities.MYSTIC_WAND_SHOOT=EntityType.Builder.create(EntityMysticWandShoot.class, EntityMysticWandShoot::new).tracker(200, 1, true).build("kathairis:mystic_wand_shoot"),"mystic_wand_shoot")
+				setup(ModEntities.COMMON_BUTTERFLY1=EntityType.Builder.<EntityButterfly>create(EntityButterfly::new, EntityClassification.AMBIENT).size(0.6F,0.5F).build("kathairis:common_butterfly1"),"common_butterfly1"),
+				setup(ModEntities.COMMON_BUTTERFLY2=EntityType.Builder.<EntityButterfly1>create(EntityButterfly1::new, EntityClassification.AMBIENT).size(0.6F,0.5F).build("kathairis:common_butterfly2"),"common_butterfly2"),
+				setup(ModEntities.CLOUD_SHIMMER=EntityType.Builder.<EntityCloudShimmer>create(EntityCloudShimmer::new, EntityClassification.AMBIENT).size(0.6F,0.5F).build("kathairis:cloud_shimmer"),"cloud_shimmer"),
+				setup(ModEntities.ILLUKINI=EntityType.Builder.<EntityIllukini>create(EntityIllukini::new, EntityClassification.AMBIENT).size(0.6F,0.5F).setTrackingRange(200).build("kathairis:illukini"),"illukini"),
+				setup(ModEntities.RUBY_SILE=EntityType.Builder.<EntityRubySile>create(EntityRubySile::new, EntityClassification.AMBIENT).size(0.6F,0.5F).setTrackingRange(200).build("kathairis:ruby_sile"),"ruby_sile"),
+				setup(ModEntities.SKYLIGHT=EntityType.Builder.<EntitySkylight>create(EntitySkylight::new, EntityClassification.AMBIENT).size(0.15F,0.15F).setTrackingRange(200).build("kathairis:skylight"),"skylight"),
+				setup(ModEntities.BIG_TURTLE=EntityType.Builder.<EntityBigTurtle>create(EntityBigTurtle::new, EntityClassification.CREATURE).size(0.9F,1.2F).setTrackingRange(200).build("kathairis:big_turtle"),"big_turtle"),
+				setup(ModEntities.BISON=EntityType.Builder.<EntityBison>create(EntityBison::new, EntityClassification.CREATURE).size(1.5F,1.7F).setTrackingRange(200).build("kathairis:bison"),"bison"),
+				setup(ModEntities.CACTI_SPORE=EntityType.Builder.<EntityCactiSpore>create(EntityCactiSpore::new, EntityClassification.MONSTER).size(1F,1F).setTrackingRange(200).build("kathairis:cacti_spore"),"cacti_spore"),
+				setup(ModEntities.CAMEL=EntityType.Builder.<EntityCamel>create(EntityCamel::new, EntityClassification.CREATURE).size(1.6F,1.5F).setTrackingRange(200).build("kathairis:camel"),"camel"),
+				setup(ModEntities.CLOUD_OISTER=EntityType.Builder.<EntityCloudOister>create(EntityCloudOister::new, EntityClassification.CREATURE).size(0.6F,0.6F).setTrackingRange(200).build("kathairis:cloud_oister"),"cloud_oister"),
+				setup(ModEntities.CLOUDY_SLIME=EntityType.Builder.<EntityCloudySlime>create(EntityCloudySlime::new, EntityClassification.CREATURE).size(1.4F,1.4F).setTrackingRange(200).build("kathairis:cloudy_slime"),"cloudy_slime"),
+				setup(ModEntities.FLYING_SQUID=EntityType.Builder.<EntityFlyingSquid>create(EntityFlyingSquid::new, EntityClassification.CREATURE).size(1.5F,2F).setTrackingRange(200).build("kathairis:flying_squid"),"flying_squid"),
+				setup(ModEntities.FUNGITE=EntityType.Builder.<EntityFungite>create(EntityFungite::new, EntityClassification.MONSTER).size(1.5F,2.4F).setTrackingRange(200).build("kathairis:fungite"),"fungite"),
+				setup(ModEntities.GAZNOWEL=EntityType.Builder.<EntityGaznowel>create(EntityGaznowel::new, EntityClassification.MONSTER).size(1F,2F).setTrackingRange(200).build("kathairis:gaznowel"),"gaznowel"),
+				setup(ModEntities.GECKO=EntityType.Builder.<EntityGecko>create(EntityGecko::new, EntityClassification.CREATURE).size(0.7F,0.25F).setTrackingRange(200).build("kathairis:gecko"),"gecko"),
+				setup(ModEntities.HOWLER=EntityType.Builder.<EntityHowler>create(EntityHowler::new, EntityClassification.MONSTER).size(0.85F,1F).setTrackingRange(200).build("kathairis:howler"),"howler"),
+				setup(ModEntities.JELLY_FISH=EntityType.Builder.<EntityJellyFish>create(EntityJellyFish::new, EntityClassification.MONSTER).size(1f,1f).setTrackingRange(200).build("kathairis:jelly_fish"),"jelly_fish"),
+				setup(ModEntities.LIVING_FLOWER=EntityType.Builder.<EntityLivingFlower>create(EntityLivingFlower::new, EntityClassification.AMBIENT).size(0.3F,0.5F).setTrackingRange(200).build("kathairis:living_flower"),"living_flower"),
+				setup(ModEntities.MYSTIC_BIRD=EntityType.Builder.<EntityMysticBird>create(EntityMysticBird::new, EntityClassification.AMBIENT).size(0.5F,0.7F).setTrackingRange(200).build("kathairis:mystic_bird"),"mystic_bird"),
+				setup(ModEntities.PHASM=EntityType.Builder.<EntityPhasm>create(EntityPhasm::new, EntityClassification.MONSTER).size(1F,2F).setTrackingRange(200).build("kathairis:phasm"),"phasm"),
+				setup(ModEntities.POISONOUS_SCORPION=EntityType.Builder.<EntityPoisonousScorpion>create(EntityPoisonousScorpion::new, EntityClassification.MONSTER).size(0.4F,0.7F).setTrackingRange(200).build("kathairis:poisonous_scorpion"),"poisonous_scorpion"),
+				setup(ModEntities.SKYRAY=EntityType.Builder.<EntitySkyray>create(EntitySkyray::new, EntityClassification.AMBIENT).size(10F,2.5F).setTrackingRange(200).build("kathairis:skyray"),"skyray"),
+				setup(ModEntities.STRANGE_WANDERER=EntityType.Builder.<EntityStrangeWanderer>create(EntityStrangeWanderer::new, EntityClassification.AMBIENT).size(1F,2F).setTrackingRange(200).build("kathairis:strange_wanderer"),"strange_wanderer"),
+				setup(ModEntities.MYSTIC_WAND_SHOOT=EntityType.Builder.<EntityMysticWandShoot>create(EntityMysticWandShoot::new, EntityClassification.MISC).size(1F,1F).setTrackingRange(200).build("kathairis:mystic_wand_shoot"),"mystic_wand_shoot")
 		);
 		ModEntities.registerPlacementTypes();
 		ModEntities.registerEntitySpawns();

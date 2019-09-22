@@ -1,31 +1,31 @@
 package io.github.krevik.kathairis.client.model;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.model.ModelBase;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelJellyFish extends ModelBase
+public class ModelJellyFish<T extends LivingEntity> extends EntityModel<T>
 {
   //fields
-    public ModelRenderer Leg1;
-    public ModelRenderer Part2;
-    public ModelRenderer Part1;
-    public ModelRenderer overhang1;
-    public ModelRenderer overhang2;
-    public ModelRenderer overhang3;
-    public ModelRenderer Leg2;
-    public ModelRenderer Leg3;
-    public ModelRenderer Leg4;
-    public ModelRenderer Leg5;
-    public ModelRenderer Leg6;
-    public ModelRenderer Leg7;
-    public ModelRenderer Leg8;
+    public RendererModel Leg1;
+    public RendererModel Part2;
+    public RendererModel Part1;
+    public RendererModel overhang1;
+    public RendererModel overhang2;
+    public RendererModel overhang3;
+    public RendererModel Leg2;
+    public RendererModel Leg3;
+    public RendererModel Leg4;
+    public RendererModel Leg5;
+    public RendererModel Leg6;
+    public RendererModel Leg7;
+    public RendererModel Leg8;
     
     protected int animIndex=0;
     protected int mode=0;
@@ -38,51 +38,51 @@ public class ModelJellyFish extends ModelBase
     	    public ModelJellyFish() {
     	        this.textureWidth = 128;
     	        this.textureHeight = 128;
-    	        this.overhang2 = new ModelRenderer(this, 112, -8);
+    	        this.overhang2 = new RendererModel(this, 112, -8);
     	        this.overhang2.setRotationPoint(2.2F, 2.4F, -1.3F);
     	        this.overhang2.addBox(0.0F, 0.0F, 0.0F, 0, 31, 8, 0.0F);
     	        this.setRotation(overhang2, 0.0F, -1.0927506446736497F, 0.0F);
-    	        this.Leg4 = new ModelRenderer(this, 0, 20);
+    	        this.Leg4 = new RendererModel(this, 0, 20);
     	        this.Leg4.setRotationPoint(-4.0F, 2.8F, 0.0F);
     	        this.Leg4.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.Leg8 = new ModelRenderer(this, 0, 20);
+    	        this.Leg8 = new RendererModel(this, 0, 20);
     	        this.Leg8.setRotationPoint(-3.1F, 2.7F, -3.0F);
     	        this.Leg8.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.Part1 = new ModelRenderer(this, 0, 2);
+    	        this.Part1 = new RendererModel(this, 0, 2);
     	        this.Part1.setRotationPoint(-5.0F, 1.0F, -4.9F);
     	        this.Part1.addBox(0.0F, 0.0F, 0.0F, 10, 2, 10, 0.0F);
-    	        this.Leg2 = new ModelRenderer(this, 0, 20);
+    	        this.Leg2 = new RendererModel(this, 0, 20);
     	        this.Leg2.setRotationPoint(-0.2F, 2.8F, -3.9F);
     	        this.Leg2.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.Part2 = new ModelRenderer(this, 3, 1);
+    	        this.Part2 = new RendererModel(this, 3, 1);
     	        this.Part2.setRotationPoint(-4.0F, -1.0F, -4.0F);
     	        this.Part2.addBox(0.0F, 0.0F, 0.0F, 8, 2, 8, 0.0F);
-    	        this.Leg6 = new ModelRenderer(this, 0, 20);
+    	        this.Leg6 = new RendererModel(this, 0, 20);
     	        this.Leg6.setRotationPoint(-3.4F, 2.7F, 2.9F);
     	        this.Leg6.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.Leg5 = new ModelRenderer(this, 0, 20);
+    	        this.Leg5 = new RendererModel(this, 0, 20);
     	        this.Leg5.setRotationPoint(2.0F, 2.8F, 2.5F);
     	        this.Leg5.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.Leg1 = new ModelRenderer(this, 0, 20);
+    	        this.Leg1 = new RendererModel(this, 0, 20);
     	        this.Leg1.setRotationPoint(-0.7F, 2.7F, 3.3F);
     	        this.Leg1.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.overhang3 = new ModelRenderer(this, 112, -8);
+    	        this.overhang3 = new RendererModel(this, 112, -8);
     	        this.overhang3.setRotationPoint(-2.3F, 2.5F, -1.3F);
     	        this.overhang3.addBox(0.0F, 0.0F, 0.0F, 0, 31, 8, 0.0F);
     	        this.setRotation(overhang3, 0.0F, 1.0471975511965976F, 0.0F);
-    	        this.Leg7 = new ModelRenderer(this, 0, 20);
+    	        this.Leg7 = new RendererModel(this, 0, 20);
     	        this.Leg7.setRotationPoint(2.0F, 2.7F, -2.4F);
     	        this.Leg7.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.Leg3 = new ModelRenderer(this, 0, 20);
+    	        this.Leg3 = new RendererModel(this, 0, 20);
     	        this.Leg3.setRotationPoint(3.0F, 2.8F, 0.0F);
     	        this.Leg3.addBox(0.0F, 0.0F, 0.0F, 1, 8, 1, 0.0F);
-    	        this.overhang1 = new ModelRenderer(this, 112, -8);
+    	        this.overhang1 = new RendererModel(this, 112, -8);
     	        this.overhang1.setRotationPoint(-0.1F, 2.4F, -2.4F);
     	        this.overhang1.addBox(0.0F, 0.0F, 0.0F, 0, 31, 8, 0.0F);
     	    }
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translatef(this.overhang2.offsetX, this.overhang2.offsetY, this.overhang2.offsetZ);
 		GlStateManager.translatef(this.overhang2.rotationPointX * f5, this.overhang2.rotationPointY * f5, this.overhang2.rotationPointZ * f5);
@@ -175,7 +175,7 @@ public class ModelJellyFish extends ModelBase
 		GlStateManager.popMatrix();
 	}
   
-  private void setRotation(ModelRenderer model, float x, float y, float z)
+  private void setRotation(RendererModel model, float x, float y, float z)
   {
     model.rotateAngleX = x;
     model.rotateAngleY = y;
@@ -183,9 +183,9 @@ public class ModelJellyFish extends ModelBase
   }
 
   @Override
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+  public void setRotationAngles(T entity, float f, float f1, float f2, float f3, float f4, float f5)
   {
-    super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    super.setRotationAngles(entity, f, f1, f2, f3, f4, f5);
     float d0 = (float) (Math.PI * -2.0D / 8 + (Math.PI / 2D));
     
     Leg2.rotateAngleX=-degToRad(animationTimer[0][animIndex/10]);

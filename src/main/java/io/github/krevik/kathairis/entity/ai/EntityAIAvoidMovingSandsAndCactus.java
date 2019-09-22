@@ -1,8 +1,8 @@
 package io.github.krevik.kathairis.entity.ai;
 
 import io.github.krevik.kathairis.init.ModBlocks;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -10,23 +10,24 @@ import net.minecraft.world.gen.Heightmap;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.Random;
 
-public class EntityAIAvoidMovingSandsAndCactus extends EntityAIBase
+public class EntityAIAvoidMovingSandsAndCactus extends Goal
 {
-    private final EntityCreature creature;
+    private final CreatureEntity creature;
     private double shelterX;
     private double shelterY;
     private double shelterZ;
     private final double movementSpeed;
     private final World world;
 
-    public EntityAIAvoidMovingSandsAndCactus(EntityCreature theCreatureIn, double movementSpeedIn)
+    public EntityAIAvoidMovingSandsAndCactus(CreatureEntity theCreatureIn, double movementSpeedIn)
     {
         this.creature = theCreatureIn;
         this.movementSpeed = movementSpeedIn;
         this.world = theCreatureIn.world;
-        this.setMutexBits(1);
+        this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
     }
 
     @Override

@@ -1,11 +1,11 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.model.ModelBase;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,79 +15,79 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelGecko extends ModelBase {
-    public ModelRenderer head_1;
-    public ModelRenderer body_1;
-    public ModelRenderer legmain_1;
-    public ModelRenderer legmain_2;
-    public ModelRenderer legmain_3;
-    public ModelRenderer legmain_4;
-    public ModelRenderer tail_1;
-    public ModelRenderer tail_2;
-    public ModelRenderer tail_3;
-    public ModelRenderer jawtop;
-    public ModelRenderer jawbottom;
-    public ModelRenderer legtwo_1;
-    public ModelRenderer legtwo_2;
-    public ModelRenderer legtwo_3;
-    public ModelRenderer legtwo_4;
+public class ModelGecko<T extends LivingEntity> extends EntityModel<T> {
+    public RendererModel head_1;
+    public RendererModel body_1;
+    public RendererModel legmain_1;
+    public RendererModel legmain_2;
+    public RendererModel legmain_3;
+    public RendererModel legmain_4;
+    public RendererModel tail_1;
+    public RendererModel tail_2;
+    public RendererModel tail_3;
+    public RendererModel jawtop;
+    public RendererModel jawbottom;
+    public RendererModel legtwo_1;
+    public RendererModel legtwo_2;
+    public RendererModel legtwo_3;
+    public RendererModel legtwo_4;
 
     public ModelGecko() {
         this.textureWidth = 64;
         this.textureHeight = 32;
-        this.jawtop = new ModelRenderer(this, 17, 0);
+        this.jawtop = new RendererModel(this, 17, 0);
         this.jawtop.setRotationPoint(-1.0F, 20.68F, -9.7F);
         this.jawtop.addBox(0.0F, 0.0F, 0.0F, 3, 1, 3, 0.0F);
-        this.legtwo_2 = new ModelRenderer(this, 0, 4);
+        this.legtwo_2 = new RendererModel(this, 0, 4);
         this.legtwo_2.setRotationPoint(-0.1F, 1.4F, 0.5F);
         this.legtwo_2.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legtwo_2, -0.9105382707654417F, 0.045553093477052F, -0.045553093477052F);
-        this.tail_1 = new ModelRenderer(this, 0, 23);
+        this.tail_1 = new RendererModel(this, 0, 23);
         this.tail_1.setRotationPoint(-1.15F, 20.6F, -1.2F);
         this.tail_1.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
         this.setRotateAngle(tail_1, 0.27314402793711257F, 0.0F, 0.0F);
-        this.body_1 = new ModelRenderer(this, 26, 16);
+        this.body_1 = new RendererModel(this, 26, 16);
         this.body_1.setRotationPoint(-1.5F, 20.5F, -5.8F);
         this.body_1.addBox(0.0F, 0.0F, 0.0F, 5, 4, 9, 0.0F);
-        this.tail_2 = new ModelRenderer(this, 0, 15);
+        this.tail_2 = new RendererModel(this, 0, 15);
         this.tail_2.setRotationPoint(-0.8F, 20.4F, 0.5F);
         this.tail_2.addBox(0.0F, 0.0F, 0.0F, 3, 3, 4, 0.0F);
         this.setRotateAngle(tail_2, 0.6373942428283291F, 0.0F, 0.0F);
-        this.legtwo_1 = new ModelRenderer(this, 0, 4);
+        this.legtwo_1 = new RendererModel(this, 0, 4);
         this.legtwo_1.setRotationPoint(-0.1F, 1.4F, 0.5F);
         this.legtwo_1.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legtwo_1, -0.9105382707654417F, 0.045553093477052F, -0.045553093477052F);
-        this.legtwo_3 = new ModelRenderer(this, 0, 4);
+        this.legtwo_3 = new RendererModel(this, 0, 4);
         this.legtwo_3.setRotationPoint(-0.1F, 1.4F, 0.5F);
         this.legtwo_3.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legtwo_3, -1.1838568316277536F, 0.045553093477052F, -0.045553093477052F);
-        this.head_1 = new ModelRenderer(this, 42, 0);
+        this.head_1 = new RendererModel(this, 42, 0);
         this.head_1.setRotationPoint(-1.25F, 19.95F, -8.4F);
         this.head_1.addBox(0.0F, 0.0F, 0.0F, 4, 4, 5, 0.0F);
-        this.legmain_3 = new ModelRenderer(this, 0, 0);
+        this.legmain_3 = new RendererModel(this, 0, 0);
         this.legmain_3.setRotationPoint(0.9F, 22.85F, -2.0F);
         this.legmain_3.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legmain_3, 0.8651597102135892F, 0.22759093446006054F, -0.7740535232594852F);
-        this.legtwo_4 = new ModelRenderer(this, 0, 4);
+        this.legtwo_4 = new RendererModel(this, 0, 4);
         this.legtwo_4.setRotationPoint(-0.1F, 1.4F, 0.5F);
         this.legtwo_4.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legtwo_4, -1.1838568316277536F, 0.045553093477052F, -0.045553093477052F);
-        this.tail_3 = new ModelRenderer(this, 11, 11);
+        this.tail_3 = new RendererModel(this, 11, 11);
         this.tail_3.setRotationPoint(-0.6F, 20.0F, 2.1F);
         this.tail_3.addBox(0.0F, 0.0F, 0.0F, 2, 2, 4, 0.0F);
         this.setRotateAngle(tail_3, 1.2292353921796064F, 0.004537856055185257F, 0.0F);
-        this.jawbottom = new ModelRenderer(this, 17, 5);
+        this.jawbottom = new RendererModel(this, 17, 5);
         this.jawbottom.setRotationPoint(-1.0F, 21.47F, -9.7F);
         this.jawbottom.addBox(0.0F, 0.0F, 0.0F, 3, 1, 3, 0.0F);
-        this.legmain_4 = new ModelRenderer(this, 0, 0);
+        this.legmain_4 = new RendererModel(this, 0, 0);
         this.legmain_4.setRotationPoint(-1.7F, 22.1F, -2.1F);
         this.legmain_4.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legmain_4, 0.7285004297824331F, -0.18203784098300857F, 0.7740535232594852F);
-        this.legmain_2 = new ModelRenderer(this, 0, 0);
+        this.legmain_2 = new RendererModel(this, 0, 0);
         this.legmain_2.setRotationPoint(0.7F, 22.85F, -5.6F);
         this.legmain_2.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legmain_2, 0.8651597102135892F, 0.22759093446006054F, -0.7740535232594852F);
-        this.legmain_1 = new ModelRenderer(this, 0, 0);
+        this.legmain_1 = new RendererModel(this, 0, 0);
         this.legmain_1.setRotationPoint(-1.5F, 22.1F, -5.8F);
         this.legmain_1.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
         this.setRotateAngle(legmain_1, 0.7285004297824331F, -0.18203784098300857F, 0.7740535232594852F);
@@ -98,7 +98,7 @@ public class ModelGecko extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
         GlStateManager.pushMatrix();
         GlStateManager.translatef(this.jawtop.offsetX, this.jawtop.offsetY, this.jawtop.offsetZ);
         GlStateManager.translatef(this.jawtop.rotationPointX * f5, this.jawtop.rotationPointY * f5, this.jawtop.rotationPointZ * f5);
@@ -162,7 +162,7 @@ public class ModelGecko extends ModelBase {
     }
 
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(RendererModel modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
@@ -170,9 +170,9 @@ public class ModelGecko extends ModelBase {
 
     FunctionHelper helper = Kathairis.getHelper();
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5, Entity entity)
+    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5)
     {
-        super.setRotationAngles(limbSwing, limbSwingAmount, f2, f3, f4, f5, entity);
+        super.setRotationAngles(entity, limbSwing, limbSwingAmount, f2, f3, f4, f5);
         this.legmain_1.rotateAngleX = (helper.degToRad(41.74F))+ MathHelper.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         this.legmain_2.rotateAngleX = (helper.degToRad(49.57F))+ MathHelper.sin(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
         this.legmain_3.rotateAngleX = (helper.degToRad(49.57F))+ MathHelper.sin(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;

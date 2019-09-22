@@ -1,16 +1,16 @@
 package io.github.krevik.kathairis.item;
 
 import io.github.krevik.kathairis.init.ModItemGroups;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.ItemArmor;
 
 /**
  * @author Cadiboo
  */
-public class ItemKathairisArmor extends ItemArmor {
+public class ItemKathairisArmor extends ArmorItem {
 
-	public ItemKathairisArmor(IArmorMaterial material, EntityEquipmentSlot slot) {
+	public ItemKathairisArmor(IArmorMaterial material, EquipmentSlotType slot) {
 		super(material, slot, new Properties().group(ModItemGroups.ARMOR));
 	}
 

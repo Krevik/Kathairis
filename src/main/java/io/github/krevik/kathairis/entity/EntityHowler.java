@@ -7,14 +7,14 @@ import io.github.krevik.kathairis.entity.ai.EntityAITargetSpecified;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.passive.horse.LlamaEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityHowler extends EntityMob
+public class EntityHowler extends MonsterEntity
 {
     private static final DataParameter<Float> animTimer = EntityDataManager.createKey(EntityHowler.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> animTimerTail = EntityDataManager.createKey(EntityHowler.class, DataSerializers.FLOAT);
@@ -37,28 +37,32 @@ public class EntityHowler extends EntityMob
     public EntityHowler(World worldIn)
     {
         super(ModEntities.HOWLER,worldIn);
-        this.setSize(0.85F, 1F);
     }
 
+    public EntityHowler(EntityType<EntityHowler> type, World world) {
+        super(type, world);
+    }
+
+
     @Override
-    protected void initEntityAI()
-    {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
-        this.tasks.addTask(4, new EntityAIHowlerAttackStun(this, 1.0D, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(2, new EntityAITargetSpecified<>(this, EntityAnimal.class, false, new Predicate<Entity>()
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
+        this.goalSelector.addGoal(4, new EntityAIHowlerAttackStun(this, 1.0D, true));
+        this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
+        this.goalSelector.addGoal(2, new EntityAITargetSpecified<AnimalEntity>(this, AnimalEntity.class, false, new Predicate<LivingEntity>()
         {
-            public boolean apply(@Nullable Entity e)
+
+            public boolean apply(@Nullable LivingEntity e)
             {
-                return e instanceof EntitySheep || e instanceof EntityRabbit ||e instanceof EntityPig ||
+                return e instanceof SheepEntity || e instanceof RabbitEntity ||e instanceof PigEntity ||
                         e instanceof EntityBison||e instanceof EntityBigTurtle||e instanceof EntityGecko||
-                        e instanceof EntityStrangeWanderer|| e instanceof EntityChicken ||
-                        e instanceof EntityCamel||e instanceof EntityCloudySlime|| e instanceof EntityLlama ||
-                        e instanceof EntityVillager || e instanceof EntityCow;
+                        e instanceof EntityStrangeWanderer|| e instanceof ChickenEntity ||
+                        e instanceof EntityCamel||e instanceof EntityCloudySlime|| e instanceof LlamaEntity ||
+                        e instanceof VillagerEntity || e instanceof CowEntity;
             }
         }));
         this.experienceValue=15;
@@ -81,6 +85,11 @@ public class EntityHowler extends EntityMob
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
 
+    }
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_HOWLER;
     }
 
     @Override
@@ -192,23 +201,16 @@ public class EntityHowler extends EntityMob
         return CreatureAttribute.UNDEAD;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_HOWLER;
-    }
-
 
     @Override
-    public void writeAdditional(NBTTagCompound compound)
+    public void writeAdditional(CompoundNBT compound)
     {
         super.writeAdditional(compound);
         compound.putFloat("animTimer",getAnimTimer());
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound)
+    public void readAdditional(CompoundNBT compound)
     {
         super.readAdditional(compound);
         setAnimTimer(compound.getFloat("animTimer"));

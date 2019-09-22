@@ -1,18 +1,20 @@
 package io.github.krevik.kathairis.entity.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityAIHowlerAttackStun extends EntityAIBase
+import java.util.EnumSet;
+
+public class EntityAIHowlerAttackStun extends Goal
 {
     World world;
-    protected EntityCreature attacker;
+    protected CreatureEntity attacker;
     /** An amount of decrementing ticks that allows the entity to attack once the tick reaches 0. */
     protected int attackTick;
     /** The speed with which the mob will approach the target */
@@ -29,13 +31,13 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
     private int failedPathFindingPenalty = 0;
     private boolean canPenalize = false;
 
-    public EntityAIHowlerAttackStun(EntityCreature creature, double speedIn, boolean useLongMemory)
+    public EntityAIHowlerAttackStun(CreatureEntity creature, double speedIn, boolean useLongMemory)
     {
         this.attacker = creature;
         this.world = creature.world;
         this.speedTowardsTarget = speedIn;
         this.longMemory = useLongMemory;
-        this.setMutexBits(3);
+        this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
     }
 
     /**
@@ -43,7 +45,7 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
 
         if (entitylivingbase == null)
         {
@@ -59,7 +61,7 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
             {
                 if (--this.delayCounter <= 0)
                 {
-                    this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
+                    this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase,0);
                     this.delayCounter = 4 + this.attacker.getRNG().nextInt(7);
                     return this.path != null;
                 }
@@ -68,7 +70,7 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
                     return true;
                 }
             }
-            this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
+            this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase,0);
 
             if (this.path != null)
             {
@@ -86,7 +88,7 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
      */
     public boolean shouldContinueExecuting()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
 
         if (entitylivingbase == null)
         {
@@ -106,7 +108,7 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
         }
         else
         {
-            return !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer)entitylivingbase).isSpectator() && !((EntityPlayer)entitylivingbase).isCreative();
+            return !(entitylivingbase instanceof PlayerEntity) || !((PlayerEntity)entitylivingbase).isSpectator() && !((PlayerEntity)entitylivingbase).isCreative();
         }
     }
 
@@ -124,9 +126,9 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
      */
     public void resetTask()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
 
-        if (entitylivingbase instanceof EntityPlayer && (((EntityPlayer)entitylivingbase).isSpectator() || ((EntityPlayer)entitylivingbase).isCreative()))
+        if (entitylivingbase instanceof PlayerEntity && (((PlayerEntity)entitylivingbase).isSpectator() || ((PlayerEntity)entitylivingbase).isCreative()))
         {
             this.attacker.setAttackTarget(null);
         }
@@ -139,8 +141,8 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
      */
     public void tick()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
-        this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
+        this.attacker.getLookController().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
         double d0 = this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getBoundingBox().minY, entitylivingbase.posZ);
         --this.delayCounter;
 
@@ -187,14 +189,14 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
         this.checkAndPerformAttack(entitylivingbase, d0);
     }
 
-    protected void checkAndPerformAttack(EntityLivingBase p_190102_1_, double p_190102_2_)
+    protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_)
     {
         double d0 = this.getAttackReachSqr(p_190102_1_);
 
         if (p_190102_2_ <= d0 && this.attackTick <= 0)
         {
             this.attackTick = 20;
-            this.attacker.swingArm(EnumHand.MAIN_HAND);
+            this.attacker.swingArm(Hand.MAIN_HAND);
             this.attacker.attackEntityAsMob(p_190102_1_);
             if(attacker.getRNG().nextInt(4)==0) {
                 //TODO
@@ -203,8 +205,8 @@ public class EntityAIHowlerAttackStun extends EntityAIBase
         }
     }
 
-    protected double getAttackReachSqr(EntityLivingBase attackTarget)
+    protected double getAttackReachSqr(LivingEntity attackTarget)
     {
-        return (double)(this.attacker.width * 2.0F * this.attacker.width * 2.0F + attackTarget.width);
+        return (double)(this.attacker.getWidth() * 2.0F * this.attacker.getWidth() * 2.0F + attackTarget.getWidth());
     }
 }

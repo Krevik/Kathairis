@@ -3,38 +3,34 @@ package io.github.krevik.kathairis.entity;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityTippedArrow;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemBow;
+import net.minecraft.entity.monster.SkeletonEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import javax.vecmath.Vector3d;
+import java.util.EnumSet;
 
-public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IMob {
+public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IMob {
 
     private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.createKey(EntityGaznowel.class, DataSerializers.BOOLEAN);
     private boolean hasMovementVector=false;
@@ -42,25 +38,34 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
     public EntityGaznowel(World worldIn)
     {
         super(ModEntities.GAZNOWEL,worldIn);
-        this.setSize(1F, 2.0F);
         this.experienceValue = 35;
-        this.moveHelper = new EntityGaznowel.GaznowelMoveHelper(this);
+        this.moveController = new GaznowelMoveHelper(this);
 
     }
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_GAZNOWEL;
+    }
+
+    public EntityGaznowel(EntityType<EntityGaznowel> type, World world) {
+        super(type, world);
+    }
+
 
     public boolean getIsSwingingArms(){
         return getDataManager().get(SWINGING_ARMS).booleanValue();
     }
 
     @Override
-    protected void initEntityAI()
-    {
-        this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
-        this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 25.0F));
-        this.targetTasks.addTask(2, new EntityGaznowel.AIInteractWithPlayer(this));
-        this.tasks.addTask(2, new EntityGaznowel.AIWander(this));
-
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class,true));
+        this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 25.0F));
+        this.goalSelector.addGoal(2, new AIInteractWithPlayer(this));
+        this.goalSelector.addGoal(2, new AIWander(this));
     }
+
 
     @Override
     protected void registerAttributes()
@@ -73,21 +78,21 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
     }
 
     @Override
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor)
+    public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor)
     {
-        EntityArrow entityarrow = this.getArrow(distanceFactor);
+        ArrowEntity entityarrow = this.getArrow(distanceFactor);
         double d0 = target.posX - this.posX;
-        double d1 = target.getBoundingBox().minY + (double)(target.height / 3.0F) - entityarrow.posY;
+        double d1 = target.getBoundingBox().minY + (double)(target.getHeight() / 3.0F) - entityarrow.posY;
         double d2 = target.posZ - this.posZ;
         double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
         entityarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
         this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.world.spawnEntity(entityarrow);
+        this.world.addEntity(entityarrow);
     }
 
-    protected EntityArrow getArrow(float p_190726_1_)
+    protected ArrowEntity getArrow(float p_190726_1_)
     {
-        EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.world, this);
+        ArrowEntity entitytippedarrow = new ArrowEntity(this.world, this);
         entitytippedarrow.setEnchantmentEffectsFromEntity(this, p_190726_1_);
         return entitytippedarrow;
     }
@@ -98,7 +103,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
     {
         super.tick();
 
-        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
+        if (!this.world.isRemote && this.world.getDifficulty() == Difficulty.PEACEFUL)
         {
             this.onKillCommand();
         }
@@ -107,9 +112,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
             hasMovementVector=false;
         }
         if(hasMovementVector){
-            motionX=(movementVector.x-posX)*0.01f;
-            motionY=(movementVector.y-posY)*0.01f;
-            motionZ=(movementVector.z-posZ)*0.01f;
+            setMotion(new Vec3d((movementVector.x-posX)*0.01f,(movementVector.y-posY)*0.01f,(movementVector.z-posZ)*0.01f));
         }
         if(getAttackTarget()!=null){
             getDataManager().set(SWINGING_ARMS,Boolean.valueOf(true));
@@ -119,7 +122,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         timer++;
         if(timer>=10){
             timer=0;
-            EntityPlayer ep = world.getNearestAttackablePlayer(this,15,15);
+            PlayerEntity ep = world.getClosestPlayer(this,15);
             if(ep!=null){
                 setAttackTarget(ep);
             }else{
@@ -168,7 +171,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         {
             return false;
         }
-        else if (source.getTrueSource() instanceof EntityPlayer)
+        else if (source.getTrueSource() instanceof PlayerEntity)
         {
             super.attackEntityFrom(source, amount);
             return true;
@@ -182,9 +185,9 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
     @Override
     public void onDeath(DamageSource cause){
         if(!world.isRemote) {
-            EntitySkeleton skeleton = new EntitySkeleton(world);
+            SkeletonEntity skeleton = new SkeletonEntity(EntityType.SKELETON,world);
             skeleton.setPositionAndUpdate(posX,posY,posZ);
-            world.spawnEntity(skeleton);
+            world.addEntity(skeleton);
         }
         super.onDeath(cause);
     }
@@ -193,7 +196,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
     {
         super.setEquipmentBasedOnDifficulty(difficulty);
-        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.BOW));
     }
 
     /*@Nullable
@@ -217,12 +220,6 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         return SoundCategory.HOSTILE;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_GAZNOWEL;
-    }
 
     @Override
     protected float getSoundVolume()
@@ -237,12 +234,11 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
     }
 
 
-    @Override
     public void setSwingingArms(boolean swingingArms) {
         this.getDataManager().set(SWINGING_ARMS, Boolean.valueOf(swingingArms));
     }
 
-    static class GaznowelMoveHelper extends EntityMoveHelper
+    static class GaznowelMoveHelper extends FlyingMovementController
     {
         private final EntityGaznowel parentEntity;
         private int courseChangeCooldown;
@@ -256,7 +252,7 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         @Override
         public void tick()
         {
-            if (this.action == EntityMoveHelper.Action.MOVE_TO)
+            if (this.action == Action.MOVE_TO)
             {
                 double d0 = this.posX - this.parentEntity.posX;
                 double d1 = this.posY - this.parentEntity.posY;
@@ -270,13 +266,11 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
 
                     if (this.isNotColliding(this.posX, this.posY, this.posZ, d3))
                     {
-                        this.parentEntity.motionX += d0 / d3 * 0.1D;
-                        this.parentEntity.motionY += d1 / d3 * 0.1D;
-                        this.parentEntity.motionZ += d2 / d3 * 0.1D;
+                        parentEntity.setMotion(new Vec3d(d0 / d3 * 0.1D,d1 / d3 * 0.1D,d2 / d3 * 0.1D));
                     }
                     else
                     {
-                        this.action = EntityMoveHelper.Action.WAIT;
+                        this.action = Action.WAIT;
                     }
                 }
             }
@@ -303,14 +297,14 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         }
     }
 
-    static class AIInteractWithPlayer extends EntityAIBase
+    static class AIInteractWithPlayer extends Goal
     {
         private final EntityGaznowel gaznowel;
 
         public AIInteractWithPlayer(EntityGaznowel p_i45859_1_)
         {
             this.gaznowel = p_i45859_1_;
-            this.setMutexBits(3);
+            this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
         }
 
         @Override
@@ -332,16 +326,16 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         @Override
         public void tick() {
             if(gaznowel.getAttackTarget()!=null) {
-                gaznowel.getLookHelper().setLookPositionWithEntity(gaznowel.getAttackTarget(), 10.0F, 100F);
+                gaznowel.getLookController().setLookPositionWithEntity(gaznowel.getAttackTarget(), 10.0F, 100F);
                 gaznowel.faceEntity(gaznowel.getAttackTarget(), 1000, 1000);
-                gaznowel.getLookHelper().tick();
+                gaznowel.getLookController().tick();
                 if (gaznowel.getDistance(gaznowel.getAttackTarget()) > 8F || !gaznowel.hasMovementVector || gaznowel.getRNG().nextInt(100) == 0) {
                     BlockPos targetPos = findPositionNearPlayer(gaznowel);
                     gaznowel.movementVector = new Vector3d(targetPos.getX(), targetPos.getY(), targetPos.getZ());
                     gaznowel.hasMovementVector = true;
                 }
-                EntityLiving entity = gaznowel;
-                EntityLivingBase entitylivingbase = entity.getAttackTarget();
+                EntityGaznowel entity = gaznowel;
+                LivingEntity entitylivingbase = entity.getAttackTarget();
 
                 if (entitylivingbase != null) {
                     gaznowel.getDataManager().set(SWINGING_ARMS, true);
@@ -367,12 +361,12 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
 
                             if (i >= 15) {
                                 entity.resetActiveHand();
-                                ((IRangedAttackMob) entity).attackEntityWithRangedAttack(entitylivingbase, ItemBow.getArrowVelocity(i));
+                                ((IRangedAttackMob) entity).attackEntityWithRangedAttack(entitylivingbase, BowItem.getArrowVelocity(i));
                                 this.attackTime = this.attackCooldown;
                             }
                         }
                     } else if (--this.attackTime <= 0 && this.seeTime >= -60) {
-                        entity.setActiveHand(EnumHand.MAIN_HAND);
+                        entity.setActiveHand(Hand.MAIN_HAND);
                     }
                 }
             }
@@ -392,14 +386,14 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
         }
     }
 
-    static class AIWander extends EntityAIBase
+    static class AIWander extends Goal
     {
         private final EntityGaznowel gaznowel;
 
         public AIWander(EntityGaznowel p_i45859_1_)
         {
             this.gaznowel = p_i45859_1_;
-            this.setMutexBits(3);
+            this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
         }
 
         @Override
@@ -415,8 +409,8 @@ public class EntityGaznowel extends EntityFlying implements IRangedAttackMob, IM
                 BlockPos targetPos = findSomePosition(gaznowel);
                 gaznowel.movementVector=new Vector3d(targetPos.getX(),targetPos.getY(),targetPos.getZ());
                 gaznowel.hasMovementVector=true;
-                gaznowel.getLookHelper().setLookPosition((float)gaznowel.movementVector.x,(float)gaznowel.movementVector.y,(float)gaznowel.movementVector.z,40,100);
-                gaznowel.getLookHelper().tick();
+                gaznowel.getLookController().setLookPosition((float)gaznowel.movementVector.x,(float)gaznowel.movementVector.y,(float)gaznowel.movementVector.z,40,100);
+                gaznowel.getLookController().tick();
             }
         }
 

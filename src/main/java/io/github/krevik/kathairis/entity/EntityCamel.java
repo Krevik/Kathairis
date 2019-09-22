@@ -1,35 +1,37 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.entity.ai.EntityAIAvoidMovingSandsAndCactus;
-import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.block.SoundType;
-import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.AbstractHorse;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityCamel extends AbstractHorse
+public class EntityCamel extends AbstractHorseEntity
 {
 
     public EntityCamel(World worldIn)
     {
         super(ModEntities.CAMEL,worldIn);
-        this.setSize(1.6F, 1.5F);
-        this.spawnableBlock= ModBlocks.KATHAIRIS_SAND;
+        //this.spawnableBlock= ModBlocks.KATHAIRIS_SAND;
+    }
+
+    public EntityCamel(EntityType<EntityCamel> type, World world) {
+        super(type, world);
     }
 
     @Override
-    protected void initEntityAI()
-    {
-    	super.initEntityAI();
-        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(0, new EntityAIAvoidMovingSandsAndCactus(this,1.0D));
     }
 
     @Override
@@ -41,6 +43,11 @@ public class EntityCamel extends AbstractHorse
         {
             this.playSound(ModSounds.MOB_CAMEL_BREATH, p_190680_1_.getVolume() * 0.6F, p_190680_1_.getPitch());
         }
+    }
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_CAMEL;
     }
 
     @Override
@@ -85,19 +92,13 @@ public class EntityCamel extends AbstractHorse
     }
 
     @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_CAMEL;
-    }
-
-    @Override
-    public boolean canMateWith(EntityAnimal otherAnimal)
+    public boolean canMateWith(AnimalEntity otherAnimal)
     {
     	return false;
     }
 
     @Override
-    public EntityCamel createChild(EntityAgeable ageable)
+    public EntityCamel createChild(AgeableEntity ageable)
     {
         return new EntityCamel(this.world);
     }

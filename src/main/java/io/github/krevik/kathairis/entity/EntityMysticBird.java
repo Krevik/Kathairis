@@ -1,15 +1,13 @@
 package io.github.krevik.kathairis.entity;
 
-import io.github.krevik.kathairis.block.BlockKathairisPlant;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.*;
+import net.minecraft.entity.passive.AmbientEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -18,37 +16,43 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.Heightmap;
 
 import javax.annotation.Nullable;
 
-public class EntityMysticBird extends EntityAmbientCreature
+public class EntityMysticBird extends AmbientEntity
 {
     private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityMysticBird.class, DataSerializers.VARINT);
     private static final DataParameter<Byte> SITTING = EntityDataManager.createKey(EntityMysticBird.class, DataSerializers.BYTE);
     private BlockPos spawnPosition;
+    private static final EntityPredicate field_213813_c;
 
     public EntityMysticBird(World worldIn)
     {
         super(ModEntities.MYSTIC_BIRD,worldIn);
-        this.setSize(0.5F, 0.7F);
         this.setIsBirdSitting(true);
         this.experienceValue=5;
     }
 
+
+    public EntityMysticBird(EntityType<EntityMysticBird> type, World world) {
+        super(type, world);
+    }
+
+
     @Override
-    public boolean canSpawn(IWorld p_205020_1_, boolean p_205020_2_) {
+    public boolean canSpawn(IWorld p_205020_1_, SpawnReason p_205020_2_) {
         return super.canSpawn(p_205020_1_, p_205020_2_);
     }
 
     @Nullable
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance p_204210_1_, @Nullable IEntityLivingData p_204210_2_, @Nullable NBTTagCompound p_204210_3_) {
+    public ILivingEntityData onInitialSpawn(IWorld p_213386_1_, DifficultyInstance p_213386_2_, SpawnReason p_213386_3_, @Nullable ILivingEntityData p_213386_4_, @Nullable CompoundNBT p_213386_5_) {
         this.setVariant(this.rand.nextInt(4));
-        return super.onInitialSpawn(p_204210_1_, p_204210_2_, p_204210_3_);
+        return super.onInitialSpawn(p_213386_1_, p_213386_2_, p_213386_3_, p_213386_4_, p_213386_5_);
     }
 
     @Override
@@ -143,76 +147,60 @@ public class EntityMysticBird extends EntityAmbientCreature
     }
 
     @Override
-    public void tick()
-    {
+    public void tick() {
         super.tick();
+        if (this.getIsBirdSitting()) {
+            this.setMotion(Vec3d.ZERO);
+            this.posY = (double)MathHelper.floor(this.posY) + 1.0D;
+        } else {
+            this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
+        }
 
-        if (this.getIsBirdSitting())
-        {
-            this.motionX = 0.0D;
-            this.motionY = 0.0D;
-            this.motionZ = 0.0D;
-            this.posY=this.world.getHeight(Heightmap.Type.MOTION_BLOCKING,this.getPosition()).getY();
-            //this.posY = (double)MathHelper.floor(this.posY) + 1.0D - (double)this.height;
-        }
-        else
-        {
-            this.motionY *= 0.6000000238418579D;
-        }
     }
 
     @Override
-    protected void updateAITasks()
-    {
+    protected void updateAITasks() {
         super.updateAITasks();
-        BlockPos blockpos = new BlockPos(this);
-        BlockPos blockpos1 = blockpos.down();
-
-        if (this.getIsBirdSitting())
-        {
-            if (this.world.getBlockState(blockpos1).isNormalCube())
-            {
-
-                if (this.world.getNearestPlayerNotCreative(this, 4.0D) != null)
-                {
-                    this.setIsBirdSitting(false);
-                    this.world.playEvent(null, 1025, blockpos, 0);
+        BlockPos lvt_1_1_ = new BlockPos(this);
+        BlockPos lvt_2_1_ = lvt_1_1_.down();
+        if (this.getIsBirdSitting()) {
+            if (this.world.getBlockState(lvt_2_1_).isNormalCube(this.world, lvt_1_1_)) {
+                if (this.rand.nextInt(200) == 0) {
+                    this.rotationYawHead = (float)this.rand.nextInt(360);
                 }
-            }
-            else
-            {
+
+                if (this.world.getClosestPlayer(field_213813_c, this) != null) {
+                    this.setIsBirdSitting(false);
+                    this.world.playEvent((PlayerEntity)null, 1025, lvt_1_1_, 0);
+                }
+            } else {
                 this.setIsBirdSitting(false);
-                this.world.playEvent(null, 1025, blockpos, 0);
+                this.world.playEvent((PlayerEntity)null, 1025, lvt_1_1_, 0);
             }
-        }
-        else
-        {
-            if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1))
-            {
+        } else {
+            if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1)) {
                 this.spawnPosition = null;
             }
 
-            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.distanceSq((double)((int)this.posX), (double)((int)this.posY), (double)((int)this.posZ)) < 4.0D)
-            {
-                this.spawnPosition = new BlockPos((int)this.posX + this.rand.nextInt(7) - this.rand.nextInt(7), (int)this.posY + this.rand.nextInt(6) - 2, (int)this.posZ + this.rand.nextInt(7) - this.rand.nextInt(7));
+            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.withinDistance(this.getPositionVec(), 2.0D)) {
+                this.spawnPosition = new BlockPos(this.posX + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7), this.posY + (double)this.rand.nextInt(6) - 2.0D, this.posZ + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7));
             }
 
-            double d0 = (double)this.spawnPosition.getX() + 0.5D - this.posX;
-            double d1 = (double)this.spawnPosition.getY() + 0.1D - this.posY;
-            double d2 = (double)this.spawnPosition.getZ() + 0.5D - this.posZ;
-            this.motionX += (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
-            this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
-            this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
-            float f = (float)(MathHelper.atan2(this.motionZ, this.motionX) * (180D / Math.PI)) - 90.0F;
-            float f1 = MathHelper.wrapDegrees(f - this.rotationYaw);
+            double lvt_3_1_ = (double)this.spawnPosition.getX() + 0.5D - this.posX;
+            double lvt_5_1_ = (double)this.spawnPosition.getY() + 0.1D - this.posY;
+            double lvt_7_1_ = (double)this.spawnPosition.getZ() + 0.5D - this.posZ;
+            Vec3d lvt_9_1_ = this.getMotion();
+            Vec3d lvt_10_1_ = lvt_9_1_.add((Math.signum(lvt_3_1_) * 0.5D - lvt_9_1_.x) * 0.10000000149011612D, (Math.signum(lvt_5_1_) * 0.699999988079071D - lvt_9_1_.y) * 0.10000000149011612D, (Math.signum(lvt_7_1_) * 0.5D - lvt_9_1_.z) * 0.10000000149011612D);
+            this.setMotion(lvt_10_1_);
+            float lvt_11_1_ = (float)(MathHelper.atan2(lvt_10_1_.z, lvt_10_1_.x) * 57.2957763671875D) - 90.0F;
+            float lvt_12_1_ = MathHelper.wrapDegrees(lvt_11_1_ - this.rotationYaw);
             this.moveForward = 0.5F;
-            this.rotationYaw += f1;
-
-            if (this.rand.nextInt(100) == 0 && this.world.getBlockState(blockpos1).isNormalCube()&&!(this.world.getBlockState(blockpos1).getBlock() instanceof BlockKathairisPlant))
-            {
+            this.rotationYaw += lvt_12_1_;
+            if (this.rand.nextInt(100) == 0 && this.world.getBlockState(lvt_2_1_).isNormalCube(this.world, lvt_2_1_)) {
                 this.setIsBirdSitting(true);
             }
         }
+
     }
 
     @Override
@@ -227,7 +215,12 @@ public class EntityMysticBird extends EntityAmbientCreature
     }
 
     @Override
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_MYSTICBIRD;
+    }
+
+    @Override
+    protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos)
     {
     }
 
@@ -255,8 +248,12 @@ public class EntityMysticBird extends EntityAmbientCreature
         }
     }
 
+    static {
+        field_213813_c = (new EntityPredicate()).setDistance(4.0D).allowFriendlyFire();
+    }
+
     @Override
-    public void writeAdditional(NBTTagCompound compound)
+    public void writeAdditional(CompoundNBT compound)
     {
         super.writeAdditional(compound);
         compound.putByte("BatFlags", this.getDataManager().get(SITTING).byteValue());
@@ -265,7 +262,7 @@ public class EntityMysticBird extends EntityAmbientCreature
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound)
+    public void readAdditional(CompoundNBT compound)
     {
         super.readAdditional(compound);
         this.getDataManager().set(SITTING, Byte.valueOf(compound.getByte("BatFlags")));
@@ -273,16 +270,4 @@ public class EntityMysticBird extends EntityAmbientCreature
 
     }
 
-    @Override
-    public float getEyeHeight()
-    {
-        return this.height / 2.0F;
-    }
-
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_MYSTICBIRD;
-    }
 }

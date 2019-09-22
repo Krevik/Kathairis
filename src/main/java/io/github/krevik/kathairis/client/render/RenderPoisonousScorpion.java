@@ -1,24 +1,25 @@
 package io.github.krevik.kathairis.client.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.client.model.ModelPoisonousScorpion;
 import io.github.krevik.kathairis.entity.EntityPoisonousScorpion;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderPoisonousScorpion extends RenderLiving<EntityPoisonousScorpion>
+public class RenderPoisonousScorpion extends MobRenderer<EntityPoisonousScorpion, ModelPoisonousScorpion<EntityPoisonousScorpion>>
 {
 	
     public static final Factory FACTORY = new Factory();
 
-    public RenderPoisonousScorpion(RenderManager renderManagerIn)
+    public RenderPoisonousScorpion(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelPoisonousScorpion(), 0.4F);
     }
@@ -33,7 +34,7 @@ public class RenderPoisonousScorpion extends RenderLiving<EntityPoisonousScorpio
     public static class Factory implements IRenderFactory<EntityPoisonousScorpion> {
 
         @Override
-        public Render<? super EntityPoisonousScorpion> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntityPoisonousScorpion> createRenderFor(EntityRendererManager manager) {
             return new RenderPoisonousScorpion(manager);
         }
 

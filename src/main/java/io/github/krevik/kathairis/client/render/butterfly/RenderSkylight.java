@@ -1,22 +1,23 @@
 package io.github.krevik.kathairis.client.render.butterfly;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.client.model.butterfly.ModelSkylight;
 import io.github.krevik.kathairis.entity.butterfly.EntitySkylight;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderSkylight extends RenderLiving<EntitySkylight>
+public class RenderSkylight extends MobRenderer<EntitySkylight, ModelSkylight<EntitySkylight>>
 {
     public static final Factory FACTORY = new Factory();
-    public RenderSkylight(RenderManager renderManagerIn)
+    public RenderSkylight(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelSkylight(), 0F);
     }
@@ -31,7 +32,7 @@ public class RenderSkylight extends RenderLiving<EntitySkylight>
     public static class Factory implements IRenderFactory<EntitySkylight> {
 
         @Override
-        public Render<? super EntitySkylight> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntitySkylight> createRenderFor(EntityRendererManager manager) {
             return new RenderSkylight(manager);
         }
 
@@ -42,7 +43,6 @@ public class RenderSkylight extends RenderLiving<EntitySkylight>
     {
     	GlStateManager.scaled(0.3, 0.3, 0.3);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-        
     }
     
 }

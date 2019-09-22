@@ -3,21 +3,22 @@ package io.github.krevik.kathairis.client.render;
 import io.github.krevik.kathairis.client.model.ModelHowler;
 import io.github.krevik.kathairis.entity.EntityHowler;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderHowler extends RenderLiving<EntityHowler>
+public class RenderHowler extends MobRenderer<EntityHowler, ModelHowler<EntityHowler>>
 {
 	
     public static final Factory FACTORY = new Factory();
 
-    public RenderHowler(RenderManager renderManagerIn)
+    public RenderHowler(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelHowler(), 0.5F);
     }
@@ -32,7 +33,7 @@ public class RenderHowler extends RenderLiving<EntityHowler>
     public static class Factory implements IRenderFactory<EntityHowler> {
 
         @Override
-        public Render<? super EntityHowler> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntityHowler> createRenderFor(EntityRendererManager manager) {
             return new RenderHowler(manager);
         }
 

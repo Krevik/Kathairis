@@ -21,9 +21,6 @@ public class TextureLocationsRef {
     public static final ResourceLocation StrangeWandererLoc = new ResourceLocation(MOD_ID,"textures/entity/strangewanderer.png");
     public static final ResourceLocation Strange_Wanderer_Christmas_Loc = new ResourceLocation(MOD_ID,"textures/entity/strange_wanderer_christmas.png");
     public static final ResourceLocation SkylightLoc = new ResourceLocation(MOD_ID,"textures/entity/skylight.png");
-    public static final ResourceLocation SkeletonWarriorLoc = new ResourceLocation(MOD_ID,"textures/entity/skeletonwarrior.png");
-    public static final ResourceLocation SteveGhostLoc = new ResourceLocation(MOD_ID,"textures/entity/steveghost.png");
-    public static final ResourceLocation DeathLoc = new ResourceLocation(MOD_ID,"textures/entity/death.png");
     public static final ResourceLocation CamelLoc = new ResourceLocation(MOD_ID,"textures/entity/camel.png");
     public static final ResourceLocation FungiteLoc = new ResourceLocation(MOD_ID,"textures/entity/fungite.png");
     public static final ResourceLocation FungiteOLoc = new ResourceLocation(MOD_ID,"textures/entity/fungiteo.png");

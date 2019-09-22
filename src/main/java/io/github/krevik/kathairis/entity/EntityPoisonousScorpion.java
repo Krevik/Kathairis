@@ -3,40 +3,39 @@ package io.github.krevik.kathairis.entity;
 import io.github.krevik.kathairis.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
-public class EntityPoisonousScorpion extends EntityMob
+public class EntityPoisonousScorpion extends MonsterEntity
 {
     public EntityPoisonousScorpion(World worldIn)
     {
         super(ModEntities.POISONOUS_SCORPION,worldIn);
-        this.setSize(0.4F, 0.7F);
         this.experienceValue=25;
     }
 
+    public EntityPoisonousScorpion(EntityType<EntityPoisonousScorpion> type, World world) {
+        super(type, world);
+    }
+
+
     @Override
-    protected void initEntityAI()
-    {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.2D, false));
-        this.tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(2, new NearestAttackableTargetGoal(this, PlayerEntity.class, true));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
     }
 
     @Override
@@ -56,6 +55,11 @@ public class EntityPoisonousScorpion extends EntityMob
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_POISONOUSSCORPION;
+    }
+
+    @Override
     protected void registerData()
     {
         super.registerData();
@@ -66,22 +70,22 @@ public class EntityPoisonousScorpion extends EntityMob
     {
         if (super.attackEntityAsMob(entityIn))
         {
-            if (entityIn instanceof EntityLivingBase)
+            if (entityIn instanceof LivingEntity)
             {
                 int i = 0;
 
-                if (this.world.getDifficulty() == EnumDifficulty.NORMAL)
+                if (this.world.getDifficulty() == Difficulty.NORMAL)
                 {
                     i = 7;
                 }
-                else if (this.world.getDifficulty() == EnumDifficulty.HARD)
+                else if (this.world.getDifficulty() == Difficulty.HARD)
                 {
                     i = 15;
                 }
 
                 if (i > 0)
                 {
-                    ((EntityLivingBase)entityIn).addPotionEffect(new PotionEffect(MobEffects.POISON, i * 20, 0));
+                    ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.POISON, i * 20, 0));
                 }
             }
 
@@ -105,13 +109,6 @@ public class EntityPoisonousScorpion extends EntityMob
     public CreatureAttribute getCreatureAttribute()
     {
         return CreatureAttribute.ARTHROPOD;
-    }
-
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_POISONOUSSCORPION;
     }
 
 }

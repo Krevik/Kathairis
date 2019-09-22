@@ -2,16 +2,15 @@ package io.github.krevik.kathairis.world.dimension.biome;
 
 import com.google.common.collect.Sets;
 import io.github.krevik.kathairis.init.ModBiomes;
-import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import io.github.krevik.kathairis.world.dimension.biome.gen.layers.KatharianLayerUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Biomes;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeCache;
-import net.minecraft.world.biome.provider.OverworldBiomeProvider;
+import net.minecraft.world.biome.provider.BiomeProvider;
+import net.minecraft.world.biome.provider.OverworldBiomeProviderSettings;
+import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.storage.WorldInfo;
 
 import javax.annotation.Nullable;
@@ -20,37 +19,37 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class KatharianBiomeProvider extends OverworldBiomeProvider {
-    private final BiomeCache cache = new BiomeCache(this);
-    private final GenLayer genBiomes;
-    private final GenLayer biomeFactoryLayer;
+public class KatharianBiomeProvider extends BiomeProvider {
+    private final Layer genBiomes;
+    private final Layer biomeFactoryLayer;
     private final Biome[] biomes;
 
-    public KatharianBiomeProvider(KatharianBiomeProviderSettings p_i48971_1_) {
-        super(p_i48971_1_);
+    public KatharianBiomeProvider(OverworldBiomeProviderSettings p_i48971_1_) {
         this.biomes = new Biome[]{ModBiomes.KATHAIRIS_RIVER,ModBiomes.KATHARIAN_FOREST, ModBiomes.KATHARIAN_DESERT,
                 ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP};
         WorldInfo lvt_2_1_ = p_i48971_1_.getWorldInfo();
-        KathairisGenSettings lvt_3_1_ = p_i48971_1_.getGeneratorSettings();
-        GenLayer[] lvt_4_1_ = KatharianLayerUtil.buildOverworldProcedure(lvt_2_1_.getSeed(), lvt_2_1_.getGenerator(), lvt_3_1_);
+        OverworldGenSettings lvt_3_1_ = p_i48971_1_.getGeneratorSettings();
+        Layer[] lvt_4_1_ = KatharianLayerUtil.buildOverworldProcedure(lvt_2_1_.getSeed(), lvt_2_1_.getGenerator(), lvt_3_1_);
         this.genBiomes = lvt_4_1_[0];
         this.biomeFactoryLayer = lvt_4_1_[1];
     }
 
-
-    @Nullable
-    public Biome getBiome(BlockPos p_180300_1_, @Nullable Biome p_180300_2_) {
-        return this.cache.getBiome(p_180300_1_.getX(), p_180300_1_.getZ(), p_180300_2_);
+    @Override
+    public Biome getBiome(int p_201545_1_, int p_201545_2_) {
+        return this.biomeFactoryLayer.func_215738_a(p_201545_1_, p_201545_2_);
     }
 
-    public Biome[] getBiomes(int p_201535_1_, int p_201535_2_, int p_201535_3_, int p_201535_4_) {
-        return this.genBiomes.generateBiomes(p_201535_1_, p_201535_2_, p_201535_3_, p_201535_4_, Biomes.DEFAULT);
+    @Override
+    public Biome func_222366_b(int p_222366_1_, int p_222366_2_) {
+        return this.genBiomes.func_215738_a(p_222366_1_, p_222366_2_);
     }
 
+    @Override
     public Biome[] getBiomes(int p_201537_1_, int p_201537_2_, int p_201537_3_, int p_201537_4_, boolean p_201537_5_) {
-        return p_201537_5_ && p_201537_3_ == 16 && p_201537_4_ == 16 && (p_201537_1_ & 15) == 0 && (p_201537_2_ & 15) == 0 ? this.cache.getCachedBiomes(p_201537_1_, p_201537_2_) : this.biomeFactoryLayer.generateBiomes(p_201537_1_, p_201537_2_, p_201537_3_, p_201537_4_, Biomes.DEFAULT);
+        return this.biomeFactoryLayer.generateBiomes(p_201537_1_, p_201537_2_, p_201537_3_, p_201537_4_);
     }
 
+    @Override
     public Set<Biome> getBiomesInSquare(int p_201538_1_, int p_201538_2_, int p_201538_3_) {
         int lvt_4_1_ = p_201538_1_ - p_201538_3_ >> 2;
         int lvt_5_1_ = p_201538_2_ - p_201538_3_ >> 2;
@@ -59,11 +58,12 @@ public class KatharianBiomeProvider extends OverworldBiomeProvider {
         int lvt_8_1_ = lvt_6_1_ - lvt_4_1_ + 1;
         int lvt_9_1_ = lvt_7_1_ - lvt_5_1_ + 1;
         Set<Biome> lvt_10_1_ = Sets.newHashSet();
-        Collections.addAll(lvt_10_1_, this.genBiomes.generateBiomes(lvt_4_1_, lvt_5_1_, lvt_8_1_, lvt_9_1_, (Biome)null));
+        Collections.addAll(lvt_10_1_, this.genBiomes.generateBiomes(lvt_4_1_, lvt_5_1_, lvt_8_1_, lvt_9_1_));
         return lvt_10_1_;
     }
 
     @Nullable
+    @Override
     public BlockPos findBiomePosition(int p_180630_1_, int p_180630_2_, int p_180630_3_, List<Biome> p_180630_4_, Random p_180630_5_) {
         int lvt_6_1_ = p_180630_1_ - p_180630_3_ >> 2;
         int lvt_7_1_ = p_180630_2_ - p_180630_3_ >> 2;
@@ -71,7 +71,7 @@ public class KatharianBiomeProvider extends OverworldBiomeProvider {
         int lvt_9_1_ = p_180630_2_ + p_180630_3_ >> 2;
         int lvt_10_1_ = lvt_8_1_ - lvt_6_1_ + 1;
         int lvt_11_1_ = lvt_9_1_ - lvt_7_1_ + 1;
-        Biome[] lvt_12_1_ = this.genBiomes.generateBiomes(lvt_6_1_, lvt_7_1_, lvt_10_1_, lvt_11_1_, (Biome)null);
+        Biome[] lvt_12_1_ = this.genBiomes.generateBiomes(lvt_6_1_, lvt_7_1_, lvt_10_1_, lvt_11_1_);
         BlockPos lvt_13_1_ = null;
         int lvt_14_1_ = 0;
 
@@ -90,6 +90,7 @@ public class KatharianBiomeProvider extends OverworldBiomeProvider {
         return lvt_13_1_;
     }
 
+    @Override
     public boolean hasStructure(Structure<?> p_205004_1_) {
         return (Boolean)this.hasStructureCache.computeIfAbsent(p_205004_1_, (p_205006_1_) -> {
             Biome[] var2 = this.biomes;
@@ -106,21 +107,18 @@ public class KatharianBiomeProvider extends OverworldBiomeProvider {
         });
     }
 
-    public Set<IBlockState> getSurfaceBlocks() {
+    @Override
+    public Set<BlockState> getSurfaceBlocks() {
         if (this.topBlocksCache.isEmpty()) {
             Biome[] var1 = this.biomes;
             int var2 = var1.length;
 
             for(int var3 = 0; var3 < var2; ++var3) {
                 Biome lvt_4_1_ = var1[var3];
-                this.topBlocksCache.add(lvt_4_1_.getSurfaceBuilderConfig().getTopMaterial());
+                this.topBlocksCache.add(lvt_4_1_.getSurfaceBuilderConfig().getTop());
             }
         }
 
         return this.topBlocksCache;
-    }
-
-    public void tick() {
-        this.cache.cleanupCache();
     }
 }

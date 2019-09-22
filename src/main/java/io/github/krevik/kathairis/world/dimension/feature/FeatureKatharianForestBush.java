@@ -1,25 +1,30 @@
 package io.github.krevik.kathairis.world.dimension.feature;
 
+import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.world.dimension.feature.tree.AbstractKatharianTreeFeature;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
 
 public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
 
-    IBlockState LOG = ModBlocks.SHINY_LOG.getDefaultState();
-    IBlockState LEAVES = ModBlocks.SHINY_LEAVES.getDefaultState();
+    BlockState LOG = ModBlocks.SHINY_LOG.getDefaultState();
+    BlockState LEAVES = ModBlocks.SHINY_LEAVES.getDefaultState();
 
-    public FeatureKatharianForestBush() {
-        super(true);
+    public FeatureKatharianForestBush(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49920_1_) {
+        super(p_i49920_1_, true);
     }
 
+
     @Override
-    protected boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos pos) {
+    protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox box) {
         if(!canGrowInto(worldIn,pos.down())){
             return false;
         }
@@ -30,11 +35,11 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
         int k=rand.nextInt(4);
         if(k==0){
             setLogState1(changedBlocks,worldIn,pos,LOG);
-            setBlockState(worldIn,pos.east(),LEAVES);
-            setBlockState(worldIn,pos.west(),LEAVES);
-            setBlockState(worldIn,pos.south(),LEAVES);
-            setBlockState(worldIn,pos.north(),LEAVES);
-            setBlockState(worldIn,pos.up(),LEAVES);
+            worldIn.setBlockState(pos.east(),LEAVES,2);
+            worldIn.setBlockState(pos.west(),LEAVES,2);
+            worldIn.setBlockState(pos.south(),LEAVES,2);
+            worldIn.setBlockState(pos.north(),LEAVES,2);
+            worldIn.setBlockState(pos.up(),LEAVES,2);
         }
         else if(k==1){
             setLogState1(changedBlocks,worldIn,pos,LOG);
@@ -73,7 +78,7 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
         return true;
     }
 
-    private void func_208521_b(IWorld p_208521_1_, BlockPos p_208521_2_, IBlockState p_208521_3_) {
+    private void func_208521_b(IWorldGenerationReader p_208521_1_, BlockPos p_208521_2_, BlockState p_208521_3_) {
         if (this.doBlockNotify) {
             p_208521_1_.setBlockState(p_208521_2_, p_208521_3_, 19);
         } else {
@@ -82,7 +87,7 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
 
     }
 
-    protected final void setLogState1(Set<BlockPos> changedBlocks, IWorld worldIn, BlockPos p_208520_3_, IBlockState p_208520_4_) {
+    protected final void setLogState1(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, BlockPos p_208520_3_, BlockState p_208520_4_) {
         this.func_208521_b(worldIn, p_208520_3_, p_208520_4_);
             changedBlocks.add(p_208520_3_.toImmutable());
 

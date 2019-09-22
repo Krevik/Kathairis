@@ -1,7 +1,7 @@
 package io.github.krevik.kathairis.world.dimension.biome.gen.layers;
 
-import net.minecraft.util.registry.IRegistry;
-import net.minecraft.world.gen.IContext;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IC1Transformer;
 
 /**
@@ -14,13 +14,14 @@ public enum GenLayerBiomeVariants implements IC1Transformer {
     }
 
     BiomeVariantsUtil util = new BiomeVariantsUtil();
-    public int apply(IContext context, int centerBiomeID) {
-        if(util.getBiomesWithVariantsList().contains(IRegistry.BIOME.get(centerBiomeID))){
-            if(context.random(4)==0){
-                return IRegistry.BIOME.getId(util.getBiomeVariant(IRegistry.BIOME.get(centerBiomeID)));
+
+    @Override
+    public int apply(INoiseRandom iNoiseRandom, int centerBiomeID) {
+        if(util.getBiomesWithVariantsList().contains(Registry.BIOME.getByValue(centerBiomeID))){
+            if(iNoiseRandom.random(4)==0){
+                return Registry.BIOME.getId(util.getBiomeVariant(Registry.BIOME.getByValue(centerBiomeID)));
             }
         }
         return centerBiomeID;
     }
-
 }

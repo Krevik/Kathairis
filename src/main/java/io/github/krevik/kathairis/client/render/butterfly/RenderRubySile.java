@@ -1,26 +1,26 @@
 package io.github.krevik.kathairis.client.render.butterfly;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.client.model.butterfly.ModelRubySile;
 import io.github.krevik.kathairis.entity.butterfly.EntityRubySile;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderRubySile extends RenderLiving<EntityRubySile>
+public class RenderRubySile extends MobRenderer<EntityRubySile, ModelRubySile<EntityRubySile>>
 {
     public static final Factory FACTORY = new Factory();
-    public RenderRubySile(RenderManager renderManagerIn)
+    public RenderRubySile(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelRubySile(), 0F);
     }
-
 
     @Override
     protected ResourceLocation getEntityTexture(EntityRubySile entity)
@@ -31,7 +31,7 @@ public class RenderRubySile extends RenderLiving<EntityRubySile>
     public static class Factory implements IRenderFactory<EntityRubySile> {
 
         @Override
-        public Render<? super EntityRubySile> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntityRubySile> createRenderFor(EntityRendererManager manager) {
             return new RenderRubySile(manager);
         }
 
@@ -42,7 +42,6 @@ public class RenderRubySile extends RenderLiving<EntityRubySile>
     {
     	GlStateManager.scaled(0.2, 0.2, 0.2);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-        
     }
     
 }

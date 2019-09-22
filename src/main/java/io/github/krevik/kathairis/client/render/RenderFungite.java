@@ -1,13 +1,14 @@
 package io.github.krevik.kathairis.client.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.client.model.ModelFungite;
 import io.github.krevik.kathairis.entity.EntityFungite;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -16,12 +17,12 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderFungite extends RenderLiving<EntityFungite>
+public class RenderFungite extends MobRenderer<EntityFungite,ModelFungite<EntityFungite>>
 {
 	boolean isBlinking=false;
     public static final Factory FACTORY = new Factory();
 
-    public RenderFungite(RenderManager renderManagerIn)
+    public RenderFungite(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelFungite(), 1F);
     }
@@ -40,7 +41,7 @@ public class RenderFungite extends RenderLiving<EntityFungite>
     public static class Factory implements IRenderFactory<EntityFungite> {
 
         @Override
-        public Render<? super EntityFungite> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntityFungite> createRenderFor(EntityRendererManager manager) {
             return new RenderFungite(manager);
         }
 

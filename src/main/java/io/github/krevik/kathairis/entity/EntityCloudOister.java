@@ -7,29 +7,29 @@ import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Particles;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.passive.AmbientEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
-public class EntityCloudOister extends EntityAmbientCreature
+public class EntityCloudOister extends AmbientEntity
 {
     private static final DataParameter<Integer> timeUntilNextPearl = EntityDataManager.createKey(EntityCloudOister.class, DataSerializers.VARINT);
     private static final DataParameter<Boolean> panic = EntityDataManager.createKey(EntityCloudOister.class, DataSerializers.BOOLEAN);
@@ -53,20 +53,26 @@ public class EntityCloudOister extends EntityAmbientCreature
     public EntityCloudOister(World worldIn)
     {
         super(ModEntities.CLOUD_OISTER,worldIn);
-        this.setSize(0.6F, 0.6F);
         this.experienceValue=5;
         this.setTimeUntilNextPearl(this.rand.nextInt(6000) + 6000);
         this.setPanic(false);
     }
+    public EntityCloudOister(EntityType<EntityCloudOister> type, World world) {
+        super(type, world);
+    }
 
     @Override
-    protected void initEntityAI()
-    {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(1, new EntityAICloudOisterPanic(this,1D));
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(1, new EntityAICloudOisterPanic(this,1.0D));
+    }
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_CLOUDOISTER;
     }
 
     @Override
@@ -115,16 +121,15 @@ public class EntityCloudOister extends EntityAmbientCreature
             if(jumpTimer>k) {
                 k=50+rand.nextInt(300);
                 jumpTimer=0;
-                motionY+=0.5;
+                setMotion(new Vec3d(getMotion().getX(),0.5,getMotion().getZ()));
                 spawnJumpParticles(getEntityWorld());
             }
             if(!this.onGround) {
                 if(this.getRNG().nextInt(100)==0) {
                     double destPosX=this.posX-this.getRNG().nextInt(6)+this.getRNG().nextInt(6);
                     double destPosZ=this.posZ-this.getRNG().nextInt(6)+this.getRNG().nextInt(6);
-                    this.getNavigator().setPath(this.getNavigator().getPathToPos(new BlockPos(destPosX,posY,destPosZ)), 1);
-                    motionX=(destPosX-this.posX)*0.15;
-                    motionZ=(destPosZ-this.posZ)*0.15;
+                    this.getNavigator().setPath(this.getNavigator().getPathToPos(new BlockPos(destPosX,posY,destPosZ),1), 1);
+                    setMotion(new Vec3d((destPosX-this.posX)*0.15,getMotion().getY(),(destPosZ-this.posZ)*0.15));
                 }
             }
         }else {
@@ -147,8 +152,7 @@ public class EntityCloudOister extends EntityAmbientCreature
             double d3 = 0;
             double d4 = 0;
             double d5 = 0;
-
-            world.addParticle(Particles.CLOUD, d0, d1, d2, d3, d4, d5);
+            world.addParticle(ParticleTypes.CLOUD, d0, d1, d2, d3, d4, d5);
         }
     }
 
@@ -157,18 +161,11 @@ public class EntityCloudOister extends EntityAmbientCreature
         return EnumCreatureAttribute.UNDEFINED;
     }*/
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_CLOUDOISTER;
-    }
-
     @Override
     public boolean attackEntityAsMob(Entity entityIn)
     {
         boolean flag = super.attackEntityAsMob(entityIn);
-    	this.motionY=0.5;
+        setMotion(new Vec3d(getMotion().getX(),0.5,getMotion().getZ()));
         spawnJumpParticles(getEntityWorld());
         return flag;
     }
@@ -181,7 +178,7 @@ public class EntityCloudOister extends EntityAmbientCreature
     }
 
     @Override
-    public void writeAdditional(NBTTagCompound compound)
+    public void writeAdditional(CompoundNBT compound)
     {
         super.writeAdditional(compound);
         compound.putInt("timeUntilNextPearl", this.timeUntilNextPearl());
@@ -189,7 +186,7 @@ public class EntityCloudOister extends EntityAmbientCreature
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound)
+    public void readAdditional(CompoundNBT compound)
     {
         super.readAdditional(compound);
         this.setTimeUntilNextPearl(compound.getInt("timeUntilNextPearl"));
@@ -197,7 +194,7 @@ public class EntityCloudOister extends EntityAmbientCreature
     }
 
     @Override
-    public boolean canSpawn(IWorld p_205020_1_, boolean p_205020_2_) {
+    public boolean canSpawn(IWorld p_205020_1_, SpawnReason reason) {
         int i = MathHelper.floor(this.posX);
         int j = MathHelper.floor(this.getBoundingBox().minY);
         int k = MathHelper.floor(this.posZ);

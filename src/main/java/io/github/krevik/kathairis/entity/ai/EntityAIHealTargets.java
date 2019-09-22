@@ -1,28 +1,30 @@
 package io.github.krevik.kathairis.entity.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class EntityAIHealTargets extends EntityAIBase
-{
-    private final EntityCreature creature;
-    private final World world;
-    private EntityPlayer target;
+import java.util.EnumSet;
 
-    public EntityAIHealTargets(EntityCreature theCreatureIn)
+public class EntityAIHealTargets extends Goal
+{
+    private final CreatureEntity creature;
+    private final World world;
+    private PlayerEntity target;
+
+    public EntityAIHealTargets(CreatureEntity theCreatureIn)
     {
         this.creature = theCreatureIn;
         this.world = theCreatureIn.world;
-        this.setMutexBits(3);
+        this.setMutexFlags(EnumSet.of(Flag.TARGET));
     }
 
     @Override
     public boolean shouldExecute()
     {
-        return world.getClosestPlayerToEntity(creature,5)!=null;
+        return world.getClosestPlayer(creature,5)!=null;
     }
 
     @Override
@@ -34,10 +36,10 @@ public class EntityAIHealTargets extends EntityAIBase
     @Override
     public void startExecuting()
     {
-        EntityLivingBase entity = world.getNearestAttackablePlayer(creature,5,5);
+        LivingEntity entity = world.getClosestPlayer(creature,5);
         if(entity!=null){
-            if(entity instanceof EntityPlayer){
-                target=(EntityPlayer)entity;
+            if(entity instanceof PlayerEntity){
+                target=(PlayerEntity)entity;
             }
         }
         if(target!=null) {

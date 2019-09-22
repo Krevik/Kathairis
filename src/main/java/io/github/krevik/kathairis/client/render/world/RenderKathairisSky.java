@@ -1,14 +1,14 @@
 package io.github.krevik.kathairis.client.render.world;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -39,9 +39,9 @@ public class RenderKathairisSky implements IRenderHandler {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void render(float partialTicks, WorldClient world, Minecraft mc) {
-        GlStateManager.disableTexture2D();
-        Vec3d vec3d = world.getSkyColor(mc.getRenderViewEntity(), partialTicks);
+    public void render(int someInt, float partialTicks, ClientWorld world, Minecraft mc) {
+        GlStateManager.disableTexture();
+        Vec3d vec3d = world.getSkyColor(mc.player.getPosition(), partialTicks);
         float f = (float)vec3d.x;
         float f1 = (float)vec3d.y;
         float f2 = (float)vec3d.z;
@@ -221,7 +221,7 @@ public class RenderKathairisSky implements IRenderHandler {
 
         if (afloat != null)
         {
-            GlStateManager.disableTexture2D();
+            GlStateManager.disableTexture();
             GlStateManager.shadeModel(7425);
             GlStateManager.pushMatrix();
             GlStateManager.rotatef(90.0F, 1.0F, 0.0F, 0.0F);
@@ -255,7 +255,7 @@ public class RenderKathairisSky implements IRenderHandler {
             GlStateManager.shadeModel(7424);
         }
 
-        GlStateManager.enableTexture2D();
+        GlStateManager.enableTexture();
         GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.pushMatrix();
         float f16 = 1.0F - world.getRainStrength(partialTicks);
@@ -291,7 +291,7 @@ public class RenderKathairisSky implements IRenderHandler {
         tessellator.draw();
         //moon end
 
-        GlStateManager.disableTexture2D();
+        GlStateManager.disableTexture();
         float f15 = world.getStarBrightness(partialTicks) * f16;
 
         if (f15 > 0.0F)
@@ -305,7 +305,7 @@ public class RenderKathairisSky implements IRenderHandler {
         GlStateManager.enableFog();
 
         GlStateManager.popMatrix();
-        GlStateManager.disableTexture2D();
+        GlStateManager.disableTexture();
         GlStateManager.color3f(0.0F, 0.0F, 0.0F);
         double d3 = mc.player.getEyePosition(partialTicks).y - world.getHorizon();
 
@@ -345,7 +345,7 @@ public class RenderKathairisSky implements IRenderHandler {
         GlStateManager.pushMatrix();
         GlStateManager.translatef(0.0F, -((float)(d3 - 16.0D)), 0.0F);
         GlStateManager.popMatrix();
-        GlStateManager.enableTexture2D();
+        GlStateManager.enableTexture();
         GlStateManager.depthMask(true);
 
     }

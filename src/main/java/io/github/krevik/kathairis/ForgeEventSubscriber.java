@@ -1,34 +1,7 @@
 package io.github.krevik.kathairis;
 
-import com.google.common.collect.ImmutableList;
-import io.github.krevik.kathairis.client.ModBlocksColorHandler;
-import io.github.krevik.kathairis.init.ModBiomes;
-import io.github.krevik.kathairis.init.ModParticles;
-import io.github.krevik.kathairis.util.ModUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.stream.Collectors;
-
-import static io.github.krevik.kathairis.Kathairis.KATHAIRIS_LOG;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
 
@@ -37,6 +10,45 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
  */
 @EventBusSubscriber(modid = MOD_ID, bus = FORGE)
 public final class ForgeEventSubscriber {
+
+    /*@SubscribeEvent
+    public static void onEatenEvents(LivingEntityUseItemEvent event){
+        if(event.getItem().getItem() == ModItems.HEART){
+            event.getEntityLiving().heal(2F);
+        }
+        if(event.getItem().getItem() == ModItems.MAGIC_BEANS){
+            setRandomPotionEffectOnPlayer(event.getEntityLiving());
+        }
+        if(event.getItem().getItem() == ModItems.NECTAR_BOWL){
+            event.getEntityLiving().heal(2f);
+        }
+    }
+
+    private static void setRandomPotionEffectOnPlayer(LivingEntity ep) {
+        Random random = ep.getRNG();
+        ArrayList<Effect> allowedEffects = new ArrayList<>();
+        allowedEffects.add(Effects.SPEED);
+        allowedEffects.add(Effects.HASTE);
+        allowedEffects.add(Effects.STRENGTH);
+        allowedEffects.add(Effects.INSTANT_HEALTH);
+        allowedEffects.add(Effects.JUMP_BOOST);
+        allowedEffects.add(Effects.REGENERATION);
+        allowedEffects.add(Effects.RESISTANCE);
+        allowedEffects.add(Effects.FIRE_RESISTANCE);
+        allowedEffects.add(Effects.WATER_BREATHING);
+        allowedEffects.add(Effects.INVISIBILITY);
+        allowedEffects.add(Effects.NIGHT_VISION);
+        allowedEffects.add(Effects.HEALTH_BOOST);
+        allowedEffects.add(Effects.ABSORPTION);
+        allowedEffects.add(Effects.SATURATION);
+        allowedEffects.add(Effects.GLOWING);
+        allowedEffects.add(Effects.LUCK);
+        allowedEffects.add(Effects.SLOW_FALLING);
+        allowedEffects.add(Effects.CONDUIT_POWER);
+        allowedEffects.add(Effects.DOLPHINS_GRACE);
+        allowedEffects.add(Effects.BAD_OMEN);
+        ep.addPotionEffect(new EffectInstance(allowedEffects.get(random.nextInt(allowedEffects.size())),300+random.nextInt(2000),random.nextInt(5)));
+    }
 /*
 	@SubscribeEvent
 	public static void writeAssets(final ModelBakeEvent ignored) {

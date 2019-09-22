@@ -1,17 +1,18 @@
 package io.github.krevik.kathairis.entity.ai;
 
-import com.google.common.base.Predicate;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 
-public class EntityAITargetSpecified<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T>
+import java.util.function.Predicate;
+
+public class EntityAITargetSpecified<T extends LivingEntity> extends NearestAttackableTargetGoal<T>
 {
-    private final EntityCreature tameable;
+    private final CreatureEntity tameable;
 
-    public EntityAITargetSpecified(EntityCreature entityIn, Class<T> classTarget, boolean checkSight, Predicate<? super T > targetSelector)
+    public EntityAITargetSpecified(CreatureEntity entityIn, Class<T> classTarget, boolean checkSight, Predicate<LivingEntity> p_i50315_6_)
     {
-        super(entityIn, classTarget, 10, checkSight, false, targetSelector);
+        super(entityIn, classTarget, 10, checkSight, false, p_i50315_6_);
         this.tameable = entityIn;
     }
 

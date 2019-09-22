@@ -1,11 +1,7 @@
 package io.github.krevik.kathairis.util.networking.packets;
 
 import io.github.krevik.kathairis.client.gui.GuiOldMan;
-import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;

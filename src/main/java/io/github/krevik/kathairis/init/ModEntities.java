@@ -1,13 +1,16 @@
 package io.github.krevik.kathairis.init;
 
+import io.github.krevik.kathairis.entity.*;
+import io.github.krevik.kathairis.entity.butterfly.*;
+import io.github.krevik.kathairis.util.SpawnPredicator;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.BiomeKatharianBiomeBase;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemSpawnEgg;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
@@ -19,69 +22,65 @@ import static io.github.krevik.kathairis.util.ModUtil._null;
 @ObjectHolder(MOD_ID)
 public class ModEntities {
 
-    public static EntityType<?> COMMON_BUTTERFLY1 = _null();
-    public static EntityType<?> COMMON_BUTTERFLY2 = _null();
-    public static EntityType<?> CLOUD_SHIMMER = _null();
-    public static EntityType<?> ILLUKINI = _null();
-    public static EntityType<?> RUBY_SILE = _null();
-    public static EntityType<?> SKYLIGHT = _null();
-    public static EntityType<?> BIG_TURTLE = _null();
-    public static EntityType<?> BISON = _null();
-    public static EntityType<?> CACTI_SPORE = _null();
-    public static EntityType<?> CAMEL = _null();
-    public static EntityType<?> CLOUD_OISTER = _null();
-    public static EntityType<?> CLOUDY_SLIME = _null();
-    public static EntityType<?> FLYING_SQUID = _null();
-    public static EntityType<?> FUNGITE = _null();
-    public static EntityType<?> GAZNOWEL = _null();
-    public static EntityType<?> GECKO = _null();
-    public static EntityType<?> HOWLER = _null();
-    public static EntityType<?> JELLY_FISH = _null();
-    public static EntityType<?> LIVING_FLOWER = _null();
-    public static EntityType<?> MYSTIC_BIRD = _null();
-    public static EntityType<?> PHASM = _null();
-    public static EntityType<?> POISONOUS_SCORPION = _null();
-    public static EntityType<?> SKYRAY = _null();
-    public static EntityType<?> STRANGE_WANDERER = _null();
-    public static EntityType<?> MYSTIC_WAND_SHOOT = _null();
+    public static EntityType<EntityButterfly> COMMON_BUTTERFLY1 = _null();
+    public static EntityType<EntityButterfly1> COMMON_BUTTERFLY2 = _null();
+    public static EntityType<EntityCloudShimmer> CLOUD_SHIMMER = _null();
+    public static EntityType<EntityIllukini> ILLUKINI = _null();
+    public static EntityType<EntityRubySile> RUBY_SILE = _null();
+    public static EntityType<EntitySkylight> SKYLIGHT = _null();
+    public static EntityType<EntityBigTurtle> BIG_TURTLE = _null();
+    public static EntityType<EntityBison> BISON = _null();
+    public static EntityType<EntityCactiSpore> CACTI_SPORE = _null();
+    public static EntityType<EntityCamel> CAMEL = _null();
+    public static EntityType<EntityCloudOister> CLOUD_OISTER = _null();
+    public static EntityType<EntityCloudySlime> CLOUDY_SLIME = _null();
+    public static EntityType<EntityFlyingSquid> FLYING_SQUID = _null();
+    public static EntityType<EntityFungite> FUNGITE = _null();
+    public static EntityType<EntityGaznowel> GAZNOWEL = _null();
+    public static EntityType<EntityGecko> GECKO = _null();
+    public static EntityType<EntityHowler> HOWLER = _null();
+    public static EntityType<EntityJellyFish> JELLY_FISH = _null();
+    public static EntityType<EntityLivingFlower> LIVING_FLOWER = _null();
+    public static EntityType<EntityMysticBird> MYSTIC_BIRD = _null();
+    public static EntityType<EntityPhasm> PHASM = _null();
+    public static EntityType<EntityPoisonousScorpion> POISONOUS_SCORPION = _null();
+    public static EntityType<EntitySkyray> SKYRAY = _null();
+    public static EntityType<EntityStrangeWanderer> STRANGE_WANDERER = _null();
+    public static EntityType<EntityMysticWandShoot> MYSTIC_WAND_SHOOT = _null();
 
-    public static void registerPlacementType(EntityType<?> type,EntitySpawnPlacementRegistry.SpawnPlacementType spawnType){
-        EntitySpawnPlacementRegistry.register(type, spawnType, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,null);
-    }
-
-    public static void registerPlacementType(EntityType<?> type,EntitySpawnPlacementRegistry.SpawnPlacementType spawnType,Heightmap.Type heightType){
-        EntitySpawnPlacementRegistry.register(type, spawnType, heightType,null);
+    public static void registerPlacementType(EntityType type,EntitySpawnPlacementRegistry.PlacementType spawnType,Heightmap.Type heightType, EntitySpawnPlacementRegistry.IPlacementPredicate predicate){
+        EntitySpawnPlacementRegistry.register(type, spawnType, heightType,predicate);
     }
 
     public static void registerPlacementTypes(){
-        registerPlacementType(COMMON_BUTTERFLY1, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(COMMON_BUTTERFLY2, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(CLOUD_SHIMMER, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(ILLUKINI, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(RUBY_SILE, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(SKYLIGHT, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(BIG_TURTLE, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(BISON, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(CACTI_SPORE, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(CAMEL, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(CLOUD_OISTER, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(CLOUDY_SLIME, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(FLYING_SQUID, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(FUNGITE, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(GAZNOWEL, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(GECKO, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(HOWLER, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(JELLY_FISH, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(LIVING_FLOWER, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(MYSTIC_BIRD, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING);
-        registerPlacementType(PHASM, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(POISONOUS_SCORPION, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(SKYRAY, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
-        registerPlacementType(STRANGE_WANDERER, EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND);
+        registerPlacementType(COMMON_BUTTERFLY1, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(COMMON_BUTTERFLY2, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(CLOUD_SHIMMER, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnNimbus);
+        registerPlacementType(ILLUKINI, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(RUBY_SILE, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(SKYLIGHT, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(BIG_TURTLE, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(BISON, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(CACTI_SPORE, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(CAMEL, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(CLOUD_OISTER, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(CLOUDY_SLIME, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(FLYING_SQUID, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(FUNGITE, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnMonster);
+        registerPlacementType(GAZNOWEL, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnMonster);
+        registerPlacementType(GECKO, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnMonster);
+        registerPlacementType(HOWLER, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnMonster);
+        registerPlacementType(JELLY_FISH, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnMonster);
+        registerPlacementType(LIVING_FLOWER, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(MYSTIC_BIRD, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(PHASM, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnMonster);
+        registerPlacementType(POISONOUS_SCORPION, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnMonster);
+        registerPlacementType(SKYRAY, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(STRANGE_WANDERER, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
 
     }
 
-    private static void registerEntitySpawn(EntityType<? extends EntityLiving> type,EnumCreatureType creatureType,Biome[] biomes, int weight, int min, int max) {
+    private static void registerEntitySpawn(EntityType<? extends LivingEntity> type, EntityClassification creatureType, Biome[] biomes, int weight, int min, int max) {
         for (Biome biome : biomes) {
             if (biome != null) {
                 if(biome instanceof BiomeKatharianBiomeBase){
@@ -94,26 +93,25 @@ public class ModEntities {
 
 
     public static void registerEntitySpawns(){
-        registerEntitySpawn((EntityType<? extends EntityLiving>)BIG_TURTLE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)MYSTIC_BIRD,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,3);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)POISONOUS_SCORPION,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},3,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)CAMEL,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},6,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)GECKO,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},4,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)LIVING_FLOWER,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},8,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)HOWLER,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},5,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)FUNGITE,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},2,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)CACTI_SPORE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},4,1,1);
+        registerEntitySpawn(BIG_TURTLE,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
+        registerEntitySpawn(MYSTIC_BIRD,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,3);
+        registerEntitySpawn(POISONOUS_SCORPION,EntityClassification.MONSTER,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},3,1,1);
+        registerEntitySpawn(CAMEL,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},6,1,1);
+        registerEntitySpawn(GECKO,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},4,1,1);
+        registerEntitySpawn(LIVING_FLOWER,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},8,1,1);
+        registerEntitySpawn(HOWLER,EntityClassification.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},5,1,1);
+        registerEntitySpawn(FUNGITE,EntityClassification.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},2,1,1);
+        registerEntitySpawn(CACTI_SPORE,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST},4,1,1);
         //registerEntitySpawn((EntityType<? extends EntityLiving>)JELLY_FISH,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,2);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)BISON,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},8,2,4);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)COMMON_BUTTERFLY1,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)COMMON_BUTTERFLY2,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)PHASM,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_SWAMP},2,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)RUBY_SILE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)RUBY_SILE,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)CLOUD_SHIMMER,EnumCreatureType.AMBIENT,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
-        registerEntitySpawn((EntityType<? extends EntityLiving>)SKYRAY,EnumCreatureType.CREATURE,new Biome[]{ModBiomes.HUGE_DESERT_MOUNTAINS},12,1,5);
+        registerEntitySpawn(BISON,EntityClassification.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},8,2,4);
+        registerEntitySpawn(COMMON_BUTTERFLY1,EntityClassification.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
+        registerEntitySpawn(COMMON_BUTTERFLY2,EntityClassification.CREATURE,new Biome[]{ModBiomes.PLAIN_FIELDS},10,1,1);
+        registerEntitySpawn(PHASM,EntityClassification.MONSTER,new Biome[]{ModBiomes.KATHARIAN_SWAMP},2,1,1);
+        registerEntitySpawn(RUBY_SILE,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
+        registerEntitySpawn(RUBY_SILE,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,1);
+        registerEntitySpawn(CLOUD_SHIMMER,EntityClassification.AMBIENT,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
+        registerEntitySpawn(SKYRAY,EntityClassification.CREATURE,new Biome[]{ModBiomes.HUGE_DESERT_MOUNTAINS},12,1,5);
         //registerEntitySpawn((EntityType<? extends EntityLiving>)SKYLIGHT,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},2,1,1);
-
     }
 
     public static void registerEggs(final RegistryEvent.Register<Item> event){
@@ -144,6 +142,6 @@ public class ModEntities {
     }
 
     private static Item makeSpawnEgg(EntityType<?> type, int color1, int color2, String name){
-        return new ItemSpawnEgg(type,color1,color2,new Item.Properties().group(ItemGroup.SEARCH)).setRegistryName(MOD_ID,name);
+        return new SpawnEggItem(type,color1,color2,new Item.Properties().group(ItemGroup.SEARCH)).setRegistryName(MOD_ID,name);
     }
 }

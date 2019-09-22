@@ -1,24 +1,25 @@
 package io.github.krevik.kathairis.client.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.client.model.ModelFlyingSquid;
 import io.github.krevik.kathairis.entity.EntityFlyingSquid;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderFlyingSquid extends RenderLiving<EntityFlyingSquid>
+public class RenderFlyingSquid extends MobRenderer<EntityFlyingSquid,ModelFlyingSquid<EntityFlyingSquid>>
 {
 	
     public static final Factory FACTORY = new Factory();
 
-    public RenderFlyingSquid(RenderManager renderManagerIn)
+    public RenderFlyingSquid(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelFlyingSquid(), 1.5F);
     }
@@ -33,7 +34,7 @@ public class RenderFlyingSquid extends RenderLiving<EntityFlyingSquid>
     public static class Factory implements IRenderFactory<EntityFlyingSquid> {
 
         @Override
-        public Render<? super EntityFlyingSquid> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntityFlyingSquid> createRenderFor(EntityRendererManager manager) {
             return new RenderFlyingSquid(manager);
         }
 

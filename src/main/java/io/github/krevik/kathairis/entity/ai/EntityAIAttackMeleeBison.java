@@ -1,17 +1,20 @@
 package io.github.krevik.kathairis.entity.ai;
 
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class EntityAIAttackMeleeBison extends EntityAIBase
+import java.util.EnumSet;
+
+public class EntityAIAttackMeleeBison extends Goal
 {
+
     World world;
-    protected EntityLiving attacker;
+    protected CreatureEntity attacker;
     protected int attackTick;
     double speedTowardsTarget;
     boolean longMemory;
@@ -20,23 +23,22 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
     private double targetX;
     private double targetY;
     private double targetZ;
-    protected final int attackInterval = 20;
     private int failedPathFindingPenalty = 0;
     private boolean canPenalize = false;
 
-    public EntityAIAttackMeleeBison(EntityLiving creature, double speedIn, boolean useLongMemory)
+    public EntityAIAttackMeleeBison(CreatureEntity creature, double speedIn, boolean useLongMemory)
     {
         this.attacker = creature;
         this.world = creature.world;
         this.speedTowardsTarget = speedIn;
         this.longMemory = useLongMemory;
-        this.setMutexBits(3);
+        this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
     }
 
     @Override
     public boolean shouldExecute()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
 
         if (entitylivingbase == null)
         {
@@ -52,7 +54,7 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
             {
                 if (--this.delayCounter <= 0)
                 {
-                    this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
+                    this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase,0);
                     this.delayCounter = 4 + this.attacker.getRNG().nextInt(7);
                     return this.path != null;
                 }
@@ -61,7 +63,7 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
                     return true;
                 }
             }
-            this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
+            this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase,0);
 
             if (this.path != null)
             {
@@ -77,7 +79,7 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
     @Override
     public boolean shouldContinueExecuting()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
 
         if (entitylivingbase == null)
         {
@@ -93,7 +95,7 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
         }
         else
         {
-            return !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer)entitylivingbase).isSpectator() && !((EntityPlayer)entitylivingbase).isCreative();
+            return !(entitylivingbase instanceof PlayerEntity) || !((PlayerEntity)entitylivingbase).isSpectator() && !((PlayerEntity)entitylivingbase).isCreative();
         }
     }
 
@@ -107,9 +109,9 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
     @Override
     public void resetTask()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
 
-        if (entitylivingbase instanceof EntityPlayer && (((EntityPlayer)entitylivingbase).isSpectator() || ((EntityPlayer)entitylivingbase).isCreative()))
+        if (entitylivingbase instanceof PlayerEntity && (((PlayerEntity)entitylivingbase).isSpectator() || ((PlayerEntity)entitylivingbase).isCreative()))
         {
             this.attacker.setAttackTarget(null);
         }
@@ -120,8 +122,8 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
     @Override
     public void tick()
     {
-        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
-        this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
+        LivingEntity entitylivingbase = this.attacker.getAttackTarget();
+        this.attacker.getLookController().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
         double d0 = this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getBoundingBox().minY, entitylivingbase.posZ);
         --this.delayCounter;
 
@@ -168,20 +170,20 @@ public class EntityAIAttackMeleeBison extends EntityAIBase
         this.checkAndPerformAttack(entitylivingbase, d0);
     }
 
-    protected void checkAndPerformAttack(EntityLivingBase p_190102_1_, double p_190102_2_)
+    protected void checkAndPerformAttack(LivingEntity p_190102_1_, double p_190102_2_)
     {
         double d0 = this.getAttackReachSqr(p_190102_1_);
 
         if (p_190102_2_ <= d0 && this.attackTick <= 0)
         {
             this.attackTick = 20;
-            this.attacker.swingArm(EnumHand.MAIN_HAND);
+            this.attacker.swingArm(Hand.MAIN_HAND);
             this.attacker.attackEntityAsMob(p_190102_1_);
         }
     }
 
-    protected double getAttackReachSqr(EntityLivingBase attackTarget)
+    protected double getAttackReachSqr(LivingEntity attackTarget)
     {
-        return (double)(this.attacker.width * 2.0F * this.attacker.width * 2.0F + attackTarget.width);
+        return (double)(this.attacker.getWidth() * 2.0F * this.attacker.getWidth() * 2.0F + attackTarget.getWidth());
     }
 }

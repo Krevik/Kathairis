@@ -1,22 +1,27 @@
 package io.github.krevik.kathairis.world.dimension.feature.desert;
 
-import io.github.krevik.kathairis.block.BlockBrinePustule;
+import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.block.BlockPurplePalm;
 import io.github.krevik.kathairis.init.ModBlocks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
+import java.util.function.Function;
 
 public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
 
+    public FeatureDesertSmallRocks(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49878_1_) {
+        super(p_i49878_1_);
+    }
+
     @Override
-    public boolean place(IWorld world, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random random, BlockPos pos, NoFeatureConfig config) {
         if(world.getBlockState(pos.down()).getBlock()== ModBlocks.SOFT_SAND || world.getBlockState(pos.down()).getBlock()==ModBlocks.KATHAIRIS_SAND){
                 int mainHeight=random.nextInt(6);
                 for(int y=0;y<=mainHeight;y++){
@@ -73,7 +78,7 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
         return false;
     }
 
-    private IBlockState getRandomWeatheredRockState(Random random){
+    private BlockState getRandomWeatheredRockState(Random random){
         return random.nextInt(2)==0? ModBlocks.WEATHERED_ROCK.getDefaultState():ModBlocks.HARDENED_WEATHERED_ROCK.getDefaultState();
     }
 }

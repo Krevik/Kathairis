@@ -2,28 +2,29 @@ package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.entity.EntityFlying;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.FlyingEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 
-import javax.annotation.Nullable;
+import java.util.EnumSet;
 
-public class EntityFlyingSquid extends EntityFlying
+public class EntityFlyingSquid extends FlyingEntity
 {
     private float randomMotionVecX;
     private float randomMotionVecY;
@@ -35,11 +36,15 @@ public class EntityFlyingSquid extends EntityFlying
     public EntityFlyingSquid(World worldIn)
     {
         super(ModEntities.FLYING_SQUID,worldIn);
-        this.setSize(1.5F, 2F);
         this.getDataManager().set(isHoldingPlayer, Boolean.valueOf(false));
         this.getDataManager().set(canHoldPlayer, Boolean.valueOf(true));
 
     }
+
+    public EntityFlyingSquid(EntityType<EntityFlyingSquid> type, World world) {
+        super(type, world);
+    }
+
 
     @Override
     protected void registerData()
@@ -49,6 +54,11 @@ public class EntityFlyingSquid extends EntityFlying
         this.getDataManager().register(isHoldingPlayer, Boolean.valueOf(false));
         this.getDataManager().register(canHoldPlayer, Boolean.valueOf(true));
 
+    }
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_FLYINGSQUID;
     }
     
     public boolean isDiving() {
@@ -83,7 +93,7 @@ public class EntityFlyingSquid extends EntityFlying
     }
 
     @Override
-    public void writeAdditional(NBTTagCompound compound)
+    public void writeAdditional(CompoundNBT compound)
     {
         super.writeAdditional(compound);
         compound.putBoolean("isHoldingPlayer", this.isHoldingPlayer());
@@ -93,7 +103,7 @@ public class EntityFlyingSquid extends EntityFlying
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound)
+    public void readAdditional(CompoundNBT compound)
     {
         super.readAdditional(compound);
         setIsHoldingPlayer(compound.getBoolean("isHoldingPlayer"));
@@ -103,9 +113,9 @@ public class EntityFlyingSquid extends EntityFlying
     }
 
     @Override
-    protected void initEntityAI()
-    {
-        this.tasks.addTask(0, new EntityFlyingSquid.AIMoveRandom(this));
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(0, new AIMoveRandom(this));
     }
 
     @Override
@@ -113,12 +123,6 @@ public class EntityFlyingSquid extends EntityFlying
     {
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-    }
-
-    @Override
-    public float getEyeHeight()
-    {
-        return this.height * 0.5F;
     }
 
     @Override
@@ -151,12 +155,6 @@ public class EntityFlyingSquid extends EntityFlying
         return false;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_FLYINGSQUID;
-    }
 
     public int animTravelTime=0;
     public int animTravelTime2=0;
@@ -166,7 +164,7 @@ public class EntityFlyingSquid extends EntityFlying
     public void tick() {
     	super.tick();
         if(isDiving()) {
-            this.travel(motionX, motionY, motionZ);
+            this.travel(getMotion().getX(), getMotion().getY(), getMotion().getZ());
         }
         if(mode==0) {
             animTravelTime++;
@@ -177,9 +175,7 @@ public class EntityFlyingSquid extends EntityFlying
         }
         if(mode==0&&animTravelTime>40) {
             mode=1;
-            motionX=randomMotionVecX;
-            motionY=randomMotionVecY;
-            motionZ=randomMotionVecZ;
+            setMotion(new Vec3d(randomMotionVecX,randomMotionVecY,randomMotionVecZ));
         }
         if(mode==1) {
             animTravelTime--;
@@ -191,7 +187,7 @@ public class EntityFlyingSquid extends EntityFlying
             animTravelTime--;
             animTravelTime--;
             if(animTravelTime<-20) {
-                this.travel(motionX, motionY, motionZ);
+                this.travel(getMotion().getX(), getMotion().getY(), getMotion().getZ());
             }
         }
         if(mode==1&&animTravelTime<-60) {
@@ -205,11 +201,11 @@ public class EntityFlyingSquid extends EntityFlying
             animTravelTime2=15;
         }
 
-        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
+        if (!this.world.isRemote && this.world.getDifficulty() == Difficulty.PEACEFUL)
         {
             this.onKillCommand();
         }
-	    	EntityPlayer ep=this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 5, true);
+	    	PlayerEntity ep=this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 5, true);
 	    	if(ep!=null) {
 	    		
 	        	if(!ep.isAlive()) {
@@ -237,7 +233,7 @@ public class EntityFlyingSquid extends EntityFlying
 
     public void travel(double x, double y, double z)
     {
-        this.move(MoverType.SELF, x, y, z);
+        this.move(MoverType.SELF, new Vec3d(x, y, z));
     }
 
     public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn)
@@ -252,13 +248,14 @@ public class EntityFlyingSquid extends EntityFlying
         return this.randomMotionVecX != 0.0F || this.randomMotionVecY != 0.0F || this.randomMotionVecZ != 0.0F;
     }
 
-    static class AIMoveRandom extends EntityAIBase
+    static class AIMoveRandom extends Goal
         {
             private final EntityFlyingSquid squid;
 
             public AIMoveRandom(EntityFlyingSquid p_i45859_1_)
             {
                 this.squid = p_i45859_1_;
+                this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
             }
 
             @Override
@@ -273,7 +270,7 @@ public class EntityFlyingSquid extends EntityFlying
                 int i = this.squid.getIdleTime();
                 boolean isHoldingPlayer=this.squid.isHoldingPlayer();
                 if(!isHoldingPlayer) {
-			                EntityPlayer ep = this.squid.world.getNearestAttackablePlayer(this.squid.getPosition(), 50, 50);
+			                PlayerEntity ep = this.squid.world.getClosestPlayer(squid,50);
 			                if(ep!=null) {
 			                		if(!ep.onGround) {
 			                			this.squid.setCanHoldPlayer(false);

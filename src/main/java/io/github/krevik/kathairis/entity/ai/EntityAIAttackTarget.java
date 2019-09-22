@@ -1,39 +1,40 @@
 package io.github.krevik.kathairis.entity.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class EntityAIAttackTarget<T extends EntityLivingBase> extends EntityAITarget
+import java.util.EnumSet;
+
+public class EntityAIAttackTarget extends MeleeAttackGoal
 {
-    protected EntityLivingBase targetEntity;
+    protected LivingEntity targetEntity;
 
 
-    public EntityAIAttackTarget(EntityCreature creature, EntityLivingBase classTarget)
+    public EntityAIAttackTarget(CreatureEntity creature, LivingEntity classTarget)
     {
-        super(creature, false);
-        this.setMutexBits(1);
+        super(creature,creature.getAIMoveSpeed(), false);
+        this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
         targetEntity=classTarget;
-    
     }
 
     @Override
     public boolean shouldExecute()
     {
-    	this.targetEntity=this.taskOwner.getAttackTarget();
+    	this.targetEntity=this.attacker.getAttackTarget();
     	return true;
     }
 
     protected AxisAlignedBB getTargetableArea(double targetDistance)
     {
-        return this.taskOwner.getBoundingBox().grow(targetDistance, 4.0D, targetDistance);
+        return this.attacker.getBoundingBox().grow(targetDistance, 4.0D, targetDistance);
     }
 
     @Override
     public void startExecuting()
     {
-        this.taskOwner.setAttackTarget(this.targetEntity);
+        this.attacker.setAttackTarget(this.targetEntity);
         super.startExecuting();
     }
 }

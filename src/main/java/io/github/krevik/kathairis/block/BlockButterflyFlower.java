@@ -1,10 +1,8 @@
 package io.github.krevik.kathairis.block;
 
-import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
-import io.github.krevik.kathairis.entity.butterfly.EntityButterfly1;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -12,13 +10,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.BUTTERFLY_FLOWER;
@@ -38,12 +36,12 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 	}
 
 	@Override
-	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext selectionContext) {
 		return VoxelShapes.create(BUTTERFLYFLOWER_AABB);
 	}
 
 	@Override
-	public void tick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		if (rand.nextInt(10) == 0) {
 			if (!worldIn.isDaytime()) {
@@ -51,7 +49,7 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 			}
 		}
 
-		if (state == BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH)) {
+		/*if (state == BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH)) {
 			List<EntityButterfly> e = worldIn.getEntitiesWithinAABB(EntityButterfly.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
 			List<EntityButterfly1> e1 = worldIn.getEntitiesWithinAABB(EntityButterfly1.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
 
@@ -69,11 +67,11 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity p_180657_5_, ItemStack p_180657_6_) {
+	public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity p_180657_5_, ItemStack p_180657_6_) {
 		super.harvestBlock(world, player, pos, state, p_180657_5_, p_180657_6_);
 		if (state == BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH)) {
 			spawnAsEntity(world, pos, new ItemStack(BUTTERFLY_FLOWER_NECTAR, 1));
@@ -81,7 +79,7 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> p_206840_1_) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
 		super.fillStateContainer(p_206840_1_);
 		p_206840_1_.add(VARIANT);
 	}

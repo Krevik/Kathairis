@@ -1,23 +1,24 @@
 package io.github.krevik.kathairis.client.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.client.model.ModelSkyray;
 import io.github.krevik.kathairis.entity.EntitySkyray;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderSkyray extends RenderLiving<EntitySkyray>
+public class RenderSkyray extends MobRenderer<EntitySkyray, ModelSkyray<EntitySkyray>>
 {
     public static final Factory FACTORY = new Factory();
 
-    public RenderSkyray(RenderManager renderManagerIn)
+    public RenderSkyray(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelSkyray(), 6F);
 
@@ -33,7 +34,7 @@ public class RenderSkyray extends RenderLiving<EntitySkyray>
     public static class Factory implements IRenderFactory<EntitySkyray> {
 
         @Override
-        public Render<? super EntitySkyray> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntitySkyray> createRenderFor(EntityRendererManager manager) {
 
             return new RenderSkyray(manager);
 

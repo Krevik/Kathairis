@@ -5,17 +5,15 @@ import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.KatharianLootTables;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -25,36 +23,41 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.EnumDifficulty;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 
-import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.Map;
 
-public class EntityPhasm extends EntityFlying implements IMob {
+public class EntityPhasm extends FlyingEntity implements IMob {
 
     private static final DataParameter<Boolean> SWINGING_ARMS = EntityDataManager.createKey(EntityPhasm.class, DataSerializers.BOOLEAN);
     public EntityPhasm(World worldIn)
     {
         super(ModEntities.PHASM,worldIn);
-        this.setSize(1F, 2.0F);
         this.experienceValue = 35;
-        this.moveHelper = new EntityPhasm.PhasmMoveHelper(this);
+        this.moveController = new PhasmMoveHelper(this);
 
     }
+
+    public EntityPhasm(EntityType<EntityPhasm> type, World world) {
+        super(type, world);
+    }
+
 
     public boolean getIsSwingingArms(){
         return getDataManager().get(SWINGING_ARMS).booleanValue();
     }
 
     @Override
-    protected void initEntityAI()
-    {
-        this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 25.0F));
-        this.tasks.addTask(5, new EntityPhasm.AIWander(this));
-        this.tasks.addTask(2,new EntityPhasm.AILookAtTheFuckingPlayer(this));
-        this.targetTasks.addTask(3, new EntityPhasm.AIInteractWithPlayer(this));
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 25.0F));
+        this.goalSelector.addGoal(5, new AIWander(this));
+        this.goalSelector.addGoal(2,new AILookAtTheFuckingPlayer(this));
+        this.goalSelector.addGoal(3, new AIInteractWithPlayer(this));
     }
 
     @Override
@@ -77,7 +80,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
     {
         super.tick();
 
-        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
+        if (!this.world.isRemote && this.world.getDifficulty() == Difficulty.PEACEFUL)
         {
             this.onKillCommand();
         }
@@ -90,13 +93,13 @@ public class EntityPhasm extends EntityFlying implements IMob {
         timer++;
         if(timer>=10) {
             timer = 0;
-            EntityPlayer ep = world.getNearestAttackablePlayer(this, 5, 5);
+            PlayerEntity ep = world.getClosestPlayer(this, 5);
             if (ep != null) {
                 setAttackTarget(ep);
             }
         }
-        if(getAttackTarget()instanceof EntityPlayer){
-            EntityPlayer player = (EntityPlayer) getAttackTarget();
+        if(getAttackTarget()instanceof PlayerEntity){
+            PlayerEntity player = (PlayerEntity) getAttackTarget();
             if(player.isCreative()||!player.isAlive()||player==null){
                 setAttackTarget(null);
             }
@@ -134,14 +137,19 @@ public class EntityPhasm extends EntityFlying implements IMob {
             }
     }*/
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_PHASM;
+    }
+
     public boolean attackEntityAsMob(Entity entityIn, float damage)
     {
         float f = 5;
         int i = 0;
 
-        if (entityIn instanceof EntityLivingBase)
+        if (entityIn instanceof LivingEntity)
         {
-            f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)entityIn).getCreatureAttribute());
+            f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((LivingEntity)entityIn).getCreatureAttribute());
             i += EnchantmentHelper.getKnockbackModifier(this);
         }
 
@@ -149,11 +157,10 @@ public class EntityPhasm extends EntityFlying implements IMob {
 
         if (flag)
         {
-            if (i > 0 && entityIn instanceof EntityLivingBase)
+            if (i > 0 && entityIn instanceof LivingEntity)
             {
-                ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
-                this.motionX *= 0.6D;
-                this.motionZ *= 0.6D;
+                ((LivingEntity)entityIn).knockBack(this, (float)i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
+                setMotionMultiplier(Blocks.AIR.getDefaultState(),new Vec3d(0.6D,1,0.6D));
             }
 
             int j = EnchantmentHelper.getFireAspectModifier(this);
@@ -163,9 +170,9 @@ public class EntityPhasm extends EntityFlying implements IMob {
                 entityIn.setFire(j * 4);
             }
 
-            if (entityIn instanceof EntityPlayer)
+            if (entityIn instanceof PlayerEntity)
             {
-                EntityPlayer entityplayer = (EntityPlayer)entityIn;
+                PlayerEntity entityplayer = (PlayerEntity)entityIn;
                 ItemStack itemstack = this.getHeldItemMainhand();
                 ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : ItemStack.EMPTY;
 
@@ -192,8 +199,8 @@ public class EntityPhasm extends EntityFlying implements IMob {
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
-        if(source.getTrueSource() instanceof EntityPlayer) {
-            EntityPlayer attacker = (EntityPlayer) source.getTrueSource();
+        if(source.getTrueSource() instanceof PlayerEntity) {
+            PlayerEntity attacker = (PlayerEntity) source.getTrueSource();
             Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(attacker.getHeldItemMainhand());
             if(map.containsKey(KathairisEnchantments.ENCHANTMENT_ETHEREAL)) {
                 return super.attackEntityFrom(source,amount);
@@ -209,13 +216,6 @@ public class EntityPhasm extends EntityFlying implements IMob {
         this.getDataManager().register(SWINGING_ARMS, Boolean.valueOf(false));
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_PHASM;
-    }
-
     @Override
     public int getMaxSpawnedInChunk()
     {
@@ -226,7 +226,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
         this.getDataManager().set(SWINGING_ARMS, Boolean.valueOf(swingingArms));
     }
 
-    static class PhasmMoveHelper extends EntityMoveHelper
+    static class PhasmMoveHelper extends FlyingMovementController
     {
         private final EntityPhasm parentEntity;
         private int courseChangeCooldown;
@@ -240,7 +240,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
         @Override
         public void tick()
         {
-            if (this.action == EntityMoveHelper.Action.MOVE_TO)
+            if (this.action == Action.MOVE_TO)
             {
                 double d0 = this.posX - this.parentEntity.posX;
                 double d1 = this.posY - this.parentEntity.posY;
@@ -254,13 +254,14 @@ public class EntityPhasm extends EntityFlying implements IMob {
 
                     if (this.isNotColliding(this.posX, this.posY, this.posZ, d3))
                     {
-                        this.parentEntity.motionX += d0 / d3 * 0.1D;
-                        this.parentEntity.motionY += d1 / d3 * 0.1D;
-                        this.parentEntity.motionZ += d2 / d3 * 0.1D;
+                        double mX = parentEntity.getMotion().getX() + d0 / d3 * 0.1D;
+                        double mY = parentEntity.getMotion().getY() + d1 / d3 * 0.1D;
+                        double mZ = parentEntity.getMotion().getZ() + d2 / d3 * 0.1D;
+                        parentEntity.setMotion(new Vec3d(mX,mY,mZ));
                     }
                     else
                     {
-                        this.action = EntityMoveHelper.Action.WAIT;
+                        this.action = Action.WAIT;
                     }
                 }
             }
@@ -288,12 +289,12 @@ public class EntityPhasm extends EntityFlying implements IMob {
         }
     }
 
-    static class AILookAtTheFuckingPlayer extends EntityAIBase {
+    static class AILookAtTheFuckingPlayer extends Goal {
         private final EntityPhasm phasm;
 
         public AILookAtTheFuckingPlayer(EntityPhasm entity) {
             phasm = entity;
-            this.setMutexBits(3);
+            this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
         }
 
         @Override
@@ -304,7 +305,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
         @Override
         public void tick() {
             if (phasm.getAttackTarget() != null) {
-                EntityLivingBase entitylivingbase = phasm.getAttackTarget();
+                LivingEntity entitylivingbase = phasm.getAttackTarget();
                 double d1 = entitylivingbase.posX - this.phasm.posX;
                 double d2 = entitylivingbase.posZ - this.phasm.posZ;
                 this.phasm.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float)Math.PI);
@@ -313,12 +314,12 @@ public class EntityPhasm extends EntityFlying implements IMob {
         }
     }
 
-    static class AIInteractWithPlayer extends EntityAIBase {
+    static class AIInteractWithPlayer extends Goal {
         private final EntityPhasm phasm;
 
         public AIInteractWithPlayer(EntityPhasm entity){
             phasm=entity;
-            this.setMutexBits(3);
+            this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
         }
 
         @Override
@@ -327,9 +328,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
         @Override
         public void tick(){
             if(phasm.getAttackTarget()!=null){
-                phasm.motionX=(phasm.getAttackTarget().posX-phasm.posX)/50;
-                phasm.motionY=(phasm.getAttackTarget().posY+1-phasm.posY)/50;
-                phasm.motionZ=(phasm.getAttackTarget().posZ-phasm.posZ)/50;
+                phasm.setMotion(new Vec3d((phasm.getAttackTarget().posX-phasm.posX)/50,(phasm.getAttackTarget().posY+1-phasm.posY)/50,(phasm.getAttackTarget().posZ-phasm.posZ)/50));
                 if(phasm.getDistance(phasm.getAttackTarget())>10f){
                     BlockPos teleportPos = getClearPositionNearItself();
                     phasm.getAttackTarget().setPositionAndUpdate(teleportPos.getX(),teleportPos.getY(),teleportPos.getZ());
@@ -341,7 +340,7 @@ public class EntityPhasm extends EntityFlying implements IMob {
             double X=phasm.posX-5+phasm.getRNG().nextDouble()*10;
             double Z=phasm.posZ-5+phasm.getRNG().nextDouble()*10;
             BlockPos tmp = phasm.world.getHeight(Heightmap.Type.MOTION_BLOCKING,new BlockPos(X,phasm.posY,Z));
-            if(phasm.world.getBlockState(tmp.down()).isFullCube()&&!phasm.world.isAirBlock(tmp.down())&&phasm.world.isAirBlock(tmp)&&
+            if(phasm.world.getBlockState(tmp.down()).isSolid()&&!phasm.world.isAirBlock(tmp.down())&&phasm.world.isAirBlock(tmp)&&
                     phasm.world.isAirBlock(tmp.up())){
                 return tmp;
             }else{
@@ -350,34 +349,32 @@ public class EntityPhasm extends EntityFlying implements IMob {
         }
     }
 
-    static class AIWander extends EntityAIBase
+    static class AIWander extends Goal
     {
-        private final EntityPhasm gaznowel;
+        private final EntityPhasm phasm;
 
         public AIWander(EntityPhasm p_i45859_1_)
         {
-            this.gaznowel = p_i45859_1_;
-            this.setMutexBits(3);
+            this.phasm = p_i45859_1_;
+            this.setMutexFlags(EnumSet.of(Flag.JUMP, Flag.MOVE, Flag.LOOK, Flag.TARGET));
         }
 
         @Override
         public boolean shouldExecute()
         {
-            return gaznowel.getAttackTarget()==null;
+            return phasm.getAttackTarget()==null;
         }
 
         @Override
         public void tick() {
 
-            if(gaznowel.getAttackTarget()==null&&gaznowel.getRNG().nextInt(500)==0){
-                BlockPos targetPos = findSomePosition(gaznowel);
-                gaznowel.motionX=(targetPos.getX()-gaznowel.posX)/50;
-                gaznowel.motionY=(targetPos.getY()-gaznowel.posY)/50;
-                gaznowel.motionZ=(targetPos.getZ()-gaznowel.posZ)/50;
-                double d1 = targetPos.getX() - this.gaznowel.posX;
-                double d2 = targetPos.getZ() - this.gaznowel.posZ;
-                this.gaznowel.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float)Math.PI);
-                this.gaznowel.renderYawOffset = this.gaznowel.rotationYaw;
+            if(phasm.getAttackTarget()==null&& phasm.getRNG().nextInt(500)==0){
+                BlockPos targetPos = findSomePosition(phasm);
+                phasm.setMotion(new Vec3d((targetPos.getX()- phasm.posX)/50,(targetPos.getY()- phasm.posY)/50,(targetPos.getZ()- phasm.posZ)/50));
+                double d1 = targetPos.getX() - this.phasm.posX;
+                double d2 = targetPos.getZ() - this.phasm.posZ;
+                this.phasm.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float)Math.PI);
+                this.phasm.renderYawOffset = this.phasm.rotationYaw;
             }
         }
 

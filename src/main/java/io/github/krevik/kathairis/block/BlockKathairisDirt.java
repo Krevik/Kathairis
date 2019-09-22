@@ -10,7 +10,7 @@ import net.minecraft.block.material.Material;
 public class BlockKathairisDirt extends Block {
 
 	public BlockKathairisDirt() {
-		super(Block.Properties.create(Material.GROUND).sound(SoundType.GROUND).hardnessAndResistance(0.5F, 0.5F));
+		super(Properties.create(Material.GOURD).sound(SoundType.GROUND).hardnessAndResistance(0.5F, 0.5F));
 	}
 
 }

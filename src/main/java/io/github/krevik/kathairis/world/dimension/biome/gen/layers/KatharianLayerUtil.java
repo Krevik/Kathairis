@@ -2,11 +2,11 @@ package io.github.krevik.kathairis.world.dimension.biome.gen.layers;
 
 import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.init.ModBiomes;
-import net.minecraft.init.Biomes;
-import net.minecraft.util.registry.IRegistry;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.IContextExtended;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.IExtendedNoiseRandom;
 import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.gen.area.IArea;
@@ -19,18 +19,19 @@ import java.util.function.LongFunction;
 
 public class KatharianLayerUtil {
 
-    protected static final int WARM_OCEAN = IRegistry.BIOME.getId(Biomes.WARM_OCEAN);
-    protected static final int LUKEWARM_OCEAN = IRegistry.BIOME.getId(Biomes.LUKEWARM_OCEAN);
-    protected static final int OCEAN = IRegistry.BIOME.getId(Biomes.OCEAN);
-    protected static final int COLD_OCEAN = IRegistry.BIOME.getId(Biomes.COLD_OCEAN);
-    protected static final int FROZEN_OCEAN = IRegistry.BIOME.getId(Biomes.FROZEN_OCEAN);
-    protected static final int DEEP_WARM_OCEAN = IRegistry.BIOME.getId(Biomes.DEEP_WARM_OCEAN);
-    protected static final int DEEP_LUKEWARM_OCEAN = IRegistry.BIOME.getId(Biomes.DEEP_LUKEWARM_OCEAN);
-    protected static final int DEEP_OCEAN = IRegistry.BIOME.getId(Biomes.DEEP_OCEAN);
-    protected static final int DEEP_COLD_OCEAN = IRegistry.BIOME.getId(Biomes.DEEP_COLD_OCEAN);
-    protected static final int DEEP_FROZEN_OCEAN = IRegistry.BIOME.getId(Biomes.DEEP_FROZEN_OCEAN);
 
-    public static <T extends IArea, C extends IContextExtended<T>> IAreaFactory<T> repeat(long seed, IAreaTransformer1 parent, IAreaFactory<T> p_202829_3_, int count, LongFunction<C> contextFactory) {
+    protected static final int WARM_OCEAN = Registry.BIOME.getId(Biomes.WARM_OCEAN);
+    protected static final int LUKEWARM_OCEAN = Registry.BIOME.getId(Biomes.LUKEWARM_OCEAN);
+    protected static final int OCEAN = Registry.BIOME.getId(Biomes.OCEAN);
+    protected static final int COLD_OCEAN = Registry.BIOME.getId(Biomes.COLD_OCEAN);
+    protected static final int FROZEN_OCEAN = Registry.BIOME.getId(Biomes.FROZEN_OCEAN);
+    protected static final int DEEP_WARM_OCEAN = Registry.BIOME.getId(Biomes.DEEP_WARM_OCEAN);
+    protected static final int DEEP_LUKEWARM_OCEAN = Registry.BIOME.getId(Biomes.DEEP_LUKEWARM_OCEAN);
+    protected static final int DEEP_OCEAN = Registry.BIOME.getId(Biomes.DEEP_OCEAN);
+    protected static final int DEEP_COLD_OCEAN = Registry.BIOME.getId(Biomes.DEEP_COLD_OCEAN);
+    protected static final int DEEP_FROZEN_OCEAN = Registry.BIOME.getId(Biomes.DEEP_FROZEN_OCEAN);
+
+    public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> repeat(long seed, IAreaTransformer1 parent, IAreaFactory<T> p_202829_3_, int count, LongFunction<C> contextFactory) {
         IAreaFactory<T> iareafactory = p_202829_3_;
 
         for(int i = 0; i < count; ++i) {
@@ -41,15 +42,15 @@ public class KatharianLayerUtil {
     }
 
 
-    public static <T extends IArea, C extends IContextExtended<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, OverworldGenSettings settings, LongFunction<C> contextFactory) {
-        IAreaFactory<T> iareafactory = GenLayerIsland.INSTANCE.apply(contextFactory.apply(1L));
-        iareafactory = GenLayerZoom.FUZZY.apply(contextFactory.apply(2000L), iareafactory);
-        iareafactory = GenLayerZoom.NORMAL.apply(contextFactory.apply(2001L), iareafactory);
-        iareafactory = GenLayerRemoveTooMuchOcean.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-        iareafactory = GenLayerZoom.NORMAL.apply(contextFactory.apply(2002L), iareafactory);
-        iareafactory = GenLayerDeepOcean.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
+    public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, OverworldGenSettings settings, LongFunction<C> contextFactory) {
+        IAreaFactory<T> iareafactory = IslandLayer.INSTANCE.apply(contextFactory.apply(1L));
+        iareafactory = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), iareafactory);
+        iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2001L), iareafactory);
+        iareafactory = RemoveTooMuchOceanLayer.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
+        iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2002L), iareafactory);
+        iareafactory = DeepOceanLayer.INSTANCE.apply(contextFactory.apply(4L), iareafactory);
         //iareafactory = GenLayerEdge.HeatIce.INSTANCE.apply(contextFactory.apply(2L), iareafactory);
-        iareafactory = repeat(1000L, GenLayerZoom.NORMAL, iareafactory, 0, contextFactory);
+        iareafactory = repeat(1000L, ZoomLayer.NORMAL, iareafactory, 0, contextFactory);
 
         int i = 8;
         int j = i;
@@ -59,52 +60,52 @@ public class KatharianLayerUtil {
 
         i = 3;
 
-        IAreaFactory<T> layer1 = repeat(1000L, GenLayerZoom.NORMAL, iareafactory, 0, contextFactory);
-        layer1 = GenLayerRiverInit.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), layer1);
+        IAreaFactory<T> layer1 = repeat(1000L, ZoomLayer.NORMAL, iareafactory, 0, contextFactory);
+        layer1 = StartRiverLayer.INSTANCE.apply(contextFactory.apply(100L), layer1);
         IAreaFactory<T> layer2 = getBiomeLayer(iareafactory, settings, contextFactory);
-        layer1 = repeat(1000L, GenLayerZoom.NORMAL, layer1, 2, contextFactory);
-        layer1 = repeat(1000L, GenLayerZoom.NORMAL, layer1, j, contextFactory);
-        layer1 = GenLayerKatharianRiver.INSTANCE.apply((IContextExtended)contextFactory.apply(1L), layer1);
-        layer1 = GenLayerSmooth.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer1);
-        layer2 = GenLayerBiomeVariants.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer2);
-        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), layer2);
+        layer1 = repeat(1000L, ZoomLayer.NORMAL, layer1, 2, contextFactory);
+        layer1 = repeat(1000L, ZoomLayer.NORMAL, layer1, j, contextFactory);
+        layer1 = GenLayerKatharianRiver.INSTANCE.apply(contextFactory.apply(1L), layer1);
+        layer1 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer1);
+        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(10L), layer2);
+        layer2 = GenLayerBiomeVariants.INSTANCE.apply(contextFactory.apply(1000L), layer2);
 
         for(int k = 0; k < i; ++k) {
-            layer2 = GenLayerZoom.NORMAL.apply((IContextExtended)contextFactory.apply((long)(1000 + k)), layer2);
+            layer2 = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), layer2);
 
             if (k == 1 || i == 1) {
-                layer2 = GenLayerKatharianBiomeEdge.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer2);
-                layer2 = GenLayerZoom.NORMAL.apply((IContextExtended)contextFactory.apply((long)(1000L)), layer2);
+                layer2 = GenLayerKatharianBiomeEdge.INSTANCE.apply(contextFactory.apply(1000L), layer2);
+                layer2 = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000L)), layer2);
             }
         }
+        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(1L), layer2);
+        layer2 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer2);
+        layer2 = GenLayerKatharianRiverMix.INSTANCE.apply(contextFactory.apply(100L), layer2, layer1);
 
-        layer2 = GenLayerSmooth.INSTANCE.apply((IContextExtended)contextFactory.apply(1000L), layer2);
-        layer2 = GenLayerKatharianRiverMix.INSTANCE.apply((IContextExtended)contextFactory.apply(100L), layer2, layer1);
-
-        IAreaFactory<T> iareafactory5 = GenLayerVoronoiZoom.INSTANCE.apply(contextFactory.apply(10L), layer2);
+        IAreaFactory<T> iareafactory5 = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(10L), layer2);
         return ImmutableList.of(layer2, iareafactory5, layer2);
     }
 
-
-   private static <T extends IArea, C extends IContextExtended<T>> IAreaFactory<T> getBiomeLayer(IAreaFactory<T> parentLayer,
-                                                                                                 OverworldGenSettings chunkSettings, LongFunction<C> contextFactory)
+    private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> getBiomeLayer(IAreaFactory<T> parentLayer,
+                                                                                               OverworldGenSettings chunkSettings, LongFunction<C> contextFactory)
     {
-        parentLayer = (new GenLayerKatharianBiome(chunkSettings)).apply((IContextExtended) contextFactory.apply(200L), parentLayer);
-        parentLayer = LayerUtil.repeat(1000L, GenLayerZoom.NORMAL, parentLayer, 2, contextFactory);
-        parentLayer = GenLayerBiomeEdge.INSTANCE.apply((IContextExtended) contextFactory.apply(1000L), parentLayer);
+        parentLayer = (new GenLayerKatharianBiome(chunkSettings)).apply(contextFactory.apply(200L), parentLayer);
+        parentLayer = LayerUtil.repeat(1000L, ZoomLayer.NORMAL, parentLayer, 2, contextFactory);
+        parentLayer = EdgeBiomeLayer.INSTANCE.apply(contextFactory.apply(1000L), parentLayer);
         return parentLayer;
     }
 
-    public static GenLayer[] buildOverworldProcedure(long seed, WorldType typeIn, OverworldGenSettings settings) {
+
+    public static Layer[] buildOverworldProcedure(long seed, WorldType typeIn, OverworldGenSettings settings) {
         int[] aint = new int[1];
         ImmutableList<IAreaFactory<LazyArea>> immutablelist = buildOverworldProcedure(typeIn, settings, (p_202825_3_) -> {
             ++aint[0];
-            return new LazyAreaLayerContext(1, aint[0], seed, p_202825_3_);
+            return new LazyAreaLayerContext(25, seed, p_202825_3_);
         });
-        GenLayer genlayer = new GenLayer(immutablelist.get(0));
-        GenLayer genlayer1 = new GenLayer(immutablelist.get(1));
-        GenLayer genlayer2 = new GenLayer(immutablelist.get(2));
-        return new GenLayer[]{genlayer, genlayer1, genlayer2};
+        Layer genlayer = new Layer(immutablelist.get(0));
+        Layer genlayer1 = new Layer(immutablelist.get(1));
+        Layer genlayer2 = new Layer(immutablelist.get(2));
+        return new Layer[]{genlayer, genlayer1, genlayer2};
     }
 
     public static boolean isOcean(int biomeIn) {
@@ -114,7 +115,7 @@ public class KatharianLayerUtil {
     }
 
     public static boolean isKatharianDesertBiome(int biomeID){
-        Biome biome = IRegistry.BIOME.get(biomeID);
+        Biome biome = Registry.BIOME.getByValue(biomeID);
         return biome== ModBiomes.KATHARIAN_DESERT_EDGE||biome==ModBiomes.SOFT_SAND_LAKES||biome==ModBiomes.KATHARIAN_DESERT||biome==ModBiomes.HUGE_DESERT_MOUNTAINS;
     }
 

@@ -1,21 +1,27 @@
 package io.github.krevik.kathairis.world.dimension.feature.plainfields;
 
+import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
-import net.minecraft.block.BlockGravel;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.GravelBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
+import java.util.function.Function;
 
 public class FeaturePlainFields extends Feature<NoFeatureConfig> {
+    public FeaturePlainFields(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49878_1_) {
+        super(p_i49878_1_);
+    }
+
     @Override
-    public boolean place(IWorld world, IChunkGenerator<? extends IChunkGenSettings> chunkGenerator, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> chunkGenerator, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {
             int shiftX=0;
             int shiftZ=0;
             int direction = rand.nextInt(2)==0?rand.nextInt(2):1+rand.nextInt(3);
@@ -50,7 +56,7 @@ public class FeaturePlainFields extends Feature<NoFeatureConfig> {
             for(int z=-radius/2;z<=radius/2;z++){
                 BlockPos toCheck = world.getHeight(Heightmap.Type.MOTION_BLOCKING,new BlockPos(posX+x,posY,posZ+z)).down();
                 if(world.isBlockLoaded(toCheck)){
-                    if(world.getBlockState(toCheck).getBlock() instanceof BlockGravel){
+                    if(world.getBlockState(toCheck).getBlock() instanceof GravelBlock){
                         result=toCheck;
                     }
                 }

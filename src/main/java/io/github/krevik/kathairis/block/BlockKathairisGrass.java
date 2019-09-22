@@ -1,22 +1,20 @@
 package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReaderBase;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.lighting.LightEngine;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -27,52 +25,57 @@ import java.util.Random;
  * @author Krevik
  */
 //TODO cleanup
-public class BlockKathairisGrass extends Block implements IGrowable {
+public class BlockKathairisGrass extends GrassBlock implements IGrowable {
 
 	public static final BooleanProperty FLOWER = BooleanProperty.create("flower");
-	public static final BooleanProperty SNOWY = BooleanProperty.create("snowy");
 	int month = Calendar.getInstance().get(Calendar.MONTH);
 
 	public BlockKathairisGrass() {
-		super(Block.Properties.create(Material.GRASS).hardnessAndResistance(0.6F, 0.6F).tickRandomly().sound(SoundType.PLANT));
+		super(Properties.create(Material.ORGANIC).hardnessAndResistance(0.6F, 0.6F).tickRandomly().sound(SoundType.PLANT));
 		this.setDefaultState(this.stateContainer.getBaseState().with(SNOWY, Boolean.FALSE).with(FLOWER, Boolean.FALSE));
 	}
 
-	private static boolean func_196383_a(IWorldReaderBase p_196383_0_, BlockPos p_196383_1_) {
-		BlockPos blockpos = p_196383_1_.up();
-		return p_196383_0_.getLight(blockpos) >= 4 || p_196383_0_.getBlockState(blockpos).getOpacity(p_196383_0_, blockpos) < p_196383_0_.getMaxLightLevel();
-	}
 
-	private static boolean func_196384_b(IWorldReaderBase p_196384_0_, BlockPos p_196384_1_) {
-		BlockPos blockpos = p_196384_1_.up();
-		return p_196384_0_.getLight(blockpos) >= 4 && p_196384_0_.getBlockState(blockpos).getOpacity(p_196384_0_, blockpos) < p_196384_0_.getMaxLightLevel() && !p_196384_0_.getFluidState(blockpos).isTagged(FluidTags.WATER);
-	}
-
-	public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	@Override
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return stateIn.with(SNOWY, shouldBeSnowed(stateIn)).with(FLOWER, stateIn.get(FLOWER));
 	}
 
 	@Override
-	public boolean isSolid(IBlockState p_200124_1_) {
+	public boolean isSolid(BlockState p_200124_1_) {
 		return true;
 	}
 
-	public void tick(IBlockState state, World worldIn, BlockPos pos, Random random) {
+	private static boolean func_220257_b(BlockState p_220257_0_, IWorldReader p_220257_1_, BlockPos p_220257_2_) {
+		BlockPos blockpos = p_220257_2_.up();
+		BlockState blockstate = p_220257_1_.getBlockState(blockpos);
+		if (blockstate.getBlock() == Blocks.SNOW && blockstate.get(SnowBlock.LAYERS) == 1) {
+			return true;
+		} else {
+			int i = LightEngine.func_215613_a(p_220257_1_, p_220257_0_, p_220257_2_, blockstate, blockpos, Direction.UP, blockstate.getOpacity(p_220257_1_, blockpos));
+			return i < p_220257_1_.getMaxLightLevel();
+		}
+	}
+
+	private static boolean func_220256_c(BlockState p_220256_0_, IWorldReader p_220256_1_, BlockPos p_220256_2_) {
+		BlockPos blockpos = p_220256_2_.up();
+		return func_220257_b(p_220256_0_, p_220256_1_, p_220256_2_) && !p_220256_1_.getFluidState(blockpos).isTagged(FluidTags.WATER);
+	}
+
+	@Override
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isRemote) {
-			if (!worldIn.isAreaLoaded(pos, 3))
-				return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
-			if (!func_196383_a(worldIn, pos)) {
-				worldIn.setBlockState(pos, ModBlocks.KATHAIRIS_DIRT.getDefaultState());
+			if (!worldIn.isAreaLoaded(pos, 3)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+			if (!func_220257_b(state, worldIn, pos)) {
+				worldIn.setBlockState(pos, Blocks.DIRT.getDefaultState());
 			} else {
 				if (worldIn.getLight(pos.up()) >= 9) {
-					for (int i = 0; i < 4; ++i) {
-						BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-						if (!worldIn.isBlockPresent(blockpos)) {
-							return;
-						}
+					BlockState blockstate = this.getDefaultState();
 
-						if (worldIn.getBlockState(blockpos).getBlock() == ModBlocks.KATHAIRIS_DIRT && func_196384_b(worldIn, blockpos) && worldIn.isAirBlock(blockpos.up())) {
-							worldIn.setBlockState(blockpos, this.getDefaultState());
+					for(int i = 0; i < 4; ++i) {
+						BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+						if (worldIn.getBlockState(blockpos).getBlock() == Blocks.DIRT && func_220256_c(blockstate, worldIn, blockpos)) {
+							worldIn.setBlockState(blockpos, blockstate.with(SNOWY, Boolean.valueOf(worldIn.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 						}
 					}
 				}
@@ -132,16 +135,17 @@ public class BlockKathairisGrass extends Block implements IGrowable {
         }
     }*/
 
-	public IBlockState getStateForPlacement(BlockItemUseContext context) {
+    @Override
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState();
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FLOWER).add(SNOWY);
 	}
 
-	private boolean shouldBeSnowed(IBlockState state) {
+	private boolean shouldBeSnowed(BlockState state) {
 		boolean result = false;
 		if (month == 11) {
 			return true;
@@ -150,7 +154,7 @@ public class BlockKathairisGrass extends Block implements IGrowable {
 	}
 
     @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+    public void grow(World worldIn, Random rand, BlockPos pos, BlockState state)
     {
         BlockPos blockpos = pos.up();
 
@@ -167,15 +171,15 @@ public class BlockKathairisGrass extends Block implements IGrowable {
                     {
                         if (rand.nextInt(100) == 6)
                         {
-                            IBlockState iblockstate0 = ModBlocks.KATHAIRIS_FUNGI.getDefaultState();
+							BlockState iblockstate0 = ModBlocks.KATHAIRIS_FUNGI.getDefaultState();
                             if(ModBlocks.KATHAIRIS_FUNGI.isValidPosition(iblockstate0,worldIn,blockpos1)){
                                 worldIn.setBlockState(blockpos1, iblockstate0, 3);
                             }
                         }
                         else
                         {
-                            IBlockState iblockstate1 = ModBlocks.KATHAIRIS_TALL_GRASS.getDefaultState();
-                            IBlockState iblockstate11 = ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState();
+							BlockState iblockstate1 = ModBlocks.KATHAIRIS_TALL_GRASS.getDefaultState();
+							BlockState iblockstate11 = ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState();
 
                             if(rand.nextInt(3)==1){
                                 if(ModBlocks.KATHAIRIS_MINI_GRASS.isValidPosition(iblockstate1,worldIn,blockpos1)){
@@ -194,7 +198,7 @@ public class BlockKathairisGrass extends Block implements IGrowable {
                 }
 
                 blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-                if (worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.KATHAIRIS_GRASS || worldIn.getBlockState(blockpos1).isNormalCube())
+                if (worldIn.getBlockState(blockpos1.down()).getBlock() != ModBlocks.KATHAIRIS_GRASS || worldIn.getBlockState(blockpos1).isNormalCube(worldIn,blockpos1))
                 {
                     break;
                 }
@@ -205,12 +209,12 @@ public class BlockKathairisGrass extends Block implements IGrowable {
     }
 
 	@Override
-	public boolean canGrow(IBlockReader p_176473_1_, BlockPos p_176473_2_, IBlockState p_176473_3_, boolean p_176473_4_) {
+	public boolean canGrow(IBlockReader p_176473_1_, BlockPos p_176473_2_, BlockState p_176473_3_, boolean p_176473_4_) {
 		return p_176473_1_.getBlockState(p_176473_2_.up()).isAir();
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 

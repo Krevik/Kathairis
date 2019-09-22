@@ -2,26 +2,27 @@ package io.github.krevik.kathairis.entity;
 
 import com.google.common.collect.Sets;
 import io.github.krevik.kathairis.entity.ai.EntityAIAttackTarget;
-import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.controller.FlyingMovementController;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.pathfinding.PathNavigateFlying;
+import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -32,71 +33,80 @@ import net.minecraft.world.gen.Heightmap;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class EntityCloudySlime extends EntityTameable
+public class EntityCloudySlime extends TameableEntity
 {
     private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityCloudySlime.class, DataSerializers.VARINT);
     private static final Set<Item> TAME_ITEMS = Sets.newHashSet(ModItems.CLOUD_ESSENCE);
+    protected SitGoal sitGoal;
 
     public EntityCloudySlime(World worldIn)
     {
         super(ModEntities.CLOUDY_SLIME,worldIn);
-        this.setSize(1.4F, 1.4F);
-        this.moveHelper = new EntityFlyHelper(this);
+
+        this.moveController = new FlyingMovementController(this);
         this.setTamed(false);
-        this.spawnableBlock= ModBlocks.KATHAIRIS_GRASS;
     }
 
-    @Override
-    protected void initEntityAI()
-    {
-    	super.initEntityAI();
-        this.aiSit = new EntityAISit(this);
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new EntityAIFollowOwnerFlying(this, 1.0D, 5.0F, 1.0F));
-        this.tasks.addTask(4, new EntityAIWanderAvoidWaterFlying(this, 1.0D));
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
-        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-        this.targetTasks.addTask(1, new EntityAIOwnerHurtTarget(this));
-        this.targetTasks.addTask(1, new EntityAIAttackTarget<>(this, this.getAttackTarget()));
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+    public EntityCloudySlime(EntityType<EntityCloudySlime> type, World world) {
+        super(type, world);
+    }
 
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        sitGoal = new SitGoal(this);
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(2, this.sitGoal);
+        this.goalSelector.addGoal(3, new FollowOwnerFlyingGoal(this, 1.0D, 5.0F, 1.0F));
+        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+        this.goalSelector.addGoal(1, new OwnerHurtTargetGoal(this));
+        this.goalSelector.addGoal(1, new EntityAIAttackTarget(this, this.getAttackTarget()));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
+    }
+
+
+    @Override
+    public SitGoal getAISit() {
+        return sitGoal;
     }
 
     @Override
     protected void registerAttributes()
     {
         super.registerAttributes();
-        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
+        this.getAttributes().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
         this.getAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.6000000059604645D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000000298023224D);
     }
 
     @Override
-    protected PathNavigate createNavigator(World worldIn)
+    protected PathNavigator createNavigator(World worldIn)
     {
-        PathNavigateFlying pathnavigateflying = new PathNavigateFlying(this, worldIn);
+        FlyingPathNavigator pathnavigateflying = new FlyingPathNavigator(this, worldIn);
         pathnavigateflying.setCanOpenDoors(false);
         pathnavigateflying.setCanEnterDoors(true);
         return pathnavigateflying;
     }
 
     @Override
-    public void travel(float strafe, float vertical, float forward) {
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_CLOUDYSLIME;
+    }
+
+    @Override
+    public void travel(Vec3d direction) {
         if (this.isInWater()) {
-            this.moveRelative(strafe, vertical, forward, 0.02F);
-            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= (double)0.8F;
-            this.motionY *= (double)0.8F;
-            this.motionZ *= (double)0.8F;
+            this.moveRelative(0.02f,new Vec3d(direction.getX(), direction.getY(), direction.getZ()));
+            this.move(MoverType.SELF, getMotion());
+            setMotionMultiplier(Blocks.WATER.getDefaultState(),new Vec3d(0.8,0.8,0.8));
         } else if (this.isInLava()) {
-            this.moveRelative(strafe, vertical, forward, 0.02F);
-            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.5D;
-            this.motionY *= 0.5D;
-            this.motionZ *= 0.5D;
+            this.moveRelative(0.02f,new Vec3d(direction.getX(), direction.getY(), direction.getZ()));
+            this.move(MoverType.SELF, getMotion());
+            setMotionMultiplier(Blocks.LAVA.getDefaultState(),new Vec3d(0.5,0.5,0.5));
         } else {
             float f = 0.91F;
             if (this.onGround) {
@@ -105,17 +115,15 @@ public class EntityCloudySlime extends EntityTameable
             }
 
             float f1 = 0.16277137F / (f * f * f);
-            this.moveRelative(strafe, vertical, forward, this.onGround ? 0.1F * f1 : 0.02F);
+            this.moveRelative(this.onGround ? 0.1F * f1 : 0.02F, new Vec3d(direction.getX(), direction.getY(), direction.getZ()));
             f = 0.91F;
             if (this.onGround) {
                 BlockPos underPos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getBoundingBox().minY) - 1, MathHelper.floor(this.posZ));
                 f = this.world.getBlockState(underPos).getSlipperiness(world, underPos, this) * 0.91F;
             }
 
-            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= (double)f;
-            this.motionY *= (double)f;
-            this.motionZ *= (double)f;
+            this.move(MoverType.SELF, getMotion());
+            setMotionMultiplier(Blocks.AIR.getDefaultState(),new Vec3d(f,f,f));
         }
 
         this.prevLimbSwingAmount = this.limbSwingAmount;
@@ -131,25 +139,19 @@ public class EntityCloudySlime extends EntityTameable
     }
 
     @Override
-    public float getEyeHeight()
-    {
-        return this.height * 0.6F;
-    }
-
-    @Override
     public void tick() {
         super.tick();
-        EntityLivingBase target = this.getAttackTarget();
+        LivingEntity target = this.getAttackTarget();
         if(target!=null&&!this.isSitting()) {
             Vec3d vec3d = target.getEyePosition(1.0F);
-            EntityCloudySlime.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+            EntityCloudySlime.this.moveController.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
         }
         if(!this.isTamed()) {
             this.setAttackTarget(this.getRevengeTarget());
         }
         if(this.getOwner()!=null) {
-            if(this.getAttackTarget() instanceof EntityTameable) {
-                EntityTameable et = (EntityTameable) this.getAttackTarget();
+            if(this.getAttackTarget() instanceof TameableEntity) {
+                TameableEntity et = (TameableEntity) this.getAttackTarget();
                 if(this.getOwner()==et.getOwner()) {
                     this.setAttackTarget(null);
                 }
@@ -159,7 +161,7 @@ public class EntityCloudySlime extends EntityTameable
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    public boolean processInteract(PlayerEntity player, Hand hand)
     {
         ItemStack itemstack = player.getHeldItem(hand);
 
@@ -203,7 +205,7 @@ public class EntityCloudySlime extends EntityTameable
                         }
                     }
                 }else {
-                    this.aiSit.setSitting(!this.isSitting());
+                    this.getAISit().setSitting(!this.isSitting());
                 }
             }
 
@@ -224,20 +226,20 @@ public class EntityCloudySlime extends EntityTameable
     }
 
     @Override
-    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+    protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos)
     {
     	
     }
 
     @Override
-    public boolean canMateWith(EntityAnimal otherAnimal)
+    public boolean canMateWith(AnimalEntity otherAnimal)
     {
         return false;
     }
 
     @Nullable
     @Override
-    public EntityAgeable createChild(EntityAgeable ageable)
+    public AgeableEntity createChild(AgeableEntity ageable)
     {
         return null;
     }
@@ -257,7 +259,7 @@ public class EntityCloudySlime extends EntityTameable
     @Override
     protected void collideWithEntity(Entity entityIn)
     {
-        if (!(entityIn instanceof EntityPlayer))
+        if (!(entityIn instanceof PlayerEntity))
         {
             super.collideWithEntity(entityIn);
         }
@@ -272,9 +274,9 @@ public class EntityCloudySlime extends EntityTameable
         }
         else
         {
-            if (this.aiSit != null)
+            if (this.getAISit() != null)
             {
-                this.aiSit.setSitting(false);
+                this.getAISit().setSitting(false);
             }
             if(source== DamageSource.IN_WALL){
                 if(this.getOwner()!=null&&getOwner().isAlive()){
@@ -306,23 +308,17 @@ public class EntityCloudySlime extends EntityTameable
     }
 
     @Override
-    public void writeAdditional(NBTTagCompound compound)
+    public void writeAdditional(CompoundNBT compound)
     {
         super.writeAdditional(compound);
         compound.putInt("Variant", this.getVariant());
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound)
+    public void readAdditional(CompoundNBT compound)
     {
         super.readAdditional(compound);
         this.setVariant(compound.getInt("Variant"));
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_CLOUDYSLIME;
-    }
 }

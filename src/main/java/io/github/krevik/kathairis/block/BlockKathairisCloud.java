@@ -1,20 +1,20 @@
 package io.github.krevik.kathairis.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,38 +32,25 @@ public class BlockKathairisCloud extends Block {
 	private Supplier<Item> pickedItem;
 
 	public BlockKathairisCloud(Supplier<Item> itemAfterPick) {
-		super(Block.Properties.create(Material.CLOTH).doesNotBlockMovement().sound(SoundType.CLOTH).hardnessAndResistance(0.5f));
+		super(Properties.create(Material.WOOL).doesNotBlockMovement().sound(SoundType.CLOTH).hardnessAndResistance(0.5f));
 		pickedItem = itemAfterPick;
-	}
-
-	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public boolean isSideInvisible(IBlockState state, IBlockState adjacentBlockState, EnumFacing side) {
+	public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
 		return adjacentBlockState.getBlock() == this || super.isSideInvisible(state, adjacentBlockState, side);
 	}
 
-	public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return BlockFaceShape.UNDEFINED;
-	}
 
 	@Override
-	public boolean propagatesSkylightDown(IBlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_) {
+	public boolean propagatesSkylightDown(BlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_) {
 		return true;
 	}
 
 	@Override
-	public int getOpacity(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return 0;
-	}
-
-	@Override
-	public IItemProvider getItemDropped(IBlockState state, World worldIn, BlockPos pos, int fortune) {
-		return null;
 	}
 
 	@Override
@@ -71,8 +58,8 @@ public class BlockKathairisCloud extends Block {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
-	@Deprecated
-	public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	@Override
+	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_220051_6_) {
 		Item heldItem = player.getHeldItem(hand).getItem();
 		if (heldItem == GLASS_JAR) {
 			if (!worldIn.isRemote) {
@@ -86,13 +73,8 @@ public class BlockKathairisCloud extends Block {
 	}
 
 	@Override
-	public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		entityIn.motionY = -0.0000001;
-	}
-
-	@Override
-	protected boolean canSilkHarvest() {
-		return true;
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+		entityIn.setMotion(new Vec3d(entityIn.getMotion().x,-0.0000001,entityIn.getMotion().z));
 	}
 
 }

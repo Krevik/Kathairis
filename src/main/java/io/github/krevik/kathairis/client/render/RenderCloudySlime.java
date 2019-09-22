@@ -1,23 +1,24 @@
 package io.github.krevik.kathairis.client.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.client.model.ModelCloudySlime;
 import io.github.krevik.kathairis.entity.EntityCloudySlime;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderCloudySlime extends RenderLiving<EntityCloudySlime>
+public class RenderCloudySlime extends MobRenderer<EntityCloudySlime,ModelCloudySlime<EntityCloudySlime>>
 {
     public static final Factory FACTORY = new Factory();
 
-    public RenderCloudySlime(RenderManager renderManagerIn)
+    public RenderCloudySlime(EntityRendererManager renderManagerIn)
     {
         super(renderManagerIn, new ModelCloudySlime(), 0F);
 
@@ -33,7 +34,7 @@ public class RenderCloudySlime extends RenderLiving<EntityCloudySlime>
     public static class Factory implements IRenderFactory<EntityCloudySlime> {
 
         @Override
-        public Render<? super EntityCloudySlime> createRenderFor(RenderManager manager) {
+        public EntityRenderer<? super EntityCloudySlime> createRenderFor(EntityRendererManager manager) {
 
             return new RenderCloudySlime(manager);
 

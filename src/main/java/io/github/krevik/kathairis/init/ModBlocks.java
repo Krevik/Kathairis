@@ -129,5 +129,11 @@ public final class ModBlocks {
 	public static final Block PURPLE_PALM = _null();
 	public static final Block ROTTEN_LOG = _null();
 	public static final Block BRINE_PUSTULE = _null();
+	public static final Block WILLOW_VINE_MAIN = _null();
+	public static final Block WILLOW_VINE_TIP = _null();
+	public static final Block MYSTIC_SAPLING = _null();
+	public static final Block SOUL_SAPLING = _null();
+	public static final Block SHINY_SAPLING = _null();
+	public static final Block ELDERWILLOW_SAPLING = _null();
 
 }

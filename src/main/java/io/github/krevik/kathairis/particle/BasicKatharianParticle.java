@@ -1,13 +1,17 @@
 package io.github.krevik.kathairis.particle;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.IParticleRenderType;
+import net.minecraft.client.particle.SpriteTexturedParticle;
+import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.entity.Entity;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -19,7 +23,7 @@ import java.awt.*;
  * @author Krevik
  * @credit Jabelar
  */
-public class BasicKatharianParticle extends Particle {
+public class BasicKatharianParticle extends SpriteTexturedParticle implements IParticleData {
     private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
     private KatharianParticleTexture textureConfig;
     private static final double GRAVITY = 0.04D;
@@ -34,6 +38,7 @@ public class BasicKatharianParticle extends Particle {
     private Color finalColor = Color.WHITE;
     private float initialScale = 1.0F;
     private float finalScale = 1.0F;
+    private float particleScale = 1.0F;
 
     private boolean enableDepth;
 
@@ -114,7 +119,7 @@ public class BasicKatharianParticle extends Particle {
     }
 
     @Override
-    public void renderParticle(BufferBuilder bufferIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+    public void renderParticle(BufferBuilder bufferIn, ActiveRenderInfo entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
@@ -139,9 +144,9 @@ public class BasicKatharianParticle extends Particle {
         if (particleAngle != 0.0F) {
             float angleInterp = particleAngle + (particleAngle - prevParticleAngle) * partialTicks;
             float f9 = MathHelper.cos(angleInterp * 0.5F);
-            float xComponent = MathHelper.sin(angleInterp * 0.5F) * (float) cameraViewDir.x;
-            float yComponent = MathHelper.sin(angleInterp * 0.5F) * (float) cameraViewDir.y;
-            float zComponent = MathHelper.sin(angleInterp * 0.5F) * (float) cameraViewDir.z;
+            float xComponent = MathHelper.sin(angleInterp * 0.5F) * (float) interpPosX;
+            float yComponent = MathHelper.sin(angleInterp * 0.5F) * (float) interpPosY;
+            float zComponent = MathHelper.sin(angleInterp * 0.5F) * (float) interpPosZ;
             Vec3d vec3d = new Vec3d(xComponent, yComponent, zComponent);
 
             for (int l = 0; l < 4; ++l) {
@@ -195,8 +200,8 @@ public class BasicKatharianParticle extends Particle {
     }
 
     @Override
-    public int getFXLayer() {
-        return 3;
+    public IParticleRenderType getRenderType() {
+        return IParticleRenderType.CUSTOM;
     }
 
     public BasicKatharianParticle setCanCollide(boolean canCollideIn) {
@@ -329,5 +334,25 @@ public class BasicKatharianParticle extends Particle {
     public BasicKatharianParticle setEnableDepth(boolean enableDepthIn) {
         enableDepth = enableDepthIn;
         return this;
+    }
+
+    /*@Override
+    public ParticleType<?> getType() {
+        return ModParticles.FAST_PARTICLE;
+    }*/
+
+    @Override
+    public ParticleType<?> getType() {
+        return null;
+    }
+
+    @Override
+    public void write(PacketBuffer buffer) {
+
+    }
+
+    @Override
+    public String getParameters() {
+        return null;
     }
 }

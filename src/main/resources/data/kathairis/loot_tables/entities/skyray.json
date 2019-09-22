@@ -1,0 +1,15 @@
+{
+    "pools": [
+        {
+		    "name": "kathairis:skyray_feather",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "kathairis:skyray_feather"
+                }
+            ]
+        }
+    ]
+}

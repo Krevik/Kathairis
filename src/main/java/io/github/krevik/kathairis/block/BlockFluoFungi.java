@@ -1,21 +1,17 @@
 package io.github.krevik.kathairis.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReaderBase;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,14 +27,14 @@ import static io.github.krevik.kathairis.init.ModBlocks.FLUO_FUNGI;
  */
 public class BlockFluoFungi extends BlockKathairisPlant {
 
-	public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public BlockFluoFungi() {
 		super(Block.Properties.create(Material.PLANTS).lightValue(10).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT));
 	}
 
 	@Override
-	public void tick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
 		handleFacing(state, worldIn, pos);
 		if (!this.isLogAround(worldIn, pos)) {
 			this.dropBlock(worldIn, pos, state);
@@ -47,35 +43,35 @@ public class BlockFluoFungi extends BlockKathairisPlant {
 
 	@Nullable
 	@Override
-	public IBlockState getStateForPlacement(BlockItemUseContext context) {
-		EnumFacing facing = context.getFace();
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		Direction facing = context.getFace();
 		World world = context.getWorld();
 		BlockPos pos = context.getPos();
 		if (isLog(world.getBlockState(pos.east()).getBlock())) {
-			return FLUO_FUNGI.getDefaultState().with(FACING, EnumFacing.WEST);
+			return FLUO_FUNGI.getDefaultState().with(FACING, Direction.WEST);
 		} else if (isLog(world.getBlockState(pos.west()).getBlock())) {
-			return FLUO_FUNGI.getDefaultState().with(FACING, EnumFacing.EAST);
+			return FLUO_FUNGI.getDefaultState().with(FACING, Direction.EAST);
 		} else if (isLog(world.getBlockState(pos.south()).getBlock())) {
-			return FLUO_FUNGI.getDefaultState().with(FACING, EnumFacing.NORTH);
+			return FLUO_FUNGI.getDefaultState().with(FACING, Direction.NORTH);
 		} else if (isLog(world.getBlockState(pos.north()).getBlock())) {
-			return FLUO_FUNGI.getDefaultState().with(FACING, EnumFacing.SOUTH);
+			return FLUO_FUNGI.getDefaultState().with(FACING, Direction.SOUTH);
 		} else {
-			return FLUO_FUNGI.getDefaultState().with(FACING, EnumFacing.WEST);
+			return FLUO_FUNGI.getDefaultState().with(FACING, Direction.WEST);
 		}
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
 		builder.add(FACING);
 	}
 
-	public boolean isLogAround(IWorldReaderBase worldIn, BlockPos pos) {
+	public boolean isLogAround(IWorldReader worldIn, BlockPos pos) {
 		boolean is = false;
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
 				BlockPos tmp = new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z);
-				if (worldIn.getBlockState(tmp).getBlock() instanceof BlockLog ||
+				if (worldIn.getBlockState(tmp).getBlock() instanceof LogBlock ||
 						worldIn.getBlockState(tmp).getBlock() instanceof BlockKathairisLog) {
 					is = true;
 				}
@@ -84,24 +80,19 @@ public class BlockFluoFungi extends BlockKathairisPlant {
 		return is;
 	}
 
-	private void dropBlock(World worldIn, BlockPos pos, IBlockState state) {
+	private void dropBlock(World worldIn, BlockPos pos, BlockState state) {
 		worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 		spawnAsEntity(worldIn, pos, new ItemStack(this));
 	}
 
 	@Override
-	public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		handleFacing(stateIn, worldIn, currentPos);
 		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
-
-	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		handleFacing(state, worldIn, pos);
 		if (!this.isLogAround(worldIn, pos)) {
 			this.dropBlock(worldIn, pos, state);
@@ -116,27 +107,27 @@ public class BlockFluoFungi extends BlockKathairisPlant {
 	}
 
 	@Override
-	public boolean isValidPosition(IBlockState state, IWorldReaderBase worldIn, BlockPos pos) {
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return isLogAround(worldIn, pos);
 	}
 
-	private void handleFacing(IBlockState state, IWorld world, BlockPos pos) {
+	private void handleFacing(BlockState state, IWorld world, BlockPos pos) {
 		if (isLog(world.getBlockState(pos.east()).getBlock())) {
-			world.setBlockState(pos, state.with(FACING, EnumFacing.WEST), 2);
+			world.setBlockState(pos, state.with(FACING, Direction.WEST), 2);
 		}
 		if (isLog(world.getBlockState(pos.west()).getBlock())) {
-			world.setBlockState(pos, state.with(FACING, EnumFacing.EAST), 2);
+			world.setBlockState(pos, state.with(FACING, Direction.EAST), 2);
 		}
 		if (isLog(world.getBlockState(pos.south()).getBlock())) {
-			world.setBlockState(pos, state.with(FACING, EnumFacing.NORTH), 2);
+			world.setBlockState(pos, state.with(FACING, Direction.NORTH), 2);
 		}
 		if (isLog(world.getBlockState(pos.north()).getBlock())) {
-			world.setBlockState(pos, state.with(FACING, EnumFacing.SOUTH), 2);
+			world.setBlockState(pos, state.with(FACING, Direction.SOUTH), 2);
 		}
 	}
 
 	private boolean isLog(Block block) {
-		return block instanceof BlockLog || block instanceof BlockKathairisLog;
+		return block instanceof LogBlock || block instanceof BlockKathairisLog;
 	}
 
    /* @Override

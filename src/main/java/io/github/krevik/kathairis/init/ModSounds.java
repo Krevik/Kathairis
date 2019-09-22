@@ -1,6 +1,5 @@
 package io.github.krevik.kathairis.init;
 
-import net.minecraft.block.SoundType;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.registries.ObjectHolder;
 

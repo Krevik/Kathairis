@@ -1,62 +1,70 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.entity.ai.EntityAIAvoidMovingSandsAndCactus;
-import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.pathfinding.PathNavigateClimber;
+import net.minecraft.pathfinding.ClimberPathNavigator;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityGecko extends EntityAnimal {
+public class EntityGecko extends AnimalEntity {
     private static final DataParameter<Integer> climbingSide = EntityDataManager.createKey(EntityGecko.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityGecko.class, DataSerializers.VARINT);
 
     public EntityGecko(World worldIn) {
         super(ModEntities.GECKO,worldIn);
-        setSize(0.7F, 0.25F);
         experienceValue = 10;
-        this.spawnableBlock= ModBlocks.KATHAIRIS_GRASS;
+    }
+
+    public EntityGecko(EntityType<EntityGecko> type, World world) {
+        super(type, world);
+    }
+
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        goalSelector.addGoal(0, new SwimGoal(this));
+        goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+        goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
+        goalSelector.addGoal(6, new RandomWalkingGoal(this, 1.0D));
+        goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        goalSelector.addGoal(3, new TemptGoal(this, 1.25D, false, Ingredient.fromItems(Items.PORKCHOP)));
+        goalSelector.addGoal(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
     }
 
     @Override
-    protected void initEntityAI() {
-        tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
-        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
-        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        tasks.addTask(8, new EntityAILookIdle(this));
-        tasks.addTask(3, new EntityAITempt(this, 1.25D, false, Ingredient.fromItems(Items.PORKCHOP)));
-        tasks.addTask(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
-
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_GECKO;
     }
+
 
     @Nonnull
     @Override
-    protected PathNavigate createNavigator(@Nonnull World worldIn)
+    protected PathNavigator createNavigator(@Nonnull World worldIn)
     {
-        return new PathNavigateClimber(this, worldIn);
+        return new ClimberPathNavigator(this, worldIn);
     }
 
     @Override
@@ -101,11 +109,6 @@ public class EntityGecko extends EntityAnimal {
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3000000417232513D);
     }
 
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-    	return KatharianLootTables.LOOT_GECKO;
-    }
 
     @Override
     public boolean isOnLadder()
@@ -128,9 +131,7 @@ public class EntityGecko extends EntityAnimal {
                 else if (!world.isAirBlock(pos.south())) setClimbingSide(EnumClimbSide.SOUTH);
             } else setClimbingSide(EnumClimbSide.FLOOR);
             if(!world.isAirBlock(getPosition())) {
-            	motionY=-1;
-            	motionX=-0.5+getRNG().nextDouble();
-            	motionZ=-0.5+getRNG().nextDouble();
+                setMotion(new Vec3d(-0.5+getRNG().nextDouble(),-1,-0.5+getRNG().nextDouble()));
             }
         }
     }
@@ -144,7 +145,7 @@ public class EntityGecko extends EntityAnimal {
     }
 
     @Override
-    public void writeAdditional(NBTTagCompound compound) {
+    public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putInt("climbingSide", climbingSide().ordinal());
         compound.putInt("Variant", getVariant());
@@ -152,7 +153,7 @@ public class EntityGecko extends EntityAnimal {
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound) {
+    public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
         //migration purpose
         int side = compound.getInt("climbingSide");
@@ -163,9 +164,9 @@ public class EntityGecko extends EntityAnimal {
     }
 
     @Override
-    public EntityGecko createChild(@Nonnull EntityAgeable ageable) {
+    public EntityGecko createChild(@Nonnull AgeableEntity ageable) {
         if (!world.isRemote) {
-            if (world.isBlockFullCube(getPosition().down())) {
+            if (world.getBlockState(getPosition().down()).isSolid()) {
                 if (getRNG().nextInt(6) == 0) {
                    // world.setBlockState(getPosition(), KCore.Gecko_Eggs.getDefaultState());
                 }
@@ -176,14 +177,10 @@ public class EntityGecko extends EntityAnimal {
 
     @Nullable
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata, @Nullable NBTTagCompound nbt) {
+    public ILivingEntityData onInitialSpawn(IWorld p_213386_1_, DifficultyInstance p_213386_2_, SpawnReason p_213386_3_, @Nullable ILivingEntityData p_213386_4_, @Nullable CompoundNBT p_213386_5_) {
         setVariant(rand.nextInt(4));
-        return livingdata;
+        return super.onInitialSpawn(p_213386_1_, p_213386_2_, p_213386_3_, p_213386_4_, p_213386_5_);
     }
 
-    @Override
-    public float getEyeHeight() {
-        return 0.95F * height;
-    }
 
 }

@@ -1,8 +1,8 @@
 package io.github.krevik.kathairis.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SandBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
@@ -16,10 +16,10 @@ public class BlockKathairisRocktus extends BlockKathairisPlant {
 	}
 
 	@Override
-	protected boolean isValidGround(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
 		boolean can = false;
-		can = block instanceof BlockSand || block instanceof BlockSoftSand || block instanceof BlockKathairisSand;
+		can = block instanceof SandBlock || block instanceof BlockSoftSand || block instanceof BlockKathairisSand;
 		return can;
 	}
 

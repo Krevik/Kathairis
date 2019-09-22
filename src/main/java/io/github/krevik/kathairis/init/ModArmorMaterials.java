@@ -1,12 +1,12 @@
 package io.github.krevik.kathairis.init;
 
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyLoadBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
@@ -75,12 +75,12 @@ public enum ModArmorMaterials implements IArmorMaterial {
 	}
 
 	@Override
-	public int getDurability(@Nonnull final EntityEquipmentSlot slotIn) {
+	public int getDurability(@Nonnull final EquipmentSlotType slotIn) {
 		return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * this.maxDamageFactor;
 	}
 
 	@Override
-	public int getDamageReductionAmount(@Nonnull final EntityEquipmentSlot slotIn) {
+	public int getDamageReductionAmount(@Nonnull final EquipmentSlotType slotIn) {
 		return this.damageReductionAmountArray[slotIn.getIndex()];
 	}
 

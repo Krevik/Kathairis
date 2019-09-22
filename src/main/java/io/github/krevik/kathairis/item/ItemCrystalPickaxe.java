@@ -2,13 +2,14 @@ package io.github.krevik.kathairis.item;
 
 import io.github.krevik.kathairis.init.ModSounds;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -37,33 +38,35 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 
 	//TODO: pooled mutable block pos and code cleanup
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
 		if (mode == 0) {
 			if (!worldIn.isRemote && (double) state.getBlockHardness(worldIn, pos) != 0.0D) {
-				stack.damageItem(1, entityLiving);
+				stack.damageItem(1, entityLiving, (p_220045_0_) -> {
+					p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+				});
 			}
-			if (entityLiving instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) entityLiving;
+			if (entityLiving instanceof PlayerEntity) {
+				PlayerEntity player = (PlayerEntity) entityLiving;
 				player.addExhaustion(1f);
 				Vec3d vec = new Vec3d(pos.getX() - player.posX, pos.getY() - player.posY, pos.getZ() - player.posZ).normalize();
-				EnumFacing facing;
+				Direction facing;
 				if (vec.z >= 0.5f && MathHelper.abs((float) vec.x) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f) {
-					facing = EnumFacing.SOUTH;
+					facing = Direction.SOUTH;
 				} else if (vec.z <= -0.5f && MathHelper.abs((float) vec.x) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f) {
-					facing = EnumFacing.NORTH;
+					facing = Direction.NORTH;
 				} else if (MathHelper.abs((float) vec.z) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f && vec.x >= 0.5f) {
-					facing = EnumFacing.EAST;
+					facing = Direction.EAST;
 				} else if (MathHelper.abs((float) vec.z) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f && vec.x <= -0.5f) {
-					facing = EnumFacing.WEST;
+					facing = Direction.WEST;
 				} else if (vec.y >= 0.5f) {
-					facing = EnumFacing.UP;
+					facing = Direction.UP;
 				} else if (vec.y <= -0.5f) {
-					facing = EnumFacing.DOWN;
+					facing = Direction.DOWN;
 				} else {
-					facing = EnumFacing.EAST;
+					facing = Direction.EAST;
 				}
 				ArrayList<BlockPos> blocksToBreak = new ArrayList<>();
-				if (facing == EnumFacing.SOUTH || facing == EnumFacing.NORTH) {
+				if (facing == Direction.SOUTH || facing == Direction.NORTH) {
 					BlockPos pos0 = pos.west();
 					BlockPos pos1 = pos.east();
 					BlockPos pos2 = pos.up();
@@ -81,7 +84,7 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 					blocksToBreak.add(pos6);
 					blocksToBreak.add(pos7);
 				}
-				if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
+				if (facing == Direction.EAST || facing == Direction.WEST) {
 					BlockPos pos0 = pos.north();
 					BlockPos pos1 = pos.south();
 					BlockPos pos2 = pos.up();
@@ -99,7 +102,7 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 					blocksToBreak.add(pos6);
 					blocksToBreak.add(pos7);
 				}
-				if (facing == EnumFacing.UP || facing == EnumFacing.DOWN) {
+				if (facing == Direction.UP || facing == Direction.DOWN) {
 					BlockPos pos0 = pos.north();
 					BlockPos pos1 = pos.south();
 					BlockPos pos2 = pos.east();
@@ -126,8 +129,7 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 						}
 					} else if (!map.containsKey(Enchantments.SILK_TOUCH) && map.containsKey(Enchantments.FORTUNE)) {
 						for (BlockPos positionToBreak : blocksToBreak) {
-							worldIn.getBlockState(positionToBreak).getBlock().dropBlockAsItemWithChance(worldIn.getBlockState(positionToBreak), worldIn, positionToBreak, 1, map.get(Enchantments.FORTUNE).intValue());
-							destroyBlock(worldIn, positionToBreak, false);
+							destroyBlock(worldIn, positionToBreak, true);
 						}
 					} else {
 						for (BlockPos positionToBreak : blocksToBreak) {
@@ -147,13 +149,13 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if (mode == 0) {
 			if (!worldIn.isRemote) {
 				mode = 1;
 			}
 			if (worldIn.isRemote) {
-				playerIn.sendMessage(new TextComponentString("Mythical power is OFF"));
+				playerIn.sendMessage(new StringTextComponent("Mythical power is OFF"));
 				worldIn.playSound(playerIn, playerIn.getPosition(), ModSounds.PICKAXE_TURN, SoundCategory.PLAYERS, 1F, 1F);
 			}
 		} else {
@@ -161,15 +163,15 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 				mode = 0;
 			}
 			if (worldIn.isRemote) {
-				playerIn.sendMessage(new TextComponentString("Mythical power is ON"));
+				playerIn.sendMessage(new StringTextComponent("Mythical power is ON"));
 				worldIn.playSound(playerIn, playerIn.getPosition(), ModSounds.PICKAXE_TURN, SoundCategory.PLAYERS, 1F, 1F);
 			}
 		}
-		return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+		return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 
 	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state) {
+	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		if (mode == 0) {
 			return super.getDestroySpeed(stack, state) / 4.5f;
 		} else {

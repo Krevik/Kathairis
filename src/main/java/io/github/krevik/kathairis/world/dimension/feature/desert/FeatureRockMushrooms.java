@@ -1,20 +1,26 @@
 package io.github.krevik.kathairis.world.dimension.feature.desert;
 
+import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.IChunkGenSettings;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
+import java.util.function.Function;
 
 public class FeatureRockMushrooms extends Feature<NoFeatureConfig> {
 
+    public FeatureRockMushrooms(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49878_1_) {
+        super(p_i49878_1_);
+    }
+
     @Override
-    public boolean place(IWorld world, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random random, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random random, BlockPos pos, NoFeatureConfig config) {
             if(world.getBlockState(pos.down()).getBlock()== ModBlocks.SOFT_SAND || world.getBlockState(pos.down()).getBlock()==ModBlocks.KATHAIRIS_SAND){
                 int radius = 2+random.nextInt(5);
                 int mushroomHeight = 4+random.nextInt(radius)+random.nextInt(4);
