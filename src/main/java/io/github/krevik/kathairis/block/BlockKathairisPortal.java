@@ -88,7 +88,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 
 
     private void updateBlocksAroundPortal(World worldIn, BlockPos pos, BlockState state, Random rand) {
-		int type1 = Kathairis.KATH_DIM_TYPE.getId();
+		int type1 = Kathairis.KATHAIRIS.getId();
 		DimensionType type = DimensionType.getById(type1);
 		if(worldIn.getDimension().getType().getId()==type1) {
             int radius=5;
@@ -162,7 +162,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 
-		int type1 = Kathairis.KATH_DIM_TYPE.getId();
+		int type1 = Kathairis.KATHAIRIS.getId();
         if(worldIn.dimension.getType() == DimensionType.getById(type1)) {
             List<EntityStrangeWanderer> e = worldIn.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX()  + 15, pos.getY() + 15, pos.getZ() + 15));
             if(e.size()==0) {

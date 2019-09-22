@@ -1,8 +1,11 @@
 package io.github.krevik.kathairis;
 
+import io.github.krevik.kathairis.client.gui.GuiOldMan;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
+import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.RenderersRegistry;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +26,7 @@ public final class Kathairis {
 
 	public static final Logger KATHAIRIS_LOG = LogManager.getLogger(ModReference.MOD_ID);
 	public static boolean SHOULD_BLOCKS_SPREAD_AROUND_PORTAL;
-	public static DimensionType KATH_DIM_TYPE;
+	public static final DimensionType KATHAIRIS = ModUtil._null();
 
 	public Kathairis() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.CONFIG_SPEC);
