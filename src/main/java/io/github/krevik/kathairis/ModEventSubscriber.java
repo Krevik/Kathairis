@@ -66,6 +66,7 @@ public final class ModEventSubscriber {
 		final Block mysticPlanks;
 		final Block shinyPlanks;
 		final Block soulPlanks;
+		final Block elderwillowPlanks;
 		final Block kathairisStone;
 		final Block kathairisCobblestone;
 		final Block weatheredRock;
@@ -76,17 +77,18 @@ public final class ModEventSubscriber {
 
 		//TODO clean up the order of these, move them all into categories. Yes my minecraft OCD is acting up
 		event.getRegistry().registerAll(
+				//logs
+				setup(new BlockKathairisLog(), "mystic_log"),
+				setup(new BlockKathairisLog(), "shiny_log"),
+				setup(new BlockKathairisLog(), "soul_log"),
 				setup(kathairisStone = new BlockKathairisStone(), "kathairis_stone"),
 				setup(new BlockKathairisPortal(), "kathairis_portal"),
 				setup(new BlockKathairisDirt(), "kathairis_dirt"),
 				setup(new BlockKathairisGrass(), "kathairis_grass"),
 				//TODO turn this into a class?
 				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.METAL)), "titanium_block"),
-				setup(new BlockKathairisLog(), "mystic_log"),
 				setup(new BlockKathairisLeaves(), "mystic_leaves"),
-				setup(new BlockKathairisLog(), "shiny_log"),
 				setup(new BlockKathairisLeaves(), "shiny_leaves"),
-				setup(new BlockKathairisLog(), "soul_log"),
 				setup(new BlockKathairisLeaves(), "soul_leaves"),
 				setup(new BlockKathairisOre(1, 1, 3, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4f)), "revenum_ore"),
 				setup(new BlockKathairisOre(1, 2, 4, Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(7f)), "titanium_ore"),
@@ -209,7 +211,17 @@ public final class ModEventSubscriber {
 				setup(new BlockKatharianSapling(new MysticTree()), "mystic_sapling"),
 				setup(new BlockKatharianSapling(new SoulTree()), "soul_sapling"),
 				setup(new BlockKatharianSapling(new ShinyTree()), "shiny_sapling"),
-				setup(new BlockKatharianSapling(new ElderwillowTree()), "elderwillow_sapling")
+				setup(new BlockKatharianSapling(new ElderwillowTree()), "elderwillow_sapling"),
+
+				setup(elderwillowPlanks = new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(3f, 3f).sound(SoundType.WOOD)), "elderwillow_planks"),
+				setup(new BlockKathairisFence(Material.WOOD, 3f, SoundType.WOOD), "elderwillow_wood_fence"),
+				setup(new BlockKathairisFenceGate(Material.WOOD, 3f, SoundType.WOOD), "elderwillow_wood_fence_gate"),
+				setup(new BlockKathairisStairs(elderwillowPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "elderwillow_wood_stairs"),
+				setup(new BlockKathairisSlab(Material.WOOD, 3f, SoundType.WOOD), "elderwillow_wood_slab"),
+				setup(new BlockKathairisDoors(Material.WOOD, SoundType.WOOD, 3f), "elderwillow_wood_doors"),
+				setup(new BlockKathairisTrapdoor(Material.WOOD, SoundType.WOOD, 3f), "elderwillow_wood_trapdoor"),
+				setup(new BlockKathairisLog(), "elderwillow_log_stripped")
+
 				);
 
 	}

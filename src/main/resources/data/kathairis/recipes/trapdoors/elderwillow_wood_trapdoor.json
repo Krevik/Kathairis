@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:elderwillow_planks"
+    }
+  },
+  "result": {
+    "item": "kathairis:elderwillow_wood_trapdoor",
+    "count": 2
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+"XZX", "XZX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:elderwillow_planks"
+    },
+	"Z": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "kathairis:elderwillow_wood_fence",
+	"count": 3
+  }
+}

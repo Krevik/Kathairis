@@ -1,0 +1,7 @@
+{
+	"parent": "block/door_top",
+	"textures": {
+		"bottom": "kathairis:block/elderwillow_wood_doors_bottom",
+		"top": "kathairis:block/elderwillow_wood_doors_top"
+	}
+}

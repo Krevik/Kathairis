@@ -35,6 +35,7 @@ public class ItemKathairisAxe extends ItemKathairisTool {
 			.put(MYSTIC_LOG, MYSTIC_LOG_STRIPPED)
 			.put(SHINY_LOG, SHINY_LOG_STRIPPED)
 			.put(SOUL_LOG, SOUL_LOG_STRIPPED)
+			.put(ELDERWILLOW_LOG, ELDERWILLOW_LOG_STRIPPED)
 			.build();
 
 	//TODO COMPLETE

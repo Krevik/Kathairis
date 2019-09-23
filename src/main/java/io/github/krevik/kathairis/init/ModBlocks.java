@@ -127,7 +127,6 @@ public final class ModBlocks {
 	public static final Block ELDERWILLOW_LOG = _null();
 	public static final Block ELDERWILLOW_LEAVES = _null();
 	public static final Block PURPLE_PALM = _null();
-	public static final Block ROTTEN_LOG = _null();
 	public static final Block BRINE_PUSTULE = _null();
 	public static final Block WILLOW_VINE_MAIN = _null();
 	public static final Block WILLOW_VINE_TIP = _null();
@@ -135,5 +134,12 @@ public final class ModBlocks {
 	public static final Block SOUL_SAPLING = _null();
 	public static final Block SHINY_SAPLING = _null();
 	public static final Block ELDERWILLOW_SAPLING = _null();
-
+	public static final Block ELDERWILLOW_WOOD_TRAPDOOR = _null();
+	public static final Block ELDERWILLOW_WOOD_DOORS = _null();
+	public static final Block ELDERWILLOW_WOOD_SLAB = _null();
+	public static final Block ELDERWILLOW_WOOD_STAIRS = _null();
+	public static final Block ELDERWILLOW_WOOD_FENCE = _null();
+	public static final Block ELDERWILLOW_WOOD_FENCE_GATE = _null();
+	public static final Block ELDERWILLOW_LOG_STRIPPED = _null();
+	public static final Block ELDERWILLOW_PLANKS = _null();
 }

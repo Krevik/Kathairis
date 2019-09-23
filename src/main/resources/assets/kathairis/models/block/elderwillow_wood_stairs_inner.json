@@ -1,0 +1,8 @@
+{
+	"parent": "block/inner_stairs",
+	"textures": {
+		"bottom": "kathairis:block/elderwillow_planks",
+		"top": "kathairis:block/elderwillow_planks",
+		"side": "kathairis:block/elderwillow_planks"
+	}
+}

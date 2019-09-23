@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:elderwillow_planks"
+    }
+  },
+  "result": {
+    "item": "kathairis:elderwillow_wood_stairs",
+	"count": 4
+  }
+}

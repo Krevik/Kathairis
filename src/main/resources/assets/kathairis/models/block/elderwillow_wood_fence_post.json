@@ -1,0 +1,6 @@
+{
+	"parent": "block/fence_post",
+	"textures": {
+		"texture": "kathairis:block/elderwillow_planks"
+	}
+}

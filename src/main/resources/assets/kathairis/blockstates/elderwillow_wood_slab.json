@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "kathairis:block/elderwillow_wood_slab" },
+        "type=top": { "model": "kathairis:block/elderwillow_wood_slab_top" },
+        "type=double": { "model": "kathairis:block/elderwillow_planks" }
+    }
+}
