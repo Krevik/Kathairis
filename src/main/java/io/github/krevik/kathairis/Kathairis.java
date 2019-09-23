@@ -7,6 +7,7 @@ import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.RenderersRegistry;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -54,6 +55,7 @@ public final class Kathairis {
 
 	private void setupClient(final FMLClientSetupEvent event) {
 		RenderersRegistry.registerRenders();
+		OBJLoader.INSTANCE.addDomain(ModReference.MOD_ID);
 	}
 
 	public static FunctionHelper getHelper(){
