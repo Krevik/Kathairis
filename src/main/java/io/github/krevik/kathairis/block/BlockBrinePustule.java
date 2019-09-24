@@ -1,10 +1,13 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
 import io.github.krevik.kathairis.init.ModItems;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
@@ -31,7 +34,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.BRINE_PUSTULE;
 /**
  * @author Krevik
  */
-public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable {
+public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable, IItemGroupProvider {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AGE = BlockStateProperties.STAGE_0_1;
@@ -41,6 +44,11 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable 
         super(Block.Properties.create(Material.PLANTS)
                 .doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT));
         setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(AGE,0));
+    }
+
+    @Override
+    public ItemGroup getItemGroup() {
+        return ModItemGroups.PLANTS;
     }
 
     @Override

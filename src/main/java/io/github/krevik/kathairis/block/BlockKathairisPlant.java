@@ -1,10 +1,13 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -26,12 +29,17 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
 /**
  * @author Krevik
  */
-public class BlockKathairisPlant extends Block implements net.minecraftforge.common.IPlantable {
+public class BlockKathairisPlant extends Block implements net.minecraftforge.common.IPlantable, IItemGroupProvider {
 
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 	public BlockKathairisPlant() {
 		super(Properties.create(Material.PLANTS).sound(SoundType.PLANT).hardnessAndResistance(0).tickRandomly().doesNotBlockMovement());
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.PLANTS;
 	}
 
 	public BlockKathairisPlant(Properties properties) {

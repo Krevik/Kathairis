@@ -1,6 +1,8 @@
 package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,6 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -24,13 +27,17 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockForestCandle extends BlockKathairisPlant {
+public class BlockForestCandle extends BlockKathairisPlant implements IItemGroupProvider {
     public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);
     public BlockForestCandle() {
         super(Block.Properties.create(Material.PLANTS).sound(SoundType.PLANT).hardnessAndResistance(0).tickRandomly().doesNotBlockMovement().lightValue(7));
         this.setDefaultState(this.stateContainer.getBaseState().with(VARIANT, EnumType.BOTTOM));
     }
 
+    @Override
+    public ItemGroup getItemGroup() {
+        return ModItemGroups.PLANTS;
+    }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext selectionContext) {

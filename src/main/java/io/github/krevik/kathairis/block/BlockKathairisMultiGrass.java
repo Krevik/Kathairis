@@ -1,10 +1,13 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
@@ -17,10 +20,15 @@ import static io.github.krevik.kathairis.init.ModBlocks.*;
 /**
  * @author Krevik
  */
-public class BlockKathairisMultiGrass extends BlockKathairisPlant {
+public class BlockKathairisMultiGrass extends BlockKathairisPlant implements IItemGroupProvider {
 
 	public BlockKathairisMultiGrass() {
 		super(Properties.create(Material.PLANTS).sound(SoundType.PLANT).hardnessAndResistance(0f).doesNotBlockMovement().tickRandomly());
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.PLANTS;
 	}
 
 	@Override

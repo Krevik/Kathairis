@@ -1,9 +1,12 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -14,10 +17,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 /**
  * @author Krevik
  */
-public class BlockRefinedCloud extends Block {
+public class BlockRefinedCloud extends Block implements IItemGroupProvider {
 
 	public BlockRefinedCloud() {
 		super(Properties.create(Material.GLASS).sound(SoundType.GLASS).hardnessAndResistance(0.75f).slipperiness(0.98f));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
 	}
 
 	@OnlyIn(Dist.CLIENT)

@@ -1,7 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "kathairis:block/elderwillow_leaf_tip"
+		"1": "kathairis:block/elderwillow_leaf_tip",
+		"particle": "kathairis:block/elderwillow_leaves"
 	},
 	"elements": [
 		{

@@ -1,9 +1,12 @@
 package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
@@ -25,7 +28,7 @@ import java.util.Random;
  * @author Krevik
  */
 //TODO cleanup
-public class BlockKathairisGrass extends GrassBlock implements IGrowable {
+public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemGroupProvider {
 
 	public static final BooleanProperty FLOWER = BooleanProperty.create("flower");
 	int month = Calendar.getInstance().get(Calendar.MONTH);
@@ -33,6 +36,11 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable {
 	public BlockKathairisGrass() {
 		super(Properties.create(Material.ORGANIC).hardnessAndResistance(0.6F, 0.6F).tickRandomly().sound(SoundType.PLANT));
 		this.setDefaultState(this.stateContainer.getBaseState().with(SNOWY, Boolean.FALSE).with(FLOWER, Boolean.FALSE));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
 	}
 
 

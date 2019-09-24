@@ -14,6 +14,7 @@ import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeature;
 
 import java.util.Random;
 import java.util.Set;
@@ -87,7 +88,7 @@ public class KatharianTreeFeature extends AbstractTreeFeature<NoFeatureConfig> {
                             int i2 = l1 - position.getZ();
                             if (Math.abs(k1) != j4 || Math.abs(i2) != j4 || rand.nextInt(2) != 0 && l3 != 0) {
                                 BlockPos blockpos = new BlockPos(j1, l2, l1);
-                                if (isAirOrLeaves(worldIn, blockpos) || isTallPlants(worldIn, blockpos)) {
+                                if (isAirOrLeaves(worldIn, blockpos) || func_214576_j(worldIn, blockpos)) {
                                     this.setLogState(changedBlocks, worldIn, blockpos, this.leaf, p_208519_5_);
                                 }
                             }
@@ -96,7 +97,7 @@ public class KatharianTreeFeature extends AbstractTreeFeature<NoFeatureConfig> {
                 }
 
                 for(int i3 = 0; i3 < i; ++i3) {
-                    if (isAirOrLeaves(worldIn, position.up(i3)) || isTallPlants(worldIn, position.up(i3))) {
+                    if (isAirOrLeaves(worldIn, position.up(i3)) || func_214576_j(worldIn, position.up(i3))) {
                         this.setLogState(changedBlocks, worldIn, position.up(i3), this.trunk, p_208519_5_);
                         if (this.vinesGrow && i3 > 0) {
                             if (rand.nextInt(3) > 0 && isAir(worldIn, position.add(-1, i3, 0))) {

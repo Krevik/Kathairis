@@ -1,11 +1,14 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -19,13 +22,18 @@ import net.minecraft.world.World;
 /**
  * @author Krevik
  */
-public class BlockMagnethium extends Block {
+public class BlockMagnethium extends Block implements IItemGroupProvider {
 
 	protected static final AxisAlignedBB ALMOST_FULL_BLOCK_AABB = new AxisAlignedBB(0.01D, 0.01D, 0.01D, 0.99D, 0.99D, 0.99D);
 	private VoxelShape shape = VoxelShapes.create(ALMOST_FULL_BLOCK_AABB);
 
 	public BlockMagnethium() {
 		super(Properties.create(Material.ANVIL).hardnessAndResistance(3f, 3f).sound(SoundType.METAL));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
 	}
 
 	@Override

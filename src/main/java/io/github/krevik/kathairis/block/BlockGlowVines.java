@@ -1,11 +1,14 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.DirectionProperty;
@@ -31,7 +34,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.GLOWVINES;
 /**
  * @author Krevik
  */
-public class BlockGlowVines extends BlockKathairisPlant {
+public class BlockGlowVines extends BlockKathairisPlant implements IItemGroupProvider {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -41,6 +44,10 @@ public class BlockGlowVines extends BlockKathairisPlant {
 		setDefaultState(getDefaultState().with(VARIANT, EnumType.TOP).with(FACING, Direction.EAST));
 	}
 
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
+	}
 
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {

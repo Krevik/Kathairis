@@ -1,9 +1,12 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 /**
  * @author Krevik
  */
-public class BlockCondensedCloud extends Block {
+public class BlockCondensedCloud extends Block implements IItemGroupProvider {
 
 	public BlockCondensedCloud() {
 		super(Properties.create(Material.WOOL).hardnessAndResistance(1f, 1f).sound(SoundType.CLOTH));
@@ -36,4 +39,8 @@ public class BlockCondensedCloud extends Block {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
+	}
 }

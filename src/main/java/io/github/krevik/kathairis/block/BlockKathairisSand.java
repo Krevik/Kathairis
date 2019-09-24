@@ -1,8 +1,11 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.FallingBlockEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -16,12 +19,17 @@ import java.util.Random;
 /**
  * @author Krevik
  */
-public class BlockKathairisSand extends FallingBlock {
+public class BlockKathairisSand extends FallingBlock implements IItemGroupProvider {
 
 	public static boolean fallInstantly = false;
 
 	public BlockKathairisSand() {
 		super(Properties.create(Material.SAND).tickRandomly().hardnessAndResistance(0.75f).sound(SoundType.SAND));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
 	}
 
 	public static boolean canFallThrough(BlockState state) {

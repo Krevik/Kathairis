@@ -1,8 +1,11 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -25,7 +28,7 @@ import static io.github.krevik.kathairis.init.ModItems.BUTTERFLY_FLOWER_NECTAR;
 /**
  * @author Krevik
  */
-public class BlockButterflyFlower extends BlockKathairisPlant {
+public class BlockButterflyFlower extends BlockKathairisPlant implements IItemGroupProvider {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);
 	protected static final AxisAlignedBB BUTTERFLYFLOWER_AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.9D, 1D);
@@ -33,6 +36,11 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 	public BlockButterflyFlower() {
 		super();
 		this.setDefaultState(this.stateContainer.getBaseState().with(VARIANT, EnumType.WITHOUT));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.PLANTS;
 	}
 
 	@Override

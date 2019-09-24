@@ -1,11 +1,14 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -23,7 +26,7 @@ import java.util.Random;
 /**
  * @author Krevik
  */
-public class BlockBaurble extends Block {
+public class BlockBaurble extends Block implements IItemGroupProvider {
 
 	protected static final AxisAlignedBB BAURBLE_AABB = new AxisAlignedBB(0.2D, 0.4D, 0.2D, 0.8D, 1D, 0.8D);
 
@@ -64,4 +67,8 @@ public class BlockBaurble extends Block {
 		dropIfNotValidPosition(state, worldIn, pos);
 	}
 
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
+	}
 }

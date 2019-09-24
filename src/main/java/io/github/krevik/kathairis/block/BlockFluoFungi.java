@@ -1,8 +1,11 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -25,12 +28,17 @@ import static io.github.krevik.kathairis.init.ModBlocks.FLUO_FUNGI;
 /**
  * @author Krevik
  */
-public class BlockFluoFungi extends BlockKathairisPlant {
+public class BlockFluoFungi extends BlockKathairisPlant implements IItemGroupProvider {
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public BlockFluoFungi() {
 		super(Block.Properties.create(Material.PLANTS).lightValue(10).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0).sound(SoundType.PLANT));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.PLANTS;
 	}
 
 	@Override

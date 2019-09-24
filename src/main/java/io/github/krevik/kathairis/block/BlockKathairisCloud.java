@@ -1,5 +1,7 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
@@ -27,13 +30,18 @@ import static io.github.krevik.kathairis.init.ModItems.GLASS_JAR;
 /**
  * @author Krevik
  */
-public class BlockKathairisCloud extends Block {
+public class BlockKathairisCloud extends Block implements IItemGroupProvider {
 
 	private Supplier<Item> pickedItem;
 
 	public BlockKathairisCloud(Supplier<Item> itemAfterPick) {
 		super(Properties.create(Material.WOOL).doesNotBlockMovement().sound(SoundType.CLOTH).hardnessAndResistance(0.5f));
 		pickedItem = itemAfterPick;
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.BUILDING_BLOCKS;
 	}
 
 	@OnlyIn(Dist.CLIENT)

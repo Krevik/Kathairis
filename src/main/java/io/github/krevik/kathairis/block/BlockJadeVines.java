@@ -1,5 +1,7 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketServerPlayerUseJadeVine;
 import net.minecraft.block.Block;
@@ -10,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.EnumProperty;
@@ -32,7 +35,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.JADE_VINES;
 /**
  * @author Krevik
  */
-public class BlockJadeVines extends BlockKathairisPlant {
+public class BlockJadeVines extends BlockKathairisPlant implements IItemGroupProvider {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);
 	Random random = new Random();
@@ -40,6 +43,11 @@ public class BlockJadeVines extends BlockKathairisPlant {
 	public BlockJadeVines() {
 		super();
 		setDefaultState(getDefaultState().with(VARIANT, EnumType.TOP));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.PLANTS;
 	}
 
 	@Override

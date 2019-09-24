@@ -1,5 +1,7 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
@@ -28,10 +30,6 @@ public class BlockMagicBeans extends CropsBlock {
 
 	public BlockMagicBeans() {
 		super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT));
-	}
-
-	public ItemGroup getItemGroup() {
-		return null;
 	}
 
 	@Override

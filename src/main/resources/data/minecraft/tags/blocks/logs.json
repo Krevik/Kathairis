@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:mystic_logs",
+    "#minecraft:shiny_logs",
+    "#minecraft:soul_logs",
+    "#minecraft:elderwillow_logs"
+  ]
+}

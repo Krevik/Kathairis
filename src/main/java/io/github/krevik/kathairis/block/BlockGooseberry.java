@@ -1,5 +1,7 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -7,6 +9,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -29,13 +32,18 @@ import static io.github.krevik.kathairis.init.ModItems.GOOSEBERRIES;
 /**
  * @author Krevik
  */
-public class BlockGooseberry extends Block {
+public class BlockGooseberry extends Block implements IItemGroupProvider {
 
 	public static final EnumProperty<EnumType> VARIANT = EnumProperty.create("variant", EnumType.class);
 
 	public BlockGooseberry(Material material, float hardness, float resistance, SoundType soundType) {
 		super(Properties.create(material).hardnessAndResistance(hardness, resistance).sound(soundType));
 		setDefaultState(getDefaultState().with(VARIANT, EnumType.WITHOUT));
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.PLANTS;
 	}
 
 	@Override

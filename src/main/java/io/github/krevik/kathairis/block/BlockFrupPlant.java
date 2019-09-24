@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;

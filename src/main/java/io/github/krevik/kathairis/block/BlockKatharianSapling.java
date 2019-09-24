@@ -1,16 +1,19 @@
 package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.trees.Tree;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
-public class BlockKatharianSapling extends SaplingBlock {
+public class BlockKatharianSapling extends SaplingBlock implements IItemGroupProvider {
     public BlockKatharianSapling(Tree p_i48337_1_) {
         super(p_i48337_1_, Block.Properties.create(Material.PLANTS).sound(SoundType.PLANT).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0));
     }
@@ -33,5 +36,10 @@ public class BlockKatharianSapling extends SaplingBlock {
         if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
             return worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, Direction.UP, this);
         return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
+    }
+
+    @Override
+    public ItemGroup getItemGroup() {
+        return ModItemGroups.PLANTS;
     }
 }

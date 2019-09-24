@@ -1,8 +1,11 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
@@ -12,7 +15,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.*;
 /**
  * @author Krevik
  */
-public class BlockKathairisDeadGrass extends BlockKathairisPlant {
+public class BlockKathairisDeadGrass extends BlockKathairisPlant implements IItemGroupProvider {
 
 	public BlockKathairisDeadGrass() {
 		super();
@@ -22,6 +25,11 @@ public class BlockKathairisDeadGrass extends BlockKathairisPlant {
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
+	}
+
+	@Override
+	public ItemGroup getItemGroup() {
+		return ModItemGroups.PLANTS;
 	}
 
 	@Override

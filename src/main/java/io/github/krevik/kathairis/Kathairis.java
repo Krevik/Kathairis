@@ -5,6 +5,7 @@ import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.RenderersRegistry;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.client.model.obj.OBJLoader;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.omg.DynamicAny.DynEnumHelper;
 
 /**
  * @author Cadiboo
@@ -27,7 +29,7 @@ public final class Kathairis {
 
 	public static final Logger KATHAIRIS_LOG = LogManager.getLogger(ModReference.MOD_ID);
 	public static boolean SHOULD_BLOCKS_SPREAD_AROUND_PORTAL;
-	public static final DimensionType KATHAIRIS = ModUtil._null();
+	public static DimensionType KATHAIRIS;
 
 	public Kathairis() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.CONFIG_SPEC);
