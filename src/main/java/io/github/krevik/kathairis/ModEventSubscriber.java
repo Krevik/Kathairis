@@ -73,7 +73,6 @@ public final class ModEventSubscriber {
 		final Block mudBricks;
 		final Block kathairisStoneBricks;
 
-		//TODO clean up the order of these, move them all into categories. Yes my minecraft OCD is acting up
 		event.getRegistry().registerAll(
 				//logs and stripped logs
 				setup(new BlockKathairisLog(), "mystic_log"),
@@ -104,7 +103,7 @@ public final class ModEventSubscriber {
 				setup(new BlockBaurble(), "baurble"),
 				setup(new BlockLayeredSand(), "layered_sand"), //TODO ADD LOOT TABLE
 				setup(new BlockSolisCrystals(), "solis_crystals"),
-				setup(new BlockKathairisSandstone(), "kathairis_sandstone"), //TODO: reorganise
+				setup(new BlockKathairisSandstone(), "kathairis_sandstone"),
 				setup(new BlockMysticGemBlock(), "mystic_gem_block"),
 				setup(new BlockCondensedCloud(), "blue_cloud_bricks"),
 				setup(new BlockCondensedCloud(), "yellow_cloud_block"),
@@ -314,13 +313,9 @@ public final class ModEventSubscriber {
 			if(IItemGroupProvider.class.isAssignableFrom(block.getClass())){
 				registry.register(setup(new BlockItem(block, new Item.Properties().group(((IItemGroupProvider)(block)).getItemGroup())), block.getRegistryName()));
 			}
-			/*if(ICreativeTabProvider.class.isAssignableFrom(block.getClass())){
-			}*/
-			//registry.register(setup(new BlockItem(block, new Item.Properties().group(BUILDING_BLOCKS)), block.getRegistryName()));
 		}
 
 	}
-
 
 
 	@SubscribeEvent

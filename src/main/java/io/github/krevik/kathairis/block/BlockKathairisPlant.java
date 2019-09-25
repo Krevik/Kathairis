@@ -69,7 +69,7 @@ public class BlockKathairisPlant extends Block implements net.minecraftforge.com
 	@Override
 	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos blockPos, boolean isMoving) {
 		super.neighborChanged(state, world, pos, block, blockPos,isMoving);
-		if (!isValidPosition(state, world, pos) || !world.isAirBlock(pos.up())) {
+		if (!isValidPosition(state, world, pos)) {
 			world.removeBlock(pos,isMoving);
 		}
 	}

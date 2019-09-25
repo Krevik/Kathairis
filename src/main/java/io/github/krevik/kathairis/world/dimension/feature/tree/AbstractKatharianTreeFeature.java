@@ -22,8 +22,8 @@ public abstract class AbstractKatharianTreeFeature extends AbstractTreeFeature<N
     protected static boolean canGrowInto(IWorldGenerationBaseReader p_214587_0_, BlockPos p_214587_1_) {
             return p_214587_0_.hasBlockState(p_214587_1_, (p_214573_0_) -> {
                 Block block = p_214573_0_.getBlock();
-                return p_214573_0_.isIn(BlockTags.LEAVES) || block == Blocks.GRASS_BLOCK ||
-                        Block.isDirt(block) || block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE
+                return block == Blocks.GRASS_BLOCK ||
+                        block.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE
                         || block == ModBlocks.KATHAIRIS_DIRT || block== ModBlocks.KATHAIRIS_GRASS;
             });
     }

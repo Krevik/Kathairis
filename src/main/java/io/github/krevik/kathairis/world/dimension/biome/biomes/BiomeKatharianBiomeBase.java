@@ -5,6 +5,7 @@ import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.CrystalLabirynthConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +28,7 @@ public class BiomeKatharianBiomeBase extends Biome {
 
     protected BiomeKatharianBiomeBase(Builder p_i48975_1_) {
         super(p_i48975_1_);
+        this.addStructure(KatharianFeatureList.CRYSTAL_LABIRYNTH,new CrystalLabirynthConfig("lel",20));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TITANIUM_ORE.getDefaultState(), 9), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 64)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(), 18), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));
@@ -44,9 +46,6 @@ public class BiomeKatharianBiomeBase extends Biome {
         }
         return super.getSpawns(p_76747_1_);
     }
-
-
-
 
     @OnlyIn(Dist.CLIENT)
     @Override

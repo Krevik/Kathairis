@@ -12,12 +12,17 @@ import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSmall
 import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSoulCloudWithChests;
 import io.github.krevik.kathairis.world.dimension.feature.swamp.FeatureBasicSwamp;
 import io.github.krevik.kathairis.world.dimension.feature.tree.*;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.CrystalLabirynthConfig;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth.StructureCrystalLabirynth;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KathairisSwampSurfaceBuilder;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianDesertEdgeSurfaceBuilder;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianSoftSandLakesSurfaceBuilder;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.structure.VillageStructure;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilderConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
@@ -62,6 +67,7 @@ public class KatharianFeatureList {
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_DESERT_EDGE_SURFACE_BUILDER = registerSurfaceBuilder("desert_edge", new KatharianDesertEdgeSurfaceBuilder(SurfaceBuilderConfig::deserialize));
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SOFT_SAND_LAKES_SURFACE_BUILDER = registerSurfaceBuilder("soft_sand_lakes", new KatharianSoftSandLakesSurfaceBuilder(SurfaceBuilderConfig::deserialize));
 
+    public static final Structure<CrystalLabirynthConfig> CRYSTAL_LABIRYNTH = registerFeature("crystal_labirynth", new StructureCrystalLabirynth(CrystalLabirynthConfig::deserialize));
 
     private static <C extends IFeatureConfig, F extends Feature<C>> F registerFeature(String key, F value) {
         return (F)(Registry.<Feature<?>>register(Registry.FEATURE, "kathairis:" + key, value));

@@ -37,7 +37,7 @@ public class FeatureKatharianSwampTallTree1 extends AbstractKatharianTreeFeature
                         //add some hanging blocks
                         if (((x * x) + (z * z) + (y * y) == (radius / 2 * radius / 2)) && isAir(world,tmp.down())) {
                             world.setBlockState(tmp.down(), LEAF, 2);
-                            int yyLength=random.nextInt(5);
+                            int yyLength=random.nextInt(4);
                             for (int yy = 0; yy <= yyLength; yy++) {
                                 if (isAir(world,tmp.down(yy))) {
                                     world.setBlockState(tmp.down(yy), LEAF, 2);
