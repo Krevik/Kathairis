@@ -142,4 +142,7 @@ public final class ModBlocks {
 	public static final Block ELDERWILLOW_WOOD_FENCE_GATE = _null();
 	public static final Block ELDERWILLOW_LOG_STRIPPED = _null();
 	public static final Block ELDERWILLOW_PLANKS = _null();
+	public static final Block KATHAIRIS_SANDSTONE_STAIRS = _null();
+	public static final Block KATHAIRIS_SANDSTONE_WALL = _null();
+	public static final Block KATHAIRIS_SANDSTONE_SLAB = _null();
 }

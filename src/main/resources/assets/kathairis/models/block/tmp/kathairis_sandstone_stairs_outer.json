@@ -1,0 +1,8 @@
+{
+	"parent": "block/outer_stairs",
+	"textures": {
+		"bottom": "kathairis:block/kathairis_sandstone",
+		"top": "kathairis:block/kathairis_sandstone",
+		"side": "kathairis:block/kathairis_sandstone"
+	}
+}

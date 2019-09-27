@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BiomeKatharianBiomeBase extends Biome {
-    public Color baseGrassColor =new Color(66,244,238);
+    public Color baseGrassColor = new Color(66,244,238);
 
     protected BiomeKatharianBiomeBase(Builder p_i48975_1_) {
         super(p_i48975_1_);

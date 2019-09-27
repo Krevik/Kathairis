@@ -72,6 +72,7 @@ public final class ModEventSubscriber {
 		final Block hardenedWeatheredRockBricks;
 		final Block mudBricks;
 		final Block kathairisStoneBricks;
+		final Block kathairisSandstone;
 
 		event.getRegistry().registerAll(
 				//logs and stripped logs
@@ -103,7 +104,7 @@ public final class ModEventSubscriber {
 				setup(new BlockBaurble(), "baurble"),
 				setup(new BlockLayeredSand(), "layered_sand"), //TODO ADD LOOT TABLE
 				setup(new BlockSolisCrystals(), "solis_crystals"),
-				setup(new BlockKathairisSandstone(), "kathairis_sandstone"),
+				setup(kathairisSandstone = new BlockKathairisSandstone(), "kathairis_sandstone"),
 				setup(new BlockMysticGemBlock(), "mystic_gem_block"),
 				setup(new BlockCondensedCloud(), "blue_cloud_bricks"),
 				setup(new BlockCondensedCloud(), "yellow_cloud_block"),
@@ -149,6 +150,7 @@ public final class ModEventSubscriber {
 				setup(new BlockKathairisWall(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_wall"),
 				setup(new BlockKathairisWall(Material.ROCK, 2f, SoundType.STONE), "mud_bricks_wall"),
 				setup(new BlockKathairisWall(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_stone_bricks_wall"),
+				setup(new BlockKathairisWall(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_sandstone_wall"),
 				//stairs
 				setup(new BlockKathairisStairs(mysticPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "mystic_wood_stairs"),
 				setup(new BlockKathairisStairs(shinyPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "shiny_wood_stairs"),
@@ -160,7 +162,8 @@ public final class ModEventSubscriber {
 				setup(new BlockKathairisStairs(hardenedWeatheredRockBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_stairs"),
 				setup(new BlockKathairisStairs(mudBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "mud_bricks_stairs"),
 				setup(new BlockKathairisStairs(kathairisStoneBricks.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "kathairis_stone_bricks_stairs"),
-				setup(new BlockKathairisStairs(elderwillowPlanks.getDefaultState(), Material.WOOD, 3f, SoundType.WOOD), "elderwillow_wood_stairs"),
+				setup(new BlockKathairisStairs(elderwillowPlanks.getDefaultState(), Material.WOOD, 2f, SoundType.WOOD), "elderwillow_wood_stairs"),
+				setup(new BlockKathairisStairs(kathairisSandstone.getDefaultState(), Material.ROCK, 2f, SoundType.STONE), "kathairis_sandstone_stairs"),
 				//slabs
 				setup(new BlockKathairisSlab(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_stone_slab"),
 				setup(new BlockKathairisSlab(Material.ROCK, 2.5f, SoundType.STONE), "kathairis_cobblestone_slab"),
@@ -173,6 +176,7 @@ public final class ModEventSubscriber {
 				setup(new BlockKathairisSlab(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_slab"),
 				setup(new BlockKathairisSlab(Material.ROCK, 2f, SoundType.STONE), "hardened_weathered_rock_bricks_slab"),
 				setup(new BlockKathairisSlab(Material.WOOD, 3f, SoundType.WOOD), "elderwillow_wood_slab"),
+				setup(new BlockKathairisSlab(Material.ROCK, 2f, SoundType.STONE), "kathairis_sandstone_slab"),
 				//plants
 				setup(new BlockBisonStars(), "bison_stars"),
 				setup(new BlockKathairisPlant(), "eye_plant"),

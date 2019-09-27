@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "kathairis:kathairis_sandstone"
+    }
+  },
+  "result": {
+    "item": "kathairis:kathairis_sandstone_stairs",
+	"count": 4
+  }
+}

@@ -82,6 +82,6 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
     }
 
     private BlockState getRandomWeatheredRockState(Random random){
-        return random.nextInt(2)==0? ModBlocks.WEATHERED_ROCK.getDefaultState():ModBlocks.HARDENED_WEATHERED_ROCK.getDefaultState();
+        return random.nextInt(2)==0 ? ModBlocks.WEATHERED_ROCK.getDefaultState():ModBlocks.HARDENED_WEATHERED_ROCK.getDefaultState();
     }
 }
