@@ -1,9 +1,12 @@
 package io.github.krevik.kathairis.world.dimension.feature.desert;
 
 import com.mojang.datafixers.Dynamic;
+import io.github.krevik.kathairis.block.BlockBrinePustule;
 import io.github.krevik.kathairis.block.BlockPurplePalm;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -67,7 +70,7 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
                             if(random.nextInt(6)==0){
                                 BlockPos tmp = new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z);
                                 if(ModBlocks.BRINE_PUSTULE.isValidPosition(ModBlocks.BRINE_PUSTULE.getDefaultState(),world,tmp)){
-                                    world.setBlockState(tmp,ModBlocks.BRINE_PUSTULE.getDefaultState(),2);
+                                    world.setBlockState(tmp,((BlockBrinePustule)ModBlocks.BRINE_PUSTULE).getStateForPlacement(world,tmp),2);
                                 }
                             }
                         }

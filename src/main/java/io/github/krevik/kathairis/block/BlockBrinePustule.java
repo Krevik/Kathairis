@@ -89,6 +89,21 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable,
         }
     }
 
+    @Nullable
+    public BlockState getStateForPlacement(IWorld world, BlockPos pos) {
+        if (isStone(world.getBlockState(pos.east()))) {
+            return BRINE_PUSTULE.getDefaultState().with(FACING, Direction.EAST);
+        } else if (isStone(world.getBlockState(pos.west()))) {
+            return BRINE_PUSTULE.getDefaultState().with(FACING, Direction.WEST);
+        } else if (isStone(world.getBlockState(pos.south()))) {
+            return BRINE_PUSTULE.getDefaultState().with(FACING, Direction.SOUTH);
+        } else if (isStone(world.getBlockState(pos.north()))) {
+            return BRINE_PUSTULE.getDefaultState().with(FACING, Direction.NORTH);
+        } else {
+            return BRINE_PUSTULE.getDefaultState().with(FACING, Direction.WEST);
+        }
+    }
+
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
