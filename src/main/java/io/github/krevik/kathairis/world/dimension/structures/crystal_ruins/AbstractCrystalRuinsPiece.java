@@ -1,4 +1,4 @@
-package io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth;
+package io.github.krevik.kathairis.world.dimension.structures.crystal_ruins;
 
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
@@ -21,7 +21,7 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public abstract class AbstractCrystalLabirynthPiece extends StructurePiece {
+public abstract class AbstractCrystalRuinsPiece extends StructurePiece {
     protected final JigsawPiece field_214832_a;
     protected BlockPos field_214833_b;
     private final int groundLevelDelta;
@@ -29,7 +29,7 @@ public abstract class AbstractCrystalLabirynthPiece extends StructurePiece {
     private final List<JigsawJunction> junctions = Lists.newArrayList();
     private final TemplateManager field_214837_f;
 
-    public AbstractCrystalLabirynthPiece(IStructurePieceType p_i51346_1_, TemplateManager p_i51346_2_, JigsawPiece p_i51346_3_, BlockPos p_i51346_4_, int groundLevelDelta, Rotation rotation, MutableBoundingBox p_i51346_7_) {
+    public AbstractCrystalRuinsPiece(IStructurePieceType p_i51346_1_, TemplateManager p_i51346_2_, JigsawPiece p_i51346_3_, BlockPos p_i51346_4_, int groundLevelDelta, Rotation rotation, MutableBoundingBox p_i51346_7_) {
         super(p_i51346_1_, 0);
         this.field_214837_f = p_i51346_2_;
         this.field_214832_a = p_i51346_3_;
@@ -39,7 +39,7 @@ public abstract class AbstractCrystalLabirynthPiece extends StructurePiece {
         this.boundingBox = p_i51346_7_;
     }
 
-    public AbstractCrystalLabirynthPiece(TemplateManager p_i51347_1_, CompoundNBT p_i51347_2_, IStructurePieceType p_i51347_3_) {
+    public AbstractCrystalRuinsPiece(TemplateManager p_i51347_1_, CompoundNBT p_i51347_2_, IStructurePieceType p_i51347_3_) {
         super(p_i51347_3_, p_i51347_2_);
         this.field_214837_f = p_i51347_1_;
         this.field_214833_b = new BlockPos(p_i51347_2_.getInt("PosX"), p_i51347_2_.getInt("PosY"), p_i51347_2_.getInt("PosZ"));

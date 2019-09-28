@@ -16,6 +16,7 @@ import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
+import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.netty.buffer.Unpooled;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
@@ -33,6 +34,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
@@ -43,6 +46,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.RegistryManager;
 
 import javax.annotation.Nonnull;
 
@@ -57,8 +61,11 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 public final class ModEventSubscriber {
 
 
-
 	@SubscribeEvent
+	public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event) {
+		KatharianFeatureList.putStructures();
+	}
+		@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
 
 		final Block mysticPlanks;

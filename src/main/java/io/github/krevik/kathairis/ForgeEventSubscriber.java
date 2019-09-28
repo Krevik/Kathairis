@@ -1,6 +1,28 @@
 package io.github.krevik.kathairis;
 
+import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.util.networking.PacketHandler;
+import io.github.krevik.kathairis.util.networking.packets.PacketClientOperateFOV;
+import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
+import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
+import io.github.krevik.kathairis.world.dimension.PlayerInPortal;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.Structures;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+
+import java.util.ArrayList;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
@@ -10,6 +32,83 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
  */
 @EventBusSubscriber(modid = MOD_ID, bus = FORGE)
 public final class ForgeEventSubscriber {
+
+    private static ArrayList<PlayerInPortal> playersInPortal=new ArrayList<>();
+    private static ArrayList<PlayerInPortal> playersToRemove=new ArrayList<>();
+    @SubscribeEvent
+    public static void playerTeleporting(TickEvent.WorldTickEvent event){
+        World world = event.world;
+        if(event.side==LogicalSide.SERVER){
+            for(ServerPlayerEntity playerEntity:world.getServer().getPlayerList().getPlayers()){
+                if(playerEntity.timeUntilPortal>0){
+                    if(playerEntity.getEntityWorld().getBlockState(playerEntity.getPosition()).getBlock()==ModBlocks.KATHAIRIS_PORTAL){
+                        if(!playersInPortal.isEmpty()){
+                            boolean isThatPlayerInTheList=false;
+                            for(PlayerInPortal playerInPortal:playersInPortal){
+                                if(playerInPortal.getPlayer()==playerEntity){
+                                    isThatPlayerInTheList=true;
+                                }
+                            }
+                            if(!isThatPlayerInTheList){
+                                playersInPortal.add(new PlayerInPortal(playerEntity,0));
+                            }
+                        }else{
+                            playersInPortal.add(new PlayerInPortal(playerEntity,0));
+                        }
+                    }
+                }
+            }
+            if(!playersInPortal.isEmpty()){
+                for(PlayerInPortal playerInPortal:playersInPortal){
+                    playerInPortal.setTimeInPortal(playerInPortal.getTimeInPortal()+1);
+                    if(playerInPortal.getTimeInPortal()>=500){
+                            changeDimensionPlayer(playerInPortal.getPlayer());
+                            playersToRemove.add(playerInPortal);
+                            playerInPortal.setTimeInPortal(600);
+                            recoverStandardFOV(playerInPortal);
+                    }else{
+                        operateFOV(playerInPortal);
+                        if(playerInPortal.getPlayer().getEntityWorld().getBlockState(playerInPortal.getPlayer().getPosition()).getBlock()!=ModBlocks.KATHAIRIS_PORTAL){
+                            recoverStandardFOV(playerInPortal);
+                            playerInPortal.setTimeInPortal(0);
+                            playersToRemove.add(playerInPortal);
+                        }
+                    }
+                }
+                playersInPortal.removeAll(playersToRemove);
+                playersToRemove.clear();
+            }
+        }
+    }
+
+    private static void changeDimensionPlayer(PlayerEntity entity){
+        DimensionType type = ModDimensionKathairis.getDimensionType();
+        entity.timeUntilPortal=0;
+        if(entity.getRidingEntity()==null && !entity.isBeingRidden()){
+            entity.setPortal(new BlockPos(entity.posX,entity.posY,entity.posZ));
+            if (entity.timeUntilPortal > 0) {
+                entity.timeUntilPortal = 10;
+            }else if(entity.dimension != type){
+                entity.timeUntilPortal=10;
+                KathairisTeleportingManager.changeDimPlayer((ServerPlayerEntity) entity, type);
+            }else if(entity.dimension == type){
+                entity.timeUntilPortal = 10;
+                KathairisTeleportingManager.changeDimPlayer((ServerPlayerEntity) entity, DimensionType.OVERWORLD);
+            }
+        }
+    }
+
+    private static void operateFOV(PlayerInPortal playerInPortal){
+        if(!playerInPortal.getPlayer().getEntityWorld().isRemote()){
+            PacketHandler.sendTo(new PacketClientOperateFOV(70+(playerInPortal.getTimeInPortal()/6)), (ServerPlayerEntity) playerInPortal.getPlayer());
+        }
+    }
+
+    private static void recoverStandardFOV(PlayerInPortal playerInPortal){
+        if(!playerInPortal.getPlayer().getEntityWorld().isRemote()){
+            PacketHandler.sendTo(new PacketClientOperateFOV(70), (ServerPlayerEntity) playerInPortal.getPlayer());
+        }
+    }
 
     /*@SubscribeEvent
     public static void onEatenEvents(LivingEntityUseItemEvent event){

@@ -1,4 +1,4 @@
-package io.github.krevik.kathairis.world.dimension.structures.crystal_labirynth;
+package io.github.krevik.kathairis.world.dimension.structures.crystal_ruins;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
@@ -8,16 +8,15 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.structure.*;
-import net.minecraft.world.gen.feature.structure.VillageStructure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
-public class StructureCrystalLabirynth extends Structure<CrystalLabirynthConfig> {
-    public StructureCrystalLabirynth(Function<Dynamic<?>, ? extends CrystalLabirynthConfig> p_i51419_1_) {
+public class StructureCrystalRuins extends Structure<CrystalRuinsConfig> {
+    public StructureCrystalRuins(Function<Dynamic<?>, ? extends CrystalRuinsConfig> p_i51419_1_) {
         super(p_i51419_1_);
     }
 
@@ -38,11 +37,13 @@ public class StructureCrystalLabirynth extends Structure<CrystalLabirynthConfig>
         return new ChunkPos(k1, l1);
     }
 
+
+
     public boolean hasStartAt(ChunkGenerator<?> chunkGen, Random rand, int chunkPosX, int chunkPosZ) {
         ChunkPos chunkpos = this.getStartPositionForPosition(chunkGen, rand, chunkPosX, chunkPosZ, 0, 0);
         if (chunkPosX == chunkpos.x && chunkPosZ == chunkpos.z) {
             Biome biome = chunkGen.getBiomeProvider().getBiome(new BlockPos((chunkPosX << 4) + 9, 0, (chunkPosZ << 4) + 9));
-            return chunkGen.hasStructure(biome, KatharianFeatureList.CRYSTAL_LABIRYNTH);
+            return chunkGen.hasStructure(biome, KatharianFeatureList.CRYSTAL_RUINS);
         } else {
             return false;
         }
@@ -53,7 +54,7 @@ public class StructureCrystalLabirynth extends Structure<CrystalLabirynthConfig>
     }
 
     public String getStructureName() {
-        return "kathairis:crystal_labirynth";
+        return "kathairis:crystal_ruins";
     }
 
     public int getSize() {
@@ -66,9 +67,10 @@ public class StructureCrystalLabirynth extends Structure<CrystalLabirynthConfig>
         }
 
         public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
-            CrystalLabirynthConfig villageconfig = (CrystalLabirynthConfig)generator.getStructureConfig(biomeIn, KatharianFeatureList.CRYSTAL_LABIRYNTH);
-            //BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-            //VillagePieces.func_214838_a(generator, templateManagerIn, blockpos, this.components, this.rand, villageconfig);
+            CrystalRuinsConfig config = (CrystalRuinsConfig)generator.getStructureConfig(biomeIn, KatharianFeatureList.CRYSTAL_RUINS);
+            BlockPos blockpos = new BlockPos(chunkX * 16, 64, chunkZ * 16);
+            System.out.println("Crystal Ruins generated at: "+ "x: "+ blockpos.getX() + " z: " + blockpos.getZ());
+            CrystalRuinsPieces.initialisePieces(generator, templateManagerIn, blockpos, this.components, this.rand, config);
             this.recalculateStructureSize();
         }
     }
