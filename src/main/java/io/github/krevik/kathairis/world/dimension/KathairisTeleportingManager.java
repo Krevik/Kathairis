@@ -28,9 +28,10 @@ import java.util.Map;
  * @author Krevik
  */
 public class KathairisTeleportingManager {
-    private static ArrayList<PlayerInPortal> playersInPortal=new ArrayList<>();
     public static void tele(Entity entity){
-        entity.timeUntilPortal=10;
+        if(!entity.world.isRemote && (entity instanceof ServerPlayerEntity)){
+            entity.timeUntilPortal=10;
+        }
         if(!entity.world.isRemote && !(entity instanceof ServerPlayerEntity)){
             DimensionType type = ModDimensionKathairis.getDimensionType();
             if(entity.getRidingEntity()==null && !entity.isBeingRidden()){
