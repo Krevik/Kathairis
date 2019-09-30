@@ -3,12 +3,14 @@ package io.github.krevik.kathairis.world.dimension.biome.biomes;
 import com.google.common.collect.Lists;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
 import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -22,6 +24,7 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.GameData;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,7 +34,7 @@ public class BiomeKatharianBiomeBase extends Biome {
     public Color baseGrassColor = new Color(66,244,238);
     protected BiomeKatharianBiomeBase(Builder p_i48975_1_) {
         super(p_i48975_1_);
-        //this.addStructure(KatharianFeatureList.CRYSTAL_RUINS,new CrystalRuinsConfig("kathairis:crystal_ruins/entrances",6));
+        this.addStructure(KatharianFeatureList.CRYSTAL_RUINS,new CrystalRuinsConfig("kathairis:crystal_ruins/entrances",6));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TITANIUM_ORE.getDefaultState(), 9), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 64)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(), 18), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));

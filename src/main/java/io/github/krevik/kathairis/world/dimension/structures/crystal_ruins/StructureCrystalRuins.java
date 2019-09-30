@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
-public class StructureCrystalRuins extends Structure<CrystalRuinsConfig> {
+public class StructureCrystalRuins extends ScatteredStructure<CrystalRuinsConfig> {
     public StructureCrystalRuins(Function<Dynamic<?>, ? extends CrystalRuinsConfig> p_i51419_1_) {
         super(p_i51419_1_);
     }
@@ -49,6 +49,11 @@ public class StructureCrystalRuins extends Structure<CrystalRuinsConfig> {
         }
     }
 
+    @Override
+    protected int getSeedModifier() {
+        return 0;
+    }
+
     public Structure.IStartFactory getStartFactory() {
         return Start::new;
     }
@@ -69,7 +74,6 @@ public class StructureCrystalRuins extends Structure<CrystalRuinsConfig> {
         public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
             CrystalRuinsConfig config = (CrystalRuinsConfig)generator.getStructureConfig(biomeIn, KatharianFeatureList.CRYSTAL_RUINS);
             BlockPos blockpos = new BlockPos(chunkX * 16, 64, chunkZ * 16);
-            System.out.println("Crystal Ruins generated at: "+ "x: "+ blockpos.getX() + " z: " + blockpos.getZ());
             CrystalRuinsPieces.initialisePieces(generator, templateManagerIn, blockpos, this.components, this.rand, config);
             this.recalculateStructureSize();
         }

@@ -60,7 +60,7 @@ public final class ForgeEventSubscriber {
             }
             if(!playersInPortal.isEmpty()){
                 for(PlayerInPortal playerInPortal:playersInPortal){
-                    playerInPortal.setTimeInPortal(playerInPortal.getTimeInPortal()+1);
+                        playerInPortal.setTimeInPortal(playerInPortal.getTimeInPortal() + 1);
                     if(playerInPortal.getTimeInPortal()>=500){
                             changeDimensionPlayer(playerInPortal.getPlayer());
                             playersToRemove.add(playerInPortal);

@@ -14,9 +14,30 @@ import io.github.krevik.kathairis.util.IItemGroupProvider;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
+import io.github.krevik.kathairis.world.dimension.ChunkGeneratorKathairis;
+import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
+import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
+import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
-import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
+import io.github.krevik.kathairis.world.dimension.feature.*;
+import io.github.krevik.kathairis.world.dimension.feature.carver.KatharianWorldCaveCarver;
+import io.github.krevik.kathairis.world.dimension.feature.desert.*;
+import io.github.krevik.kathairis.world.dimension.feature.floating_islands.FeatureHugeFloatingIsland;
+import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureForestCandleBush;
+import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureSteppedSucculent;
+import io.github.krevik.kathairis.world.dimension.feature.plainfields.FeaturePlainFields;
+import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureKatharianCloudRuins;
+import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureKatharianFloatingMiniIsland;
+import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSmallRuins;
+import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSoulCloudWithChests;
+import io.github.krevik.kathairis.world.dimension.feature.swamp.FeatureBasicSwamp;
+import io.github.krevik.kathairis.world.dimension.feature.tree.*;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsConfig;
+import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.StructureCrystalRuins;
+import io.github.krevik.kathairis.world.dimension.surface.builder.KathairisSwampSurfaceBuilder;
+import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianDesertEdgeSurfaceBuilder;
+import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianSoftSandLakesSurfaceBuilder;
 import io.netty.buffer.Unpooled;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
@@ -26,16 +47,18 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.gen.ChunkGeneratorType;
+import net.minecraft.world.gen.carver.WorldCarver;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
@@ -43,14 +66,10 @@ import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.minecraftforge.registries.RegistryManager;
+import net.minecraftforge.registries.*;
 
 import javax.annotation.Nonnull;
 
-import static io.github.krevik.kathairis.init.ModItemGroups.BUILDING_BLOCKS;
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
@@ -62,8 +81,23 @@ public final class ModEventSubscriber {
 
 
 	@SubscribeEvent
+	public static void onRegisterBiomeProviderType(final RegistryEvent.Register<BiomeProviderType<?,?>> event) {
+		event.getRegistry().registerAll(
+			setup(new BiomeProviderType<>(KatharianBiomeProvider::new, KatharianBiomeProviderSettings::new),"kathairis_biome_provider_type")
+		);
+	}
+
+	@SubscribeEvent
+	public static void onRegisterChunkGeneratorType(final RegistryEvent.Register<ChunkGeneratorType<?,?>> event) {
+		event.getRegistry().registerAll(
+				setup(new ChunkGeneratorType<>(ChunkGeneratorKathairis::new,true, KathairisGenSettings::new),"kathairis_chunk_generator_type")
+		);
+	}
+
+
+	@SubscribeEvent
 	public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event) {
-		KatharianFeatureList.putStructures();
+		GameData.getStructureMap().put("kathairis:crystal_ruins",KatharianFeatureList.CRYSTAL_RUINS);
 	}
 		@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
@@ -480,6 +514,10 @@ public final class ModEventSubscriber {
 	}
 
 	public static <T extends IForgeRegistryEntry> T setup(final T entry, final String name) {
+		return setup(entry, new ResourceLocation(MOD_ID, name));
+	}
+
+	public static <T extends IForgeRegistryEntry> T setup(String name, final T entry) {
 		return setup(entry, new ResourceLocation(MOD_ID, name));
 	}
 

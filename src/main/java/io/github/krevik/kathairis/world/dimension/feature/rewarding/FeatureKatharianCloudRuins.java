@@ -34,7 +34,6 @@ public class FeatureKatharianCloudRuins extends Feature<NoFeatureConfig> {
             for (int x = -radius / 2; x <= radius / 2; x++) {
                 for (int z = -radius / 2; z <= radius / 2; z++) {
                     for (int y = -radius / 4; y <= radius; y++) {
-                        //do main crown
                         BlockPos tmp = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                         if (((x * x) + (z * z) + (y * 2 * y * 2) <= (radius / 2 * radius / 2))) {
                             if (world.isBlockLoaded(tmp)) {
