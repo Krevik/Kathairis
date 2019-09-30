@@ -34,7 +34,7 @@ public class BiomeKatharianBiomeBase extends Biome {
     public Color baseGrassColor = new Color(66,244,238);
     protected BiomeKatharianBiomeBase(Builder p_i48975_1_) {
         super(p_i48975_1_);
-        this.addStructure(KatharianFeatureList.CRYSTAL_RUINS,new CrystalRuinsConfig("kathairis:crystal_ruins/entrances",6));
+        //this.addStructure(KatharianFeatureList.CRYSTAL_RUINS,new CrystalRuinsConfig("kathairis:crystal_ruins/entrances",6));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TITANIUM_ORE.getDefaultState(), 9), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 64)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(), 18), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));
