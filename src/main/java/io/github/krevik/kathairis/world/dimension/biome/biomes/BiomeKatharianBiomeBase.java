@@ -40,9 +40,7 @@ public class BiomeKatharianBiomeBase extends Biome {
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));
     }
 
-
     private static final int MONSTER_SPAWN_WEIGHT = 5;
-
 
     @Override
     public List<SpawnListEntry> getSpawns(EntityClassification p_76747_1_) {

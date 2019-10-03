@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 import org.omg.DynamicAny.DynEnumHelper;
 
 /**
- * @author Cadiboo
+ * @author Cadiboo, Krevik
  */
 @Mod(ModReference.MOD_ID)
 public final class Kathairis {

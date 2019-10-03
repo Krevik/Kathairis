@@ -30,6 +30,7 @@ import java.util.Map;
 public class KathairisTeleportingManager {
     public static void tele(Entity entity){
         if(!entity.world.isRemote && (entity instanceof ServerPlayerEntity)){
+            //this is handled through ForgeEventSubscriber#playerTeleporting
             entity.timeUntilPortal=10;
         }
         if(!entity.world.isRemote && !(entity instanceof ServerPlayerEntity)){
