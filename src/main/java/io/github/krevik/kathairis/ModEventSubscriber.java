@@ -49,6 +49,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -97,7 +98,7 @@ public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event) {
-		GameData.getStructureMap().put("kathairis:crystal_ruins",KatharianFeatureList.CRYSTAL_RUINS);
+		//GameData.getStructureMap().put("kathairis:crystal_ruins",KatharianFeatureList.CRYSTAL_RUINS);
 	}
 		@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
@@ -467,10 +468,7 @@ public final class ModEventSubscriber {
 		);
 	}
 
-	@SubscribeEvent
-	public static void onRegisterParticleTypes(final RegistryEvent.Register<ParticleType<?>> event){
-		//ModParticles.registerParticles();
-	}
+
 
 
 	@SubscribeEvent

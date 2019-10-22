@@ -2,14 +2,17 @@ package io.github.krevik.kathairis.block;
 
 import com.google.common.cache.LoadingCache;
 import io.github.krevik.kathairis.Kathairis;
+import io.github.krevik.kathairis.client.model.ModelPhasm;
 import io.github.krevik.kathairis.entity.EntityStrangeWanderer;
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -236,7 +239,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
             double d3 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d4 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d5 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
-			//worldIn.addParticle((IParticleData) ModParticles.TEST,d0,d1,d2,d3,d4,d5);
+			//worldIn.addParticle(ModParticles.TEST,d0,d1,d2,d3,d4,d5);
         }
 		/*if (rand.nextInt(100) == 0) {
 			worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);

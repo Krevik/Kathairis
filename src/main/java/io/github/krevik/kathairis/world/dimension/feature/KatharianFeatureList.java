@@ -22,6 +22,7 @@ import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianSoftS
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.PlainsBiome;
 import net.minecraft.world.gen.carver.ICarverConfig;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.*;
@@ -69,7 +70,8 @@ public class KatharianFeatureList {
     public static final Feature<NoFeatureConfig> FEATURE_SOUL_CLOUD_WITH_CHESTS = registerFeature("feature_soul_cloud_with_chests",new FeatureSoulCloudWithChests(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> FEATURE_CLOUD_RUINS = registerFeature("feature_cloud_ruins",new FeatureKatharianCloudRuins(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> FEATURE_SMALL_RUINS = registerFeature("feature_small_ruins",new FeatureSmallRuins(NoFeatureConfig::deserialize));
-    public static final Structure<CrystalRuinsConfig> CRYSTAL_RUINS = registerFeature("crystal_ruins", new StructureCrystalRuins(CrystalRuinsConfig::deserialize));
+    //public static final Structure<CrystalRuinsConfig> CRYSTAL_RUINS = registerFeature("crystal_ruins", new StructureCrystalRuins(CrystalRuinsConfig::deserialize));
+    public static final Feature<CrystalRuinsConfig> CRYSTAL_RUINS = registerFeature("crystal_ruins", new StructureCrystalRuins(CrystalRuinsConfig::deserialize));
 
     public static final WorldCarver<ProbabilityConfig> KATHARIAN_CAVE_WORLD_CARVER = registerWorldCarver("katharian_cave_world_carver",new KatharianWorldCaveCarver(ProbabilityConfig::deserialize,256));
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = registerSurfaceBuilder("katharian_swamp_surface_builder", new KathairisSwampSurfaceBuilder(SurfaceBuilderConfig::deserialize));

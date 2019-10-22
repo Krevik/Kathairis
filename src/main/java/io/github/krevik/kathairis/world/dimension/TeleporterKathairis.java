@@ -44,22 +44,23 @@ public class TeleporterKathairis extends Teleporter {
 		this.random = new Random(worldIn.getSeed());
 	}
 
-	public boolean func_222268_a(Entity p_222268_1_, float p_222268_2_) {
-		Vec3d vec3d = p_222268_1_.getLastPortalVec();
-		Direction direction = p_222268_1_.getTeleportDirection();
-		BlockPattern.PortalInfo blockpattern$portalinfo = this.func_222272_a(new BlockPos(p_222268_1_), p_222268_1_.getMotion(), direction, vec3d.x, vec3d.y, p_222268_1_ instanceof PlayerEntity);
-		if (blockpattern$portalinfo == null) {
+	@Override
+	public boolean placeInPortal(Entity p_222268_1_, float p_222268_2_) {
+		Vec3d lvt_3_1_ = p_222268_1_.getLastPortalVec();
+		Direction lvt_4_1_ = p_222268_1_.getTeleportDirection();
+		BlockPattern.PortalInfo lvt_5_1_ = this.placeInExistingPortal(new BlockPos(p_222268_1_), p_222268_1_.getMotion(), lvt_4_1_, lvt_3_1_.x, lvt_3_1_.y, p_222268_1_ instanceof PlayerEntity);
+		if (lvt_5_1_ == null) {
 			return false;
 		} else {
-			Vec3d vec3d1 = blockpattern$portalinfo.field_222505_a;
-			Vec3d vec3d2 = blockpattern$portalinfo.field_222506_b;
-			p_222268_1_.setMotion(vec3d2);
-			p_222268_1_.rotationYaw = p_222268_2_ + (float)blockpattern$portalinfo.field_222507_c;
+			Vec3d lvt_6_1_ = lvt_5_1_.pos;
+			Vec3d lvt_7_1_ = lvt_5_1_.motion;
+			p_222268_1_.setMotion(lvt_7_1_);
+			p_222268_1_.rotationYaw = p_222268_2_ + (float)lvt_5_1_.rotation;
 			if (p_222268_1_ instanceof ServerPlayerEntity) {
-				((ServerPlayerEntity)p_222268_1_).connection.setPlayerLocation(vec3d1.x, vec3d1.y, vec3d1.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
+				((ServerPlayerEntity)p_222268_1_).connection.setPlayerLocation(lvt_6_1_.x, lvt_6_1_.y, lvt_6_1_.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
 				((ServerPlayerEntity)p_222268_1_).connection.captureCurrentPosition();
 			} else {
-				p_222268_1_.setLocationAndAngles(vec3d1.x, vec3d1.y, vec3d1.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
+				p_222268_1_.setLocationAndAngles(lvt_6_1_.x, lvt_6_1_.y, lvt_6_1_.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
 			}
 
 			return true;
@@ -67,7 +68,7 @@ public class TeleporterKathairis extends Teleporter {
 	}
 
 	@Nullable
-	public BlockPattern.PortalInfo func_222272_a(BlockPos p_222272_1_, Vec3d p_222272_2_, Direction p_222272_3_, double p_222272_4_, double p_222272_6_, boolean p_222272_8_) {
+	public BlockPattern.PortalInfo placeInExistingPortal(BlockPos p_222272_1_, Vec3d p_222272_2_, Direction p_222272_3_, double p_222272_4_, double p_222272_6_, boolean p_222272_8_) {
 		int i = 128;
 		boolean flag = true;
 		BlockPos blockpos = null;
@@ -123,7 +124,7 @@ public class TeleporterKathairis extends Teleporter {
 				}
 
 				BlockPattern.PatternHelper blockpattern$patternhelper = BLOCK_KATHAIRIS_PORTAL.createPatternHelper(this.world, blockpos);
-				return blockpattern$patternhelper.func_222504_a(p_222272_3_, blockpos, p_222272_6_, p_222272_2_, p_222272_4_);
+				return blockpattern$patternhelper.getPortalInfo(p_222272_3_, blockpos, p_222272_6_, p_222272_2_, p_222272_4_);
 			}
 		}
 	}

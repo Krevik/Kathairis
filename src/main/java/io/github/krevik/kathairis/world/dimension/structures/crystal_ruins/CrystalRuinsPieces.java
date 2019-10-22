@@ -4,8 +4,11 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
+import io.github.krevik.kathairis.world.dimension.feature.structures.utils.SingleJigsawPieceNoAirIgnorance;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -15,23 +18,21 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.jigsaw.*;
 import net.minecraft.world.gen.feature.structure.*;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.feature.template.*;
 
 public class CrystalRuinsPieces {
 
     static{
-        //JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ModReference.MOD_ID,"crystal_ruins/corridors"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ModReference.MOD_ID+":"+"crystal_ruins/corridors/corridor_01"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
-        //JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ModReference.MOD_ID,"crystal_ruins/rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ModReference.MOD_ID+":"+"crystal_ruins/corridors/room_01"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
-        //JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ModReference.MOD_ID,"crystal_ruins/decorations"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ModReference.MOD_ID+":"+"crystal_ruins/corridors/decoration_01"), 1), Pair.of(new SingleJigsawPiece(ModReference.MOD_ID+":"+"crystal_ruins/corridors/decoration_02"), 1), Pair.of(new SingleJigsawPiece(ModReference.MOD_ID+":"+"crystal_ruins/corridors/decoration_03"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/stairs"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece("crystal_ruins/stairs/stairs_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/entrances"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece("crystal_ruins/entrances/entrance_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/crossings"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece("crystal_ruins/crossings/crossing_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
-
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/corridors"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/corridors/corridor_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/rooms/room_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/decorations"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/decorations/decoration_01"), 6), Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/decorations/decoration_02"), 1), Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/decorations/decoration_03"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/stairs"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/stairs/stairs_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/entrances"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/entrances/entrance_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation("crystal_ruins/crossings"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPieceNoAirIgnorance("crystal_ruins/crossings/crossing_01"), 6)), JigsawPattern.PlacementBehaviour.RIGID));
     }
 
     public static void initialisePieces(ChunkGenerator<?> p_214838_0_, TemplateManager p_214838_1_, BlockPos p_214838_2_, List<StructurePiece> p_214838_3_, SharedSeedRandom p_214838_4_, CrystalRuinsConfig p_214838_5_) {
-
-        JigsawManager.func_214889_a(new ResourceLocation("crystal_ruins/entrances"), 32, CrystalRuinsPieces.CrystalRuins::new, p_214838_0_, p_214838_1_, p_214838_2_, p_214838_3_, p_214838_4_);
+        JigsawManager.func_214889_a(p_214838_5_.startPool, p_214838_5_.size, CrystalRuinsPieces.CrystalRuins::new, p_214838_0_, p_214838_1_, p_214838_2_, p_214838_3_, p_214838_4_);
     }
 
     public static class CrystalRuins extends AbstractVillagePiece {
