@@ -1,6 +1,11 @@
 package io.github.krevik.kathairis.world.dimension.feature.carver;
 
 import com.mojang.datafixers.Dynamic;
+import io.github.krevik.kathairis.init.ModBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
@@ -111,6 +116,18 @@ public class KatharianWorldCaveCarver extends WorldCarver<ProbabilityConfig> {
             }
         }
 
+    }
+
+    protected boolean func_222706_a(BlockState p_222706_1_) {
+        Block block = p_222706_1_.getBlock();
+        return this.carvableBlocks.contains(p_222706_1_.getBlock()) || block==ModBlocks.KATHAIRIS_DIRT ||
+                block==ModBlocks.KATHAIRIS_GRASS || block==ModBlocks.KATHAIRIS_STONE;
+    }
+
+    protected boolean canCarveBlock(BlockState state, BlockState aboveState) {
+        Block block = state.getBlock();
+        return this.func_222706_a(state) || (block == ModBlocks.KATHAIRIS_SAND || block == ModBlocks.KATHAIRIS_SANDSTONE)
+                && !aboveState.getFluidState().isTagged(FluidTags.WATER);
     }
 
     protected boolean func_222708_a(double p_222708_1_, double p_222708_3_, double p_222708_5_, int p_222708_7_) {

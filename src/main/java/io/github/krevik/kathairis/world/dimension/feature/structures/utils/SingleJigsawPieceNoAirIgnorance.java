@@ -104,7 +104,7 @@ public class SingleJigsawPieceNoAirIgnorance extends JigsawPiece {
         PlacementSettings placementsettings = new PlacementSettings();
         placementsettings.setBoundingBox(boundsIn);
         placementsettings.setRotation(rotationIn);
-        placementsettings.func_215223_c(true);
+        placementsettings.func_215223_c(false);
         placementsettings.setIgnoreEntities(false);
         placementsettings.addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
         placementsettings.addProcessor(JigsawReplacementStructureProcessor.INSTANCE);

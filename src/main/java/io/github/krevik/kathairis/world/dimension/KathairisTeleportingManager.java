@@ -33,7 +33,8 @@ public class KathairisTeleportingManager {
             //this is handled through ForgeEventSubscriber#playerTeleporting
             entity.timeUntilPortal=10;
         }
-        if(!entity.world.isRemote && !(entity instanceof ServerPlayerEntity)){
+        //crashing
+        /*if(!entity.world.isRemote && !(entity instanceof ServerPlayerEntity)){
             DimensionType type = ModDimensionKathairis.getDimensionType();
             if(entity.getRidingEntity()==null && !entity.isBeingRidden()){
                 entity.setPortal(new BlockPos(entity.posX,entity.posY,entity.posZ));
@@ -47,7 +48,7 @@ public class KathairisTeleportingManager {
                     changeDim(entity, DimensionType.OVERWORLD);
                 }
             }
-        }
+        }*/
     }
 
 
