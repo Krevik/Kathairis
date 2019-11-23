@@ -27,8 +27,8 @@ public class BiomeKatharianDesert extends BiomeKatharianBiomeBase{
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CLOUD_MINI_ISLAND, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(200)));
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createDecoratedFeature(KatharianFeatureList.FEATURE_SOUL_CLOUD_WITH_CHESTS, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(750)));
         this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, createDecoratedFeature(KatharianFeatureList.FEATURE_CLOUD_RUINS, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(750)));
-        this.addStructure((Structure<CrystalRuinsConfig>)KatharianFeatureList.CRYSTAL_RUINS,new CrystalRuinsConfig("crystal_ruins/entrances",6));
-        this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createDecoratedFeature(KatharianFeatureList.CRYSTAL_RUINS, new CrystalRuinsConfig("crystal_ruins/entrances",6), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+        //this.addStructure((Structure<CrystalRuinsConfig>)KatharianFeatureList.CRYSTAL_RUINS,new CrystalRuinsConfig("crystal_ruins/entrances",6));
+        //this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createDecoratedFeature(KatharianFeatureList.CRYSTAL_RUINS, new CrystalRuinsConfig("crystal_ruins/entrances",6), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 
         baseGrassColor=Color.ORANGE;
     }

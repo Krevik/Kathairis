@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketClientOperateFOV;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
@@ -8,16 +9,21 @@ import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.PlayerInPortal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.structure.Structures;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -107,6 +113,49 @@ public final class ForgeEventSubscriber {
     private static void recoverStandardFOV(PlayerInPortal playerInPortal){
         if(!playerInPortal.getPlayer().getEntityWorld().isRemote()){
             PacketHandler.sendTo(new PacketClientOperateFOV(70), (ServerPlayerEntity) playerInPortal.getPlayer());
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void blockBreakEvent(BlockEvent.HarvestDropsEvent event) {
+        if (!event.getWorld().isRemote()) {
+            PlayerEntity breaker = event.getHarvester();
+            if (breaker != null) {
+                ItemStack heldStack = breaker.getHeldItemMainhand();
+                Item heldItem = heldStack.getItem().asItem();
+                if (heldItem.equals(ModItems.MAGNETHIUM_AXE) || heldItem.equals(ModItems.MAGNETHIUM_PICKAXE) || heldItem.equals(ModItems.MAGNETHIUM_SHOVEL)) {
+                    event.setDropChance(0);
+
+                    double x = event.getPos().getX() + 0.5;
+                    double y = event.getPos().getY() + 0.5;
+                    double z = event.getPos().getZ() + 0.5;
+
+                    for (ItemStack itemStack : event.getDrops()) {
+                        ItemEntity currentItem = new ItemEntity(breaker.world, x, y, z, itemStack);
+
+                        if (heldItem.equals(ModItems.MAGNETHIUM_AXE)) {
+                            double motionX = breaker.posX - currentItem.posX;
+                            double motionY = breaker.posY - currentItem.posY;
+                            double motionZ = breaker.posZ - currentItem.posZ;
+                            currentItem.setMotion(new Vec3d(motionX,motionY,motionZ));
+                        } else if (heldItem.equals(ModItems.MAGNETHIUM_PICKAXE)) {
+                            currentItem.setNoGravity(true);
+                            double motionX = 0;
+                            double motionY = -0.01;
+                            double motionZ = 0;
+                            currentItem.setMotion(new Vec3d(motionX,motionY,motionZ));
+                        } else if (heldItem.equals(ModItems.MAGNETHIUM_SHOVEL)) {
+                            currentItem.setNoGravity(true);
+                            double motionX = 0;
+                            double motionY = 0;
+                            double motionZ = 0;
+                            currentItem.setMotion(new Vec3d(motionX,motionY,motionZ));
+                        }
+                        breaker.world.addEntity(currentItem);
+                    }
+                }
+            }
         }
     }
 

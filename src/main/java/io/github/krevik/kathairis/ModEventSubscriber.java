@@ -46,6 +46,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.network.PacketBuffer;
@@ -53,6 +55,7 @@ import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProviderType;
 import net.minecraft.world.gen.ChunkGeneratorType;
@@ -63,6 +66,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -98,7 +102,7 @@ public final class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> event) {
-		//GameData.getStructureMap().put("kathairis:crystal_ruins",KatharianFeatureList.CRYSTAL_RUINS);
+
 	}
 		@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
@@ -523,5 +527,7 @@ public final class ModEventSubscriber {
 		entry.setRegistryName(registryName);
 		return entry;
 	}
+
+
 
 }

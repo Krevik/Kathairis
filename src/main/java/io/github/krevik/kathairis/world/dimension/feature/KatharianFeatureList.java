@@ -13,6 +13,8 @@ import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSmall
 import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSoulCloudWithChests;
 import io.github.krevik.kathairis.world.dimension.feature.swamp.FeatureBasicSwamp;
 import io.github.krevik.kathairis.world.dimension.feature.tree.*;
+import io.github.krevik.kathairis.world.dimension.structures.cloud_temple.CloudTemplePieces;
+import io.github.krevik.kathairis.world.dimension.structures.cloud_temple.StructureCloudTemple;
 import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsConfig;
 import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsPieces;
 import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.StructureCrystalRuins;
@@ -70,8 +72,8 @@ public class KatharianFeatureList {
     public static final Feature<NoFeatureConfig> FEATURE_SOUL_CLOUD_WITH_CHESTS = registerFeature("feature_soul_cloud_with_chests",new FeatureSoulCloudWithChests(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> FEATURE_CLOUD_RUINS = registerFeature("feature_cloud_ruins",new FeatureKatharianCloudRuins(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> FEATURE_SMALL_RUINS = registerFeature("feature_small_ruins",new FeatureSmallRuins(NoFeatureConfig::deserialize));
-    //public static final Structure<CrystalRuinsConfig> CRYSTAL_RUINS = registerFeature("crystal_ruins", new StructureCrystalRuins(CrystalRuinsConfig::deserialize));
     public static final Feature<CrystalRuinsConfig> CRYSTAL_RUINS = registerFeature("crystal_ruins", new StructureCrystalRuins(CrystalRuinsConfig::deserialize));
+    public static final Feature<NoFeatureConfig> CLOUD_TEMPLE = registerFeature("cloud_temple", new StructureCloudTemple(NoFeatureConfig::deserialize));
 
     public static final WorldCarver<ProbabilityConfig> KATHARIAN_CAVE_WORLD_CARVER = registerWorldCarver("katharian_cave_world_carver",new KatharianWorldCaveCarver(ProbabilityConfig::deserialize,256));
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = registerSurfaceBuilder("katharian_swamp_surface_builder", new KathairisSwampSurfaceBuilder(SurfaceBuilderConfig::deserialize));
@@ -79,6 +81,7 @@ public class KatharianFeatureList {
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SOFT_SAND_LAKES_SURFACE_BUILDER = registerSurfaceBuilder("katharian_soft_sand_lakes_surface_builder", new KatharianSoftSandLakesSurfaceBuilder(SurfaceBuilderConfig::deserialize));
 
     public static IStructurePieceType CRYSTAL_RUINS_PIECES_TYPE = registerStructurePieces(CrystalRuinsPieces.CrystalRuins::new, "crystal_ruins_pieces_type");
+    public static IStructurePieceType CLOUD_TEMPLE_PIECES_TYPE = registerStructurePieces(CloudTemplePieces.CloudTemple::new, "cloud_temple_pieces_type");
 
     static IStructurePieceType registerStructurePieces(IStructurePieceType p_214750_0_, String key) {
         return Registry.register(Registry.STRUCTURE_PIECE, key.toLowerCase(Locale.ROOT), p_214750_0_);

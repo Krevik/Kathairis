@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.util;
 
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -20,6 +21,7 @@ public class RewardHelper {
 	private static ArrayList<ItemStack> floatingMiniIslandRewardsList = new ArrayList<>();
 	private static ArrayList<ItemStack> cloudMiniTempleRewardsList = new ArrayList<>();
 	private static ArrayList<ItemStack> ruinsRewardsList = new ArrayList<>();
+	private static ArrayList<ItemStack> cloudTempleRewardsList = new ArrayList<>();
 
 	private static void initFloatingMiniIslandRewardsList(Random random) {
 		floatingMiniIslandRewardsList.clear();
@@ -72,6 +74,43 @@ public class RewardHelper {
 		ruinsRewardsList.add(new ItemStack(ModItems.SKYRAY_FEATHER, 1 + random.nextInt(2)));
 	}
 
+	private static void initCloudTempleRewardsList(Random random) {
+		cloudTempleRewardsList.clear();
+		cloudTempleRewardsList.add(new ItemStack(CLOUD_PEARL, 6 + random.nextInt(4)));
+		cloudTempleRewardsList.add(new ItemStack(CLOUD_ESSENCE, 8 + random.nextInt(4)));
+		cloudTempleRewardsList.add(new ItemStack(HEART, 12 + random.nextInt(4)));
+		cloudTempleRewardsList.add(new ItemStack(REVENUM_INGOT, 32 + random.nextInt(16)));
+		cloudTempleRewardsList.add(new ItemStack(MYSTIC_GEM, 16 + random.nextInt(16)));
+		cloudTempleRewardsList.add(new ItemStack(TITANIUM_INGOT, 32 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(MAGIC_BEANS, 16 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(FRUP, 36 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(GOOSEBERRIES, 36 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(COOKED_BISON_MEAT, 36 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(CRYSTAL_SHARD_BLUE, 36 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(CRYSTAL_SHARD_YELLOW, 36 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(CRYSTAL_SHARD_VIOLET, 36 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(Items.DIAMOND, 10 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(ModBlocks.MAGNETHIUM, 12 + random.nextInt(12)));
+		cloudTempleRewardsList.add(new ItemStack(CRYSTAL_PICKAXE, 1));
+		cloudTempleRewardsList.add(new ItemStack(CRYSTAL_PICKAXE, 1));
+		cloudTempleRewardsList.add(new ItemStack(CRYSTAL_PICKAXE, 1));
+		cloudTempleRewardsList.add(new ItemStack(CRYSTAL_PICKAXE, 1));
+		cloudTempleRewardsList.add(new ItemStack(MAGNETHIUM_PICKAXE, 1));
+		cloudTempleRewardsList.add(new ItemStack(MAGNETHIUM_SWORD, 1));
+
+	}
+
+	public static ArrayList<ItemStack> getCloudTempleRewards(Random random) {
+		initCloudTempleRewardsList(random);
+		ArrayList<ItemStack> rewards = new ArrayList<>();
+		for (int x = 1; x <= 9 + random.nextInt(3); x++) {
+			rewards.add(cloudTempleRewardsList.get(random.nextInt(cloudTempleRewardsList.size())));
+			initCloudTempleRewardsList(random);
+		}
+		return rewards;
+	}
+
+
 	public static ArrayList<ItemStack> getFloatingMiniIslandRewards(Random random) {
 		initFloatingMiniIslandRewardsList(random);
 		ArrayList<ItemStack> rewards = new ArrayList<>();
@@ -104,10 +143,12 @@ public class RewardHelper {
 
 	public static void addRewardsToTheChest(ArrayList<ItemStack> rewards, TileEntity tileEntity){
 		Random random = new Random();
-		if(tileEntity instanceof ChestTileEntity){
-			ChestTileEntity chest = (ChestTileEntity) tileEntity;
-			for(int i=0;i<rewards.size();i++){
-				chest.setInventorySlotContents(random.nextInt(16),rewards.get(i));
+		if(tileEntity !=null) {
+			if (tileEntity instanceof ChestTileEntity) {
+				ChestTileEntity chest = (ChestTileEntity) tileEntity;
+				for (int i = 0; i < rewards.size(); i++) {
+					chest.setInventorySlotContents(random.nextInt(16), rewards.get(i));
+				}
 			}
 		}
 	}
