@@ -117,47 +117,6 @@ public final class ForgeEventSubscriber {
     }
 
 
-    @SubscribeEvent
-    public static void blockBreakEvent(BlockEvent.HarvestDropsEvent event) {
-        if (!event.getWorld().isRemote()) {
-            PlayerEntity breaker = event.getHarvester();
-            if (breaker != null) {
-                ItemStack heldStack = breaker.getHeldItemMainhand();
-                Item heldItem = heldStack.getItem().asItem();
-                if (heldItem.equals(ModItems.MAGNETHIUM_AXE) || heldItem.equals(ModItems.MAGNETHIUM_PICKAXE) || heldItem.equals(ModItems.MAGNETHIUM_SHOVEL)) {
-                    event.setDropChance(0);
-
-                    double x = event.getPos().getX() + 0.5;
-                    double y = event.getPos().getY() + 0.5;
-                    double z = event.getPos().getZ() + 0.5;
-
-                    for (ItemStack itemStack : event.getDrops()) {
-                        ItemEntity currentItem = new ItemEntity(breaker.world, x, y, z, itemStack);
-
-                        if (heldItem.equals(ModItems.MAGNETHIUM_AXE)) {
-                            double motionX = breaker.posX - currentItem.posX;
-                            double motionY = breaker.posY - currentItem.posY;
-                            double motionZ = breaker.posZ - currentItem.posZ;
-                            currentItem.setMotion(new Vec3d(motionX,motionY,motionZ));
-                        } else if (heldItem.equals(ModItems.MAGNETHIUM_PICKAXE)) {
-                            currentItem.setNoGravity(true);
-                            double motionX = 0;
-                            double motionY = -0.01;
-                            double motionZ = 0;
-                            currentItem.setMotion(new Vec3d(motionX,motionY,motionZ));
-                        } else if (heldItem.equals(ModItems.MAGNETHIUM_SHOVEL)) {
-                            currentItem.setNoGravity(true);
-                            double motionX = 0;
-                            double motionY = 0;
-                            double motionZ = 0;
-                            currentItem.setMotion(new Vec3d(motionX,motionY,motionZ));
-                        }
-                        breaker.world.addEntity(currentItem);
-                    }
-                }
-            }
-        }
-    }
 
     /*@SubscribeEvent
     public static void onEatenEvents(LivingEntityUseItemEvent event){

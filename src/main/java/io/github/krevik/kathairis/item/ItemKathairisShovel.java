@@ -4,19 +4,25 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import io.github.krevik.kathairis.init.ModItemGroups;
+import io.github.krevik.kathairis.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -68,5 +74,21 @@ public class ItemKathairisShovel extends ItemKathairisTool {
 		}
 
 		return ActionResultType.PASS;
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack p_179218_1_, World p_179218_2_, BlockState p_179218_3_, BlockPos p_179218_4_, LivingEntity p_179218_5_) {
+		if(p_179218_1_.getItem()== ModItems.MAGNETHIUM_SHOVEL){
+			List<ItemEntity> e = p_179218_2_.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(p_179218_4_.getX() - 5, p_179218_4_.getY() - 5, p_179218_4_.getZ() - 5, p_179218_4_.getX() + 5, p_179218_4_.getY() + 5, p_179218_4_.getZ() + 5));
+			if(!e.isEmpty()){
+				for(ItemEntity entity:e){
+					double motionX = p_179218_5_.getPosition().getX()-entity.getPosition().getX();
+					double motionY = p_179218_5_.getPosition().getY()-entity.getPosition().getY();
+					double motionZ = p_179218_5_.getPosition().getZ()-entity.getPosition().getZ();
+					entity.setMotion(motionX,motionY,motionZ);
+				}
+			}
+		}
+		return super.onBlockDestroyed(p_179218_1_, p_179218_2_, p_179218_3_, p_179218_4_, p_179218_5_);
 	}
 }
