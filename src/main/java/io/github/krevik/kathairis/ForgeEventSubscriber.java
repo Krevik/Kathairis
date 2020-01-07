@@ -106,13 +106,13 @@ public final class ForgeEventSubscriber {
 
     private static void operateFOV(PlayerInPortal playerInPortal){
         if(!playerInPortal.getPlayer().getEntityWorld().isRemote()){
-            PacketHandler.sendTo(new PacketClientOperateFOV(70+(playerInPortal.getTimeInPortal()/6)), (ServerPlayerEntity) playerInPortal.getPlayer());
+            PacketHandler.sendTo(new PacketClientOperateFOV((playerInPortal.getTimeInPortal()/6)), (ServerPlayerEntity) playerInPortal.getPlayer());
         }
     }
 
     private static void recoverStandardFOV(PlayerInPortal playerInPortal){
         if(!playerInPortal.getPlayer().getEntityWorld().isRemote()){
-            PacketHandler.sendTo(new PacketClientOperateFOV(70), (ServerPlayerEntity) playerInPortal.getPlayer());
+            PacketHandler.sendTo(new PacketClientOperateFOV(0), (ServerPlayerEntity) playerInPortal.getPlayer());
         }
     }
 
