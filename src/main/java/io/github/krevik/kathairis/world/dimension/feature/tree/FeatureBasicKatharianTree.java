@@ -18,21 +18,15 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class FeatureBasicKatharianTree<T extends BaseKatharianTreeFeatureConfig> extends AbstractKatharianTreeFeature {
+public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
 
     private static final BlockState LOG = ModBlocks.MYSTIC_LOG.getDefaultState();
     private static final BlockState LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
     private final boolean useExtraRandomHeight;
 
-    public FeatureBasicKatharianTree(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49920_1_) {
+    public FeatureBasicKatharianTree(Function<Dynamic<?>, ? extends BaseKatharianTreeFeatureConfig> p_i49920_1_) {
         super(p_i49920_1_);
         this.useExtraRandomHeight = true;
-    }
-
-
-        @Override
-    protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) {
-
     }
 
     @Override
@@ -87,7 +81,7 @@ public class FeatureBasicKatharianTree<T extends BaseKatharianTreeFeatureConfig>
                                 int l1 = k1 - position.getZ();
                                 if (Math.abs(j1) != l2 || Math.abs(l1) != l2 || rand.nextInt(2) != 0 && k2 != 0) {
                                     BlockPos blockpos = new BlockPos(i3, i2, k1);
-                                    if (isAir(worldIn,position)|| isLeaves(worldIn,position)) {
+                                    if (isAirOrLeaves(worldIn,position)) {
                                         worldIn.setBlockState(blockpos,LEAF,2);
                                         leavesSet.add(blockpos);
                                     }
@@ -97,8 +91,8 @@ public class FeatureBasicKatharianTree<T extends BaseKatharianTreeFeatureConfig>
                     }
 
                     for(int j2 = 0; j2 < i; ++j2) {
-                        if (isAir(worldIn, position.up(j2)) || isLeaves(worldIn,position.up(j2))) {
-                            worldIn.setBlockState(position.up(j2),LEAF,2);
+                        if (isAirOrLeaves(worldIn,position.up(j2))) {
+                            worldIn.setBlockState(position.up(j2),LOG,2);
                             trunkSet.add(position.up(j2));
                         }
                     }

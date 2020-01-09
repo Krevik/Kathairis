@@ -26,7 +26,7 @@ public class FeatureBasicSwamp extends Feature<NoFeatureConfig> {
 
         for(int i = 0; i < 32; ++i) {
             BlockPos blockpos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-            if (!world.isAirBlock(blockpos.down()) && world.isAirBlock(blockpos)&&world.getBiome(blockpos)== ModBiomes.KATHARIAN_SWAMP&&
+            if (!world.isAirBlock(blockpos.down()) && world.isAirBlock(blockpos)&&world.func_226691_t_(blockpos)== ModBiomes.KATHARIAN_SWAMP&&
             world.getBlockState(blockpos.down())!= Blocks.WATER.getDefaultState()&&world.getBlockState(blockpos.down()).getBlock()==ModBlocks.KATHAIRIS_GRASS) {
                 world.setBlockState(blockpos.down(), iblockstate1, 2);
             }

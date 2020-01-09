@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.jigsaw.IJigsawDeserializer;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
@@ -87,6 +88,7 @@ public class SingleJigsawPieceCloudTemple extends JigsawPiece {
         Template template = templateManagerIn.getTemplateDefaulted(this.location);
         return template.getMutableBoundingBox((new PlacementSettings()).setRotation(rotationIn), pos);
     }
+
 
     public boolean place(TemplateManager templateManagerIn, IWorld worldIn, BlockPos pos, Rotation rotationIn, MutableBoundingBox boundsIn, Random rand) {
         BlockPos position = new BlockPos(pos.getX(),200,pos.getZ());

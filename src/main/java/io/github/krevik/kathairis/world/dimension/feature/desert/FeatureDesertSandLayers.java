@@ -24,8 +24,8 @@ public class FeatureDesertSandLayers extends Feature<NoFeatureConfig> {
     }
 
     public boolean place(IWorld p_212245_1_, ChunkGenerator<? extends GenerationSettings> p_212245_2_, Random p_212245_3_, BlockPos p_212245_4_, NoFeatureConfig p_212245_5_) {
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
+        BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
+        BlockPos.Mutable blockpos$mutableblockpos1 = new BlockPos.Mutable();
 
         for(int i = 0; i < 16; ++i) {
             for(int j = 0; j < 16; ++j) {
@@ -34,7 +34,7 @@ public class FeatureDesertSandLayers extends Feature<NoFeatureConfig> {
                 int i1 = p_212245_1_.getHeight(Heightmap.Type.MOTION_BLOCKING, k, l);
                 blockpos$mutableblockpos.setPos(k, i1, l);
                 blockpos$mutableblockpos1.setPos(blockpos$mutableblockpos).move(Direction.DOWN, 1);
-                Biome biome = p_212245_1_.getBiome(blockpos$mutableblockpos);
+                Biome biome = p_212245_1_.func_226691_t_(blockpos$mutableblockpos);
 
                 if (biome== ModBiomes.KATHARIAN_DESERT) {
                     p_212245_1_.setBlockState(blockpos$mutableblockpos, ModBlocks.LAYERED_SAND.getDefaultState().with(BlockLayeredSand.LAYERS,1+p_212245_3_.nextInt(3)), 2);

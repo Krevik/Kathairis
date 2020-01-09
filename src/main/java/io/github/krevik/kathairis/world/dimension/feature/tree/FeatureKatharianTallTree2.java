@@ -2,10 +2,15 @@ package io.github.krevik.kathairis.world.dimension.feature.tree;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
@@ -16,27 +21,11 @@ public class FeatureKatharianTallTree2 extends AbstractKatharianTreeFeature {
     private static final BlockState LOG = ModBlocks.MYSTIC_LOG.getDefaultState();
     private static final BlockState LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
 
-    public FeatureKatharianTallTree2(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49920_1_) {
-        super(p_i49920_1_, true);
+    public FeatureKatharianTallTree2(Function<Dynamic<?>, ? extends BaseKatharianTreeFeatureConfig> p_i49920_1_) {
+        super(p_i49920_1_);
     }
 
-
-    @Override
-    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox box) {
-        if(canGrowInto(worldIn, pos.down())) {
-            int treeHeight = 5+rand.nextInt(7);
-            for (int c = 0; c <= treeHeight; c++) {
-                setBlocks(changedBlocks,worldIn,new BlockPos(pos.getX(),pos.getY()+c,pos.getZ()),LOG);
-            }
-
-            generateCrown(worldIn, new BlockPos(pos.getX(), pos.getY() + treeHeight, pos.getZ()), (int) (1 + (treeHeight / 1.5)),rand);
-            return true;
-        }
-
-        return false;
-    }
-
-    private void generateCrown(IWorldGenerationReader world, BlockPos pos, int radius, Random random) {
+    private void generateCrown(IWorldGenerationReader world, BlockPos pos, int radius, Random random, Set<BlockPos> leavesSet) {
         BlockState leaves = LEAF;
         for(int x=-radius/2;x<=radius/2;x++) {
             for(int z=-radius/2;z<=radius/2;z++) {
@@ -46,15 +35,19 @@ public class FeatureKatharianTallTree2 extends AbstractKatharianTreeFeature {
                     if(((x*x)+(z*z)+(y*y)<=(radius/2*radius/2))){
                         if(isAir(world,tmp)){
                             world.setBlockState(tmp,leaves,2);
+                            leavesSet.add(tmp);
                         }
                      }
                      //add some hanging blocks
                      if(((x*x)+(z*z)+(y*y)==(radius/2*radius/2)) && isAir(world,tmp.down())){
                          world.setBlockState(tmp.down(),LEAF,2);
+                         leavesSet.add(tmp.down());
                          if(random.nextInt(3)==0 && isAir(world,tmp.down(2))){
                              world.setBlockState(tmp.down(2),LEAF,2);
+                             leavesSet.add(tmp.down(2));
                              if(random.nextInt(3)==0 && isAir(world,tmp.down(3))){
                                  world.setBlockState(tmp.down(3),LEAF,2);
+                                 leavesSet.add(tmp.down(3));
                              }
                          }
                      }
@@ -63,17 +56,24 @@ public class FeatureKatharianTallTree2 extends AbstractKatharianTreeFeature {
         }
     }
 
+    @Override
+    protected boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos pos, Set leavesSet, Set trunksSet, MutableBoundingBox p_225557_6_, BaseTreeFeatureConfig p_225557_7_) {
+        if(canGrowInto(worldIn, pos.down())) {
+            int treeHeight = 5+rand.nextInt(7);
+            for (int c = 0; c <= treeHeight; c++) {
+                worldIn.setBlockState(new BlockPos(pos.getX(),pos.getY()+c,pos.getZ()),LOG,2);
+                trunksSet.add(new BlockPos(pos.getX(),pos.getY()+c,pos.getZ()));
+            }
 
-    protected final void setBlocks(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, BlockPos p_208520_3_, BlockState p_208520_4_) {
-        this.func_208521_b(worldIn, p_208520_3_, p_208520_4_);
-        changedBlocks.add(p_208520_3_.toImmutable());
+            generateCrown(worldIn, new BlockPos(pos.getX(), pos.getY() + treeHeight, pos.getZ()), (int) (1 + (treeHeight / 1.5)),rand,leavesSet);
+            return true;
+        }
+
+        return false;
     }
 
-    private void func_208521_b(IWorldGenerationReader p_208521_1_, BlockPos p_208521_2_, BlockState p_208521_3_) {
-        if (this.doBlockNotify) {
-            p_208521_1_.setBlockState(p_208521_2_, p_208521_3_, 19);
-        } else {
-            p_208521_1_.setBlockState(p_208521_2_, p_208521_3_, 18);
-        }
+    @Override
+    public boolean place(IWorld worldIn, ChunkGenerator generator, Random rand, BlockPos pos, IFeatureConfig config) {
+        return true;
     }
 }
