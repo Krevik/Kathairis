@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.world.dimension.feature;
 
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.feature.carver.KatharianWorldCaveCarver;
+import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
 import io.github.krevik.kathairis.world.dimension.feature.desert.*;
 import io.github.krevik.kathairis.world.dimension.feature.floating_islands.FeatureHugeFloatingIsland;
 import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureForestCandleBush;
@@ -45,13 +46,13 @@ import static io.github.krevik.kathairis.util.ModUtil._null;
 
 public class KatharianFeatureList {
 
-    public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_TREE = registerFeature("katharian_tree", new KatharianTreeFeature(NoFeatureConfig::deserialize,true));
-    public static final AbstractTreeFeature<NoFeatureConfig> BASIC_STANDARD_TREE = registerFeature("basic_standard_tree", new FeatureBasicKatharianTree(NoFeatureConfig::deserialize,true));
-    public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_TREE_1 = registerFeature("katharian_tree_1",new FeatureKatharianTallTree1(NoFeatureConfig::deserialize));
-    public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_TREE_2 = registerFeature("katharian_tree_2",new FeatureKatharianTallTree2(NoFeatureConfig::deserialize));
-    public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_TREE_3 = registerFeature("katharian_tree_3",new FeatureKatharianTallTree3(NoFeatureConfig::deserialize));
-    public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_HUGE_TREE_1 = registerFeature("katharian_huge_tree_1",new FeatureKatharianTreeHuge1(NoFeatureConfig::deserialize));
-    public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_SOUL_TREE = registerFeature("katharian_soul_tree",new FeatureKatharianSoulTree(NoFeatureConfig::deserialize));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> KATHARIAN_TREE = registerFeature("katharian_tree", new KatharianTreeFeature(BaseKatharianTreeFeatureConfig::deserializeMystic,true));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> BASIC_STANDARD_TREE = registerFeature("basic_standard_tree", new FeatureBasicKatharianTree(BaseKatharianTreeFeatureConfig::deserialize,true));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> KATHARIAN_TREE_1 = registerFeature("katharian_tree_1",new FeatureKatharianTallTree1(BaseKatharianTreeFeatureConfig::deserialize));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> KATHARIAN_TREE_2 = registerFeature("katharian_tree_2",new FeatureKatharianTallTree2(BaseKatharianTreeFeatureConfig::deserialize));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> KATHARIAN_TREE_3 = registerFeature("katharian_tree_3",new FeatureKatharianTallTree3(BaseKatharianTreeFeatureConfig::deserialize));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> KATHARIAN_HUGE_TREE_1 = registerFeature("katharian_huge_tree_1",new FeatureKatharianTreeHuge1(BaseKatharianTreeFeatureConfig::deserialize));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> KATHARIAN_SOUL_TREE = registerFeature("katharian_soul_tree",new FeatureKatharianSoulTree(BaseKatharianTreeFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> KATHARIAN_CLOUD = registerFeature("katharian_cloud",new FeatureKatharianCloud(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> KATHARIAN_CACTUS = registerFeature("katharian_cactus",new FeatureKatharianCactus(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> KATHARIAN_DEAD_BUSH = registerFeature("katharian_dead_bush",new FeatureKatharianDeadBush(NoFeatureConfig::deserialize));
@@ -62,7 +63,7 @@ public class KatharianFeatureList {
     public static final Feature<NoFeatureConfig> KATHARIAN_ROCKTUS = registerFeature("katharian_rocktus",new FeatureKatharianRocktus(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> SAND_LAYERS = registerFeature("sand_layers",new FeatureDesertSandLayers(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> STEPPED_SUCCULENT = registerFeature("stepped_succulent",new FeatureSteppedSucculent(NoFeatureConfig::deserialize));
-    public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_SWAMP_TALL_TREE_1 = registerFeature("katharian_swamp_tall_tree_1",new FeatureKatharianSwampTallTree1(NoFeatureConfig::deserialize));
+    public static final AbstractTreeFeature<BaseKatharianTreeFeatureConfig> KATHARIAN_SWAMP_TALL_TREE_1 = registerFeature("katharian_swamp_tall_tree_1",new FeatureKatharianSwampTallTree1(BaseKatharianTreeFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> BASIC_SWAMP_FEATURE = registerFeature("basic_swamp_feature",new FeatureBasicSwamp(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> SMALL_ROCK = registerFeature("small_rock",new FeatureDesertSmallRocks(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> KATHARIAN_FOREST_BUSH = registerFeature("katharian_forest_bush",new FeatureKatharianForestBush(NoFeatureConfig::deserialize));

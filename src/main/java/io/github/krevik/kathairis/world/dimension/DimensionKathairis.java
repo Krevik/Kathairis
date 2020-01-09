@@ -6,6 +6,7 @@ import io.github.krevik.kathairis.client.render.world.RenderKathairisSky;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModDimensions;
+import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
 import net.minecraft.block.Blocks;
@@ -36,7 +37,7 @@ public class DimensionKathairis extends OverworldDimension {
 
 
     public DimensionKathairis(World world) {
-        super(world,Kathairis.KATHAIRIS);
+        super(world,DimensionType.byName(ModReference.KATHAIRIS));
     }
 
     public DimensionKathairis(World world, DimensionType dimensionType) {
@@ -47,8 +48,7 @@ public class DimensionKathairis extends OverworldDimension {
     public ChunkGenerator<? extends GenerationSettings> createChunkGenerator() {
         WorldType worldtype = this.world.getWorldInfo().getGenerator();
         BiomeProviderType<KatharianBiomeProviderSettings, KatharianBiomeProvider> biomeprovidertype1 = ModDimensions.KATHAIRIS_BIOME_PROVIDER_TYPE;
-        KatharianBiomeProviderSettings overworldbiomeprovidersettings1 = biomeprovidertype1.createSettings().setGeneratorSettings(new KathairisGenSettings()).setWorldInfo(this.world.getWorldInfo());
-        BiomeProvider biomeprovider = biomeprovidertype1.create(overworldbiomeprovidersettings1);
+        BiomeProvider biomeprovider = biomeprovidertype1.create(new KatharianBiomeProviderSettings());
 
         ChunkGeneratorType<OverworldGenSettings, ChunkGeneratorKathairis> chunkgeneratortype4 = ModDimensions.KATHAIRIS_CHUNK_GENERATOR_TYPE;
         OverworldGenSettings overworldgensettings1 = chunkgeneratortype4.createSettings();
@@ -71,7 +71,8 @@ public class DimensionKathairis extends OverworldDimension {
 
     Vec3d swampColor = new Vec3d(14/10,51/10,12/10);
 
-    @Override
+    /*@Override
+    //TODO
     public Vec3d getSkyColor(BlockPos cameraPosition, float partialTicks) {
         int radius=6;
         ArrayList<BlockPos> posesToCalculate = new ArrayList<>();
@@ -83,7 +84,7 @@ public class DimensionKathairis extends OverworldDimension {
         }
         boolean isSwampNear=false;
         for(BlockPos pos:posesToCalculate){
-            if(Minecraft.getInstance().player.world.getBiome(pos)==ModBiomes.KATHARIAN_SWAMP){
+            if(Minecraft.getInstance().player.world.func_226691_t_(pos)==ModBiomes.KATHARIAN_SWAMP){
                 isSwampNear=true;
             }
         }
@@ -93,7 +94,7 @@ public class DimensionKathairis extends OverworldDimension {
 
         }
         return super.getSkyColor(cameraPosition,partialTicks);
-    }
+    }*/
 
     @Override
     @OnlyIn(Dist.CLIENT)
@@ -110,7 +111,7 @@ public class DimensionKathairis extends OverworldDimension {
         }
         boolean isSwampNear=false;
         for(BlockPos pos:posesToCalculate){
-            if(player.world.getBiome(pos)==ModBiomes.KATHARIAN_SWAMP){
+            if(player.world.func_226691_t_(pos)==ModBiomes.KATHARIAN_SWAMP){
                 isSwampNear=true;
             }
         }
@@ -130,7 +131,7 @@ public class DimensionKathairis extends OverworldDimension {
         float sumG=0;
         float sumB=0;
         for(BlockPos pos:posesToCalculate){
-            if(world.getBiome(pos)==ModBiomes.KATHARIAN_SWAMP){
+            if(world.func_226691_t_(pos)==ModBiomes.KATHARIAN_SWAMP){
                 sumR+=swampValue.x;
                 sumG+=swampValue.y;
                 sumB+=swampValue.z;

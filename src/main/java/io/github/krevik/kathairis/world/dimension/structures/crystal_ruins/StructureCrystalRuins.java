@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
@@ -40,16 +41,10 @@ public class StructureCrystalRuins extends Structure<CrystalRuinsConfig> {
         return new ChunkPos(lvt_13_1_, lvt_14_1_);
     }
 
-
-
-    public boolean hasStartAt(ChunkGenerator<?> p_202372_1_, Random p_202372_2_, int p_202372_3_, int p_202372_4_) {
-        ChunkPos lvt_5_1_ = this.getStartPositionForPosition(p_202372_1_, p_202372_2_, p_202372_3_, p_202372_4_, 0, 0);
-        if (p_202372_3_ == lvt_5_1_.x && p_202372_4_ == lvt_5_1_.z) {
-            Biome lvt_6_1_ = p_202372_1_.getBiomeProvider().getBiome(new BlockPos((p_202372_3_ << 4) + 9, 0, (p_202372_4_ << 4) + 9));
-            return p_202372_1_.hasStructure(lvt_6_1_, (Structure<? extends IFeatureConfig>) KatharianFeatureList.CRYSTAL_RUINS);
-        } else {
-            return false;
-        }
+    @Override
+    public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> p_225558_2_, Random p_225558_3_, int p_225558_4_, int p_225558_5_, Biome p_225558_6_) {
+        ChunkPos chunkpos = this.getStartPositionForPosition(p_225558_2_, p_225558_3_, p_225558_4_, p_225558_5_, 0, 0);
+        return p_225558_4_ == chunkpos.x && p_225558_5_ == chunkpos.z ? p_225558_2_.hasStructure(p_225558_6_, this) : false;
     }
 
 
@@ -65,9 +60,10 @@ public class StructureCrystalRuins extends Structure<CrystalRuinsConfig> {
         return 8;
     }
 
+
     public static class Start extends MarginedStructureStart {
-        public Start(Structure<?> p_i51110_1_, int p_i51110_2_, int p_i51110_3_, Biome p_i51110_4_, MutableBoundingBox p_i51110_5_, int p_i51110_6_, long p_i51110_7_) {
-            super(p_i51110_1_, p_i51110_2_, p_i51110_3_, p_i51110_4_, p_i51110_5_, p_i51110_6_, p_i51110_7_);
+        public Start(Structure<?> p_i225821_1_, int p_i225821_2_, int p_i225821_3_, MutableBoundingBox p_i225821_4_, int p_i225821_5_, long p_i225821_6_) {
+            super(p_i225821_1_, p_i225821_2_, p_i225821_3_, p_i225821_4_, p_i225821_5_, p_i225821_6_);
         }
 
         public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {

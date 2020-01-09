@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.world.dimension;
 
 
-import com.google.common.collect.Maps;
 import io.github.krevik.kathairis.block.BlockKathairisPortal;
 import io.github.krevik.kathairis.init.ModBlocks;
 import it.unimi.dsi.fastutil.longs.LongIterator;
@@ -16,6 +15,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.*;
+import net.minecraft.village.PointOfInterest;
+import net.minecraft.village.PointOfInterestManager;
+import net.minecraft.village.PointOfInterestType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.server.ServerWorld;
@@ -25,18 +27,13 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Supplier;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
+import java.util.stream.Collectors;
 
 public class TeleporterKathairis extends Teleporter {
-	private static final Logger LOGGER = LogManager.getLogger();
-	private static final BlockKathairisPortal BLOCK_KATHAIRIS_PORTAL = (BlockKathairisPortal) ModBlocks.KATHAIRIS_PORTAL;
 	protected final ServerWorld world;
 	protected final Random random;
-	protected final Map<ColumnPos, PortalPosition> destinationCoordinateCache = Maps.newHashMapWithExpectedSize(4096);
-	private final Object2LongMap<ColumnPos> field_222275_f = new Object2LongOpenHashMap<>();
 
 	public TeleporterKathairis(ServerWorld worldIn) {
 		super(worldIn);
@@ -44,114 +41,65 @@ public class TeleporterKathairis extends Teleporter {
 		this.random = new Random(worldIn.getSeed());
 	}
 
-	@Override
 	public boolean placeInPortal(Entity p_222268_1_, float p_222268_2_) {
-		Vec3d lvt_3_1_ = p_222268_1_.getLastPortalVec();
-		Direction lvt_4_1_ = p_222268_1_.getTeleportDirection();
-		BlockPattern.PortalInfo lvt_5_1_ = this.placeInExistingPortal(new BlockPos(p_222268_1_), p_222268_1_.getMotion(), lvt_4_1_, lvt_3_1_.x, lvt_3_1_.y, p_222268_1_ instanceof PlayerEntity);
-		if (lvt_5_1_ == null) {
+		Vec3d vec3d = p_222268_1_.getLastPortalVec();
+		Direction direction = p_222268_1_.getTeleportDirection();
+		BlockPattern.PortalInfo blockpattern$portalinfo = this.placeInExistingPortal(new BlockPos(p_222268_1_), p_222268_1_.getMotion(), direction, vec3d.x, vec3d.y, p_222268_1_ instanceof PlayerEntity);
+		if (blockpattern$portalinfo == null) {
 			return false;
 		} else {
-			Vec3d lvt_6_1_ = lvt_5_1_.pos;
-			Vec3d lvt_7_1_ = lvt_5_1_.motion;
-			p_222268_1_.setMotion(lvt_7_1_);
-			p_222268_1_.rotationYaw = p_222268_2_ + (float)lvt_5_1_.rotation;
-			if (p_222268_1_ instanceof ServerPlayerEntity) {
-				((ServerPlayerEntity)p_222268_1_).connection.setPlayerLocation(lvt_6_1_.x, lvt_6_1_.y, lvt_6_1_.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
-				((ServerPlayerEntity)p_222268_1_).connection.captureCurrentPosition();
-			} else {
-				p_222268_1_.setLocationAndAngles(lvt_6_1_.x, lvt_6_1_.y, lvt_6_1_.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
-			}
-
+			Vec3d vec3d1 = blockpattern$portalinfo.pos;
+			Vec3d vec3d2 = blockpattern$portalinfo.motion;
+			p_222268_1_.setMotion(vec3d2);
+			p_222268_1_.rotationYaw = p_222268_2_ + (float)blockpattern$portalinfo.rotation;
+			p_222268_1_.func_225653_b_(vec3d1.x, vec3d1.y, vec3d1.z);
 			return true;
 		}
 	}
 
 	@Nullable
-	public BlockPattern.PortalInfo placeInExistingPortal(BlockPos p_222272_1_, Vec3d p_222272_2_, Direction p_222272_3_, double p_222272_4_, double p_222272_6_, boolean p_222272_8_) {
-		int i = 128;
-		boolean flag = true;
-		BlockPos blockpos = null;
-		ColumnPos columnpos = new ColumnPos(p_222272_1_);
-		if (!p_222272_8_ && this.field_222275_f.containsKey(columnpos)) {
-			return null;
-		} else {
-			PortalPosition teleporter$portalposition = this.destinationCoordinateCache.get(columnpos);
-			if (teleporter$portalposition != null) {
-				blockpos = teleporter$portalposition.field_222267_a;
-				teleporter$portalposition.lastUpdateTime = this.world.getGameTime();
-				flag = false;
-			} else {
-				double d0 = Double.MAX_VALUE;
-
-				for(int j = -128; j <= 128; ++j) {
-					BlockPos blockpos2;
-					for(int k = -128; k <= 128; ++k) {
-						for(BlockPos blockpos1 = p_222272_1_.add(j, this.world.getActualHeight() - 1 - p_222272_1_.getY(), k); blockpos1.getY() >= 0; blockpos1 = blockpos2) {
-							blockpos2 = blockpos1.down();
-							if (this.world.getBlockState(blockpos1).getBlock() == BLOCK_KATHAIRIS_PORTAL) {
-								for(blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == BLOCK_KATHAIRIS_PORTAL; blockpos2 = blockpos2.down()) {
-									blockpos1 = blockpos2;
-								}
-
-								double d1 = blockpos1.distanceSq(p_222272_1_);
-								if (d0 < 0.0D || d1 < d0) {
-									d0 = d1;
-									blockpos = blockpos1;
-								}
-							}
-						}
-					}
-				}
-			}
-
-			if (blockpos == null) {
-				long l = this.world.getGameTime() + 300L;
-				this.field_222275_f.put(columnpos, l);
-				return null;
-			} else {
-				if (flag) {
-					this.destinationCoordinateCache.put(columnpos, new PortalPosition(blockpos, this.world.getGameTime()));
-					Logger logger = LOGGER;
-					Supplier[] asupplier = new Supplier[2];
-					Dimension dimension = this.world.getDimension();
-					asupplier[0] = dimension::getType;
-					asupplier[1] = () -> {
-						return columnpos;
-					};
-					logger.debug("Adding kathairis portal ticket for {}:{}", asupplier);
-					this.world.getChunkProvider().func_217228_a(TicketType.PORTAL, new ChunkPos(blockpos), 3, columnpos);
-				}
-
-				BlockPattern.PatternHelper blockpattern$patternhelper = BLOCK_KATHAIRIS_PORTAL.createPatternHelper(this.world, blockpos);
-				return blockpattern$patternhelper.getPortalInfo(p_222272_3_, blockpos, p_222272_6_, p_222272_2_, p_222272_4_);
-			}
-		}
+	public BlockPattern.PortalInfo placeInExistingPortal(BlockPos p_222272_1_, Vec3d p_222272_2_, Direction directionIn, double p_222272_4_, double p_222272_6_, boolean p_222272_8_) {
+		PointOfInterestManager pointofinterestmanager = this.world.getPointOfInterestManager();
+		pointofinterestmanager.func_226347_a_(this.world, p_222272_1_, 128);
+		List<PointOfInterest> list = pointofinterestmanager.func_226353_b_((p_226705_0_) -> {
+			return p_226705_0_ == PointOfInterestType.field_226358_u_;
+		}, p_222272_1_, 128, PointOfInterestManager.Status.ANY).collect(Collectors.toList());
+		Optional<PointOfInterest> optional = list.stream().min(Comparator.<PointOfInterest>comparingDouble((p_226706_1_) -> {
+			return p_226706_1_.getPos().distanceSq(p_222272_1_);
+		}).thenComparingInt((p_226704_0_) -> {
+			return p_226704_0_.getPos().getY();
+		}));
+		return optional.map((p_226707_7_) -> {
+			BlockPos blockpos = p_226707_7_.getPos();
+			this.world.getChunkProvider().func_217228_a(TicketType.PORTAL, new ChunkPos(blockpos), 3, blockpos);
+			BlockPattern.PatternHelper blockpattern$patternhelper = BlockKathairisPortal.createPatternHelper(this.world, blockpos);
+			return blockpattern$patternhelper.getPortalInfo(directionIn, blockpos, p_222272_6_, p_222272_2_, p_222272_4_);
+		}).orElse((BlockPattern.PortalInfo)null);
 	}
 
 	public boolean makePortal(Entity entityIn) {
 		int i = 16;
 		double d0 = -1.0D;
-		int j = MathHelper.floor(entityIn.posX);
-		int k = MathHelper.floor(entityIn.posY);
-		int l = MathHelper.floor(entityIn.posZ);
+		int j = MathHelper.floor(entityIn.func_226277_ct_());
+		int k = MathHelper.floor(entityIn.func_226278_cu_());
+		int l = MathHelper.floor(entityIn.func_226281_cx_());
 		int i1 = j;
 		int j1 = k;
 		int k1 = l;
 		int l1 = 0;
 		int i2 = this.random.nextInt(4);
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 		for(int j2 = j - 16; j2 <= j + 16; ++j2) {
-			double d1 = (double)j2 + 0.5D - entityIn.posX;
+			double d1 = (double)j2 + 0.5D - entityIn.func_226277_ct_();
 
 			for(int l2 = l - 16; l2 <= l + 16; ++l2) {
-				double d2 = (double)l2 + 0.5D - entityIn.posZ;
+				double d2 = (double)l2 + 0.5D - entityIn.func_226281_cx_();
 
 				label276:
 				for(int j3 = this.world.getActualHeight() - 1; j3 >= 0; --j3) {
-					if (this.world.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3, l2))) {
-						while(j3 > 0 && this.world.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2))) {
+					if (this.world.isAirBlock(blockpos$mutable.setPos(j2, j3, l2))) {
+						while(j3 > 0 && this.world.isAirBlock(blockpos$mutable.setPos(j2, j3 - 1, l2))) {
 							--j3;
 						}
 
@@ -169,15 +117,15 @@ public class TeleporterKathairis extends Teleporter {
 										int i5 = j2 + (k4 - 1) * l3 + j4 * i4;
 										int j5 = j3 + l4;
 										int k5 = l2 + (k4 - 1) * i4 - j4 * l3;
-										blockpos$mutableblockpos.setPos(i5, j5, k5);
-										if (l4 < 0 && !this.world.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || l4 >= 0 && !this.world.isAirBlock(blockpos$mutableblockpos)) {
+										blockpos$mutable.setPos(i5, j5, k5);
+										if (l4 < 0 && !this.world.getBlockState(blockpos$mutable).getMaterial().isSolid() || l4 >= 0 && !this.world.isAirBlock(blockpos$mutable)) {
 											continue label276;
 										}
 									}
 								}
 							}
 
-							double d5 = (double)j3 + 0.5D - entityIn.posY;
+							double d5 = (double)j3 + 0.5D - entityIn.func_226278_cu_();
 							double d7 = d1 * d1 + d5 * d5 + d2 * d2;
 							if (d0 < 0.0D || d7 < d0) {
 								d0 = d7;
@@ -194,15 +142,15 @@ public class TeleporterKathairis extends Teleporter {
 
 		if (d0 < 0.0D) {
 			for(int l5 = j - 16; l5 <= j + 16; ++l5) {
-				double d3 = (double)l5 + 0.5D - entityIn.posX;
+				double d3 = (double)l5 + 0.5D - entityIn.func_226277_ct_();
 
 				for(int j6 = l - 16; j6 <= l + 16; ++j6) {
-					double d4 = (double)j6 + 0.5D - entityIn.posZ;
+					double d4 = (double)j6 + 0.5D - entityIn.func_226281_cx_();
 
 					label214:
 					for(int i7 = this.world.getActualHeight() - 1; i7 >= 0; --i7) {
-						if (this.world.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7, j6))) {
-							while(i7 > 0 && this.world.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6))) {
+						if (this.world.isAirBlock(blockpos$mutable.setPos(l5, i7, j6))) {
+							while(i7 > 0 && this.world.isAirBlock(blockpos$mutable.setPos(l5, i7 - 1, j6))) {
 								--i7;
 							}
 
@@ -215,14 +163,14 @@ public class TeleporterKathairis extends Teleporter {
 										int i11 = l5 + (i10 - 1) * l8;
 										int j11 = i7 + k10;
 										int k11 = j6 + (i10 - 1) * k9;
-										blockpos$mutableblockpos.setPos(i11, j11, k11);
-										if (k10 < 0 && !this.world.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || k10 >= 0 && !this.world.isAirBlock(blockpos$mutableblockpos)) {
+										blockpos$mutable.setPos(i11, j11, k11);
+										if (k10 < 0 && !this.world.getBlockState(blockpos$mutable).getMaterial().isSolid() || k10 >= 0 && !this.world.isAirBlock(blockpos$mutable)) {
 											continue label214;
 										}
 									}
 								}
 
-								double d6 = (double)i7 + 0.5D - entityIn.posY;
+								double d6 = (double)i7 + 0.5D - entityIn.func_226278_cu_();
 								double d8 = d3 * d3 + d6 * d6 + d4 * d4;
 								if (d0 < 0.0D || d8 < d0) {
 									d0 = d8;
@@ -259,8 +207,8 @@ public class TeleporterKathairis extends Teleporter {
 						int j10 = k2 + i9;
 						int l10 = k6 + (i8 - 1) * i3 - j7 * l6;
 						boolean flag = i9 < 0;
-						blockpos$mutableblockpos.setPos(l9, j10, l10);
-						this.world.setBlockState(blockpos$mutableblockpos, flag ? Blocks.STONE.getDefaultState() : Blocks.AIR.getDefaultState());
+						blockpos$mutable.setPos(l9, j10, l10);
+						this.world.setBlockState(blockpos$mutable, flag ? Blocks.STONE.getDefaultState() : Blocks.AIR.getDefaultState());
 					}
 				}
 			}
@@ -269,79 +217,21 @@ public class TeleporterKathairis extends Teleporter {
 		for(int k7 = -1; k7 < 3; ++k7) {
 			for(int j8 = -1; j8 < 4; ++j8) {
 				if (k7 == -1 || k7 == 2 || j8 == -1 || j8 == 3) {
-					blockpos$mutableblockpos.setPos(i6 + k7 * l6, k2 + j8, k6 + k7 * i3);
-					this.world.setBlockState(blockpos$mutableblockpos, Blocks.STONE.getDefaultState(), 3);
+					blockpos$mutable.setPos(i6 + k7 * l6, k2 + j8, k6 + k7 * i3);
+					this.world.setBlockState(blockpos$mutable, Blocks.STONE.getDefaultState(), 3);
 				}
 			}
 		}
 
-		BlockState blockstate = BLOCK_KATHAIRIS_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, l6 == 0 ? Direction.Axis.Z : Direction.Axis.X);
+		BlockState blockstate = ModBlocks.KATHAIRIS_PORTAL.getDefaultState().with(BlockKathairisPortal.AXIS, l6 == 0 ? Direction.Axis.Z : Direction.Axis.X);
 
 		for(int k8 = 0; k8 < 2; ++k8) {
 			for(int j9 = 0; j9 < 3; ++j9) {
-				blockpos$mutableblockpos.setPos(i6 + k8 * l6, k2 + j9, k6 + k8 * i3);
-				this.world.setBlockState(blockpos$mutableblockpos, blockstate, 18);
+				blockpos$mutable.setPos(i6 + k8 * l6, k2 + j9, k6 + k8 * i3);
+				this.world.setBlockState(blockpos$mutable, blockstate, 18);
 			}
 		}
 
 		return true;
-	}
-
-	/**
-	 * called periodically to remove out-of-date portal locations from the cache list. Argument par1 is a
-	 * WorldServer.getTotalWorldTime() value.
-	 */
-	public void tick(long worldTime) {
-		if (worldTime % 100L == 0L) {
-			this.func_222270_b(worldTime);
-			this.func_222269_c(worldTime);
-		}
-
-	}
-
-	private void func_222270_b(long p_222270_1_) {
-		LongIterator longiterator = this.field_222275_f.values().iterator();
-
-		while(longiterator.hasNext()) {
-			long i = longiterator.nextLong();
-			if (i <= p_222270_1_) {
-				longiterator.remove();
-			}
-		}
-
-	}
-
-	private void func_222269_c(long p_222269_1_) {
-		long i = p_222269_1_ - 300L;
-		Iterator<Entry<ColumnPos, PortalPosition>> iterator = this.destinationCoordinateCache.entrySet().iterator();
-
-		while(iterator.hasNext()) {
-			Entry<ColumnPos, PortalPosition> entry = iterator.next();
-			PortalPosition teleporter$portalposition = entry.getValue();
-			if (teleporter$portalposition.lastUpdateTime < i) {
-				ColumnPos columnpos = entry.getKey();
-				Logger logger = LOGGER;
-				Supplier[] asupplier = new Supplier[2];
-				Dimension dimension = this.world.getDimension();
-				asupplier[0] = dimension::getType;
-				asupplier[1] = () -> {
-					return columnpos;
-				};
-				logger.debug("Removing nether portal ticket for {}:{}", asupplier);
-				this.world.getChunkProvider().func_217222_b(TicketType.PORTAL, new ChunkPos(teleporter$portalposition.field_222267_a), 3, columnpos);
-				iterator.remove();
-			}
-		}
-
-	}
-
-	static class PortalPosition {
-		public final BlockPos field_222267_a;
-		public long lastUpdateTime;
-
-		public PortalPosition(BlockPos p_i50813_1_, long p_i50813_2_) {
-			this.field_222267_a = p_i50813_1_;
-			this.lastUpdateTime = p_i50813_2_;
-		}
 	}
 }

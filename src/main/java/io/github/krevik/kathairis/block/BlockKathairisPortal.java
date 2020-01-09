@@ -6,10 +6,12 @@ import io.github.krevik.kathairis.client.model.ModelPhasm;
 import io.github.krevik.kathairis.entity.EntityStrangeWanderer;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModParticles;
+import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.IParticleData;
@@ -91,9 +93,8 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 
 
     private void updateBlocksAroundPortal(World worldIn, BlockPos pos, BlockState state, Random rand) {
-		int type1 = Kathairis.KATHAIRIS.getId();
-		DimensionType type = DimensionType.getById(type1);
-		if(worldIn.getDimension().getType().getId()==type1) {
+		DimensionType type = DimensionType.byName(ModReference.KATHAIRIS);
+		if(worldIn.getDimension().getType().getId()==type.getId()) {
             int radius=5;
             int shiftX=+rand.nextInt(radius+1)-rand.nextInt(radius+1);
             int shiftY=-rand.nextInt(radius+1)+rand.nextInt(radius+1);
@@ -165,8 +166,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 
-		int type1 = Kathairis.KATHAIRIS.getId();
-        if(worldIn.dimension.getType() == DimensionType.getById(type1)) {
+        if(worldIn.dimension.getType().getId() == DimensionType.byName(ModReference.KATHAIRIS).getId()) {
             List<EntityStrangeWanderer> e = worldIn.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX()  + 15, pos.getY() + 15, pos.getZ() + 15));
             if(e.size()==0) {
                 if(!worldIn.isRemote) {

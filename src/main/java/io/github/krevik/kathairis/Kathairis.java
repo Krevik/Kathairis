@@ -41,7 +41,7 @@ public final class Kathairis {
 
 	public static final Logger KATHAIRIS_LOG = LogManager.getLogger(ModReference.MOD_ID);
 	public static boolean SHOULD_BLOCKS_SPREAD_AROUND_PORTAL;
-	public static DimensionType KATHAIRIS;
+	//public static DimensionType KATHAIRIS;
 
 	public Kathairis() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.CONFIG_SPEC);
@@ -68,7 +68,7 @@ public final class Kathairis {
 
 	private void setupClient(final FMLClientSetupEvent event) {
 		RenderersRegistry.registerRenders();
-		OBJLoader.INSTANCE.addDomain(ModReference.MOD_ID);
+		//OBJLoader.INSTANCE.(ModReference.MOD_ID);
 	}
 
 	public static FunctionHelper getHelper(){

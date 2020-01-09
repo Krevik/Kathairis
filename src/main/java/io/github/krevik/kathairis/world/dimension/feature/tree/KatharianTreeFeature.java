@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.world.dimension.feature.tree;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CocoaBlock;
@@ -20,7 +21,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class KatharianTreeFeature extends AbstractTreeFeature<NoFeatureConfig> {
+public class KatharianTreeFeature extends AbstractTreeFeature<BaseKatharianTreeFeatureConfig> {
     private static final BlockState DEFAULT_TRUNK = ModBlocks.MYSTIC_LOG.getDefaultState();
     private static final BlockState DEFAULT_LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
     protected final int minTreeHeight;

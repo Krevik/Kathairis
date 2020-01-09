@@ -1,30 +1,42 @@
 package io.github.krevik.kathairis.world.dimension.feature.tree;
 
 import com.mojang.datafixers.Dynamic;
+import com.sun.xml.internal.ws.binding.FeatureListUtil;
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.ForestBiome;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 
+import java.util.Base64;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
+public class FeatureBasicKatharianTree<T extends BaseKatharianTreeFeatureConfig> extends AbstractKatharianTreeFeature {
+
     private static final BlockState LOG = ModBlocks.MYSTIC_LOG.getDefaultState();
     private static final BlockState LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
     private final boolean useExtraRandomHeight;
 
-    public FeatureBasicKatharianTree(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49920_1_, boolean notify) {
-        super(p_i49920_1_, notify);
-            this.useExtraRandomHeight = true;
+    public FeatureBasicKatharianTree(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49920_1_) {
+        super(p_i49920_1_);
+        this.useExtraRandomHeight = true;
     }
 
 
-    @Override
+        @Override
     protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) {
+
+    }
+
+    @Override
+    protected boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set leavesSet, Set trunkSet, MutableBoundingBox mutable, BaseTreeFeatureConfig config) {
         int i = rand.nextInt(3) + 5;
         if (this.useExtraRandomHeight) {
             i += rand.nextInt(7);
@@ -42,7 +54,7 @@ public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
                     k = 2;
                 }
 
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+                BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 
                 for(int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
                     for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
@@ -76,7 +88,8 @@ public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
                                 if (Math.abs(j1) != l2 || Math.abs(l1) != l2 || rand.nextInt(2) != 0 && k2 != 0) {
                                     BlockPos blockpos = new BlockPos(i3, i2, k1);
                                     if (isAir(worldIn,position)|| isLeaves(worldIn,position)) {
-                                        this.setBlockState(worldIn, blockpos, LEAF);
+                                        worldIn.setBlockState(blockpos,LEAF,2);
+                                        leavesSet.add(blockpos);
                                     }
                                 }
                             }
@@ -85,7 +98,8 @@ public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
 
                     for(int j2 = 0; j2 < i; ++j2) {
                         if (isAir(worldIn, position.up(j2)) || isLeaves(worldIn,position.up(j2))) {
-                            this.setLogState(changedBlocks, worldIn, position.up(j2), LOG,p_208519_5_);
+                            worldIn.setBlockState(position.up(j2),LEAF,2);
+                            trunkSet.add(position.up(j2));
                         }
                     }
 
@@ -97,5 +111,11 @@ public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
         } else {
             return false;
         }
+    }
+
+
+    @Override
+    public boolean place(IWorld worldIn, ChunkGenerator generator, Random rand, BlockPos pos, IFeatureConfig config) {
+        return false;
     }
 }

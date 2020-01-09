@@ -1,7 +1,9 @@
 package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.init.ModDimensions;
 import io.github.krevik.kathairis.init.ModItems;
+import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketClientOperateFOV;
 import io.github.krevik.kathairis.world.dimension.KathairisTeleportingManager;
@@ -22,8 +24,10 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.structure.Structures;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -38,6 +42,15 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
  */
 @EventBusSubscriber(modid = MOD_ID, bus = FORGE)
 public final class ForgeEventSubscriber {
+
+    @SubscribeEvent
+    public static void onRegisterDimensionsEvent(RegisterDimensionsEvent event)
+    {
+        if (DimensionType.byName(ModReference.KATHAIRIS) == null)
+        {
+            DimensionManager.registerDimension(ModReference.KATHAIRIS, ModDimensions.KATHAIRIS, null, true);
+        }
+    }
 
     private static ArrayList<PlayerInPortal> playersInPortal=new ArrayList<>();
     private static ArrayList<PlayerInPortal> playersToRemove=new ArrayList<>();
@@ -91,7 +104,7 @@ public final class ForgeEventSubscriber {
         DimensionType type = ModDimensionKathairis.getDimensionType();
         entity.timeUntilPortal=0;
         if(entity.getRidingEntity()==null && !entity.isBeingRidden()){
-            entity.setPortal(new BlockPos(entity.posX,entity.posY,entity.posZ));
+            entity.setPortal(entity.getPosition());
             if (entity.timeUntilPortal > 0) {
                 entity.timeUntilPortal = 10;
             }else if(entity.dimension != type){

@@ -88,7 +88,6 @@ public class KathairisTeleportingManager {
     }*/
 
 
-
     public static void changeDim(Entity entityToTp,DimensionType destination) {
         if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(entityToTp, destination)){} //return null;
         if (!entityToTp.world.isRemote && !entityToTp.removed) {
@@ -109,8 +108,8 @@ public class KathairisTeleportingManager {
                 blockpos = serverworld1.getSpawnCoordinate();
             } else {
                 double movementFactor = serverworld.getDimension().getMovementFactor() / serverworld1.getDimension().getMovementFactor();
-                double d0 = entityToTp.posX * movementFactor;
-                double d1 = entityToTp.posZ * movementFactor;
+                double d0 = entityToTp.getPosition().getX() * movementFactor;
+                double d1 = entityToTp.getPosition().getZ() * movementFactor;
 
                 double d3 = Math.min(-2.9999872E7D, serverworld1.getWorldBorder().minX() + 16.0D);
                 double d4 = Math.min(-2.9999872E7D, serverworld1.getWorldBorder().minZ() + 16.0D);
@@ -119,7 +118,7 @@ public class KathairisTeleportingManager {
                 d0 = MathHelper.clamp(d0, d3, d5);
                 d1 = MathHelper.clamp(d1, d4, d6);
                 Vec3d vec3d1 = entityToTp.getLastPortalVec();
-                blockpos = new BlockPos(d0, entityToTp.posY, d1);
+                blockpos = new BlockPos(d0, entityToTp.getPosition().getY(), d1);
                 BlockPattern.PortalInfo blockpattern$portalinfo = serverworld1.getDefaultTeleporter().placeInExistingPortal(blockpos, vec3d, entityToTp.getTeleportDirection(), vec3d1.x, vec3d1.y, entityToTp instanceof PlayerEntity);
                 if (blockpattern$portalinfo == null) {
                     //return null;
@@ -171,18 +170,17 @@ public class KathairisTeleportingManager {
             ServerWorld serverworld1 = player.server.getWorld(destination);
             WorldInfo worldinfo = player.world.getWorldInfo();
             net.minecraftforge.fml.network.NetworkHooks.sendDimensionDataPacket(player.connection.netManager, player);
-            player.connection.sendPacket(new SRespawnPacket(destination, worldinfo.getGenerator(), player.interactionManager.getGameType()));
+            player.connection.sendPacket(new SRespawnPacket(destination, WorldInfo.func_227498_c_(worldinfo.getSeed()), worldinfo.getGenerator(), player.interactionManager.getGameType()));
             player.connection.sendPacket(new SServerDifficultyPacket(worldinfo.getDifficulty(), worldinfo.isDifficultyLocked()));
             PlayerList playerlist = player.server.getPlayerList();
             playerlist.updatePermissionLevel(player);
             serverworld.removeEntity(player, true); //Forge: the player entity is moved to the new world, NOT cloned. So keep the data alive with no matching invalidate call.
             player.revive();
-            double d0 = player.posX;
-            double d1 = player.posY;
-            double d2 = player.posZ;
+            double d0 = player.getPosition().getX();
+            double d1 = player.getPosition().getY();
+            double d2 = player.getPosition().getZ();
             float f = player.rotationPitch;
             float f1 = player.rotationYaw;
-            double d3 = 8.0D;
             float f2 = f1;
             serverworld.getProfiler().startSection("moving");
             double moveFactor = serverworld.getDimension().getMovementFactor() / serverworld1.getDimension().getMovementFactor();
@@ -210,9 +208,9 @@ public class KathairisTeleportingManager {
             d2 = MathHelper.clamp(d2, d4, d6);
             player.setLocationAndAngles(d0, d1, d2, f1, f);
             if (destination == DimensionType.THE_END) {
-                int i = MathHelper.floor(player.posX);
-                int j = MathHelper.floor(player.posY) - 1;
-                int k = MathHelper.floor(player.posZ);
+                int i = MathHelper.floor(player.getPosition().getX());
+                int j = MathHelper.floor(player.getPosition().getY()) - 1;
+                int k = MathHelper.floor(player.getPosition().getZ());
                 int l = 1;
                 int i1 = 0;
 
@@ -239,7 +237,7 @@ public class KathairisTeleportingManager {
             player.setWorld(serverworld1);
             serverworld1.func_217447_b(player);
             //player.func_213846_b(serverworld);
-            player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, f1, f);
+            player.connection.setPlayerLocation(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), f1, f);
             player.interactionManager.setWorld(serverworld1);
             player.connection.sendPacket(new SPlayerAbilitiesPacket(player.abilities));
             playerlist.sendWorldInfo(player, serverworld1);
