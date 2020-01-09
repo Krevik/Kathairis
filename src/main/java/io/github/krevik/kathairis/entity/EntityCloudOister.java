@@ -126,10 +126,10 @@ public class EntityCloudOister extends AmbientEntity
             }
             if(!this.onGround) {
                 if(this.getRNG().nextInt(100)==0) {
-                    double destPosX=this.posX-this.getRNG().nextInt(6)+this.getRNG().nextInt(6);
-                    double destPosZ=this.posZ-this.getRNG().nextInt(6)+this.getRNG().nextInt(6);
-                    this.getNavigator().setPath(this.getNavigator().getPathToPos(new BlockPos(destPosX,posY,destPosZ),1), 1);
-                    setMotion(new Vec3d((destPosX-this.posX)*0.15,getMotion().getY(),(destPosZ-this.posZ)*0.15));
+                    double destPosX=this.getPosition().getX()-this.getRNG().nextInt(6)+this.getRNG().nextInt(6);
+                    double destPosZ=this.getPosition().getZ()-this.getRNG().nextInt(6)+this.getRNG().nextInt(6);
+                    this.getNavigator().setPath(this.getNavigator().getPathToPos(new BlockPos(destPosX,getPosition().getY(),destPosZ),1), 1);
+                    setMotion(new Vec3d((destPosX-this.getPosition().getX())*0.15,getMotion().getY(),(destPosZ-this.getPosition().getZ())*0.15));
                 }
             }
         }else {
@@ -146,9 +146,9 @@ public class EntityCloudOister extends AmbientEntity
     public void spawnJumpParticles(World world){
         for (int i = 0; i < 24; ++i)
         {
-            double d0 = posX + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();
-            double d1 = posY;
-            double d2 = posZ + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();
+            double d0 = getPosition().getX() + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();
+            double d1 = getPosition().getY();
+            double d2 = getPosition().getZ() + Kathairis.getHelper().getRandom().nextDouble() - Kathairis.getHelper().getRandom().nextDouble();
             double d3 = 0;
             double d4 = 0;
             double d5 = 0;
@@ -195,9 +195,9 @@ public class EntityCloudOister extends AmbientEntity
 
     @Override
     public boolean canSpawn(IWorld p_205020_1_, SpawnReason reason) {
-        int i = MathHelper.floor(this.posX);
+        int i = MathHelper.floor(this.getPosition().getX());
         int j = MathHelper.floor(this.getBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
+        int k = MathHelper.floor(this.getPosition().getZ());
         BlockPos blockpos = new BlockPos(i, j, k);
         Block block = this.world.getBlockState(blockpos.down()).getBlock();
         return block instanceof BlockKathairisCloud;

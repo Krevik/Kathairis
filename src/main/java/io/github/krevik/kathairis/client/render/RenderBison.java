@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelBison;
 import io.github.krevik.kathairis.entity.EntityBison;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -23,13 +24,9 @@ public class RenderBison extends MobRenderer<EntityBison, ModelBison<EntityBison
         super(renderManagerIn, new ModelBison(), 1F);
     }
 
-    @Override
-    public void doRender(EntityBison bison, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
-        super.doRender(bison, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
-    }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityBison entity)
+    public ResourceLocation getEntityTexture(EntityBison entity)
     {
         return TextureLocationsRef.BisonLoc;
     }
@@ -47,7 +44,7 @@ public class RenderBison extends MobRenderer<EntityBison, ModelBison<EntityBison
     protected void applyRotations(EntityBison entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
     	if(!entityLiving.isChild()) {
-        	GlStateManager.scaled(1.5, 1.5, 1.5);
+        	RenderSystem.scaled(1.5, 1.5, 1.5);
     	}
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         

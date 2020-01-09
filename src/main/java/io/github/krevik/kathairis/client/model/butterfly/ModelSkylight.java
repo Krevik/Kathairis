@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,61 +16,61 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class ModelSkylight<T extends LivingEntity> extends EntityModel<T> {
-    public RendererModel Head;
-    public RendererModel Wing4;
-    public RendererModel Wing3;
-    public RendererModel lowerbody;
-    public RendererModel Body;
-    public RendererModel Body_1;
-    public RendererModel Head1;
-    public RendererModel Head2;
-    public RendererModel Czulko;
-    public RendererModel Czulko_1;
-    public RendererModel Wing2;
-    public RendererModel Wing1;
+    public ModelRenderer Head;
+    public ModelRenderer Wing4;
+    public ModelRenderer Wing3;
+    public ModelRenderer lowerbody;
+    public ModelRenderer Body;
+    public ModelRenderer Body_1;
+    public ModelRenderer Head1;
+    public ModelRenderer Head2;
+    public ModelRenderer Czulko;
+    public ModelRenderer Czulko_1;
+    public ModelRenderer Wing2;
+    public ModelRenderer Wing1;
 
     public ModelSkylight() {
         this.textureWidth = 128;
         this.textureHeight = 64;
-        this.Wing2 = new RendererModel(this, 62, 0);
+        this.Wing2 = new ModelRenderer(this, 62, 0);
         this.Wing2.setRotationPoint(-0.0F, 0.0F, 5.0F);
-        this.Wing2.addBox(-21.0F, 0.0F, 0.0F, 21, 0, 27, 0.0F);
-        this.Wing3 = new RendererModel(this, 14, 46);
+        this.Wing2.func_228301_a_(-21.0F, 0.0F, 0.0F, 21, 0, 27, 0.0F);
+        this.Wing3 = new ModelRenderer(this, 14, 46);
         this.Wing3.setRotationPoint(1.7F, 17.0F, -1.4F);
-        this.Wing3.addBox(0.0F, 0.0F, -6.1F, 26, 0, 18, 0.0F);
+        this.Wing3.func_228301_a_(0.0F, 0.0F, -6.1F, 26, 0, 18, 0.0F);
         this.setRotateAngle(Wing3, 0.0F, 0.0F, -0.03665191429188092F);
-        this.lowerbody = new RendererModel(this, 0, 46);
+        this.lowerbody = new ModelRenderer(this, 0, 46);
         this.lowerbody.setRotationPoint(-1.4F, 15.9F, 1.0F);
-        this.lowerbody.addBox(0.0F, 0.0F, 0.0F, 2, 2, 12, 0.0F);
-        this.Czulko = new RendererModel(this, 13, 29);
+        this.lowerbody.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 2, 12, 0.0F);
+        this.Czulko = new ModelRenderer(this, 13, 29);
         this.Czulko.setRotationPoint(0.8F, 16.7F, -7.6F);
-        this.Czulko.addBox(0.0F, 0.0F, 0.0F, 6, 0, 17, 0.0F);
+        this.Czulko.func_228301_a_(0.0F, 0.0F, 0.0F, 6, 0, 17, 0.0F);
         this.setRotateAngle(Czulko, 0.0F, -2.0943951023931953F, 0.31869712141416456F);
-        this.Head = new RendererModel(this, 0, 38);
+        this.Head = new ModelRenderer(this, 0, 38);
         this.Head.setRotationPoint(-2.3F, 15.5F, -8.9F);
-        this.Head.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
-        this.Czulko_1 = new RendererModel(this, 13, 29);
+        this.Head.func_228301_a_(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.Czulko_1 = new ModelRenderer(this, 13, 29);
         this.Czulko_1.setRotationPoint(1.6F, 15.6F, -5.4F);
-        this.Czulko_1.addBox(0.0F, 0.0F, 0.0F, 6, 0, 17, 0.0F);
+        this.Czulko_1.func_228301_a_(0.0F, 0.0F, 0.0F, 6, 0, 17, 0.0F);
         this.setRotateAngle(Czulko_1, 0.0F, 2.0943951023931953F, -0.31869712141416456F);
-        this.Wing4 = new RendererModel(this, -12, 0);
+        this.Wing4 = new ModelRenderer(this, -12, 0);
         this.Wing4.setRotationPoint(0.0F, 17.0F, -1.4F);
-        this.Wing4.addBox(-25.0F, 0.0F, -6.0F, 26, 0, 18, 0.0F);
-        this.Head2 = new RendererModel(this, 18, 36);
+        this.Wing4.func_228301_a_(-25.0F, 0.0F, -6.0F, 26, 0, 18, 0.0F);
+        this.Head2 = new ModelRenderer(this, 18, 36);
         this.Head2.setRotationPoint(-2.6F, 15.0F, -10.0F);
-        this.Head2.addBox(0.0F, 0.0F, 0.0F, 2, 2, 2, 0.0F);
-        this.Head1 = new RendererModel(this, 18, 36);
+        this.Head2.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 2, 2, 0.0F);
+        this.Head1 = new ModelRenderer(this, 18, 36);
         this.Head1.setRotationPoint(0.4F, 15.0F, -10.0F);
-        this.Head1.addBox(0.0F, 0.0F, 0.0F, 2, 2, 2, 0.0F);
-        this.Wing1 = new RendererModel(this, 59, 27);
+        this.Head1.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 2, 2, 0.0F);
+        this.Wing1 = new ModelRenderer(this, 59, 27);
         this.Wing1.setRotationPoint(0.0F, 0.0F, 5.7F);
-        this.Wing1.addBox(0.0F, 0.0F, 0.0F, 20, 0, 27, 0.0F);
-        this.Body = new RendererModel(this, 0, 18);
+        this.Wing1.func_228301_a_(0.0F, 0.0F, 0.0F, 20, 0, 27, 0.0F);
+        this.Body = new ModelRenderer(this, 0, 18);
         this.Body.setRotationPoint(-2.0F, 16.0F, -8.1F);
-        this.Body.addBox(0.0F, 0.0F, 0.0F, 4, 4, 8, 0.0F);
-        this.Body_1 = new RendererModel(this, 0, 18);
+        this.Body.func_228301_a_(0.0F, 0.0F, 0.0F, 4, 4, 8, 0.0F);
+        this.Body_1 = new ModelRenderer(this, 0, 18);
         this.Body_1.setRotationPoint(-2.2F, 15.4F, -1.1F);
-        this.Body_1.addBox(0.0F, 0.0F, 0.0F, 4, 4, 8, 0.0F);
+        this.Body_1.func_228301_a_(0.0F, 0.0F, 0.0F, 4, 4, 8, 0.0F);
         this.Wing4.addChild(this.Wing2);
         this.Wing3.addChild(this.Wing1);
     }
@@ -148,7 +148,7 @@ public class ModelSkylight<T extends LivingEntity> extends EntityModel<T> {
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(RendererModel modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

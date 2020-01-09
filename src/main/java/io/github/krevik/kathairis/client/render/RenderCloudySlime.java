@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelCloudySlime;
 import io.github.krevik.kathairis.entity.EntityCloudySlime;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -26,7 +27,7 @@ public class RenderCloudySlime extends MobRenderer<EntityCloudySlime,ModelCloudy
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityCloudySlime entity)
+    public ResourceLocation getEntityTexture(EntityCloudySlime entity)
     {
         return TextureLocationsRef.CloudySlimeLoc;
     }
@@ -45,8 +46,8 @@ public class RenderCloudySlime extends MobRenderer<EntityCloudySlime,ModelCloudy
     @Override
     protected void applyRotations(EntityCloudySlime entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.rotatef(90, 0, 1, 0);
-    	GlStateManager.scaled(0.7, 0.7, 0.7);
+    	RenderSystem.rotatef(90, 0, 1, 0);
+    	RenderSystem.scaled(0.7, 0.7, 0.7);
 
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }

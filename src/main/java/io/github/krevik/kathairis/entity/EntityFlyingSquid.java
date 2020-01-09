@@ -149,12 +149,6 @@ public class EntityFlyingSquid extends FlyingEntity
         return 0.4F;
     }
 
-    @Override
-    protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-
 
     public int animTravelTime=0;
     public int animTravelTime2=0;
@@ -205,7 +199,7 @@ public class EntityFlyingSquid extends FlyingEntity
         {
             this.onKillCommand();
         }
-	    	PlayerEntity ep=this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 5, true);
+	    	PlayerEntity ep=this.world.getClosestPlayer(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), 5, true);
 	    	if(ep!=null) {
 	    		
 	        	if(!ep.isAlive()) {
@@ -219,8 +213,8 @@ public class EntityFlyingSquid extends FlyingEntity
 		    		if(swingTries>100) {
 		    			this.setIsHoldingPlayer(false);
 		    		}
-		    		ep.setPositionAndUpdate(this.posX,this.posY-2,this.posZ);
-			    		//PacketSquidHoldingPlayerServer packet = new PacketSquidHoldingPlayerServer(this.posX,this.posY-2,this.posZ);
+		    		ep.setPositionAndUpdate(this.getPosition().getX(),this.getPosition().getY()-2,this.getPosition().getZ());
+			    		//PacketSquidHoldingPlayerServer packet = new PacketSquidHoldingPlayerServer(this.getPosition().getX(),this.getPosition().getY()-2,this.getPosition().getZ());
 			    		//KathairisPacketHandler.CHANNEL.sendToServer(packet);
 			    		//maybe add client side to make it working?
 	        	}
@@ -277,27 +271,27 @@ public class EntityFlyingSquid extends FlyingEntity
 			                		}else {
 			                			this.squid.setCanHoldPlayer(true);
 			                		}
-				                	if(ep.posX-this.squid.posX<0.15F&&ep.posZ-this.squid.posZ<0.15F&&(int)this.squid.posY<=(int)ep.posY+2) {
+				                	if(ep.getPosition().getX()-this.squid.getPosition().getX()<0.15F&&ep.getPosition().getZ()-this.squid.getPosition().getZ()<0.15F&&(int)this.squid.getPosition().getY()<=(int)ep.getPosition().getY()+2) {
 				                		if(this.squid.canHoldPlayer()) {
 				                			this.squid.setIsHoldingPlayer(true);	
 				                		}
 				                	}else {
 				                		this.squid.setIsHoldingPlayer(false);
 				                	}
-				                	if(this.squid.getPosition().getX() !=(int)ep.posX|| this.squid.getPosition().getZ() !=(int)ep.posZ) {
-					                	float f1=(float) (ep.posX-this.squid.posX);
-					                	float f3=(float) (ep.posZ-this.squid.posZ);
+				                	if(this.squid.getPosition().getX() !=(int)ep.getPosition().getX()|| this.squid.getPosition().getZ() !=(int)ep.getPosition().getZ()) {
+					                	float f1=(float) (ep.getPosition().getX()-this.squid.getPosition().getX());
+					                	float f3=(float) (ep.getPosition().getZ()-this.squid.getPosition().getZ());
 					                	float f2=0;
-					                	if((this.squid.posY-ep.posY)<=4) {
+					                	if((this.squid.getPosition().getY()-ep.getPosition().getY())<=4) {
 					                		f2=3;
 					                	}
 					                	Vec3d direction=new Vec3d(f1,f2,f3);
 					                	Vec3d normalized=direction.normalize();
 					                	this.squid.setMovementVector((float)normalized.x/10, (float)normalized.y, (float)normalized.z/10);
 				                	}
-				                	if(ep.posX-this.squid.posX<0.15F&&ep.posZ-this.squid.posZ<0.15F) {
-				                		if(squid.posY>ep.posY+2) {
-				                			float f = (float) (ep.posY-this.squid.posY);
+				                	if(ep.getPosition().getX()-this.squid.getPosition().getX()<0.15F&&ep.getPosition().getZ()-this.squid.getPosition().getZ()<0.15F) {
+				                		if(squid.getPosition().getY()>ep.getPosition().getY()+2) {
+				                			float f = (float) (ep.getPosition().getY()-this.squid.getPosition().getY());
 				                			Vec3d normalized = new Vec3d(0,f,0).normalize();
 				                			this.squid.setMovementVector(0, (float)normalized.y, 0);
 				                			this.squid.getDataManager().set(isDiving, Boolean.valueOf(true));
@@ -306,7 +300,7 @@ public class EntityFlyingSquid extends FlyingEntity
 				                		this.squid.getDataManager().set(isDiving, Boolean.valueOf(false));
 				                	}
 				                	if(this.squid.isDiving()) {
-				                		if(this.squid.posY<ep.posY+2) {
+				                		if(this.squid.getPosition().getY()<ep.getPosition().getY()+2) {
 				                			if(!this.squid.isHoldingPlayer()) {
 				                				this.squid.setDiving(false);
 				                			}
@@ -325,7 +319,7 @@ public class EntityFlyingSquid extends FlyingEntity
 		                    float f1 = MathHelper.cos(f) * 0.2F;
 		                    float f2 = -0.1F + this.squid.getRNG().nextFloat() * 0.2F;
 		
-		                    if(squid.posY>250&&f2>0) {
+		                    if(squid.getPosition().getY()>250&&f2>0) {
 		                    	f2=-f2;
 		                    }
 		                    float f3 = MathHelper.sin(f) * 0.2F;
@@ -334,11 +328,11 @@ public class EntityFlyingSquid extends FlyingEntity
 	                }
 	            }else {
 	            	float f=-0.1F + this.squid.getRNG().nextFloat() * 0.2F;
-	            	if(this.squid.posY<=this.squid.world.getHeight(Heightmap.Type.MOTION_BLOCKING,this.squid.getPosition()).getY()+12) {
+	            	if(this.squid.getPosition().getY()<=this.squid.world.getHeight(Heightmap.Type.MOTION_BLOCKING,this.squid.getPosition()).getY()+12) {
 	            		f=1F;
 	            	}
 	            	this.squid.setMovementVector(0, f, 0);
-                    if(squid.posY>250&&f>0) {
+                    if(squid.getPosition().getY()>250&&f>0) {
                     	f=-f;
                     }	            	
 	            	

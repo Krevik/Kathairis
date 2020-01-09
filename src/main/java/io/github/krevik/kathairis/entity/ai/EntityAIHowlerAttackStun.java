@@ -78,7 +78,7 @@ public class EntityAIHowlerAttackStun extends Goal
             }
             else
             {
-                return this.getAttackReachSqr(entitylivingbase) >= this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getBoundingBox().minY, entitylivingbase.posZ);
+                return this.getAttackReachSqr(entitylivingbase) >= this.attacker.getDistanceSq(entitylivingbase.getPosition().getX(), entitylivingbase.getBoundingBox().minY, entitylivingbase.getPosition().getZ());
             }
         }
     }
@@ -143,14 +143,14 @@ public class EntityAIHowlerAttackStun extends Goal
     {
         LivingEntity entitylivingbase = this.attacker.getAttackTarget();
         this.attacker.getLookController().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
-        double d0 = this.attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getBoundingBox().minY, entitylivingbase.posZ);
+        double d0 = this.attacker.getDistanceSq(entitylivingbase.getPosition().getX(), entitylivingbase.getBoundingBox().minY, entitylivingbase.getPosition().getZ());
         --this.delayCounter;
 
         if ((this.longMemory || this.attacker.getEntitySenses().canSee(entitylivingbase)) && this.delayCounter <= 0 && (this.targetX == 0.0D && this.targetY == 0.0D && this.targetZ == 0.0D || entitylivingbase.getDistanceSq(this.targetX, this.targetY, this.targetZ) >= 1.0D || this.attacker.getRNG().nextFloat() < 0.05F))
         {
-            this.targetX = entitylivingbase.posX;
+            this.targetX = entitylivingbase.getPosition().getX();
             this.targetY = entitylivingbase.getBoundingBox().minY;
-            this.targetZ = entitylivingbase.posZ;
+            this.targetZ = entitylivingbase.getPosition().getZ();
             this.delayCounter = 4 + this.attacker.getRNG().nextInt(7);
 
             if (this.canPenalize)

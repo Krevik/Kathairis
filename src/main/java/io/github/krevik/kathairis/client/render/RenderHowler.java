@@ -25,7 +25,7 @@ public class RenderHowler extends MobRenderer<EntityHowler, ModelHowler<EntityHo
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityHowler entity)
+    public ResourceLocation getEntityTexture(EntityHowler entity)
     {
         return TextureLocationsRef.HowlerLoc;
     }
@@ -37,13 +37,6 @@ public class RenderHowler extends MobRenderer<EntityHowler, ModelHowler<EntityHo
             return new RenderHowler(manager);
         }
 
-    }
-
-    @Override
-    protected void applyRotations(EntityHowler entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-        
     }
     
 }

@@ -31,7 +31,7 @@ public class ItemMysticWand extends Item {
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
         if(!world.isRemote) {
             EntityMysticWandShoot bullet = new EntityMysticWandShoot(world);
-            bullet.setPosition(player.posX + player.getForward().x, player.posY + player.getEyeHeight() + player.getForward().y, player.posZ + player.getForward().z);
+            bullet.setPosition(player.getPosition().getX() + player.getForward().x, player.getPosition().getY() + player.getEyeHeight() + player.getForward().y, player.getPosition().getZ() + player.getForward().z);
             bullet.setMotion(new Vec3d(player.getForward().normalize().x,player.getForward().normalize().y,player.getForward().normalize().z));
             world.addEntity(bullet);
             player.getHeldItem(hand).damageItem(1, player, (p_220045_0_) -> {

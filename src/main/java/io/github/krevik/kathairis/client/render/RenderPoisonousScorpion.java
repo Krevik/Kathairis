@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelPoisonousScorpion;
 import io.github.krevik.kathairis.entity.EntityPoisonousScorpion;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -26,7 +27,7 @@ public class RenderPoisonousScorpion extends MobRenderer<EntityPoisonousScorpion
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityPoisonousScorpion entity)
+    public ResourceLocation getEntityTexture(EntityPoisonousScorpion entity)
     {
         return TextureLocationsRef.PoisonousScorpionLoc;
     }
@@ -43,7 +44,7 @@ public class RenderPoisonousScorpion extends MobRenderer<EntityPoisonousScorpion
     @Override
     protected void applyRotations(EntityPoisonousScorpion entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scaled(0.5, 0.5, 0.5);
+    	RenderSystem.scaled(0.5, 0.5, 0.5);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         
     }

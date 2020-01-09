@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelSkyray;
 import io.github.krevik.kathairis.entity.EntitySkyray;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -26,7 +27,7 @@ public class RenderSkyray extends MobRenderer<EntitySkyray, ModelSkyray<EntitySk
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntitySkyray entity)
+    public ResourceLocation getEntityTexture(EntitySkyray entity)
     {
         return TextureLocationsRef.SkyrayLoc;
     }
@@ -45,11 +46,11 @@ public class RenderSkyray extends MobRenderer<EntitySkyray, ModelSkyray<EntitySk
     @Override
     protected void applyRotations(EntitySkyray entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.rotatef(-90, 0, 1, 0);
+    	RenderSystem.rotatef(-90, 0, 1, 0);
     	if(entityLiving.getAdult()==0) {
-        	GlStateManager.scaled(2, 2, 2);
+            RenderSystem.scaled(2, 2, 2);
     	}else {
-        	GlStateManager.scaled(8, 8, 8);
+            RenderSystem.scaled(8, 8, 8);
     	}
 
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);

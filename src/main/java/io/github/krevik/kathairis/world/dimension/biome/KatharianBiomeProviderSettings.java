@@ -10,7 +10,7 @@ import net.minecraft.world.storage.WorldInfo;
 public class KatharianBiomeProviderSettings extends OverworldBiomeProviderSettings {
     private final long field_226848_a_;
     private final WorldType field_226849_b_;
-    private OverworldGenSettings generatorSettings = new OverworldGenSettings();
+    private KathairisGenSettings generatorSettings = new KathairisGenSettings();
 
     public KatharianBiomeProviderSettings(WorldInfo p_i225751_1_) {
         super(p_i225751_1_);
@@ -18,7 +18,7 @@ public class KatharianBiomeProviderSettings extends OverworldBiomeProviderSettin
         this.field_226849_b_ = p_i225751_1_.getGenerator();
     }
 
-    public net.minecraft.world.biome.provider.OverworldBiomeProviderSettings setGeneratorSettings(OverworldGenSettings p_205441_1_) {
+    public KatharianBiomeProviderSettings setGeneratorSettings(KathairisGenSettings p_205441_1_) {
         this.generatorSettings = p_205441_1_;
         return this;
     }
@@ -31,7 +31,7 @@ public class KatharianBiomeProviderSettings extends OverworldBiomeProviderSettin
         return this.field_226849_b_;
     }
 
-    public OverworldGenSettings getGeneratorSettings() {
+    public KathairisGenSettings getGeneratorSettings() {
         return this.generatorSettings;
     }
 }

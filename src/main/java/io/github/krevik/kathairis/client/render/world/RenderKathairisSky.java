@@ -1,12 +1,14 @@
 package io.github.krevik.kathairis.client.render.world;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.Vector4f;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.ResourceLocation;
@@ -40,21 +42,21 @@ public class RenderKathairisSky implements IRenderHandler {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void render(int someInt, float partialTicks, ClientWorld world, Minecraft mc) {
-        GlStateManager.disableTexture();
+        RenderSystem.disableTexture();
         Vec3d vec3d = world.getSkyColor(mc.player.getPosition(), partialTicks);
         float f = (float)vec3d.x;
         float f1 = (float)vec3d.y;
         float f2 = (float)vec3d.z;
-        GlStateManager.color3f(f, f1, f2);
+        RenderSystem.color3f(f, f1, f2);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
-        GlStateManager.depthMask(false);
-        GlStateManager.enableFog();
+        RenderSystem.depthMask(false);
+        RenderSystem.enableFog();
 
-        GlStateManager.disableFog();
-        GlStateManager.disableAlphaTest();
-        GlStateManager.enableBlend();
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        RenderSystem.disableFog();
+        RenderSystem.disableAlphaTest();
+        RenderSystem.enableBlend();
+        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         RenderHelper.disableStandardItemLighting();
 
         //stars
@@ -68,7 +70,7 @@ public class RenderKathairisSky implements IRenderHandler {
                     constantLight[x] += (helper.getRandomInteger(0, 8) - helper.getRandomInteger(0, 8));
                 }
             }
-            GlStateManager.pushMatrix();
+            RenderSystem.pushMatrix();
             Random random = new Random(10842L);
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
             for (int i = 0; i < 3000; ++i) {
@@ -97,7 +99,7 @@ public class RenderKathairisSky implements IRenderHandler {
                     double d16 = Math.cos(d14);
 
                     for (int j = 0; j < 4; ++j) {
-                        Vector4d color = new Vector4d(helper.getRandomInteger(10842L, 66, 137), helper.getRandomInteger(10842L, 65, 244), helper.getRandomInteger(10842L, 229, 244), constantLight[i]);
+                        Vector4f color = new Vector4f(helper.getRandomInteger(10842L, 66, 137), helper.getRandomInteger(10842L, 65, 244), helper.getRandomInteger(10842L, 229, 244), constantLight[i]);
                         double d18 = (double) ((j & 2) - 1) * d33;
                         double d19 = (double) ((j + 1 & 2) - 1) * d33;
                         double d21 = d18 * d16 - d19 * d15;
@@ -113,9 +115,9 @@ public class RenderKathairisSky implements IRenderHandler {
             }
 
             tessellator.draw();
-            GlStateManager.popMatrix();
+            RenderSystem.popMatrix();
 
-            GlStateManager.pushMatrix();
+            RenderSystem.pushMatrix();
             if (helper.getRandom().nextInt(100) == 0) {
                 random = new Random();
                 //generate falling star
@@ -210,7 +212,7 @@ public class RenderKathairisSky implements IRenderHandler {
 
             tessellator.draw();
 
-            GlStateManager.popMatrix();
+            RenderSystem.popMatrix();
         }
 
         //stars end
@@ -221,12 +223,12 @@ public class RenderKathairisSky implements IRenderHandler {
 
         if (afloat != null)
         {
-            GlStateManager.disableTexture();
-            GlStateManager.shadeModel(7425);
-            GlStateManager.pushMatrix();
-            GlStateManager.rotatef(90.0F, 1.0F, 0.0F, 0.0F);
-            GlStateManager.rotatef(MathHelper.sin(world.getCelestialAngleRadians(partialTicks)) < 0.0F ? 180.0F : 0.0F, 0.0F, 0.0F, 1.0F);
-            GlStateManager.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
+            RenderSystem.disableTexture();
+            RenderSystem.shadeModel(7425);
+            RenderSystem.pushMatrix();
+            RenderSystem.rotatef(90.0F, 1.0F, 0.0F, 0.0F);
+            RenderSystem.rotatef(MathHelper.sin(world.getCelestialAngleRadians(partialTicks)) < 0.0F ? 180.0F : 0.0F, 0.0F, 0.0F, 1.0F);
+            RenderSystem.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
             float f6 = afloat[0];
             float f7 = afloat[1];
             float f8 = afloat[2];
@@ -251,17 +253,17 @@ public class RenderKathairisSky implements IRenderHandler {
             }
 
             tessellator.draw();
-            GlStateManager.popMatrix();
-            GlStateManager.shadeModel(7424);
+            RenderSystem.popMatrix();
+            RenderSystem.shadeModel(7424);
         }
 
-        GlStateManager.enableTexture();
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.pushMatrix();
+        RenderSystem.enableTexture();
+        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        RenderSystem.pushMatrix();
         float f16 = 1.0F - world.getRainStrength(partialTicks);
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, f16);
-        GlStateManager.rotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, f16);
+        RenderSystem.rotatef(-90.0F, 0.0F, 1.0F, 0.0F);
+        RenderSystem.rotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
         f17 = 30.0F;
         //sun start
         mc.getTextureManager().bindTexture(SUN_TEXTURES);
@@ -291,30 +293,30 @@ public class RenderKathairisSky implements IRenderHandler {
         tessellator.draw();
         //moon end
 
-        GlStateManager.disableTexture();
+        RenderSystem.disableTexture();
         float f15 = world.getStarBrightness(partialTicks) * f16;
 
         if (f15 > 0.0F)
         {
-            GlStateManager.color4f(f15, f15, f15, f15);
+            RenderSystem.color4f(f15, f15, f15, f15);
         }
 
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GlStateManager.disableBlend();
-        GlStateManager.enableAlphaTest();
-        GlStateManager.enableFog();
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.disableBlend();
+        RenderSystem.enableAlphaTest();
+        RenderSystem.enableFog();
 
-        GlStateManager.popMatrix();
-        GlStateManager.disableTexture();
-        GlStateManager.color3f(0.0F, 0.0F, 0.0F);
+        RenderSystem.popMatrix();
+        RenderSystem.disableTexture();
+        RenderSystem.color3f(0.0F, 0.0F, 0.0F);
         double d3 = mc.player.getEyePosition(partialTicks).y - world.getHorizon();
 
         if (d3 < 0.0D)
         {
-            GlStateManager.pushMatrix();
-            GlStateManager.translatef(0.0F, 12.0F, 0.0F);
+            RenderSystem.pushMatrix();
+            RenderSystem.translatef(0.0F, 12.0F, 0.0F);
 
-            GlStateManager.popMatrix();
+            RenderSystem.popMatrix();
             float f18 = 1.0F;
             float f19 = -((float)(d3 + 65.0D));
             float f20 = -1.0F;
@@ -342,11 +344,11 @@ public class RenderKathairisSky implements IRenderHandler {
             tessellator.draw();
         }
 
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(0.0F, -((float)(d3 - 16.0D)), 0.0F);
-        GlStateManager.popMatrix();
-        GlStateManager.enableTexture();
-        GlStateManager.depthMask(true);
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(0.0F, -((float)(d3 - 16.0D)), 0.0F);
+        RenderSystem.popMatrix();
+        RenderSystem.enableTexture();
+        RenderSystem.depthMask(true);
 
     }
 

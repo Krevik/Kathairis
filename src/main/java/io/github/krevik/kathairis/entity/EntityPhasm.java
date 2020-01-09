@@ -24,6 +24,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
@@ -119,9 +120,9 @@ public class EntityPhasm extends FlyingEntity implements IMob {
     public void onLivingUpdate(){
         super.onLivingUpdate();
             if (ticker >= 1) {
-                double d0 = ((float) posX + (getEntityBoundingBox().maxX - getEntityBoundingBox().minX) / 2) - 0.5;
-                double d1 = ((float) posY + (getEntityBoundingBox().maxY - getEntityBoundingBox().minY) / 2);
-                double d2 = ((float) posZ + (getEntityBoundingBox().maxZ - getEntityBoundingBox().minZ) / 2) - 0.5;
+                double d0 = ((float) getPosition().getX() + (getEntityBoundingBox().maxX - getEntityBoundingBox().minX) / 2) - 0.5;
+                double d1 = ((float) getPosition().getY() + (getEntityBoundingBox().maxY - getEntityBoundingBox().minY) / 2);
+                double d2 = ((float) getPosition().getZ() + (getEntityBoundingBox().maxZ - getEntityBoundingBox().minZ) / 2) - 0.5;
                 Particle theParticle = new DynamicParticle(
                         ParticlesFactory.TWINKLINGPARTICLE,
                         world,
@@ -233,7 +234,7 @@ public class EntityPhasm extends FlyingEntity implements IMob {
 
         public PhasmMoveHelper(EntityPhasm ghast)
         {
-            super(ghast);
+            super(ghast,10,false);
             this.parentEntity = ghast;
         }
 
@@ -242,9 +243,9 @@ public class EntityPhasm extends FlyingEntity implements IMob {
         {
             if (this.action == Action.MOVE_TO)
             {
-                double d0 = this.posX - this.parentEntity.posX;
-                double d1 = this.posY - this.parentEntity.posY;
-                double d2 = this.posZ - this.parentEntity.posZ;
+                double d0 = this.getPosition().getX() - this.parentEntity.getPosition().getX();
+                double d1 = this.getPosition().getY() - this.parentEntity.getPosition().getY();
+                double d2 = this.getPosition().getZ() - this.parentEntity.getPosition().getZ();
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
                 if (this.courseChangeCooldown-- <= 0)
@@ -252,7 +253,7 @@ public class EntityPhasm extends FlyingEntity implements IMob {
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
                     d3 = (double) MathHelper.sqrt(d3);
 
-                    if (this.isNotColliding(this.posX, this.posY, this.posZ, d3))
+                    if (this.isNotColliding(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), d3))
                     {
                         double mX = parentEntity.getMotion().getX() + d0 / d3 * 0.1D;
                         double mY = parentEntity.getMotion().getY() + d1 / d3 * 0.1D;
@@ -269,9 +270,9 @@ public class EntityPhasm extends FlyingEntity implements IMob {
 
         private boolean isNotColliding(double x, double y, double z, double p_179926_7_)
         {
-            double d0 = (x - this.parentEntity.posX) / p_179926_7_;
-            double d1 = (y - this.parentEntity.posY) / p_179926_7_;
-            double d2 = (z - this.parentEntity.posZ) / p_179926_7_;
+            double d0 = (x - this.parentEntity.getPosition().getX()) / p_179926_7_;
+            double d1 = (y - this.parentEntity.getPosition().getY()) / p_179926_7_;
+            double d2 = (z - this.parentEntity.getPosition().getZ()) / p_179926_7_;
             AxisAlignedBB axisalignedbb = this.parentEntity.getBoundingBox();
 
             for (int i = 1; (double)i < p_179926_7_; ++i)
@@ -279,7 +280,7 @@ public class EntityPhasm extends FlyingEntity implements IMob {
                 axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 
 
-                if (!this.parentEntity.world.isCollisionBoxesEmpty(this.parentEntity, axisalignedbb))
+                if (!this.parentEntity.world.checkNoEntityCollision(this.parentEntity, VoxelShapes.create(axisalignedbb)))
                 {
                     return false;
                 }
@@ -306,8 +307,8 @@ public class EntityPhasm extends FlyingEntity implements IMob {
         public void tick() {
             if (phasm.getAttackTarget() != null) {
                 LivingEntity entitylivingbase = phasm.getAttackTarget();
-                double d1 = entitylivingbase.posX - this.phasm.posX;
-                double d2 = entitylivingbase.posZ - this.phasm.posZ;
+                double d1 = entitylivingbase.getPosition().getX() - this.phasm.getPosition().getX();
+                double d2 = entitylivingbase.getPosition().getZ() - this.phasm.getPosition().getZ();
                 this.phasm.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float)Math.PI);
                 this.phasm.renderYawOffset = this.phasm.rotationYaw;
             }
@@ -328,7 +329,7 @@ public class EntityPhasm extends FlyingEntity implements IMob {
         @Override
         public void tick(){
             if(phasm.getAttackTarget()!=null){
-                phasm.setMotion(new Vec3d((phasm.getAttackTarget().posX-phasm.posX)/50,(phasm.getAttackTarget().posY+1-phasm.posY)/50,(phasm.getAttackTarget().posZ-phasm.posZ)/50));
+                phasm.setMotion(new Vec3d((phasm.getAttackTarget().getPosition().getX()-phasm.getPosition().getX())/50,(phasm.getAttackTarget().getPosition().getY()+1-phasm.getPosition().getY())/50,(phasm.getAttackTarget().getPosition().getZ()-phasm.getPosition().getZ())/50));
                 if(phasm.getDistance(phasm.getAttackTarget())>10f){
                     BlockPos teleportPos = getClearPositionNearItself();
                     phasm.getAttackTarget().setPositionAndUpdate(teleportPos.getX(),teleportPos.getY(),teleportPos.getZ());
@@ -337,9 +338,9 @@ public class EntityPhasm extends FlyingEntity implements IMob {
         }
 
         private BlockPos getClearPositionNearItself(){
-            double X=phasm.posX-5+phasm.getRNG().nextDouble()*10;
-            double Z=phasm.posZ-5+phasm.getRNG().nextDouble()*10;
-            BlockPos tmp = phasm.world.getHeight(Heightmap.Type.MOTION_BLOCKING,new BlockPos(X,phasm.posY,Z));
+            double X=phasm.getPosition().getX()-5+phasm.getRNG().nextDouble()*10;
+            double Z=phasm.getPosition().getZ()-5+phasm.getRNG().nextDouble()*10;
+            BlockPos tmp = phasm.world.getHeight(Heightmap.Type.MOTION_BLOCKING,new BlockPos(X,phasm.getPosition().getY(),Z));
             if(phasm.world.getBlockState(tmp.down()).isSolid()&&!phasm.world.isAirBlock(tmp.down())&&phasm.world.isAirBlock(tmp)&&
                     phasm.world.isAirBlock(tmp.up())){
                 return tmp;
@@ -370,9 +371,9 @@ public class EntityPhasm extends FlyingEntity implements IMob {
 
             if(phasm.getAttackTarget()==null&& phasm.getRNG().nextInt(500)==0){
                 BlockPos targetPos = findSomePosition(phasm);
-                phasm.setMotion(new Vec3d((targetPos.getX()- phasm.posX)/50,(targetPos.getY()- phasm.posY)/50,(targetPos.getZ()- phasm.posZ)/50));
-                double d1 = targetPos.getX() - this.phasm.posX;
-                double d2 = targetPos.getZ() - this.phasm.posZ;
+                phasm.setMotion(new Vec3d((targetPos.getX()- phasm.getPosition().getX())/50,(targetPos.getY()- phasm.getPosition().getY())/50,(targetPos.getZ()- phasm.getPosition().getZ())/50));
+                double d1 = targetPos.getX() - this.phasm.getPosition().getX();
+                double d2 = targetPos.getZ() - this.phasm.getPosition().getZ();
                 this.phasm.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float)Math.PI);
                 this.phasm.renderYawOffset = this.phasm.rotationYaw;
             }
@@ -380,12 +381,12 @@ public class EntityPhasm extends FlyingEntity implements IMob {
 
         BlockPos findSomePosition(EntityPhasm gaznowel){
             BlockPos result;
-            double posX=gaznowel.posX-5+gaznowel.getRNG().nextInt(10);
-            double posZ=gaznowel.posZ-5+gaznowel.getRNG().nextInt(10);
-            double posY=gaznowel.posY-5+gaznowel.getRNG().nextInt(10);
-            if(posY>255){ posY=-20;}
-            if(posY<0) {posY+=20;}
-            result=new BlockPos(posX,posY,posZ);
+            double getPosition().getX()=gaznowel.getPosition().getX()-5+gaznowel.getRNG().nextInt(10);
+            double getPosition().getZ()=gaznowel.getPosition().getZ()-5+gaznowel.getRNG().nextInt(10);
+            double getPosition().getY()=gaznowel.getPosition().getY()-5+gaznowel.getRNG().nextInt(10);
+            if(getPosition().getY()>255){ getPosition().getY()=-20;}
+            if(getPosition().getY()<0) {getPosition().getY()+=20;}
+            result=new BlockPos(getPosition().getX(),getPosition().getY(),getPosition().getZ());
             if(!(gaznowel.world.isAirBlock(result)&&gaznowel.world.isAirBlock(result.up()))){
                 return findSomePosition(gaznowel);
             }else{

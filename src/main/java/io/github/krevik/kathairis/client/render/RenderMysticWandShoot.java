@@ -19,7 +19,7 @@ public class RenderMysticWandShoot extends EntityRenderer<EntityMysticWandShoot>
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(EntityMysticWandShoot entity) {
+    public ResourceLocation getEntityTexture(EntityMysticWandShoot entity) {
         return null;
     }
 

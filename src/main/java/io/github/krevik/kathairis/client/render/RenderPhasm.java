@@ -24,7 +24,7 @@ public class RenderPhasm extends MobRenderer<EntityPhasm, ModelPhasm<EntityPhasm
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityPhasm entity) {
+    public ResourceLocation getEntityTexture(EntityPhasm entity) {
         return TextureLocationsRef.PhasmLoc;
     }
 

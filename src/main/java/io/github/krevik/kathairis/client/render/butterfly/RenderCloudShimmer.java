@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render.butterfly;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.butterfly.ModelCloudShimmer;
 import io.github.krevik.kathairis.entity.butterfly.EntityCloudShimmer;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -23,7 +24,7 @@ public class RenderCloudShimmer extends MobRenderer<EntityCloudShimmer, ModelClo
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityCloudShimmer entity)
+    public ResourceLocation getEntityTexture(EntityCloudShimmer entity)
     {
             return TextureLocationsRef.CloudShimmerLoc;
     }
@@ -40,7 +41,7 @@ public class RenderCloudShimmer extends MobRenderer<EntityCloudShimmer, ModelClo
     @Override
     protected void applyRotations(EntityCloudShimmer entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scaled(0.3, 0.3, 0.3);
+        RenderSystem.scaled(0.3, 0.3, 0.3);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
     

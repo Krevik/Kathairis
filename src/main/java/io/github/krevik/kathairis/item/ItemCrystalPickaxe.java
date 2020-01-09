@@ -48,7 +48,7 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 			if (entityLiving instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entityLiving;
 				player.addExhaustion(1f);
-				Vec3d vec = new Vec3d(pos.getX() - player.posX, pos.getY() - player.posY, pos.getZ() - player.posZ).normalize();
+				Vec3d vec = new Vec3d(pos.getX() - player.getPosition().getX(), pos.getY() - player.getPosition().getY(), pos.getZ() - player.getPosition().getZ()).normalize();
 				Direction facing;
 				if (vec.z >= 0.5f && MathHelper.abs((float) vec.x) < 0.5f && MathHelper.abs((float) vec.y) < 0.5f) {
 					facing = Direction.SOUTH;

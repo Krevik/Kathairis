@@ -26,7 +26,7 @@ public class RenderGaznowel extends MobRenderer<EntityGaznowel,ModelGaznowel<Ent
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityGaznowel entity) {
+    public ResourceLocation getEntityTexture(EntityGaznowel entity) {
         return TextureLocationsRef.GaznowelLoc;
     }
 

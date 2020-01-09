@@ -37,11 +37,11 @@ public class EntityCactiSpore extends MonsterEntity
 
     @Override
     public boolean canSpawn(IWorld world, SpawnReason spawnReason) {
-        int lvt_3_1_ = MathHelper.floor(this.posX);
+        int lvt_3_1_ = MathHelper.floor(this.getPosition().getX());
         int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
-        int lvt_5_1_ = MathHelper.floor(this.posZ);
+        int lvt_5_1_ = MathHelper.floor(this.getPosition().getZ());
         BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
-        return this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this.world,getPosition(),ModEntities.CACTI_SPORE);
+        return this.getBlockPathWeight(new BlockPos(this.getPosition().getX(), this.getBoundingBox().minY, this.getPosition().getZ()), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this.world,getPosition(),ModEntities.CACTI_SPORE);
     }
 
     @Override
@@ -100,8 +100,7 @@ public class EntityCactiSpore extends MonsterEntity
     @Override
     public void tick() {
         setMotion(new Vec3d(0,-1,0));
-        this.posX=this.lastTickPosX;
-        this.posZ=this.lastTickPosZ;
+        this.setPosition(lastTickPosX,getPosition().getY(),lastTickPosZ);
         this.rotationPitch=0;
         this.rotationYaw=0;
         this.rotationYawHead=0;

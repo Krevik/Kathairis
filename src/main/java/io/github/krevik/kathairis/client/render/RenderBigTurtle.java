@@ -25,7 +25,7 @@ public class RenderBigTurtle extends MobRenderer<EntityBigTurtle,ModelBigTurtle<
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityBigTurtle entity)
+    public ResourceLocation getEntityTexture(EntityBigTurtle entity)
     {
         return TextureLocationsRef.BigTurtleLoc;
     }
@@ -37,13 +37,6 @@ public class RenderBigTurtle extends MobRenderer<EntityBigTurtle,ModelBigTurtle<
             return new RenderBigTurtle(manager);
         }
 
-    }
-
-    @Override
-    protected void applyRotations(EntityBigTurtle entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-        
     }
     
 }

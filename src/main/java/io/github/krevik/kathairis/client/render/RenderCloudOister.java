@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelCloudOister;
 import io.github.krevik.kathairis.entity.EntityCloudOister;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -26,7 +27,7 @@ public class RenderCloudOister extends MobRenderer<EntityCloudOister,ModelCloudO
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityCloudOister entity)
+    public ResourceLocation getEntityTexture(EntityCloudOister entity)
     {
         return TextureLocationsRef.CloudOisterLoc;
     }
@@ -44,9 +45,9 @@ public class RenderCloudOister extends MobRenderer<EntityCloudOister,ModelCloudO
     protected void applyRotations(EntityCloudOister entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
     	if(!entityLiving.isChild()) {
-        	GlStateManager.scaled(1.5, 1.5, 1.5);
+        	RenderSystem.scaled(1.5, 1.5, 1.5);
     	}
-    	GlStateManager.rotatef(180, 0, 1, 0);
+    	RenderSystem.rotatef(180, 0, 1, 0);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         
     }

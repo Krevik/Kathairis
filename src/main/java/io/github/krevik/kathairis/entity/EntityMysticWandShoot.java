@@ -62,15 +62,13 @@ public class EntityMysticWandShoot extends Entity {
                 this.onImpact(raytraceresult);
             }
 
-            this.posX += this.getMotion().getX()*2;
-            this.posY += this.getMotion().getY()*2;
-            this.posZ += this.getMotion().getZ()*2;
+            setPosition(this.getPosition().getX()+this.getMotion().getX()*2,getPosition().getY()+this.getMotion().getY()*2,getPosition().getZ()+this.getMotion().getZ()*2);
             ProjectileHelper.rotateTowardsMovement(this, 0.2F);
             float f = this.getMotionFactor();
             if (this.isInWater()) {
                 for(int i = 0; i < 4; ++i) {
                     float f1 = 0.25F;
-                    this.world.addParticle(ParticleTypes.BUBBLE, this.posX - this.getMotion().getX() * 0.25D, this.posY - this.getMotion().getY() * 0.25D, this.posZ - this.getMotion().getZ() * 0.25D, this.getMotion().getX(), this.getMotion().getY(), this.getMotion().getZ());
+                    this.world.addParticle(ParticleTypes.BUBBLE, this.getPosition().getX() - this.getMotion().getX() * 0.25D, this.getPosition().getY() - this.getMotion().getY() * 0.25D, this.getPosition().getZ() - this.getMotion().getZ() * 0.25D, this.getMotion().getX(), this.getMotion().getY(), this.getMotion().getZ());
                 }
 
                 f = 0.8F;
@@ -81,9 +79,9 @@ public class EntityMysticWandShoot extends Entity {
             }
                     for(int c=0;c<=3;c++) {
                         //TODO
-                        //world.addParticle((IParticleData) ModParticles.MYSTIC_WAND_SHOOT, this.posX, this.posY, this.posZ, 0, -0.01f, 0);
+                        //world.addParticle((IParticleData) ModParticles.MYSTIC_WAND_SHOOT, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), 0, -0.01f, 0);
                     }
-            this.setPosition(this.posX, this.posY, this.posZ);
+            this.setPosition(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ());
         } else {
             this.remove();
         }
@@ -175,9 +173,4 @@ public class EntityMysticWandShoot extends Entity {
         return 0.0F;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    public int getBrightnessForRender() {
-        return 0;
-    }
 }

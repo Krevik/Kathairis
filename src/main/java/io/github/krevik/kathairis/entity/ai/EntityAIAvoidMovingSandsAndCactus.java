@@ -38,7 +38,7 @@ public class EntityAIAvoidMovingSandsAndCactus extends Goal
     	for(int x=-2;x<=2;x++) {
     		for(int y=-2;y<=2;y++) {
     			for(int z=-2;z<=2;z++) {
-    				BlockPos tmp = new BlockPos(this.creature.posX+x,this.creature.posY+y,this.creature.posZ+z);
+    				BlockPos tmp = new BlockPos(this.creature.getPosition().getX()+x,this.creature.getPosition().getY()+y,this.creature.getPosition().getZ()+z);
     				poses.add(tmp);
     			}
     		}
@@ -84,7 +84,7 @@ public class EntityAIAvoidMovingSandsAndCactus extends Goal
     private Vec3d findPossibleShelter()
     {
         Random random = this.creature.getRNG();
-        BlockPos blockpos = new BlockPos(this.creature.posX, this.creature.getBoundingBox().minY, this.creature.posZ);
+        BlockPos blockpos = new BlockPos(this.creature.getPosition().getX(), this.creature.getBoundingBox().minY, this.creature.getPosition().getZ());
 
         for (int i = 0; i < 3; ++i)
         {

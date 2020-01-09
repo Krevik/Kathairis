@@ -82,14 +82,13 @@ public class EntityLivingFlower extends EntityKatharianAnimal
     @Override
     public void tick() {
         setMotion(new Vec3d(0,-1,0));
-        this.posX=this.lastTickPosX;
-        this.posZ=this.lastTickPosZ;
+        setPosition(this.lastTickPosX,getPosition().getY(),this.lastTickPosZ);
         this.rotationPitch=0;
         this.rotationYaw=0;
         this.rotationYawHead=0;
         if(this.world.isRemote) {
             if(this.rand.nextInt(30)==1) {
-                //this.world.spawnParticle(EnumParticleTypes.HEART, this.posX, this.posY+0.5, this.posZ, 0, 0.2, 0);
+                //this.world.spawnParticle(EnumParticleTypes.HEART, this.getPosition().getX(), this.getPosition().getY()+0.5, this.getPosition().getZ(), 0, 0.2, 0);
             }
         }
     	super.tick();
@@ -112,7 +111,7 @@ public class EntityLivingFlower extends EntityKatharianAnimal
             {
                 player.dropItem(new ItemStack(KCore.PotWithLivingFlower), false);
             }
-            this.posY=-20;
+            this.getPosition().getY()=-20;
             this.setDead();
             return true;
         }

@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.world.dimension.biome.gen.layers;
 
 import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.init.ModBiomes;
+import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
@@ -42,7 +43,7 @@ public class KatharianLayerUtil {
     }
 
 
-    public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, OverworldGenSettings settings, LongFunction<C> contextFactory) {
+    public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildOverworldProcedure(WorldType worldTypeIn, KathairisGenSettings settings, LongFunction<C> contextFactory) {
         IAreaFactory<T> iareafactory = IslandLayer.INSTANCE.apply(contextFactory.apply(1L));
         iareafactory = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), iareafactory);
         iareafactory = ZoomLayer.NORMAL.apply(contextFactory.apply(2001L), iareafactory);
@@ -82,8 +83,8 @@ public class KatharianLayerUtil {
         layer2 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer2);
         layer2 = GenLayerKatharianRiverMix.INSTANCE.apply(contextFactory.apply(100L), layer2, layer1);
 
-        IAreaFactory<T> iareafactory5 = VoroniZoomLayer.INSTANCE.apply(contextFactory.apply(10L), layer2);
-        return ImmutableList.of(layer2, iareafactory5, layer2);
+        IAreaFactory<T> iareafactory5 = ZoomLayer.NORMAL.apply(contextFactory.apply(10L), layer2);
+        return iareafactory5;
     }
 
     private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> getBiomeLayer(IAreaFactory<T> parentLayer,
@@ -96,16 +97,12 @@ public class KatharianLayerUtil {
     }
 
 
-    public static Layer[] buildOverworldProcedure(long seed, WorldType typeIn, OverworldGenSettings settings) {
-        int[] aint = new int[1];
-        ImmutableList<IAreaFactory<LazyArea>> immutablelist = buildOverworldProcedure(typeIn, settings, (p_202825_3_) -> {
-            ++aint[0];
-            return new LazyAreaLayerContext(25, seed, p_202825_3_);
+    public static Layer buildOverworldProcedure(long seed, WorldType typeIn, KathairisGenSettings settings) {
+        int i = 25;
+        IAreaFactory<LazyArea> iareafactory = buildOverworldProcedure(typeIn, settings, (p_227473_2_) -> {
+            return new LazyAreaLayerContext(i, seed, p_227473_2_);
         });
-        Layer genlayer = new Layer(immutablelist.get(0));
-        Layer genlayer1 = new Layer(immutablelist.get(1));
-        Layer genlayer2 = new Layer(immutablelist.get(2));
-        return new Layer[]{genlayer, genlayer1, genlayer2};
+        return new Layer(iareafactory);
     }
 
     public static boolean isOcean(int biomeIn) {

@@ -3,6 +3,7 @@ package io.github.krevik.kathairis.world.dimension.biome;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import io.github.krevik.kathairis.init.ModBiomes;
+import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import io.github.krevik.kathairis.world.dimension.biome.gen.layers.KatharianLayerUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -24,27 +25,15 @@ import java.util.Random;
 import java.util.Set;
 
 public class KatharianBiomeProvider extends BiomeProvider {
-
     private final Layer genBiomes;
-    private final Layer biomeFactoryLayer;
-    private final Biome[] biomes;
+    private static final Set<Biome> field_226847_e_ =
+            ImmutableSet.of(ModBiomes.KATHAIRIS_RIVER, ModBiomes.KATHARIAN_FOREST, ModBiomes.KATHARIAN_DESERT,
+                    ModBiomes.PLAIN_FIELDS, ModBiomes.KATHARIAN_SWAMP);
 
-    public KatharianBiomeProvider(OverworldBiomeProviderSettings p_i48971_1_) {
-        this.biomes = new Biome[]{ModBiomes.KATHAIRIS_RIVER, ModBiomes.KATHARIAN_FOREST, ModBiomes.KATHARIAN_DESERT,
-                ModBiomes.PLAIN_FIELDS, ModBiomes.KATHARIAN_SWAMP};
-        WorldInfo lvt_2_1_ = p_i48971_1_.getWorldInfo();
-        OverworldGenSettings lvt_3_1_ = p_i48971_1_.getGeneratorSettings();
-        Layer[] lvt_4_1_ = KatharianLayerUtil.buildOverworldProcedure(lvt_2_1_.getSeed(), lvt_2_1_.getGenerator(), lvt_3_1_);
-        this.genBiomes = lvt_4_1_[0];
-        this.biomeFactoryLayer = lvt_4_1_[1];
-    }
-
-    private final Layer genBiomes;
-    private static final Set<Biome> field_226847_e_ = ImmutableSet.of(Biomes.OCEAN, Biomes.PLAINS, Biomes.DESERT, Biomes.MOUNTAINS, Biomes.FOREST, Biomes.TAIGA, Biomes.SWAMP, Biomes.RIVER, Biomes.FROZEN_OCEAN, Biomes.FROZEN_RIVER, Biomes.SNOWY_TUNDRA, Biomes.SNOWY_MOUNTAINS, Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE, Biomes.BEACH, Biomes.DESERT_HILLS, Biomes.WOODED_HILLS, Biomes.TAIGA_HILLS, Biomes.MOUNTAIN_EDGE, Biomes.JUNGLE, Biomes.JUNGLE_HILLS, Biomes.JUNGLE_EDGE, Biomes.DEEP_OCEAN, Biomes.STONE_SHORE, Biomes.SNOWY_BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.DARK_FOREST, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.WOODED_MOUNTAINS, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.BADLANDS, Biomes.WOODED_BADLANDS_PLATEAU, Biomes.BADLANDS_PLATEAU, Biomes.WARM_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.COLD_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.SUNFLOWER_PLAINS, Biomes.DESERT_LAKES, Biomes.GRAVELLY_MOUNTAINS, Biomes.FLOWER_FOREST, Biomes.TAIGA_MOUNTAINS, Biomes.SWAMP_HILLS, Biomes.ICE_SPIKES, Biomes.MODIFIED_JUNGLE, Biomes.MODIFIED_JUNGLE_EDGE, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS, Biomes.DARK_FOREST_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.MODIFIED_GRAVELLY_MOUNTAINS, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU, Biomes.ERODED_BADLANDS, Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU, Biomes.MODIFIED_BADLANDS_PLATEAU);
-
-    public KatharianBiomeProvider(OverworldBiomeProviderSettings settingsProvider) {
+    public KatharianBiomeProvider(KatharianBiomeProviderSettings settingsProvider) {
         super(field_226847_e_);
-        this.genBiomes = LayerUtil.func_227474_a_(settingsProvider.func_226850_a_(), settingsProvider.func_226851_b_(), settingsProvider.getGeneratorSettings());
+        this.genBiomes = KatharianLayerUtil.buildOverworldProcedure(settingsProvider.func_226850_a_(),
+                settingsProvider.func_226851_b_(), settingsProvider.getGeneratorSettings());
     }
 
     public Biome func_225526_b_(int p_225526_1_, int p_225526_2_, int p_225526_3_) {

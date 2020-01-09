@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.client.model.ModelFungite;
 import io.github.krevik.kathairis.entity.EntityFungite;
@@ -29,7 +30,7 @@ public class RenderFungite extends MobRenderer<EntityFungite,ModelFungite<Entity
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityFungite entity)
+    public ResourceLocation getEntityTexture(EntityFungite entity)
     {
     	if(isBlinking) {
     		return TextureLocationsRef.FungiteOLoc;
@@ -50,7 +51,7 @@ public class RenderFungite extends MobRenderer<EntityFungite,ModelFungite<Entity
     @Override
     protected void applyRotations(EntityFungite entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scaled(0.8, 0.8, 0.8);
+    	RenderSystem.scaled(0.8, 0.8, 0.8);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         if(!isBlinking) {
 	        if(this.random.nextInt(400)==0) {

@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render.butterfly;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.butterfly.ModelButterfly;
 import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -25,7 +26,7 @@ public class RenderButterfly extends MobRenderer<EntityButterfly, ModelButterfly
 
     
     @Override
-    protected ResourceLocation getEntityTexture(EntityButterfly entity)
+    public ResourceLocation getEntityTexture(EntityButterfly entity)
     {
             return TextureLocationsRef.ButterflyLoc;
     }
@@ -42,7 +43,7 @@ public class RenderButterfly extends MobRenderer<EntityButterfly, ModelButterfly
     @Override
     protected void applyRotations(EntityButterfly entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scaled(0.2, 0.2, 0.2);
+        RenderSystem.scaled(0.2, 0.2, 0.2);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
 }

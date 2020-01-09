@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.particle;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;
@@ -24,7 +25,7 @@ import java.awt.*;
  * @credit Jabelar
  */
 public class BasicKatharianParticle extends SpriteTexturedParticle implements IParticleData {
-    private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
+    //private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
     private KatharianParticleTexture textureConfig;
     private static final double GRAVITY = 0.04D;
     private static final double GROUND_DECCEL = 0.7D;
@@ -118,14 +119,14 @@ public class BasicKatharianParticle extends SpriteTexturedParticle implements IP
         particleScale = initialScale + progress * (finalScale - initialScale);
     }
 
-    @Override
+    /*@Override
     public void renderParticle(BufferBuilder bufferIn, ActiveRenderInfo entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-        GlStateManager.pushMatrix();
-        GlStateManager.enableBlend();
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        GlStateManager.alphaFunc(516, 0.003921569F);
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, particleAlpha);
-        GlStateManager.depthMask(enableDepth);
+        RenderSystem.pushMatrix();
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.alphaFunc(516, 0.003921569F);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, particleAlpha);
+        RenderSystem.depthMask(enableDepth);
 
         Minecraft.getInstance().getTextureManager().bindTexture(textureConfig.getResourceLocation());
 
@@ -197,7 +198,7 @@ public class BasicKatharianParticle extends SpriteTexturedParticle implements IP
                 .endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.popMatrix();
-    }
+    }*/
 
     @Override
     public IParticleRenderType getRenderType() {

@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render.butterfly;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.butterfly.ModelIllukini;
 import io.github.krevik.kathairis.entity.butterfly.EntityIllukini;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -23,7 +24,7 @@ public class RenderIllukini extends MobRenderer<EntityIllukini, ModelIllukini<En
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityIllukini entity)
+    public ResourceLocation getEntityTexture(EntityIllukini entity)
     {
             return TextureLocationsRef.IllukiniLoc;
     }
@@ -40,7 +41,7 @@ public class RenderIllukini extends MobRenderer<EntityIllukini, ModelIllukini<En
     @Override
     protected void applyRotations(EntityIllukini entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scaled(0.3, 0.3, 0.3);
+        RenderSystem.scaled(0.3, 0.3, 0.3);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
     

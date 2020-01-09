@@ -45,12 +45,12 @@ public class EntityBigTurtle extends AnimalEntity
 
     @Override
     public boolean canSpawn(IWorld p_205020_1_, SpawnReason sth) {
-        int lvt_3_1_ = MathHelper.floor(this.posX);
+        int lvt_3_1_ = MathHelper.floor(this.getPosition().getX());
         int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
-        int lvt_5_1_ = MathHelper.floor(this.posZ);
+        int lvt_5_1_ = MathHelper.floor(this.getPosition().getZ());
         BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
-        return p_205020_1_.getLightSubtracted(lvt_6_1_, 0) > 8 &&
-                this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), p_205020_1_) >= 0.0F && p_205020_1_.getBlockState((new BlockPos(this)).down()).canEntitySpawn(world,new BlockPos(this).down(),ModEntities.BIG_TURTLE);
+        return p_205020_1_.getNeighborAwareLightSubtracted(lvt_6_1_, 0) > 8 &&
+                this.getBlockPathWeight(new BlockPos(this.getPosition().getX(), this.getBoundingBox().minY, this.getPosition().getZ()), p_205020_1_) >= 0.0F && p_205020_1_.getBlockState((new BlockPos(this)).down()).canEntitySpawn(world,new BlockPos(this).down(),ModEntities.BIG_TURTLE);
     }
 
 

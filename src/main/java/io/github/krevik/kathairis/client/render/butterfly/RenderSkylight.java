@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render.butterfly;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.butterfly.ModelSkylight;
 import io.github.krevik.kathairis.entity.butterfly.EntitySkylight;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -24,7 +25,7 @@ public class RenderSkylight extends MobRenderer<EntitySkylight, ModelSkylight<En
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntitySkylight entity)
+    public ResourceLocation getEntityTexture(EntitySkylight entity)
     {
             return TextureLocationsRef.SkylightLoc;
     }
@@ -41,7 +42,7 @@ public class RenderSkylight extends MobRenderer<EntitySkylight, ModelSkylight<En
     @Override
     protected void applyRotations(EntitySkylight entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scaled(0.3, 0.3, 0.3);
+        RenderSystem.scaled(0.3, 0.3, 0.3);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
     

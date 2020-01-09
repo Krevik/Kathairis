@@ -25,7 +25,7 @@ public class RenderCactiSpore extends MobRenderer<EntityCactiSpore,ModelCactiSpo
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityCactiSpore entity)
+    public ResourceLocation getEntityTexture(EntityCactiSpore entity)
     {
         return TextureLocationsRef.CactiSporeLoc;
     }

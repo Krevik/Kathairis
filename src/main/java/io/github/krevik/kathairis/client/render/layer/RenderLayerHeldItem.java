@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render.layer;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelGaznowel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -30,18 +31,18 @@ public class RenderLayerHeldItem<T extends LivingEntity, M extends EntityModel<T
 
         if (!itemstack.isEmpty() || !itemstack1.isEmpty())
         {
-            GlStateManager.pushMatrix();
+            RenderSystem.pushMatrix();
 
             if (this.getEntityModel().isChild)
             {
                 float f = 0.5F;
-                GlStateManager.translatef(0.0F, 0.75F, 0.0F);
-                GlStateManager.scaled(0.5F, 0.5F, 0.5F);
+                RenderSystem.translatef(0.0F, 0.75F, 0.0F);
+                RenderSystem.scaled(0.5F, 0.5F, 0.5F);
             }
 
             this.renderHeldItem(entitylivingbaseIn, itemstack1, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, HandSide.RIGHT);
             this.renderHeldItem(entitylivingbaseIn, itemstack, ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, HandSide.LEFT);
-            GlStateManager.popMatrix();
+            RenderSystem.popMatrix();
         }
     }
 
@@ -50,30 +51,30 @@ public class RenderLayerHeldItem<T extends LivingEntity, M extends EntityModel<T
     {
         if (!stack.isEmpty())
         {
-            GlStateManager.pushMatrix();
+            RenderSystem.pushMatrix();
 
             if (entityLiving.isSneaking())
             {
-                GlStateManager.translatef(0.0F, 0.2F, 0.0F);
+                RenderSystem.translatef(0.0F, 0.2F, 0.0F);
             }
             this.translateToHand(handSide);
-            GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
-            GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
+            RenderSystem.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
+            RenderSystem.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
             boolean flag=false;
-            GlStateManager.translatef((float)(flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
-            GlStateManager.scaled(0.75f,0.75f,0.75f);
+            RenderSystem.translatef((float)(flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
+            RenderSystem.scaled(0.75f,0.75f,0.75f);
             if(entityLiving instanceof LivingEntity){
                 LivingEntity entity = (LivingEntity) entityLiving;
                 if(entity.getCombatTracker().getCombatDuration()>0){
-                    GlStateManager.translatef(-0.1F,-1.3F,0.4F);
-                    GlStateManager.rotatef(45F, -4.0F, 0F, 0F);
-                    GlStateManager.rotatef(45F, 0F, 0.0F, -1F);
+                    RenderSystem.translatef(-0.1F,-1.3F,0.4F);
+                    RenderSystem.rotatef(45F, -4.0F, 0F, 0F);
+                    RenderSystem.rotatef(45F, 0F, 0.0F, -1F);
                 }else{
-                   GlStateManager.translatef(0.0F,-0.8F,+0.075F);
+                    RenderSystem.translatef(0.0F,-0.8F,+0.075F);
                 }
             }
             Minecraft.getInstance().getItemRenderer().renderItem(stack,entityLiving, transformType, flag);
-            GlStateManager.popMatrix();
+            RenderSystem.popMatrix();
         }
     }
 

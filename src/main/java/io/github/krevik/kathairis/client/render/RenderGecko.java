@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelGecko;
 import io.github.krevik.kathairis.entity.EntityGecko;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -26,7 +27,7 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityGecko entity)
+    public ResourceLocation getEntityTexture(EntityGecko entity)
     {
         return TextureLocationsRef.GeckoLoc;
     }
@@ -50,15 +51,15 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
     	}*/
         if (entityLiving.isClimbing()) {
             if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.EAST) {
-                GlStateManager.rotatef(90, 0, 0, 1);
+                RenderSystem.rotatef(90, 0, 0, 1);
             } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.WEST) {
-                GlStateManager.rotatef(90, 0, 0, -1);
+                RenderSystem.rotatef(90, 0, 0, -1);
             } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.NORTH) {
-                GlStateManager.rotatef(90, 1, 0, 0);
+                RenderSystem.rotatef(90, 1, 0, 0);
             } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.SOUTH) {
-                GlStateManager.rotatef(90, -1, 0, 0);
+                RenderSystem.rotatef(90, -1, 0, 0);
             }
-            GlStateManager.translatef(0f, -0.3F, 0F);
+            RenderSystem.translatef(0f, -0.3F, 0F);
         }
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         

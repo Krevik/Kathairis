@@ -151,7 +151,7 @@ public class EntityMysticBird extends AmbientEntity
         super.tick();
         if (this.getIsBirdSitting()) {
             this.setMotion(Vec3d.ZERO);
-            this.posY = (double)MathHelper.floor(this.posY) + 1.0D;
+            setPosition(getPosition().getX(),MathHelper.floor(this.getPosition().getY()+1.0D),getPosition().getZ());
         } else {
             this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
         }
@@ -183,12 +183,12 @@ public class EntityMysticBird extends AmbientEntity
             }
 
             if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.withinDistance(this.getPositionVec(), 2.0D)) {
-                this.spawnPosition = new BlockPos(this.posX + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7), this.posY + (double)this.rand.nextInt(6) - 2.0D, this.posZ + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7));
+                this.spawnPosition = new BlockPos(this.getPosition().getX() + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7), this.getPosition().getY() + (double)this.rand.nextInt(6) - 2.0D, this.getPosition().getZ() + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7));
             }
 
-            double lvt_3_1_ = (double)this.spawnPosition.getX() + 0.5D - this.posX;
-            double lvt_5_1_ = (double)this.spawnPosition.getY() + 0.1D - this.posY;
-            double lvt_7_1_ = (double)this.spawnPosition.getZ() + 0.5D - this.posZ;
+            double lvt_3_1_ = (double)this.spawnPosition.getX() + 0.5D - this.getPosition().getX();
+            double lvt_5_1_ = (double)this.spawnPosition.getY() + 0.1D - this.getPosition().getY();
+            double lvt_7_1_ = (double)this.spawnPosition.getZ() + 0.5D - this.getPosition().getZ();
             Vec3d lvt_9_1_ = this.getMotion();
             Vec3d lvt_10_1_ = lvt_9_1_.add((Math.signum(lvt_3_1_) * 0.5D - lvt_9_1_.x) * 0.10000000149011612D, (Math.signum(lvt_5_1_) * 0.699999988079071D - lvt_9_1_.y) * 0.10000000149011612D, (Math.signum(lvt_7_1_) * 0.5D - lvt_9_1_.z) * 0.10000000149011612D);
             this.setMotion(lvt_10_1_);
@@ -201,17 +201,6 @@ public class EntityMysticBird extends AmbientEntity
             }
         }
 
-    }
-
-    @Override
-    protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-
-    @Override
-    public void fall(float distance, float damageMultiplier)
-    {
     }
 
     @Override

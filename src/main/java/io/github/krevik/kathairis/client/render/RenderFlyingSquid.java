@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelFlyingSquid;
 import io.github.krevik.kathairis.entity.EntityFlyingSquid;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -26,7 +27,7 @@ public class RenderFlyingSquid extends MobRenderer<EntityFlyingSquid,ModelFlying
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityFlyingSquid entity)
+    public ResourceLocation getEntityTexture(EntityFlyingSquid entity)
     {
         return TextureLocationsRef.FlyingSquidLoc;
     }
@@ -43,13 +44,13 @@ public class RenderFlyingSquid extends MobRenderer<EntityFlyingSquid,ModelFlying
     @Override
     protected void applyRotations(EntityFlyingSquid entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.translatef(0, -1, 0);
-    	GlStateManager.rotatef(90, 0, 1, 0);
+    	RenderSystem.translatef(0, -1, 0);
+    	RenderSystem.rotatef(90, 0, 1, 0);
     	if(entityLiving.isDiving()) {
-        	GlStateManager.rotatef(180, 0, 0, 1);
+        	RenderSystem.rotatef(180, 0, 0, 1);
     	}
     	if(entityLiving.isChild()) {
-        	GlStateManager.scaled(0.6, 0.6, 0.6);
+        	RenderSystem.scaled(0.6, 0.6, 0.6);
     	}
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         

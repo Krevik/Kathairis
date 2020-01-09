@@ -25,7 +25,7 @@ public class RenderJellyFish extends MobRenderer<EntityJellyFish, ModelJellyFish
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityJellyFish entity)
+    public ResourceLocation getEntityTexture(EntityJellyFish entity)
     {
         return TextureLocationsRef.JellyFishLoc;
     }
@@ -39,12 +39,6 @@ public class RenderJellyFish extends MobRenderer<EntityJellyFish, ModelJellyFish
 
         }
 
-    }
-
-    @Override
-    protected void applyRotations(EntityJellyFish entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
     
 }

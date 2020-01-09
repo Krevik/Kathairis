@@ -52,7 +52,7 @@ public class EntitySkyray extends FlyingEntity
     public EntitySkyray(World worldIn)
     {
         super(ModEntities.SKYRAY,worldIn);
-        this.moveController = new FlyingMovementController(this);
+        this.moveController = new FlyingMovementController(this,10,false);
         this.setNoGravity(true);
         this.setTimeUntilNextFeather(this.rand.nextInt(12000) + 12000);
     }
@@ -114,9 +114,9 @@ public class EntitySkyray extends FlyingEntity
         	if(this.rand.nextInt(99999999)==0) {
         	    EntitySkyray skyray = new EntitySkyray(world);
         	    skyray.setAdult(1);
-        	    skyray.setPosition(posX,posY,posZ);
+        	    skyray.setPosition(getPosition().getX(),getPosition().getY(),getPosition().getZ());
         	    world.addEntity(skyray);
-        	    posX=posY=posZ=-10;
+        	    setPosition(0,-10,0);
         	    onKillCommand();
         	}
         }
@@ -226,13 +226,6 @@ public class EntitySkyray extends FlyingEntity
     }
 
     @Override
-    protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-
-
-    @Override
     public void livingTick() {
         super.livingTick();
         travel();
@@ -251,7 +244,7 @@ public class EntitySkyray extends FlyingEntity
 
     public void travel()
     {
-    	this.moveController.setMoveTo(this.posX+randomMotionVecX, this.posY+randomMotionVecY, this.posZ+randomMotionVecZ, 1000f);
+    	this.moveController.setMoveTo(this.getPosition().getX()+randomMotionVecX, this.getPosition().getY()+randomMotionVecY, this.getPosition().getZ()+randomMotionVecZ, 1000f);
     }
 
     public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn)
@@ -294,7 +287,7 @@ public class EntitySkyray extends FlyingEntity
             	     //watch for parent
             		if(this.squid.getRNG().nextInt(25)==0) {
                     List<EntitySkyray> skyrays = new ArrayList<EntitySkyray>();
-            	        	skyrays=this.squid.world.getEntitiesWithinAABB(EntitySkyray.class, new AxisAlignedBB(this.squid.posX - 15, this.squid.posY - 15, this.squid.posZ - 15, this.squid.posX  + 15, this.squid.posY + 15, this.squid.posZ + 15));
+            	        	skyrays=this.squid.world.getEntitiesWithinAABB(EntitySkyray.class, new AxisAlignedBB(this.squid.getPosition().getX() - 15, this.squid.getPosition().getY() - 15, this.squid.getPosition().getZ() - 15, this.squid.getPosition().getX()  + 15, this.squid.getPosition().getY() + 15, this.squid.getPosition().getZ() + 15));
             	        	if(skyrays.size()>0) {
             	        	    for(int x=0;x<skyrays.size();x++) {
             	        	        if(skyrays.get(x).getAdult()==1){
@@ -340,10 +333,10 @@ public class EntitySkyray extends FlyingEntity
 	                	if(diffZ>0.1) {
 	                        f3=(float) (lookZ+diffZ/100);
 	                	}
-	                    if(this.squid.posY>240&&squid.randomMotionVecY>0) {
+	                    if(this.squid.getPosition().getY()>240&&squid.randomMotionVecY>0) {
 	                    	f2=-squid.getRNG().nextFloat();
 	                    }
-	                    if(this.squid.posY<120&&squid.randomMotionVecY<0) {
+	                    if(this.squid.getPosition().getY()<120&&squid.randomMotionVecY<0) {
 	                    	f2=squid.getRNG().nextFloat();
 	                    }
 	                    this.squid.setMovementVector(f1, f2, f3);
@@ -351,9 +344,9 @@ public class EntitySkyray extends FlyingEntity
 
 	                if(this.squid.getAdult()==0&&this.squid.getParent()!=null){
 	                    if(this.squid.getDistance(this.squid.getParent())>5) {
-                            float f1 = (float) (this.squid.getParent().posX - this.squid.posX) / 3;
-                            float f2 = (float) (this.squid.getParent().posY - this.squid.posY) / 3;
-                            float f3 = (float) (this.squid.getParent().posZ - this.squid.posZ) / 3;
+                            float f1 = (float) (this.squid.getParent().getPosition().getX() - this.squid.getPosition().getX()) / 3;
+                            float f2 = (float) (this.squid.getParent().getPosition().getY() - this.squid.getPosition().getY()) / 3;
+                            float f3 = (float) (this.squid.getParent().getPosition().getZ() - this.squid.getPosition().getZ()) / 3;
 
                             this.squid.setMovementVector(f1, f2, f3);
                         }

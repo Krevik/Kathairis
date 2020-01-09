@@ -177,7 +177,7 @@ public class EntityJellyFish extends CreatureEntity
 
         public JellyFishMoveHelper(EntityJellyFish ghast)
         {
-            super(ghast);
+            super(ghast,10,false);
             this.parentEntity = ghast;
         }
 
@@ -188,10 +188,10 @@ public class EntityJellyFish extends CreatureEntity
         		this.parentEntity.randomMotionVecX=this.parentEntity.getRNG().nextFloat()-this.parentEntity.getRNG().nextFloat();
         		this.parentEntity.randomMotionVecX=this.parentEntity.getRNG().nextFloat()-this.parentEntity.getRNG().nextFloat();
         		this.parentEntity.randomMotionVecY=this.parentEntity.getRNG().nextFloat()-this.parentEntity.getRNG().nextFloat();
-        		if(this.parentEntity.posY < this.parentEntity.world.getHeight(Heightmap.Type.MOTION_BLOCKING,this.parentEntity.getPosition()).getY()+1&&this.parentEntity.randomMotionVecY<0) {
+        		if(this.parentEntity.getPosition().getY() < this.parentEntity.world.getHeight(Heightmap.Type.MOTION_BLOCKING,this.parentEntity.getPosition()).getY()+1&&this.parentEntity.randomMotionVecY<0) {
         			this.parentEntity.randomMotionVecY=-this.parentEntity.randomMotionVecY;
         		}
-        		if(this.parentEntity.randomMotionVecY>0&&this.parentEntity.posY>220) {
+        		if(this.parentEntity.randomMotionVecY>0&&this.parentEntity.getPosition().getY()>220) {
         			this.parentEntity.randomMotionVecY=-this.parentEntity.randomMotionVecY;
         		}
         		
@@ -205,7 +205,7 @@ public class EntityJellyFish extends CreatureEntity
         			List<EntityJellyFish> list = this.parentEntity.world.getEntitiesWithinAABB(EntityJellyFish.class, this.parentEntity.getBoundingBox().grow(10));
         			if(list.size()>1) {
         				this.parentEntity.setAttackTarget(ep);
-        				this.parentEntity.setMotion(new Vec3d((ep.posX-this.parentEntity.posX)/3,(ep.posY-this.parentEntity.posY)/3,(ep.posZ-this.parentEntity.posZ)/3));
+        				this.parentEntity.setMotion(new Vec3d((ep.getPosition().getX()-this.parentEntity.getPosition().getX())/3,(ep.getPosition().getY()-this.parentEntity.getPosition().getY())/3,(ep.getPosition().getZ()-this.parentEntity.getPosition().getZ())/3));
         				this.parentEntity.jellyfish=list.get(0);
         			}else {
         				this.parentEntity.setAttackTarget(null);

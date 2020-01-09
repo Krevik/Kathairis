@@ -55,12 +55,12 @@ public class EntityBison extends EntityKatharianAnimal
 
     @Override
     public boolean canSpawn(IWorld world, SpawnReason sth) {
-        int lvt_3_1_ = MathHelper.floor(this.posX);
+        int lvt_3_1_ = MathHelper.floor(this.getPosition().getX());
         int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
-        int lvt_5_1_ = MathHelper.floor(this.posZ);
+        int lvt_5_1_ = MathHelper.floor(this.getPosition().getZ());
         BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
-        return spawnableBlocks.contains(world.getBlockState(lvt_6_1_.down()).getBlock()) && world.getLightSubtracted(lvt_6_1_, 0) > 8 &&
-                this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(world,getPosition(),ModEntities.BISON);
+        return spawnableBlocks.contains(world.getBlockState(lvt_6_1_.down()).getBlock()) && world.getNeighborAwareLightSubtracted(lvt_6_1_, 0) > 8 &&
+                this.getBlockPathWeight(new BlockPos(this.getPosition().getX(), this.getBoundingBox().minY, this.getPosition().getZ()), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(world,getPosition(),ModEntities.BISON);
     }
 
     @Override
@@ -154,7 +154,7 @@ public class EntityBison extends EntityKatharianAnimal
             //attack in hordes
             if(source.getTrueSource() instanceof LivingEntity) {
                 List<EntityBison> bisons = new ArrayList<EntityBison>();
-                bisons=world.getEntitiesWithinAABB(EntityBison.class, new AxisAlignedBB(posX - 15, posY - 15, posZ - 15, posX  + 15, posY + 15, posZ + 15));
+                bisons=world.getEntitiesWithinAABB(EntityBison.class, new AxisAlignedBB(getPosition().getX() - 15, getPosition().getY() - 15, getPosition().getZ() - 15, getPosition().getX()  + 15, getPosition().getY() + 15, getPosition().getZ() + 15));
                 for(int x=0;x<bisons.size();x++) {
                     bisons.get(x).setAttackTarget((LivingEntity) source.getTrueSource());
                 }
@@ -184,7 +184,7 @@ public class EntityBison extends EntityKatharianAnimal
                     if(getHapiness()>3+rand.nextInt(4)+rand.nextFloat()){
                         setHapiness(0);
                         //dropItem(KCore.functionHelper.getRandomMusicDisc(),0);
-                        //EntityItem item = new EntityItem(world,posX+0.5f,posY+0.5f,posZ+0.5f);
+                        //EntityItem item = new EntityItem(world,getPosition().getX()+0.5f,getPosition().getY()+0.5f,getPosition().getZ()+0.5f);
                         //item.setItem(new ItemStack(KCore.functionHelper.getRandomMusicDisc(),1));
                        // world.spawnEntity(item);
                     }

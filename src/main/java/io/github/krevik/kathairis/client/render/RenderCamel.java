@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelCamel;
 import io.github.krevik.kathairis.entity.EntityCamel;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -26,7 +27,7 @@ public class RenderCamel extends MobRenderer<EntityCamel,ModelCamel<EntityCamel>
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityCamel entity)
+    public ResourceLocation getEntityTexture(EntityCamel entity)
     {
         return TextureLocationsRef.CamelLoc;
     }
@@ -44,7 +45,7 @@ public class RenderCamel extends MobRenderer<EntityCamel,ModelCamel<EntityCamel>
     protected void applyRotations(EntityCamel entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
     	if(entityLiving.isChild()) {
-        	GlStateManager.scaled(0.6, 0.6, 0.6);
+        	RenderSystem.scaled(0.6, 0.6, 0.6);
     	}
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         

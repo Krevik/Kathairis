@@ -45,10 +45,10 @@ public class EntityAICloudOisterPanic extends Goal
     	if(jumpTimer>12) {
     		jumpTimer=0;
             creature.spawnJumpParticles(creature.getEntityWorld());
-			double destPosX=creature.posX-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
-			double destPosZ=creature.posZ-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
-			creature.getNavigator().setPath(creature.getNavigator().getPathToPos(new BlockPos(destPosX,creature.posY,destPosZ),0), 1);
-            creature.setMotion(new Vec3d((destPosX-creature.posX)*0.15,0.5,(destPosZ-creature.posZ)*0.15));
+			double destPosX=creature.getPosition().getX()-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
+			double destPosZ=creature.getPosition().getZ()-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
+			creature.getNavigator().setPath(creature.getNavigator().getPathToPos(new BlockPos(destPosX,creature.getPosition().getY(),destPosZ),0), 1);
+            creature.setMotion(new Vec3d((destPosX-creature.getPosition().getX())*0.15,0.5,(destPosZ-creature.getPosition().getZ())*0.15));
 
         }
     }

@@ -43,7 +43,7 @@ public class EntityCloudySlime extends TameableEntity
     {
         super(ModEntities.CLOUDY_SLIME,worldIn);
 
-        this.moveController = new FlyingMovementController(this);
+        this.moveController = new FlyingMovementController(this,10,false);
         this.setTamed(false);
     }
 
@@ -110,7 +110,7 @@ public class EntityCloudySlime extends TameableEntity
         } else {
             float f = 0.91F;
             if (this.onGround) {
-                BlockPos underPos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getBoundingBox().minY) - 1, MathHelper.floor(this.posZ));
+                BlockPos underPos = new BlockPos(MathHelper.floor(this.getPosition().getX()), MathHelper.floor(this.getBoundingBox().minY) - 1, MathHelper.floor(this.getPosition().getZ()));
                 f = this.world.getBlockState(underPos).getSlipperiness(world, underPos, this) * 0.91F;
             }
 
@@ -118,7 +118,7 @@ public class EntityCloudySlime extends TameableEntity
             this.moveRelative(this.onGround ? 0.1F * f1 : 0.02F, new Vec3d(direction.getX(), direction.getY(), direction.getZ()));
             f = 0.91F;
             if (this.onGround) {
-                BlockPos underPos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getBoundingBox().minY) - 1, MathHelper.floor(this.posZ));
+                BlockPos underPos = new BlockPos(MathHelper.floor(this.getPosition().getX()), MathHelper.floor(this.getBoundingBox().minY) - 1, MathHelper.floor(this.getPosition().getZ()));
                 f = this.world.getBlockState(underPos).getSlipperiness(world, underPos, this) * 0.91F;
             }
 
@@ -127,8 +127,8 @@ public class EntityCloudySlime extends TameableEntity
         }
 
         this.prevLimbSwingAmount = this.limbSwingAmount;
-        double d1 = this.posX - this.prevPosX;
-        double d0 = this.posZ - this.prevPosZ;
+        double d1 = this.getPosition().getX() - this.prevPosX;
+        double d0 = this.getPosition().getZ() - this.prevPosZ;
         float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
         if (f2 > 1.0F) {
             f2 = 1.0F;
@@ -220,12 +220,6 @@ public class EntityCloudySlime extends TameableEntity
     }
 
     @Override
-    public void fall(float distance, float damageMultiplier)
-    {
-    	
-    }
-
-    @Override
     protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos)
     {
     	
@@ -280,9 +274,9 @@ public class EntityCloudySlime extends TameableEntity
             }
             if(source== DamageSource.IN_WALL){
                 if(this.getOwner()!=null&&getOwner().isAlive()){
-                    setPosition(getOwner().posX,getOwner().posY,getOwner().posZ);
+                    setPosition(getOwner().getPosition().getX(),getOwner().getPosition().getY(),getOwner().getPosition().getZ());
                 }else{
-                    BlockPos tmp = new BlockPos(posX,world.getHeight(Heightmap.Type.MOTION_BLOCKING,getPosition()).getY()+1,posZ);
+                    BlockPos tmp = new BlockPos(getPosition().getX(),world.getHeight(Heightmap.Type.MOTION_BLOCKING,getPosition()).getY()+1,getPosition().getZ());
                     setPosition(tmp.getX(),tmp.getY(),tmp.getZ());
                 }
             }

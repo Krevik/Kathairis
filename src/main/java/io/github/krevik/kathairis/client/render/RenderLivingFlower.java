@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelLivingFlower;
 import io.github.krevik.kathairis.entity.EntityLivingFlower;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -29,7 +30,7 @@ public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivi
 
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityLivingFlower entity)
+    public ResourceLocation getEntityTexture(EntityLivingFlower entity)
     {
         return TextureLocationsRef.LivingFlowerLoc;
     }
@@ -57,7 +58,7 @@ public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivi
 
     private void drawCircle(float x, float y, float radius,EntityLivingFlower entity)
     {
-        GlStateManager.disableLighting();
+        RenderSystem.disableLighting();
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         int i;
@@ -70,7 +71,7 @@ public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivi
             bufferbuilder.pos(x,entity.posY+0.3f,y).color(0.0f, 0.8f, 0.0f, 0.6f).endVertex();
             bufferbuilder.pos(x+(radius * Math.cos(i*twicePi/triangleAmount)),entity.posY+0.3f,y+(radius*Math.sin(i*twicePi/triangleAmount))).color(0.0f, 0.8f, 0.0f, 0.6f).endVertex();
         }
-        GlStateManager.enableLighting();
+        RenderSystem.enableLighting();
         tessellator.draw();
     }
 

@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelMysticBird;
 import io.github.krevik.kathairis.entity.EntityMysticBird;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
@@ -27,7 +28,7 @@ public class RenderMysticBird extends MobRenderer<EntityMysticBird, ModelMysticB
 
     @Override
     @Nullable
-    protected ResourceLocation getEntityTexture(EntityMysticBird entity)
+    public ResourceLocation getEntityTexture(EntityMysticBird entity)
     {
     	int variant=entity.getVariant();
     	if(variant==0) return TextureLocationsRef.MysticBirdLoc;
@@ -49,7 +50,7 @@ public class RenderMysticBird extends MobRenderer<EntityMysticBird, ModelMysticB
     @Override
     protected void applyRotations(EntityMysticBird entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
     {
-    	GlStateManager.scaled(0.4, 0.4, 0.4);
+    	RenderSystem.scaled(0.4, 0.4, 0.4);
         super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
         
     }

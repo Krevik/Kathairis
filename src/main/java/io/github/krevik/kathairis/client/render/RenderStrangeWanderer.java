@@ -26,7 +26,7 @@ public class RenderStrangeWanderer extends MobRenderer<EntityStrangeWanderer, Mo
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityStrangeWanderer entity)
+    public ResourceLocation getEntityTexture(EntityStrangeWanderer entity)
     {
         int month = Calendar.getInstance().get(Calendar.MONTH);
         if(month==11){
@@ -45,12 +45,6 @@ public class RenderStrangeWanderer extends MobRenderer<EntityStrangeWanderer, Mo
 
         }
 
-    }
-
-    @Override
-    protected void applyRotations(EntityStrangeWanderer entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
     }
     
 }

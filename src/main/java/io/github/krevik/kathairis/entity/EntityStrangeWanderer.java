@@ -77,9 +77,9 @@ public class EntityStrangeWanderer extends MobEntity
     @Override
     public void tick() {
     	super.tick();
-        PlayerEntity ep = this.world.getClosestPlayer(posX, posY, posZ, 15, true);
+        PlayerEntity ep = this.world.getClosestPlayer(getPosition().getX(), getPosition().getY(), getPosition().getZ(), 15, true);
     	if(ep!=null) {
-            this.getLookController().setLookPosition(ep.posX, ep.posY + (double)ep.getEyeHeight(), ep.posZ, (float)100, (float)100);
+            this.getLookController().setLookPosition(ep.getPosition().getX(), ep.getPosition().getY() + (double)ep.getEyeHeight(), ep.getPosition().getZ(), (float)100, (float)100);
     	}
 
     }
