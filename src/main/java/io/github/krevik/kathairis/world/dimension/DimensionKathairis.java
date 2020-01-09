@@ -6,6 +6,7 @@ import io.github.krevik.kathairis.client.render.world.RenderKathairisSky;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModDimensions;
+import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
 import net.minecraft.block.Blocks;
@@ -36,7 +37,7 @@ public class DimensionKathairis extends OverworldDimension {
 
 
     public DimensionKathairis(World world) {
-        super(world,Kathairis.KATHAIRIS);
+        super(world,DimensionType.byName(ModReference.KATHAIRIS));
     }
 
     public DimensionKathairis(World world, DimensionType dimensionType) {
@@ -45,7 +46,6 @@ public class DimensionKathairis extends OverworldDimension {
 
     @Override
     public ChunkGenerator<? extends GenerationSettings> createChunkGenerator() {
-        WorldType worldtype = this.world.getWorldInfo().getGenerator();
         BiomeProviderType<KatharianBiomeProviderSettings, KatharianBiomeProvider> biomeprovidertype1 = ModDimensions.KATHAIRIS_BIOME_PROVIDER_TYPE;
         KatharianBiomeProviderSettings overworldbiomeprovidersettings1 = biomeprovidertype1.createSettings().setGeneratorSettings(new KathairisGenSettings()).setWorldInfo(this.world.getWorldInfo());
         BiomeProvider biomeprovider = biomeprovidertype1.create(overworldbiomeprovidersettings1);

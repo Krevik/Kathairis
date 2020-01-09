@@ -40,7 +40,7 @@ public class BiomeKatharianBiomeBase extends Biome {
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TITANIUM_ORE.getDefaultState(), 9), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 64)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(), 18), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));
-        this.addStructure((Structure<NoFeatureConfig>)KatharianFeatureList.CLOUD_TEMPLE,IFeatureConfig.NO_FEATURE_CONFIG);
+        //this.addStructure((Structure<NoFeatureConfig>)KatharianFeatureList.CLOUD_TEMPLE,IFeatureConfig.NO_FEATURE_CONFIG);
         //this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createDecoratedFeature(KatharianFeatureList.CLOUD_TEMPLE, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 
     }
