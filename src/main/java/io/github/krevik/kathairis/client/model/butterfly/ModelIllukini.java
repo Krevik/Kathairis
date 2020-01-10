@@ -1,16 +1,18 @@
 package io.github.krevik.kathairis.client.model.butterfly;
 
+import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelIllukini<T extends LivingEntity> extends EntityModel<T> {
+public class ModelIllukini<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer Head;
     public ModelRenderer Wing4;
     public ModelRenderer Head1;
@@ -51,16 +53,26 @@ public class ModelIllukini<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.lowerbody.render(f5);
-        this.Czulko_1.render(f5);
-        this.Wing4_1.render(f5);
-        this.Head2.render(f5);
-        this.Body.render(f5);
-        this.Wing4.render(f5);
-        this.Head.render(f5);
-        this.Head1.render(f5);
+    public void func_225597_a_(T entity, float f, float f1, float f2, float f3, float f4) {
+        if(entity.getMotion().y!=0D||entity.getMotion().x!=0D||entity.getMotion().z!=0D) {
+            Wing4.rotateAngleZ= MathHelper.sin(f2*0.6f);
+            Wing4_1.rotateAngleZ=-MathHelper.sin(f2*0.6f);
+        }else {
+            Wing4.rotateAngleZ=-helper.degToRad(70)- MathHelper.sin(f2*0.05f)*0.05f;
+            Wing4_1.rotateAngleZ= helper.degToRad(70)+ MathHelper.sin(f2*0.05f)*0.05f;
+        }
     }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(lowerbody,Czulko_1,Wing4_1,Head2,Body,Wing4,Head,Head1);
+    }
+
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
@@ -69,17 +81,5 @@ public class ModelIllukini<T extends LivingEntity> extends EntityModel<T> {
     }
 
     FunctionHelper helper = Kathairis.getHelper();
-    @Override
-    public void setRotationAngles(T entity, float f, float f1, float f2, float f3, float f4, float f5 )
-    {
-    	super.setRotationAngles(entity, f, f1, f2, f3, f4, f5);
-    	if(entity.getMotion().y!=0D||entity.getMotion().x!=0D||entity.getMotion().z!=0D) {
-        	Wing4.rotateAngleZ= MathHelper.sin(f2*0.6f);
-        	Wing4_1.rotateAngleZ=-MathHelper.sin(f2*0.6f);
-    	}else {
-        	Wing4.rotateAngleZ=-helper.degToRad(70)- MathHelper.sin(f2*0.05f)*0.05f;
-        	Wing4_1.rotateAngleZ= helper.degToRad(70)+ MathHelper.sin(f2*0.05f)*0.05f;
-    	}
-    }
 }
 
