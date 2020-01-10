@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.world.dimension.structures.crystal_ruins;
 
 import com.mojang.datafixers.Dynamic;
-import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -10,12 +9,11 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.structure.*;
+import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 

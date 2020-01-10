@@ -2,13 +2,11 @@ package io.github.krevik.kathairis.world.dimension.feature.rewarding;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.block.BlockKathairisCloud;
-import io.github.krevik.kathairis.block.TreesForSaplings.SoulTree;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.RewardHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.trees.Tree;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;

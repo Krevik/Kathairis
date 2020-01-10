@@ -2,13 +2,6 @@ package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 import java.awt.*;

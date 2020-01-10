@@ -3,8 +3,6 @@ package io.github.krevik.kathairis.world.dimension.feature.tree;
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.block.BlockGlowVines;
 import io.github.krevik.kathairis.init.ModBlocks;
-import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
-import io.github.krevik.kathairis.world.dimension.feature.config.KatharianTreeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -16,7 +14,7 @@ import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
@@ -26,7 +24,7 @@ public class FeatureKatharianTreeHuge1 extends AbstractKatharianTreeFeature {
     private static final BlockState LOG = ModBlocks.MYSTIC_LOG.getDefaultState();
     private static final BlockState LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
 
-    public FeatureKatharianTreeHuge1(Function<Dynamic<?>, ? extends KatharianTreeFeatureConfig> p_i49920_1_) {
+    public FeatureKatharianTreeHuge1(Function<Dynamic<?>, ? extends TreeFeatureConfig> p_i49920_1_) {
         super(p_i49920_1_);
     }
 

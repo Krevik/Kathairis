@@ -6,7 +6,11 @@ import io.github.krevik.kathairis.world.dimension.feature.tree.AbstractKatharian
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
@@ -19,7 +23,7 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
     BlockState LEAVES = ModBlocks.SHINY_LEAVES.getDefaultState();
 
     public FeatureKatharianForestBush(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49920_1_) {
-        super(p_i49920_1_, true);
+        super(p_i49920_1_);
     }
 
 
@@ -79,7 +83,7 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
     }
 
     private void func_208521_b(IWorldGenerationReader p_208521_1_, BlockPos p_208521_2_, BlockState p_208521_3_) {
-        if (this.doBlockNotify) {
+        if (true) {
             p_208521_1_.setBlockState(p_208521_2_, p_208521_3_, 19);
         } else {
             p_208521_1_.setBlockState(p_208521_2_, p_208521_3_, 18);
@@ -91,5 +95,17 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
         this.func_208521_b(worldIn, p_208520_3_, p_208520_4_);
             changedBlocks.add(p_208520_3_.toImmutable());
 
+    }
+
+    //TODO
+    @Override
+    protected boolean func_225557_a_(IWorldGenerationReader p_225557_1_, Random p_225557_2_, BlockPos p_225557_3_, Set p_225557_4_, Set p_225557_5_, MutableBoundingBox p_225557_6_, BaseTreeFeatureConfig p_225557_7_) {
+        return false;
+    }
+
+    //TODO
+    @Override
+    public boolean place(IWorld worldIn, ChunkGenerator generator, Random rand, BlockPos pos, IFeatureConfig config) {
+        return false;
     }
 }

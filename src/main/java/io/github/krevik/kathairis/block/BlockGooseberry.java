@@ -13,6 +13,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
@@ -21,8 +22,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
@@ -61,15 +60,16 @@ public class BlockGooseberry extends Block implements IItemGroupProvider {
 		return (worldIn.getNeighborAwareLightSubtracted(pos, 0) >= 8 || worldIn.canBlockSeeSky(pos)) && isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos.down());
 	}
 
+
+
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
-		boolean result = false;
+	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
 		if (state == GOOSEBERRY_BUSH.getDefaultState().with(VARIANT, EnumType.WITH)) {
 			player.addItemStackToInventory(new ItemStack(GOOSEBERRIES, 1 + player.getRNG().nextInt(5)));
-			result = true;
 			world.setBlockState(pos, GOOSEBERRY_BUSH.getDefaultState());
+			return ActionResultType.SUCCESS;
 		}
-		return result;
+		return ActionResultType.PASS;
 	}
 
 

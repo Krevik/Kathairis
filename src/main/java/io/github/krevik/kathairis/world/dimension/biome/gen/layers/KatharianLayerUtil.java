@@ -1,6 +1,5 @@
 package io.github.krevik.kathairis.world.dimension.biome.gen.layers;
 
-import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import net.minecraft.util.registry.Registry;

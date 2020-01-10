@@ -3,7 +3,6 @@ package io.github.krevik.kathairis.client.model;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;

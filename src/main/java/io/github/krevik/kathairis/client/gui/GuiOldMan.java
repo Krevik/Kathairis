@@ -2,19 +2,15 @@ package io.github.krevik.kathairis.client.gui;
 
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -213,7 +209,7 @@ public class GuiOldMan extends Screen {
     @Override
     public void render(int parWidth, int parHeight, float particle) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GlStateManager.enableColorMaterial();
+        RenderSystem.enableColorMaterial();
         //this.mc.getTextureManager().bindTexture(GUITextures);
         this.renderBackground();
         //TODO //drawModalRectWithCustomSizedTexture(margin, height-shifter1/2-margin, 0, 0, ImageWidth/2,shifter1/2,ImageWidth/2,shifter1/2);

@@ -2,7 +2,6 @@ package io.github.krevik.kathairis.world.dimension.feature;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -49,7 +48,7 @@ public class BasicKatharianOreFeature extends Feature<KatharianMinableConfig> {
     protected boolean func_207803_a(IWorld p_207803_1_, Random p_207803_2_, KatharianMinableConfig p_207803_3_, double p_207803_4_, double p_207803_6_, double p_207803_8_, double p_207803_10_, double p_207803_12_, double p_207803_14_, int p_207803_16_, int p_207803_17_, int p_207803_18_, int p_207803_19_, int p_207803_20_) {
         int lvt_21_1_ = 0;
         BitSet lvt_22_1_ = new BitSet(p_207803_19_ * p_207803_20_ * p_207803_19_);
-        MutableBlockPos lvt_23_1_ = new MutableBlockPos();
+        BlockPos.Mutable lvt_23_1_ = new BlockPos.Mutable();
         double[] lvt_24_1_ = new double[p_207803_3_.size * 4];
 
         int lvt_25_2_;

@@ -1,21 +1,19 @@
 package io.github.krevik.kathairis.world.dimension.feature.config;
 
-import io.github.krevik.kathairis.init.ModBlocks;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-
-
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.DynamicOps;
-import java.util.List;
+import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.blockstateprovider.BlockStateProvider;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
+
+import java.util.List;
 
 public class KatharianTreeFeatureConfig extends TreeFeatureConfig {
     public final FoliagePlacer field_227327_a_;
@@ -60,20 +58,21 @@ public class KatharianTreeFeatureConfig extends TreeFeatureConfig {
         return this;
     }
 
-    public static <T> KatharianTreeFeatureConfig deserializeElderwillow(Dynamic<T> data) {
-        return func_227376_b_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.ELDERWILLOW_SAPLING);
+
+    public static <T> TreeFeatureConfig deserializeElderwillow(Dynamic<T> data) {
+        return func_227338_a_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.ELDERWILLOW_SAPLING);
     }
 
-    public static <T> KatharianTreeFeatureConfig deserializeShiny(Dynamic<T> data) {
-        return func_227376_b_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.SHINY_SAPLING);
+    public static <T> TreeFeatureConfig deserializeShiny(Dynamic<T> data) {
+        return func_227338_a_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.SHINY_SAPLING);
     }
 
-    public static <T> KatharianTreeFeatureConfig deserializeSoul(Dynamic<T> data) {
-        return func_227376_b_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.SOUL_SAPLING);
+    public static <T> TreeFeatureConfig deserializeSoul(Dynamic<T> data) {
+        return func_227338_a_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.SOUL_SAPLING);
     }
 
-    public static <T> KatharianTreeFeatureConfig deserializeMystic(Dynamic<T> data) {
-        return func_227376_b_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING);
+    public static <T> TreeFeatureConfig deserializeMystic(Dynamic<T> data) {
+        return func_227338_a_(data).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING);
     }
 
 

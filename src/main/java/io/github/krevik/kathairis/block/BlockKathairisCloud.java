@@ -12,7 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -63,7 +63,7 @@ public class BlockKathairisCloud extends Block implements IItemGroupProvider {
 
 
 	@Override
-	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_220051_6_) {
+	public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_220051_6_) {
 		Item heldItem = player.getHeldItem(hand).getItem();
 		if (heldItem == GLASS_JAR) {
 			if (!worldIn.isRemote) {
@@ -71,9 +71,9 @@ public class BlockKathairisCloud extends Block implements IItemGroupProvider {
 				player.addItemStackToInventory(new ItemStack(pickedItem.get()));
 			}
 			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
-			return true;
+			return ActionResultType.SUCCESS;
 		}
-		return false;
+		return ActionResultType.PASS;
 	}
 
 	@Override

@@ -1,30 +1,14 @@
 package io.github.krevik.kathairis.client.render.layer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.krevik.kathairis.client.model.ModelGaznowel;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.IHasArm;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.HandSide;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
-@OnlyIn(Dist.CLIENT)
+/*@OnlyIn(Dist.CLIENT)
 public class RenderLayerHeldItem<T extends LivingEntity, M extends EntityModel<T> & IHasArm> extends LayerRenderer<T, M> {
-
 
    public RenderLayerHeldItem(IEntityRenderer<T, M> p_i50934_1_) {
         super(p_i50934_1_);
     }
 
     @Override
-    public void render(T entitylivingbaseIn, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float p_212842_6_, float p_212842_7_, float p_212842_8_) {
+    public void func_225628_a_(MatrixStack p_225628_1_, IRenderTypeBuffer p_225628_2_, int p_225628_3_, T entitylivingbaseIn, float p_225628_5_, float p_225628_6_, float p_225628_7_, float p_225628_8_, float p_225628_9_, float p_225628_10_) {
         boolean flag = entitylivingbaseIn.getPrimaryHand() == HandSide.RIGHT;
         ItemStack itemstack = flag ? entitylivingbaseIn.getHeldItemOffhand() : entitylivingbaseIn.getHeldItemMainhand();
         ItemStack itemstack1 = flag ? entitylivingbaseIn.getHeldItemMainhand() : entitylivingbaseIn.getHeldItemOffhand();
@@ -88,4 +72,4 @@ public class RenderLayerHeldItem<T extends LivingEntity, M extends EntityModel<T
     {
         return false;
     }
-}
+}*/

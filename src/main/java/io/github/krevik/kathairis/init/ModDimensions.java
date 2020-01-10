@@ -1,7 +1,9 @@
 package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.util.ModReference;
+import io.github.krevik.kathairis.util.RegistryHelper;
 import io.github.krevik.kathairis.world.dimension.ChunkGeneratorKathairis;
+import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;

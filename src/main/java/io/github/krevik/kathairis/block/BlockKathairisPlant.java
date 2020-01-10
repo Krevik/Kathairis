@@ -17,10 +17,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
-import javax.annotation.Nonnull;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;

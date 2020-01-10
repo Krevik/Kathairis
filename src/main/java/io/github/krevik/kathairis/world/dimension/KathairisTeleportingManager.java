@@ -1,10 +1,7 @@
 package io.github.krevik.kathairis.world.dimension;
 
-import io.github.krevik.kathairis.init.ModBlocks;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -19,10 +16,6 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldInfo;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * @author Krevik

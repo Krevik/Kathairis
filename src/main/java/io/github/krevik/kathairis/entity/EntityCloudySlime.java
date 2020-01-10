@@ -11,6 +11,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -59,7 +60,7 @@ public class EntityCloudySlime extends TameableEntity
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(2, this.sitGoal);
-        this.goalSelector.addGoal(3, new FollowOwnerFlyingGoal(this, 1.0D, 5.0F, 1.0F));
+        this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 5.0F, 1.0F,true));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.goalSelector.addGoal(1, new OwnerHurtTargetGoal(this));

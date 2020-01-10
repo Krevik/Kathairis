@@ -1,13 +1,7 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import io.github.krevik.kathairis.init.ModBlocks;
-import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
-import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsConfig;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.placement.*;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 

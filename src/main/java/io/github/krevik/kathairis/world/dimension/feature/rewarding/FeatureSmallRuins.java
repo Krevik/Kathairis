@@ -1,10 +1,11 @@
 package io.github.krevik.kathairis.world.dimension.feature.rewarding;
 
 import com.mojang.datafixers.Dynamic;
-import io.github.krevik.kathairis.block.BlockKathairisCloud;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.RewardHelper;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.BushBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;

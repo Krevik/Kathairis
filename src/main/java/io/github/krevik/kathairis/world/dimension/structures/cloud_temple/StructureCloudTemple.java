@@ -1,9 +1,6 @@
 package io.github.krevik.kathairis.world.dimension.structures.cloud_temple;
 
 import com.mojang.datafixers.Dynamic;
-import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
-import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsConfig;
-import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsPieces;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -11,7 +8,6 @@ import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
 import net.minecraft.world.gen.feature.structure.Structure;

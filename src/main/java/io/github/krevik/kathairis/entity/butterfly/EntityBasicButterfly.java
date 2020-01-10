@@ -98,7 +98,7 @@ public class EntityBasicButterfly extends AmbientEntity
         super.tick();
         if (this.getIsBirdSitting()) {
             this.setMotion(Vec3d.ZERO);
-            this.getPosition().getY() = (double)MathHelper.floor(this.getPosition().getY()) + 1.0D;
+            setPosition(getPosition().getX(),(double)MathHelper.floor(this.getPosition().getY()) + 1.0D,getPosition().getZ());
         } else {
             this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
         }
@@ -153,18 +153,6 @@ public class EntityBasicButterfly extends AmbientEntity
             }
         }
 
-    }
-
-
-    @Override
-    protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-
-    @Override
-    public void fall(float distance, float damageMultiplier)
-    {
     }
 
     @Override

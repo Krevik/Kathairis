@@ -1,13 +1,20 @@
 package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.item.*;
+import io.github.krevik.kathairis.util.IItemGroupProvider;
 import io.github.krevik.kathairis.util.ModReference;
+import io.github.krevik.kathairis.util.ModUtil;
+import io.github.krevik.kathairis.util.RegistryHelper;
+import net.minecraft.block.Block;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 

@@ -5,8 +5,7 @@ import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placement.*;
+import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 

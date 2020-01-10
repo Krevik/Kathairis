@@ -1,13 +1,13 @@
 package io.github.krevik.kathairis.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelMysticBird;
 import io.github.krevik.kathairis.entity.EntityMysticBird;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -48,11 +48,9 @@ public class RenderMysticBird extends MobRenderer<EntityMysticBird, ModelMysticB
     }
 
     @Override
-    protected void applyRotations(EntityMysticBird entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-    	RenderSystem.scaled(0.4, 0.4, 0.4);
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-        
+    public void func_225623_a_(EntityMysticBird e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
+        RenderSystem.scaled(0.4, 0.4, 0.4);
+        super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
     
 }

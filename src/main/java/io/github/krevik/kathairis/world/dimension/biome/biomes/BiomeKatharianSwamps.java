@@ -5,10 +5,11 @@ import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.PlainsBiome;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placement.*;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 import java.awt.*;

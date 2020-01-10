@@ -1,13 +1,13 @@
 package io.github.krevik.kathairis.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelSkyray;
 import io.github.krevik.kathairis.entity.EntitySkyray;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -43,17 +43,17 @@ public class RenderSkyray extends MobRenderer<EntitySkyray, ModelSkyray<EntitySk
 
     }
 
-    @Override
-    protected void applyRotations(EntitySkyray entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-    	RenderSystem.rotatef(-90, 0, 1, 0);
-    	if(entityLiving.getAdult()==0) {
-            RenderSystem.scaled(2, 2, 2);
-    	}else {
-            RenderSystem.scaled(8, 8, 8);
-    	}
 
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
+    @Override
+    public void func_225623_a_(EntitySkyray e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
+        RenderSystem.rotatef(-90, 0, 1, 0);
+        if(e.getAdult()==0) {
+            RenderSystem.scaled(2, 2, 2);
+        }else {
+            RenderSystem.scaled(8, 8, 8);
+        }
+
+        super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
     
 }

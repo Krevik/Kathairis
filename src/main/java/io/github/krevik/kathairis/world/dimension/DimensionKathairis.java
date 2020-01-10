@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.world.dimension;
 
 
-import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.client.render.world.RenderKathairisSky;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;

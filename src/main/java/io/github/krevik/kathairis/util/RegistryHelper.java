@@ -1,11 +1,7 @@
 package io.github.krevik.kathairis.util;
 
-import joptsimple.internal.Strings;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import javax.annotation.Nonnull;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 

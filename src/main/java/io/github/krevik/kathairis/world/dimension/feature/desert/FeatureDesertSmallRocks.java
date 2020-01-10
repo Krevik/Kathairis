@@ -5,8 +5,6 @@ import io.github.krevik.kathairis.block.BlockBrinePustule;
 import io.github.krevik.kathairis.block.BlockPurplePalm;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;

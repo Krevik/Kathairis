@@ -1,36 +1,11 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import com.google.common.collect.Lists;
-import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.FunctionHelper;
-import io.github.krevik.kathairis.util.ModReference;
-import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
-import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
-import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsConfig;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityClassification;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.PlainsBiome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
-import net.minecraft.world.gen.feature.structure.VillageStructure;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.GameData;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BiomeKatharianBiomeBase extends Biome {

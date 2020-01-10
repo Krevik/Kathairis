@@ -1,13 +1,13 @@
 package io.github.krevik.kathairis.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelGecko;
 import io.github.krevik.kathairis.entity.EntityGecko;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,9 +42,8 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
     }
 
     @Override
-    protected void applyRotations(EntityGecko entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-    	/*if(entityLiving.isChild()) {
+    public void func_225623_a_(EntityGecko entityLiving, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
+            	/*if(entityLiving.isChild()) {
         	GlStateManager.scale(0.5, 0.5, 0.5);
     	}else {
         	GlStateManager.scale(0.8, 0.8, 0.8);
@@ -61,8 +60,7 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
             }
             RenderSystem.translatef(0f, -0.3F, 0F);
         }
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-        
+        super.func_225623_a_(entityLiving,f1,f2,s,i1,i2);
     }
     
 }

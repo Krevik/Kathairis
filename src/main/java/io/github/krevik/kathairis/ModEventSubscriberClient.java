@@ -1,11 +1,7 @@
 package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.client.ModBlocksColorHandler;
-import io.github.krevik.kathairis.init.ModParticles;
-import io.github.krevik.kathairis.particle.TestParticle;
 import io.github.krevik.kathairis.util.RenderersRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

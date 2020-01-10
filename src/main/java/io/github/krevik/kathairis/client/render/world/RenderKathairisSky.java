@@ -18,7 +18,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IRenderHandler;
 
-import javax.vecmath.Vector4d;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -43,7 +42,7 @@ public class RenderKathairisSky implements IRenderHandler {
     @OnlyIn(Dist.CLIENT)
     public void render(int someInt, float partialTicks, ClientWorld world, Minecraft mc) {
         RenderSystem.disableTexture();
-        Vec3d vec3d = world.getSkyColor(mc.player.getPosition(), partialTicks);
+        Vec3d vec3d = world.func_228318_a_(mc.player.getPosition(), partialTicks);
         float f = (float)vec3d.x;
         float f1 = (float)vec3d.y;
         float f2 = (float)vec3d.z;
@@ -108,7 +107,7 @@ public class RenderKathairisSky implements IRenderHandler {
                         double d24 = 0.0D * d12 - d21 * d13;
                         double d25 = d24 * d9 - d22 * d10;
                         double d26 = d22 * d9 + d24 * d10;
-                        bufferbuilder.pos(d5 + d25, d6 + d23, d7 + d26).color((int) color.x, (int) color.y, (int) color.z, (int) color.w).endVertex();
+                        bufferbuilder.func_225582_a_(d5 + d25, d6 + d23, d7 + d26).func_227885_a_((int) color.getX(), (int) color.getY(), (int) color.getZ(), (int) color.getW()).endVertex();
 
                     }
                 }
@@ -200,7 +199,7 @@ public class RenderKathairisSky implements IRenderHandler {
                             double d24 = 0.0D * d12 - d21 * d13;
                             double d25 = d24 * d9 - d22 * d10;
                             double d26 = d22 * d9 + d24 * d10;
-                            bufferbuilder.pos(star.getPos().x + d5 + d25 - (star.getMotion().x * cc * 0.07), star.getPos().y + d6 + d23 - (star.getMotion().y * cc * 0.07), star.getPos().z + d7 + d26 - (star.getMotion().z * cc * 0.07)).color(168, 244, 244, 200 - cc).endVertex();
+                            bufferbuilder.func_225582_a_(star.getPos().x + d5 + d25 - (star.getMotion().x * cc * 0.07), star.getPos().y + d6 + d23 - (star.getMotion().y * cc * 0.07), star.getPos().z + d7 + d26 - (star.getMotion().z * cc * 0.07)).func_227885_a_(168, 244, 244, 200 - cc).endVertex();
                         }
                     }
                     if (helper.getRandom().nextInt(1500) == 0 || fallingStarsList.size() > 30) {
@@ -242,14 +241,14 @@ public class RenderKathairisSky implements IRenderHandler {
             f8 = f11;
 
             bufferbuilder.begin(6, DefaultVertexFormats.POSITION_COLOR);
-            bufferbuilder.pos(0.0D, 100.0D, 0.0D).color(f6, f7, f8, afloat[3]).endVertex();
+            bufferbuilder.func_225582_a_(0.0D, 100.0D, 0.0D).func_227885_a_(f6, f7, f8, afloat[3]).endVertex();
 
             for (int j2 = 0; j2 <= 16; ++j2)
             {
                 float f21 = (float)j2 * ((float)Math.PI * 2F) / 16.0F;
                 float f12 = MathHelper.sin(f21);
                 float f13 = MathHelper.cos(f21);
-                bufferbuilder.pos((double)(f12 * 120.0F), (double)(f13 * 120.0F), (double)(-f13 * 40.0F * afloat[3])).color(afloat[0], afloat[1], afloat[2], 0.0F).endVertex();
+                bufferbuilder.func_225582_a_((double)(f12 * 120.0F), (double)(f13 * 120.0F), (double)(-f13 * 40.0F * afloat[3])).func_227885_a_(afloat[0], afloat[1], afloat[2], 0.0F).endVertex();
             }
 
             tessellator.draw();
@@ -268,10 +267,10 @@ public class RenderKathairisSky implements IRenderHandler {
         //sun start
         mc.getTextureManager().bindTexture(SUN_TEXTURES);
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double)(-f17), 100.0D, (double)(-f17)).tex(0.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)f17, 100.0D, (double)(-f17)).tex(1.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)f17, 100.0D, (double)f17).tex(1.0D, 1.0D).endVertex();
-        bufferbuilder.pos((double)(-f17), 100.0D, (double)f17).tex(0.0D, 1.0D).endVertex();
+        bufferbuilder.func_225582_a_((double)(-f17), 100.0D, (double)(-f17)).func_225583_a_(0.0F, 0.0F).endVertex();
+        bufferbuilder.func_225582_a_((double)f17, 100.0D, (double)(-f17)).func_225583_a_(1.0F, 0.0F).endVertex();
+        bufferbuilder.func_225582_a_((double)f17, 100.0D, (double)f17).func_225583_a_(1.0F, 1.0F).endVertex();
+        bufferbuilder.func_225582_a_((double)(-f17), 100.0D, (double)f17).func_225583_a_(0.0F, 1.0F).endVertex();
         tessellator.draw();
         //sun end
 
@@ -286,15 +285,15 @@ public class RenderKathairisSky implements IRenderHandler {
         float f24 = (float)(i2 + 1) / 4.0F;
         float f14 = (float)(k2 + 1) / 2.0F;
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double)(-f17), -100.0D, (double)f17).tex((double)f24, (double)f14).endVertex();
-        bufferbuilder.pos((double)f17, -100.0D, (double)f17).tex((double)f22, (double)f14).endVertex();
-        bufferbuilder.pos((double)f17, -100.0D, (double)(-f17)).tex((double)f22, (double)f23).endVertex();
-        bufferbuilder.pos((double)(-f17), -100.0D, (double)(-f17)).tex((double)f24, (double)f23).endVertex();
+        bufferbuilder.func_225582_a_((double)(-f17), -100.0D, (double)f17).func_225583_a_(f24, f14).endVertex();
+        bufferbuilder.func_225582_a_((double)f17, -100.0D, (double)f17).func_225583_a_(f22, f14).endVertex();
+        bufferbuilder.func_225582_a_((double)f17, -100.0D, (double)(-f17)).func_225583_a_(f22, f23).endVertex();
+        bufferbuilder.func_225582_a_((double)(-f17), -100.0D, (double)(-f17)).func_225583_a_(f24, f23).endVertex();
         tessellator.draw();
         //moon end
 
         RenderSystem.disableTexture();
-        float f15 = world.getStarBrightness(partialTicks) * f16;
+        float f15 = world.func_228330_j_(partialTicks) * f16;
 
         if (f15 > 0.0F)
         {
@@ -309,7 +308,7 @@ public class RenderKathairisSky implements IRenderHandler {
         RenderSystem.popMatrix();
         RenderSystem.disableTexture();
         RenderSystem.color3f(0.0F, 0.0F, 0.0F);
-        double d3 = mc.player.getEyePosition(partialTicks).y - world.getHorizon();
+        double d3 = mc.player.getEyePosition(partialTicks).y - world.func_228331_m_();
 
         if (d3 < 0.0D)
         {
@@ -321,26 +320,26 @@ public class RenderKathairisSky implements IRenderHandler {
             float f19 = -((float)(d3 + 65.0D));
             float f20 = -1.0F;
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-            bufferbuilder.pos(-1.0D, (double)f19, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, (double)f19, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, -1.0D, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, -1.0D, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, -1.0D, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, -1.0D, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, (double)f19, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, (double)f19, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, -1.0D, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, -1.0D, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, (double)f19, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, (double)f19, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, (double)f19, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, (double)f19, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, -1.0D, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, -1.0D, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, -1.0D, -1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(-1.0D, -1.0D, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, -1.0D, 1.0D).color(0, 0, 0, 255).endVertex();
-            bufferbuilder.pos(1.0D, -1.0D, -1.0D).color(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, (double)f19, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, (double)f19, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, -1.0D, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, -1.0D, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, -1.0D, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, -1.0D, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, (double)f19, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, (double)f19, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, -1.0D, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, -1.0D, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, (double)f19, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, (double)f19, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, (double)f19, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, (double)f19, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, -1.0D, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, -1.0D, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, -1.0D, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(-1.0D, -1.0D, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, -1.0D, 1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
+            bufferbuilder.func_225582_a_(1.0D, -1.0D, -1.0D).func_227885_a_(0, 0, 0, 255).endVertex();
             tessellator.draw();
         }
 

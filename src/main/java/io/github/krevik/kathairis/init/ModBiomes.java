@@ -1,6 +1,7 @@
 package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.util.ModReference;
+import io.github.krevik.kathairis.util.RegistryHelper;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;

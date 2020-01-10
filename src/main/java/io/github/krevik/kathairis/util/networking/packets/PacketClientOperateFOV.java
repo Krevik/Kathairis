@@ -1,6 +1,5 @@
 package io.github.krevik.kathairis.util.networking.packets;
 
-import io.github.krevik.kathairis.client.gui.GuiOldMan;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;

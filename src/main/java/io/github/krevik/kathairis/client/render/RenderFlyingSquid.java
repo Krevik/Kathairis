@@ -1,13 +1,13 @@
 package io.github.krevik.kathairis.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelFlyingSquid;
 import io.github.krevik.kathairis.entity.EntityFlyingSquid;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,18 +42,16 @@ public class RenderFlyingSquid extends MobRenderer<EntityFlyingSquid,ModelFlying
     }
 
     @Override
-    protected void applyRotations(EntityFlyingSquid entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-    	RenderSystem.translatef(0, -1, 0);
-    	RenderSystem.rotatef(90, 0, 1, 0);
-    	if(entityLiving.isDiving()) {
-        	RenderSystem.rotatef(180, 0, 0, 1);
-    	}
-    	if(entityLiving.isChild()) {
-        	RenderSystem.scaled(0.6, 0.6, 0.6);
-    	}
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-        
+    public void func_225623_a_(EntityFlyingSquid e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
+        RenderSystem.translatef(0, -1, 0);
+        RenderSystem.rotatef(90, 0, 1, 0);
+        if(e.isDiving()) {
+            RenderSystem.rotatef(180, 0, 0, 1);
+        }
+        if(e.isChild()) {
+            RenderSystem.scaled(0.6, 0.6, 0.6);
+        }
+        super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
     
 }

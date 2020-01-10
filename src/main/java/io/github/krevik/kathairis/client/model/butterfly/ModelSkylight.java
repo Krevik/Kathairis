@@ -1,12 +1,9 @@
 package io.github.krevik.kathairis.client.model.butterfly;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;

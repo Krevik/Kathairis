@@ -3,32 +3,28 @@ package io.github.krevik.kathairis.world.dimension;
 
 import io.github.krevik.kathairis.block.BlockKathairisPortal;
 import io.github.krevik.kathairis.init.ModBlocks;
-import it.unimi.dsi.fastutil.longs.LongIterator;
-import it.unimi.dsi.fastutil.objects.Object2LongMap;
-import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.village.PointOfInterest;
 import net.minecraft.village.PointOfInterestManager;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraft.world.Teleporter;
-import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.util.Supplier;
 
 import javax.annotation.Nullable;
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class TeleporterKathairis extends Teleporter {

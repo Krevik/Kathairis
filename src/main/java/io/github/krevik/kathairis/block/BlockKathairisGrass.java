@@ -10,7 +10,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -19,8 +18,6 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.lighting.LightEngine;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -156,7 +153,7 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemG
 
 
     @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, BlockState state)
+    public void func_225535_a_(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)
     {
         BlockPos blockpos = pos.up();
 

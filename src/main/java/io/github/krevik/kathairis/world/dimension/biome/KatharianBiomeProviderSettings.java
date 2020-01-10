@@ -2,9 +2,7 @@ package io.github.krevik.kathairis.world.dimension.biome;
 
 import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.provider.IBiomeProviderSettings;
 import net.minecraft.world.biome.provider.OverworldBiomeProviderSettings;
-import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraft.world.storage.WorldInfo;
 
 public class KatharianBiomeProviderSettings extends OverworldBiomeProviderSettings {

@@ -1,22 +1,15 @@
 package io.github.krevik.kathairis.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelLivingFlower;
 import io.github.krevik.kathairis.entity.EntityLivingFlower;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import org.lwjgl.opengl.GL11;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivingFlower<EntityLivingFlower>>
@@ -44,19 +37,7 @@ public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivi
 
     }
 
-
-    @Override
-    protected void preRenderCallback(EntityLivingFlower entity, float partialTickTime)
-    {
-        super.preRenderCallback(entity,partialTickTime);
-        /*if(entity.getAnimationTime()>0){
-            GlStateManager.pushMatrix();
-            drawCircle((float)entity.posX,(float)entity.posZ,entity.getAnimationTime()/100,entity);
-            GlStateManager.popMatrix();
-        }*/
-    }
-
-    private void drawCircle(float x, float y, float radius,EntityLivingFlower entity)
+    /*private void drawCircle(float x, float y, float radius,EntityLivingFlower entity)
     {
         RenderSystem.disableLighting();
         Tessellator tessellator = Tessellator.getInstance();
@@ -73,13 +54,7 @@ public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivi
         }
         RenderSystem.enableLighting();
         tessellator.draw();
-    }
-
-    @Override
-    protected void applyRotations(EntityLivingFlower entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-    {
-        super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-    }
+    }*/
 
 
 }

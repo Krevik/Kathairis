@@ -5,9 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.DynamicOps;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.properties.StructureMode;
 import net.minecraft.util.IDynamicDeserializer;
@@ -20,14 +17,11 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.jigsaw.IJigsawDeserializer;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
-import net.minecraft.world.gen.feature.jigsaw.SingleJigsawPiece;
-import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
-import net.minecraft.world.gen.feature.template.JigsawReplacementStructureProcessor;
-import net.minecraft.world.gen.feature.template.NopProcessor;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
-import net.minecraft.world.gen.feature.template.Template;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.feature.template.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class SingleJigsawPieceNoAirIgnorance extends JigsawPiece {
     protected final ResourceLocation location;

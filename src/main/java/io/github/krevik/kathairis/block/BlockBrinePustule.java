@@ -21,10 +21,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -193,12 +190,7 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable,
     }
 
     @Override
-    public void func_225535_a_(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {
-
-    }
-
-    @Override
-    public void grow(World world, Random random, BlockPos blockPos, BlockState iBlockState) {
+    public void func_225535_a_(ServerWorld world, Random random, BlockPos blockPos, BlockState iBlockState) {
         world.setBlockState(blockPos,iBlockState.with(AGE,1));
     }
 }

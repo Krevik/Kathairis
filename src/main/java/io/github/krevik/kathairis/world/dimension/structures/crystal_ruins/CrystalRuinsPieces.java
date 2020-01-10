@@ -1,14 +1,9 @@
 package io.github.krevik.kathairis.world.dimension.structures.crystal_ruins;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import io.github.krevik.kathairis.init.ModBlocks;
-import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.structures.utils.SingleJigsawPieceNoAirIgnorance;
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -16,9 +11,14 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.jigsaw.*;
-import net.minecraft.world.gen.feature.structure.*;
-import net.minecraft.world.gen.feature.template.*;
+import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
+import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
+import net.minecraft.world.gen.feature.structure.StructurePiece;
+import net.minecraft.world.gen.feature.template.TemplateManager;
+
+import java.util.List;
 
 public class CrystalRuinsPieces {
 

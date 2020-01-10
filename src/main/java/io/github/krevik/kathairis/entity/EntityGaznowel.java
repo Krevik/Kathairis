@@ -24,11 +24,11 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import javax.vecmath.Vector3d;
 import java.util.EnumSet;
 
 public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IMob {
@@ -134,9 +134,9 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
 
     BlockPos findPositionNearPlayer(EntityGaznowel gaznowel){
         BlockPos result;
-        double getPosition().getX()=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getX()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getX()+5+gaznowel.getRNG().nextInt(6);
-        double getPosition().getY()=gaznowel.getAttackTarget().getPosition().getY()+gaznowel.getRNG().nextInt(8);
-        double getPosition().getZ()=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getZ()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getZ()+5+gaznowel.getRNG().nextInt(6);
+        double posX=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getX()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getX()+5+gaznowel.getRNG().nextInt(6);
+        double posY=gaznowel.getAttackTarget().getPosition().getY()+gaznowel.getRNG().nextInt(8);
+        double posZ=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getZ()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getZ()+5+gaznowel.getRNG().nextInt(6);
         result=new BlockPos(getPosition().getX(),getPosition().getY(),getPosition().getZ());
         if(!(gaznowel.world.isAirBlock(result)&&gaznowel.world.isAirBlock(result.up()))){
             return findPositionNearPlayer(gaznowel);
@@ -147,9 +147,9 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
 
     BlockPos findSomePosition(EntityGaznowel gaznowel){
         BlockPos result;
-        double getPosition().getX()=gaznowel.getPosition().getX()-5+gaznowel.getRNG().nextInt(10);
-        double getPosition().getZ()=gaznowel.getPosition().getZ()-5+gaznowel.getRNG().nextInt(10);
-        double getPosition().getY()=gaznowel.getPosition().getY()-5+gaznowel.getRNG().nextInt(10);
+        double posX=gaznowel.getPosition().getX()-5+gaznowel.getRNG().nextInt(10);
+        double posZ=gaznowel.getPosition().getZ()-5+gaznowel.getRNG().nextInt(10);
+        double posY=gaznowel.getPosition().getY()-5+gaznowel.getRNG().nextInt(10);
         result=new BlockPos(getPosition().getX(),getPosition().getY(),getPosition().getZ());
         if(!(gaznowel.world.isAirBlock(result)&&gaznowel.world.isAirBlock(result.up()))){
             return findSomePosition(gaznowel);
@@ -246,7 +246,7 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
 
         public GaznowelMoveHelper(EntityGaznowel ghast)
         {
-            super(ghast);
+            super(ghast,10,true);
             this.parentEntity = ghast;
         }
 
@@ -255,9 +255,9 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
         {
             if (this.action == Action.MOVE_TO)
             {
-                double d0 = this.getPosition().getX() - this.parentEntity.getPosition().getX();
-                double d1 = this.getPosition().getY() - this.parentEntity.getPosition().getY();
-                double d2 = this.getPosition().getZ() - this.parentEntity.getPosition().getZ();
+                double d0 = this.parentEntity.getPosition().getX() - this.parentEntity.getPosition().getX();
+                double d1 = this.parentEntity.getPosition().getY() - this.parentEntity.getPosition().getY();
+                double d2 = this.parentEntity.getPosition().getZ() - this.parentEntity.getPosition().getZ();
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
                 if (this.courseChangeCooldown-- <= 0)
@@ -265,7 +265,7 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
                     d3 = (double) MathHelper.sqrt(d3);
 
-                    if (this.isNotColliding(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), d3))
+                    if (this.isNotColliding(this.parentEntity.getPosition().getX(), this.parentEntity.getPosition().getY(), this.parentEntity.getPosition().getZ(), d3))
                     {
                         parentEntity.setMotion(new Vec3d(d0 / d3 * 0.1D,d1 / d3 * 0.1D,d2 / d3 * 0.1D));
                     }
@@ -288,7 +288,7 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
             {
                 axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 
-                if (!this.parentEntity.world.isCollisionBoxesEmpty(this.parentEntity, axisalignedbb))
+                if (!this.parentEntity.world.checkNoEntityCollision(this.parentEntity, VoxelShapes.create(axisalignedbb)))
                 {
                     return false;
                 }
@@ -375,10 +375,10 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
 
         BlockPos findPositionNearPlayer(EntityGaznowel gaznowel){
             BlockPos result;
-            double getPosition().getX()=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getX()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getX()+5+gaznowel.getRNG().nextInt(6);
-            double getPosition().getY()=gaznowel.getAttackTarget().getPosition().getY()+gaznowel.getRNG().nextInt(8);
-            double getPosition().getZ()=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getZ()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getZ()+5+gaznowel.getRNG().nextInt(6);
-            result=new BlockPos(getPosition().getX(),getPosition().getY(),getPosition().getZ());
+            double posX=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getX()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getX()+5+gaznowel.getRNG().nextInt(6);
+            double posY=gaznowel.getAttackTarget().getPosition().getY()+gaznowel.getRNG().nextInt(8);
+            double posZ=gaznowel.getRNG().nextInt(2)==0?gaznowel.getAttackTarget().getPosition().getZ()-5-gaznowel.getRNG().nextInt(6):gaznowel.getAttackTarget().getPosition().getZ()+5+gaznowel.getRNG().nextInt(6);
+            result=new BlockPos(posX,posY,posZ);
             if(!(gaznowel.world.isAirBlock(result)&&gaznowel.world.isAirBlock(result.up()))){
                 return findPositionNearPlayer(gaznowel);
             }else{
@@ -417,10 +417,10 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
 
         BlockPos findSomePosition(EntityGaznowel gaznowel){
             BlockPos result;
-            double getPosition().getX()=gaznowel.getPosition().getX()-5+gaznowel.getRNG().nextInt(10);
-            double getPosition().getZ()=gaznowel.getPosition().getZ()-5+gaznowel.getRNG().nextInt(10);
-            double getPosition().getY()=gaznowel.getPosition().getY()-5+gaznowel.getRNG().nextInt(10);
-            result=new BlockPos(getPosition().getX(),getPosition().getY(),getPosition().getZ());
+            double posX=gaznowel.getPosition().getX()-5+gaznowel.getRNG().nextInt(10);
+            double posZ=gaznowel.getPosition().getZ()-5+gaznowel.getRNG().nextInt(10);
+            double posY=gaznowel.getPosition().getY()-5+gaznowel.getRNG().nextInt(10);
+            result=new BlockPos(posX,posY,posZ);
             if(!(gaznowel.world.isAirBlock(result)&&gaznowel.world.isAirBlock(result.up()))){
                 return findSomePosition(gaznowel);
             }else{

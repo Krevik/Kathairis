@@ -243,9 +243,9 @@ public class EntityPhasm extends FlyingEntity implements IMob {
         {
             if (this.action == Action.MOVE_TO)
             {
-                double d0 = this.getPosition().getX() - this.parentEntity.getPosition().getX();
-                double d1 = this.getPosition().getY() - this.parentEntity.getPosition().getY();
-                double d2 = this.getPosition().getZ() - this.parentEntity.getPosition().getZ();
+                double d0 = this.parentEntity.getPosition().getX() - this.parentEntity.getPosition().getX();
+                double d1 = this.parentEntity.getPosition().getY() - this.parentEntity.getPosition().getY();
+                double d2 = this.parentEntity.getPosition().getZ() - this.parentEntity.getPosition().getZ();
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
                 if (this.courseChangeCooldown-- <= 0)
@@ -253,7 +253,7 @@ public class EntityPhasm extends FlyingEntity implements IMob {
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
                     d3 = (double) MathHelper.sqrt(d3);
 
-                    if (this.isNotColliding(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), d3))
+                    if (this.isNotColliding(this.parentEntity.getPosition().getX(), this.parentEntity.getPosition().getY(), this.parentEntity.getPosition().getZ(), d3))
                     {
                         double mX = parentEntity.getMotion().getX() + d0 / d3 * 0.1D;
                         double mY = parentEntity.getMotion().getY() + d1 / d3 * 0.1D;
@@ -381,12 +381,16 @@ public class EntityPhasm extends FlyingEntity implements IMob {
 
         BlockPos findSomePosition(EntityPhasm gaznowel){
             BlockPos result;
-            double getPosition().getX()=gaznowel.getPosition().getX()-5+gaznowel.getRNG().nextInt(10);
-            double getPosition().getZ()=gaznowel.getPosition().getZ()-5+gaznowel.getRNG().nextInt(10);
-            double getPosition().getY()=gaznowel.getPosition().getY()-5+gaznowel.getRNG().nextInt(10);
-            if(getPosition().getY()>255){ getPosition().getY()=-20;}
-            if(getPosition().getY()<0) {getPosition().getY()+=20;}
-            result=new BlockPos(getPosition().getX(),getPosition().getY(),getPosition().getZ());
+            double posX=gaznowel.getPosition().getX()-5+gaznowel.getRNG().nextInt(10);
+            double posZ=gaznowel.getPosition().getZ()-5+gaznowel.getRNG().nextInt(10);
+            double posY=gaznowel.getPosition().getY()-5+gaznowel.getRNG().nextInt(10);
+            if(gaznowel.getPosition().getY()>255){
+                posY=-20;
+            }
+            if(gaznowel.getPosition().getY()<0) {
+               posY+=20;
+            }
+            result=new BlockPos(posX,posY,posZ);
             if(!(gaznowel.world.isAirBlock(result)&&gaznowel.world.isAirBlock(result.up()))){
                 return findSomePosition(gaznowel);
             }else{

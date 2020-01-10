@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.world.dimension;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 
 public class PlayerInPortal {
     private PlayerEntity player;
