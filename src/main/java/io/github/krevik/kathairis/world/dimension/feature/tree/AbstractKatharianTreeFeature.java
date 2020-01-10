@@ -3,6 +3,7 @@ package io.github.krevik.kathairis.world.dimension.feature.tree;
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
+import io.github.krevik.kathairis.world.dimension.feature.config.KatharianTreeFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
@@ -12,10 +13,11 @@ import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.function.Function;
 
-public abstract class AbstractKatharianTreeFeature<T extends BaseKatharianTreeFeatureConfig> extends AbstractTreeFeature<BaseKatharianTreeFeatureConfig> {
+public abstract class AbstractKatharianTreeFeature<T extends KatharianTreeFeatureConfig> extends AbstractTreeFeature<KatharianTreeFeatureConfig> {
 
     public AbstractKatharianTreeFeature(Function<Dynamic<?>, ? extends T> p_i225797_1_) {
         super(p_i225797_1_);

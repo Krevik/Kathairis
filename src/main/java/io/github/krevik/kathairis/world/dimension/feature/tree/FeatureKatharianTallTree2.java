@@ -3,6 +3,7 @@ package io.github.krevik.kathairis.world.dimension.feature.tree;
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
+import io.github.krevik.kathairis.world.dimension.feature.config.KatharianTreeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -21,7 +22,7 @@ public class FeatureKatharianTallTree2 extends AbstractKatharianTreeFeature {
     private static final BlockState LOG = ModBlocks.MYSTIC_LOG.getDefaultState();
     private static final BlockState LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
 
-    public FeatureKatharianTallTree2(Function<Dynamic<?>, ? extends BaseKatharianTreeFeatureConfig> p_i49920_1_) {
+    public FeatureKatharianTallTree2(Function<Dynamic<?>, ? extends KatharianTreeFeatureConfig> p_i49920_1_) {
         super(p_i49920_1_);
     }
 

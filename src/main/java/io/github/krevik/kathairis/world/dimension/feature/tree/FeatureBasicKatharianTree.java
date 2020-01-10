@@ -4,6 +4,7 @@ import com.mojang.datafixers.Dynamic;
 import com.sun.xml.internal.ws.binding.FeatureListUtil;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
+import io.github.krevik.kathairis.world.dimension.feature.config.KatharianTreeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -24,7 +25,7 @@ public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
     private static final BlockState LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
     private final boolean useExtraRandomHeight;
 
-    public FeatureBasicKatharianTree(Function<Dynamic<?>, ? extends BaseKatharianTreeFeatureConfig> p_i49920_1_) {
+    public FeatureBasicKatharianTree(Function<Dynamic<?>, ? extends KatharianTreeFeatureConfig> p_i49920_1_) {
         super(p_i49920_1_);
         this.useExtraRandomHeight = true;
     }

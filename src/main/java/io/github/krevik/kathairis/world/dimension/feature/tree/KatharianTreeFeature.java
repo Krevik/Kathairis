@@ -3,25 +3,27 @@ package io.github.krevik.kathairis.world.dimension.feature.tree;
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.world.dimension.feature.config.BaseKatharianTreeFeatureConfig;
+import io.github.krevik.kathairis.world.dimension.feature.config.KatharianTreeFeatureConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CocoaBlock;
 import net.minecraft.block.VineBlock;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class KatharianTreeFeature extends AbstractTreeFeature<BaseKatharianTreeFeatureConfig> {
+public class KatharianTreeFeature extends AbstractTreeFeature<KatharianTreeFeatureConfig> {
     private static final BlockState DEFAULT_TRUNK = ModBlocks.MYSTIC_LOG.getDefaultState();
     private static final BlockState DEFAULT_LEAF = ModBlocks.MYSTIC_LEAVES.getDefaultState();
     protected final int minTreeHeight;
@@ -29,11 +31,11 @@ public class KatharianTreeFeature extends AbstractTreeFeature<BaseKatharianTreeF
     private final BlockState trunk;
     private final BlockState leaf;
 
-    public KatharianTreeFeature(Function<Dynamic<?>, ? extends BaseKatharianTreeFeatureConfig> configFactoryIn) {
+    public KatharianTreeFeature(Function<Dynamic<?>, ? extends KatharianTreeFeatureConfig> configFactoryIn) {
         this(configFactoryIn, true, 4, DEFAULT_TRUNK, DEFAULT_LEAF, false);
     }
 
-    public KatharianTreeFeature(Function<Dynamic<?>, ? extends BaseKatharianTreeFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace, int minTreeHeightIn, BlockState trunkState, BlockState leafState, boolean vinesGrowIn) {
+    public KatharianTreeFeature(Function<Dynamic<?>, ? extends KatharianTreeFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace, int minTreeHeightIn, BlockState trunkState, BlockState leafState, boolean vinesGrowIn) {
         super(configFactoryIn);
         this.minTreeHeight = minTreeHeightIn;
         this.trunk = trunkState;
@@ -61,11 +63,16 @@ public class KatharianTreeFeature extends AbstractTreeFeature<BaseKatharianTreeF
             this.addVine(worldIn, blockpos, prop);
             blockpos = blockpos.down();
         }
+    }
 
+    public static <T> KatharianTreeFeature func_227338_a_(Dynamic<T> p_227338_0_) {
+        BaseTreeFeatureConfig basetreefeatureconfig = BaseTreeFeatureConfig.func_227376_b_(p_227338_0_);
+        FoliagePlacerType<?> foliageplacertype = Registry.field_229389_v_.getOrDefault(new ResourceLocation(p_227338_0_.get("foliage_placer").get("type").asString().orElseThrow(RuntimeException::new)));
+        return new KatharianTreeFeature(basetreefeatureconfig.field_227368_m_, basetreefeatureconfig.field_227369_n_, foliageplacertype.func_227391_a_(p_227338_0_.get("foliage_placer").orElseEmptyMap()), basetreefeatureconfig.field_227370_o_, basetreefeatureconfig.field_227371_p_, p_227338_0_.get("height_rand_a").asInt(0), p_227338_0_.get("height_rand_b").asInt(0), p_227338_0_.get("trunk_height").asInt(-1), p_227338_0_.get("trunk_height_random").asInt(0), p_227338_0_.get("trunk_top_offset").asInt(0), p_227338_0_.get("trunk_top_offset_random").asInt(0), p_227338_0_.get("foliage_height").asInt(-1), p_227338_0_.get("foliage_height_random").asInt(0), p_227338_0_.get("max_water_depth").asInt(0), p_227338_0_.get("ignore_vines").asBoolean(false));
     }
 
     @Override
-    protected boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> leavesSet, Set<BlockPos> trunksSet, MutableBoundingBox p_225557_6_, BaseKatharianTreeFeatureConfig config) {
+    protected boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> leavesSet, Set<BlockPos> trunksSet, MutableBoundingBox p_225557_6_, KatharianTreeFeatureConfig config) {
         int i = this.getHeight(rand);
         boolean flag = true;
         if (position.getY() >= 1 && position.getY() + i + 1 <= worldIn.getMaxHeight()) {

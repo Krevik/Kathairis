@@ -8,18 +8,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.feature.BushConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 import java.util.function.Function;
 
-public class FeatureForestCandleBush extends Feature<BushConfig> {
-    public FeatureForestCandleBush(Function<Dynamic<?>, ? extends BushConfig> p_i49878_1_) {
+public class FeatureForestCandleBush extends Feature<NoFeatureConfig> {
+    public FeatureForestCandleBush(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49878_1_) {
         super(p_i49878_1_);
     }
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BushConfig config) {
+    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
         int i = 0;
         BlockState iblockstate = ModBlocks.FOREST_CANDLE.getDefaultState();
         BlockState state2 = ModBlocks.FOREST_CANDLE.getDefaultState().with(BlockForestCandle.VARIANT,BlockForestCandle.EnumType.UPPER);
