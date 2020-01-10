@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
@@ -20,9 +21,7 @@ public class BlockSnowdropCyprepedium extends BlockKathairisPlant {
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
-
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		if (!worldIn.isRemote) {
 			for (int c = 0; c <= 1 + rand.nextInt(5); c++) {
 				BlockPos tmp = new BlockPos(pos.getX() - 6 + rand.nextInt(12), pos.getY() - 3 + rand.nextInt(6), pos.getZ() - 6 + rand.nextInt(12));

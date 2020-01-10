@@ -18,6 +18,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.lighting.LightEngine;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -49,11 +50,6 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemG
 		return stateIn.with(SNOWY, shouldBeSnowed(stateIn)).with(FLOWER, stateIn.get(FLOWER));
 	}
 
-	@Override
-	public boolean isSolid(BlockState p_200124_1_) {
-		return true;
-	}
-
 	private static boolean func_220257_b(BlockState p_220257_0_, IWorldReader p_220257_1_, BlockPos p_220257_2_) {
 		BlockPos blockpos = p_220257_2_.up();
 		BlockState blockstate = p_220257_1_.getBlockState(blockpos);
@@ -71,7 +67,8 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemG
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+		super.func_225534_a_(state, worldIn, pos, random);
 		if (!worldIn.isRemote) {
 			if (!worldIn.isAreaLoaded(pos, 3)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
 			if (!func_220257_b(state, worldIn, pos)) {
@@ -122,11 +119,6 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemG
         }*/
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
 
     /*private IBlockState getRandomGiftState(Random random){
         int k=random.nextInt(3);
@@ -160,6 +152,8 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemG
 		}
 		return state.get(SNOWY);
 	}
+
+
 
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, BlockState state)

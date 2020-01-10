@@ -18,6 +18,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -49,9 +50,9 @@ public class BlockButterflyFlower extends BlockKathairisPlant implements IItemGr
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
-		if (rand.nextInt(10) == 0) {
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+		super.func_225534_a_(state, worldIn, pos, random);
+		if (random.nextInt(10) == 0) {
 			if (!worldIn.isDaytime()) {
 				worldIn.setBlockState(pos, BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH));
 			}

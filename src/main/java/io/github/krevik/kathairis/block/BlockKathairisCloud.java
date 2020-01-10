@@ -61,10 +61,6 @@ public class BlockKathairisCloud extends Block implements IItemGroupProvider {
 		return 0;
 	}
 
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.TRANSLUCENT;
-	}
 
 	@Override
 	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_220051_6_) {

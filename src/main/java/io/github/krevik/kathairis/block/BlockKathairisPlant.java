@@ -8,7 +8,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -72,14 +71,6 @@ public class BlockKathairisPlant extends Block implements net.minecraftforge.com
 		if (!isValidPosition(state, world, pos)) {
 			world.removeBlock(pos,isMoving);
 		}
-	}
-
-
-	@Nonnull
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override

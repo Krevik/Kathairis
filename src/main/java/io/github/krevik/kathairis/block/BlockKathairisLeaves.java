@@ -6,11 +6,11 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
@@ -21,6 +21,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.*;
  */
 public class BlockKathairisLeaves extends LeavesBlock implements IItemGroupProvider {
 
+	boolean renderTranslucent;
 	public BlockKathairisLeaves() {
 		super(Properties.create(Material.PLANTS).hardnessAndResistance(0.2f).sound(SoundType.PLANT).tickRandomly());
 		this.setDefaultState(this.stateContainer.getBaseState().with(DISTANCE, Integer.valueOf(7)).with(PERSISTENT, Boolean.valueOf(false)));
@@ -36,7 +37,7 @@ public class BlockKathairisLeaves extends LeavesBlock implements IItemGroupProvi
 	private static BlockState updateDistance(BlockState p_208493_0_, IWorld p_208493_1_, BlockPos p_208493_2_) {
 		int i = 7;
 
-		try (BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain()) {
+		try (BlockPos.PooledMutable blockpos$pooledmutableblockpos = BlockPos.PooledMutable.retain()) {
 			for (Direction enumfacing : Direction.values()) {
 				blockpos$pooledmutableblockpos.setPos(p_208493_2_).move(enumfacing);
 				i = Math.min(i, getDistanceNew(p_208493_1_.getBlockState(blockpos$pooledmutableblockpos)) + 1);
@@ -73,16 +74,13 @@ public class BlockKathairisLeaves extends LeavesBlock implements IItemGroupProvi
 	}
 
 	@Override
-	public void randomTick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+		super.func_225534_a_(state, worldIn, pos, random);
 		if (!state.get(PERSISTENT) && state.get(DISTANCE) == 7) {
 			worldIn.removeBlock(pos,false);
 		}
-
-	}
-
-	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
 		worldIn.setBlockState(pos, updateDistance(state, worldIn, pos), 3);
+
 	}
 
 	@Override
@@ -95,10 +93,6 @@ public class BlockKathairisLeaves extends LeavesBlock implements IItemGroupProvi
 		return stateIn;
 	}
 
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {

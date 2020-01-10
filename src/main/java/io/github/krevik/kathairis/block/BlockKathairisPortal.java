@@ -29,6 +29,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -163,32 +164,30 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
-		super.tick(state, worldIn, pos, rand);
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		super.func_225534_a_(state,worldIn,pos,rand);
+		if(worldIn.dimension.getType().getId() == DimensionType.byName(ModReference.KATHAIRIS).getId()) {
+			List<EntityStrangeWanderer> e = worldIn.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX()  + 15, pos.getY() + 15, pos.getZ() + 15));
+			if(e.size()==0) {
+				if(!worldIn.isRemote) {
+					int X=pos.getX()+rand.nextInt(4)-rand.nextInt(4);
+					int Y=pos.getY();
+					int Z = pos.getZ()+rand.nextInt(4)-rand.nextInt(4);
+					if(worldIn.isAirBlock(new BlockPos(X,Y,Z))&&worldIn.isAirBlock(new BlockPos(X,Y,Z).up())) {
+						EntityStrangeWanderer esw = new EntityStrangeWanderer(worldIn);
+						esw.setPosition(X,Y,Z);
+						worldIn.addEntity(esw);
+					}
 
-        if(worldIn.dimension.getType().getId() == DimensionType.byName(ModReference.KATHAIRIS).getId()) {
-            List<EntityStrangeWanderer> e = worldIn.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX()  + 15, pos.getY() + 15, pos.getZ() + 15));
-            if(e.size()==0) {
-                if(!worldIn.isRemote) {
-                    int X=pos.getX()+rand.nextInt(4)-rand.nextInt(4);
-                    int Y=pos.getY();
-                    int Z = pos.getZ()+rand.nextInt(4)-rand.nextInt(4);
-                    if(worldIn.isAirBlock(new BlockPos(X,Y,Z))&&worldIn.isAirBlock(new BlockPos(X,Y,Z).up())) {
-                        EntityStrangeWanderer esw = new EntityStrangeWanderer(worldIn);
-                        esw.setPosition(X,Y,Z);
-                        worldIn.addEntity(esw);
-                    }
+				}
+			}
+		}
 
-                }
-            }
-        }
-
-        if(Kathairis.SHOULD_BLOCKS_SPREAD_AROUND_PORTAL) {
-            for (int x = 0; x < 1 + rand.nextInt(4); x++) {
-                updateBlocksAroundPortal(worldIn, pos, state, rand);
-            }
-        }
-
+		if(Kathairis.SHOULD_BLOCKS_SPREAD_AROUND_PORTAL) {
+			for (int x = 0; x < 1 + rand.nextInt(4); x++) {
+				updateBlocksAroundPortal(worldIn, pos, state, rand);
+			}
+		}
 	}
 
 	@Override
@@ -207,11 +206,6 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 		Direction.Axis enumfacing$axis1 = stateIn.get(AXIS);
 		boolean flag = enumfacing$axis1 != enumfacing$axis && enumfacing$axis.isHorizontal();
 		return !flag && facingState.getBlock() != this && !(new Size(worldIn, currentPos, enumfacing$axis1)).func_208508_f() ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-	}
-
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
@@ -289,18 +283,21 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 		builder.add(AXIS);
 	}
 
-	@Override
-	public BlockPattern.PatternHelper createPatternHelper(IWorld worldIn, BlockPos p_181089_2_) {
+
+
+	//@Override
+	//TODO?
+	public static BlockPattern.PatternHelper createPatternHelper(IWorld p_181089_0_, BlockPos worldIn) {
 		Direction.Axis direction$axis = Direction.Axis.Z;
-		Size netherportalblock$size = new Size(worldIn, p_181089_2_, Direction.Axis.X);
-		LoadingCache<BlockPos, CachedBlockInfo> loadingcache = BlockPattern.createLoadingCache(worldIn, true);
+		BlockKathairisPortal.Size netherportalblock$size = new BlockKathairisPortal.Size(p_181089_0_, worldIn, Direction.Axis.X);
+		LoadingCache<BlockPos, CachedBlockInfo> loadingcache = BlockPattern.createLoadingCache(p_181089_0_, true);
 		if (!netherportalblock$size.isValid()) {
 			direction$axis = Direction.Axis.X;
-			netherportalblock$size = new Size(worldIn, p_181089_2_, Direction.Axis.Z);
+			netherportalblock$size = new BlockKathairisPortal.Size(p_181089_0_, worldIn, Direction.Axis.Z);
 		}
 
 		if (!netherportalblock$size.isValid()) {
-			return new BlockPattern.PatternHelper(p_181089_2_, Direction.NORTH, Direction.UP, loadingcache, 1, 1, 1);
+			return new BlockPattern.PatternHelper(worldIn, Direction.NORTH, Direction.UP, loadingcache, 1, 1, 1);
 		} else {
 			int[] aint = new int[Direction.AxisDirection.values().length];
 			Direction direction = netherportalblock$size.rightDir.rotateYCCW();

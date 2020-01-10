@@ -18,11 +18,11 @@ import net.minecraft.item.Items;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -58,13 +58,6 @@ public class BlockJadeVines extends BlockKathairisPlant implements IItemGroupPro
 				worldIn.destroyBlock(pos, true);
 			}
 		}
-	}
-
-	@Nonnull
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -146,7 +139,8 @@ public class BlockJadeVines extends BlockKathairisPlant implements IItemGroupPro
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		super.func_225534_a_(state, worldIn, pos, rand);
 		if (!worldIn.isRemote) {
 			handleVariantsAndCanBlockBeHere(worldIn, pos, state);
 			if (rand.nextInt(20) == 0) {

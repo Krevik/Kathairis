@@ -13,7 +13,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Hand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +20,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -47,8 +47,8 @@ public class BlockGooseberry extends Block implements IItemGroupProvider {
 	}
 
 	@Override
-	public void tick(BlockState state, World world, BlockPos pos, Random random) {
-		super.tick(state, world, pos, random);
+	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		super.func_225534_a_(state, world, pos, random);
 		if (!world.isRemote) {
 			if (random.nextInt(50) == 0) {
 				world.setBlockState(pos, GOOSEBERRY_BUSH.getDefaultState().with(VARIANT, EnumType.WITH));
@@ -56,15 +56,9 @@ public class BlockGooseberry extends Block implements IItemGroupProvider {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
-
 	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canBlockSeeSky(pos)) && isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos.down());
+		return (worldIn.getNeighborAwareLightSubtracted(pos, 0) >= 8 || worldIn.canBlockSeeSky(pos)) && isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos.down());
 	}
 
 	@Override

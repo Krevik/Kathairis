@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.block;
 
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModItemGroups;
 import io.github.krevik.kathairis.util.IItemGroupProvider;
 import net.minecraft.block.Block;
@@ -22,9 +23,11 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IEnviromentBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -69,7 +72,7 @@ public class BlockLayeredSand extends Block implements IItemGroupProvider {
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isRemote) {
 			giveSandToNeighboursNew(state, worldIn, pos);
 		}
@@ -90,7 +93,6 @@ public class BlockLayeredSand extends Block implements IItemGroupProvider {
             }
         }
         */
-
 	}
 
 	@Override
@@ -236,13 +238,14 @@ public class BlockLayeredSand extends Block implements IItemGroupProvider {
 	}
 
 
+	@OnlyIn(Dist.CLIENT)
 	@Override
-	public boolean doesSideBlockRendering(BlockState state, IEnviromentBlockReader world, BlockPos pos, Direction face) {
+	public static boolean shouldSideBeRendered(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
 		if (face == Direction.UP) {
 			return true;
 		} else {
 			BlockState iblockstate = world.getBlockState(pos.offset(face));
-			return (iblockstate.getBlock() != this || iblockstate.get(LAYERS).intValue() < state.get(LAYERS).intValue()) && shouldSideBeRendered(state, world, pos, face);
+			return (iblockstate.getBlock() != ModBlocks.LAYERED_SAND || iblockstate.get(LAYERS).intValue() < state.get(LAYERS).intValue()) && shouldSideBeRendered(state, world, pos, face);
 		}
 	}
 

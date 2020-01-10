@@ -13,7 +13,6 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -21,6 +20,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -57,12 +57,12 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable,
     }
 
     @Override
-    public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
-        handleFacing(state, worldIn, pos);
+    public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        super.func_225534_a_(state, worldIn, pos, random);
         if (!this.isStoneAround(worldIn, pos)) {
             this.dropBlock(worldIn, pos, state);
         }
-        if(rand.nextInt(100)==0) {
+        if(random.nextInt(100)==0) {
             if (state.get(AGE) < 1) {
                 worldIn.setBlockState(pos,state.with(AGE,state.get(AGE)+1));
             }
@@ -158,13 +158,6 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable,
         }
     }
 
-    @Nonnull
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
-
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
         return isStoneAround(worldIn, pos);
@@ -197,6 +190,11 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable,
     @Override
     public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, BlockState iBlockState) {
         return iBlockState.get(AGE)<1;
+    }
+
+    @Override
+    public void func_225535_a_(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {
+
     }
 
     @Override

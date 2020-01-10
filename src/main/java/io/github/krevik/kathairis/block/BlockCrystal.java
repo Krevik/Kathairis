@@ -74,11 +74,6 @@ public class BlockCrystal extends Block implements IItemGroupProvider {
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-
-	@Override
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		Direction facing = state.get(FACING);
 		if (facing == Direction.UP) return isValidGround(worldIn.getBlockState(pos.down()));

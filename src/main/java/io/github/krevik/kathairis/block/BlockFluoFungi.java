@@ -10,12 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -42,7 +42,8 @@ public class BlockFluoFungi extends BlockKathairisPlant implements IItemGroupPro
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random rand) {
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+		super.func_225534_a_(state, worldIn, pos, random);
 		handleFacing(state, worldIn, pos);
 		if (!this.isLogAround(worldIn, pos)) {
 			this.dropBlock(worldIn, pos, state);
@@ -105,13 +106,6 @@ public class BlockFluoFungi extends BlockKathairisPlant implements IItemGroupPro
 		if (!this.isLogAround(worldIn, pos)) {
 			this.dropBlock(worldIn, pos, state);
 		}
-	}
-
-	@Nonnull
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
