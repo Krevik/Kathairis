@@ -1,10 +1,12 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityPhasm;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelPhasm<T extends LivingEntity> extends EntityModel<EntityPhasm> {
+public class ModelPhasm<T extends LivingEntity> extends AgeableModel<EntityPhasm> {
     public ModelRenderer Head;
     public ModelRenderer Body1;
     public ModelRenderer InnerHead;
@@ -65,9 +67,25 @@ public class ModelPhasm<T extends LivingEntity> extends EntityModel<EntityPhasm>
     }
 
     @Override
-    public void render(EntityPhasm entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.Body1.render(f5);
-        this.Head.render(f5);
+    public void func_225597_a_(EntityPhasm entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4) {
+        setRotateAngle(LeftArm,0+ MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(23.48f)- MathHelper.sin(f2*0.05f)*0.1f);
+        setRotateAngle(RightArm,0- MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(-18.26f)+ MathHelper.sin(f2*0.05f)*0.1f);
+        setRotateAngle(Body2,helper.degToRad(21)+ MathHelper.sin(f2*0.05f)*0.15f,0,0);
+        if(entity.getIsSwingingArms()){
+            setRotateAngle(LeftArm,helper.degToRad(-86)+ MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(23.48f)- MathHelper.sin(f2*0.05f)*0.1f);
+            setRotateAngle(RightArm,helper.degToRad(-86)- MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(-18.26f)+ MathHelper.sin(f2*0.05f)*0.1f);
+
+        }
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(Body1,Head);
     }
 
     /**
@@ -80,17 +98,4 @@ public class ModelPhasm<T extends LivingEntity> extends EntityModel<EntityPhasm>
     }
 
     FunctionHelper helper = Kathairis.getHelper();
-
-    @Override
-    public void setRotationAngles(EntityPhasm entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5) {
-        super.setRotationAngles(entity, limbSwing, limbSwingAmount, f2, f3, f4, f5);
-        setRotateAngle(LeftArm,0+ MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(23.48f)- MathHelper.sin(f2*0.05f)*0.1f);
-        setRotateAngle(RightArm,0- MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(-18.26f)+ MathHelper.sin(f2*0.05f)*0.1f);
-        setRotateAngle(Body2,helper.degToRad(21)+ MathHelper.sin(f2*0.05f)*0.15f,0,0);
-            if(entity.getIsSwingingArms()){
-                setRotateAngle(LeftArm,helper.degToRad(-86)+ MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(23.48f)- MathHelper.sin(f2*0.05f)*0.1f);
-                setRotateAngle(RightArm,helper.degToRad(-86)- MathHelper.sin(f2*0.05f)*0.1f,0,helper.degToRad(-18.26f)+ MathHelper.sin(f2*0.05f)*0.1f);
-
-            }
-    }
 }

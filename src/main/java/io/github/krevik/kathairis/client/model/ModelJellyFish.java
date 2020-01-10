@@ -1,8 +1,9 @@
 package io.github.krevik.kathairis.client.model;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -10,8 +11,23 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelJellyFish<T extends LivingEntity> extends EntityModel<T>
+public class ModelJellyFish<T extends LivingEntity> extends AgeableModel<T>
 {
+	@Override
+	protected Iterable<ModelRenderer> func_225602_a_() {
+		return null;
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> func_225600_b_() {
+		return null;
+	}
+
+	@Override
+	public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+	}
+	/*
   //fields
     public ModelRenderer Leg1;
     public ModelRenderer Part2;
@@ -80,6 +96,21 @@ public class ModelJellyFish<T extends LivingEntity> extends EntityModel<T>
     	        this.overhang1.setRotationPoint(-0.1F, 2.4F, -2.4F);
     	        this.overhang1.func_228301_a_(0.0F, 0.0F, 0.0F, 0, 31, 8, 0.0F);
     	    }
+
+	@Override
+	public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> func_225602_a_() {
+		return null;
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> func_225600_b_() {
+		return null;
+	}
 
 	@Override
 	public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
@@ -236,5 +267,5 @@ public class ModelJellyFish<T extends LivingEntity> extends EntityModel<T>
   {
       return degrees * (float)Math.PI / 180 ;
   }
-
+*/
 }

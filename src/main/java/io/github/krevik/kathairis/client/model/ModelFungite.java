@@ -1,8 +1,11 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 
@@ -10,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
  * slimebasse! - Hugo
  * Created using Tabula 7.0.0
  */
-public class ModelFungite<T extends LivingEntity> extends EntityModel<T> {
+public class ModelFungite<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer leg15;
     public ModelRenderer leg25;
     public ModelRenderer body_2;
@@ -122,57 +125,7 @@ public class ModelFungite<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.arm_6.render(f5);
-        this.leg25.render(f5);
-        this.arm_4.render(f5);
-        this.body_4.render(f5);
-        this.arm_2.render(f5);
-        this.body_1.render(f5);
-        this.arm_1.render(f5);
-        this.mouth_layer.render(f5);
-        this.body_5.render(f5);
-        this.body_3.render(f5);
-        this.arm_8.render(f5);
-        this.leg15.render(f5);
-        this.body_2.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.cap_top.offsetX, this.cap_top.offsetY, this.cap_top.offsetZ);
-        GlStateManager.translatef(this.cap_top.rotationPointX * f5, this.cap_top.rotationPointY * f5, this.cap_top.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 1.1D, 1.1D);
-        GlStateManager.translatef(-this.cap_top.offsetX, -this.cap_top.offsetY, -this.cap_top.offsetZ);
-        GlStateManager.translatef(-this.cap_top.rotationPointX * f5, -this.cap_top.rotationPointY * f5, -this.cap_top.rotationPointZ * f5);
-        this.cap_top.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.leg15_1.offsetX, this.leg15_1.offsetY, this.leg15_1.offsetZ);
-        GlStateManager.translatef(this.leg15_1.rotationPointX * f5, this.leg15_1.rotationPointY * f5, this.leg15_1.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 1.1D, 1.1D);
-        GlStateManager.translatef(-this.leg15_1.offsetX, -this.leg15_1.offsetY, -this.leg15_1.offsetZ);
-        GlStateManager.translatef(-this.leg15_1.rotationPointX * f5, -this.leg15_1.rotationPointY * f5, -this.leg15_1.rotationPointZ * f5);
-        this.leg15_1.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Cap_base.offsetX, this.Cap_base.offsetY, this.Cap_base.offsetZ);
-        GlStateManager.translatef(this.Cap_base.rotationPointX * f5, this.Cap_base.rotationPointY * f5, this.Cap_base.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 1.1D, 1.1D);
-        GlStateManager.translatef(-this.Cap_base.offsetX, -this.Cap_base.offsetY, -this.Cap_base.offsetZ);
-        GlStateManager.translatef(-this.Cap_base.rotationPointX * f5, -this.Cap_base.rotationPointY * f5, -this.Cap_base.rotationPointZ * f5);
-        this.Cap_base.render(f5);
-        GlStateManager.popMatrix();
-    }
-
-
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
-    }
-
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5)
-    {
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, f2, f3, f4, f5);
+    public void func_225597_a_(T entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4) {
         this.arm_7.rotateAngleX=(float)-20+(MathHelper.sin((float)(f2*0.1))*0.2f);
         //this.arm_7.rotateAngleZ=(float)-30+(MathHelper.sin((float)(f2*0.1))*0.05f);
         this.arm_6.rotateAngleZ=(float)-90+(MathHelper.sin((float)(f2*0.1))*0.1f);
@@ -180,12 +133,49 @@ public class ModelFungite<T extends LivingEntity> extends EntityModel<T> {
         this.arm_2.rotateAngleZ= +(MathHelper.sin((float)(f2*0.1))*0.1f);
         this.arm_8.rotateAngleY=(float)0.045553093477052+(MathHelper.sin((float)(f2*0.1))*0.1f);
         this.arm_4.rotateAngleZ=(float)-0.5009094953223726+(MathHelper.sin((float)(f2*0.1))*0.1f);
-        
+
         this.leg15.rotateAngleX = -0.5462880558742251F+ MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 0.6F * limbSwingAmount;
         this.leg25.rotateAngleY = 1.1838568316277536F+ MathHelper.cos(limbSwing * 0.6662F) * 0.6F * limbSwingAmount;
         this.leg15.rotateAngleY = -0.2617993878f;
         this.leg25.rotateAngleX = 0.31415926536f- MathHelper.sin(limbSwing) * limbSwingAmount+1;
         this.leg25.rotateAngleZ = 0.5235987756F- MathHelper.sin(limbSwing) * limbSwingAmount+1;
+    }
 
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        /*RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.cap_top.offsetX, this.cap_top.offsetY, this.cap_top.offsetZ);
+        RenderSystem.translatef(this.cap_top.rotationPointX * f5, this.cap_top.rotationPointY * f5, this.cap_top.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 1.1D, 1.1D);
+        RenderSystem.translatef(-this.cap_top.offsetX, -this.cap_top.offsetY, -this.cap_top.offsetZ);
+        RenderSystem.translatef(-this.cap_top.rotationPointX * f5, -this.cap_top.rotationPointY * f5, -this.cap_top.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.leg15_1.offsetX, this.leg15_1.offsetY, this.leg15_1.offsetZ);
+        RenderSystem.translatef(this.leg15_1.rotationPointX * f5, this.leg15_1.rotationPointY * f5, this.leg15_1.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 1.1D, 1.1D);
+        RenderSystem.translatef(-this.leg15_1.offsetX, -this.leg15_1.offsetY, -this.leg15_1.offsetZ);
+        RenderSystem.translatef(-this.leg15_1.rotationPointX * f5, -this.leg15_1.rotationPointY * f5, -this.leg15_1.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Cap_base.offsetX, this.Cap_base.offsetY, this.Cap_base.offsetZ);
+        RenderSystem.translatef(this.Cap_base.rotationPointX * f5, this.Cap_base.rotationPointY * f5, this.Cap_base.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 1.1D, 1.1D);
+        RenderSystem.translatef(-this.Cap_base.offsetX, -this.Cap_base.offsetY, -this.Cap_base.offsetZ);
+        RenderSystem.translatef(-this.Cap_base.rotationPointX * f5, -this.Cap_base.rotationPointY * f5, -this.Cap_base.rotationPointZ * f5);
+        RenderSystem.popMatrix();*/
+        return ImmutableList.of(leg15,leg25,body_2,body_3,body_5,mouth_layer,arm_8,arm_4,leg15_1,Cap_base,cap_top,
+                arm_6,body_4,body_1,arm_1,arm_2,leg45,leg35,arm_5,arm_7,arm_3);
+    }
+
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
     }
 }

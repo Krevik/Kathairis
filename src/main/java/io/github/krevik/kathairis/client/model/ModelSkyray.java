@@ -1,9 +1,12 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
+import net.minecraft.client.renderer.entity.model.CowModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelSkyray<T extends LivingEntity> extends EntityModel<T> {
+public class ModelSkyray<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer body1;
     public ModelRenderer body1_1;
     public ModelRenderer body1_2;
@@ -140,22 +143,28 @@ public class ModelSkyray<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.body1.render(f5);
-        this.Tail1.render(f5);
-        this.body1_6.render(f5);
-        this.body1_1.render(f5);
-        this.body1_5.render(f5);
-        this.Wing21.render(f5);
-        this.Wing11.render(f5);
-        this.body1_2.render(f5);
-        this.body1_3.render(f5);
-        this.body1_4.render(f5);
+    public void func_225597_a_(T entity, float limbSwing, float limbSwingAmount, float age, float f3, float f4) {
+        Wing11.rotateAngleZ= MathHelper.sin((age/10))*0.2f;
+        Wing21.rotateAngleZ= MathHelper.sin((age/10))*0.2f;
+        Wing11.rotateAngleY= helper.degToRad(106.9f)+ MathHelper.sin((age/10))*0.2f;
+        Wing21.rotateAngleY=-helper.degToRad(106.9f)- MathHelper.sin((age/10))*0.2f;
+        Tail2.rotateAngleY= MathHelper.sin((age/10) *0.8f)*0.13f;
+        Tail3.rotateAngleY= MathHelper.sin((age/10) *0.8f)*0.14f;
+        Tail4.rotateAngleY= MathHelper.sin((age/10) *0.8f)*0.18f;
+        Tail5.rotateAngleX=-MathHelper.sin((age/10) *0.8f)*1f;
+        Tail4.rotateAngleZ= MathHelper.sin((age/10) *1.6f)*0.2f;
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(body1,Tail1,body1_6,body1_1,body1_5,Wing21,Wing11,body1_2,body1_3,body1_4);
+    }
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
@@ -163,25 +172,4 @@ public class ModelSkyray<T extends LivingEntity> extends EntityModel<T> {
     }
 
     FunctionHelper helper = Kathairis.getHelper();
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5 )
-    {
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, age, f3, f4, f5);
-        Wing11.rotateAngleZ= MathHelper.sin((age/10))*0.2f;
-        Wing21.rotateAngleZ= MathHelper.sin((age/10))*0.2f;
-        
-        Wing11.rotateAngleY= helper.degToRad(106.9f)+ MathHelper.sin((age/10))*0.2f;
-        Wing21.rotateAngleY=-helper.degToRad(106.9f)- MathHelper.sin((age/10))*0.2f;
-        
-        Tail2.rotateAngleY= MathHelper.sin((age/10) *0.8f)*0.13f;
-        Tail3.rotateAngleY= MathHelper.sin((age/10) *0.8f)*0.14f;
-        Tail4.rotateAngleY= MathHelper.sin((age/10) *0.8f)*0.18f;
-        
-        Tail5.rotateAngleX=-MathHelper.sin((age/10) *0.8f)*1f;
-        
-        Tail4.rotateAngleZ= MathHelper.sin((age/10) *1.6f)*0.2f;
-
-
-
-    }
 }

@@ -1,13 +1,28 @@
 package io.github.krevik.kathairis.client.model;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelLivingFlower<T extends LivingEntity> extends EntityModel<T> {
-    public ModelRenderer Pylek;
+public class ModelLivingFlower<T extends LivingEntity> extends AgeableModel<T> {
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return null;
+    }
+
+    @Override
+    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+    }
+/*    public ModelRenderer Pylek;
     public ModelRenderer Noga2;
     public ModelRenderer Noga1;
     public ModelRenderer Noga3;
@@ -190,9 +205,6 @@ public class ModelLivingFlower<T extends LivingEntity> extends EntityModel<T> {
         GlStateManager.popMatrix();
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
@@ -209,4 +221,5 @@ public class ModelLivingFlower<T extends LivingEntity> extends EntityModel<T> {
         this.Lisc4.rotateAngleX= MathHelper.abs(MathHelper.sin(age * 0.006662F))*1.4F;
         this.Lisc5.rotateAngleX= MathHelper.abs(MathHelper.sin(age * 0.006662F))*1.4F;
       }
+      */
 }

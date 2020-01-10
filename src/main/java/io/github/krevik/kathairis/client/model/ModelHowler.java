@@ -1,11 +1,14 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityHowler;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -13,7 +16,7 @@ import org.lwjgl.opengl.GL11;
  * Howler - HKhugo
  * Created using Tabula 7.0.0
  */
-public class ModelHowler<T extends LivingEntity> extends EntityModel<EntityHowler> {
+public class ModelHowler<T extends LivingEntity> extends AgeableModel<EntityHowler> {
   public ModelRenderer FrontRightLeg1;
   public ModelRenderer Body1;
   public ModelRenderer Head1;
@@ -160,21 +163,82 @@ public class ModelHowler<T extends LivingEntity> extends EntityModel<EntityHowle
   }
 
   @Override
-  public void render(EntityHowler entity, float f, float f1, float f2, float f3, float f4, float f5) {
-    this.Head1.render(f5);
-    this.Body1.render(f5);
-    this.FrontLeftLeg1.render(f5);
-    GlStateManager.enableBlend();
-    GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-    GlStateManager.color4f(1.0F, 1.0F, 1.0F, 0.998F);
-    this.BehindRightLeg1.render(f5);
-    GlStateManager.disableBlend();
-    this.FrontRightLeg1.render(f5);
-    GlStateManager.enableBlend();
-    GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-    GlStateManager.color4f(1.0F, 1.0F, 1.0F, 0.998F);
-    this.BehindLeftLeg1.render(f5);
-    GlStateManager.disableBlend();
+  public void func_225597_a_(EntityHowler entity, float limbSwing, float limbSwingAmount, float age, float f3, float f4) {
+    float timer = entity.getAnimTimer();
+    float timerTail = entity.getAnimTimerTail();
+    if(timerTail<101){
+      Tail.rotateAngleZ=Tail3RZ[0]+(Tail3RZ[1]-Tail3RZ[0])*(timerTail)/100f;
+    }
+    if(timerTail>100&&timerTail<201){
+      Tail.rotateAngleZ=Tail3RZ[1]+(Tail3RZ[2]-Tail3RZ[1])*(timerTail-100)/100f;
+    }
+    if(timerTail>200){
+      Tail.rotateAngleZ=Tail3RZ[2]+(Tail3RZ[3]-Tail3RZ[2])*(timerTail-200)/100f;
+    }
+
+    if(timer<101){
+      FrontRightLeg1.rotateAngleX=FrontRightLeg1R[1]*timer/100;
+      FrontRightLeg3.rotateAngleX=FrontRightLeg3R[1]*timer/100;
+      FrontLeftLeg1.rotateAngleX=FrontLeftLeg1R[1]*timer/100;
+      FrontLeftLeg3.rotateAngleX=FrontLeftLeg3R[1]*timer/100;
+      BehindRightLeg1.rotateAngleX=BehindRightLeg1R[1]*timer/100;
+      BehindRightLeg3.rotateAngleX=BehindRightLeg3R[1]*timer/100;
+      BehindLeftLeg1.rotateAngleX=BehindLeftLeg1R[1]*timer/100;
+      BehindLeftLeg3.rotateAngleX=BehindLeftLeg3R[1]*timer/100;
+      if(entity.getShouldAnimJaw()){
+        Head3.rotateAngleX=Head3R[0];
+      }else{
+        Head3.rotateAngleX=0;
+      }
+    }
+    if(timer>100&&timer<201){
+      FrontRightLeg1.rotateAngleX=FrontRightLeg1R[1]+(FrontRightLeg1R[2]-FrontRightLeg1R[1])*(timer-100)/100f;
+      FrontRightLeg3.rotateAngleX=FrontRightLeg3R[1]+(FrontRightLeg3R[2]-FrontRightLeg3R[1])*(timer-100)/100f;
+      FrontLeftLeg1.rotateAngleX=FrontLeftLeg1R[1]+(FrontLeftLeg1R[2]-FrontLeftLeg1R[1])*(timer-100)/100f;
+      FrontLeftLeg3.rotateAngleX=FrontLeftLeg3R[1]+(FrontLeftLeg3R[2]-FrontLeftLeg3R[1])*(timer-100)/100f;
+      BehindRightLeg1.rotateAngleX=BehindRightLeg1R[1]+(BehindRightLeg1R[2]-BehindRightLeg1R[1])*(timer-100)/100f;
+      BehindRightLeg3.rotateAngleX=BehindRightLeg3R[1]+(BehindRightLeg3R[2]-BehindRightLeg3R[1])*(timer-100)/100f;
+      BehindLeftLeg1.rotateAngleX=BehindLeftLeg1R[1]+(BehindLeftLeg1R[2]-BehindLeftLeg1R[1])*(timer-100)/100f;
+      BehindLeftLeg3.rotateAngleX=BehindLeftLeg3R[1]+(BehindLeftLeg3R[2]-BehindLeftLeg3R[1])*(timer-100)/100f;
+      if(entity.getShouldAnimJaw()) {
+        Head3.rotateAngleX=Head3R[0]+(Head3R[1]-Head3R[0])*(timer-100)/100f;
+      }else{
+        Head3.rotateAngleX=0;
+      }
+    }
+    if(timer>200){
+      FrontRightLeg1.rotateAngleX=FrontRightLeg1R[2]+(FrontRightLeg1R[3]-FrontRightLeg1R[2])*(timer-200)/100f;
+      FrontRightLeg3.rotateAngleX=FrontRightLeg3R[2]+(FrontRightLeg3R[3]-FrontRightLeg3R[2])*(timer-200)/100f;
+      FrontLeftLeg1.rotateAngleX=FrontLeftLeg1R[2]+(FrontLeftLeg1R[3]-FrontLeftLeg1R[2])*(timer-200)/100f;
+      FrontLeftLeg3.rotateAngleX=FrontLeftLeg3R[2]+(FrontLeftLeg3R[3]-FrontLeftLeg3R[2])*(timer-200)/100f;
+      BehindRightLeg1.rotateAngleX=BehindRightLeg1R[2]+(BehindRightLeg1R[3]-BehindRightLeg1R[2])*(timer-200)/100f;
+      BehindRightLeg3.rotateAngleX=BehindRightLeg3R[2]+(BehindRightLeg3R[3]-BehindRightLeg3R[2])*(timer-200)/100f;
+      BehindLeftLeg1.rotateAngleX=BehindLeftLeg1R[2]+(BehindLeftLeg1R[3]-BehindLeftLeg1R[2])*(timer-200)/100f;
+      BehindLeftLeg3.rotateAngleX=BehindLeftLeg3R[2]+(BehindLeftLeg3R[3]-BehindLeftLeg3R[2])*(timer-200)/100f;
+      if(entity.getShouldAnimJaw()){
+        Head3.rotateAngleX=Head3R[1]+(Head3R[2]-Head3R[1])*(timer-200)/100f;
+      }else{
+        Head3.rotateAngleX=0;
+      }
+    }
+  }
+
+  @Override
+  protected Iterable<ModelRenderer> func_225602_a_() {
+    return null;
+  }
+
+  @Override
+  protected Iterable<ModelRenderer> func_225600_b_() {
+    RenderSystem.enableBlend();
+    RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+    RenderSystem.color4f(1.0F, 1.0F, 1.0F, 0.998F);
+    RenderSystem.disableBlend();
+    RenderSystem.enableBlend();
+    RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+    RenderSystem.color4f(1.0F, 1.0F, 1.0F, 0.998F);
+    RenderSystem.disableBlend();
+    return ImmutableList.of(Head1,Body1,FrontLeftLeg1,BehindRightLeg1,FrontRightLeg1,BehindLeftLeg1);
   }
 
   public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
@@ -198,69 +262,6 @@ public class ModelHowler<T extends LivingEntity> extends EntityModel<EntityHowle
   float[] Head3R = {0,helper.degToRad(25f),0};
 
   float[] Tail3RZ = {0,helper.degToRad(-32f),helper.degToRad(32f),0};
-
-  @Override
-  public void setRotationAngles(EntityHowler entity, float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5 )
-  {
-    super.setRotationAngles(entity, limbSwing,limbSwingAmount,age,f3,f4,f5);
-        float timer = entity.getAnimTimer();
-        float timerTail = entity.getAnimTimerTail();
-        if(timerTail<101){
-          Tail.rotateAngleZ=Tail3RZ[0]+(Tail3RZ[1]-Tail3RZ[0])*(timerTail)/100f;
-        }
-        if(timerTail>100&&timerTail<201){
-          Tail.rotateAngleZ=Tail3RZ[1]+(Tail3RZ[2]-Tail3RZ[1])*(timerTail-100)/100f;
-        }
-        if(timerTail>200){
-          Tail.rotateAngleZ=Tail3RZ[2]+(Tail3RZ[3]-Tail3RZ[2])*(timerTail-200)/100f;
-        }
-
-      if(timer<101){
-          FrontRightLeg1.rotateAngleX=FrontRightLeg1R[1]*timer/100;
-          FrontRightLeg3.rotateAngleX=FrontRightLeg3R[1]*timer/100;
-          FrontLeftLeg1.rotateAngleX=FrontLeftLeg1R[1]*timer/100;
-          FrontLeftLeg3.rotateAngleX=FrontLeftLeg3R[1]*timer/100;
-          BehindRightLeg1.rotateAngleX=BehindRightLeg1R[1]*timer/100;
-          BehindRightLeg3.rotateAngleX=BehindRightLeg3R[1]*timer/100;
-          BehindLeftLeg1.rotateAngleX=BehindLeftLeg1R[1]*timer/100;
-          BehindLeftLeg3.rotateAngleX=BehindLeftLeg3R[1]*timer/100;
-          if(entity.getShouldAnimJaw()){
-            Head3.rotateAngleX=Head3R[0];
-          }else{
-            Head3.rotateAngleX=0;
-          }
-        }
-        if(timer>100&&timer<201){
-          FrontRightLeg1.rotateAngleX=FrontRightLeg1R[1]+(FrontRightLeg1R[2]-FrontRightLeg1R[1])*(timer-100)/100f;
-          FrontRightLeg3.rotateAngleX=FrontRightLeg3R[1]+(FrontRightLeg3R[2]-FrontRightLeg3R[1])*(timer-100)/100f;
-          FrontLeftLeg1.rotateAngleX=FrontLeftLeg1R[1]+(FrontLeftLeg1R[2]-FrontLeftLeg1R[1])*(timer-100)/100f;
-          FrontLeftLeg3.rotateAngleX=FrontLeftLeg3R[1]+(FrontLeftLeg3R[2]-FrontLeftLeg3R[1])*(timer-100)/100f;
-          BehindRightLeg1.rotateAngleX=BehindRightLeg1R[1]+(BehindRightLeg1R[2]-BehindRightLeg1R[1])*(timer-100)/100f;
-          BehindRightLeg3.rotateAngleX=BehindRightLeg3R[1]+(BehindRightLeg3R[2]-BehindRightLeg3R[1])*(timer-100)/100f;
-          BehindLeftLeg1.rotateAngleX=BehindLeftLeg1R[1]+(BehindLeftLeg1R[2]-BehindLeftLeg1R[1])*(timer-100)/100f;
-          BehindLeftLeg3.rotateAngleX=BehindLeftLeg3R[1]+(BehindLeftLeg3R[2]-BehindLeftLeg3R[1])*(timer-100)/100f;
-          if(entity.getShouldAnimJaw()) {
-            Head3.rotateAngleX=Head3R[0]+(Head3R[1]-Head3R[0])*(timer-100)/100f;
-          }else{
-            Head3.rotateAngleX=0;
-          }
-        }
-        if(timer>200){
-          FrontRightLeg1.rotateAngleX=FrontRightLeg1R[2]+(FrontRightLeg1R[3]-FrontRightLeg1R[2])*(timer-200)/100f;
-          FrontRightLeg3.rotateAngleX=FrontRightLeg3R[2]+(FrontRightLeg3R[3]-FrontRightLeg3R[2])*(timer-200)/100f;
-          FrontLeftLeg1.rotateAngleX=FrontLeftLeg1R[2]+(FrontLeftLeg1R[3]-FrontLeftLeg1R[2])*(timer-200)/100f;
-          FrontLeftLeg3.rotateAngleX=FrontLeftLeg3R[2]+(FrontLeftLeg3R[3]-FrontLeftLeg3R[2])*(timer-200)/100f;
-          BehindRightLeg1.rotateAngleX=BehindRightLeg1R[2]+(BehindRightLeg1R[3]-BehindRightLeg1R[2])*(timer-200)/100f;
-          BehindRightLeg3.rotateAngleX=BehindRightLeg3R[2]+(BehindRightLeg3R[3]-BehindRightLeg3R[2])*(timer-200)/100f;
-          BehindLeftLeg1.rotateAngleX=BehindLeftLeg1R[2]+(BehindLeftLeg1R[3]-BehindLeftLeg1R[2])*(timer-200)/100f;
-          BehindLeftLeg3.rotateAngleX=BehindLeftLeg3R[2]+(BehindLeftLeg3R[3]-BehindLeftLeg3R[2])*(timer-200)/100f;
-          if(entity.getShouldAnimJaw()){
-            Head3.rotateAngleX=Head3R[1]+(Head3R[2]-Head3R[1])*(timer-200)/100f;
-          }else{
-            Head3.rotateAngleX=0;
-          }
-        }
-  }
 
 
 }

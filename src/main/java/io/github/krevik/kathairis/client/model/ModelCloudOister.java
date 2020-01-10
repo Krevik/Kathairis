@@ -1,8 +1,11 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -12,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelCloudOister<T extends LivingEntity> extends EntityModel<T> {
+public class ModelCloudOister<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer shape1;
     public ModelRenderer shape1_1;
     public ModelRenderer shape1_2;
@@ -107,111 +110,110 @@ public class ModelCloudOister<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_10.offsetX, this.shape1_10.offsetY, this.shape1_10.offsetZ);
-        GlStateManager.translatef(this.shape1_10.rotationPointX * f5, this.shape1_10.rotationPointY * f5, this.shape1_10.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.6D, 1.0D);
-        GlStateManager.translatef(-this.shape1_10.offsetX, -this.shape1_10.offsetY, -this.shape1_10.offsetZ);
-        GlStateManager.translatef(-this.shape1_10.rotationPointX * f5, -this.shape1_10.rotationPointY * f5, -this.shape1_10.rotationPointZ * f5);
-        this.shape1_10.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_3.offsetX, this.shape1_3.offsetY, this.shape1_3.offsetZ);
-        GlStateManager.translatef(this.shape1_3.rotationPointX * f5, this.shape1_3.rotationPointY * f5, this.shape1_3.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.6D, 1.0D);
-        GlStateManager.translatef(-this.shape1_3.offsetX, -this.shape1_3.offsetY, -this.shape1_3.offsetZ);
-        GlStateManager.translatef(-this.shape1_3.rotationPointX * f5, -this.shape1_3.rotationPointY * f5, -this.shape1_3.rotationPointZ * f5);
-        this.shape1_3.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_11.offsetX, this.shape1_11.offsetY, this.shape1_11.offsetZ);
-        GlStateManager.translatef(this.shape1_11.rotationPointX * f5, this.shape1_11.rotationPointY * f5, this.shape1_11.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 0.8D, 1.0D);
-        GlStateManager.translatef(-this.shape1_11.offsetX, -this.shape1_11.offsetY, -this.shape1_11.offsetZ);
-        GlStateManager.translatef(-this.shape1_11.rotationPointX * f5, -this.shape1_11.rotationPointY * f5, -this.shape1_11.rotationPointZ * f5);
-        this.shape1_11.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1.offsetX, this.shape1.offsetY, this.shape1.offsetZ);
-        GlStateManager.translatef(this.shape1.rotationPointX * f5, this.shape1.rotationPointY * f5, this.shape1.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.7D, 1.0D);
-        GlStateManager.translatef(-this.shape1.offsetX, -this.shape1.offsetY, -this.shape1.offsetZ);
-        GlStateManager.translatef(-this.shape1.rotationPointX * f5, -this.shape1.rotationPointY * f5, -this.shape1.rotationPointZ * f5);
-        this.shape1.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_6.offsetX, this.shape1_6.offsetY, this.shape1_6.offsetZ);
-        GlStateManager.translatef(this.shape1_6.rotationPointX * f5, this.shape1_6.rotationPointY * f5, this.shape1_6.rotationPointZ * f5);
-        GlStateManager.scaled(1.3D, 1.3D, 1.3D);
-        GlStateManager.translatef(-this.shape1_6.offsetX, -this.shape1_6.offsetY, -this.shape1_6.offsetZ);
-        GlStateManager.translatef(-this.shape1_6.rotationPointX * f5, -this.shape1_6.rotationPointY * f5, -this.shape1_6.rotationPointZ * f5);
-        this.shape1_6.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_8.offsetX, this.shape1_8.offsetY, this.shape1_8.offsetZ);
-        GlStateManager.translatef(this.shape1_8.rotationPointX * f5, this.shape1_8.rotationPointY * f5, this.shape1_8.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 0.8D, 1.0D);
-        GlStateManager.translatef(-this.shape1_8.offsetX, -this.shape1_8.offsetY, -this.shape1_8.offsetZ);
-        GlStateManager.translatef(-this.shape1_8.rotationPointX * f5, -this.shape1_8.rotationPointY * f5, -this.shape1_8.rotationPointZ * f5);
-        this.shape1_8.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_1.offsetX, this.shape1_1.offsetY, this.shape1_1.offsetZ);
-        GlStateManager.translatef(this.shape1_1.rotationPointX * f5, this.shape1_1.rotationPointY * f5, this.shape1_1.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.7D, 1.0D);
-        GlStateManager.translatef(-this.shape1_1.offsetX, -this.shape1_1.offsetY, -this.shape1_1.offsetZ);
-        GlStateManager.translatef(-this.shape1_1.rotationPointX * f5, -this.shape1_1.rotationPointY * f5, -this.shape1_1.rotationPointZ * f5);
-        this.shape1_1.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_7.offsetX, this.shape1_7.offsetY, this.shape1_7.offsetZ);
-        GlStateManager.translatef(this.shape1_7.rotationPointX * f5, this.shape1_7.rotationPointY * f5, this.shape1_7.rotationPointZ * f5);
-        GlStateManager.scaled(1.3D, 1.3D, 1.3D);
-        GlStateManager.translatef(-this.shape1_7.offsetX, -this.shape1_7.offsetY, -this.shape1_7.offsetZ);
-        GlStateManager.translatef(-this.shape1_7.rotationPointX * f5, -this.shape1_7.rotationPointY * f5, -this.shape1_7.rotationPointZ * f5);
-        this.shape1_7.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_9.offsetX, this.shape1_9.offsetY, this.shape1_9.offsetZ);
-        GlStateManager.translatef(this.shape1_9.rotationPointX * f5, this.shape1_9.rotationPointY * f5, this.shape1_9.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.6D, 1.0D);
-        GlStateManager.translatef(-this.shape1_9.offsetX, -this.shape1_9.offsetY, -this.shape1_9.offsetZ);
-        GlStateManager.translatef(-this.shape1_9.rotationPointX * f5, -this.shape1_9.rotationPointY * f5, -this.shape1_9.rotationPointZ * f5);
-        this.shape1_9.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_5.offsetX, this.shape1_5.offsetY, this.shape1_5.offsetZ);
-        GlStateManager.translatef(this.shape1_5.rotationPointX * f5, this.shape1_5.rotationPointY * f5, this.shape1_5.rotationPointZ * f5);
-        GlStateManager.scaled(0.35D, 0.35D, 0.35D);
-        GlStateManager.translatef(-this.shape1_5.offsetX, -this.shape1_5.offsetY, -this.shape1_5.offsetZ);
-        GlStateManager.translatef(-this.shape1_5.rotationPointX * f5, -this.shape1_5.rotationPointY * f5, -this.shape1_5.rotationPointZ * f5);
-        this.shape1_5.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_4.offsetX, this.shape1_4.offsetY, this.shape1_4.offsetZ);
-        GlStateManager.translatef(this.shape1_4.rotationPointX * f5, this.shape1_4.rotationPointY * f5, this.shape1_4.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.6D, 1.0D);
-        GlStateManager.translatef(-this.shape1_4.offsetX, -this.shape1_4.offsetY, -this.shape1_4.offsetZ);
-        GlStateManager.translatef(-this.shape1_4.rotationPointX * f5, -this.shape1_4.rotationPointY * f5, -this.shape1_4.rotationPointZ * f5);
-        this.shape1_4.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.shape1_2.offsetX, this.shape1_2.offsetY, this.shape1_2.offsetZ);
-        GlStateManager.translatef(this.shape1_2.rotationPointX * f5, this.shape1_2.rotationPointY * f5, this.shape1_2.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.7D, 1.0D);
-        GlStateManager.translatef(-this.shape1_2.offsetX, -this.shape1_2.offsetY, -this.shape1_2.offsetZ);
-        GlStateManager.translatef(-this.shape1_2.rotationPointX * f5, -this.shape1_2.rotationPointY * f5, -this.shape1_2.rotationPointZ * f5);
-        this.shape1_2.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.body2.offsetX, this.body2.offsetY, this.body2.offsetZ);
-        GlStateManager.translatef(this.body2.rotationPointX * f5, this.body2.rotationPointY * f5, this.body2.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 0.7D, 1.2D);
-        GlStateManager.translatef(-this.body2.offsetX, -this.body2.offsetY, -this.body2.offsetZ);
-        GlStateManager.translatef(-this.body2.rotationPointX * f5, -this.body2.rotationPointY * f5, -this.body2.rotationPointZ * f5);
-        this.body2.render(f5);
-        GlStateManager.popMatrix();
+    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        /*RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_10.offsetX, this.shape1_10.offsetY, this.shape1_10.offsetZ);
+        RenderSystem.translatef(this.shape1_10.rotationPointX * f5, this.shape1_10.rotationPointY * f5, this.shape1_10.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.6D, 1.0D);
+        RenderSystem.translatef(-this.shape1_10.offsetX, -this.shape1_10.offsetY, -this.shape1_10.offsetZ);
+        RenderSystem.translatef(-this.shape1_10.rotationPointX * f5, -this.shape1_10.rotationPointY * f5, -this.shape1_10.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_3.offsetX, this.shape1_3.offsetY, this.shape1_3.offsetZ);
+        RenderSystem.translatef(this.shape1_3.rotationPointX * f5, this.shape1_3.rotationPointY * f5, this.shape1_3.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.6D, 1.0D);
+        RenderSystem.translatef(-this.shape1_3.offsetX, -this.shape1_3.offsetY, -this.shape1_3.offsetZ);
+        RenderSystem.translatef(-this.shape1_3.rotationPointX * f5, -this.shape1_3.rotationPointY * f5, -this.shape1_3.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_11.offsetX, this.shape1_11.offsetY, this.shape1_11.offsetZ);
+        RenderSystem.translatef(this.shape1_11.rotationPointX * f5, this.shape1_11.rotationPointY * f5, this.shape1_11.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 0.8D, 1.0D);
+        RenderSystem.translatef(-this.shape1_11.offsetX, -this.shape1_11.offsetY, -this.shape1_11.offsetZ);
+        RenderSystem.translatef(-this.shape1_11.rotationPointX * f5, -this.shape1_11.rotationPointY * f5, -this.shape1_11.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1.offsetX, this.shape1.offsetY, this.shape1.offsetZ);
+        RenderSystem.translatef(this.shape1.rotationPointX * f5, this.shape1.rotationPointY * f5, this.shape1.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.7D, 1.0D);
+        RenderSystem.translatef(-this.shape1.offsetX, -this.shape1.offsetY, -this.shape1.offsetZ);
+        RenderSystem.translatef(-this.shape1.rotationPointX * f5, -this.shape1.rotationPointY * f5, -this.shape1.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_6.offsetX, this.shape1_6.offsetY, this.shape1_6.offsetZ);
+        RenderSystem.translatef(this.shape1_6.rotationPointX * f5, this.shape1_6.rotationPointY * f5, this.shape1_6.rotationPointZ * f5);
+        RenderSystem.scaled(1.3D, 1.3D, 1.3D);
+        RenderSystem.translatef(-this.shape1_6.offsetX, -this.shape1_6.offsetY, -this.shape1_6.offsetZ);
+        RenderSystem.translatef(-this.shape1_6.rotationPointX * f5, -this.shape1_6.rotationPointY * f5, -this.shape1_6.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_8.offsetX, this.shape1_8.offsetY, this.shape1_8.offsetZ);
+        RenderSystem.translatef(this.shape1_8.rotationPointX * f5, this.shape1_8.rotationPointY * f5, this.shape1_8.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 0.8D, 1.0D);
+        RenderSystem.translatef(-this.shape1_8.offsetX, -this.shape1_8.offsetY, -this.shape1_8.offsetZ);
+        RenderSystem.translatef(-this.shape1_8.rotationPointX * f5, -this.shape1_8.rotationPointY * f5, -this.shape1_8.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_1.offsetX, this.shape1_1.offsetY, this.shape1_1.offsetZ);
+        RenderSystem.translatef(this.shape1_1.rotationPointX * f5, this.shape1_1.rotationPointY * f5, this.shape1_1.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.7D, 1.0D);
+        RenderSystem.translatef(-this.shape1_1.offsetX, -this.shape1_1.offsetY, -this.shape1_1.offsetZ);
+        RenderSystem.translatef(-this.shape1_1.rotationPointX * f5, -this.shape1_1.rotationPointY * f5, -this.shape1_1.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_7.offsetX, this.shape1_7.offsetY, this.shape1_7.offsetZ);
+        RenderSystem.translatef(this.shape1_7.rotationPointX * f5, this.shape1_7.rotationPointY * f5, this.shape1_7.rotationPointZ * f5);
+        RenderSystem.scaled(1.3D, 1.3D, 1.3D);
+        RenderSystem.translatef(-this.shape1_7.offsetX, -this.shape1_7.offsetY, -this.shape1_7.offsetZ);
+        RenderSystem.translatef(-this.shape1_7.rotationPointX * f5, -this.shape1_7.rotationPointY * f5, -this.shape1_7.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_9.offsetX, this.shape1_9.offsetY, this.shape1_9.offsetZ);
+        RenderSystem.translatef(this.shape1_9.rotationPointX * f5, this.shape1_9.rotationPointY * f5, this.shape1_9.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.6D, 1.0D);
+        RenderSystem.translatef(-this.shape1_9.offsetX, -this.shape1_9.offsetY, -this.shape1_9.offsetZ);
+        RenderSystem.translatef(-this.shape1_9.rotationPointX * f5, -this.shape1_9.rotationPointY * f5, -this.shape1_9.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_5.offsetX, this.shape1_5.offsetY, this.shape1_5.offsetZ);
+        RenderSystem.translatef(this.shape1_5.rotationPointX * f5, this.shape1_5.rotationPointY * f5, this.shape1_5.rotationPointZ * f5);
+        RenderSystem.scaled(0.35D, 0.35D, 0.35D);
+        RenderSystem.translatef(-this.shape1_5.offsetX, -this.shape1_5.offsetY, -this.shape1_5.offsetZ);
+        RenderSystem.translatef(-this.shape1_5.rotationPointX * f5, -this.shape1_5.rotationPointY * f5, -this.shape1_5.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_4.offsetX, this.shape1_4.offsetY, this.shape1_4.offsetZ);
+        RenderSystem.translatef(this.shape1_4.rotationPointX * f5, this.shape1_4.rotationPointY * f5, this.shape1_4.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.6D, 1.0D);
+        RenderSystem.translatef(-this.shape1_4.offsetX, -this.shape1_4.offsetY, -this.shape1_4.offsetZ);
+        RenderSystem.translatef(-this.shape1_4.rotationPointX * f5, -this.shape1_4.rotationPointY * f5, -this.shape1_4.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.shape1_2.offsetX, this.shape1_2.offsetY, this.shape1_2.offsetZ);
+        RenderSystem.translatef(this.shape1_2.rotationPointX * f5, this.shape1_2.rotationPointY * f5, this.shape1_2.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.7D, 1.0D);
+        RenderSystem.translatef(-this.shape1_2.offsetX, -this.shape1_2.offsetY, -this.shape1_2.offsetZ);
+        RenderSystem.translatef(-this.shape1_2.rotationPointX * f5, -this.shape1_2.rotationPointY * f5, -this.shape1_2.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.body2.offsetX, this.body2.offsetY, this.body2.offsetZ);
+        RenderSystem.translatef(this.body2.rotationPointX * f5, this.body2.rotationPointY * f5, this.body2.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 0.7D, 1.2D);
+        RenderSystem.translatef(-this.body2.offsetX, -this.body2.offsetY, -this.body2.offsetZ);
+        RenderSystem.translatef(-this.body2.rotationPointX * f5, -this.body2.rotationPointY * f5, -this.body2.rotationPointZ * f5);
+        RenderSystem.popMatrix();*/
+        return ImmutableList.of(shape1,shape1_1,shape1_2,shape1_3,shape1_4,shape1_5,body2,shape1_6,shape1_7,shape1_8
+        ,shape1_9,shape1_10,shape1_11,body2_1,shape1_12,body2_2,shape1_13);
     }
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
@@ -220,9 +222,4 @@ public class ModelCloudOister<T extends LivingEntity> extends EntityModel<T> {
         modelRenderer.rotateAngleZ = z;
     }
 
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5)
-    {
-     super.setRotationAngles(entity, limbSwing, limbSwingAmount, age, f3, f4, f5);
-    }
 }

@@ -1,10 +1,12 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityGaznowel;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.HandSide;
@@ -18,8 +20,22 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 
 @OnlyIn(Dist.CLIENT)
-public class ModelGaznowel<T extends LivingEntity> extends EntityModel<EntityGaznowel> {
-    public ModelRenderer Cloud1;
+public class ModelGaznowel<T extends LivingEntity> extends AgeableModel<EntityGaznowel> {
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return null;
+    }
+
+    @Override
+    public void func_225597_a_(EntityGaznowel p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+    }
+    /*public ModelRenderer Cloud1;
     public ModelRenderer Body2;
     public ModelRenderer Body1;
     public ModelRenderer RightLeg1;
@@ -147,17 +163,21 @@ public class ModelGaznowel<T extends LivingEntity> extends EntityModel<EntityGaz
     }
 
     @Override
-    public void render(EntityGaznowel entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.RightLeg1.render(f5);
-        this.Body2.render(f5);
-        this.LeftLeg1.render(f5);
-        this.Cloud1.render(f5);
-        this.Body1.render(f5);
+    public void func_225597_a_(EntityGaznowel p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(RightLeg1,Body2,LeftLeg1,Cloud1,Body1);
+    }
+
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
@@ -266,6 +286,6 @@ public class ModelGaznowel<T extends LivingEntity> extends EntityModel<EntityGaz
     protected ModelRenderer getArmForSide(HandSide side)
     {
         return side == HandSide.LEFT ? this.LeftArm1 : this.RightArm1;
-    }
+    }*/
 
 }

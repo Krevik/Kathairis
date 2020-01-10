@@ -3,9 +3,10 @@ package io.github.krevik.kathairis.client.model;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.CowModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.ZombieModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelStrangeWanderer<T extends LivingEntity> extends EntityModel<T> {
+public class ModelStrangeWanderer<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer flower;
     public ModelRenderer head;
     public ModelRenderer body;
@@ -83,19 +84,17 @@ public class ModelStrangeWanderer<T extends LivingEntity> extends EntityModel<T>
 
     }
 
+    @Override
     protected Iterable<ModelRenderer> func_225602_a_() {
         return ImmutableList.of(this.head);
     }
 
+    @Override
     protected Iterable<ModelRenderer> func_225600_b_() {
         return ImmutableList.of(this.body, this.leftleg, this.hat1, this.rightarm, this.leftarm,
                 flower,beard,rightleg,stick,backpack1,backpack2);
     }
 
-
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;

@@ -1,13 +1,15 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelCloudySlime<T extends LivingEntity> extends EntityModel<T> {
+public class ModelCloudySlime<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer shape1;
     public ModelRenderer shape1_1;
     public ModelRenderer shape1_2;
@@ -90,23 +92,19 @@ public class ModelCloudySlime<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.shape1_2.render(f5);
-        this.shape1_6.render(f5);
-        this.shape1_7.render(f5);
-        this.shape1_8.render(f5);
-        this.shape1_15.render(f5);
-        this.shape1_3.render(f5);
-        this.shape1_10.render(f5);
-        this.shape1_9.render(f5);
-        this.shape1_4.render(f5);
-        this.shape1_13.render(f5);
-        this.shape1_12.render(f5);
-        this.shape1_1.render(f5);
-        this.shape1.render(f5);
-        this.shape1_11.render(f5);
-        this.shape1_14.render(f5);
-        this.shape1_5.render(f5);
+    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(shape1_2,shape1_6,shape1_7,shape1_8,shape1_15,shape1_3,shape1_10,shape1_9,shape1_4,
+                shape1_13,shape1_12,shape1_1,shape1,shape1_11,shape1_14,shape1_5);
     }
     
 
@@ -116,9 +114,4 @@ public class ModelCloudySlime<T extends LivingEntity> extends EntityModel<T> {
         modelRenderer.rotateAngleZ = z;
     }
 
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5)
-    {
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, f2, f3, f4, f5);
-    }
 }

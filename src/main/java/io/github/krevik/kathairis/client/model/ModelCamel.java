@@ -1,9 +1,12 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.entity.EntityCamel;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 
@@ -13,7 +16,7 @@ import java.util.Random;
  * ModelHorse - Either Mojang or a mod author
  * Created using Tabula 7.0.0
  */
-public class ModelCamel<T extends LivingEntity> extends EntityModel<T> {
+public class ModelCamel<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer Head1;
     public ModelRenderer Lejce1;
     public ModelRenderer Lejce2;
@@ -163,55 +166,63 @@ public class ModelCamel<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.Neck1.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Garb2.offsetX, this.Garb2.offsetY, this.Garb2.offsetZ);
-        GlStateManager.translatef(this.Garb2.rotationPointX * f5, this.Garb2.rotationPointY * f5, this.Garb2.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 1.0D, 0.9D);
-        GlStateManager.translatef(-this.Garb2.offsetX, -this.Garb2.offsetY, -this.Garb2.offsetZ);
-        GlStateManager.translatef(-this.Garb2.rotationPointX * f5, -this.Garb2.rotationPointY * f5, -this.Garb2.rotationPointZ * f5);
-        this.Garb2.render(f5);
-        GlStateManager.popMatrix();
-        this.Neck2.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Body1.offsetX, this.Body1.offsetY, this.Body1.offsetZ);
-        GlStateManager.translatef(this.Body1.rotationPointX * f5, this.Body1.rotationPointY * f5, this.Body1.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 1.0D, 0.9D);
-        GlStateManager.translatef(-this.Body1.offsetX, -this.Body1.offsetY, -this.Body1.offsetZ);
-        GlStateManager.translatef(-this.Body1.rotationPointX * f5, -this.Body1.rotationPointY * f5, -this.Body1.rotationPointZ * f5);
-        this.Body1.render(f5);
-        GlStateManager.popMatrix();
-        this.Body2.render(f5);
-        this.FrontLeftUpperLeg.render(f5);
-        this.BackRightUpperLeg.render(f5);
-        this.Tail1.render(f5);
-        this.BackLeftUpperLeg.render(f5);
-        this.Head1.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Garb1.offsetX, this.Garb1.offsetY, this.Garb1.offsetZ);
-        GlStateManager.translatef(this.Garb1.rotationPointX * f5, this.Garb1.rotationPointY * f5, this.Garb1.rotationPointZ * f5);
-        GlStateManager.scaled(1.0D, 1.0D, 0.9D);
-        GlStateManager.translatef(-this.Garb1.offsetX, -this.Garb1.offsetY, -this.Garb1.offsetZ);
-        GlStateManager.translatef(-this.Garb1.rotationPointX * f5, -this.Garb1.rotationPointY * f5, -this.Garb1.rotationPointZ * f5);
-        this.Garb1.render(f5);
-        GlStateManager.popMatrix();
-        this.FrontRightUpperLeg.render(f5);
-        if(entity instanceof EntityCamel) {
-        	EntityCamel camel = (EntityCamel) entity;
-        	if(camel.isHorseSaddled()) {
-                this.SiodloGlowne.render(f5);
-                this.Lejce1.render(f5);
-                this.NakladkaNaOgon.render(f5);
-                this.Lejce2.render(f5);
+    public void func_225597_a_(T entity, float limbSwing, float limbSwingAmount, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
 
-        	}
+
+        this.BackRightUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.BackLeftUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        this.FrontRightUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        this.FrontLeftUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+
+        if(!shouldAnimateTail) {
+            if(random.nextInt(750)==0) {
+                shouldAnimateTail=true;
+            }
+        }
+        if(shouldAnimateTail) {
+            timer++;
+            Tail1.rotateAngleZ=(MathHelper.sin((timer/25)*0.6F));
+            if(timer>400) {
+                timer=0;
+                shouldAnimateTail=false;
+                Tail1.rotateAngleZ=0;
+            }
         }
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        /*RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Garb2.offsetX, this.Garb2.offsetY, this.Garb2.offsetZ);
+        RenderSystem.translatef(this.Garb2.rotationPointX * f5, this.Garb2.rotationPointY * f5, this.Garb2.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 1.0D, 0.9D);
+        RenderSystem.translatef(-this.Garb2.offsetX, -this.Garb2.offsetY, -this.Garb2.offsetZ);
+        RenderSystem.translatef(-this.Garb2.rotationPointX * f5, -this.Garb2.rotationPointY * f5, -this.Garb2.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Body1.offsetX, this.Body1.offsetY, this.Body1.offsetZ);
+        RenderSystem.translatef(this.Body1.rotationPointX * f5, this.Body1.rotationPointY * f5, this.Body1.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 1.0D, 0.9D);
+        RenderSystem.translatef(-this.Body1.offsetX, -this.Body1.offsetY, -this.Body1.offsetZ);
+        RenderSystem.translatef(-this.Body1.rotationPointX * f5, -this.Body1.rotationPointY * f5, -this.Body1.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Garb1.offsetX, this.Garb1.offsetY, this.Garb1.offsetZ);
+        RenderSystem.translatef(this.Garb1.rotationPointX * f5, this.Garb1.rotationPointY * f5, this.Garb1.rotationPointZ * f5);
+        RenderSystem.scaled(1.0D, 1.0D, 0.9D);
+        RenderSystem.translatef(-this.Garb1.offsetX, -this.Garb1.offsetY, -this.Garb1.offsetZ);
+        RenderSystem.translatef(-this.Garb1.rotationPointX * f5, -this.Garb1.rotationPointY * f5, -this.Garb1.rotationPointZ * f5);
+        RenderSystem.popMatrix();*/
+
+        return ImmutableList.of(Neck1,Garb2,Neck2,Body1,Body2,FrontLeftUpperLeg,BackRightUpperLeg,Tail1,BackLeftUpperLeg,
+                Head1,Garb1,FrontRightUpperLeg,SiodloGlowne,Lejce1,NakladkaNaOgon,Lejce2);
+    }
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
@@ -221,32 +232,4 @@ public class ModelCamel<T extends LivingEntity> extends EntityModel<T> {
     protected boolean shouldAnimateTail=false;
     protected float timer=0;
     protected Random random = new Random();
-
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5)
-    {
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, f2, f3, f4, f5);
-
-        
-        this.BackRightUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.BackLeftUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.FrontRightUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.FrontLeftUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        
-        if(!shouldAnimateTail) {
-        	if(random.nextInt(750)==0) {
-        		shouldAnimateTail=true;
-        	}
-        }
-        if(shouldAnimateTail) {
-        	timer++;
-        	Tail1.rotateAngleZ=(MathHelper.sin((timer/25)*0.6F));
-        	if(timer>400) {
-        		timer=0;
-        		shouldAnimateTail=false;
-        		Tail1.rotateAngleZ=0;
-        	}
-        }
-        
-    }
 }

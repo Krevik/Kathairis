@@ -1,10 +1,13 @@
 package io.github.krevik.kathairis.client.model.butterfly;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelSkylight<T extends LivingEntity> extends EntityModel<T> {
+public class ModelSkylight<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer Head;
     public ModelRenderer Wing4;
     public ModelRenderer Wing3;
@@ -76,78 +79,82 @@ public class ModelSkylight<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.Wing3.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.lowerbody.offsetX, this.lowerbody.offsetY, this.lowerbody.offsetZ);
-        GlStateManager.translatef(this.lowerbody.rotationPointX * f5, this.lowerbody.rotationPointY * f5, this.lowerbody.rotationPointZ * f5);
-        GlStateManager.scaled(1.6D, 1.2D, 1.0D);
-        GlStateManager.translatef(-this.lowerbody.offsetX, -this.lowerbody.offsetY, -this.lowerbody.offsetZ);
-        GlStateManager.translatef(-this.lowerbody.rotationPointX * f5, -this.lowerbody.rotationPointY * f5, -this.lowerbody.rotationPointZ * f5);
-        this.lowerbody.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Czulko.offsetX, this.Czulko.offsetY, this.Czulko.offsetZ);
-        GlStateManager.translatef(this.Czulko.rotationPointX * f5, this.Czulko.rotationPointY * f5, this.Czulko.rotationPointZ * f5);
-        GlStateManager.scaled(0.5D, 1.0D, 0.5D);
-        GlStateManager.translatef(-this.Czulko.offsetX, -this.Czulko.offsetY, -this.Czulko.offsetZ);
-        GlStateManager.translatef(-this.Czulko.rotationPointX * f5, -this.Czulko.rotationPointY * f5, -this.Czulko.rotationPointZ * f5);
-        this.Czulko.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Head.offsetX, this.Head.offsetY, this.Head.offsetZ);
-        GlStateManager.translatef(this.Head.rotationPointX * f5, this.Head.rotationPointY * f5, this.Head.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.1D, 1.0D);
-        GlStateManager.translatef(-this.Head.offsetX, -this.Head.offsetY, -this.Head.offsetZ);
-        GlStateManager.translatef(-this.Head.rotationPointX * f5, -this.Head.rotationPointY * f5, -this.Head.rotationPointZ * f5);
-        this.Head.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Czulko_1.offsetX, this.Czulko_1.offsetY, this.Czulko_1.offsetZ);
-        GlStateManager.translatef(this.Czulko_1.rotationPointX * f5, this.Czulko_1.rotationPointY * f5, this.Czulko_1.rotationPointZ * f5);
-        GlStateManager.scaled(0.5D, 1.0D, 0.5D);
-        GlStateManager.translatef(-this.Czulko_1.offsetX, -this.Czulko_1.offsetY, -this.Czulko_1.offsetZ);
-        GlStateManager.translatef(-this.Czulko_1.rotationPointX * f5, -this.Czulko_1.rotationPointY * f5, -this.Czulko_1.rotationPointZ * f5);
-        this.Czulko_1.render(f5);
-        GlStateManager.popMatrix();
-        this.Wing4.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Head2.offsetX, this.Head2.offsetY, this.Head2.offsetZ);
-        GlStateManager.translatef(this.Head2.rotationPointX * f5, this.Head2.rotationPointY * f5, this.Head2.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.1D, 1.0D);
-        GlStateManager.translatef(-this.Head2.offsetX, -this.Head2.offsetY, -this.Head2.offsetZ);
-        GlStateManager.translatef(-this.Head2.rotationPointX * f5, -this.Head2.rotationPointY * f5, -this.Head2.rotationPointZ * f5);
-        this.Head2.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Head1.offsetX, this.Head1.offsetY, this.Head1.offsetZ);
-        GlStateManager.translatef(this.Head1.rotationPointX * f5, this.Head1.rotationPointY * f5, this.Head1.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.1D, 1.0D);
-        GlStateManager.translatef(-this.Head1.offsetX, -this.Head1.offsetY, -this.Head1.offsetZ);
-        GlStateManager.translatef(-this.Head1.rotationPointX * f5, -this.Head1.rotationPointY * f5, -this.Head1.rotationPointZ * f5);
-        this.Head1.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Body.offsetX, this.Body.offsetY, this.Body.offsetZ);
-        GlStateManager.translatef(this.Body.rotationPointX * f5, this.Body.rotationPointY * f5, this.Body.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 0.7D, 1.0D);
-        GlStateManager.translatef(-this.Body.offsetX, -this.Body.offsetY, -this.Body.offsetZ);
-        GlStateManager.translatef(-this.Body.rotationPointX * f5, -this.Body.rotationPointY * f5, -this.Body.rotationPointZ * f5);
-        this.Body.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.Body_1.offsetX, this.Body_1.offsetY, this.Body_1.offsetZ);
-        GlStateManager.translatef(this.Body_1.rotationPointX * f5, this.Body_1.rotationPointY * f5, this.Body_1.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 0.8D, 1.6D);
-        GlStateManager.translatef(-this.Body_1.offsetX, -this.Body_1.offsetY, -this.Body_1.offsetZ);
-        GlStateManager.translatef(-this.Body_1.rotationPointX * f5, -this.Body_1.rotationPointY * f5, -this.Body_1.rotationPointZ * f5);
-        this.Body_1.render(f5);
-        GlStateManager.popMatrix();
+    public void func_225597_a_(T entity, float f, float f1, float f2, float f3, float p_225597_6_) {
+        if(entity.getMotion().y!=0D||entity.getMotion().x!=0D||entity.getMotion().z!=0D) {
+            Wing4.rotateAngleZ= MathHelper.sin(f2*0.6f);
+            Wing3.rotateAngleZ=-MathHelper.sin(f2*0.6f);
+        }else {
+            Wing4.rotateAngleZ= helper.degToRad(70)- MathHelper.sin(f2*0.05f)*0.05f;
+            Wing3.rotateAngleZ=-helper.degToRad(70)+ MathHelper.sin(f2*0.05f)*0.05f;
+        }
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        /*RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.lowerbody.offsetX, this.lowerbody.offsetY, this.lowerbody.offsetZ);
+        RenderSystem.translatef(this.lowerbody.rotationPointX * f5, this.lowerbody.rotationPointY * f5, this.lowerbody.rotationPointZ * f5);
+        RenderSystem.scaled(1.6D, 1.2D, 1.0D);
+        RenderSystem.translatef(-this.lowerbody.offsetX, -this.lowerbody.offsetY, -this.lowerbody.offsetZ);
+        RenderSystem.translatef(-this.lowerbody.rotationPointX * f5, -this.lowerbody.rotationPointY * f5, -this.lowerbody.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Czulko.offsetX, this.Czulko.offsetY, this.Czulko.offsetZ);
+        RenderSystem.translatef(this.Czulko.rotationPointX * f5, this.Czulko.rotationPointY * f5, this.Czulko.rotationPointZ * f5);
+        RenderSystem.scaled(0.5D, 1.0D, 0.5D);
+        RenderSystem.translatef(-this.Czulko.offsetX, -this.Czulko.offsetY, -this.Czulko.offsetZ);
+        RenderSystem.translatef(-this.Czulko.rotationPointX * f5, -this.Czulko.rotationPointY * f5, -this.Czulko.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Head.offsetX, this.Head.offsetY, this.Head.offsetZ);
+        RenderSystem.translatef(this.Head.rotationPointX * f5, this.Head.rotationPointY * f5, this.Head.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.1D, 1.0D);
+        RenderSystem.translatef(-this.Head.offsetX, -this.Head.offsetY, -this.Head.offsetZ);
+        RenderSystem.translatef(-this.Head.rotationPointX * f5, -this.Head.rotationPointY * f5, -this.Head.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Czulko_1.offsetX, this.Czulko_1.offsetY, this.Czulko_1.offsetZ);
+        RenderSystem.translatef(this.Czulko_1.rotationPointX * f5, this.Czulko_1.rotationPointY * f5, this.Czulko_1.rotationPointZ * f5);
+        RenderSystem.scaled(0.5D, 1.0D, 0.5D);
+        RenderSystem.translatef(-this.Czulko_1.offsetX, -this.Czulko_1.offsetY, -this.Czulko_1.offsetZ);
+        RenderSystem.translatef(-this.Czulko_1.rotationPointX * f5, -this.Czulko_1.rotationPointY * f5, -this.Czulko_1.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Head2.offsetX, this.Head2.offsetY, this.Head2.offsetZ);
+        RenderSystem.translatef(this.Head2.rotationPointX * f5, this.Head2.rotationPointY * f5, this.Head2.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.1D, 1.0D);
+        RenderSystem.translatef(-this.Head2.offsetX, -this.Head2.offsetY, -this.Head2.offsetZ);
+        RenderSystem.translatef(-this.Head2.rotationPointX * f5, -this.Head2.rotationPointY * f5, -this.Head2.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Head1.offsetX, this.Head1.offsetY, this.Head1.offsetZ);
+        RenderSystem.translatef(this.Head1.rotationPointX * f5, this.Head1.rotationPointY * f5, this.Head1.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.1D, 1.0D);
+        RenderSystem.translatef(-this.Head1.offsetX, -this.Head1.offsetY, -this.Head1.offsetZ);
+        RenderSystem.translatef(-this.Head1.rotationPointX * f5, -this.Head1.rotationPointY * f5, -this.Head1.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Body.offsetX, this.Body.offsetY, this.Body.offsetZ);
+        RenderSystem.translatef(this.Body.rotationPointX * f5, this.Body.rotationPointY * f5, this.Body.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 0.7D, 1.0D);
+        RenderSystem.translatef(-this.Body.offsetX, -this.Body.offsetY, -this.Body.offsetZ);
+        RenderSystem.translatef(-this.Body.rotationPointX * f5, -this.Body.rotationPointY * f5, -this.Body.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.Body_1.offsetX, this.Body_1.offsetY, this.Body_1.offsetZ);
+        RenderSystem.translatef(this.Body_1.rotationPointX * f5, this.Body_1.rotationPointY * f5, this.Body_1.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 0.8D, 1.6D);
+        RenderSystem.translatef(-this.Body_1.offsetX, -this.Body_1.offsetY, -this.Body_1.offsetZ);
+        RenderSystem.translatef(-this.Body_1.rotationPointX * f5, -this.Body_1.rotationPointY * f5, -this.Body_1.rotationPointZ * f5);
+        RenderSystem.popMatrix();*/
+        return ImmutableList.of(Head,Wing4,Wing3,lowerbody,Body,Body_1,Head1,Head2,Czulko,Czulko_1,Wing2,Wing1);
+    }
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
@@ -155,17 +162,4 @@ public class ModelSkylight<T extends LivingEntity> extends EntityModel<T> {
     }
 
     FunctionHelper helper = Kathairis.getHelper();
-
-    @Override
-    public void setRotationAngles(T entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
-	      super.setRotationAngles(entity, f, f1, f2, f3, f4, f5);
-	    	if(entity.getMotion().y!=0D||entity.getMotion().x!=0D||entity.getMotion().z!=0D) {
-	        	Wing4.rotateAngleZ= MathHelper.sin(f2*0.6f);
-	        	Wing3.rotateAngleZ=-MathHelper.sin(f2*0.6f);
-	    	}else {
-	        	Wing4.rotateAngleZ= helper.degToRad(70)- MathHelper.sin(f2*0.05f)*0.05f;
-	        	Wing3.rotateAngleZ=-helper.degToRad(70)+ MathHelper.sin(f2*0.05f)*0.05f;
-	    	}
-    }
 }

@@ -1,9 +1,12 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.entity.EntityBison;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelBison<T extends LivingEntity> extends EntityModel<T> {
+public class ModelBison<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer Body1;
     public ModelRenderer FrontRightUpperLeg;
     public ModelRenderer FrontLeftUpperLeg;
@@ -107,69 +110,14 @@ public class ModelBison<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.Tail1.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.HornLeft.offsetX, this.HornLeft.offsetY, this.HornLeft.offsetZ);
-        GlStateManager.translatef(this.HornLeft.rotationPointX * f5, this.HornLeft.rotationPointY * f5, this.HornLeft.rotationPointZ * f5);
-        GlStateManager.scaled(1.6D, 1.2D, 1.0D);
-        GlStateManager.translatef(-this.HornLeft.offsetX, -this.HornLeft.offsetY, -this.HornLeft.offsetZ);
-        GlStateManager.translatef(-this.HornLeft.rotationPointX * f5, -this.HornLeft.rotationPointY * f5, -this.HornLeft.rotationPointZ * f5);
-        this.HornLeft.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.LeftThigh.offsetX, this.LeftThigh.offsetY, this.LeftThigh.offsetZ);
-        GlStateManager.translatef(this.LeftThigh.rotationPointX * f5, this.LeftThigh.rotationPointY * f5, this.LeftThigh.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 1.2D, 1.2D);
-        GlStateManager.translatef(-this.LeftThigh.offsetX, -this.LeftThigh.offsetY, -this.LeftThigh.offsetZ);
-        GlStateManager.translatef(-this.LeftThigh.rotationPointX * f5, -this.LeftThigh.rotationPointY * f5, -this.LeftThigh.rotationPointZ * f5);
-        this.LeftThigh.render(f5);
-        GlStateManager.popMatrix();
-        this.Head2.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.HornRight.offsetX, this.HornRight.offsetY, this.HornRight.offsetZ);
-        GlStateManager.translatef(this.HornRight.rotationPointX * f5, this.HornRight.rotationPointY * f5, this.HornRight.rotationPointZ * f5);
-        GlStateManager.scaled(1.6D, 1.2D, 1.0D);
-        GlStateManager.translatef(-this.HornRight.offsetX, -this.HornRight.offsetY, -this.HornRight.offsetZ);
-        GlStateManager.translatef(-this.HornRight.rotationPointX * f5, -this.HornRight.rotationPointY * f5, -this.HornRight.rotationPointZ * f5);
-        this.HornRight.render(f5);
-        GlStateManager.popMatrix();
-        this.FrontLeftUpperLeg.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.RightThigh.offsetX, this.RightThigh.offsetY, this.RightThigh.offsetZ);
-        GlStateManager.translatef(this.RightThigh.rotationPointX * f5, this.RightThigh.rotationPointY * f5, this.RightThigh.rotationPointZ * f5);
-        GlStateManager.scaled(1.1D, 1.2D, 1.2D);
-        GlStateManager.translatef(-this.RightThigh.offsetX, -this.RightThigh.offsetY, -this.RightThigh.offsetZ);
-        GlStateManager.translatef(-this.RightThigh.rotationPointX * f5, -this.RightThigh.rotationPointY * f5, -this.RightThigh.rotationPointZ * f5);
-        this.RightThigh.render(f5);
-        GlStateManager.popMatrix();
-        this.Body1.render(f5);
-        this.Head1.render(f5);
-        this.FrontRightUpperLeg.render(f5);
-        this.Body2.render(f5);
-    }
+    public void func_225597_a_(T entity, float limbSwing, float limbSwingAmount, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
-    }
 
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5)
-    {
-    	
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, f2, f3, f4, f5);
-
-        
         this.RightThigh.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F) * 1F * limbSwingAmount;
         this.LeftThigh.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F + (float)Math.PI) * 1F * limbSwingAmount;
         this.FrontRightUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F + (float)Math.PI) * 1F * limbSwingAmount;
         this.FrontLeftUpperLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.3662F) * 1F * limbSwingAmount;
-        
+
         if(entity instanceof EntityBison) {
             EntityBison bison = (EntityBison) entity;
             if (bison.getShouldAnimTail()) {
@@ -178,7 +126,53 @@ public class ModelBison<T extends LivingEntity> extends EntityModel<T> {
                 Tail1.rotateAngleZ = 0;
             }
         }
-        
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        /*RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.HornLeft.offsetX, this.HornLeft.offsetY, this.HornLeft.offsetZ);
+        RenderSystem.translatef(this.HornLeft.rotationPointX * f5, this.HornLeft.rotationPointY * f5, this.HornLeft.rotationPointZ * f5);
+        RenderSystem.scaled(1.6D, 1.2D, 1.0D);
+        RenderSystem.translatef(-this.HornLeft.offsetX, -this.HornLeft.offsetY, -this.HornLeft.offsetZ);
+        RenderSystem.translatef(-this.HornLeft.rotationPointX * f5, -this.HornLeft.rotationPointY * f5, -this.HornLeft.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.LeftThigh.offsetX, this.LeftThigh.offsetY, this.LeftThigh.offsetZ);
+        RenderSystem.translatef(this.LeftThigh.rotationPointX * f5, this.LeftThigh.rotationPointY * f5, this.LeftThigh.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 1.2D, 1.2D);
+        RenderSystem.translatef(-this.LeftThigh.offsetX, -this.LeftThigh.offsetY, -this.LeftThigh.offsetZ);
+        RenderSystem.translatef(-this.LeftThigh.rotationPointX * f5, -this.LeftThigh.rotationPointY * f5, -this.LeftThigh.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.HornRight.offsetX, this.HornRight.offsetY, this.HornRight.offsetZ);
+        RenderSystem.translatef(this.HornRight.rotationPointX * f5, this.HornRight.rotationPointY * f5, this.HornRight.rotationPointZ * f5);
+        RenderSystem.scaled(1.6D, 1.2D, 1.0D);
+        RenderSystem.translatef(-this.HornRight.offsetX, -this.HornRight.offsetY, -this.HornRight.offsetZ);
+        RenderSystem.translatef(-this.HornRight.rotationPointX * f5, -this.HornRight.rotationPointY * f5, -this.HornRight.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.RightThigh.offsetX, this.RightThigh.offsetY, this.RightThigh.offsetZ);
+        RenderSystem.translatef(this.RightThigh.rotationPointX * f5, this.RightThigh.rotationPointY * f5, this.RightThigh.rotationPointZ * f5);
+        RenderSystem.scaled(1.1D, 1.2D, 1.2D);
+        RenderSystem.translatef(-this.RightThigh.offsetX, -this.RightThigh.offsetY, -this.RightThigh.offsetZ);
+        RenderSystem.translatef(-this.RightThigh.rotationPointX * f5, -this.RightThigh.rotationPointY * f5, -this.RightThigh.rotationPointZ * f5);
+        RenderSystem.popMatrix();*/
+        return ImmutableList.of(Body1,FrontRightUpperLeg,FrontLeftUpperLeg,Head1,HornLeft,Body2,Head2,Tail1,RightThigh,
+                LeftThigh,HornRight,FrontRightDownLeg,FrontLeftDownLeg,Tail2,BackRightUpperLeg,BackRightDownLeg,
+                BackLeftUpperLeg,BackLeftDownLeg);
+    }
+
+
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
     }
 }
 

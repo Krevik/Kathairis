@@ -1,10 +1,12 @@
 package io.github.krevik.kathairis.client.model;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,8 +17,22 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelGecko<T extends LivingEntity> extends EntityModel<T> {
-    public ModelRenderer head_1;
+public class ModelGecko<T extends LivingEntity> extends AgeableModel<T> {
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return null;
+    }
+
+    @Override
+    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+    }
+    /*public ModelRenderer head_1;
     public ModelRenderer body_1;
     public ModelRenderer legmain_1;
     public ModelRenderer legmain_2;
@@ -98,8 +114,23 @@ public class ModelGecko<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
+    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return null;
+    }
+
+    @Override
     public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        GlStateManager.pushMatrix();
+        RenderSystem.pushMatrix();
         GlStateManager.translatef(this.jawtop.offsetX, this.jawtop.offsetY, this.jawtop.offsetZ);
         GlStateManager.translatef(this.jawtop.rotationPointX * f5, this.jawtop.rotationPointY * f5, this.jawtop.rotationPointZ * f5);
         GlStateManager.scaled(0.6D, 0.8D, 0.6D);
@@ -178,5 +209,5 @@ public class ModelGecko<T extends LivingEntity> extends EntityModel<T> {
         this.legmain_3.rotateAngleX = (helper.degToRad(49.57F))+ MathHelper.sin(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
         this.legmain_4.rotateAngleX = (helper.degToRad(41.74F))+ MathHelper.sin(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 
-    }
+    }*/
 }

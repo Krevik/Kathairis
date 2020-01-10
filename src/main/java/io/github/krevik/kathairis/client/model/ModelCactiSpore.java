@@ -1,11 +1,13 @@
 package io.github.krevik.kathairis.client.model;
 
 
+import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityCactiSpore;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelCactiSpore<T extends LivingEntity> extends EntityModel<T> {
+public class ModelCactiSpore<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer Body;
     public ModelRenderer Spike1;
     public ModelRenderer Spike2;
@@ -136,26 +138,57 @@ public class ModelCactiSpore<T extends LivingEntity> extends EntityModel<T> {
         this.Body.addChild(this.FlowerBud);
     }
 
+
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.Spike6.render(f5);
-        this.Spike3.render(f5);
-        this.Spike9.render(f5);
-        this.Spike10.render(f5);
-        this.Body.render(f5);
-        this.Spike7.render(f5);
-        this.Spike12.render(f5);
-        this.Spike2.render(f5);
-        this.Spike5.render(f5);
-        this.Spike4.render(f5);
-        this.Spike1.render(f5);
-        this.Spike8.render(f5);
-        this.Spike11.render(f5);
+    public void func_225597_a_(T entity, float p_225597_2_, float p_225597_3_, float age, float p_225597_5_, float p_225597_6_) {
+        setRotateAngle(Petal1,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F,0,0);
+        setRotateAngle(Petal2,0,0,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F);
+        setRotateAngle(Petal3,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F,helper.degToRad(-180),0);
+        setRotateAngle(Petal4,0,helper.degToRad(180),helper.degToRad(20)+ MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F);
+        if(entity instanceof EntityCactiSpore) {
+            /*EntityCactiSpore living = (EntityCactiSpore) entity;
+            int divider = 100;
+            float multiplier = 0.4f;
+            Spike1.offsetX = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike1.offsetZ = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike2.offsetX = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike2.offsetZ = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike3.offsetX = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike3.offsetZ = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike4.offsetX = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike4.offsetZ = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike5.offsetX = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike5.offsetZ = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike6.offsetX = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike6.offsetZ = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike7.offsetX = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike7.offsetZ = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike8.offsetX = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike8.offsetZ = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+
+            Spike9.offsetX = MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            // Spike9.offsetY=MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
+            //Spike10.offsetY=MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
+            Spike10.offsetZ = MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            //Spike11.offsetY=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
+            Spike11.offsetZ = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            Spike12.offsetX = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            //Spike12.offsetY=MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
+               */
+        }
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(Spike6,Spike3,Spike9,Spike10,Body,Spike7,Spike12,Spike2,Spike5,Spike4,Spike1,Spike8,
+                Spike11);
+    }
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
@@ -164,44 +197,4 @@ public class ModelCactiSpore<T extends LivingEntity> extends EntityModel<T> {
 
     FunctionHelper helper = Kathairis.getHelper();
 
-    @Override
-    public void setRotationAngles(T entity, float f, float f1, float age, float f3, float f4, float f5)
-    {
-        super.setRotationAngles(entity, f, f1, age, f3, f4, f5);
-        setRotateAngle(Petal1,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F,0,0);
-        setRotateAngle(Petal2,0,0,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F);
-        setRotateAngle(Petal3,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F,helper.degToRad(-180),0);
-        setRotateAngle(Petal4,0,helper.degToRad(180),helper.degToRad(20)+ MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F);
-        if(entity instanceof EntityCactiSpore){
-            EntityCactiSpore living = (EntityCactiSpore) entity;
-                    int divider=100;
-                    float multiplier=0.4f;
-            Spike1.offsetX=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike1.offsetZ=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike2.offsetX=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike2.offsetZ=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike3.offsetX=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike3.offsetZ=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike4.offsetX=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike4.offsetZ=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike5.offsetX=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike5.offsetZ=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike6.offsetX=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike6.offsetZ=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike7.offsetX=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike7.offsetZ=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike8.offsetX=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike8.offsetZ=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-
-            Spike9.offsetX= MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            // Spike9.offsetY=MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
-            //Spike10.offsetY=MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
-            Spike10.offsetZ= MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            //Spike11.offsetY=+MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
-            Spike11.offsetZ=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            Spike12.offsetX=-MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1)*multiplier;
-            //Spike12.offsetY=MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
-
-        }
-    }
 }

@@ -1,10 +1,13 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityFlyingSquid;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -14,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelFlyingSquid<T extends LivingEntity> extends EntityModel<T> {
+public class ModelFlyingSquid<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer body1;
     public ModelRenderer body2;
     public ModelRenderer body3;
@@ -136,77 +139,122 @@ public class ModelFlyingSquid<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.body1.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain_5.offsetX, this.tentaclemain_5.offsetY, this.tentaclemain_5.offsetZ);
-        GlStateManager.translatef(this.tentaclemain_5.rotationPointX * f5, this.tentaclemain_5.rotationPointY * f5, this.tentaclemain_5.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain_5.offsetX, -this.tentaclemain_5.offsetY, -this.tentaclemain_5.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain_5.rotationPointX * f5, -this.tentaclemain_5.rotationPointY * f5, -this.tentaclemain_5.rotationPointZ * f5);
-        this.tentaclemain_5.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain_4.offsetX, this.tentaclemain_4.offsetY, this.tentaclemain_4.offsetZ);
-        GlStateManager.translatef(this.tentaclemain_4.rotationPointX * f5, this.tentaclemain_4.rotationPointY * f5, this.tentaclemain_4.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain_4.offsetX, -this.tentaclemain_4.offsetY, -this.tentaclemain_4.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain_4.rotationPointX * f5, -this.tentaclemain_4.rotationPointY * f5, -this.tentaclemain_4.rotationPointZ * f5);
-        this.tentaclemain_4.render(f5);
-        GlStateManager.popMatrix();
-        this.body3.render(f5);
-        this.body2.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain.offsetX, this.tentaclemain.offsetY, this.tentaclemain.offsetZ);
-        GlStateManager.translatef(this.tentaclemain.rotationPointX * f5, this.tentaclemain.rotationPointY * f5, this.tentaclemain.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain.offsetX, -this.tentaclemain.offsetY, -this.tentaclemain.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain.rotationPointX * f5, -this.tentaclemain.rotationPointY * f5, -this.tentaclemain.rotationPointZ * f5);
-        this.tentaclemain.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain_2.offsetX, this.tentaclemain_2.offsetY, this.tentaclemain_2.offsetZ);
-        GlStateManager.translatef(this.tentaclemain_2.rotationPointX * f5, this.tentaclemain_2.rotationPointY * f5, this.tentaclemain_2.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain_2.offsetX, -this.tentaclemain_2.offsetY, -this.tentaclemain_2.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain_2.rotationPointX * f5, -this.tentaclemain_2.rotationPointY * f5, -this.tentaclemain_2.rotationPointZ * f5);
-        this.tentaclemain_2.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain_3.offsetX, this.tentaclemain_3.offsetY, this.tentaclemain_3.offsetZ);
-        GlStateManager.translatef(this.tentaclemain_3.rotationPointX * f5, this.tentaclemain_3.rotationPointY * f5, this.tentaclemain_3.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain_3.offsetX, -this.tentaclemain_3.offsetY, -this.tentaclemain_3.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain_3.rotationPointX * f5, -this.tentaclemain_3.rotationPointY * f5, -this.tentaclemain_3.rotationPointZ * f5);
-        this.tentaclemain_3.render(f5);
-        GlStateManager.popMatrix();
-        this.wingflap2.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain_6.offsetX, this.tentaclemain_6.offsetY, this.tentaclemain_6.offsetZ);
-        GlStateManager.translatef(this.tentaclemain_6.rotationPointX * f5, this.tentaclemain_6.rotationPointY * f5, this.tentaclemain_6.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain_6.offsetX, -this.tentaclemain_6.offsetY, -this.tentaclemain_6.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain_6.rotationPointX * f5, -this.tentaclemain_6.rotationPointY * f5, -this.tentaclemain_6.rotationPointZ * f5);
-        this.tentaclemain_6.render(f5);
-        GlStateManager.popMatrix();
-        this.wingflap1.render(f5);
-        this.body3_1.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain_1.offsetX, this.tentaclemain_1.offsetY, this.tentaclemain_1.offsetZ);
-        GlStateManager.translatef(this.tentaclemain_1.rotationPointX * f5, this.tentaclemain_1.rotationPointY * f5, this.tentaclemain_1.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain_1.offsetX, -this.tentaclemain_1.offsetY, -this.tentaclemain_1.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain_1.rotationPointX * f5, -this.tentaclemain_1.rotationPointY * f5, -this.tentaclemain_1.rotationPointZ * f5);
-        this.tentaclemain_1.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef(this.tentaclemain_7.offsetX, this.tentaclemain_7.offsetY, this.tentaclemain_7.offsetZ);
-        GlStateManager.translatef(this.tentaclemain_7.rotationPointX * f5, this.tentaclemain_7.rotationPointY * f5, this.tentaclemain_7.rotationPointZ * f5);
-        GlStateManager.scaled(1.2D, 1.0D, 1.2D);
-        GlStateManager.translatef(-this.tentaclemain_7.offsetX, -this.tentaclemain_7.offsetY, -this.tentaclemain_7.offsetZ);
-        GlStateManager.translatef(-this.tentaclemain_7.rotationPointX * f5, -this.tentaclemain_7.rotationPointY * f5, -this.tentaclemain_7.rotationPointZ * f5);
-        this.tentaclemain_7.render(f5);
-        GlStateManager.popMatrix();
+    public void func_225597_a_(T entity, float limbSwing, float limbSwingAmount, float age, float p_225597_5_, float p_225597_6_) {
+        if(entity instanceof EntityFlyingSquid) {
+            EntityFlyingSquid squid = (EntityFlyingSquid) entity;
+            float animTimer = squid.animTravelTime;
+            float animTimer2 = squid.animTravelTime2;
+
+
+
+
+
+            if(squid.isHoldingPlayer()) {
+                tentaclemain.rotateAngleX=degToRad(15.65f);
+                tentaclemain_1.rotateAngleX=degToRad(15.65f);
+                tentaclemain_2.rotateAngleX=degToRad(15.65f);
+                tentaclemain_3.rotateAngleX=degToRad(15.65f);
+                tentaclemain_4.rotateAngleX=degToRad(15.65f);
+                tentaclemain_6.rotateAngleX=degToRad(15.65f);
+                tentaclemain_5.rotateAngleX=degToRad(15.65f);
+                tentaclemain_7.rotateAngleX=degToRad(15.65f);
+
+                tentacklesecond_5.rotateAngleX=degToRad(-42f);
+                tentacklesecond_1.rotateAngleX=degToRad(-42f);
+                tentacklesecond_7.rotateAngleX=degToRad(-42f);
+                tentacklesecond_3.rotateAngleX=degToRad(-42f);
+                tentacklesecond.rotateAngleX=degToRad(-42f);
+                tentacklesecond_2.rotateAngleX=degToRad(-42f);
+                tentacklesecond_4.rotateAngleX=degToRad(-42f);
+                tentacklesecond_6.rotateAngleX=degToRad(-42f);
+            }else {
+                tentaclemain.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+                tentaclemain_1.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+                tentaclemain_2.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+                tentaclemain_3.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+                tentaclemain_4.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+                tentaclemain_6.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+                tentaclemain_5.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+                tentaclemain_7.rotateAngleX=degToRad(15.65f)+animTimer2/100;
+
+                tentacklesecond_5.rotateAngleX=degToRad(33.91f)+animTimer/100;
+                tentacklesecond_1.rotateAngleX=degToRad(33.91f)+animTimer/100;
+                tentacklesecond_7.rotateAngleX=degToRad(33.91f)+animTimer/100;
+                tentacklesecond_3.rotateAngleX=degToRad(33.91f)+animTimer/100;
+                tentacklesecond.rotateAngleX=degToRad(33.91f)+animTimer/100;
+                tentacklesecond_2.rotateAngleX=degToRad(33.91f)+animTimer/100;
+                tentacklesecond_4.rotateAngleX=degToRad(33.91f)+animTimer/100;
+                tentacklesecond_6.rotateAngleX=degToRad(33.91f)+animTimer/100;
+            }
+        }
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        /*RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain_5.offsetX, this.tentaclemain_5.offsetY, this.tentaclemain_5.offsetZ);
+        RenderSystem.translatef(this.tentaclemain_5.rotationPointX * f5, this.tentaclemain_5.rotationPointY * f5, this.tentaclemain_5.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain_5.offsetX, -this.tentaclemain_5.offsetY, -this.tentaclemain_5.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain_5.rotationPointX * f5, -this.tentaclemain_5.rotationPointY * f5, -this.tentaclemain_5.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain_4.offsetX, this.tentaclemain_4.offsetY, this.tentaclemain_4.offsetZ);
+        RenderSystem.translatef(this.tentaclemain_4.rotationPointX * f5, this.tentaclemain_4.rotationPointY * f5, this.tentaclemain_4.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain_4.offsetX, -this.tentaclemain_4.offsetY, -this.tentaclemain_4.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain_4.rotationPointX * f5, -this.tentaclemain_4.rotationPointY * f5, -this.tentaclemain_4.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain.offsetX, this.tentaclemain.offsetY, this.tentaclemain.offsetZ);
+        RenderSystem.translatef(this.tentaclemain.rotationPointX * f5, this.tentaclemain.rotationPointY * f5, this.tentaclemain.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain.offsetX, -this.tentaclemain.offsetY, -this.tentaclemain.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain.rotationPointX * f5, -this.tentaclemain.rotationPointY * f5, -this.tentaclemain.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain_2.offsetX, this.tentaclemain_2.offsetY, this.tentaclemain_2.offsetZ);
+        RenderSystem.translatef(this.tentaclemain_2.rotationPointX * f5, this.tentaclemain_2.rotationPointY * f5, this.tentaclemain_2.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain_2.offsetX, -this.tentaclemain_2.offsetY, -this.tentaclemain_2.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain_2.rotationPointX * f5, -this.tentaclemain_2.rotationPointY * f5, -this.tentaclemain_2.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain_3.offsetX, this.tentaclemain_3.offsetY, this.tentaclemain_3.offsetZ);
+        RenderSystem.translatef(this.tentaclemain_3.rotationPointX * f5, this.tentaclemain_3.rotationPointY * f5, this.tentaclemain_3.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain_3.offsetX, -this.tentaclemain_3.offsetY, -this.tentaclemain_3.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain_3.rotationPointX * f5, -this.tentaclemain_3.rotationPointY * f5, -this.tentaclemain_3.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain_6.offsetX, this.tentaclemain_6.offsetY, this.tentaclemain_6.offsetZ);
+        RenderSystem.translatef(this.tentaclemain_6.rotationPointX * f5, this.tentaclemain_6.rotationPointY * f5, this.tentaclemain_6.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain_6.offsetX, -this.tentaclemain_6.offsetY, -this.tentaclemain_6.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain_6.rotationPointX * f5, -this.tentaclemain_6.rotationPointY * f5, -this.tentaclemain_6.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain_1.offsetX, this.tentaclemain_1.offsetY, this.tentaclemain_1.offsetZ);
+        RenderSystem.translatef(this.tentaclemain_1.rotationPointX * f5, this.tentaclemain_1.rotationPointY * f5, this.tentaclemain_1.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain_1.offsetX, -this.tentaclemain_1.offsetY, -this.tentaclemain_1.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain_1.rotationPointX * f5, -this.tentaclemain_1.rotationPointY * f5, -this.tentaclemain_1.rotationPointZ * f5);
+        RenderSystem.popMatrix();
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef(this.tentaclemain_7.offsetX, this.tentaclemain_7.offsetY, this.tentaclemain_7.offsetZ);
+        RenderSystem.translatef(this.tentaclemain_7.rotationPointX * f5, this.tentaclemain_7.rotationPointY * f5, this.tentaclemain_7.rotationPointZ * f5);
+        RenderSystem.scaled(1.2D, 1.0D, 1.2D);
+        RenderSystem.translatef(-this.tentaclemain_7.offsetX, -this.tentaclemain_7.offsetY, -this.tentaclemain_7.offsetZ);
+        RenderSystem.translatef(-this.tentaclemain_7.rotationPointX * f5, -this.tentaclemain_7.rotationPointY * f5, -this.tentaclemain_7.rotationPointZ * f5);
+        RenderSystem.popMatrix();*/
+
+        return ImmutableList.of(body1,tentaclemain_5,tentaclemain_4,body3,body2,tentaclemain,tentaclemain_2,
+                tentaclemain_3,wingflap2,tentaclemain_6,wingflap1,body3_1,tentaclemain_1,tentaclemain_7);
     }
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
@@ -217,59 +265,5 @@ public class ModelFlyingSquid<T extends LivingEntity> extends EntityModel<T> {
     
     private float degToRad(float deg) {
     	return Kathairis.getHelper().degToRad(deg);
-    }
-
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float age, float f3, float f4, float f5)
-    {
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, age, f3, f4, f5);
-    	if(entity instanceof EntityFlyingSquid) {
-    		EntityFlyingSquid squid = (EntityFlyingSquid) entity;
-    		float animTimer = squid.animTravelTime;
-    		float animTimer2 = squid.animTravelTime2;
-
-
-    		
-
-    		
-    		if(squid.isHoldingPlayer()) {
-        		tentaclemain.rotateAngleX=degToRad(15.65f);
-        		tentaclemain_1.rotateAngleX=degToRad(15.65f);
-        		tentaclemain_2.rotateAngleX=degToRad(15.65f);
-        		tentaclemain_3.rotateAngleX=degToRad(15.65f);
-        		tentaclemain_4.rotateAngleX=degToRad(15.65f);
-        		tentaclemain_6.rotateAngleX=degToRad(15.65f);
-        		tentaclemain_5.rotateAngleX=degToRad(15.65f);
-        		tentaclemain_7.rotateAngleX=degToRad(15.65f);
-        		
-    			tentacklesecond_5.rotateAngleX=degToRad(-42f);
-        		tentacklesecond_1.rotateAngleX=degToRad(-42f);
-        		tentacklesecond_7.rotateAngleX=degToRad(-42f);
-        		tentacklesecond_3.rotateAngleX=degToRad(-42f);
-        		tentacklesecond.rotateAngleX=degToRad(-42f);
-        		tentacklesecond_2.rotateAngleX=degToRad(-42f);
-        		tentacklesecond_4.rotateAngleX=degToRad(-42f);
-        		tentacklesecond_6.rotateAngleX=degToRad(-42f);
-    		}else {
-        		tentaclemain.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		tentaclemain_1.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		tentaclemain_2.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		tentaclemain_3.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		tentaclemain_4.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		tentaclemain_6.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		tentaclemain_5.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		tentaclemain_7.rotateAngleX=degToRad(15.65f)+animTimer2/100;
-        		
-        		tentacklesecond_5.rotateAngleX=degToRad(33.91f)+animTimer/100;
-        		tentacklesecond_1.rotateAngleX=degToRad(33.91f)+animTimer/100;
-        		tentacklesecond_7.rotateAngleX=degToRad(33.91f)+animTimer/100;
-        		tentacklesecond_3.rotateAngleX=degToRad(33.91f)+animTimer/100;
-        		tentacklesecond.rotateAngleX=degToRad(33.91f)+animTimer/100;
-        		tentacklesecond_2.rotateAngleX=degToRad(33.91f)+animTimer/100;
-        		tentacklesecond_4.rotateAngleX=degToRad(33.91f)+animTimer/100;
-        		tentacklesecond_6.rotateAngleX=degToRad(33.91f)+animTimer/100;
-    		}
-    	}
-
     }
 }

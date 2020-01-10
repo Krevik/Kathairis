@@ -1,8 +1,10 @@
 package io.github.krevik.kathairis.client.model;
 
 
+import com.google.common.collect.ImmutableList;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelBigTurtle<T extends LivingEntity> extends EntityModel<T> {
+public class ModelBigTurtle<T extends LivingEntity> extends AgeableModel<T> {
 
     public ModelRenderer Noga1;
     public ModelRenderer Noga2;
@@ -54,35 +56,27 @@ public class ModelBigTurtle<T extends LivingEntity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        this.Tulow1.render(f5);
-        this.Noga2.render(f5);
-        this.Glowa.render(f5);
-        this.Noga1.render(f5);
-        this.Noga3.render(f5);
-        this.Noga4.render(f5);
-        this.Tulow2.render(f5);
-        this.Tulow3.render(f5);
+    public void func_225597_a_(T entity, float limbSwing, float limbSwingAmount, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+        this.Noga1.rotateAngleX = MathHelper.cos(limbSwing * 2F) * 1.4F * limbSwingAmount;
+        this.Noga2.rotateAngleX = MathHelper.cos(limbSwing * 2F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        this.Noga3.rotateAngleX = MathHelper.cos(limbSwing * 2F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        this.Noga4.rotateAngleX = MathHelper.cos(limbSwing * 2F) * 1.4F * limbSwingAmount;
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(Tulow1,Noga2,Glowa,Noga1,Noga3,Noga4,Tulow2,Tulow3);
+    }
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
 
-    }
-
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float f2, float f3, float f4, float f5)
-    {
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, f2, f3, f4, f5);
-        this.Noga1.rotateAngleX = MathHelper.cos(limbSwing * 2F) * 1.4F * limbSwingAmount;
-        this.Noga2.rotateAngleX = MathHelper.cos(limbSwing * 2F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.Noga3.rotateAngleX = MathHelper.cos(limbSwing * 2F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.Noga4.rotateAngleX = MathHelper.cos(limbSwing * 2F) * 1.4F * limbSwingAmount;
     }
 }

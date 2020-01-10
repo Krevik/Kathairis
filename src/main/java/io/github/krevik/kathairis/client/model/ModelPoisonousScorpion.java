@@ -1,9 +1,11 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelPoisonousScorpion<T extends LivingEntity> extends EntityModel<T> {
+public class ModelPoisonousScorpion<T extends LivingEntity> extends AgeableModel<T> {
     public ModelRenderer Tail9;
     public ModelRenderer Tail4;
     public ModelRenderer Tail15;
@@ -204,32 +206,29 @@ public class ModelPoisonousScorpion<T extends LivingEntity> extends EntityModel<
     }
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        this.Tail12.render(f5);
-        this.Tail15.render(f5);
-        this.Leg61.render(f5);
-        this.Szczypce21.render(f5);
-        this.Szczypce11.render(f5);
-        this.Leg2_1.render(f5);
-        this.Tail4.render(f5);
-        this.Tail2.render(f5);
-        this.Tail13.render(f5);
-        this.Leg2_3.render(f5);
-        this.Leg61_2.render(f5);
-        this.Tail1.render(f5);
-        this.Body_1.render(f5);
-        this.Leg2.render(f5);
-        this.Leg61_1.render(f5);
-        this.Tail9.render(f5);
-        this.Leg2_2.render(f5);
-        this.Leg61_3.render(f5);
-        this.Tail4_1.render(f5);
-        this.Body.render(f5);
+    public void func_225597_a_(T entity, float f, float f1, float f2, float f3, float f4) {
+        Leg61.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f+0.4f)+0.01f*0.01f;
+        Leg2_1.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
+        Leg61_2.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f+0.4f)+0.01f*0.01f;
+        Leg2_3.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
+
+        Leg2.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
+        Leg2_2.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
+        Leg61_1.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
+        Leg61_3.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    @Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(Tail12,Tail15,Leg61,Szczypce21,Szczypce11,Leg2_1,Tail4,Tail2,Tail13,Leg2_3,
+                Leg61_2,Tail9,Leg2_3,Leg61_3,Tail4_1,Body);
+    }
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
@@ -237,18 +236,5 @@ public class ModelPoisonousScorpion<T extends LivingEntity> extends EntityModel<
     }
 
     FunctionHelper helper = Kathairis.getHelper();
-    @Override
-    public void setRotationAngles(T entity, float f, float f1, float f2, float f3, float f4, float f5 )
-    {
-      super.setRotationAngles(entity, f, f1, f2, f3, f4, f5);
-      Leg61.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f+0.4f)+0.01f*0.01f;
-      Leg2_1.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
-      Leg61_2.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f+0.4f)+0.01f*0.01f;
-      Leg2_3.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f+0.4f)+0.01f*0.01f;
 
-        Leg2.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
-        Leg2_2.rotateAngleZ= helper.degToRad(5.22f) - MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
-        Leg61_1.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
-        Leg61_3.rotateAngleZ= helper.degToRad(-5.22f) + MathHelper.cos(f*2+0.4f)+0.01f*0.01f;
-    }
 }
