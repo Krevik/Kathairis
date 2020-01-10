@@ -12,7 +12,6 @@ import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -23,6 +22,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -62,13 +62,12 @@ public class BlockSoftSand extends Block implements IItemGroupProvider {
 		return VoxelShapes.empty();
 	}
 
-	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isRemote) {
 			this.checkFallable(worldIn, pos);
 		}
-
 	}
+
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
@@ -90,11 +89,6 @@ public class BlockSoftSand extends Block implements IItemGroupProvider {
 		return 2;
 	}
 
-
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
 
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {

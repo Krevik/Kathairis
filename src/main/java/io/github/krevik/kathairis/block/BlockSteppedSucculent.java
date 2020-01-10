@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
@@ -39,8 +40,8 @@ public class BlockSteppedSucculent extends BlockKathairisPlant {
 	}
 
 	@Override
-	public void tick(BlockState state, World world, BlockPos pos, Random random) {
-		super.tick(state, world, pos, random);
+	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		super.func_225534_a_(state, world, pos, random);
 		if (random.nextInt(20) == 0) {
 			int height = 0;
 			if (world.isAirBlock(pos.up())) {

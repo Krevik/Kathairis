@@ -11,6 +11,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
@@ -50,8 +51,8 @@ public class BlockWillowVineMain extends BlockKathairisPlant implements IGrowabl
     }
 
     @Override
-    public void tick(BlockState state, World world, BlockPos pos, Random random) {
-        super.tick(state, world, pos, random);
+    public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random p_225534_4_) {
+        super.func_225534_a_(state,world,pos,p_225534_4_);
         if (!world.isRemote) {
             if (!isValidPosition(state,world,pos)) {
                 world.destroyBlock(pos, false);
@@ -62,6 +63,7 @@ public class BlockWillowVineMain extends BlockKathairisPlant implements IGrowabl
             }
         }
     }
+
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
@@ -89,9 +91,9 @@ public class BlockWillowVineMain extends BlockKathairisPlant implements IGrowabl
     }
 
     @Override
-    public void grow(World world, Random random, BlockPos blockPos, BlockState blockState) {
+    public void func_225535_a_(ServerWorld world, Random random, BlockPos blockPos, BlockState blockState) {
         if(world.getBlockState(blockPos.down()).getBlock()==Blocks.AIR&&
-        world.getBlockState(blockPos.down(2)).getBlock()==Blocks.AIR){
+                world.getBlockState(blockPos.down(2)).getBlock()==Blocks.AIR){
             if(world.getBlockState(blockPos.down(3)).getBlock()==Blocks.AIR){
                 if(random.nextInt(6)==0){
                     world.setBlockState(blockPos.down(), ModBlocks.WILLOW_VINE_TIP.getDefaultState());
@@ -103,4 +105,5 @@ public class BlockWillowVineMain extends BlockKathairisPlant implements IGrowabl
             }
         }
     }
+
 }

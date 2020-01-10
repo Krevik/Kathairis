@@ -2,10 +2,7 @@ package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModItemGroups;
 import io.github.krevik.kathairis.util.IItemGroupProvider;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItemUseContext;
@@ -48,11 +45,6 @@ public class BlockSolisCrystals extends Block implements IItemGroupProvider {
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.with(FACING, mirrorIn.mirror(state.get(FACING)));
-	}
-
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
