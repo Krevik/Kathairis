@@ -69,14 +69,14 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemG
 		if (!worldIn.isRemote) {
 			if (!worldIn.isAreaLoaded(pos, 3)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
 			if (!func_220257_b(state, worldIn, pos)) {
-				worldIn.setBlockState(pos, Blocks.DIRT.getDefaultState());
+				worldIn.setBlockState(pos, ModBlocks.KATHAIRIS_DIRT.getDefaultState());
 			} else {
 				if (worldIn.getLight(pos.up()) >= 9) {
 					BlockState blockstate = this.getDefaultState();
 
 					for(int i = 0; i < 4; ++i) {
 						BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-						if (worldIn.getBlockState(blockpos).getBlock() == Blocks.DIRT && func_220256_c(blockstate, worldIn, blockpos)) {
+						if (worldIn.getBlockState(blockpos).getBlock() == ModBlocks.KATHAIRIS_DIRT && func_220256_c(blockstate, worldIn, blockpos)) {
 							worldIn.setBlockState(blockpos, blockstate.with(SNOWY, Boolean.valueOf(worldIn.getBlockState(blockpos.up()).getBlock() == Blocks.SNOW)));
 						}
 					}
@@ -143,14 +143,11 @@ public class BlockKathairisGrass extends GrassBlock implements IGrowable, IItemG
 	}
 
 	private boolean shouldBeSnowed(BlockState state) {
-		boolean result = false;
 		if (month == 11) {
 			return true;
 		}
 		return state.get(SNOWY);
 	}
-
-
 
     @Override
     public void func_225535_a_(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)

@@ -27,7 +27,6 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
     }
 
 
-    @Override
     protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos pos, MutableBoundingBox box) {
         if(!canGrowInto(worldIn,pos.down())){
             return false;
@@ -106,6 +105,6 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
     //TODO
     @Override
     public boolean place(IWorld worldIn, ChunkGenerator generator, Random rand, BlockPos pos, IFeatureConfig config) {
-        return false;
+        return true;
     }
 }

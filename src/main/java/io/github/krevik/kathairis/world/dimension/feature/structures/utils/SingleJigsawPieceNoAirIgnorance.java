@@ -14,9 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.jigsaw.IJigsawDeserializer;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
+import net.minecraft.world.gen.feature.jigsaw.SingleJigsawPiece;
 import net.minecraft.world.gen.feature.template.*;
 
 import java.util.Collections;
@@ -70,7 +72,7 @@ public class SingleJigsawPieceNoAirIgnorance extends JigsawPiece {
 
     public List<Template.BlockInfo> getJigsawBlocks(TemplateManager templateManagerIn, BlockPos pos, Rotation rotationIn, Random rand) {
         Template template = templateManagerIn.getTemplateDefaulted(this.location);
-        List<Template.BlockInfo> list = template.func_215386_a(pos, (new PlacementSettings()).setRotation(rotationIn), Blocks.JIGSAW, true);
+        List<Template.BlockInfo> list = template.func_215386_a(pos, (new PlacementSettings()).setRotation(rotationIn), Blocks.field_226904_lY_, true);
         Collections.shuffle(list, rand);
         return list;
     }
@@ -80,14 +82,16 @@ public class SingleJigsawPieceNoAirIgnorance extends JigsawPiece {
         return template.getMutableBoundingBox((new PlacementSettings()).setRotation(rotationIn), pos);
     }
 
-    public boolean place(TemplateManager templateManagerIn, IWorld worldIn, BlockPos pos, Rotation rotationIn, MutableBoundingBox boundsIn, Random rand) {
-        Template template = templateManagerIn.getTemplateDefaulted(this.location);
-        PlacementSettings placementsettings = this.createPlacementSettings(rotationIn, boundsIn);
-        if (!template.addBlocksToWorld(worldIn, pos, placementsettings, 18)) {
+
+    @Override
+    public boolean func_225575_a_(TemplateManager p_225575_1_, IWorld p_225575_2_, ChunkGenerator<?> p_225575_3_, BlockPos p_225575_4_, Rotation p_225575_5_, MutableBoundingBox p_225575_6_, Random p_225575_7_) {
+        Template template = p_225575_1_.getTemplateDefaulted(this.location);
+        PlacementSettings placementsettings = this.createPlacementSettings(p_225575_5_, p_225575_6_);
+        if (!template.addBlocksToWorld(p_225575_2_, p_225575_4_, placementsettings, 18)) {
             return false;
         } else {
-            for(Template.BlockInfo template$blockinfo : Template.processBlockInfos(template, worldIn, pos, placementsettings, this.func_214857_a(templateManagerIn, pos, rotationIn, false))) {
-                this.func_214846_a(worldIn, template$blockinfo, pos, rotationIn, rand, boundsIn);
+            for(Template.BlockInfo template$blockinfo : Template.processBlockInfos(template, p_225575_2_, p_225575_4_, placementsettings, this.func_214857_a(p_225575_1_, p_225575_4_, p_225575_5_, false))) {
+                this.func_214846_a(p_225575_2_, template$blockinfo, p_225575_4_, p_225575_5_, p_225575_7_, p_225575_6_);
             }
 
             return true;

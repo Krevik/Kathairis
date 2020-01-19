@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.world.dimension.feature;
 
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.world.dimension.feature.carver.KatharianWorldCaveCarver;
 import io.github.krevik.kathairis.world.dimension.feature.config.KatharianTreeFeatureConfig;
@@ -22,11 +23,21 @@ import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.Struc
 import io.github.krevik.kathairis.world.dimension.surface.builder.KathairisSwampSurfaceBuilder;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianDesertEdgeSurfaceBuilder;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianSoftSandLakesSurfaceBuilder;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.carver.ICarverConfig;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
+import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
+import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.CountRangeConfig;
+import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilderConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
@@ -34,6 +45,19 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import java.util.Locale;
 
 public class KatharianFeatureList {
+
+    public static final TreeFeatureConfig MYSTIC_TREE_FEATURE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).func_225568_b_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_TALL_GRASS_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.KATHAIRIS_TALL_GRASS.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_MINI_GRASS_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_GOOSEBERRY_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.GOOSEBERRY_BUSH.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_FUNGI_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.KATHAIRIS_FUNGI.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_NIGHT_FLOWER_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.KATHAIRIS_NIGHT_FLOWER.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_VILYRIA_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.VILYRIA.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_MULTI_GRASS_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.KATHAIRIS_MULTI_GRASS.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_BUTTERFLY_FLOWER_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.BUTTERFLY_FLOWER.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_EYE_PLANT_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.EYE_PLANT.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_BISON_STARS_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.BISON_STARS.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
+    public static final BlockClusterFeatureConfig BLOCK_CLUSTER_FRUP_PLANT_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.FRUP_PLANT.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
 
     public static final AbstractTreeFeature<TreeFeatureConfig> KATHARIAN_TREE = registerFeature("katharian_tree", new KatharianTreeFeature(KatharianTreeFeatureConfig::deserializeMystic));
     public static final AbstractTreeFeature<TreeFeatureConfig> BASIC_STANDARD_TREE = registerFeature("basic_standard_tree", new FeatureBasicKatharianTree(KatharianTreeFeatureConfig::deserializeMystic));
@@ -89,4 +113,28 @@ public class KatharianFeatureList {
         return (F)(Registry.<WorldCarver<?>>register(Registry.CARVER, ModReference.MOD_ID+":"+key, carver));
     }
 
+    public static void addDefaultSkyDecorations(Biome biome) {
+        biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, KatharianFeatureList.KATHARIAN_CLOUD.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(3))));
+        biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, KatharianFeatureList.KATHARIAN_CLOUD_MINI_ISLAND.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(200))));
+        biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, KatharianFeatureList.FEATURE_SOUL_CLOUD_WITH_CHESTS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(750))));
+        biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, KatharianFeatureList.FEATURE_CLOUD_RUINS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(750))));
+    }
+
+    public static void addDefaultCarvers(Biome biomeIn) {
+        biomeIn.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(KatharianFeatureList.KATHARIAN_CAVE_WORLD_CARVER, new ProbabilityConfig(0.14285715F)));
+    }
+
+    public static void addDefaultOres(Biome biome){
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, KatharianFeatureList.ORE.func_225566_b_(new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TITANIUM_ORE.getDefaultState(),9)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(20, 0, 0, 64))));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, KatharianFeatureList.ORE.func_225566_b_(new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(),18)).func_227228_a_(Placement.COUNT_RANGE.func_227446_a_(new CountRangeConfig(20, 0, 0, 128))));
+    }
+
+    public static void addDefaultLakes(Biome biome){
+        biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).func_227228_a_(Placement.WATER_LAKE.func_227446_a_(new ChanceConfig(4))));
+        biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.LAVA.getDefaultState())).func_227228_a_(Placement.LAVA_LAKE.func_227446_a_(new ChanceConfig(80))));
+    }
+
+    public static void addWaterLakes(Biome biome){
+        biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).func_227228_a_(Placement.WATER_LAKE.func_227446_a_(new ChanceConfig(4))));
+    }
 }

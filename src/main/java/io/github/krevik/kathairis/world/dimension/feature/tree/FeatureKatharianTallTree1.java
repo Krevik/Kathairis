@@ -73,8 +73,4 @@ public class FeatureKatharianTallTree1 extends AbstractKatharianTreeFeature {
         return false;
     }
 
-    @Override
-    public boolean place(IWorld worldIn, ChunkGenerator generator, Random rand, BlockPos pos, IFeatureConfig config) {
-        return true;
-    }
 }

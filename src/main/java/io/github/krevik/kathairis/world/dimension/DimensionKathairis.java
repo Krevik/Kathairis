@@ -19,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.provider.OverworldBiomeProvider;
+import net.minecraft.world.biome.provider.OverworldBiomeProviderSettings;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.OverworldDimension;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -46,14 +48,17 @@ public class DimensionKathairis extends OverworldDimension {
     @Override
     public ChunkGenerator<? extends GenerationSettings> createChunkGenerator() {
         WorldType worldtype = this.world.getWorldInfo().getGenerator();
-        BiomeProviderType<KatharianBiomeProviderSettings, KatharianBiomeProvider> biomeprovidertype1 = ModDimensions.KATHAIRIS_BIOME_PROVIDER_TYPE;
-        BiomeProvider biomeprovider = biomeprovidertype1.create(new KatharianBiomeProviderSettings());
+        //BiomeProviderType<KatharianBiomeProviderSettings, KatharianBiomeProvider> biomeprovidertype1 = ModDimensions.KATHAIRIS_BIOME_PROVIDER_TYPE;
+        //BiomeProviderType<OverworldBiomeProviderSettings, OverworldBiomeProvider> biomeprovidertype1 = BiomeProviderType.VANILLA_LAYERED;
+        //BiomeProvider biomeprovider = biomeprovidertype1.create(new KatharianBiomeProviderSettings(world.getWorldInfo()));
+
+        KatharianBiomeProvider biomeProviderKath = new KatharianBiomeProvider(new KatharianBiomeProviderSettings(world.getWorldInfo()));
 
         ChunkGeneratorType<OverworldGenSettings, ChunkGeneratorKathairis> chunkgeneratortype4 = ModDimensions.KATHAIRIS_CHUNK_GENERATOR_TYPE;
         OverworldGenSettings overworldgensettings1 = chunkgeneratortype4.createSettings();
         overworldgensettings1.setDefaultBlock(ModBlocks.KATHAIRIS_STONE.getDefaultState());
         overworldgensettings1.setDefaultFluid(Blocks.WATER.getDefaultState());
-        return chunkgeneratortype4.create(this.world, biomeprovider, overworldgensettings1);
+        return chunkgeneratortype4.create(this.world, biomeProviderKath, overworldgensettings1);
     }
 
 

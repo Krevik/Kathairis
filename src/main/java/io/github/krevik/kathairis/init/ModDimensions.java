@@ -7,14 +7,21 @@ import io.github.krevik.kathairis.world.dimension.KathairisGenSettings;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProvider;
 import io.github.krevik.kathairis.world.dimension.biome.KatharianBiomeProviderSettings;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.provider.EndBiomeProvider;
+import net.minecraft.world.biome.provider.EndBiomeProviderSettings;
 import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.OverworldGenSettings;
+import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ObjectHolder;
+
+import java.lang.reflect.Constructor;
+import java.util.function.Function;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static io.github.krevik.kathairis.util.ModUtil._null;
@@ -40,9 +47,12 @@ public final class ModDimensions {
 
     @SubscribeEvent
     public static void onRegisterBiomeProviderType(final RegistryEvent.Register<BiomeProviderType<?,?>> event) {
+        /*Constructor<BiomeProviderType> constructor = BiomeProviderType.class.getDeclaredConstructor(Function.class, Function.class);
+        constructor.setAccessible(true);
+        BiomeProviderType<?,?> type = constructor.newInstance();
         event.getRegistry().registerAll(
                 RegistryHelper.setup(new BiomeProviderType<>(KatharianBiomeProvider::new, KatharianBiomeProviderSettings::new),"kathairis_biome_provider_type")
-        );
+        );*/
     }
 
     @SubscribeEvent

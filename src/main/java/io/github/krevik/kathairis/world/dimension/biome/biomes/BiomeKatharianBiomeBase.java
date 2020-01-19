@@ -1,23 +1,36 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
 import com.google.common.collect.Lists;
+import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.FunctionHelper;
+import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
+import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.PlainsBiome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.CountRangeConfig;
+import net.minecraft.world.gen.placement.Placement;
 
 import java.awt.*;
 import java.util.List;
 
 public class BiomeKatharianBiomeBase extends Biome {
+
     public Color baseGrassColor = new Color(66,244,238);
     protected BiomeKatharianBiomeBase(Builder p_i48975_1_) {
         super(p_i48975_1_);
-        /*this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TITANIUM_ORE.getDefaultState(), 9), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 64)));
-        this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(), 18), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
-        this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));
-        this.addStructure((Structure<NoFeatureConfig>)KatharianFeatureList.CLOUD_TEMPLE,IFeatureConfig.NO_FEATURE_CONFIG);
+        KatharianFeatureList.addDefaultCarvers(this);
+        KatharianFeatureList.addDefaultOres(this);
+        this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(128))));
+        this.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, KatharianFeatureList.CLOUD_TEMPLE.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
         //this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createDecoratedFeature(KatharianFeatureList.CLOUD_TEMPLE, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-        */
+
     }
 
     private static final int MONSTER_SPAWN_WEIGHT = 5;

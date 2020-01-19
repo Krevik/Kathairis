@@ -41,13 +41,13 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
 
     }
 
-    @Override
+    /*@Override
     public void func_225623_a_(EntityGecko entityLiving, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-            	/*if(entityLiving.isChild()) {
+            	if(entityLiving.isChild()) {
         	GlStateManager.scale(0.5, 0.5, 0.5);
     	}else {
         	GlStateManager.scale(0.8, 0.8, 0.8);
-    	}*/
+    	}
         if (entityLiving.isClimbing()) {
             if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.EAST) {
                 RenderSystem.rotatef(90, 0, 0, 1);
@@ -61,6 +61,6 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
             RenderSystem.translatef(0f, -0.3F, 0F);
         }
         super.func_225623_a_(entityLiving,f1,f2,s,i1,i2);
-    }
+    }*/
     
 }

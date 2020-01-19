@@ -93,6 +93,7 @@ public class ModEntities {
 
 
     public static void registerEntitySpawns(){
+        /*
         registerEntitySpawn(BIG_TURTLE,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
         registerEntitySpawn(MYSTIC_BIRD,EntityClassification.CREATURE,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS},12,1,3);
         registerEntitySpawn(POISONOUS_SCORPION,EntityClassification.MONSTER,new Biome[]{ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},3,1,1);
@@ -112,6 +113,7 @@ public class ModEntities {
         registerEntitySpawn(CLOUD_SHIMMER,EntityClassification.AMBIENT,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},12,1,1);
         registerEntitySpawn(SKYRAY,EntityClassification.CREATURE,new Biome[]{ModBiomes.HUGE_DESERT_MOUNTAINS},12,1,5);
         //registerEntitySpawn((EntityType<? extends EntityLiving>)SKYLIGHT,EnumCreatureType.MONSTER,new Biome[]{ModBiomes.KATHARIAN_FOREST,ModBiomes.KATHARIAN_DENSE_FOREST,ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP,ModBiomes.KATHARIAN_DESERT,ModBiomes.KATHARIAN_DESERT_EDGE},2,1,1);
+    */
     }
 
     public static void registerEggs(final RegistryEvent.Register<Item> event){

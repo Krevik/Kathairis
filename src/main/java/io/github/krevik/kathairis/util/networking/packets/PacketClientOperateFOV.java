@@ -38,7 +38,7 @@ public class PacketClientOperateFOV  {
                 DistExecutor.runWhenOn(Dist.CLIENT,()->new Runnable() {
                     @Override
                     public void run() {
-                        double defaultFOV = Minecraft.getInstance().gameSettings.fov;
+                        double defaultFOV = 70;
                         Minecraft.getInstance().gameSettings.fov=defaultFOV+message.getFOV();
                     }
                 });

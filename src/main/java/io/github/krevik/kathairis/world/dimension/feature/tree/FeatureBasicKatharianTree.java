@@ -1,17 +1,25 @@
 package io.github.krevik.kathairis.world.dimension.feature.tree;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.shapes.VoxelShapePart;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.template.Template;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
@@ -106,8 +114,5 @@ public class FeatureBasicKatharianTree extends AbstractKatharianTreeFeature {
     }
 
 
-    @Override
-    public boolean place(IWorld worldIn, ChunkGenerator generator, Random rand, BlockPos pos, IFeatureConfig config) {
-        return false;
-    }
+
 }

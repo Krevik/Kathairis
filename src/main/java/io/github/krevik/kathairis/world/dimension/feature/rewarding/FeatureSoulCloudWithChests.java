@@ -54,6 +54,7 @@ public class FeatureSoulCloudWithChests extends Feature<NoFeatureConfig> {
         }
     }
 
+    //TODO
     private void placeTrees(IWorld world, BlockPos startingPos, Random random, int scanningRadius){
         int posX=startingPos.getX();
         int posY=startingPos.getY();
@@ -68,7 +69,7 @@ public class FeatureSoulCloudWithChests extends Feature<NoFeatureConfig> {
                                 if(random.nextInt(15)==0){
                                     world.setBlockState(actualPos,ModBlocks.KATHAIRIS_GRASS.getDefaultState(),2);
                                     Tree soulTree = new SoulTree();
-                                    soulTree.spawn(world,actualPos.up(),ModBlocks.KATHAIRIS_GRASS.getDefaultState(),random);
+                                    //soulTree.func_225545_a_(world,world.getChunkProvider().getChunkGenerator(),actualPos.up(),ModBlocks.KATHAIRIS_GRASS.getDefaultState(),random);
                                 }
                             }
                         }

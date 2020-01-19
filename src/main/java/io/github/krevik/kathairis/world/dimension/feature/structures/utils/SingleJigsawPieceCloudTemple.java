@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.jigsaw.IJigsawDeserializer;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
@@ -69,7 +70,7 @@ public class SingleJigsawPieceCloudTemple extends JigsawPiece {
 
     public List<Template.BlockInfo> getJigsawBlocks(TemplateManager templateManagerIn, BlockPos pos, Rotation rotationIn, Random rand) {
         Template template = templateManagerIn.getTemplateDefaulted(this.location);
-        List<Template.BlockInfo> list = template.func_215386_a(pos, (new PlacementSettings()).setRotation(rotationIn), Blocks.JIGSAW, true);
+        List<Template.BlockInfo> list = template.func_215386_a(pos, (new PlacementSettings()).setRotation(rotationIn), Blocks.field_226904_lY_, true);
         Collections.shuffle(list, rand);
         return list;
     }
@@ -79,8 +80,8 @@ public class SingleJigsawPieceCloudTemple extends JigsawPiece {
         return template.getMutableBoundingBox((new PlacementSettings()).setRotation(rotationIn), pos);
     }
 
-
-    public boolean place(TemplateManager templateManagerIn, IWorld worldIn, BlockPos pos, Rotation rotationIn, MutableBoundingBox boundsIn, Random rand) {
+    @Override
+    public boolean func_225575_a_(TemplateManager templateManagerIn, IWorld worldIn, ChunkGenerator<?> p_225575_3_, BlockPos pos, Rotation rotationIn, MutableBoundingBox boundsIn, Random rand) {
         BlockPos position = new BlockPos(pos.getX(),200,pos.getZ());
         Template template = templateManagerIn.getTemplateDefaulted(this.location);
         PlacementSettings placementsettings = this.createPlacementSettings(rotationIn, boundsIn);
