@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_TALL_GRASS;
  */
 public class BlockKathairisTallGrass extends BlockKathairisPlant {
 
-	protected static final AxisAlignedBB TALL_GRASS_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 	public BlockKathairisTallGrass() {
 		super();
@@ -39,7 +40,7 @@ public class BlockKathairisTallGrass extends BlockKathairisPlant {
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return VoxelShapes.create(TALL_GRASS_AABB);
+		return SHAPE;
 	}
 
 }

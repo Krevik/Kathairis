@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModItemGroups;
 import io.github.krevik.kathairis.util.IItemGroupProvider;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemGroup;
@@ -19,5 +20,4 @@ public class BlockKathairisFungi extends BlockKathairisPlant implements IItemGro
 	public ItemGroup getItemGroup() {
 		return ModItemGroups.PLANTS;
 	}
-
 }

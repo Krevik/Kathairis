@@ -22,18 +22,11 @@ public class ModBlocksColorHandler implements IBlockColor
 
     public static void registerBlockColors()
     {
-        //Minecraft.getInstance().getBlockColors().register(INSTANCE, ModBlocks.KATHAIRIS_GRASS);
+        Minecraft.getInstance().getBlockColors().register(INSTANCE, ModBlocks.KATHAIRIS_GRASS);
     }
 
     @Override
     public int getColor(BlockState p_getColor_1_, @Nullable ILightReader p_getColor_2_, @Nullable BlockPos p_getColor_3_, int p_getColor_4_) {
             return Minecraft.getInstance().player.world.func_226691_t_(p_getColor_3_).func_225528_a_(p_getColor_3_.getX(),p_getColor_3_.getZ());
     }
-
-
-    /*@Override
-    //TODO
-    public int getColor(BlockState blockState, @Nullable ILightReader iEnviromentBlockReader, @Nullable BlockPos blockPos, int i) {
-        return iEnviromentBlockReader.func_226691_t_(blockPos).getGrassColor(blockPos);
-    }*/
 }

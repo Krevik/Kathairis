@@ -14,7 +14,6 @@ public enum GenLayerBiomeVariants implements IC1Transformer {
     }
 
     BiomeVariantsUtil util = new BiomeVariantsUtil();
-
     @Override
     public int apply(INoiseRandom iNoiseRandom, int centerBiomeID) {
         if(util.getBiomesWithVariantsList().contains(Registry.BIOME.getByValue(centerBiomeID))){

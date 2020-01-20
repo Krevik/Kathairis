@@ -2,10 +2,7 @@ package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModItemGroups;
 import io.github.krevik.kathairis.util.IItemGroupProvider;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Direction;
@@ -17,6 +14,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
 import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
@@ -26,7 +25,7 @@ import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
  */
 public class BlockKathairisPlant extends Block implements net.minecraftforge.common.IPlantable, IItemGroupProvider {
 
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0000001D, 0.00000001D, 0.00000001D, 15.99999999D, 15.99999999D, 15.99999999D);
 
 	public BlockKathairisPlant() {
 		super(Properties.create(Material.PLANTS).sound(SoundType.PLANT).hardnessAndResistance(0).tickRandomly().doesNotBlockMovement());
@@ -91,6 +90,12 @@ public class BlockKathairisPlant extends Block implements net.minecraftforge.com
 		BlockState state = world.getBlockState(pos);
 		if (state.getBlock() != this) return getDefaultState();
 		return state;
+	}
+
+	@Deprecated
+	@Override
+	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return false;
 	}
 
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {

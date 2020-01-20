@@ -21,7 +21,6 @@ public class ConfigHandler {
     public static class Config
     {
         public ForgeConfigSpec.BooleanValue SHOULD_BLOCKS_SPREAD_AROUND_PORTAL;
-
         Config(ForgeConfigSpec.Builder builder) {
 
             builder.push("general");

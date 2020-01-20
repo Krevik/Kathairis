@@ -23,7 +23,7 @@ public class BiomeKatharianDenseForest extends BiomeKatharianBiomeBase{
         DefaultBiomeFeatures.addLakes(this);
 
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR
-                .func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(KatharianFeatureList.KATHARIAN_TREE_1
+                .func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(KatharianFeatureList.KATHARIAN_TREE_2
                                 .func_225566_b_(KatharianFeatureList.MYSTIC_TREE_FEATURE_CONFIG)
                                 .func_227227_a_(0.05F),
                 KatharianFeatureList.KATHARIAN_TREE_2.func_225566_b_(KatharianFeatureList.MYSTIC_TREE_FEATURE_CONFIG)

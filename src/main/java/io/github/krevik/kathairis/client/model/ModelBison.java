@@ -127,7 +127,7 @@ public class ModelBison<T extends LivingEntity> extends AgeableModel<T> {
 
     @Override
     protected Iterable<ModelRenderer> func_225602_a_() {
-        return null;
+        return ImmutableList.of(Head1);
     }
 
     @Override

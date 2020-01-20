@@ -219,7 +219,7 @@ public class ModelPoisonousScorpion<T extends LivingEntity> extends AgeableModel
 
     @Override
     protected Iterable<ModelRenderer> func_225602_a_() {
-        return null;
+        return ImmutableList.of(Body_1);
     }
 
     @Override

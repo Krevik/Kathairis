@@ -25,7 +25,7 @@ public final class BiomeKatharianForest extends BiomeKatharianBiomeBase {
         super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, KATHARIAN_GRASS_DIRT_GRAVEL_SURFACE).precipitation(Biome.RainType.RAIN).category(Biome.Category.FOREST).depth(0.1F).scale(0.1F).temperature(0.7F).downfall(0.8F).waterColor(4159204).waterFogColor(329011).parent((String)null));
         KatharianFeatureList.addDefaultLakes(this);
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR
-                .func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(KatharianFeatureList.KATHARIAN_TREE_1
+                .func_225566_b_(new MultipleRandomFeatureConfig(ImmutableList.of(KatharianFeatureList.KATHARIAN_TREE_2
                                 .func_225566_b_(KatharianFeatureList.MYSTIC_TREE_FEATURE_CONFIG)
                                 .func_227227_a_(0.6F),
                         KatharianFeatureList.KATHARIAN_TREE_2.func_225566_b_(KatharianFeatureList.MYSTIC_TREE_FEATURE_CONFIG)

@@ -179,7 +179,7 @@ public class ModelCactiSpore<T extends LivingEntity> extends AgeableModel<T> {
 
     @Override
     protected Iterable<ModelRenderer> func_225602_a_() {
-        return null;
+        return ImmutableList.of(Body);
     }
 
     @Override

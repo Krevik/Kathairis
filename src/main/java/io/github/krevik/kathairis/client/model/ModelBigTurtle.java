@@ -3,6 +3,7 @@ package io.github.krevik.kathairis.client.model;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
+import net.minecraft.client.renderer.entity.model.QuadrupedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
@@ -64,7 +65,7 @@ public class ModelBigTurtle<T extends LivingEntity> extends AgeableModel<T> {
 
     @Override
     protected Iterable<ModelRenderer> func_225602_a_() {
-        return null;
+        return ImmutableList.of(Glowa);
     }
 
     @Override

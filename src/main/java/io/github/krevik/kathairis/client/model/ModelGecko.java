@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.client.model;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
@@ -23,10 +24,25 @@ public class ModelGecko<T extends LivingEntity> extends AgeableModel<T> {
     }
 
     @Override
+    public void func_225597_a_(T t, float v, float v1, float v2, float v3, float v4) {
+
+    }
+    /*@Override
+    protected Iterable<ModelRenderer> func_225602_a_() {
+        return ImmutableList.of(head_1);
+    }
+
+    @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return ImmutableList.of(head_1,body_1,legmain_1,legmain_2,
+                legmain_3,legmain_4,tail_1,tail_2,tail_3,jawtop,jawbottom,legtwo_1,legtwo_2,legtwo_3,legtwo_4);
+    }
+
+    @Override
     public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
 
     }
-    /*public ModelRenderer head_1;
+    public ModelRenderer head_1;
     public ModelRenderer body_1;
     public ModelRenderer legmain_1;
     public ModelRenderer legmain_2;
@@ -105,21 +121,6 @@ public class ModelGecko<T extends LivingEntity> extends AgeableModel<T> {
         this.legmain_1.addChild(this.legtwo_1);
         this.legmain_3.addChild(this.legtwo_3);
         this.legmain_4.addChild(this.legtwo_4);
-    }
-
-    @Override
-    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
-
-    }
-
-    @Override
-    protected Iterable<ModelRenderer> func_225602_a_() {
-        return null;
-    }
-
-    @Override
-    protected Iterable<ModelRenderer> func_225600_b_() {
-        return null;
     }
 
     @Override

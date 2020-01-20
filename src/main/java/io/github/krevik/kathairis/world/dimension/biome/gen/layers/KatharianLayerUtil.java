@@ -41,7 +41,6 @@ public class KatharianLayerUtil {
         return iareafactory;
     }
 
-
     public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildOverworldProcedure(WorldType worldTypeIn, KathairisGenSettings settings, LongFunction<C> contextFactory) {
         IAreaFactory<T> iareafactory = IslandLayer.INSTANCE.apply(contextFactory.apply(1L));
         iareafactory = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), iareafactory);
@@ -67,7 +66,7 @@ public class KatharianLayerUtil {
         layer1 = repeat(1000L, ZoomLayer.NORMAL, layer1, j, contextFactory);
         layer1 = GenLayerKatharianRiver.INSTANCE.apply(contextFactory.apply(1L), layer1);
         layer1 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer1);
-        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(10L), layer2);
+        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(1000L), layer2);
         layer2 = GenLayerBiomeVariants.INSTANCE.apply(contextFactory.apply(1000L), layer2);
 
         for(int k = 0; k < i; ++k) {
@@ -78,9 +77,9 @@ public class KatharianLayerUtil {
                 layer2 = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000L)), layer2);
             }
         }
-        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(1L), layer2);
         layer2 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer2);
         layer2 = GenLayerKatharianRiverMix.INSTANCE.apply(contextFactory.apply(100L), layer2, layer1);
+        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(1000L), layer2);
 
         IAreaFactory<T> iareafactory5 = ZoomLayer.NORMAL.apply(contextFactory.apply(10L), layer2);
         return iareafactory5;
@@ -112,7 +111,8 @@ public class KatharianLayerUtil {
 
     public static boolean isKatharianDesertBiome(int biomeID){
         Biome biome = Registry.BIOME.getByValue(biomeID);
-        return biome== ModBiomes.KATHARIAN_DESERT_EDGE||biome==ModBiomes.SOFT_SAND_LAKES||biome==ModBiomes.KATHARIAN_DESERT||biome==ModBiomes.HUGE_DESERT_MOUNTAINS;
+        return biome== ModBiomes.KATHARIAN_DESERT_EDGE||
+                biome==ModBiomes.SOFT_SAND_LAKES||biome==ModBiomes.KATHARIAN_DESERT||biome==ModBiomes.HUGE_DESERT_MOUNTAINS;
     }
 
 

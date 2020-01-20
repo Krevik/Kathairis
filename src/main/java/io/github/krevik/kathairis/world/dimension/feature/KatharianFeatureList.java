@@ -61,7 +61,7 @@ public class KatharianFeatureList {
 
     public static final AbstractTreeFeature<TreeFeatureConfig> KATHARIAN_TREE = registerFeature("katharian_tree", new KatharianTreeFeature(KatharianTreeFeatureConfig::deserializeMystic));
     public static final AbstractTreeFeature<TreeFeatureConfig> BASIC_STANDARD_TREE = registerFeature("basic_standard_tree", new FeatureBasicKatharianTree(KatharianTreeFeatureConfig::deserializeMystic));
-    public static final AbstractTreeFeature<TreeFeatureConfig> KATHARIAN_TREE_1 = registerFeature("katharian_tree_1",new FeatureKatharianTallTree1(KatharianTreeFeatureConfig::deserializeMystic));
+    //public static final AbstractTreeFeature<TreeFeatureConfig> KATHARIAN_TREE_1 = registerFeature("katharian_tree_1",new FeatureKatharianTallTree1(KatharianTreeFeatureConfig::deserializeMystic));
     public static final AbstractTreeFeature<TreeFeatureConfig> KATHARIAN_TREE_2 = registerFeature("katharian_tree_2",new FeatureKatharianTallTree2(KatharianTreeFeatureConfig::deserializeMystic));
     public static final AbstractTreeFeature<TreeFeatureConfig> KATHARIAN_TREE_3 = registerFeature("katharian_tree_3",new FeatureKatharianTallTree3(KatharianTreeFeatureConfig::deserializeShiny));
     public static final AbstractTreeFeature<TreeFeatureConfig> KATHARIAN_HUGE_TREE_1 = registerFeature("katharian_huge_tree_1",new FeatureKatharianTreeHuge1(KatharianTreeFeatureConfig::deserializeMystic));

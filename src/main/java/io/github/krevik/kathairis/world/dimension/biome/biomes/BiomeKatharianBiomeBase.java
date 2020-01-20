@@ -5,7 +5,10 @@ import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.PlainsBiome;
 import net.minecraft.world.gen.GenerationStage;
@@ -16,8 +19,11 @@ import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BiomeKatharianBiomeBase extends Biome {
@@ -44,16 +50,16 @@ public class BiomeKatharianBiomeBase extends Biome {
         return super.getSpawns(p_76747_1_);
     }
 
-    /*@OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
-    public int getGrassColor(BlockPos pos)
+    public int func_225528_a_(double posX, double posZ)
     {
         World world = Minecraft.getInstance().world;
-        ArrayList<BlockPos> toCalculate = new ArrayList<BlockPos>();
+        ArrayList<BlockPos> toCalculate = new ArrayList<>();
         int radiusCalculation = 6;
         for (int x = -radiusCalculation; x <= radiusCalculation; x++) {
             for (int z = -radiusCalculation; z <= radiusCalculation; z++) {
-                toCalculate.add(new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z));
+                toCalculate.add(new BlockPos(posX + x, 100, posZ + z));
             }
         }
 
@@ -62,21 +68,21 @@ public class BiomeKatharianBiomeBase extends Biome {
         int sumB = 0;
         int count = 0;
         for (BlockPos positionForAverage : toCalculate) {
-            if(world.getBiome(positionForAverage) instanceof BiomeKatharianBiomeBase) {
-                BiomeKatharianBiomeBase biome = (BiomeKatharianBiomeBase) world.getBiome(positionForAverage);
+            if(world.func_226691_t_(positionForAverage) instanceof BiomeKatharianBiomeBase) {
+                BiomeKatharianBiomeBase biome = (BiomeKatharianBiomeBase) world.func_226691_t_(positionForAverage);
                 count++;
                 sumR += biome.baseGrassColor.getRed();
                 sumG += biome.baseGrassColor.getGreen();
                 sumB += biome.baseGrassColor.getBlue();
             }else{
-                return super.getGrassColor(positionForAverage);
+                return super.func_225528_a_(positionForAverage.getX(),positionForAverage.getZ());
             }
         }
         Color averageColor = new Color(sumR / count, sumG / count, sumB / count);
 
 
         return Integer.parseInt(convertColorToHexadeimal(averageColor), 16);
-    }*/
+    }
 
     public static String convertColorToHexadeimal(Color color)
     {

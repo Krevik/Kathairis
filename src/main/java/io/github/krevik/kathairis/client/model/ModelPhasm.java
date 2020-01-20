@@ -79,12 +79,12 @@ public class ModelPhasm<T extends LivingEntity> extends AgeableModel<EntityPhasm
 
     @Override
     protected Iterable<ModelRenderer> func_225602_a_() {
-        return null;
+        return ImmutableList.of(Head);
     }
 
     @Override
     protected Iterable<ModelRenderer> func_225600_b_() {
-        return ImmutableList.of(Body1,Head);
+        return ImmutableList.of(Body1,Head,LeftArm,RightArm);
     }
 
     /**

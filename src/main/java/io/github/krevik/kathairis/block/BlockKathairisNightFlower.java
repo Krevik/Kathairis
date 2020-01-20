@@ -2,9 +2,11 @@ package io.github.krevik.kathairis.block;
 
 import io.github.krevik.kathairis.init.ModItemGroups;
 import io.github.krevik.kathairis.util.IItemGroupProvider;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.math.shapes.VoxelShape;
 
 /**
  * @author Krevik
