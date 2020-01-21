@@ -47,10 +47,10 @@ public class RenderMysticBird extends MobRenderer<EntityMysticBird, ModelMysticB
 
     }
 
-    /*@Override
+    @Override
     public void func_225623_a_(EntityMysticBird e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        RenderSystem.scaled(0.4, 0.4, 0.4);
+        s.func_227862_a_(0.4f,0.4f,0.4f);
         super.func_225623_a_(e,f1,f2,s,i1,i2);
-    }*/
+    }
     
 }

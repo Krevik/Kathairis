@@ -9,7 +9,10 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.SlimeRenderer;
+import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -42,9 +45,7 @@ public class RenderBison extends MobRenderer<EntityBison, ModelBison<EntityBison
 
     @Override
     public void func_225623_a_(EntityBison e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        if(!e.isChild()) {
-            RenderSystem.scaled(1.5, 1.5, 1.5);
-        }
+        s.func_227862_a_(1.5f,1.5f,1.5f);
         super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
 

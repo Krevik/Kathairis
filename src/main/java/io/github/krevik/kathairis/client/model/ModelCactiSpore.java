@@ -6,6 +6,7 @@ import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.entity.EntityCactiSpore;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
+import net.minecraft.client.renderer.entity.model.ZombieModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
@@ -137,7 +138,6 @@ public class ModelCactiSpore<T extends LivingEntity> extends AgeableModel<T> {
         this.Body.addChild(this.FlowerBud);
     }
 
-
     @Override
     public void func_225597_a_(T entity, float p_225597_2_, float p_225597_3_, float age, float p_225597_5_, float p_225597_6_) {
         setRotateAngle(Petal1,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F,0,0);
@@ -145,10 +145,10 @@ public class ModelCactiSpore<T extends LivingEntity> extends AgeableModel<T> {
         setRotateAngle(Petal3,helper.degToRad(-20)- MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F,helper.degToRad(-180),0);
         setRotateAngle(Petal4,0,helper.degToRad(180),helper.degToRad(20)+ MathHelper.abs(MathHelper.sin(age * 0.006662F))*0.8F);
         if(entity instanceof EntityCactiSpore) {
-            /*EntityCactiSpore living = (EntityCactiSpore) entity;
+            EntityCactiSpore living = (EntityCactiSpore) entity;
             int divider = 100;
             float multiplier = 0.4f;
-            Spike1.offsetX = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
+            /*Spike1.offsetX = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
             Spike1.offsetZ = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
             Spike2.offsetX = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
             Spike2.offsetZ = +MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
@@ -173,7 +173,7 @@ public class ModelCactiSpore<T extends LivingEntity> extends AgeableModel<T> {
             Spike11.offsetZ = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
             Spike12.offsetX = -MathHelper.clamp((float) (Math.atan((float) living.getSpikeTimer() / divider)), 0, 1) * multiplier;
             //Spike12.offsetY=MathHelper.clamp((float)(Math.atan((float)living.getSpikeTimer()/divider)),0,1);
-               */
+        */
         }
     }
 

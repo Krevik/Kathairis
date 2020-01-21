@@ -40,7 +40,7 @@ public class RenderRubySile extends MobRenderer<EntityRubySile, ModelRubySile<En
 
     @Override
     public void func_225623_a_(EntityRubySile e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        RenderSystem.scaled(0.2, 0.2, 0.2);
+        s.func_227862_a_(0.2f, 0.2f, 0.2f);
         super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
     

@@ -79,10 +79,11 @@ public class KatharianLayerUtil {
         }
         layer2 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer2);
         layer2 = GenLayerKatharianRiverMix.INSTANCE.apply(contextFactory.apply(100L), layer2, layer1);
-        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(1000L), layer2);
 
         IAreaFactory<T> iareafactory5 = ZoomLayer.NORMAL.apply(contextFactory.apply(10L), layer2);
-        return iareafactory5;
+        IAreaFactory<T> iAreaFactory6 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(1000L), iareafactory5);
+
+        return iAreaFactory6;
     }
 
     private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> getBiomeLayer(IAreaFactory<T> parentLayer,

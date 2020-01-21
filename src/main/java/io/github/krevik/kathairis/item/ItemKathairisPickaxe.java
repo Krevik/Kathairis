@@ -55,14 +55,12 @@ public class ItemKathairisPickaxe extends ItemKathairisTool {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack p_179218_1_, World p_179218_2_, BlockState p_179218_3_, BlockPos p_179218_4_, LivingEntity p_179218_5_) {
-		if(p_179218_1_.getItem()== ModItems.MAGNETHIUM_PICKAXE){
+		if(p_179218_1_.getItem() == ModItems.MAGNETHIUM_PICKAXE){
 			List<ItemEntity> e = p_179218_2_.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(p_179218_4_.getX() - 5, p_179218_4_.getY() - 5, p_179218_4_.getZ() - 5, p_179218_4_.getX() + 5, p_179218_4_.getY() + 5, p_179218_4_.getZ() + 5));
 			if(!e.isEmpty()){
 				for(ItemEntity entity:e){
-					double motionX = p_179218_5_.getPosition().getX()-entity.getPosition().getX();
-					double motionY = p_179218_5_.getPosition().getY()-entity.getPosition().getY();
-					double motionZ = p_179218_5_.getPosition().getZ()-entity.getPosition().getZ();
-					entity.setMotion(motionX,motionY,motionZ);
+					entity.setNoGravity(true);
+					entity.setMotion(0.0D,0.0D,0.0D);
 				}
 			}
 		}

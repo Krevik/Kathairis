@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -42,7 +43,8 @@ public class RenderButterfly extends MobRenderer<EntityButterfly, ModelButterfly
 
     @Override
     public void func_225623_a_(EntityButterfly e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        RenderSystem.scaled(0.2, 0.2, 0.2);
+        s.func_227862_a_(0.2f,0.2f,0.2f);
+        //RenderSystem.scaled(0.2, 0.2, 0.2);
         super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
 }

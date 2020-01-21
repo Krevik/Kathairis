@@ -26,6 +26,8 @@ public class BiomeKatharianDesert extends BiomeKatharianBiomeBase{
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, KatharianFeatureList.KATHARIAN_DEAD_BUSH.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.COUNT_HEIGHTMAP_DOUBLE.func_227446_a_(new FrequencyConfig(2))));
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, KatharianFeatureList.KATHARIAN_ROCKTUS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.COUNT_HEIGHTMAP_DOUBLE.func_227446_a_(new FrequencyConfig(2))));
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, KatharianFeatureList.KATHARIAN_CACTUS.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.COUNT_HEIGHTMAP_DOUBLE.func_227446_a_(new FrequencyConfig(10))));
+        this.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, KatharianFeatureList.MAGNETHIUM_HALF_SPHERE.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(100))));
+
         KatharianFeatureList.addDefaultSkyDecorations(this);
         //this.addStructure((Structure<CrystalRuinsConfig>)KatharianFeatureList.CRYSTAL_RUINS,new CrystalRuinsConfig("crystal_ruins/entrances",6));
         //this.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, createDecoratedFeature(KatharianFeatureList.CRYSTAL_RUINS, new CrystalRuinsConfig("crystal_ruins/entrances",6), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));

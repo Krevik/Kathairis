@@ -22,7 +22,7 @@ public class RenderCamel extends MobRenderer<EntityCamel,ModelCamel<EntityCamel>
 
     public RenderCamel(EntityRendererManager renderManagerIn)
     {
-        super(renderManagerIn, new ModelCamel(), 1.5F);
+        super(renderManagerIn, new ModelCamel(), 1.0F);
     }
 
 
@@ -44,7 +44,7 @@ public class RenderCamel extends MobRenderer<EntityCamel,ModelCamel<EntityCamel>
     @Override
     public void func_225623_a_(EntityCamel e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
         if(e.isChild()) {
-            RenderSystem.scaled(0.6, 0.6, 0.6);
+            s.func_227862_a_(0.6f, 0.6f, 0.6f);
         }
         super.func_225623_a_(e,f1,f2,s,i1,i2);
     }

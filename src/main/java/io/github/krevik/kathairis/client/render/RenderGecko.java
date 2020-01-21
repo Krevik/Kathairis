@@ -41,26 +41,27 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
 
     }
 
-    /*@Override
+    @Override
     public void func_225623_a_(EntityGecko entityLiving, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-            	if(entityLiving.isChild()) {
-        	GlStateManager.scale(0.5, 0.5, 0.5);
+        //TODO fix rotations (translatef)
+        if(entityLiving.isChild()) {
+        	s.func_227862_a_(0.5f, 0.5f, 0.5f);
     	}else {
-        	GlStateManager.scale(0.8, 0.8, 0.8);
+        	s.func_227862_a_(0.8f, 0.8f, 0.8f);
     	}
         if (entityLiving.isClimbing()) {
             if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.EAST) {
-                RenderSystem.rotatef(90, 0, 0, 1);
+                //s.func_227861_a_(0, 0, 90);
             } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.WEST) {
-                RenderSystem.rotatef(90, 0, 0, -1);
+                //s.func_227861_a_(0, 0, -90);
             } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.NORTH) {
-                RenderSystem.rotatef(90, 1, 0, 0);
+                //s.func_227861_a_(90, 0, 0);
             } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.SOUTH) {
-                RenderSystem.rotatef(90, -1, 0, 0);
+                //s.func_227861_a_(-90, 0, 0);
             }
-            RenderSystem.translatef(0f, -0.3F, 0F);
+            //s.translatef(0f, -0.0F, 0F);
         }
         super.func_225623_a_(entityLiving,f1,f2,s,i1,i2);
-    }*/
+    }
     
 }

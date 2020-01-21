@@ -22,7 +22,7 @@ public class ItemMagnethiumSword extends ItemKathairisSword {
 		stack.damageItem(1, entityLivingBase, (p_220045_0_) -> {
 			p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 		});
-		target.addPotionEffect(new EffectInstance(Effects.LEVITATION, 25, 1));
+		target.addPotionEffect(new EffectInstance(Effects.LEVITATION, 100, 1));
 		return true;
 	}
 

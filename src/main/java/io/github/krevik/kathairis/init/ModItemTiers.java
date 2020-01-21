@@ -14,10 +14,10 @@ import static io.github.krevik.kathairis.init.ModItems.*;
  */
 public enum ModItemTiers implements IItemTier {
 
-	TITANIUM(3, 1000, 7.0F, 2.5F, 12, () -> Ingredient.fromItems(TITANIUM_INGOT)),
+	TITANIUM(3, 2000, 7.0F, 2.5F, 12, () -> Ingredient.fromItems(TITANIUM_INGOT)),
 	MYSTIC(3, 2000, 12.0F, 3.5F, 12, () -> Ingredient.fromItems(MYSTIC_GEM)),
 	REVENUM(3, 800, 7.0F, 3.0F, 18, () -> Ingredient.fromItems(REVENUM_INGOT)),
-	CRYSTAL(3, 1000, 2.0F, 4.0F, 22, () -> Ingredient.fromItems(CRYSTAL_CLUSTER)),
+	CRYSTAL(3, 500, 2.0F, 4.0F, 22, () -> Ingredient.fromItems(CRYSTAL_CLUSTER)),
 	MAGNETHIUM(3, 800, 6.0F, 3.0F, 20, () -> Ingredient.fromItems(MAGNETHIUM_SHARD)),
 
 	;

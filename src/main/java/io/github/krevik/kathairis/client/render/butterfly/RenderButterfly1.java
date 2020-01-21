@@ -3,6 +3,7 @@ package io.github.krevik.kathairis.client.render.butterfly;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.butterfly.ModelButterfly;
+import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
 import io.github.krevik.kathairis.entity.butterfly.EntityButterfly1;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -39,9 +40,11 @@ public class RenderButterfly1 extends MobRenderer<EntityButterfly1, ModelButterf
 
     }
 
+
     @Override
     public void func_225623_a_(EntityButterfly1 e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        RenderSystem.scaled(0.2, 0.2, 0.2);
+        s.func_227862_a_(0.2f,0.2f,0.2f);
+        //RenderSystem.scaled(0.2, 0.2, 0.2);
         super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
 }

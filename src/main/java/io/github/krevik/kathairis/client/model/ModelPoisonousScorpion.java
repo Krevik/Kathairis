@@ -16,6 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class ModelPoisonousScorpion<T extends LivingEntity> extends AgeableModel<T> {
+    //TODO re-port fix
     public ModelRenderer Tail9;
     public ModelRenderer Tail4;
     public ModelRenderer Tail15;
@@ -224,8 +225,40 @@ public class ModelPoisonousScorpion<T extends LivingEntity> extends AgeableModel
 
     @Override
     protected Iterable<ModelRenderer> func_225600_b_() {
-        return ImmutableList.of(Tail12,Tail15,Leg61,Szczypce21,Szczypce11,Leg2_1,Tail4,Tail2,Tail13,Leg2_3,
-                Leg61_2,Tail9,Leg2_3,Leg61_3,Tail4_1,Body);
+        return ImmutableList.of(Tail9,
+                Tail4,
+                Tail15,
+                Tail1,
+                Tail13,
+                Tail12,
+                Tail2,
+                Szczypce11,
+                Body,
+                Leg61,
+                Szczypce21,
+                Body_1,
+                Leg61_1,
+                Leg61_2,
+                Leg61_3,
+                Leg2,
+                Leg2_1,
+                Leg2_2,
+                Leg2_3,
+                Tail4_1,
+                Szczypce11Child,
+                Szczypce11ChildChild,
+                Szczypce11ChildChild_1,
+                Leg61Child,
+                Szczypce21Child,
+                Szczypce21ChildChild,
+                Szczypce21ChildChild_1,
+                Leg61Child_1,
+                Leg61Child_2,
+                Leg61Child_3,
+                Leg31Child,
+                Leg31Child_1,
+                Leg31Child_2,
+                Leg31Child_3);
     }
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {

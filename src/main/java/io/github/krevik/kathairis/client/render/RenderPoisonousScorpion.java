@@ -43,7 +43,7 @@ public class RenderPoisonousScorpion extends MobRenderer<EntityPoisonousScorpion
 
     @Override
     public void func_225623_a_(EntityPoisonousScorpion e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        RenderSystem.scaled(0.5, 0.5, 0.5);
+        s.func_227862_a_(0.5f, 0.5f, 0.5f);
         super.func_225623_a_(e,f1,f2,s,i1,i2);
     }
     

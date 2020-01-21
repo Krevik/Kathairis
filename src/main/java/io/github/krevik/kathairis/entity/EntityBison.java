@@ -183,6 +183,7 @@ public class EntityBison extends EntityKatharianAnimal
                     setHapiness(getHapiness() + rand.nextFloat());
                     if(getHapiness()>3+rand.nextInt(4)+rand.nextFloat()){
                         setHapiness(0);
+                        //TODO
                         //dropItem(KCore.functionHelper.getRandomMusicDisc(),0);
                         //EntityItem item = new EntityItem(world,getPosition().getX()+0.5f,getPosition().getY()+0.5f,getPosition().getZ()+0.5f);
                         //item.setItem(new ItemStack(KCore.functionHelper.getRandomMusicDisc(),1));

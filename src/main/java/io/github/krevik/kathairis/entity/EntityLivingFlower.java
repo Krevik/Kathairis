@@ -89,13 +89,14 @@ public class EntityLivingFlower extends EntityKatharianAnimal
         this.rotationYawHead=0;
         if(this.world.isRemote) {
             if(this.rand.nextInt(30)==1) {
+                //TODO
                 //this.world.spawnParticle(EnumParticleTypes.HEART, this.getPosition().getX(), this.getPosition().getY()+0.5, this.getPosition().getZ(), 0, 0.2, 0);
             }
         }
     	super.tick();
     }
 
-    
+    //TODO
     /*public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
         ItemStack itemstack = player.getHeldItem(hand);

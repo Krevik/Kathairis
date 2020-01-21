@@ -88,6 +88,7 @@ public class KatharianFeatureList {
     public static final Feature<NoFeatureConfig> FEATURE_SMALL_RUINS = registerFeature("feature_small_ruins",new FeatureSmallRuins(NoFeatureConfig::deserialize));
     public static final Feature<CrystalRuinsConfig> CRYSTAL_RUINS = registerFeature("crystal_ruins", new StructureCrystalRuins(CrystalRuinsConfig::deserialize));
     public static final Feature<NoFeatureConfig> CLOUD_TEMPLE = registerFeature("cloud_temple", new StructureCloudTemple(NoFeatureConfig::deserialize));
+    public static final Feature<NoFeatureConfig> MAGNETHIUM_HALF_SPHERE = registerFeature("magnethium_half_sphere", new FeatureMagnethiumHalfSphere(NoFeatureConfig::deserialize));
 
     public static final WorldCarver<ProbabilityConfig> KATHARIAN_CAVE_WORLD_CARVER = registerWorldCarver("katharian_cave_world_carver",new KatharianWorldCaveCarver(ProbabilityConfig::deserialize,256));
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = registerSurfaceBuilder("katharian_swamp_surface_builder", new KathairisSwampSurfaceBuilder(SurfaceBuilderConfig::deserialize));

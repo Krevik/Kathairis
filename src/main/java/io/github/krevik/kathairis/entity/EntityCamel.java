@@ -17,11 +17,10 @@ import net.minecraft.world.World;
 
 public class EntityCamel extends AbstractHorseEntity
 {
-
+//TODO make it tameable
     public EntityCamel(World worldIn)
     {
         super(ModEntities.CAMEL,worldIn);
-        //this.spawnableBlock= ModBlocks.KATHAIRIS_SAND;
     }
 
     public EntityCamel(EntityType<EntityCamel> type, World world) {

@@ -65,6 +65,10 @@ public class ModEventSubscriberClient {
         RenderTypeLookup.setRenderLayer(ModBlocks.BISON_STARS, RenderType.func_228645_f_());
         RenderTypeLookup.setRenderLayer(ModBlocks.FRUP_PLANT, RenderType.func_228645_f_());
         RenderTypeLookup.setRenderLayer(ModBlocks.EYE_PLANT, RenderType.func_228645_f_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CRYSTAL, RenderType.func_228645_f_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.VIOLET_CRYSTAL, RenderType.func_228645_f_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CRYSTAL, RenderType.func_228645_f_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_PORTAL, RenderType.func_228645_f_());
 
     }
 

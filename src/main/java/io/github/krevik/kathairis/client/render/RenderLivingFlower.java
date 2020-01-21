@@ -37,25 +37,5 @@ public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivi
 
     }
 
-    /*private void drawCircle(float x, float y, float radius,EntityLivingFlower entity)
-    {
-        RenderSystem.disableLighting();
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuffer();
-        int i;
-        int triangleAmount = 1000;
-        float twicePi = (float)(2.0f * Math.PI);
-
-        bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-        for(i = 0; i <= triangleAmount; i++)
-        {
-            bufferbuilder.pos(x,entity.posY+0.3f,y).color(0.0f, 0.8f, 0.0f, 0.6f).endVertex();
-            bufferbuilder.pos(x+(radius * Math.cos(i*twicePi/triangleAmount)),entity.posY+0.3f,y+(radius*Math.sin(i*twicePi/triangleAmount))).color(0.0f, 0.8f, 0.0f, 0.6f).endVertex();
-        }
-        RenderSystem.enableLighting();
-        tessellator.draw();
-    }*/
-
-
 }
 
