@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.init;
 
 import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
+import io.github.krevik.kathairis.util.RegistryHelper;
 import io.github.krevik.kathairis.util.SpawnPredicator;
 import io.github.krevik.kathairis.world.dimension.biome.biomes.BiomeKatharianBiomeBase;
 import net.minecraft.entity.EntityClassification;
@@ -14,12 +15,16 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ObjectHolder;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static io.github.krevik.kathairis.util.ModUtil._null;
+import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 @ObjectHolder(MOD_ID)
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = MOD)
 public class ModEntities {
 
     public static EntityType<EntityButterfly> COMMON_BUTTERFLY1 = _null();
@@ -47,6 +52,40 @@ public class ModEntities {
     public static EntityType<EntitySkyray> SKYRAY = _null();
     public static EntityType<EntityStrangeWanderer> STRANGE_WANDERER = _null();
     public static EntityType<EntityMysticWandShoot> MYSTIC_WAND_SHOOT = _null();
+
+    @SubscribeEvent
+    public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){
+        event.getRegistry().registerAll(
+                RegistryHelper.setup(ModEntities.COMMON_BUTTERFLY1=EntityType.Builder.<EntityButterfly>create(EntityButterfly::new, EntityClassification.AMBIENT).size(0.6F,0.5F).build("kathairis:common_butterfly1"),"common_butterfly1"),
+                RegistryHelper.setup(ModEntities.COMMON_BUTTERFLY2=EntityType.Builder.<EntityButterfly1>create(EntityButterfly1::new, EntityClassification.AMBIENT).size(0.6F,0.5F).build("kathairis:common_butterfly2"),"common_butterfly2"),
+                RegistryHelper.setup(ModEntities.CLOUD_SHIMMER=EntityType.Builder.<EntityCloudShimmer>create(EntityCloudShimmer::new, EntityClassification.AMBIENT).size(0.6F,0.5F).build("kathairis:cloud_shimmer"),"cloud_shimmer"),
+                RegistryHelper.setup(ModEntities.ILLUKINI=EntityType.Builder.<EntityIllukini>create(EntityIllukini::new, EntityClassification.AMBIENT).size(0.6F,0.5F).setTrackingRange(200).build("kathairis:illukini"),"illukini"),
+                RegistryHelper.setup(ModEntities.RUBY_SILE=EntityType.Builder.<EntityRubySile>create(EntityRubySile::new, EntityClassification.AMBIENT).size(0.6F,0.5F).setTrackingRange(200).build("kathairis:ruby_sile"),"ruby_sile"),
+                RegistryHelper.setup(ModEntities.SKYLIGHT=EntityType.Builder.<EntitySkylight>create(EntitySkylight::new, EntityClassification.AMBIENT).size(0.15F,0.15F).setTrackingRange(200).build("kathairis:skylight"),"skylight"),
+                RegistryHelper.setup(ModEntities.BIG_TURTLE=EntityType.Builder.<EntityBigTurtle>create(EntityBigTurtle::new, EntityClassification.CREATURE).size(0.9F,1.2F).setTrackingRange(200).build("kathairis:big_turtle"),"big_turtle"),
+                RegistryHelper.setup(ModEntities.BISON=EntityType.Builder.<EntityBison>create(EntityBison::new, EntityClassification.CREATURE).size(1.5F,1.7F).setTrackingRange(200).build("kathairis:bison"),"bison"),
+                RegistryHelper.setup(ModEntities.CACTI_SPORE=EntityType.Builder.<EntityCactiSpore>create(EntityCactiSpore::new, EntityClassification.MONSTER).size(1F,1F).setTrackingRange(200).build("kathairis:cacti_spore"),"cacti_spore"),
+                RegistryHelper.setup(ModEntities.CAMEL=EntityType.Builder.<EntityCamel>create(EntityCamel::new, EntityClassification.CREATURE).size(1.6F,1.5F).setTrackingRange(200).build("kathairis:camel"),"camel"),
+                RegistryHelper.setup(ModEntities.CLOUD_OISTER=EntityType.Builder.<EntityCloudOister>create(EntityCloudOister::new, EntityClassification.CREATURE).size(0.6F,0.6F).setTrackingRange(200).build("kathairis:cloud_oister"),"cloud_oister"),
+                RegistryHelper.setup(ModEntities.CLOUDY_SLIME=EntityType.Builder.<EntityCloudySlime>create(EntityCloudySlime::new, EntityClassification.CREATURE).size(1.4F,1.4F).setTrackingRange(200).build("kathairis:cloudy_slime"),"cloudy_slime"),
+                RegistryHelper.setup(ModEntities.FLYING_SQUID=EntityType.Builder.<EntityFlyingSquid>create(EntityFlyingSquid::new, EntityClassification.CREATURE).size(1.5F,2F).setTrackingRange(200).build("kathairis:flying_squid"),"flying_squid"),
+                RegistryHelper.setup(ModEntities.FUNGITE=EntityType.Builder.<EntityFungite>create(EntityFungite::new, EntityClassification.MONSTER).size(1.5F,2.4F).setTrackingRange(200).build("kathairis:fungite"),"fungite"),
+                RegistryHelper.setup(ModEntities.GAZNOWEL=EntityType.Builder.<EntityGaznowel>create(EntityGaznowel::new, EntityClassification.MONSTER).size(1F,2F).setTrackingRange(200).build("kathairis:gaznowel"),"gaznowel"),
+                RegistryHelper.setup(ModEntities.GECKO=EntityType.Builder.<EntityGecko>create(EntityGecko::new, EntityClassification.CREATURE).size(0.7F,0.25F).setTrackingRange(200).build("kathairis:gecko"),"gecko"),
+                RegistryHelper.setup(ModEntities.HOWLER=EntityType.Builder.<EntityHowler>create(EntityHowler::new, EntityClassification.MONSTER).size(0.85F,1F).setTrackingRange(200).build("kathairis:howler"),"howler"),
+                RegistryHelper.setup(ModEntities.JELLY_FISH=EntityType.Builder.<EntityJellyFish>create(EntityJellyFish::new, EntityClassification.MONSTER).size(1f,1f).setTrackingRange(200).build("kathairis:jelly_fish"),"jelly_fish"),
+                RegistryHelper.setup(ModEntities.LIVING_FLOWER=EntityType.Builder.<EntityLivingFlower>create(EntityLivingFlower::new, EntityClassification.AMBIENT).size(0.3F,0.5F).setTrackingRange(200).build("kathairis:living_flower"),"living_flower"),
+                RegistryHelper.setup(ModEntities.MYSTIC_BIRD=EntityType.Builder.<EntityMysticBird>create(EntityMysticBird::new, EntityClassification.AMBIENT).size(0.5F,0.7F).setTrackingRange(200).build("kathairis:mystic_bird"),"mystic_bird"),
+                RegistryHelper.setup(ModEntities.PHASM=EntityType.Builder.<EntityPhasm>create(EntityPhasm::new, EntityClassification.MONSTER).size(1F,2F).setTrackingRange(200).build("kathairis:phasm"),"phasm"),
+                RegistryHelper.setup(ModEntities.POISONOUS_SCORPION=EntityType.Builder.<EntityPoisonousScorpion>create(EntityPoisonousScorpion::new, EntityClassification.MONSTER).size(0.4F,0.7F).setTrackingRange(200).build("kathairis:poisonous_scorpion"),"poisonous_scorpion"),
+                RegistryHelper.setup(ModEntities.SKYRAY=EntityType.Builder.<EntitySkyray>create(EntitySkyray::new, EntityClassification.AMBIENT).size(10F,2.5F).setTrackingRange(200).build("kathairis:skyray"),"skyray"),
+                RegistryHelper.setup(ModEntities.STRANGE_WANDERER=EntityType.Builder.<EntityStrangeWanderer>create(EntityStrangeWanderer::new, EntityClassification.AMBIENT).size(1F,2F).setTrackingRange(200).build("kathairis:strange_wanderer"),"strange_wanderer"),
+                RegistryHelper.setup(ModEntities.MYSTIC_WAND_SHOOT=EntityType.Builder.<EntityMysticWandShoot>create(EntityMysticWandShoot::new, EntityClassification.MISC).size(1F,1F).setTrackingRange(200).build("kathairis:mystic_wand_shoot"),"mystic_wand_shoot")
+        );
+        ModEntities.registerPlacementTypes();
+        ModEntities.registerEntitySpawns();
+    }
+
 
     public static void registerPlacementType(EntityType type,EntitySpawnPlacementRegistry.PlacementType spawnType,Heightmap.Type heightType, EntitySpawnPlacementRegistry.IPlacementPredicate predicate){
         EntitySpawnPlacementRegistry.register(type, spawnType, heightType,predicate);

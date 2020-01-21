@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.world.dimension;
 
 
 import io.github.krevik.kathairis.client.render.world.RenderKathairisSky;
+import io.github.krevik.kathairis.client.render.world.RenderKatharianSkyNew;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModDimensions;
@@ -160,7 +161,7 @@ public class DimensionKathairis extends OverworldDimension {
     @Override
     public IRenderHandler getSkyRenderer() {
         if (super.getSkyRenderer() == null) {
-            this.setSkyRenderer(new RenderKathairisSky());
+            this.setSkyRenderer(new RenderKatharianSkyNew());
         }
         return super.getSkyRenderer();
     }

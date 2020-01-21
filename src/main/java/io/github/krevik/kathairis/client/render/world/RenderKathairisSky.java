@@ -1,23 +1,28 @@
 package io.github.krevik.kathairis.client.render.world;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.Kathairis;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.Vector4f;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.vertex.VertexBuffer;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.common.ForgeConfig;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,6 +33,14 @@ public class RenderKathairisSky implements IRenderHandler {
 
     private static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation(MOD_ID,"textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation(MOD_ID,"textures/environment/sun.png");
+    @Nullable
+    private VertexBuffer starVBO;
+    @Nullable
+    private VertexBuffer skyVBO;
+    @Nullable
+    private VertexBuffer sky2VBO;
+    private final VertexFormat starsVertexFormat = DefaultVertexFormats.POSITION_COLOR;
+    private final VertexFormat vertexBufferFormat = DefaultVertexFormats.POSITION;
 
     public RenderKathairisSky()
     {
@@ -38,11 +51,251 @@ public class RenderKathairisSky implements IRenderHandler {
     private ArrayList<FallingStar> fallingStarsList = new ArrayList();
     private FunctionHelper helper = Kathairis.getHelper();
 
-    @Override
+    private final float[] field_228411_ak_ = new float[1024];
+    private final float[] field_228412_al_ = new float[1024];
+    private MatrixStack matrixStack = null;
+
+    @OnlyIn(Dist.CLIENT)
+    public void renderOld(int someInt, float partialTicks, ClientWorld world, Minecraft mc) {
+        if(matrixStack==null){
+            matrixStack=new MatrixStack();
+        }
+        for(int i = 0; i < 32; ++i) {
+            for(int j = 0; j < 32; ++j) {
+                float f = (float)(j - 16);
+                float f1 = (float)(i - 16);
+                float f2 = MathHelper.sqrt(f * f + f1 * f1);
+                this.field_228411_ak_[i << 5 | j] = -f1 / f2;
+                this.field_228412_al_[i << 5 | j] = f / f2;
+            }
+        }
+
+        this.generateStars();
+        this.generateSky();
+        this.generateSky2();
+    }
+
+
+    private void generateSky() {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        if (this.skyVBO != null) {
+            this.skyVBO.close();
+        }
+
+        this.skyVBO = new VertexBuffer(this.vertexBufferFormat);
+        //this.renderSky(bufferbuilder, 16.0F, false);
+        //bufferbuilder.finishDrawing();
+        this.skyVBO.func_227875_a_(bufferbuilder);
+    }
+
+    private void generateSky2() {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        if (this.sky2VBO != null) {
+            this.sky2VBO.close();
+        }
+
+        this.sky2VBO = new VertexBuffer(this.vertexBufferFormat);
+        //this.renderSky(bufferbuilder, -16.0F, true);
+        //bufferbuilder.finishDrawing();
+        this.sky2VBO.func_227875_a_(bufferbuilder);
+    }
+
+
+    private void generateStars() {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        if (this.starVBO != null) {
+            this.starVBO.close();
+        }
+
+        this.starVBO = new VertexBuffer(this.vertexBufferFormat);
+        //this.renderStars(bufferbuilder);
+        //bufferbuilder.finishDrawing();
+        this.starVBO.func_227875_a_(bufferbuilder);
+    }
+
+    private void renderStars(BufferBuilder bufferBuilderIn) {
+        bufferBuilderIn.begin(7, DefaultVertexFormats.POSITION_COLOR);
+            //stars
+            for (int x = 0; x < 3000; x++) {
+                if (constantLight[x] >= 255) {
+                    constantLight[x] -= helper.getRandomInteger(0, 8);
+                } else if (constantLight[x] <= 0) {
+                    constantLight[x] = helper.getRandomInteger(0, 256);
+                } else {
+                    constantLight[x] += (helper.getRandomInteger(0, 8) - helper.getRandomInteger(0, 8));
+                }
+            }
+            RenderSystem.pushMatrix();
+            Random random = new Random(10842L);
+            for (int i = 0; i < 3000; ++i) {
+                double d0 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                double d1 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                double d2 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                double d33 = (double) (0.15F + random.nextFloat() * 0.1F);
+                double d4 = d0 * d0 + d1 * d1 + d2 * d2;
+
+                if (d4 < 1.0D && d4 > 0.01D) {
+                    d4 = 1.0D / Math.sqrt(d4);
+                    d0 = d0 * d4;
+                    d1 = d1 * d4;
+                    d2 = d2 * d4;
+                    double d5 = d0 * 100.0D;
+                    double d6 = d1 * 100.0D;
+                    double d7 = d2 * 100.0D;
+                    double d8 = Math.atan2(d0, d2);
+                    double d9 = Math.sin(d8);
+                    double d10 = Math.cos(d8);
+                    double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+                    double d12 = Math.sin(d11);
+                    double d13 = Math.cos(d11);
+                    double d14 = random.nextDouble() * Math.PI * 2.0D;
+                    double d15 = Math.sin(d14);
+                    double d16 = Math.cos(d14);
+
+                    for (int j = 0; j < 4; ++j) {
+                        Vector4f color = new Vector4f(helper.getRandomInteger(10842L, 66, 137), helper.getRandomInteger(10842L, 65, 244), helper.getRandomInteger(10842L, 229, 244), constantLight[i]);
+                        double d18 = (double) ((j & 2) - 1) * d33;
+                        double d19 = (double) ((j + 1 & 2) - 1) * d33;
+                        double d21 = d18 * d16 - d19 * d15;
+                        double d22 = d19 * d16 + d18 * d15;
+                        double d23 = d21 * d12 + 0.0D * d13;
+                        double d24 = 0.0D * d12 - d21 * d13;
+                        double d25 = d24 * d9 - d22 * d10;
+                        double d26 = d22 * d9 + d24 * d10;
+                        bufferBuilderIn.func_225582_a_(d5 + d25, d6 + d23, d7 + d26).func_227885_a_((int) color.getX(), (int) color.getY(), (int) color.getZ(), (int) color.getW()).endVertex();
+
+                    }
+                }
+            }
+
+            if (helper.getRandom().nextInt(100) == 0) {
+                random = new Random();
+                //generate falling star
+                double d0 = (double) (random.nextFloat() * 6.0F - 2F);
+                double d1 = (double) (random.nextFloat() * 6.0F - 2F);
+                double d2 = (double) (random.nextFloat() * 6.0F - 2F);
+                double d33 = (double) (0.15F + random.nextFloat() * 0.1F);
+                double d4 = d0 * d0 + d1 * d1 + d2 * d2;
+
+                d4 = 1.0D / Math.sqrt(d4);
+                d0 = d0 * d4;
+                d1 = d1 * d4;
+                d2 = d2 * d4;
+                double d5 = d0 * 60.0D;
+                double d6 = d1 * 60.0D;
+                double d7 = d2 * 60.0D;
+                double d8 = Math.atan2(d0, d2);
+                double d9 = Math.sin(d8);
+                double d10 = Math.cos(d8);
+                double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+                double d12 = Math.sin(d11);
+                double d13 = Math.cos(d11);
+                double d14 = random.nextDouble() * Math.PI * 2.0D;
+                double d15 = Math.sin(d14);
+                double d16 = Math.cos(d14);
+
+                double d18 = (double) ((0 & 2) - 1) * d33;
+                double d19 = (double) ((1 + 1 & 2) - 1) * d33;
+                double d21 = d18 * d16 - d19 * d15;
+                double d22 = d19 * d16 + d18 * d15;
+                double d23 = d21 * d12 + 0.0D * d13;
+                double d24 = 0.0D * d12 - d21 * d13;
+                double d25 = d24 * d9 - d22 * d10;
+                double d26 = d22 * d9 + d24 * d10;
+                FallingStar star = new FallingStar(this.fallingStarsList.size(), d5 + d25, d6 + d23, d7 + d26, -0.5F + random.nextFloat(), -0.5F + random.nextFloat(), -0.5F + random.nextFloat(), new Random().nextLong());
+                this.fallingStarsList.add(star);
+            }
+
+            //operate existing falling stars
+            for (int x = 0; x < this.fallingStarsList.size(); x++) {
+                if (this.fallingStarsList.get(x) != null) {
+                    FallingStar star = this.fallingStarsList.get(x);
+                    star.update();
+                    Long starSeed = star.getSeed();
+
+                    random = new Random(starSeed);
+                    double d0 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                    double d1 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                    double d2 = (double) (random.nextFloat() * 2.0F - 1.0F);
+                    double d33 = (double) (0.15F + random.nextFloat() * 0.1F);
+                    double d4 = d0 * d0 + d1 * d1 + d2 * d2;
+                    d4 = 1.0D;
+                    d0 = d0 * d4;
+                    d1 = d1 * d4;
+                    d2 = d2 * d4;
+                    double d5 = d0 * 100.0D;
+                    double d6 = d1 * 100.0D;
+                    double d7 = d2 * 100.0D;
+                    double d8 = Math.atan2(d0, d2);
+                    double d9 = Math.sin(d8);
+                    double d10 = Math.cos(d8);
+                    double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
+                    double d12 = Math.sin(d11);
+                    double d13 = Math.cos(d11);
+                    double d14 = random.nextDouble() * Math.PI * 2.0D;
+                    double d15 = Math.sin(d14);
+                    double d16 = Math.cos(d14);
+
+
+                    int trailSteps = 200;
+                    for (int cc = 1; cc <= trailSteps; cc++) {
+                        for (int j = 0; j < 4; ++j) {
+                            //
+                            double d18 = (double) ((j & 2) - 1) * d33;
+                            double d19 = (double) ((j + 1 & 2) - 1) * d33;
+                            double d21 = d18 * d16 - d19 * d15;
+                            double d22 = d19 * d16 + d18 * d15;
+                            double d23 = d21 * d12 + 0.0D * d13;
+                            double d24 = 0.0D * d12 - d21 * d13;
+                            double d25 = d24 * d9 - d22 * d10;
+                            double d26 = d22 * d9 + d24 * d10;
+                            bufferBuilderIn.func_225582_a_(star.getPos().x + d5 + d25 - (star.getMotion().x * cc * 0.07), star.getPos().y + d6 + d23 - (star.getMotion().y * cc * 0.07), star.getPos().z + d7 + d26 - (star.getMotion().z * cc * 0.07)).func_227885_a_(168, 244, 244, 200 - cc).endVertex();
+                        }
+                    }
+                    if (helper.getRandom().nextInt(1500) == 0 || fallingStarsList.size() > 30) {
+                        this.fallingStarsList.remove(x);
+                    }
+                }
+
+            }
+
+        //stars end
+
+    }
+
+    private void renderSky(BufferBuilder bufferBuilderIn, float posY, boolean reverseX) {
+        int i = 64;
+        int j = 6;
+        bufferBuilderIn.begin(7, DefaultVertexFormats.POSITION);
+
+        for(int k = -384; k <= 384; k += 64) {
+            for(int l = -384; l <= 384; l += 64) {
+                float f = (float)k;
+                float f1 = (float)(k + 64);
+                if (reverseX) {
+                    f1 = (float)k;
+                    f = (float)(k + 64);
+                }
+
+                bufferBuilderIn.func_225582_a_((double)f, (double)posY, (double)l).endVertex();
+                bufferBuilderIn.func_225582_a_((double)f1, (double)posY, (double)l).endVertex();
+                bufferBuilderIn.func_225582_a_((double)f1, (double)posY, (double)(l + 64)).endVertex();
+                bufferBuilderIn.func_225582_a_((double)f, (double)posY, (double)(l + 64)).endVertex();
+            }
+        }
+
+    }
+
     @OnlyIn(Dist.CLIENT)
     public void render(int someInt, float partialTicks, ClientWorld world, Minecraft mc) {
+        this.generateStars();
+        this.generateSky();
+        this.generateSky2();
         RenderSystem.disableTexture();
-        Vec3d vec3d = world.func_228318_a_(mc.player.getPosition(), partialTicks);
+        Vec3d vec3d = world.func_228318_a_(mc.gameRenderer.getActiveRenderInfo().getBlockPos(), partialTicks);
         float f = (float)vec3d.x;
         float f1 = (float)vec3d.y;
         float f2 = (float)vec3d.z;
@@ -285,15 +538,15 @@ public class RenderKathairisSky implements IRenderHandler {
         float f24 = (float)(i2 + 1) / 4.0F;
         float f14 = (float)(k2 + 1) / 2.0F;
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.func_225582_a_((double)(-f17), -100.0D, (double)f17).func_225583_a_(f24, f14).endVertex();
-        bufferbuilder.func_225582_a_((double)f17, -100.0D, (double)f17).func_225583_a_(f22, f14).endVertex();
-        bufferbuilder.func_225582_a_((double)f17, -100.0D, (double)(-f17)).func_225583_a_(f22, f23).endVertex();
-        bufferbuilder.func_225582_a_((double)(-f17), -100.0D, (double)(-f17)).func_225583_a_(f24, f23).endVertex();
+        bufferbuilder.func_225582_a_((double)(-f17), -100.0D, (double)f17).func_225583_a_((float)f24, (float)f14).endVertex();
+        bufferbuilder.func_225582_a_((double)f17, -100.0D, (double)f17).func_225583_a_((float)f22, (float)f14).endVertex();
+        bufferbuilder.func_225582_a_((double)f17, -100.0D, (double)(-f17)).func_225583_a_((float)f22, (float)f23).endVertex();
+        bufferbuilder.func_225582_a_((double)(-f17), -100.0D, (double)(-f17)).func_225583_a_((float)f24, (float)f23).endVertex();
         tessellator.draw();
         //moon end
 
         RenderSystem.disableTexture();
-        float f15 = world.func_228330_j_(partialTicks) * f16;
+        float f15 = 2F * f16;
 
         if (f15 > 0.0F)
         {
@@ -350,6 +603,4 @@ public class RenderKathairisSky implements IRenderHandler {
         RenderSystem.depthMask(true);
 
     }
-
-
 }

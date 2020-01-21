@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -22,6 +23,7 @@ public class RenderCloudShimmer extends MobRenderer<EntityCloudShimmer, ModelClo
     {
         super(renderManagerIn, new ModelCloudShimmer(), 0F);
     }
+
 
     @Override
     public ResourceLocation getEntityTexture(EntityCloudShimmer entity)
