@@ -39,8 +39,8 @@ public class BlockFluoFungi extends BlockKathairisPlant implements IItemGroupPro
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		super.func_225534_a_(state, worldIn, pos, random);
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+		super.tick(state, worldIn, pos, random);
 		handleFacing(state, worldIn, pos);
 		if (!this.isLogAround(worldIn, pos)) {
 			this.dropBlock(worldIn, pos, state);

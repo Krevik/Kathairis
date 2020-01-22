@@ -51,8 +51,8 @@ public class BlockWillowVineMain extends BlockKathairisPlant implements IGrowabl
     }
 
     @Override
-    public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random p_225534_4_) {
-        super.func_225534_a_(state,world,pos,p_225534_4_);
+    public void tick(BlockState state, ServerWorld world, BlockPos pos, Random p_225534_4_) {
+        super.tick(state,world,pos,p_225534_4_);
         if (!world.isRemote) {
             if (!isValidPosition(state,world,pos)) {
                 world.destroyBlock(pos, false);
@@ -91,7 +91,7 @@ public class BlockWillowVineMain extends BlockKathairisPlant implements IGrowabl
     }
 
     @Override
-    public void func_225535_a_(ServerWorld world, Random random, BlockPos blockPos, BlockState blockState) {
+    public void grow(ServerWorld world, Random random, BlockPos blockPos, BlockState blockState) {
         if(world.getBlockState(blockPos.down()).getBlock()==Blocks.AIR&&
                 world.getBlockState(blockPos.down(2)).getBlock()==Blocks.AIR){
             if(world.getBlockState(blockPos.down(3)).getBlock()==Blocks.AIR){

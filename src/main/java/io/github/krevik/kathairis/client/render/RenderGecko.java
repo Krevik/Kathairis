@@ -3,9 +3,11 @@ package io.github.krevik.kathairis.client.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelGecko;
+import io.github.krevik.kathairis.entity.EntityCloudOister;
 import io.github.krevik.kathairis.entity.EntityGecko;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Quaternion;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -42,26 +44,25 @@ public class RenderGecko extends MobRenderer<EntityGecko, ModelGecko<EntityGecko
     }
 
     @Override
-    public void func_225623_a_(EntityGecko entityLiving, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        //TODO fix rotations (translatef)
-        if(entityLiving.isChild()) {
-        	s.func_227862_a_(0.5f, 0.5f, 0.5f);
-    	}else {
-        	s.func_227862_a_(0.8f, 0.8f, 0.8f);
-    	}
-        if (entityLiving.isClimbing()) {
-            if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.EAST) {
-                //s.func_227861_a_(0, 0, 90);
-            } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.WEST) {
-                //s.func_227861_a_(0, 0, -90);
-            } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.NORTH) {
-                //s.func_227861_a_(90, 0, 0);
-            } else if (entityLiving.climbingSide() == EntityGecko.EnumClimbSide.SOUTH) {
-                //s.func_227861_a_(-90, 0, 0);
-            }
-            //s.translatef(0f, -0.0F, 0F);
+    protected void func_225621_a_(EntityGecko e, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
+        //TODO fix rotations
+        if(e.isChild()) {
+            s.scale(0.5f, 0.5f, 0.5f);
+        }else {
+            s.scale(0.8f, 0.8f, 0.8f);
         }
-        super.func_225623_a_(entityLiving,f1,f2,s,i1,i2);
+        if (e.isClimbing()) {
+            if (e.climbingSide() == EntityGecko.EnumClimbSide.EAST) {
+                s.rotate(new Quaternion(0,0, 1, 90));
+            } else if (e.climbingSide() == EntityGecko.EnumClimbSide.WEST) {
+                s.rotate(new Quaternion(0,0, 1, -90));
+            } else if (e.climbingSide() == EntityGecko.EnumClimbSide.NORTH) {
+                s.rotate(new Quaternion(1,0, 0, 90));
+            } else if (e.climbingSide() == EntityGecko.EnumClimbSide.SOUTH) {
+                s.rotate(new Quaternion(1, 0, 0, -90));
+            }
+        }
+        super.func_225621_a_(e, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
     
 }

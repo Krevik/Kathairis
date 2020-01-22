@@ -36,69 +36,69 @@ public class ModelCloudOister<T extends LivingEntity> extends AgeableModel<T> {
         this.textureHeight = 32;
         this.shape1_10 = new ModelRenderer(this, 0, 0);
         this.shape1_10.setRotationPoint(1.1F, 22.6F, -2.1F);
-        this.shape1_10.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 3, 0.0F);
+        this.shape1_10.addBox(0.0F, 0.0F, 0.0F, 2, 1, 3, 0.0F);
         this.setRotateAngle(shape1_10, -0.18378317023500287F, 2.457423586808016F, 0.0F);
         this.shape1_3 = new ModelRenderer(this, 0, 0);
         this.shape1_3.setRotationPoint(-0.7F, 23.7F, -1.0F);
-        this.shape1_3.func_228301_a_(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
+        this.shape1_3.addBox(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
         this.setRotateAngle(shape1_3, 0.0F, 0.36425021489121656F, -0.27314402793711257F);
         this.shape1_11 = new ModelRenderer(this, 0, 3);
         this.shape1_11.setRotationPoint(2.0F, 22.7F, -2.2F);
-        this.shape1_11.func_228301_a_(0.0F, 0.0F, 0.0F, 4, 1, 1, 0.0F);
+        this.shape1_11.addBox(0.0F, 0.0F, 0.0F, 4, 1, 1, 0.0F);
         this.setRotateAngle(shape1_11, -0.40980330836826856F, 3.141592653589793F, 0.0F);
         this.shape1_12 = new ModelRenderer(this, 0, 0);
         this.shape1_12.setRotationPoint(0.7F, 0.0F, 1.0F);
-        this.shape1_12.func_228301_a_(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
+        this.shape1_12.addBox(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
         this.setRotateAngle(shape1_12, 0.0F, 0.36425021489121656F, 0.40980330836826856F);
         this.shape1 = new ModelRenderer(this, 0, 0);
         this.shape1.setRotationPoint(-1.4F, 23.1F, -4.0F);
-        this.shape1.func_228301_a_(0.0F, 0.0F, 1.0F, 2, 1, 5, 0.0F);
+        this.shape1.addBox(0.0F, 0.0F, 1.0F, 2, 1, 5, 0.0F);
         this.setRotateAngle(shape1, -0.136659280431156F, -0.6373942428283291F, 0.7285004297824331F);
         this.shape1_6 = new ModelRenderer(this, 18, 4);
         this.shape1_6.setRotationPoint(1.2F, 21.4F, 0.5F);
-        this.shape1_6.func_228301_a_(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.shape1_6.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
         this.setRotateAngle(shape1_6, 0.0F, 0.36425021489121656F, 0.0F);
         this.shape1_8 = new ModelRenderer(this, 0, 0);
         this.shape1_8.setRotationPoint(-1.0F, 22.7F, -5.8F);
-        this.shape1_8.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 3, 0.0F);
+        this.shape1_8.addBox(0.0F, 0.0F, 0.0F, 2, 1, 3, 0.0F);
         this.setRotateAngle(shape1_8, 0.18203784098300857F, 0.0F, 0.0F);
         this.shape1_13 = new ModelRenderer(this, 0, 0);
         this.shape1_13.setRotationPoint(0.8F, 0.4F, 0.9F);
-        this.shape1_13.func_228301_a_(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
+        this.shape1_13.addBox(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
         this.setRotateAngle(shape1_13, 0.136659280431156F, 0.27314402793711257F, 0.31869712141416456F);
         this.shape1_1 = new ModelRenderer(this, 0, 0);
         this.shape1_1.setRotationPoint(-1.0F, 23.3F, -2.2F);
-        this.shape1_1.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
+        this.shape1_1.addBox(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
         this.shape1_7 = new ModelRenderer(this, 14, 4);
         this.shape1_7.setRotationPoint(-2.6F, 21.4F, 0.2F);
-        this.shape1_7.func_228301_a_(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
+        this.shape1_7.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
         this.setRotateAngle(shape1_7, 0.0F, -0.36425021489121656F, 0.0F);
         this.shape1_9 = new ModelRenderer(this, 0, 0);
         this.shape1_9.setRotationPoint(0.7F, 22.6F, -3.4F);
-        this.shape1_9.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 3, 0.0F);
+        this.shape1_9.addBox(0.0F, 0.0F, 0.0F, 2, 1, 3, 0.0F);
         this.setRotateAngle(shape1_9, -0.18378317023500287F, -2.4586453172844123F, 0.0F);
         this.body2_2 = new ModelRenderer(this, 0, 0);
         this.body2_2.setRotationPoint(1.7F, -0.2F, 0.1F);
-        this.body2_2.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
+        this.body2_2.addBox(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
         this.setRotateAngle(body2_2, 0.0F, 0.7285004297824331F, 0.5009094953223726F);
         this.shape1_5 = new ModelRenderer(this, 16, 0);
         this.shape1_5.setRotationPoint(-1.1F, 20.8F, -0.3F);
-        this.shape1_5.func_228301_a_(0.0F, 0.0F, 0.0F, 6, 6, 6, 0.0F);
+        this.shape1_5.addBox(0.0F, 0.0F, 0.0F, 6, 6, 6, 0.0F);
         this.shape1_4 = new ModelRenderer(this, 0, 0);
         this.shape1_4.setRotationPoint(-1.9F, 23.2F, -2.0F);
-        this.shape1_4.func_228301_a_(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
+        this.shape1_4.addBox(0.0F, 0.0F, 0.0F, 3, 1, 4, 0.0F);
         this.setRotateAngle(shape1_4, 0.0F, -0.36425021489121656F, 0.27314402793711257F);
         this.body2_1 = new ModelRenderer(this, 0, 0);
         this.body2_1.setRotationPoint(-1.3F, 0.2F, -1.2F);
-        this.body2_1.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
+        this.body2_1.addBox(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
         this.setRotateAngle(body2_1, 0.0F, -0.6829473363053812F, -0.5009094953223726F);
         this.shape1_2 = new ModelRenderer(this, 0, 0);
         this.shape1_2.setRotationPoint(0.5F, 23.75F, -1.9F);
-        this.shape1_2.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
+        this.shape1_2.addBox(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
         this.setRotateAngle(shape1_2, -0.136659280431156F, 0.6829473363053812F, -0.7285004297824331F);
         this.body2 = new ModelRenderer(this, 0, 0);
         this.body2.setRotationPoint(-0.9F, 22.3F, -3.0F);
-        this.body2.func_228301_a_(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
+        this.body2.addBox(0.0F, 0.0F, 0.0F, 2, 1, 5, 0.0F);
         this.setRotateAngle(body2, 1.2747884856566583F, 0.0F, 0.0F);
         this.body2.addChild(this.shape1_12);
         this.body2_1.addChild(this.shape1_13);
@@ -107,7 +107,7 @@ public class ModelCloudOister<T extends LivingEntity> extends AgeableModel<T> {
     }
 
     @Override
-    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+    public void render(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
 
     }
 

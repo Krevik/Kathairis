@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelBison;
 import io.github.krevik.kathairis.entity.EntityBison;
+import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -44,9 +45,9 @@ public class RenderBison extends MobRenderer<EntityBison, ModelBison<EntityBison
     }
 
     @Override
-    public void func_225623_a_(EntityBison e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        s.func_227862_a_(1.5f,1.5f,1.5f);
-        super.func_225623_a_(e,f1,f2,s,i1,i2);
+    protected void func_225621_a_(EntityBison p_225621_1_, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
+        s.scale(1.5f,1.5f,1.5f);
+        super.func_225621_a_(p_225621_1_, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
 
     

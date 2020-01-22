@@ -3,6 +3,8 @@ package io.github.krevik.kathairis.client.render.butterfly;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.butterfly.ModelCloudShimmer;
+import io.github.krevik.kathairis.entity.EntityCloudySlime;
+import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
 import io.github.krevik.kathairis.entity.butterfly.EntityCloudShimmer;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -41,9 +43,9 @@ public class RenderCloudShimmer extends MobRenderer<EntityCloudShimmer, ModelClo
     }
 
     @Override
-    public void func_225623_a_(EntityCloudShimmer e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        s.func_227862_a_(0.3f, 0.3f, 0.3f);
-        super.func_225623_a_(e,f1,f2,s,i1,i2);
+    protected void func_225621_a_(EntityCloudShimmer p_225621_1_, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
+        s.scale(0.3f,0.3f,0.3f);
+        super.func_225621_a_(p_225621_1_, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
     
 }

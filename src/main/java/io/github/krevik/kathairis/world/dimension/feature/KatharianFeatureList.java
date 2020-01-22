@@ -20,6 +20,9 @@ import io.github.krevik.kathairis.world.dimension.structures.cloud_temple.Struct
 import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsConfig;
 import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.CrystalRuinsPieces;
 import io.github.krevik.kathairis.world.dimension.structures.crystal_ruins.StructureCrystalRuins;
+import io.github.krevik.kathairis.world.dimension.structures.sky_fortress.SkyFortressConfig;
+import io.github.krevik.kathairis.world.dimension.structures.sky_fortress.SkyFortressPieces;
+import io.github.krevik.kathairis.world.dimension.structures.sky_fortress.StructureSkyFortress;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KathairisSwampSurfaceBuilder;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianDesertEdgeSurfaceBuilder;
 import io.github.krevik.kathairis.world.dimension.surface.builder.KatharianSoftSandLakesSurfaceBuilder;
@@ -46,7 +49,7 @@ import java.util.Locale;
 
 public class KatharianFeatureList {
 
-    public static final TreeFeatureConfig MYSTIC_TREE_FEATURE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).func_225568_b_();
+    public static final TreeFeatureConfig MYSTIC_TREE_FEATURE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).build();
     public static final BlockClusterFeatureConfig BLOCK_CLUSTER_TALL_GRASS_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.KATHAIRIS_TALL_GRASS.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
     public static final BlockClusterFeatureConfig BLOCK_CLUSTER_MINI_GRASS_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.KATHAIRIS_MINI_GRASS.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
     public static final BlockClusterFeatureConfig BLOCK_CLUSTER_GOOSEBERRY_FEATURE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.GOOSEBERRY_BUSH.getDefaultState()), new SimpleBlockPlacer())).func_227315_a_(64).func_227317_b_().func_227322_d_();
@@ -89,6 +92,7 @@ public class KatharianFeatureList {
     public static final Feature<CrystalRuinsConfig> CRYSTAL_RUINS = registerFeature("crystal_ruins", new StructureCrystalRuins(CrystalRuinsConfig::deserialize));
     public static final Feature<NoFeatureConfig> CLOUD_TEMPLE = registerFeature("cloud_temple", new StructureCloudTemple(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> MAGNETHIUM_HALF_SPHERE = registerFeature("magnethium_half_sphere", new FeatureMagnethiumHalfSphere(NoFeatureConfig::deserialize));
+    public static final Feature<SkyFortressConfig> SKY_FORTRESS = registerFeature("sky_fortress", new StructureSkyFortress(SkyFortressConfig::deserialize));
 
     public static final WorldCarver<ProbabilityConfig> KATHARIAN_CAVE_WORLD_CARVER = registerWorldCarver("katharian_cave_world_carver",new KatharianWorldCaveCarver(ProbabilityConfig::deserialize,256));
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = registerSurfaceBuilder("katharian_swamp_surface_builder", new KathairisSwampSurfaceBuilder(SurfaceBuilderConfig::deserialize));
@@ -97,6 +101,7 @@ public class KatharianFeatureList {
 
     public static IStructurePieceType CRYSTAL_RUINS_PIECES_TYPE = registerStructurePieces(CrystalRuinsPieces.CrystalRuins::new, "crystal_ruins_pieces_type");
     public static IStructurePieceType CLOUD_TEMPLE_PIECES_TYPE = registerStructurePieces(CloudTemplePieces.CloudTemple::new, "cloud_temple_pieces_type");
+    public static IStructurePieceType SKY_FORTRESS_PIECE_TYPE = registerStructurePieces(SkyFortressPieces.SkyFortress::new, "sky_fortress_pieces_type");
 
     static IStructurePieceType registerStructurePieces(IStructurePieceType p_214750_0_, String key) {
         return Registry.register(Registry.STRUCTURE_PIECE, key.toLowerCase(Locale.ROOT), p_214750_0_);

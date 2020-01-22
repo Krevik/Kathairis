@@ -72,7 +72,7 @@ public class SingleJigsawPieceNoAirIgnorance extends JigsawPiece {
 
     public List<Template.BlockInfo> getJigsawBlocks(TemplateManager templateManagerIn, BlockPos pos, Rotation rotationIn, Random rand) {
         Template template = templateManagerIn.getTemplateDefaulted(this.location);
-        List<Template.BlockInfo> list = template.func_215386_a(pos, (new PlacementSettings()).setRotation(rotationIn), Blocks.field_226904_lY_, true);
+        List<Template.BlockInfo> list = template.func_215386_a(pos, (new PlacementSettings()).setRotation(rotationIn), Blocks.JIGSAW, true);
         Collections.shuffle(list, rand);
         return list;
     }

@@ -33,43 +33,48 @@ public class ModEventSubscriberClient {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
-        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_MULTI_GRASS, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_TALL_GRASS, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CLOUD, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CLOUD, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CLOUD_BRICKS, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CLOUD_BLOCK, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_MINI_GRASS, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.VILYRIA, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_GRASS, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.ELDERWILLOW_LEAVES, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.MYSTIC_LEAVES, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SHINY_LEAVES, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SOUL_LEAVES, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BUTTERFLY_FLOWER, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.GLOWVINES, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.FLUO_FUNGI, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_NIGHT_FLOWER, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.PURPLE_PALM, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BRINE_PUSTULE, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_SUCCULENT, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SHINY_SAPLING, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SOUL_SAPLING, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.MYSTIC_SAPLING, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.ELDERWILLOW_SAPLING, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.ROCKTUS, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.WILLOW_VINE_MAIN, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.WILLOW_VINE_TIP, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.FOREST_CANDLE, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.GOOSEBERRY_BUSH, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BISON_STARS, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.FRUP_PLANT, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.EYE_PLANT, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CRYSTAL, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.VIOLET_CRYSTAL, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CRYSTAL, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_PORTAL, RenderType.func_228645_f_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.HANGING_ROOTS, RenderType.func_228645_f_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_MULTI_GRASS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_TALL_GRASS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CLOUD, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CLOUD, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CLOUD_BRICKS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CLOUD_BLOCK, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_MINI_GRASS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.VILYRIA, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_GRASS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.ELDERWILLOW_LEAVES, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.MYSTIC_LEAVES, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SHINY_LEAVES, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOUL_LEAVES, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BUTTERFLY_FLOWER, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GLOWVINES, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FLUO_FUNGI, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_NIGHT_FLOWER, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.PURPLE_PALM, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BRINE_PUSTULE, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_SUCCULENT, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SHINY_SAPLING, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOUL_SAPLING, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.MYSTIC_SAPLING, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.ELDERWILLOW_SAPLING, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.ROCKTUS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.WILLOW_VINE_MAIN, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.WILLOW_VINE_TIP, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FOREST_CANDLE, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GOOSEBERRY_BUSH, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BISON_STARS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FRUP_PLANT, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.EYE_PLANT, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CRYSTAL, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.VIOLET_CRYSTAL, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CRYSTAL, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_PORTAL, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HANGING_ROOTS, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CLOUD_FLOWER, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CLOUD_FLOWER, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CLOUD_REFINED, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CLOUD_REFINED, RenderType.translucent());
+
 
     }
 

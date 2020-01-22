@@ -46,8 +46,8 @@ public class BlockGooseberry extends Block implements IItemGroupProvider {
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.func_225534_a_(state, world, pos, random);
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		super.tick(state, world, pos, random);
 		if (!world.isRemote) {
 			if (random.nextInt(50) == 0) {
 				world.setBlockState(pos, GOOSEBERRY_BUSH.getDefaultState().with(VARIANT, EnumType.WITH));
@@ -63,7 +63,7 @@ public class BlockGooseberry extends Block implements IItemGroupProvider {
 
 
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
 		if (state == GOOSEBERRY_BUSH.getDefaultState().with(VARIANT, EnumType.WITH)) {
 			player.addItemStackToInventory(new ItemStack(GOOSEBERRIES, 1 + player.getRNG().nextInt(5)));
 			world.setBlockState(pos, GOOSEBERRY_BUSH.getDefaultState());

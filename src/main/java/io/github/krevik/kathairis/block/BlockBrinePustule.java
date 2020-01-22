@@ -54,8 +54,8 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable,
     }
 
     @Override
-    public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        super.func_225534_a_(state, worldIn, pos, random);
+    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        super.tick(state, worldIn, pos, random);
         if (!this.isStoneAround(worldIn, pos)) {
             this.dropBlock(worldIn, pos, state);
         }
@@ -190,7 +190,7 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable,
     }
 
     @Override
-    public void func_225535_a_(ServerWorld world, Random random, BlockPos blockPos, BlockState iBlockState) {
+    public void grow(ServerWorld world, Random random, BlockPos blockPos, BlockState iBlockState) {
         world.setBlockState(blockPos,iBlockState.with(AGE,1));
     }
 }

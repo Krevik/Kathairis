@@ -3,9 +3,11 @@ package io.github.krevik.kathairis.client.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelCloudOister;
+import io.github.krevik.kathairis.entity.EntityCamel;
 import io.github.krevik.kathairis.entity.EntityCloudOister;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Quaternion;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -42,12 +44,12 @@ public class RenderCloudOister extends MobRenderer<EntityCloudOister,ModelCloudO
     }
 
     @Override
-    public void func_225623_a_(EntityCloudOister e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
+    protected void func_225621_a_(EntityCloudOister e, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
         if(!e.isChild()) {
-            RenderSystem.scaled(1.5, 1.5, 1.5);
+            s.scale(1.5f, 1.5f, 1.5f);
         }
-        RenderSystem.rotatef(180, 0, 1, 0);
-        super.func_225623_a_(e,f1,f2,s,i1,i2);
+        s.rotate(new Quaternion(180,0,1,0));
+        super.func_225621_a_(e, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
     
 }

@@ -69,7 +69,7 @@ public class BlockLayeredSand extends Block implements IItemGroupProvider {
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isRemote) {
 			giveSandToNeighboursNew(state, worldIn, pos);
 		}

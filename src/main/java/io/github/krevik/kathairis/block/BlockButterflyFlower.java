@@ -50,8 +50,8 @@ public class BlockButterflyFlower extends BlockKathairisPlant implements IItemGr
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		super.func_225534_a_(state, worldIn, pos, random);
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+		super.tick(state, worldIn, pos, random);
 		if (random.nextInt(10) == 0) {
 			if (!worldIn.isDaytime()) {
 				worldIn.setBlockState(pos, BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH));

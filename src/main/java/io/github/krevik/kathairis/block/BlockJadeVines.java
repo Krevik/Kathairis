@@ -136,8 +136,8 @@ public class BlockJadeVines extends BlockKathairisPlant implements IItemGroupPro
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		super.func_225534_a_(state, worldIn, pos, rand);
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		super.tick(state, worldIn, pos, rand);
 		if (!worldIn.isRemote) {
 			handleVariantsAndCanBlockBeHere(worldIn, pos, state);
 			if (rand.nextInt(20) == 0) {

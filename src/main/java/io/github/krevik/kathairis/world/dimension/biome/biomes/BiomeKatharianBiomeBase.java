@@ -68,8 +68,8 @@ public class BiomeKatharianBiomeBase extends Biome {
         int sumB = 0;
         int count = 0;
         for (BlockPos positionForAverage : toCalculate) {
-            if(world.func_226691_t_(positionForAverage) instanceof BiomeKatharianBiomeBase) {
-                BiomeKatharianBiomeBase biome = (BiomeKatharianBiomeBase) world.func_226691_t_(positionForAverage);
+            if(world.getBiome(positionForAverage) instanceof BiomeKatharianBiomeBase) {
+                BiomeKatharianBiomeBase biome = (BiomeKatharianBiomeBase) world.getBiome(positionForAverage);
                 count++;
                 sumR += biome.baseGrassColor.getRed();
                 sumG += biome.baseGrassColor.getGreen();

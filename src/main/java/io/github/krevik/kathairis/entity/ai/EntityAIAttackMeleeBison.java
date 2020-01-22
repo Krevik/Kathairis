@@ -54,7 +54,7 @@ public class EntityAIAttackMeleeBison extends Goal
             {
                 if (--this.delayCounter <= 0)
                 {
-                    this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase,0);
+                    this.path = this.attacker.getNavigator().getPathToEntity(entitylivingbase,0);
                     this.delayCounter = 4 + this.attacker.getRNG().nextInt(7);
                     return this.path != null;
                 }
@@ -63,7 +63,7 @@ public class EntityAIAttackMeleeBison extends Goal
                     return true;
                 }
             }
-            this.path = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase,0);
+            this.path = this.attacker.getNavigator().getPathToEntity(entitylivingbase,0);
 
             if (this.path != null)
             {

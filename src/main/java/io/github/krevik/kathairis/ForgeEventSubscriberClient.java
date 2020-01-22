@@ -32,7 +32,7 @@ public class ForgeEventSubscriberClient {
         }
         boolean isSwampNear=false;
         for(BlockPos pos:posesToCalculate){
-            if(player.world.func_226691_t_(pos)== ModBiomes.KATHARIAN_SWAMP){
+            if(player.world.getBiome(pos)== ModBiomes.KATHARIAN_SWAMP){
                 isSwampNear=true;
             }
         }
@@ -47,7 +47,7 @@ public class ForgeEventSubscriberClient {
         float result;
         float sum=0;
         for(BlockPos pos:posesToCalculate){
-            if(world.func_226691_t_(pos)==ModBiomes.KATHARIAN_SWAMP){
+            if(world.getBiome(pos)==ModBiomes.KATHARIAN_SWAMP){
                 sum+=swampValue;
             }else{
                 sum+=normalValue;

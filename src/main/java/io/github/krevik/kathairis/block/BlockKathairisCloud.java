@@ -62,8 +62,10 @@ public class BlockKathairisCloud extends Block implements IItemGroupProvider {
 	}
 
 
+
+
 	@Override
-	public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_220051_6_) {
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_220051_6_) {
 		Item heldItem = player.getHeldItem(hand).getItem();
 		if (heldItem == GLASS_JAR) {
 			if (!worldIn.isRemote) {

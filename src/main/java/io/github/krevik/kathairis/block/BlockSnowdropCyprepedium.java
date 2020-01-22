@@ -20,7 +20,7 @@ public class BlockSnowdropCyprepedium extends BlockKathairisPlant {
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		if (!worldIn.isRemote) {
 			for (int c = 0; c <= 1 + rand.nextInt(5); c++) {
 				BlockPos tmp = new BlockPos(pos.getX() - 6 + rand.nextInt(12), pos.getY() - 3 + rand.nextInt(6), pos.getZ() - 6 + rand.nextInt(12));

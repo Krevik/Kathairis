@@ -3,9 +3,11 @@ package io.github.krevik.kathairis.client.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelCloudySlime;
+import io.github.krevik.kathairis.entity.EntityCloudOister;
 import io.github.krevik.kathairis.entity.EntityCloudySlime;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Quaternion;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -40,14 +42,13 @@ public class RenderCloudySlime extends MobRenderer<EntityCloudySlime,ModelCloudy
             return new RenderCloudySlime(manager);
 
         }
-
     }
 
     @Override
-    public void func_225623_a_(EntityCloudySlime e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        RenderSystem.rotatef(90, 0, 1, 0);
-        RenderSystem.scaled(0.7, 0.7, 0.7);
-        super.func_225623_a_(e,f1,f2,s,i1,i2);
+    protected void func_225621_a_(EntityCloudySlime e, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
+        s.rotate(new Quaternion(90, 0, 1, 0));
+        s.scale(0.7f, 0.7f, 0.7f);
+        super.func_225621_a_(e, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
     
 }

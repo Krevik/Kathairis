@@ -45,8 +45,8 @@ public class BlockBaurble extends Block implements IItemGroupProvider {
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.func_225534_a_(state, world, pos, random);
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		super.tick(state, world, pos, random);
 		dropIfNotValidPosition(state, world, pos);
 	}
 

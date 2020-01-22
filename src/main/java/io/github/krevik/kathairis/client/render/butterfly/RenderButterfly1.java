@@ -40,11 +40,10 @@ public class RenderButterfly1 extends MobRenderer<EntityButterfly1, ModelButterf
 
     }
 
-
     @Override
-    public void func_225623_a_(EntityButterfly1 e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        s.func_227862_a_(0.2f,0.2f,0.2f);
-        //RenderSystem.scaled(0.2, 0.2, 0.2);
-        super.func_225623_a_(e,f1,f2,s,i1,i2);
+    protected void func_225621_a_(EntityButterfly1 p_225621_1_, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
+        s.scale(0.2f,0.2f,0.2f);
+        super.func_225621_a_(p_225621_1_, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
+
 }

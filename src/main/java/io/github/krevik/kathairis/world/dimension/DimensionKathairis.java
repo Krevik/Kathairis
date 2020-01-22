@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.world.dimension;
 
 
-import io.github.krevik.kathairis.client.render.world.RenderKathairisSky;
 import io.github.krevik.kathairis.init.ModBiomes;
 import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModDimensions;
@@ -116,7 +115,7 @@ public class DimensionKathairis extends OverworldDimension {
         }
         boolean isSwampNear=false;
         for(BlockPos pos:posesToCalculate){
-            if(player.world.func_226691_t_(pos)==ModBiomes.KATHARIAN_SWAMP){
+            if(player.world.getBiome(pos)==ModBiomes.KATHARIAN_SWAMP){
                 isSwampNear=true;
             }
         }
@@ -136,7 +135,7 @@ public class DimensionKathairis extends OverworldDimension {
         float sumG=0;
         float sumB=0;
         for(BlockPos pos:posesToCalculate){
-            if(world.func_226691_t_(pos)==ModBiomes.KATHARIAN_SWAMP){
+            if(world.getBiome(pos)==ModBiomes.KATHARIAN_SWAMP){
                 sumR+=swampValue.x;
                 sumG+=swampValue.y;
                 sumB+=swampValue.z;

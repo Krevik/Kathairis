@@ -160,8 +160,8 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 	}
 
 	@Override
-	public void func_225534_a_(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-		super.func_225534_a_(state,worldIn,pos,rand);
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		super.tick(state,worldIn,pos,rand);
 		if(worldIn.dimension.getType().getId() == DimensionType.byName(ModReference.KATHAIRIS).getId()) {
 			List<EntityStrangeWanderer> e = worldIn.getEntitiesWithinAABB(EntityStrangeWanderer.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX()  + 15, pos.getY() + 15, pos.getZ() + 15));
 			if(e.size()==0) {

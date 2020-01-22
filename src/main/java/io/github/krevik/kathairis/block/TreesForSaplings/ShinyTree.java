@@ -15,6 +15,6 @@ public class ShinyTree extends Tree {
 
     @Nullable
     protected ConfiguredFeature<TreeFeatureConfig, ?> func_225546_b_(Random p_225546_1_) {
-        return KatharianFeatureList.KATHARIAN_TREE_3.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.SHINY_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.SHINY_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.SHINY_SAPLING).func_225568_b_());
+        return KatharianFeatureList.KATHARIAN_TREE_3.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.SHINY_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.SHINY_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.SHINY_SAPLING).build());
     }
 }

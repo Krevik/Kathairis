@@ -15,6 +15,6 @@ public class ElderwillowTree extends Tree {
 
     @Nullable
     protected ConfiguredFeature<TreeFeatureConfig, ?> func_225546_b_(Random p_225546_1_) {
-        return KatharianFeatureList.KATHARIAN_SWAMP_TALL_TREE_1.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.ELDERWILLOW_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.ELDERWILLOW_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.ELDERWILLOW_SAPLING).func_225568_b_());
+        return KatharianFeatureList.KATHARIAN_SWAMP_TALL_TREE_1.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.ELDERWILLOW_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.ELDERWILLOW_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.ELDERWILLOW_SAPLING).build());
     }
 }

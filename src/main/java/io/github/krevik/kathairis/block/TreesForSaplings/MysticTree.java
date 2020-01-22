@@ -18,13 +18,13 @@ public class MysticTree extends Tree {
     protected ConfiguredFeature<TreeFeatureConfig, ?> func_225546_b_(Random p_225546_1_) {
         int k=p_225546_1_.nextInt(3);
         if(k==0) {
-            return KatharianFeatureList.KATHARIAN_HUGE_TREE_1.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).func_225568_b_());
+            return KatharianFeatureList.KATHARIAN_HUGE_TREE_1.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).build());
         }
         if(k==1) {
-            return KatharianFeatureList.KATHARIAN_TREE_2.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).func_225568_b_());
+            return KatharianFeatureList.KATHARIAN_TREE_2.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).build());
         }
-        if(k==2) {        return KatharianFeatureList.KATHARIAN_TREE_2.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).func_225568_b_());
+        if(k==2) {        return KatharianFeatureList.KATHARIAN_TREE_2.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).build());
         }
-        return KatharianFeatureList.KATHARIAN_HUGE_TREE_1.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).func_225568_b_());
+        return KatharianFeatureList.KATHARIAN_HUGE_TREE_1.func_225566_b_((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.MYSTIC_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.MYSTIC_LEAVES.getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable) ModBlocks.MYSTIC_SAPLING).build());
     }
 }

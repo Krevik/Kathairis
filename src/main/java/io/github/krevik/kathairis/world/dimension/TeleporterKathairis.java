@@ -67,7 +67,7 @@ public class TeleporterKathairis extends Teleporter {
 		}));
 		return optional.map((p_226707_7_) -> {
 			BlockPos blockpos = p_226707_7_.getPos();
-			this.world.getChunkProvider().func_217228_a(TicketType.PORTAL, new ChunkPos(blockpos), 3, blockpos);
+			this.world.getChunkProvider().registerTicket(TicketType.PORTAL, new ChunkPos(blockpos), 3, blockpos);
 			BlockPattern.PatternHelper blockpattern$patternhelper = BlockKathairisPortal.createPatternHelper(this.world, blockpos);
 			return blockpattern$patternhelper.getPortalInfo(directionIn, blockpos, p_222272_6_, p_222272_2_, p_222272_4_);
 		}).orElse((BlockPattern.PortalInfo)null);
@@ -76,9 +76,9 @@ public class TeleporterKathairis extends Teleporter {
 	public boolean makePortal(Entity entityIn) {
 		int i = 16;
 		double d0 = -1.0D;
-		int j = MathHelper.floor(entityIn.func_226277_ct_());
-		int k = MathHelper.floor(entityIn.func_226278_cu_());
-		int l = MathHelper.floor(entityIn.func_226281_cx_());
+		int j = MathHelper.floor(entityIn.getPosX());
+		int k = MathHelper.floor(entityIn.getPosY());
+		int l = MathHelper.floor(entityIn.getPosZ());
 		int i1 = j;
 		int j1 = k;
 		int k1 = l;
@@ -87,10 +87,10 @@ public class TeleporterKathairis extends Teleporter {
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 		for(int j2 = j - 16; j2 <= j + 16; ++j2) {
-			double d1 = (double)j2 + 0.5D - entityIn.func_226277_ct_();
+			double d1 = (double)j2 + 0.5D - entityIn.getPosX();
 
 			for(int l2 = l - 16; l2 <= l + 16; ++l2) {
-				double d2 = (double)l2 + 0.5D - entityIn.func_226281_cx_();
+				double d2 = (double)l2 + 0.5D - entityIn.getPosZ();
 
 				label276:
 				for(int j3 = this.world.getActualHeight() - 1; j3 >= 0; --j3) {
@@ -121,7 +121,7 @@ public class TeleporterKathairis extends Teleporter {
 								}
 							}
 
-							double d5 = (double)j3 + 0.5D - entityIn.func_226278_cu_();
+							double d5 = (double)j3 + 0.5D - entityIn.getPosY();
 							double d7 = d1 * d1 + d5 * d5 + d2 * d2;
 							if (d0 < 0.0D || d7 < d0) {
 								d0 = d7;
@@ -138,10 +138,10 @@ public class TeleporterKathairis extends Teleporter {
 
 		if (d0 < 0.0D) {
 			for(int l5 = j - 16; l5 <= j + 16; ++l5) {
-				double d3 = (double)l5 + 0.5D - entityIn.func_226277_ct_();
+				double d3 = (double)l5 + 0.5D - entityIn.getPosX();
 
 				for(int j6 = l - 16; j6 <= l + 16; ++j6) {
-					double d4 = (double)j6 + 0.5D - entityIn.func_226281_cx_();
+					double d4 = (double)j6 + 0.5D - entityIn.getPosZ();
 
 					label214:
 					for(int i7 = this.world.getActualHeight() - 1; i7 >= 0; --i7) {
@@ -166,7 +166,7 @@ public class TeleporterKathairis extends Teleporter {
 									}
 								}
 
-								double d6 = (double)i7 + 0.5D - entityIn.func_226278_cu_();
+								double d6 = (double)i7 + 0.5D - entityIn.getPosY();
 								double d8 = d3 * d3 + d6 * d6 + d4 * d4;
 								if (d0 < 0.0D || d8 < d0) {
 									d0 = d8;

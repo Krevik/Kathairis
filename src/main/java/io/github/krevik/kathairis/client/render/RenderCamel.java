@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelCamel;
 import io.github.krevik.kathairis.entity.EntityCamel;
+import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -42,11 +43,11 @@ public class RenderCamel extends MobRenderer<EntityCamel,ModelCamel<EntityCamel>
     }
 
     @Override
-    public void func_225623_a_(EntityCamel e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
+    protected void func_225621_a_(EntityCamel e, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
         if(e.isChild()) {
-            s.func_227862_a_(0.6f, 0.6f, 0.6f);
+            s.scale(0.6f, 0.6f, 0.6f);
         }
-        super.func_225623_a_(e,f1,f2,s,i1,i2);
+        super.func_225621_a_(e, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
 
     

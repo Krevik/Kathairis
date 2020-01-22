@@ -3,9 +3,12 @@ package io.github.krevik.kathairis.client.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.krevik.kathairis.client.model.ModelFlyingSquid;
+import io.github.krevik.kathairis.entity.EntityCloudOister;
 import io.github.krevik.kathairis.entity.EntityFlyingSquid;
+import io.github.krevik.kathairis.entity.EntityFungite;
 import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Quaternion;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -42,16 +45,16 @@ public class RenderFlyingSquid extends MobRenderer<EntityFlyingSquid,ModelFlying
     }
 
     @Override
-    public void func_225623_a_(EntityFlyingSquid e, float f1, float f2, MatrixStack s, IRenderTypeBuffer i1, int i2) {
-        RenderSystem.translatef(0, -1, 0);
-        RenderSystem.rotatef(90, 0, 1, 0);
+    protected void func_225621_a_(EntityFlyingSquid e, MatrixStack s, float p_225621_3_, float p_225621_4_, float p_225621_5_) {
+        s.translate(0, -1, 0);
+        s.rotate(new Quaternion(90, 0, 1, 0));
         if(e.isDiving()) {
-            RenderSystem.rotatef(180, 0, 0, 1);
+            s.rotate(new Quaternion(180, 0, 0, 1));
         }
         if(e.isChild()) {
-            RenderSystem.scaled(0.6, 0.6, 0.6);
+            s.scale(0.6f, 0.6f, 0.6f);
         }
-        super.func_225623_a_(e,f1,f2,s,i1,i2);
+        super.func_225621_a_(e, s, p_225621_3_, p_225621_4_, p_225621_5_);
     }
     
 }
