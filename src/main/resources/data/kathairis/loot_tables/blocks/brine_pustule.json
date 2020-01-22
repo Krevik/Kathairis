@@ -50,7 +50,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "kathairis:mineral_fruit",
+          "block": "kathairis:brine_pustule",
           "properties": {
             "stage": "1"
           }
