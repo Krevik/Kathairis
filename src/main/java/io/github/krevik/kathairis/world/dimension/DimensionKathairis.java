@@ -30,6 +30,7 @@ import net.minecraft.world.gen.OverworldGenSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IRenderHandler;
+import org.omg.DynamicAny.DynEnumHelper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -156,6 +157,7 @@ public class DimensionKathairis extends OverworldDimension {
         return super.getMusicType();
     }
 
+    //TODO
     @Nullable
     @Override
     public IRenderHandler getSkyRenderer() {

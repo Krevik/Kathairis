@@ -190,7 +190,7 @@ public final class ModItems {
 				RegistryHelper.setup(new Item(new Item.Properties().food(ModFoods.EASTER_FOOD).group(ModItemGroups.FOOD)), "christmas_chocolate"),
 				RegistryHelper.setup(new Item(new Item.Properties().food(ModFoods.EASTER_FOOD).group(ModItemGroups.FOOD)), "ice_creams"),
 				RegistryHelper.setup(new Item(new Item.Properties().food(ModFoods.EASTER_FOOD).group(ModItemGroups.FOOD)), "sweet_muffin"),
-				RegistryHelper.setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "pot_with_living_flower"),
+				RegistryHelper.setup(new ItemPotWithLivingFlower(ModItemGroups.MISCELLANEOUS), "pot_with_living_flower"),
 				RegistryHelper.setup(new ItemKathairisPickaxe(ModItemTiers.MAGNETHIUM), "magnethium_pickaxe"),
 				RegistryHelper.setup(new ItemKathairisAxe(ModItemTiers.MAGNETHIUM), "magnethium_axe"),
 				RegistryHelper.setup(new ItemKathairisShovel(ModItemTiers.MAGNETHIUM), "magnethium_shovel"),

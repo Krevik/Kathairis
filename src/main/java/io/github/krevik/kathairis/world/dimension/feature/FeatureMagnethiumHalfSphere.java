@@ -72,6 +72,7 @@ public class FeatureMagnethiumHalfSphere extends Feature<NoFeatureConfig> {
                 if(isNearSphereBoundlineUnderHalfY(radius,blockPosWithBlockStateHolder.sphereShift)){
                     worldIn.setBlockState(new BlockPos(posXX,posYY+randomYShift,posZZ), ModBlocks.MAGNETHIUM.getDefaultState(),2);
                 }
+                //TODO add hanging roots
             }
         }
 

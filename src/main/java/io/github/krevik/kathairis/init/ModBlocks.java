@@ -157,6 +157,7 @@ public final class ModBlocks {
 	public static final Block KATHAIRIS_SANDSTONE_STAIRS = _null();
 	public static final Block KATHAIRIS_SANDSTONE_WALL = _null();
 	public static final Block KATHAIRIS_SANDSTONE_SLAB = _null();
+	public static final Block HANGING_ROOTS = _null();
 
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
@@ -309,6 +310,7 @@ public final class ModBlocks {
 				RegistryHelper.setup(new BlockKatharianSapling(new SoulTree()), "soul_sapling"),
 				RegistryHelper.setup(new BlockKatharianSapling(new ShinyTree()), "shiny_sapling"),
 				RegistryHelper.setup(new BlockKatharianSapling(new ElderwillowTree()), "elderwillow_sapling"),
+				RegistryHelper.setup(new BlockHangingRoots(), "hanging_roots"),
 				//doors and trapdoors
 				RegistryHelper.setup(new BlockKathairisDoors(Material.WOOD, SoundType.WOOD, 3f), "mystic_wood_doors"),
 				RegistryHelper.setup(new BlockKathairisDoors(Material.WOOD, SoundType.WOOD, 3f), "shiny_wood_doors"),

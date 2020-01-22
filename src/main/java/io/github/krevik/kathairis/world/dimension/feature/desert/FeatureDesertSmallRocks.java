@@ -61,7 +61,6 @@ public class FeatureDesertSmallRocks extends Feature<NoFeatureConfig> {
                     }
                 }
 
-                //TODO CHECK IF IT IS WORKING
                 for(int x=-4;x<=4;x++){
                     for(int y=0;y<=mainHeight;y++){
                         for(int z=-4;z<=4;z++){

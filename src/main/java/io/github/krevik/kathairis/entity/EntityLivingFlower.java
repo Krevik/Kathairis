@@ -2,19 +2,28 @@ package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.entity.ai.EntityAIHealTargets;
 import io.github.krevik.kathairis.init.ModEntities;
+import io.github.krevik.kathairis.init.ModItems;
 import io.github.krevik.kathairis.util.KatharianLootTables;
+import io.github.krevik.kathairis.util.networking.PacketHandler;
+import io.github.krevik.kathairis.util.networking.packets.PacketClientSpawnHeartParticle;
+import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nullable;
 
@@ -87,41 +96,40 @@ public class EntityLivingFlower extends EntityKatharianAnimal
         this.rotationPitch=0;
         this.rotationYaw=0;
         this.rotationYawHead=0;
-        if(this.world.isRemote) {
+        if(!this.world.isRemote) {
             if(this.rand.nextInt(30)==1) {
-                //TODO
-                //this.world.spawnParticle(EnumParticleTypes.HEART, this.getPosition().getX(), this.getPosition().getY()+0.5, this.getPosition().getZ(), 0, 0.2, 0);
+                PacketHandler.sendToAll(new PacketClientSpawnHeartParticle(this.getPosition().getX(), this.getPosition().getY()+0.5, this.getPosition().getZ(), 0, 0.2, 0));
             }
         }
     	super.tick();
     }
 
-    //TODO
-    /*public boolean processInteract(EntityPlayer player, EnumHand hand)
+    @Override
+    public boolean processInteract(PlayerEntity player, Hand hand)
     {
         ItemStack itemstack = player.getHeldItem(hand);
 
-        if (itemstack.getItem() == Items.FLOWER_POT && !player.capabilities.isCreativeMode && !this.isChild())
+        if (itemstack.getItem() == Items.FLOWER_POT && !player.isCreative() && !this.isChild())
         {
             itemstack.shrink(1);
 
             if (itemstack.isEmpty())
             {
-                player.setHeldItem(hand, new ItemStack(KCore.PotWithLivingFlower));
+                player.setHeldItem(hand, new ItemStack(ModItems.POT_WITH_LIVING_FLOWER));
             }
-            else if (!player.inventory.addItemStackToInventory(new ItemStack(KCore.PotWithLivingFlower)))
+            else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.POT_WITH_LIVING_FLOWER)))
             {
-                player.dropItem(new ItemStack(KCore.PotWithLivingFlower), false);
+                player.dropItem(new ItemStack(ModItems.POT_WITH_LIVING_FLOWER), false);
             }
-            this.getPosition().getY()=-20;
-            this.setDead();
+            this.setPosition(0,-50,0);
+            this.remove();
             return true;
         }
         else
         {
             return super.processInteract(player, hand);
         }
-    }*/
+    }
 
     @Override
     public CreatureAttribute getCreatureAttribute()

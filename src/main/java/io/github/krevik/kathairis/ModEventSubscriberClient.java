@@ -69,6 +69,7 @@ public class ModEventSubscriberClient {
         RenderTypeLookup.setRenderLayer(ModBlocks.VIOLET_CRYSTAL, RenderType.func_228645_f_());
         RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CRYSTAL, RenderType.func_228645_f_());
         RenderTypeLookup.setRenderLayer(ModBlocks.KATHAIRIS_PORTAL, RenderType.func_228645_f_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HANGING_ROOTS, RenderType.func_228645_f_());
 
     }
 

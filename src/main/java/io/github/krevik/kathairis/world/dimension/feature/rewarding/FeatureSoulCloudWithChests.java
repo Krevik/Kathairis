@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -54,8 +55,7 @@ public class FeatureSoulCloudWithChests extends Feature<NoFeatureConfig> {
         }
     }
 
-    //TODO
-    private void placeTrees(IWorld world, BlockPos startingPos, Random random, int scanningRadius){
+    private void placeTrees(IWorld world, BlockPos startingPos, Random random, int scanningRadius, ChunkGenerator<?> chunkGenerator){
         int posX=startingPos.getX();
         int posY=startingPos.getY();
         int posZ=startingPos.getZ();
@@ -69,7 +69,7 @@ public class FeatureSoulCloudWithChests extends Feature<NoFeatureConfig> {
                                 if(random.nextInt(15)==0){
                                     world.setBlockState(actualPos,ModBlocks.KATHAIRIS_GRASS.getDefaultState(),2);
                                     Tree soulTree = new SoulTree();
-                                    //soulTree.func_225545_a_(world,world.getChunkProvider().getChunkGenerator(),actualPos.up(),ModBlocks.KATHAIRIS_GRASS.getDefaultState(),random);
+                                    soulTree.func_225545_a_(world,chunkGenerator,actualPos.up(),ModBlocks.KATHAIRIS_GRASS.getDefaultState(),random);
                                 }
                             }
                         }
@@ -114,7 +114,7 @@ public class FeatureSoulCloudWithChests extends Feature<NoFeatureConfig> {
             BlockState block = random.nextInt(2)==0 ? ModBlocks.BLUE_CLOUD.getDefaultState() : ModBlocks.YELLOW_CLOUD.getDefaultState();
             int height = 150+random.nextInt(50)+random.nextInt(20);
             generateCloud(world,new BlockPos(pos.getX(),height,pos.getZ()),4+random.nextInt(9),random,block,0);
-            placeTrees(world,new BlockPos(pos.getX(),height,pos.getZ()),random,12);
+            placeTrees(world,new BlockPos(pos.getX(),height,pos.getZ()),random,12, generator);
             placeChestsWithRewards(world,new BlockPos(pos.getX(),height,pos.getZ()),random,12);
         return true;
     }
